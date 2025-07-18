@@ -19,6 +19,15 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'nom',
+        'prenom',
+        'ville',
+        'description',
+        'image',
+        'pays',
+        'type',
+        'telephone',
+        'theme',
+        'biographie',
         'email',
         'password',
     ];
@@ -42,4 +51,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+
+    public function reseaus()
+    {
+        return $this->belongsToMany(Reseau::class, 'user_reseaus', 'id_user', 'id_reseau')
+            ->withPivot('link')
+            ->withTimestamps();
+    }
 }
