@@ -14,6 +14,12 @@ class EvenementController extends Controller
         return view('Dashboard.Evenement.index', compact('evenements'));
     }
 
+    public function show($id)
+    {
+        $evenements = Evenement::with(['sponsors','intervenants'])->findOrFail($id);
+        return response()->json($evenements);
+    }
+
     public function store(Request $request)
     {
         try {

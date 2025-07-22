@@ -30,17 +30,12 @@ Route::get('/', function () {
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('/sponsor', function () {
-    return view('sponsor');
-})->name('sponsor');
+Route::get('/sponsors', [HomeController::class, 'sponsor'])->name('sponsor');
 
-Route::get('/intervenant', function () {
-    return view('intervenant');
-})->name('intervenant');
+Route::get('/intervenant', [HomeController::class, 'intervenant'])->name('intervenant');
 
-Route::get('/evenement', function () {
-    return view('evenement');
-})->name('evenement');
+Route::get('/evenement', [HomeController::class, 'evenement'])->name('evenement');
+
 
 Route::get('/billet', function () {
     return view('billet');
@@ -80,6 +75,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('/dashboard/evenements', [EvenementController::class, 'store'])->name('evenements.store');
     Route::put('/dashboard/evenements/{evenement}', [EvenementController::class, 'update'])->name('evenements.update');
     Route::delete('/dashboard/evenements/{evenement}', [EvenementController::class, 'destroy'])->name('evenements.destroy');
+    Route::get('/evenement/{id}', [EvenementController::class, 'show']);
 
     Route::get('/dashboard/sponsors', [SponsorController::class, 'index'])->name('sponsors.index');
     Route::post('/dashboard/sponsors', [SponsorController::class, 'store'])->name('sponsors.store');

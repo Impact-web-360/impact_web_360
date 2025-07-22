@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Sponsor;
 use App\Models\Evenement;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -14,9 +15,37 @@ class HomeController extends Controller
     {
         $sponsors = Sponsor::all();
         $evenements = Evenement::all();
+        $intervenants = User::where('type', 'intervenant')->get();
 
-        return view('index', compact('sponsors', 'evenements'));
+        return view('index', compact('sponsors', 'evenements','intervenants'));
 
+    }
+
+    public function sponsor()
+    {
+        $sponsors = Sponsor::all();
+        $evenements = Evenement::all();
+        $intervenants = User::where('type', 'intervenant')->get();
+
+        return view('sponsor', compact('sponsors', 'evenements','intervenants'));
+    }
+
+    public function intervenant()
+    {
+        $sponsors = Sponsor::all();
+        $evenements = Evenement::all();
+        $intervenants = User::where('type', 'intervenant')->get();
+
+        return view('intervenant', compact('sponsors', 'evenements','intervenants'));
+    }
+
+    public function evenement()
+    {
+        $sponsors = Sponsor::all();
+        $evenements = Evenement::all();
+        $intervenants = User::where('type', 'intervenant')->get();
+
+        return view('evenement', compact('sponsors', 'evenements','intervenants'));
     }
 
     /**

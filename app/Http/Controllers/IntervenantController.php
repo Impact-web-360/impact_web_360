@@ -12,8 +12,7 @@ class IntervenantController extends Controller
 {
     public function index()
     {
-        $intervenants = User::where('type', 'intervenant')->get();
-        return view('Dashboard.Intervenant.index', compact('intervenants'));
+        
     }
 
     public function store(Request $request)
@@ -41,16 +40,6 @@ class IntervenantController extends Controller
 
             $intervenant = User::create($data);
 
-            // Traitement des réseaux sociaux
-            $reseaux = $request->input('reseaux', []);
-            foreach ($reseaux['nom'] ?? [] as $index => $nom) {
-                $lien = $reseaux['lien'][$index] ?? null;
-                if (!empty($nom) && !empty($lien)) {
-                    $reseau = Reseau::firstOrCreate(['nom' => $nom]);
-                    $intervenant->reseaus()->attach($reseau->id, ['lien' => $lien]);
-                }
-            }
-
             return redirect()->back()->with('success', 'Intervenant créé avec succès !');
         } catch (\Throwable $th) {
             Log::error("Erreur création intervenant", ['error' => $th->getMessage()]);
@@ -67,8 +56,6 @@ class IntervenantController extends Controller
             'theme'       => 'nullable|string',
             'description' => 'required|string',
             'image'       => 'nullable|image',
-            'reseaux.nom.*'  => 'nullable|string',
-            'reseaux.lien.*' => 'nullable|url',
         ]);
 
         if ($request->hasFile('image')) {
@@ -78,16 +65,6 @@ class IntervenantController extends Controller
 
         $intervenant->update($data);
 
-        // Synchro réseaux sociaux
-        $intervenant->reseaus()->detach();
-        $reseaux = $request->input('reseaux', []);
-        foreach ($reseaux['nom'] ?? [] as $index => $nom) {
-            $lien = $reseaux['lien'][$index] ?? null;
-            if (!empty($nom) && !empty($lien)) {
-                $reseau = Reseau::firstOrCreate(['nom' => $nom]);
-                $intervenant->reseaus()->attach($reseau->id, ['lien' => $lien]);
-            }
-        }
 
         return redirect()->back()->with('success', 'Intervenant mis à jour !');
     }

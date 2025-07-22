@@ -201,7 +201,7 @@
 
 <!-- NAVBAR -->
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top navbar-custom container">
-      <a class="navbar-brand" href="index.php"><img src="logo.png" alt="Logo Impact Web" /></a>
+      <a class="navbar-brand" href="index.php"><img src="{{ asset('dossiers/image/Impact-Web-360-Logo1.png') }}" alt="Logo Impact Web" /></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <div class="hamburger"  id="hamburgerBtn">
           <span></span>
@@ -211,41 +211,41 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="index.php">Accueil</a></li>
-          <li class="nav-item"><a class="nav-link active" href="evenement.php">Événements</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">E-learning</a></li>
-          <li class="nav-item"><a class="nav-link" href="intervenant.php">Intervenants</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Billetterie</a></li>
-          <li class="nav-item"><a class="nav-link" href="boutique.php">Boutique</a></li>
-          <li class="nav-item"><a class="btn btn-light mx-2" href="connexion.html">Se connecter</a></li>
-          <li class="nav-item"><a class="btn btn-inscrire" href="inscription.html">S'inscrire</a></li>
+          <li class="nav-item"><a class="nav-link " href="{{ route('home') }}">Acceuil</a></li>
+          <li class="nav-item"><a class="nav-link active" href="{{ route('evenement') }}">Événements</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">E-learning</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ route('intervenant') }}">Intervenants</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ route('billet') }}">Billetterie</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ route('boutique') }}">Boutique</a></li>
+          <li class="nav-item"><a class="btn btn-light mx-2" href="{{ route('login') }}">Se connecter</a></li>
+          <li class="nav-item"><a class="btn btn-inscrire" href="{{ route('register') }}">S'inscrire</a></li>
         </ul>
       </div>
-</nav>
+    </nav>
+
 
 <!-- SECTION : Tous les événements -->
 <section class="text-white py-5" style="margin-top: 120px;" >
   <div class="container ">
     <h2 class="mb-3 fw-bold">Nos Événements</h2>
-    <p class="mb-4">Chaque événement Impact Web 360 est pensé pour connecter, inspirer et former les passionnés du numérique au Bénin et en Afrique...</p>
+    <p class="mb-4 fs-6">Chaque événement impact Web 360 est pensé pour connecter, inspirer et former les pasionnés du numérique au Bénin et en Afrique. <br> Entre conférences, ateliers, panels et sessions de networking, nos rencontres offrent une expérience unique autour <br> des métiers du digital, de l'entrepreneuriat et de l'innovation.</p>
 
     <!-- Aperçu limité -->
+    @foreach ($evenements as $evenement)
     <div class="row g-4" id="evenements-apercu">
       <div class="col-md-6">
         <div class="card bg-transparent border-0 text-white">
-          <img src="" class="card-img-top rounded-4" alt="">
+          <img src="{{ asset('storage/' . $evenement->image) }}" class="card-img-top w-50 " alt="" >
           <div class="card-body px-0">
+            <p class="fs-6">{{ $evenement->date_debut }}</p>
             <small class="text-black"></small>
-            <h5 class="mt-2">Thème : </h5>
-            <p></p>
-            <p><strong>Lieu :</strong> </p>
-            <a href="" class="btn btn-danger btn-sm">Réserver <i class="fa-solid fa-arrow-right ms-1"></i></a>
-
+            <h5 class="mt-2">Thème : "{{ $evenement->theme }}"</h5>
+            <a href="" class="btn btn-primary rounded-5 btn-sm">Replay disponibles <i class="fa-solid fa-arrow-right ms-1"></i></a>
           </div>
         </div>
       </div>
-
     </div>
+  @endforeach
 
     
     <!-- Liste complète cachée au départ -->

@@ -396,7 +396,7 @@
                                       <i class="fas fa-trash"></i> 
                                   </button>
                                 </form>
-                              <a href="#" class="btn btn-danger fw-bold" data-bs-toggle="modal" data-bs-target="#eventModal">Informations</a>
+                              <a href="#" class="btn btn-danger fw-bold" data-bs-toggle="modal" data-bs-target="#eventModal{{ $evenement->id }}">Informations</a>
                               </div>
                               <center><a href="{{ route('sponsors.index') }}" class="btn btn-dark text-white fs-6 fw-bold mt-3 text-center" data-bs-toggle="modal" data-bs-target="#addSponsorModal">Ajouter un sponsor</a></center>
                               <center><a href="{{ route('sponsors.index') }}" class="btn btn-dark text-white fs-6 fw-bold mt-3 text-center" data-bs-toggle="modal" data-bs-target="#addIntervenantModal" >Ajouter un intervenant</a></center>
@@ -410,155 +410,63 @@
 
 
     <!-- Modale personnalisée -->
-    <div class="custom-modal" id="eventModal">
-        <button id="closeModalBtn" class="btn-close position-absolute bg-danger top-0 end-0 " aria-label="Fermer"></button>
-        <div class="custom-modal-content">
-            <div class="main-container">
-                  <div class="app-layout">
-                    <main class="main-content flex-grow-1 p-4">
-                        <div class="event-detail-window">
-                            <div class="d-flex justify-content-between align-items-center mb-4">
-                                <h4 class="text-white mb-0">Événements </h4>
-                                <i class="fas fa-chevron-right text-danger mx-2"></i>
-                                <div class="btn-toolbar mb-md-0">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary text-danger me-2">
-                                        <i class="fas fa-edit me-1"></i> Modifier
-                                    </button>
-                                    <button type="button" class="btn btn-sm btn-outline-danger">
-                                        <i class="fas fa-trash-alt me-1"></i> Supprimer
-                                    </button>
-                                </div>
-                                
-                                <div class="header-actions d-none d-md-flex">
-                                    <span class="btn btn-sm btn-outline-secondary text-white-50 border-0 me-3">
-                                        <i class="fas fa-plus me-1"></i> Nouvel Intervenant
-                                    </span>
-                                    <span class="btn btn-sm btn-outline-secondary text-white-50 border-0">
-                                        <i class="fas fa-plus me-1"></i> Nouvel sponsor
-                                    </span>
-                                </div>
-                            </div>
+    @foreach($evenements as $evenement)
 
-                            <div class="row g-4">
-                                <div class="col-lg-8">
-                                    <div class="featured-event-banner p-4 rounded-3 mb-4">
-                                        <div class="row align-items-center">
-                                            <div class="col-md-8">
-                                                <p class="text-white-50 mb-1">Détails de l'évènement</p>
-                                                <h2 class="text-danger mb-3">{{ $evenement->nom }}</h2>
-                                                <p class="text-white-50 description-text">
-                                                    {{ $evenement->description }}
-                                                </p>
-                                                <div class="event-meta mt-3 d-flex flex-wrap text-white-50">
-                                                    <span class="me-4 mb-2"><i class="fas fa-users me-1"></i> +5000 Participants</span>
-                                                    <span class="me-4 mb-2"><i class="fas fa-calendar-alt me-1"></i>{{ $evenement->date_debut }}</span>
-                                                    <span class="me-4 mb-2"><i class="fas fa-hourglass-half me-1"></i> 3 Jours</span>
-                                                    <span class="mb-2"><i class="fas fa-map-marker-alt me-1"></i>{{ $evenement->lieu }}</span>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 text-center mt-3 mt-md-0">
-                                                <img src="{{ asset('storage/' . $evenement->image) }}" alt="Event Banner" class="img-fluid rounded-3 event-banner-img">
-                                            </div>
-                                        </div>
-                                    </div>
+    <!-- Modal pour chaque événement -->
+    <div class="modal fade" id="eventModal{{ $evenement->id }}" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content bg-dark text-white">
+                <div class="modal-header">
+                    <h5 class="modal-title">{{ $evenement->nom }}</h5>
+                    <button type="button" class="btn-close bg-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>{{ $evenement->description }}</p>
+                    <p><i class="fas fa-map-marker-alt"></i> {{ $evenement->lieu }}</p>
+                    <p><i class="fas fa-calendar-alt"></i> {{ $evenement->date_debut }}</p>
 
-                                    <div class="section-block mb-4">
-                                        <div class="d-flex justify-content-between align-items-center mb-3">
-                                            <h4 class="text-white mb-0">Intervenants</h4>
-
-                                        </div>
-                                        <div class="row g-3">
-                                            <div class="col-6 col-md-4 col-lg-3">
-                                                <div class="card speaker-card text-center h-100">
-                                                    <img src="https://via.placeholder.com/120x120/555555/FFFFFF?text=Bob+K" class="card-img-top rounded-circle mx-auto mt-3 mb-2" alt="Bob K">
-                                                    <div class="card-body p-2">
-                                                        <h6 class="card-title text-white mb-0">Bob Klein</h6>
-                                                        <p class="card-text text-white-50 small">Expert Cyber.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            </div>
-                                    </div>
-
-                                    <div class="section-block">
-                                        <div class="d-flex justify-content-between align-items-center mb-3">
-                                            <h4 class="text-white mb-0">Sponsors</h4>
-                                            
-                                        </div>
-                                        <div class="row g-2">
-                                            <div class="col-12 col-md-6">
-                                                <div class="card sponsor-card d-flex flex-row align-items-center p-2">
-                                                    <img src="https://via.placeholder.com/60x60/8B0000/FFFFFF?text=Tech+Corp" class="rounded sponsor-logo me-3" alt="Sponsor Logo">
-                                                    <div class="flex-grow-1">
-                                                        <h6 class="text-white mb-0">TechCorp Solutions</h6>
-                                                        <p class="text-white-50 small mb-0">Partenaire Principal</p>
-                                                    </div>
-                                                    <i class="fas fa-info-circle text-white-50 ms-auto"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-4">
-                                    <div class="right-sidebar p-4 rounded-3">
-                                        <h5 class="text-white mb-3">Événements Récents / Connexes</h5>
-                                        <ul class="list-unstyled">
-                                            <li class="d-flex align-items-center mb-3 song-item">
-                                                <img src="https://via.placeholder.com/70x70/333333/FFFFFF?text=Conf+IA" alt="AI Conf" class="rounded me-3">
-                                                <div>
-                                                    <p class="text-white mb-0">Conférence sur l'IA et l'Éthique</p>
-                                                    <small class="text-white-50">Dr. Anya Sharma</small>
-                                                </div>
-                                                <i class="fas fa-play-circle text-danger ms-auto fs-4"></i>
-                                            </li>
-                                            <li class="d-flex align-items-center mb-3 song-item">
-                                                <img src="https://via.placeholder.com/70x70/333333/FFFFFF?text=Web3+F" alt="Web3 Forum" class="rounded me-3">
-                                                <div>
-                                                    <p class="text-white mb-0">Le Forum du Web3 Décentralisé</p>
-                                                    <small class="text-white-50">Équipe Blockchain Pro</small>
-                                                </div>
-                                                <i class="fas fa-play-circle text-danger ms-auto fs-4"></i>
-                                            </li>
-                                            <li class="d-flex align-items-center mb-3 song-item">
-                                                <img src="https://via.placeholder.com/70x70/333333/FFFFFF?text=Robot+Expo" alt="Robot Expo" class="rounded me-3">
-                                                <div>
-                                                    <p class="text-white mb-0">Expo Internationale de la Robotique</p>
-                                                    <small class="text-white-50">Global Robotics</small>
-                                                </div>
-                                                <i class="fas fa-play-circle text-danger ms-auto fs-4"></i>
-                                            </li>
-                                        </ul>
-
-                                        <h5 class="text-white mt-4 mb-3">Produits Vedettes</h5>
-                                        <ul class="list-unstyled">
-                                            <li class="d-flex align-items-center mb-3 song-item">
-                                                <img src="https://via.placeholder.com/70x70/333333/FFFFFF?text=Kit+Dev" alt="Dev Kit" class="rounded me-3">
-                                                <div>
-                                                    <p class="text-white mb-0">Kit de Développement IA avancé</p>
-                                                    <small class="text-white-50">149,99 $</small>
-                                                </div>
-                                                <i class="fas fa-shopping-cart text-white-50 ms-auto fs-4"></i>
-                                            </li>
-                                            <li class="d-flex align-items-center mb-3 song-item">
-                                                <img src="https://via.placeholder.com/70x70/333333/FFFFFF?text=Guide+Sec" alt="Security Guide" class="rounded me-3">
-                                                <div>
-                                                    <p class="text-white mb-0">Guide Complet Cybersécurité 2025</p>
-                                                    <small class="text-white-50">29,99 $</small>
-                                                </div>
-                                                <i class="fas fa-shopping-cart text-white-50 ms-auto fs-4"></i>
-                                            </li>
-                                        </ul>
+                    <h6 class="mt-4">Intervenants :</h6>
+                    <div class="row">
+                      @if($evenement->intervenants && $evenement->intervenants->count())
+                        @foreach($evenement->intervenants as $intervenant)
+                            <div class="col-md-4">
+                                <div class="card bg-secondary text-white mb-2">
+                                    <img src="{{ asset('storage/'.$intervenant->photo) }}" class="card-img-top" alt="{{ $intervenant->nom }}">
+                                    <div class="card-body">
+                                        <h6>{{ $intervenant->nom }}</h6>
+                                        <small>{{ $intervenant->fonction }}</small>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </main>
+                        @endforeach
+                      @else
+                          <p class="text-white-50">Aucun intervenant enregistré</p>
+                      @endif
+                    </div>
+
+                    <h6 class="mt-4">Sponsors :</h6>
+                    <div class="row">
+                      @if($evenement->sponsors && $evenement->sponsors->count())
+                                                  @foreach($evenement->sponsors as $sponsor)
+                            <div class="col-md-6">
+                                <div class="card bg-secondary text-white mb-2 d-flex flex-row align-items-center">
+                                    <img src="{{ asset('storage/'.$sponsor->logo) }}" width="60" class="m-2">
+                                    <div>
+                                        <h6>{{ $sponsor->nom }}</h6>
+                                        <small>{{ $sponsor->type }}</small>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                      @else
+                          <p class="text-white-50">Aucun sponsor enregistré</p>
+                      @endif
+                    </div>
                 </div>
             </div>
-
         </div>
     </div>
+@endforeach
 
 
 
