@@ -35,7 +35,7 @@ class EvenementController extends Controller
                     // stocke "events/xyz.jpg" en DB
                     $data['image'] = $path;
                 }
-            Evenement::create($data);
+            
 
             $evenement = new Evenement();
             $evenement->nom         = $data['nom'];

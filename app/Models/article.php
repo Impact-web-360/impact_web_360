@@ -14,4 +14,11 @@ class article extends Model
         'image',
         'prix',
     ];
+    public function client()
+    {
+        return $this->belongsToMany(client::class, 'achat', 'id_article', 'id_client')
+            ->withPivot('montant')
+            ->withTimestamps();
+    }
+
 }

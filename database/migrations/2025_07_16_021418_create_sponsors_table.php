@@ -17,6 +17,13 @@ return new class extends Migration
             $table->string('description');
             $table->string('logo');
             $table->string('promoteur');
+            $table->string('facebook')->nullable();
+                $table->string('whatsapp')->nullable();
+                $table->string('linkedin')->nullable();
+                $table->string('instagram')->nullable();
+                $table->string('tiktok')->nullable();
+                $table->string('youtube')->nullable();
+
             $table->timestamps();
         });
     }

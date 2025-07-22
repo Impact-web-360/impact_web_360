@@ -110,9 +110,9 @@
                 <img src="logo.png" alt="Logo Impact Web" class="logo-img">
             </div>
             <h4 class="text-center mb-3">Créer un compte</h4>
-            <button class="btn btn-dark google-btn">
+            <a href="{{ url('auth/google') }}" class="btn btn-dark google-btn">
                 <i class="fab fa-google me-2"></i> Google
-            </button>
+            </a>
             <button class="btn btn-dark facebook-btn">
                 <i class="fab fa-facebook-f me-2"></i> Facebook
             </button>

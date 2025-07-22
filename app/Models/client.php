@@ -17,4 +17,11 @@ class client extends Model
     'whatsapp',
     ];
 
+    public function article()
+    {
+        return $this->belongsToMany(article::class, 'achat', 'id_client', 'id_article')
+            ->withPivot('montant')
+            ->withTimestamps();
+    }
+
 }

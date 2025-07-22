@@ -13,9 +13,13 @@ return new class extends Migration
     {
         Schema::create('formations', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('categorie_id')->constrained('categories')->cascadeOnDelete();
             $table->string('titre');
-            $table->string('description');
-            $table->string('formateur');
+            $table->string('formateur')->nullable();
+            $table->text('description')->nullable();
+            $table->unsignedInteger('duree_minutes')->nullable(); // durée estimée
+            $table->string('image')->nullable(); // affiche/cover
+            $table->boolean('is_published')->default(false);
             $table->timestamps();
         });
     }

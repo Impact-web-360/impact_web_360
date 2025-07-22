@@ -12,4 +12,14 @@ class user_evenement extends Model
         'id_user',
         'id_evenement',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id_user');
+    }
+
+    public function evenement()
+    {
+        return $this->belongsTo(evenement::class, 'id_evenement');
+    }
 }

@@ -12,4 +12,14 @@ class user_formation extends Model
         'id_user',
         'id_formation',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id_user');
+    }
+
+    public function formation()
+    {
+        return $this->belongsTo(formation::class, 'id_formation');
+    }
 }

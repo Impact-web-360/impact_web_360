@@ -7,38 +7,347 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <style>
-    body { background-color: #f8f9fa; }
-    .sidebar {
-      height: 100vh;
-      background: #212529;
-      color: white;
-      padding-top: 2rem;
+<style>
+      body { background-color: #f8f9fa; }
+      .sidebar {
+        height: 100vh;
+        background: #212529;
+        color: white;
+        padding-top: 2rem;
+      }
+
+      .sidebar a {
+        color: white;
+        text-decoration: none;
+        display: block;
+        padding: 10px 20px;
+        transition: background 0.3s;
+      }
+      .sidebar a:hover,
+      .sidebar a.active {
+        background: #343a40;
+        border-left: 3px solid #dc3545;
+      }
+      .content {
+        padding: 2rem;
+      }
+      .card {
+        border: none;
+        box-shadow: 0 0 10px rgba(0,0,0,0.05);
+      }
+      .table th {
+        background: #f1f1f1;
+      }
+
+      .image-wrapper {
+      height: 200px;
+      overflow: hidden;
     }
 
-    .sidebar a {
-      color: white;
-      text-decoration: none;
-      display: block;
-      padding: 10px 20px;
-      transition: background 0.3s;
+    .image-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Rend l'image bien cadrée sans déformation */
     }
-    .sidebar a:hover,
-    .sidebar a.active {
-      background: #343a40;
-      border-left: 3px solid #dc3545;
-    }
-    .content {
-      padding: 2rem;
-    }
+
     .card {
-      border: none;
-      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
     }
-    .table th {
-      background: #f1f1f1;
-    }
-  </style>
+
+</style>
+<style>
+        :root {
+            --primary-red: #DC3545; /* Bootstrap danger red */
+            --background-app: #181818; /* Main app background */
+            --background-card: #282828; /* Card-like elements background */
+            --background-dark: #000; /* Darkest background for top bar/borders */
+            --text-light: #f8f9fa; /* White text */
+            --text-muted: #adb5bd; /* Gray text for secondary info */
+            --border-color: #333; /* Darker border for separation */
+        }
+
+        /* Browser Window Mockup */
+        .main-container {
+            background-color: var(--background-dark);
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            margin: 20px auto; /* Center the whole app window */
+            max-width: 1400px; /* Max width for desktop view */
+            height: calc(100vh - 40px); /* Adjust height for margin */
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Top Navigation Bar Mockup (desktop only) */
+        .top-nav-mock {
+            background-color: var(--background-dark);
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            height: 50px; /* Fixed height */
+        }
+
+        .search-bar-mock {
+            background-color: var(--background-card);
+            border-radius: 20px;
+            padding: 5px 15px;
+            min-width: 300px;
+        }
+
+        .top-nav-icons i {
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .top-nav-icons i:hover {
+            color: var(--primary-red);
+        }
+
+        /* Main App Layout */
+        .app-layout {
+            display: flex;
+            flex-grow: 1;
+            background-color: var(--background-app);
+        }
+
+        
+        /* Main Content Area */
+        .main-content {
+            flex-grow: 1;
+            overflow-y: auto; /* Scrollable content */
+            padding: 2rem !important; /* Global padding for content */
+        }
+
+        /* Event Detail Window (the actual pop-up content) */
+        .event-detail-window {
+            background-color: var(--background-app); /* Use main app background */
+            border-radius: 10px;
+            
+        }
+
+        /* Header actions (New Event, Feed, Shuffle) */
+        .header-actions .btn {
+            color: var(--text-muted) !important;
+            border-color: transparent !important;
+            font-size: 0.9rem;
+            padding: 8px 12px;
+            border-radius: 20px;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+
+        .header-actions .btn:hover {
+            background-color: var(--background-card);
+            color: var(--text-light) !important;
+        }
+
+        /* Featured Event Banner */
+        .featured-event-banner {
+            background-color: var(--background-card);
+            position: relative;
+            overflow: hidden; /* For image overflow */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .featured-event-banner h2 {
+            font-weight: bold;
+            font-size: 2.2rem;
+            line-height: 1.2;
+        }
+
+        .featured-event-banner .description-text {
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .featured-event-banner .event-meta span {
+            font-size: 0.9rem;
+        }
+
+        .event-banner-img {
+            border: 3px solid rgba(220, 53, 69, 0.7); /* Red border around image */
+            box-shadow: 0 0 10px rgba(220, 53, 69, 0.3);
+            object-fit: cover;
+            width: 100%;
+            height: 180px; /* Fixed height for consistency */
+        }
+
+        /* Section Blocks (Speakers, Sponsors) */
+        .section-block {
+            margin-bottom: 2rem;
+        }
+
+        .section-block h4 {
+            font-weight: bold;
+            font-size: 1.4rem;
+        }
+
+        /* Speaker Card */
+        .speaker-card {
+            background-color: var(--background-card);
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            padding: 10px;
+        }
+
+        .speaker-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            background-color: rgba(220, 53, 69, 0.1); /* Subtle red tint on hover */
+        }
+
+        .speaker-card img {
+            border: 2px solid var(--primary-red);
+            width: 90px; /* Adjusted size */
+            height: 90px;
+            object-fit: cover;
+        }
+
+        /* Sponsor Card */
+        .sponsor-card {
+            background-color: var(--background-card);
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .sponsor-card:hover {
+            background-color: rgba(220, 53, 69, 0.1); /* Subtle red tint on hover */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .sponsor-logo {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+            background-color: #fff; /* White background for logos */
+            padding: 3px;
+            border: 1px solid rgba(220, 53, 69, 0.5);
+        }
+
+        /* Right Sidebar (Now Playing / Related) */
+        .right-sidebar {
+            background-color: var(--background-card);
+            border: none;
+        }
+
+        .song-item {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-color);
+            transition: background-color 0.2s ease;
+            cursor: pointer;
+        }
+
+        .song-item:last-child {
+            border-bottom: none;
+        }
+
+        .song-item:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .song-item img {
+            object-fit: cover;
+            width: 60px;
+            height: 60px;
+        }
+
+        .song-item .fa-play-circle,
+        .song-item .fa-shopping-cart {
+            color: var(--text-muted); /* Default color for icons */
+            transition: color 0.2s ease;
+        }
+
+        .song-item:hover .fa-play-circle {
+            color: var(--primary-red) !important; /* Red on hover */
+        }
+        .song-item:hover .fa-shopping-cart {
+            color: var(--text-light) !important; /* White on hover for cart */
+        }
+
+        /* General Styling */
+        a {
+            text-decoration: none;
+        }
+
+        .text-white-50 {
+            color: rgba(255, 255, 255, 0.7) !important;
+        }
+
+        /* Responsive Adjustments */
+        @media (min-width: 992px) { /* Large screens and up */
+            .app-layout {
+                height: calc(100% - 50px); /* Adjust for top nav bar */
+            }
+        }
+
+        @media (max-width: 991.98px) { /* Medium and small screens */
+            .main-container {
+                margin: 0;
+                border-radius: 0;
+                height: 100vh; /* Full viewport height */
+                box-shadow: none;
+            }
+
+            .main-content {
+                padding: 1rem !important; /* Reduced padding for mobile */
+            }
+
+            .featured-event-banner h2 {
+                font-size: 1.8rem; /* Smaller title on mobile */
+            }
+
+            .featured-event-banner .event-meta span {
+                width: 100%; /* Stack info on small screens */
+            }
+
+            .header-actions {
+                display: none !important; /* Hide secondary actions on small screens */
+            }
+
+            .event-banner-img {
+                height: 150px; /* Smaller image on mobile */
+            }
+        }
+
+        /* Extra Small screens (e.g., phones in portrait) */
+        @media (max-width: 575.98px) {
+            .speaker-card img {
+                width: 70px;
+                height: 70px;
+            }
+            .featured-event-banner h2 {
+                font-size: 1.5rem;
+            }
+            .featured-event-banner .description-text {
+                font-size: 0.85rem;
+            }
+        }
+        .custom-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 2000;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.75);
+            display: none; /* cachée par défaut */
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .custom-modal-content {
+            width: 100%;
+            max-width: 1440px;
+            background-color: transparent;
+            border-radius: 10px;
+        }
+
+    </style>
 </head>
 <body>
 <div class="container-fluid">
@@ -68,9 +377,11 @@
         </button>
                 
             @foreach ($evenements as $evenement)
-                        <div class="card-body d-flex me-2">
-                          <div class="card" style="width: 18rem;">
-                            <img src="{{ asset('storage/' . $evenement->image) }}" alt="{{ $evenement->nom }}" class="img-fluid" >
+                        <div class="col-md-4 mb-4 d-flex align-items-stretch me-2 ">
+                          <div class="card">
+                            <div class="image-wrapper">
+                                    <img src="{{ asset('storage/' . $evenement->image) }}" class="card-img-top" alt="Affiche de l'évènement">
+                              </div>
                             <div class="card-body">
                               <h5 class="card-title mb-3">{{ $evenement->nom }}</h5>
                               <h6>{{ $evenement->promoteur }}</h6>
@@ -85,7 +396,7 @@
                                       <i class="fas fa-trash"></i> 
                                   </button>
                                 </form>
-                              <a href="#" class="btn btn-danger fw-bold">Informations</a>
+                              <a href="#" class="btn btn-danger fw-bold" data-bs-toggle="modal" data-bs-target="#eventModal">Informations</a>
                               </div>
                               <center><a href="{{ route('sponsors.index') }}" class="btn btn-dark text-white fs-6 fw-bold mt-3 text-center" data-bs-toggle="modal" data-bs-target="#addSponsorModal">Ajouter un sponsor</a></center>
                               <center><a href="{{ route('sponsors.index') }}" class="btn btn-dark text-white fs-6 fw-bold mt-3 text-center" data-bs-toggle="modal" data-bs-target="#addIntervenantModal" >Ajouter un intervenant</a></center>
@@ -96,6 +407,159 @@
             
         </div>
       </div>
+
+
+    <!-- Modale personnalisée -->
+    <div class="custom-modal" id="eventModal">
+        <button id="closeModalBtn" class="btn-close position-absolute bg-danger top-0 end-0 " aria-label="Fermer"></button>
+        <div class="custom-modal-content">
+            <div class="main-container">
+                  <div class="app-layout">
+                    <main class="main-content flex-grow-1 p-4">
+                        <div class="event-detail-window">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <h4 class="text-white mb-0">Événements </h4>
+                                <i class="fas fa-chevron-right text-danger mx-2"></i>
+                                <div class="btn-toolbar mb-md-0">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary text-danger me-2">
+                                        <i class="fas fa-edit me-1"></i> Modifier
+                                    </button>
+                                    <button type="button" class="btn btn-sm btn-outline-danger">
+                                        <i class="fas fa-trash-alt me-1"></i> Supprimer
+                                    </button>
+                                </div>
+                                
+                                <div class="header-actions d-none d-md-flex">
+                                    <span class="btn btn-sm btn-outline-secondary text-white-50 border-0 me-3">
+                                        <i class="fas fa-plus me-1"></i> Nouvel Intervenant
+                                    </span>
+                                    <span class="btn btn-sm btn-outline-secondary text-white-50 border-0">
+                                        <i class="fas fa-plus me-1"></i> Nouvel sponsor
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="row g-4">
+                                <div class="col-lg-8">
+                                    <div class="featured-event-banner p-4 rounded-3 mb-4">
+                                        <div class="row align-items-center">
+                                            <div class="col-md-8">
+                                                <p class="text-white-50 mb-1">Détails de l'évènement</p>
+                                                <h2 class="text-danger mb-3">{{ $evenement->nom }}</h2>
+                                                <p class="text-white-50 description-text">
+                                                    {{ $evenement->description }}
+                                                </p>
+                                                <div class="event-meta mt-3 d-flex flex-wrap text-white-50">
+                                                    <span class="me-4 mb-2"><i class="fas fa-users me-1"></i> +5000 Participants</span>
+                                                    <span class="me-4 mb-2"><i class="fas fa-calendar-alt me-1"></i>{{ $evenement->date_debut }}</span>
+                                                    <span class="me-4 mb-2"><i class="fas fa-hourglass-half me-1"></i> 3 Jours</span>
+                                                    <span class="mb-2"><i class="fas fa-map-marker-alt me-1"></i>{{ $evenement->lieu }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 text-center mt-3 mt-md-0">
+                                                <img src="{{ asset('storage/' . $evenement->image) }}" alt="Event Banner" class="img-fluid rounded-3 event-banner-img">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="section-block mb-4">
+                                        <div class="d-flex justify-content-between align-items-center mb-3">
+                                            <h4 class="text-white mb-0">Intervenants</h4>
+
+                                        </div>
+                                        <div class="row g-3">
+                                            <div class="col-6 col-md-4 col-lg-3">
+                                                <div class="card speaker-card text-center h-100">
+                                                    <img src="https://via.placeholder.com/120x120/555555/FFFFFF?text=Bob+K" class="card-img-top rounded-circle mx-auto mt-3 mb-2" alt="Bob K">
+                                                    <div class="card-body p-2">
+                                                        <h6 class="card-title text-white mb-0">Bob Klein</h6>
+                                                        <p class="card-text text-white-50 small">Expert Cyber.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            </div>
+                                    </div>
+
+                                    <div class="section-block">
+                                        <div class="d-flex justify-content-between align-items-center mb-3">
+                                            <h4 class="text-white mb-0">Sponsors</h4>
+                                            
+                                        </div>
+                                        <div class="row g-2">
+                                            <div class="col-12 col-md-6">
+                                                <div class="card sponsor-card d-flex flex-row align-items-center p-2">
+                                                    <img src="https://via.placeholder.com/60x60/8B0000/FFFFFF?text=Tech+Corp" class="rounded sponsor-logo me-3" alt="Sponsor Logo">
+                                                    <div class="flex-grow-1">
+                                                        <h6 class="text-white mb-0">TechCorp Solutions</h6>
+                                                        <p class="text-white-50 small mb-0">Partenaire Principal</p>
+                                                    </div>
+                                                    <i class="fas fa-info-circle text-white-50 ms-auto"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <div class="right-sidebar p-4 rounded-3">
+                                        <h5 class="text-white mb-3">Événements Récents / Connexes</h5>
+                                        <ul class="list-unstyled">
+                                            <li class="d-flex align-items-center mb-3 song-item">
+                                                <img src="https://via.placeholder.com/70x70/333333/FFFFFF?text=Conf+IA" alt="AI Conf" class="rounded me-3">
+                                                <div>
+                                                    <p class="text-white mb-0">Conférence sur l'IA et l'Éthique</p>
+                                                    <small class="text-white-50">Dr. Anya Sharma</small>
+                                                </div>
+                                                <i class="fas fa-play-circle text-danger ms-auto fs-4"></i>
+                                            </li>
+                                            <li class="d-flex align-items-center mb-3 song-item">
+                                                <img src="https://via.placeholder.com/70x70/333333/FFFFFF?text=Web3+F" alt="Web3 Forum" class="rounded me-3">
+                                                <div>
+                                                    <p class="text-white mb-0">Le Forum du Web3 Décentralisé</p>
+                                                    <small class="text-white-50">Équipe Blockchain Pro</small>
+                                                </div>
+                                                <i class="fas fa-play-circle text-danger ms-auto fs-4"></i>
+                                            </li>
+                                            <li class="d-flex align-items-center mb-3 song-item">
+                                                <img src="https://via.placeholder.com/70x70/333333/FFFFFF?text=Robot+Expo" alt="Robot Expo" class="rounded me-3">
+                                                <div>
+                                                    <p class="text-white mb-0">Expo Internationale de la Robotique</p>
+                                                    <small class="text-white-50">Global Robotics</small>
+                                                </div>
+                                                <i class="fas fa-play-circle text-danger ms-auto fs-4"></i>
+                                            </li>
+                                        </ul>
+
+                                        <h5 class="text-white mt-4 mb-3">Produits Vedettes</h5>
+                                        <ul class="list-unstyled">
+                                            <li class="d-flex align-items-center mb-3 song-item">
+                                                <img src="https://via.placeholder.com/70x70/333333/FFFFFF?text=Kit+Dev" alt="Dev Kit" class="rounded me-3">
+                                                <div>
+                                                    <p class="text-white mb-0">Kit de Développement IA avancé</p>
+                                                    <small class="text-white-50">149,99 $</small>
+                                                </div>
+                                                <i class="fas fa-shopping-cart text-white-50 ms-auto fs-4"></i>
+                                            </li>
+                                            <li class="d-flex align-items-center mb-3 song-item">
+                                                <img src="https://via.placeholder.com/70x70/333333/FFFFFF?text=Guide+Sec" alt="Security Guide" class="rounded me-3">
+                                                <div>
+                                                    <p class="text-white mb-0">Guide Complet Cybersécurité 2025</p>
+                                                    <small class="text-white-50">29,99 $</small>
+                                                </div>
+                                                <i class="fas fa-shopping-cart text-white-50 ms-auto fs-4"></i>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </main>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
 
 
       <!-- Modals de modification -->
@@ -335,40 +799,102 @@
             <div class="mb-2">
               <input type="text" name="x" class="form-control" placeholder="Lien X (Twitter)">
             </div>
+            <div class="modal-footer">
+            <button type="submit" class="btn btn-danger">Enregistrer</button>
+            </div>
           </div>
         </div>
 
       </div>
-      <div class="modal-footer">
-        <button type="submit" class="btn btn-danger">Enregistrer</button>
-      </div>
-    </form>
-  </div>
-</div>
 
-
-          
-        </div>
-         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-          <button type="submit" class="btn btn-danger">Enregistrer</button>
-        </div>
     </form>
   </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-function ajouterReseau() {
-    const container = document.getElementById('reseaux-container');
-    const nouveau = document.createElement('div');
-    nouveau.classList.add('d-flex', 'mb-2');
-    nouveau.innerHTML = `
-        <input type="text" name="reseaux[nom][]" class="form-control me-2" placeholder="Nom du réseau">
-        <input type="url" name="reseaux[lien][]" class="form-control" placeholder="Lien du profil">
-    `;
-    container.appendChild(nouveau);
-}
-</script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const openSidebarBtn = document.getElementById('openSidebar');
+            const closeSidebarBtn = document.getElementById('closeSidebar');
+            const sidebar = document.querySelector('.sidebar-left');
+
+            if (openSidebarBtn) {
+                openSidebarBtn.addEventListener('click', function() {
+                    sidebar.classList.add('show');
+                });
+            }
+
+            if (closeSidebarBtn) {
+                closeSidebarBtn.addEventListener('click', function() {
+                    sidebar.classList.remove('show');
+                });
+            }
+
+            // Optional: Close sidebar when clicking outside on mobile
+            document.addEventListener('click', function(event) {
+                if (sidebar.classList.contains('show') && !sidebar.contains(event.target) && !openSidebarBtn.contains(event.target)) {
+                    sidebar.classList.remove('show');
+                }
+            });
+
+            // Add simple hover effects (handled mostly by CSS, but can extend with JS for complex animations)
+            const cards = document.querySelectorAll('.speaker-card, .sponsor-card, .song-item');
+
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    // Can add more complex JS animations here if needed
+                    // e.g., gsap.to(this, { duration: 0.2, y: -5, ease: "power1.out" });
+                });
+                card.addEventListener('mouseleave', function() {
+                    // e.g., gsap.to(this, { duration: 0.2, y: 0, ease: "power1.out" });
+                });
+
+                card.addEventListener('click', function() {
+                    // Simulate a click effect
+                    this.classList.add('clicked-effect');
+                    setTimeout(() => {
+                        this.classList.remove('clicked-effect');
+                    }, 200);
+
+                    // In a real app, you'd navigate or open a modal
+                    console.log('Item clicked:', this);
+                });
+            });
+
+            // Add CSS class for click animation (define this in style.css)
+            const styleSheet = document.styleSheets[0];
+            const clickKeyframes = `
+                @keyframes clickedEffect {
+                    0% { transform: scale(1); }
+                    50% { transform: scale(0.98); }
+                    100% { transform: scale(1); }
+                }
+            `;
+            styleSheet.insertRule(clickKeyframes, styleSheet.cssRules.length);
+
+            const clickedEffectRule = `
+                .clicked-effect {
+                    animation: clickedEffect 0.2s ease-out;
+                }
+            `;
+            styleSheet.insertRule(clickedEffectRule, styleSheet.cssRules.length);
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const modal = document.getElementById('eventModal');
+            const openModalBtn = document.getElementById('openModalBtn');
+
+            openModalBtn.addEventListener('click', function () {
+                modal.style.display = 'flex';
+            });
+            const closeModalBtn = document.getElementById('closeModalBtn');
+            closeModalBtn.addEventListener('click', function () {
+                modal.style.display = 'none';
+            });
+        });
+        
+
+
+    </script>
 </body>
 </html>

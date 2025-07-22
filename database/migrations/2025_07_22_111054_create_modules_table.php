@@ -11,9 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('reseaus', function (Blueprint $table) {
+        Schema::create('modules', function (Blueprint $table) {
             $table->id();
-            $table->string('libelle');
+            $table->string('titre');
+            $table->string('fichier')->nullable(); // Assuming 'fichier' is a file path or URL
+            $table->string('video')->nullable();
+            $table->foreignId('formation_id')->constrained('formations')->cascadeOnDelete();
             $table->timestamps();
         });
     }
@@ -23,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('reseaus');
+        Schema::dropIfExists('modules');
     }
 };

@@ -23,6 +23,13 @@ return new class extends Migration
             $table->string('description')->nullable();
             $table->string('biographie')->nullable();
             $table->string('theme')->nullable();
+            $table->string('facebook')->nullable();
+                $table->string('whatsapp')->nullable();
+                $table->string('linkedin')->nullable();
+                $table->string('instagram')->nullable();
+                $table->string('tiktok')->nullable();
+                $table->string('youtube')->nullable();
+
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

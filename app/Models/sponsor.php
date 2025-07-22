@@ -13,5 +13,17 @@ class sponsor extends Model
         'description',
         'logo',
         'promoteur',
+         'facebook',
+        'wahtsapp',
+        'linkedin',
+        'instagram',
+        'tiktok',
+        'youtube',
+
     ];
+    public function evenement()
+    {
+        return $this->belongsToMany(Evenement::class, 'sponsor_evenement', 'id_sponsor', 'id_evenement')
+            ->withTimestamps();
+    }
 }

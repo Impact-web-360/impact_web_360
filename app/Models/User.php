@@ -30,6 +30,12 @@ class User extends Authenticatable
         'biographie',
         'email',
         'password',
+        'facebook',
+        'wahtsapp',
+        'linkedin',
+        'instagram',
+        'tiktok',
+        'youtube',
     ];
 
     /**
@@ -53,10 +59,18 @@ class User extends Authenticatable
     ];
 
 
-    public function reseaus()
+    
+
+    public function formation()
     {
-        return $this->belongsToMany(Reseau::class, 'user_reseaus', 'id_user', 'id_reseau')
-            ->withPivot('link')
+        return $this->belongsToMany(Formation::class, 'user_formation', 'id_user', 'id_formation')
             ->withTimestamps();
     }
+
+    public function evenement()
+    {
+        return $this->belongsToMany(Evenement::class, 'user_evenement', 'id_user', 'id_evenement')
+            ->withTimestamps();
+    }
+
 }

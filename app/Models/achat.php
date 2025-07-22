@@ -13,4 +13,15 @@ class achat extends Model
         'id_article',
         'montant',
     ];
+
+    public function article()
+    {
+        return $this->belongsTo(client::class, 'id_article');
+    }
+
+    public function client()
+    {
+        return $this->belongsTo(article::class, 'id_client');
+    }
 }
+

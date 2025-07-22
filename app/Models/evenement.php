@@ -19,6 +19,16 @@ class Evenement extends Model
         'date_debut',
         'date_fin',
         'image',
+        'facebook',
+        'whatsapp',
+        'instagram',
+        'tiktok',
     ];
+
+    public function user()
+    {
+        return $this->belongsToMany(User::class, 'user_evenement', 'id_evenement', 'id_user')
+            ->withTimestamps();
+    }
 }
 

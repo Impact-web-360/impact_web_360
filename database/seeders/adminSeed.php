@@ -25,7 +25,7 @@ class adminSeed extends Seeder
             'telephone' => '+33123456789',
             'theme' => 'light',
             'biographie' => 'Passionné par le développement web et les nouvelles technologies.',
-            'email' => 'admin@admin',
+            'email' => 'admin360@gmail.com',
             'password' => $hashedPassword,
         ]);
     }
