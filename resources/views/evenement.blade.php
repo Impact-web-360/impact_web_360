@@ -1,6 +1,6 @@
-
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8">
   <title>Nos Événements - Impact Web 360</title>
@@ -9,7 +9,7 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
   <style>
     body {
-      background-color: #111;
+      background-color: #000;
       color: #f0f0f0;
       font-family: 'Segoe UI', sans-serif;
     }
@@ -45,8 +45,15 @@
     }
 
     .event-card {
-      background: linear-gradient(to bottom right, #151a25, #1e2230);
+      background: #000;
       border-radius: 1rem;
+      border: 1px solid #444;
+    }
+
+    .event-card-body {
+      background: linear-gradient(to bottom right, #151a25, #1e2230);
+      border-bottom-left-radius: 1rem;
+      border-bottom-right-radius: 1rem;
     }
 
     .footer {
@@ -59,15 +66,16 @@
       margin-bottom: 0.5rem;
     }
 
-    .footer-links a{ color: #ccccff; 
-      text-decoration: none; 
-      display: block; 
-      margin-bottom: 0.5rem; 
+    .footer-links a {
+      color: #ccccff;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 0.5rem;
       transition: all 0.3s ease;
     }
-    
-    .footer-links a:hover{ 
-      color: #ff4500; 
+
+    .footer-links a:hover {
+      color: #ff4500;
       padding-left: 4px;
     }
 
@@ -103,27 +111,29 @@
 
     @media (max-width: 976px) {
       .navbar-brand img {
-        margin-top: -65px; 
-        max-height: 180px; 
+        margin-top: -65px;
+        max-height: 180px;
         margin-left: -30px;
       }
+
       .navbar-brand {
-          max-height: 50px;
-        }
+        max-height: 50px;
+      }
 
       .navbar-custom {
         margin-top: 10px;
       }
 
-      .yes{
+      .yes {
         margin-bottom: 10px;
       }
-      .yes2{
+
+      .yes2 {
         margin-top: 10px;
       }
 
       #navbarNav {
-        background-color:rgb(0, 0, 102);
+        background-color: rgb(0, 0, 102);
         width: 100%;
         padding: 40px;
         position: absolute;
@@ -142,7 +152,7 @@
         font-weight: bod;
       }
 
-      #navbarNav .btn{
+      #navbarNav .btn {
         margin-top: 50px;
         width: 100%;
       }
@@ -154,147 +164,142 @@
       }
 
       .hamburger {
-          width: 30px;
-          height: 22px;
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          cursor: pointer;
-          z-index: 1001;
-          border: none;
-        }
+        width: 30px;
+        height: 22px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        cursor: pointer;
+        z-index: 1001;
+        border: none;
+      }
 
-        .hamburger span {
-          height: 3px;
-          background-color: white;
-          border-radius: 2px;
-          transition: all 0.4s ease;
-          border: none;
-        }
+      .hamburger span {
+        height: 3px;
+        background-color: white;
+        border-radius: 2px;
+        transition: all 0.4s ease;
+        border: none;
+      }
 
-        .navbar-toggler {
+      .navbar-toggler {
         border: none !important;
         background: transparent !important;
         box-shadow: none !important;
         outline: none !important;
-        }
+      }
 
 
-        /* Animation croix */
-        .hamburger.active span:nth-child(1) {
-          transform: rotate(45deg) translate(5px, 5px);
-        }
-        .hamburger.active span:nth-child(2) {
-          opacity: 0;
-        }
-        .hamburger.active span:nth-child(3) {
-          transform: rotate(-45deg) translate(8px, -9px);
-        }
-        /* Supprimer styles Bootstrap par défaut */
-        .navbar-toggler-icon {
+      /* Animation croix */
+      .hamburger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+
+      .hamburger.active span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .hamburger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(8px, -9px);
+      }
+
+      /* Supprimer styles Bootstrap par défaut */
+      .navbar-toggler-icon {
         background-image: none !important;
-        }
+      }
+    }
+
+    @media (max-width: 768px) {
+      .event-card-top img {
+        width: 100% !important;
+      }
     }
   </style>
 </head>
+
 <body>
 
-<!-- NAVBAR -->
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top navbar-custom container">
-      <a class="navbar-brand" href="index.php"><img src="{{ asset('dossiers/image/Impact-Web-360-Logo1.png') }}" alt="Logo Impact Web" /></a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <div class="hamburger"  id="hamburgerBtn">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link " href="{{ route('home') }}">Acceuil</a></li>
-          <li class="nav-item"><a class="nav-link active" href="{{ route('evenement') }}">Événements</a></li>
-          <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">E-learning</a></li>
-          <li class="nav-item"><a class="nav-link" href="{{ route('intervenant') }}">Intervenants</a></li>
-          <li class="nav-item"><a class="nav-link" href="{{ route('billet') }}">Billetterie</a></li>
-          <li class="nav-item"><a class="nav-link" href="{{ route('boutique') }}">Boutique</a></li>
-          <li class="nav-item"><a class="btn btn-light mx-2" href="{{ route('login') }}">Se connecter</a></li>
-          <li class="nav-item"><a class="btn btn-inscrire" href="{{ route('register') }}">S'inscrire</a></li>
-        </ul>
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top navbar-custom container">
+    <a class="navbar-brand" href="index.php"><img src="{{ asset('dossiers/image/Impact-Web-360-Logo1.png') }}" alt="Logo Impact Web" /></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <div class="hamburger" id="hamburgerBtn">
+        <span></span>
+        <span></span>
+        <span></span>
       </div>
-    </nav>
-
-
-<!-- SECTION : Tous les événements -->
-<section class="text-white py-5" style="margin-top: 120px;" >
-  <div class="container ">
-    <h2 class="mb-3 fw-bold">Nos Événements</h2>
-    <p class="mb-4 fs-6">Chaque événement impact Web 360 est pensé pour connecter, inspirer et former les pasionnés du numérique au Bénin et en Afrique. <br> Entre conférences, ateliers, panels et sessions de networking, nos rencontres offrent une expérience unique autour <br> des métiers du digital, de l'entrepreneuriat et de l'innovation.</p>
-
-    <!-- Aperçu limité -->
-    @foreach ($evenements as $evenement)
-    <div class="row g-4" id="evenements-apercu">
-      <div class="col-md-6">
-        <div class="card bg-transparent border-0 text-white">
-          <img src="{{ asset('storage/' . $evenement->image) }}" class="card-img-top w-50 " alt="" >
-          <div class="card-body px-0">
-            <p class="fs-6">{{ $evenement->date_debut }}</p>
-            <small class="text-black"></small>
-            <h5 class="mt-2">Thème : "{{ $evenement->theme }}"</h5>
-            <a href="" class="btn btn-primary rounded-5 btn-sm">Replay disponibles <i class="fa-solid fa-arrow-right ms-1"></i></a>
-          </div>
-        </div>
-      </div>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link " href="{{ route('home') }}">Acceuil</a></li>
+        <li class="nav-item"><a class="nav-link active" href="{{ route('evenement') }}">Événements</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">E-learning</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ route('intervenant') }}">Intervenants</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ route('billet') }}">Billetterie</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ route('boutique') }}">Boutique</a></li>
+        <li class="nav-item"><a class="btn btn-light mx-2" href="{{ route('login') }}">Se connecter</a></li>
+        <li class="nav-item"><a class="btn btn-inscrire" href="{{ route('register') }}">S'inscrire</a></li>
+      </ul>
     </div>
-  @endforeach
+  </nav>
 
-    
-    <!-- Liste complète cachée au départ -->
-    <div class="row g-4 d-none" id="evenements-complet">
-      
-      <div class="col-md-6">
-        <div class="card bg-transparent border-0 text-white">
-          <img src="i" class="card-img-top rounded-4" alt="">
-          <div class="card-body px-0">
-            <small class="text-black"></small>
-            <h5 class="mt-2">Thème : ""</h5>
-            <p></p>
-            <p><strong>Lieu :</p>
-            <a href="#" class="btn btn-danger btn-sm">Réserver <i class="fa-solid fa-arrow-right ms-1"></i></a>
+
+  <!-- SECTION : Tous les événements -->
+  <section class="text-white py-5" style="margin-top: 100px;">
+    <div class="container ">
+      <h2 class="mb-3 fw-bold">Nos Événements</h2>
+      <p class="mb-4 fs-6">Chaque événement impact Web 360 est pensé pour connecter, inspirer et former les pasionnés du numérique au Bénin et en Afrique. <br> Entre conférences, ateliers, panels et sessions de networking, nos rencontres offrent une expérience unique autour <br> des métiers du digital, de l'entrepreneuriat et de l'innovation.</p>
+
+      <!-- Aperçu limité -->
+      <div class="row g-4" id="evenements-liste">
+        @foreach ($evenements as $evenement)
+        <div class="col-md-6 evenement-item">
+          <div class="card bg-transparent border-3 text-white">
+            <img src="{{ asset('storage/' . $evenement->image) }}" class="card-img-top w-100 rounded" style="max-height: 300px; object-fit: cover;" alt="">
+            <div class="card-body px-0">
+              <p class="fs-6">{{ $evenement->date_debut }}</p>
+              <h5>Thème : "{{ $evenement->theme }}"</h5>
+              <a href="" class=" text-decoration-none">Replay disponibles <i class="fa-solid fa-arrow-right ms-1"></i></a>
+            </div>
           </div>
         </div>
+        @endforeach
       </div>
-      
     </div>
 
     <div class="mt-4 text-center">
       <button id="btn-decouvrir" class="btn btn-danger"><i class="fas fa-eye me-2"></i>Découvrir tous les événements</button>
       <button id="btn-masquer" class="btn btn-outline-light d-none"><i class="fas fa-eye-slash me-2"></i>Voir moins</button>
     </div>
-    
 
-  </div>
-</section>
 
-<!-- SECTION : Événement à venir -->
-
-<section class="text-white py-5" style="background-color:rgba(5, 5, 41, 0.6);">
-  <div class="container">
-    <h2 class="mb-3">Événement à venir</h2>
-    <p class="mb-4">Ne rate pas le prochain rendez-vous de la communauté Impact Web 360. Réserve ta place dès maintenant !</p>
-    <div class="event-card p-4 rounded-4 text-center ">
-      <img src="" class="img-fluid rounded mb-3 " alt="Image événement">
-      <h4></h4>
-      <p><strong>Date :</strong> </p>
-      <p><strong>Heure :</strong> </p>
-      <p><strong>Lieu :</strong></p>
-      <p><strong>Thème :</strong></p>
-      <p><strong>Description :</strong></p>
-      <a href="#" class="btn btn-danger btn-lg mt-3">Réserver mon billet <i class="fa-solid fa-arrow-right ms-1"></i></a>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ===== FOOTER ===== -->
+  <!-- SECTION : Événement à venir -->
+
+  <section class="text-white py-5 align-items-center justify-content-center d-flex">
+    <div class="container text-center">
+      <h2 class="mb-3">Événement à venir</h2>
+      <p class="mb-4">Ne rate pas le prochain rendez-vous de la communauté Impact Web 360. Réserve ta place dès maintenant !</p>
+      <div class="event-card mx-auto w-100 w-md-75 w-lg-50">
+        <div class="event-card-top p-3">
+          <img src="{{ asset('storage/' . $evenement->image) }}" class="img-fluid w-25" alt="Image événement">
+        </div>
+        <div class="event-card-body p-3">
+          <h3>{{ $evenement->nom }}</h3>
+          <p class="mb-1"><strong>Date : </strong><span>{{ $evenement->date_debut }}</span></p>
+          <p class="mb-1"><strong>Heure : </strong><span>{{ \Carbon\Carbon::createFromFormat('H:i:s', $evenement->heure)->format('H:i') }}</span></p>
+          <p class="mb-1"><strong>Lieu : </strong><span>{{ $evenement->lieu }}</span></p>
+          <p class="mb-1"><strong>Thème : </strong><span>{{ $evenement->theme }}</span></p>
+          <p class="mb-2"><strong>Description : </strong><span>{{ $evenement->description }}</span></p>
+          <a href="#" class="btn btn-danger btn-lg mt-2">Réserver mon billet <i class="fa-solid fa-arrow-right ms-1"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
   <footer class="footer text-white pt-5">
     <div class="container">
       <div class="row">
@@ -349,36 +354,52 @@
     </div>
   </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-  const btnDecouvrir = document.getElementById('btn-decouvrir');
-  const btnMasquer = document.getElementById('btn-masquer');
-  const evenementsApercu = document.getElementById('evenements-apercu');
-  const evenementsComplet = document.getElementById('evenements-complet');
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const evenementItems = document.querySelectorAll('.evenement-item');
+      const btnDecouvrir = document.getElementById('btn-decouvrir');
+      const btnMasquer = document.getElementById('btn-masquer');
 
-  btnDecouvrir.addEventListener('click', () => {
-    evenementsComplet.classList.remove('d-none');
-    evenementsApercu.classList.add('d-none');
-    btnDecouvrir.classList.add('d-none');
-    btnMasquer.classList.remove('d-none');
-  });
-
-  btnMasquer.addEventListener('click', () => {
-    evenementsComplet.classList.add('d-none');
-    evenementsApercu.classList.remove('d-none');
-    btnMasquer.classList.add('d-none');
-    btnDecouvrir.classList.remove('d-none');
-  });
-</script>
-<script>
-      document.addEventListener('DOMContentLoaded', () => {
-        const toggler = document.querySelector('.navbar-toggler');
-        const hamburger = document.getElementById('hamburgerBtn');
-
-        toggler.addEventListener('click', () => {
-          hamburger.classList.toggle('active');
+      const afficherNombre = (nombre) => {
+        evenementItems.forEach((item, index) => {
+          if (index < nombre) {
+            item.classList.remove('d-none');
+          } else {
+            item.classList.add('d-none');
+          }
         });
+      };
+
+      // Afficher seulement 2 événements au chargement
+      afficherNombre(2);
+
+      // Au clic sur "Découvrir"
+      btnDecouvrir.addEventListener('click', () => {
+        afficherNombre(evenementItems.length);
+        btnDecouvrir.classList.add('d-none');
+        btnMasquer.classList.remove('d-none');
       });
-    </script>
+
+      // Au clic sur "Voir moins"
+      btnMasquer.addEventListener('click', () => {
+        afficherNombre(2);
+        btnMasquer.classList.add('d-none');
+        btnDecouvrir.classList.remove('d-none');
+      });
+    });
+  </script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggler = document.querySelector('.navbar-toggler');
+      const hamburger = document.getElementById('hamburgerBtn');
+
+      toggler.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+      });
+    });
+  </script>
 </body>
+
 </html>
