@@ -219,29 +219,29 @@
 
 <body>
 
-  <!-- NAVBAR -->
-  <nav class="navbar navbar-expand-lg navbar-dark fixed-top navbar-custom container">
-    <a class="navbar-brand" href="index.php"><img src="{{ asset('dossiers/image/Impact-Web-360-Logo1.png') }}" alt="Logo Impact Web" /></a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-      <div class="hamburger" id="hamburgerBtn">
-        <span></span>
-        <span></span>
-        <span></span>
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top navbar-custom container">
+      <a class="navbar-brand" href="index.php"><img src="{{ asset('dossiers/image/Impact-Web-360-Logo1.png') }}" alt="Logo Impact Web" /></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <div class="hamburger"  id="hamburgerBtn">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link " href="{{ route('home') }}">Acceuil</a></li>
+          <li class="nav-item"><a class="nav-link active" href="{{ route('evenement') }}">Événements</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">E-learning</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ route('intervenant') }}">Intervenants</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ route('step1') }}">Billetterie</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ route('boutique') }}">Boutique</a></li>
+          <li class="nav-item"><a class="btn btn-light mx-2" href="{{ route('login') }}">Se connecter</a></li>
+          <li class="nav-item"><a class="btn btn-inscrire" href="{{ route('register') }}">S'inscrire</a></li>
+        </ul>
       </div>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link " href="{{ route('home') }}">Acceuil</a></li>
-        <li class="nav-item"><a class="nav-link active" href="{{ route('evenement') }}">Événements</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">E-learning</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ route('intervenant') }}">Intervenants</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ route('billet') }}">Billetterie</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ route('boutique') }}">Boutique</a></li>
-        <li class="nav-item"><a class="btn btn-light mx-2" href="{{ route('login') }}">Se connecter</a></li>
-        <li class="nav-item"><a class="btn btn-inscrire" href="{{ route('register') }}">S'inscrire</a></li>
-      </ul>
-    </div>
-  </nav>
+    </nav>
 
 
   <!-- SECTION : Tous les événements -->
@@ -278,26 +278,25 @@
 
   <!-- SECTION : Événement à venir -->
 
-  <section class="text-white py-5 align-items-center justify-content-center d-flex">
-    <div class="container text-center">
-      <h2 class="mb-3">Événement à venir</h2>
-      <p class="mb-4">Ne rate pas le prochain rendez-vous de la communauté Impact Web 360. Réserve ta place dès maintenant !</p>
-      <div class="event-card mx-auto w-100 w-md-75 w-lg-50">
-        <div class="event-card-top p-3">
-          <img src="{{ asset('storage/' . $evenement->image) }}" class="img-fluid w-25" alt="Image événement">
-        </div>
-        <div class="event-card-body p-3">
-          <h3>{{ $evenement->nom }}</h3>
-          <p class="mb-1"><strong>Date : </strong><span>{{ $evenement->date_debut }}</span></p>
-          <p class="mb-1"><strong>Heure : </strong><span>{{ \Carbon\Carbon::createFromFormat('H:i:s', $evenement->heure)->format('H:i') }}</span></p>
-          <p class="mb-1"><strong>Lieu : </strong><span>{{ $evenement->lieu }}</span></p>
-          <p class="mb-1"><strong>Thème : </strong><span>{{ $evenement->theme }}</span></p>
-          <p class="mb-2"><strong>Description : </strong><span>{{ $evenement->description }}</span></p>
-          <a href="#" class="btn btn-danger btn-lg mt-2">Réserver mon billet <i class="fa-solid fa-arrow-right ms-1"></i></a>
-        </div>
-      </div>
+<section class="text-white py-5" style="background-color:rgba(5, 5, 41, 0.6);">
+  <div class="container">
+    <h2 class="mb-3">Événement à venir</h2>
+    <p class="mb-4">Ne rate pas le prochain rendez-vous de la communauté Impact Web 360. Réserve ta place dès maintenant !</p>
+    @foreach ($evenements as $evenement)
+    <div class="event-card p-4 rounded-4 text-center ">
+      <img src="{{ asset('storage/' . $evenement->image) }}" class="img-fluid rounded mb-3 w-25" alt="Image événement">
+      <h4></h4>
+      <p><strong>Date : {{$evenement->date_debut}}</strong> </p>
+      <p><strong>Heure : {{$evenement->heure}}</strong> </p>
+      <p><strong>Lieu : {{$evenement->lieu}}</strong></p>
+      <p><strong>Thème : {{$evenement->theme}}</strong></p>
+      <p><strong>Description : {{$evenement->description}}</strong></p>
+      <a href="#" class="btn btn-danger btn-lg mt-3">Réserver mon billet <i class="fa-solid fa-arrow-right ms-1"></i></a>
     </div>
-  </section>
+    @endforeach
+    
+  </div>
+</section>
 
   <!-- ===== FOOTER ===== -->
   <footer class="footer text-white pt-5">

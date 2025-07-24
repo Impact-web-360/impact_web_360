@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Sponsor;
+use App\Models\sponsor_evenement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -22,6 +23,7 @@ class SponsorController extends Controller
                 'promoteur' => 'required|string',
                 'description' => 'required|string',
                 'logo' => 'required|image',
+                'evenement_id' => 'required|exists:evenements,id',
             ]);
 
             if ($request->hasFile('logo')) {
@@ -29,7 +31,13 @@ class SponsorController extends Controller
                 $data['logo'] = $path;
             }
 
-            Sponsor::create($data);
+          $sponsor=Sponsor::create($data);
+
+            sponsor_evenement::create([
+                'id_sponsor' => $sponsor->id,
+                'id_evenement' => $data['evenement_id'],
+            ]);
+
 
             return redirect()->back()->with('success', 'Sponsor créé !');
         } catch (\Throwable $th) {
@@ -47,6 +55,7 @@ class SponsorController extends Controller
             'promoteur' => 'required|string',
             'description' => 'required|string',
             'logo' => 'nullable|image',
+            'evenement_id' => 'required|exists:evenements,id',
         ]);
 
         if ($request->hasFile('logo')) {

@@ -172,7 +172,7 @@
           <li class="nav-item"><a class="nav-link" href="{{ route('evenement') }}">Événements</a></li>
           <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">E-learning</a></li>
           <li class="nav-item"><a class="nav-link" href="{{ route('intervenant') }}">Intervenants</a></li>
-          <li class="nav-item"><a class="nav-link active" href="{{ route('billet') }}">Billetterie</a></li>
+          <li class="nav-item"><a class="nav-link active" href="{{ route('step1') }}">Billetterie</a></li>
           <li class="nav-item"><a class="nav-link" href="{{ route('boutique') }}">Boutique</a></li>
           <li class="nav-item"><a class="btn btn-light mx-2" href="{{ route('login') }}">Se connecter</a></li>
           <li class="nav-item"><a class="btn btn-inscrire" href="{{ route('register') }}">S'inscrire</a></li>
@@ -183,7 +183,7 @@
 <div class="container" style="margin-top: 150px;">
   <div class="ticket text-center animate__animated animate__fadeIn">
     <div class="ticket-header p-3">
-          <img src="{{ asset('dossiers/image/Impact-Web-360-Logo2.png') }}" alt="Logo">
+          <img src="" alt="Logo">
           <h5>Impact Web 360 – Édition 2025</h5>
           <div class="text-end"><strong></strong></div>
     </div>
@@ -206,47 +206,68 @@
 
   <div class="step-nav mt-5 text-dark text-center">
     <div class="step-container">
-      <span><strong class="text-primary">Informations</strong></span>
+      <span><strong class="text-primary"><a href="{{ route('step1') }}"> Informations</a></strong></span>
       <span class="mx-2 text-muted">&gt;</span>
-      <span>Réservation de siège</span>
+      <span><a href="{{ route('step2') }}">Réservation de siège</a> </span>
       <span class="mx-2 text-muted">&gt;</span>
-      <span>Confirmation</span>
+      <span><a href="{{ route('step3') }}">Confirmation</a></span>
       <span class="mx-2 text-muted">&gt;</span>
       <span>Paiement</span>
     </div>
   </div>
-
-
-
-  <form class="form-section animate__animated animate__fadeInUp" method="POST" action="">
+ <form class="form-section animate__animated animate__fadeInUp" method="POST" action="{{ route('tickets.store') }}">
+    @csrf
     <div class="alert alert-danger"></div>
    
-    <div class="div-form">
-      <input type="hidden" name="id_evenement" value="">
-      <div class="mb-3">
-        <label class="form-label">Sélectionnez le titre</label><br>
-        <div class="btn-group" role="group">
-          <input type="radio" class="btn-check" name="titre" id="m" value="M" autocomplete="off">
-          <label class="btn btn-outline-dark" for="m">M</label>
-          <input type="radio" class="btn-check" name="titre" id="mme" value="Mme" autocomplete="off">
-          <label class="btn btn-outline-dark" for="mme">Mme</label>
-          <input type="radio" class="btn-check" name="titre" id="ms" value="Ms" autocomplete="off">
-          <label class="btn btn-outline-dark" for="ms">Ms</label>
+    <div class="row div-form">
+        <div class="col-md-6 mb-3">
+            <input type="text" class="form-control p-3 rounded-4" name="nom" placeholder="Nom de famille" value="{{ $step1['nom'] ?? '' }}" required>
         </div>
-      </div>
-      <div class="row g-3">
-        <div class="col-md-6"><input type="text" class="form-control p-3 rounded-4" name="prenom" placeholder="Prénom" required></div>
-        <div class="col-md-6"><input type="text" class="form-control p-3 rounded-4" name="nom" placeholder="Nom de famille" required></div>
-        <div class="col-md-6"><input type="date" class="form-control p-3 rounded-4" name="naissance" required></div>
-        <div class="col-md-6"><input type="text" class="form-control p-3 rounded-4" name="passeport" placeholder="Numéro de passeport"></div>
-        <div class="col-md-6"><input type="text" class="form-control p-3 rounded-4" name="pays" placeholder="Pays"></div>
-        <div class="col-md-6"><input type="text" class="form-control p-3 rounded-4" name="ville" placeholder="Ville"></div>
-        <div class="col-md-6"><input type="text" class="form-control p-3 rounded-4" name="contact" placeholder="+229" required></div>
-        <div class="col-md-6"><input type="email" class="form-control p-3 rounded-4" name="email" placeholder="E-mail" required></div>
-      </div>
+
+        <div class="col-md-6 mb-3">
+            <input type="text" class="form-control p-3 rounded-4" name="prenom" placeholder="Prénom" value="{{ $step1['prenom'] ?? '' }}" required>
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <input type="text" class="form-control p-3 rounded-4" name="pays" placeholder="Pays" value="{{ $step1['pays'] ?? '' }}" required>
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <input type="text" class="form-control p-3 rounded-4" name="ville" placeholder="Ville" value="{{ $step1['ville'] ?? '' }}" required>
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <input type="text" class="form-control p-3 rounded-4" name="telephone" placeholder="Téléphone" value="{{ $step1['telephone'] ?? '' }}" required>
+        </div>
+
+        <div class="col-md-6">
+            <input type="email" class="form-control p-3 rounded-4" name="email" placeholder="Email" value="{{ $step1['email'] ?? '' }}" required>
+        </div>
+</div>
+
+<div class="card mt-3 justify-content-center rounded-5 w-50" >
+  <div class="card-body">
+    <hr>
+    <div class="row text-body-secondary card-subtitle mb-2">
+         <h6 class="col-md-8">Billet: </h6>
+         <h6 class="col-md-4">100.000FCFA</h6>
     </div>
+    <br>
+        <div class="row text-body-secondary card-subtitle mb-2">
+         <h6 class="col-md-8">Rabais: </h6>
+         <h6 class="col-md-4">-</h6>
+        </div>
+    <center>
+    <button type="button" class="btn btn-light text-center text-danger rounded-5 mb-3 justify-content-center align-item-center w-50">J'ai un code promo</button>
+  </div>
+  <div class="card-footer justify-content-between align-items-center d-flex text-body-secondary text-white fw-bold" style="background-color: #ff4500; text-align:center; color: white; border-bottom-left-radius: 2rem; border-bottom-right-radius: 2rem;">
+        <p style="text-align:center;">Résumé total</p>
+  </div>
+  </center>
+</div>
+
     <div class="text-center">
-      <button type="submit" class="btn btn-suivant">Suivant</button>
+      <button type="submit" class="btn btn-suivant">Payer</button>
     </div>
   </form>
 </div>
@@ -318,3 +339,4 @@
 </script>
 </body>
 </html>
+

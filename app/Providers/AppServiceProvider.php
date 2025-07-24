@@ -17,8 +17,21 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Bootstrap any application services.
      */
-    public function boot(): void
-    {
-        //
-    }
+    public function boot()
+{
+    view()->share([
+        'dialCodes' => [
+            'FR' => '+33',
+            'BE' => '+32',
+            'CH' => '+41',
+            // Ajouter tous les pays nécessaires...
+        ],
+        'countries' => [
+            'FR' => 'France',
+            'BE' => 'Belgique',
+            'CH' => 'Suisse',
+            // ...
+        ]
+    ]);
+}
 }

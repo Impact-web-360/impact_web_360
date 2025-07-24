@@ -421,35 +421,35 @@
         <div class="card mb-4">
           <button class="btn btn-danger mb-3" data-bs-toggle="modal" data-bs-target="#addEvenementModal">
             <i class="fa fa-plus"></i> Ajouter un événement
-          </button>
-
-          <div class="col-md-12 mb-4 d-flex justify-content-center justify-content-between me-2 ">
-          @foreach ($evenements as $evenement)
-            <div class="card">
-              <div class="image-wrapper">
-                <img src="{{ asset('storage/' . $evenement->image) }}" class="card-img-top" alt="Affiche de l'évènement">
-              </div>
-              <div class="card-body">
-                <h5 class="card-title mb-3">{{ $evenement->nom }}</h5>
-                <h6>{{ $evenement->promoteur }}</h6>
-                <div class="mt-3">
-                  <button class="btn btn-outline-primary btn-sm me-2" data-bs-toggle="modal" data-bs-target="#editEventModal{{ $evenement->id }}">
-                    <i class="fas fa-edit"></i>
-                  </button>
-                  <form method="POST" action="{{ route('evenements.destroy', $evenement->id) }}" onsubmit="return confirm('Confirmer la suppression ?');" style="display:inline;">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-outline-danger btn-sm me-4">
-                      <i class="fas fa-trash"></i>
-                    </button>
-                  </form>
-                  <a href="#" class="btn btn-danger fw-bold" data-bs-toggle="modal" data-bs-target="#eventModal{{ $evenement->id }}">Informations</a>
-                </div>
-                <center><a href="{{ route('sponsors.index') }}" class="btn btn-dark text-white fs-6 fw-bold mt-3 text-center" data-bs-toggle="modal" data-bs-target="#addSponsorModal">Ajouter un sponsor</a></center>
-                <center><a href="{{ route('sponsors.index') }}" class="btn btn-dark text-white fs-6 fw-bold mt-3 text-center" data-bs-toggle="modal" data-bs-target="#addIntervenantModal">Ajouter un intervenant</a></center>
-              </div>
-            </div>
-
+        </button>
+                
+            @foreach ($evenements as $evenement)
+                        <div class="col-md-4 mb-4 d-flex align-items-stretch me-2 ">
+                          <div class="card">
+                            <div class="image-wrapper">
+                                    <img src="{{ asset('storage/' . $evenement->image) }}" class="card-img-top" alt="Affiche de l'évènement">
+                              </div>
+                            <div class="card-body">
+                              <h5 class="card-title mb-3">{{ $evenement->nom }}</h5>
+                              <h6>{{ $evenement->promoteur }}</h6>
+                              <div class="mt-3">
+                                <button class="btn btn-outline-primary btn-sm me-2" data-bs-toggle="modal" data-bs-target="#editEventModal{{ $evenement->id }}">
+                                  <i class="fas fa-edit"></i> 
+                              </button>
+                                <form method="POST" action="{{ route('evenements.destroy', $evenement->id) }}" onsubmit="return confirm('Confirmer la suppression ?');" style="display:inline;">
+                                  @csrf
+                                  @method('DELETE')
+                                  <button type="submit" class="btn btn-outline-danger btn-sm me-4">
+                                      <i class="fas fa-trash"></i> 
+                                  </button>
+                                </form>
+                              <a href="#" class="btn btn-danger fw-bold" data-bs-toggle="modal" data-bs-target="#eventModal{{ $evenement->id }}">Informations</a>
+                              </div>
+                              <center><a href="{{ route('sponsors.index') }}" class="btn btn-dark text-white fs-6 fw-bold mt-3 text-center" data-bs-toggle="modal" data-bs-target="#addSponsorModal">Ajouter un sponsor</a></center>
+                              <center><a href="{{ route('sponsors.index') }}" class="btn btn-dark text-white fs-6 fw-bold mt-3 text-center" data-bs-toggle="modal" data-bs-target="#addIntervenantModal" >Ajouter un intervenant</a></center>
+                            </div>
+                          </div>
+          
             @endforeach
 
           </div>
@@ -663,15 +663,22 @@
     </div>
   </div>
 
-  <!-- Modal Ajouter sponsor -->
-  <div class="modal fade" id="addSponsorModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-scrollable ">
-      <form method="POST" action="{{ route('sponsors.store') }}" enctype="multipart/form-data" class="modal-content">
-        @csrf
+<!-- Modal Ajouter sponsor -->
+<div class="modal fade" id="addSponsorModal" tabindex="-1"  aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable ">
+    <form method="POST" action="{{ route('sponsors.store') }}" enctype="multipart/form-data" class="modal-content">
+      @csrf
         <div class="modal-header bg-danger text-white">
           <h5 class="modal-title" id="addsponsorLabel">Ajouter un sponsor</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
         </div>
+
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="nom" class="form-label">{{ $evenement->nom }}</label>
+            <input type="hidden" class="form-control" name="evenement_id" value="{{ $evenement->id }}" >
+          </div>
+
         <div class="modal-body">
           <div class="mb-3">
             <label for="nom" class="form-label">Nom du sponsor</label>
@@ -698,25 +705,25 @@
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
           <button type="submit" class="btn btn-danger">Enregistrer</button>
         </div>
-      </form>
-    </div>
+    </form>
   </div>
+</div>
 
-  <!-- Modal Ajouter intervenant -->
-  <div class="modal fade" id="addIntervenantModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-scrollable">
-      <form method="POST" action="{{ route('intervenants.store') }}" enctype="multipart/form-data" class="modal-content">
-        @csrf
-        <div class="modal-header bg-danger text-white">
-          <h5 class="modal-title">Ajouter un intervenant</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+<!-- Modal Ajouter intervenant -->
+<div class="modal fade" id="addIntervenantModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable">
+    <form method="POST" action="{{ route('intervenants.store') }}" enctype="multipart/form-data" class="modal-content">
+      @csrf
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title">Ajouter un intervenant</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+      </div>
+      <div class="modal-body">
+        
+        <div class="mb-3">
+          <label for="nom" class="form-label">Nom</label>
+          <input type="text" class="form-control" id="nom" name="nom" required>
         </div>
-        <div class="modal-body">
-
-          <div class="mb-3">
-            <label for="nom" class="form-label">Nom</label>
-            <input type="text" class="form-control" id="nom" name="nom" required>
-          </div>
 
           <div class="mb-3">
             <label for="description" class="form-label">Description</label>
@@ -738,33 +745,33 @@
             <input type="file" class="form-control" id="image" name="image" required>
           </div>
 
-          <div class="mb-3">
-            <label class="form-label">Réseaux sociaux</label>
-            <div id="reseaux-container">
-              <div class="d-flex mb-2">
-                <input type="text" name="whatsapp" class="form-control me-2" placeholder="Lien WhatsApp">
-                <input type="text" name="facebook" class="form-control me-2" placeholder="Lien Facebook">
-                <input type="text" name="instagram" class="form-control me-2" placeholder="Lien Instagram">
-              </div>
-              <div class="d-flex mb-2">
-                <input type="text" name="tiktok" class="form-control me-2" placeholder="Lien TikTok">
-                <input type="text" name="linkedln" class="form-control me-2" placeholder="Lien LinkedIn">
-                <input type="text" name="snapchat" class="form-control me-2" placeholder="Lien Snapchat">
-              </div>
-              <div class="mb-2">
-                <input type="text" name="x" class="form-control" placeholder="Lien X (Twitter)">
-              </div>
-              <div class="modal-footer">
-                <button type="submit" class="btn btn-danger">Enregistrer</button>
-              </div>
+        <div class="mb-3">
+          <label class="form-label">Réseaux sociaux</label>
+          <div id="reseaux-container">
+            <div class="d-flex mb-2">
+              <input type="text" name="whatsapp" class="form-control me-2" placeholder="Lien WhatsApp">
+              <input type="text" name="facebook" class="form-control me-2" placeholder="Lien Facebook">
+              <input type="text" name="instagram" class="form-control me-2" placeholder="Lien Instagram">
+            </div>
+            <div class="d-flex mb-2">
+              <input type="text" name="tiktok" class="form-control me-2" placeholder="Lien TikTok">
+              <input type="text" name="linkedln" class="form-control me-2" placeholder="Lien LinkedIn">
+              <input type="text" name="snapchat" class="form-control me-2" placeholder="Lien Snapchat">
+            </div>
+            <div class="mb-2">
+              <input type="text" name="x" class="form-control" placeholder="Lien X (Twitter)">
+            </div>
+            <div class="modal-footer">
+            <button type="submit" class="btn btn-danger">Enregistrer</button>
             </div>
           </div>
-
         </div>
 
-      </form>
-    </div>
+      </div>
+
+    </form>
   </div>
+</div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script>

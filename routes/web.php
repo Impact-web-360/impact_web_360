@@ -11,6 +11,7 @@ use App\Http\Controllers\IntervenantController;
 use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\SocialAuthController;
 use App\Http\Controllers\SponsorController;
+use App\Http\Controllers\TicketController;
 use App\Http\Requests\FormationRequest;
 
 /*
@@ -37,9 +38,17 @@ Route::get('/intervenant', [HomeController::class, 'intervenant'])->name('interv
 Route::get('/evenement', [HomeController::class, 'evenement'])->name('evenement');
 
 
-Route::get('/billet', function () {
-    return view('billet');
-})->name('billet');
+
+// Étapes réservation
+Route::get('/step1', [TicketController::class, 'step1'])->name('step1');
+Route::post('/step1', [TicketController::class, 'postStep1'])->name('step1.post');
+Route::get('/step2', [TicketController::class, 'step2'])->name('step2');
+Route::post('/step2', [TicketController::class, 'postStep2'])->name('step2.post');
+Route::get('/step3', [TicketController::class, 'step3'])->name('step3');
+Route::post('/tickets', [TicketController::class, 'store'])->name('tickets.store');
+
+// CRUD
+Route::resource('tickets', TicketController::class)->except(['create', 'store']);
 
 Route::get('/boutique', function () {
     return view('boutique');

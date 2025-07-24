@@ -744,7 +744,7 @@
           <li class="nav-item"><a class="nav-link" href="{{ route('evenement') }}">Événements</a></li>
           <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">E-learning</a></li>
           <li class="nav-item"><a class="nav-link" href="{{ route('intervenant') }}">Intervenants</a></li>
-          <li class="nav-item"><a class="nav-link" href="{{ route('billet') }}">Billetterie</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ route('step1') }}">Billetterie</a></li>
           <li class="nav-item"><a class="nav-link" href="{{ route('boutique') }}">Boutique</a></li>
           <li class="nav-item"><a class="btn btn-light mx-2" href="{{ route('login') }}">Se connecter</a></li>
           <li class="nav-item"><a class="btn btn-inscrire" href="{{ route('register') }}">S'inscrire</a></li>
@@ -752,14 +752,14 @@
       </div>
     </nav>
 
-    <!-- Hero Section -->
-    <header class="hero-section text-center" data-aos="zoom-in">
-      <div class="overlay">
-        <br><br><br>
-        <button class="btn btn-360 mb-3">Impact Web 360 ➔</button>
-        <h1 class="display-5">Nous partons de Zéro pour <br> impacter la Jeunesse <br> Africaine.</h1>
-        <p class="lead">Comment générer un revenu à 6 chiffres grâce <br> au web ?</p>
-        <a href="{{ route('billet') }}" class="btn btn-danger btn-lg mt-3 mb-5"><i class="fa fa-ticket-alt me-2 "></i>Réserver mon billet →</a>
+<!-- Hero Section -->
+<header class="hero-section text-center" data-aos="zoom-in">
+  <div class="overlay">
+    <br><br><br>
+    <button class="btn btn-360 mb-3">Impact Web 360 ➔</button>
+    <h1 class="display-5">Nous partons de Zéro pour <br> impacter la Jeunesse <br> Africaine.</h1>
+    <p class="lead">Comment générer un revenu à 6 chiffres grâce <br> au web ?</p>
+    <a href="{{ route('billet') }}" class="btn btn-danger btn-lg mt-3 mb-5"><i class="fa fa-ticket-alt me-2 "></i>Réserver mon billet →</a>
 
         <div class="countdown-container">
           <div class="time-box">
@@ -858,16 +858,16 @@
 
         </div>
 
-        <div class="col-md-6">
-          <img src="{{ asset('dossiers/image/logo-tounée.jpg') }}" alt="Image événement" class="img-fluid rounded" style="width: 400px; height: auto;">
-        </div>
-      </div>
-      <div class="mt-4">
-        <a href="{{route('billet')}}" class="btn btn-danger me-3 taille">Réserver Mon Billet</a>
-        <a href="#" class="text-decoration-underline taille" style="color: #ccc;">En savoir plus</a>
+      <div class="col-md-6">
+        <img src="{{ asset('dossiers/image/logo-tounée.jpg') }}" alt="Image événement" class="img-fluid rounded" style="width: 400px; height: auto;">
       </div>
     </div>
-  </section>
+    <div class="mt-4">
+      <a href="{{route('billet')}}" class="btn btn-danger me-3 taille">Réserver Mon Billet</a>
+      <a href="#" class="text-decoration-underline taille" style="color: #ccc;">En savoir plus</a>
+    </div>
+  </div>
+</section>
 
   <!-- Partenaires dynamiques -->
   <section class="partners-section" data-aos="fade-up">
@@ -1003,7 +1003,7 @@
               <img src="https://randomuser.me/api/portraits/women/65.jpg" class="user-img img6" alt="user6">
             </div>
             <!-- Logo central fixe -->
-            <img src="{{ asset('dossiers/image//Impact-Web-360-Logo1.png') }}" alt="Impact Web" class="center-logo">
+            <img src="{{ asset('dossiers/image/Impact-Web-360-Logo1.png') }}" alt="Impact Web" class="center-logo">
           </div>
         </div>
       </div>
