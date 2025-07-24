@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Reseau;
+use App\Models\user_evenement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Hash;
@@ -25,6 +26,7 @@ class IntervenantController extends Controller
                 'image'       => 'required|image',
                 'reseaux.nom.*'  => 'nullable|string',
                 'reseaux.lien.*' => 'nullable|url',
+                'evenement_id' => 'required|exists:evenements,id',
             ]);
 
             // Traitement image
@@ -39,6 +41,11 @@ class IntervenantController extends Controller
             $data['type'] = 'intervenant';
 
             $intervenant = User::create($data);
+
+            user_evenement::create([
+                'id_sponsor' => $intervenant->id,
+                'id_evenement' => $data['evenement_id'],
+            ]);
 
             return redirect()->back()->with('success', 'Intervenant créé avec succès !');
         } catch (\Throwable $th) {
@@ -56,6 +63,7 @@ class IntervenantController extends Controller
             'theme'       => 'nullable|string',
             'description' => 'required|string',
             'image'       => 'nullable|image',
+            'evenement_id' => 'required|exists:evenements,id',
         ]);
 
         if ($request->hasFile('image')) {

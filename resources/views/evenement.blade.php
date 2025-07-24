@@ -215,7 +215,7 @@
           <li class="nav-item"><a class="nav-link active" href="{{ route('evenement') }}">Événements</a></li>
           <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">E-learning</a></li>
           <li class="nav-item"><a class="nav-link" href="{{ route('intervenant') }}">Intervenants</a></li>
-          <li class="nav-item"><a class="nav-link" href="{{ route('billet') }}">Billetterie</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ route('step1') }}">Billetterie</a></li>
           <li class="nav-item"><a class="nav-link" href="{{ route('boutique') }}">Boutique</a></li>
           <li class="nav-item"><a class="btn btn-light mx-2" href="{{ route('login') }}">Se connecter</a></li>
           <li class="nav-item"><a class="btn btn-inscrire" href="{{ route('register') }}">S'inscrire</a></li>
@@ -281,16 +281,19 @@
   <div class="container">
     <h2 class="mb-3">Événement à venir</h2>
     <p class="mb-4">Ne rate pas le prochain rendez-vous de la communauté Impact Web 360. Réserve ta place dès maintenant !</p>
+    @foreach ($evenements as $evenement)
     <div class="event-card p-4 rounded-4 text-center ">
-      <img src="" class="img-fluid rounded mb-3 " alt="Image événement">
+      <img src="{{ asset('storage/' . $evenement->image) }}" class="img-fluid rounded mb-3 w-25" alt="Image événement">
       <h4></h4>
-      <p><strong>Date :</strong> </p>
-      <p><strong>Heure :</strong> </p>
-      <p><strong>Lieu :</strong></p>
-      <p><strong>Thème :</strong></p>
-      <p><strong>Description :</strong></p>
+      <p><strong>Date : {{$evenement->date_debut}}</strong> </p>
+      <p><strong>Heure : {{$evenement->heure}}</strong> </p>
+      <p><strong>Lieu : {{$evenement->lieu}}</strong></p>
+      <p><strong>Thème : {{$evenement->theme}}</strong></p>
+      <p><strong>Description : {{$evenement->description}}</strong></p>
       <a href="#" class="btn btn-danger btn-lg mt-3">Réserver mon billet <i class="fa-solid fa-arrow-right ms-1"></i></a>
     </div>
+    @endforeach
+    
   </div>
 </section>
 
