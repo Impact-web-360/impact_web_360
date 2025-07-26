@@ -106,7 +106,7 @@
     }
 
     .hero-section {
-      background: url('{{ asset(' dossiers/image/homme.png') }}') no-repeat center center/cover;
+      background: url('./dossiers/image/homme.png') no-repeat center center/cover;
       height: 750px;
       position: relative;
     }
@@ -752,14 +752,14 @@
       </div>
     </nav>
 
-<!-- Hero Section -->
-<header class="hero-section text-center" data-aos="zoom-in">
-  <div class="overlay">
-    <br><br><br>
-    <button class="btn btn-360 mb-3">Impact Web 360 ➔</button>
-    <h1 class="display-5">Nous partons de Zéro pour <br> impacter la Jeunesse <br> Africaine.</h1>
-    <p class="lead">Comment générer un revenu à 6 chiffres grâce <br> au web ?</p>
-    <a href="{{ route('billet') }}" class="btn btn-danger btn-lg mt-3 mb-5"><i class="fa fa-ticket-alt me-2 "></i>Réserver mon billet →</a>
+    <!-- Hero Section -->
+    <header class="hero-section text-center" data-aos="zoom-in">
+      <div class="overlay">
+        <br><br><br>
+        <button class="btn btn-360 mb-3">Impact Web 360 ➔</button>
+        <h1 class="display-5">Nous partons de Zéro pour <br> impacter la Jeunesse <br> Africaine.</h1>
+        <p class="lead">Comment générer un revenu à 6 chiffres grâce <br> au web ?</p>
+        <a href="{{ route('step1') }}" class="btn btn-danger btn-lg mt-3 mb-5"><i class="fa fa-ticket-alt me-2 "></i>Réserver mon billet →</a>
 
         <div class="countdown-container">
           <div class="time-box">
@@ -858,16 +858,16 @@
 
         </div>
 
-      <div class="col-md-6">
-        <img src="{{ asset('dossiers/image/logo-tounée.jpg') }}" alt="Image événement" class="img-fluid rounded" style="width: 400px; height: auto;">
+        <div class="col-md-6">
+          <img src="{{ asset('dossiers/image/logo-tounée.jpg') }}" alt="Image événement" class="img-fluid rounded" style="width: 400px; height: auto;">
+        </div>
+      </div>
+      <div class="mt-4">
+        <a href="{{route('step1')}}" class="btn btn-danger me-3 taille">Réserver Mon Billet</a>
+        <a href="#" class="text-decoration-underline taille" style="color: #ccc;">En savoir plus</a>
       </div>
     </div>
-    <div class="mt-4">
-      <a href="{{route('billet')}}" class="btn btn-danger me-3 taille">Réserver Mon Billet</a>
-      <a href="#" class="text-decoration-underline taille" style="color: #ccc;">En savoir plus</a>
-    </div>
-  </div>
-</section>
+  </section>
 
   <!-- Partenaires dynamiques -->
   <section class="partners-section" data-aos="fade-up">

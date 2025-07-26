@@ -35,9 +35,23 @@
       color: #fff;
       border: none;
       padding: 10px 1rem;
+      font-size: 16px;
     }
 
     .form-control::placeholder {
+      color: #aaa;
+    }
+
+    .input-box {
+      position: relative;
+    }
+
+    .input-box i {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 20px;
       color: #aaa;
     }
 
@@ -54,13 +68,18 @@
       color: #fff;
     }
 
-    .btn-primary {
+    .btn-primari {
       background-color: #ff2605;
       border: none;
+      color: #fff;
       padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      border-radius: 7px;
+      transition: background-color 0.3s ease;
     }
 
-    .btn-primary:hover {
+    .btn-primari:hover {
       background-color: #e53218;
     }
 
@@ -102,22 +121,26 @@
     <h2 class="text-center mb-4">Créer un compte</h2>
     <form method="POST" action="{{ route('register') }}">
       @csrf
-      <div class="mb-3">
+      <div class="input-box mb-3">
         <input type="text" class="form-control" name="name" placeholder="Entrer votre nom" required>
+        <i class="fa-regular fa-user"></i>
         @error('name') <small class="text-danger">{{ $message }}</small> @enderror
       </div>
-      <div class="mb-3">
-        <input type="email" class="form-control" name="email" placeholder="peterparker@gmail.com" required>
+      <div class="input-box mb-3">
+        <input type="email" class="form-control" name="email" placeholder="piterparker@gmail.com" required>
+        <i class="fa-regular fa-envelope"></i>
         @error('email') <small class="text-danger">{{ $message }}</small> @enderror
       </div>
-      <div class="mb-3">
+      <div class="input-box mb-3">
         <input type="password" class="form-control" name="password" placeholder="Mot de passe" required>
+        <i class="fa-solid fa-lock"></i>
         @error('password') <small class="text-danger">{{ $message }}</small> @enderror
       </div>
-      <div class="mb-3">
+      <div class="input-box mb-3">
         <input type="password" class="form-control" name="password_confirmation" placeholder="Confirmer le mot de passe" required>
+        <i class="fa-solid fa-lock"></i>
       </div>
-      <button class="btn btn-primary mt-3 mb-3 w-100">S'inscrire</button>
+      <button class="btn-primari mt-3 mb-3 w-100">S'inscrire</button>
     </form>
     <div class="mt-2 text-center">
       Vous avez déjà un compte ? <a href="{{ route('login') }}" class="text-danger text-decoration-none">Se connecter</a>

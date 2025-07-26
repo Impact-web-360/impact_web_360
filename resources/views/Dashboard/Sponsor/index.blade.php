@@ -91,7 +91,7 @@
       <div class="btn-container mt-4">
         <button class="btn btn-secondary" id="prevBtn" style="display: none;">Précédent</button>
         <button class="btn btn-success" id="nextBtn">Suivant</button>
-        <button class="btn btn-primary" id="submitBtn" style="display: none;">Soumettre</button>
+        <button class="btn btn-primari" id="submitBtn" style="display: none;">Soumettre</button>
       </div>
 
       <!-- Résumé final -->
