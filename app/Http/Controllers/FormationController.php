@@ -54,11 +54,7 @@ class FormationController extends Controller
     public function edit($id)
     {
         $formation = Formation::findOrFail($id);
-<<<<<<< HEAD
         $categories = Categorie::all();
-=======
-        $categories = Categorie::all(); 
->>>>>>> 92ab3102f836a5301231ea7de0eb1fda6b15425e
         return view('Dashboard.formations.edit', compact('formation', 'categories'));
     }
 
@@ -111,13 +107,8 @@ class FormationController extends Controller
         }
 
         $formation->delete();
-<<<<<<< HEAD
 
         return redirect()->route('Dashboard.formations.index')
             ->with('success', 'Formation supprimée avec succès!');
-=======
-        $formation = Formation::findOrFail($id);
-        return redirect()->route('Dashboard.formations.index')->with('success', 'Formation supprimée avec succès!');
->>>>>>> 92ab3102f836a5301231ea7de0eb1fda6b15425e
     }
 }

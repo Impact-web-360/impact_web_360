@@ -146,11 +146,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::Get('/dashboard/categories/{id}/edit', [CategorieController::class, 'edit'])
         ->name('Dashboard.categories.edit');
     Route::delete('/dashboard/categories/{categorie}', [CategorieController::class, 'destroy'])
-<<<<<<< HEAD
         ->name('Dashboard.categories.destroy');
-=======
-    ->name('Dashboard.categories.destroy');
->>>>>>> 92ab3102f836a5301231ea7de0eb1fda6b15425e
     Route::put('/dashboard/categories/{id}', [CategorieController::class, 'update'])
         ->name('Dashboard.categories.update');
 
@@ -165,11 +161,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
         ->name('Dashboard.formations.edit');
     Route::post('/dashboard/formations/store', [FormationController::class, 'store'])
         ->name('Dashboard.formations.store');
-<<<<<<< HEAD
-    Route::delete('/dashboard/formations/{formation}', [FormationController::class, 'destroy'])
-=======
     Route::Delete('/dashboard/formations/{formation}', [FormationController::class, 'destroy'])
->>>>>>> 92ab3102f836a5301231ea7de0eb1fda6b15425e
         ->name('Dashboard.formations.destroy');
     Route::put('/dashboard/formations/{id}', [FormationController::class, 'update'])
         ->name('Dashboard.formations.update');

@@ -61,10 +61,5 @@ class CategorieController extends Controller //
         $categorie->delete();
         return redirect()->route('Dashboard.categories.index')
             ->with('success', 'Catégorie supprimée avec succès!');
-    }
-<<<<<<< HEAD
 }
-=======
-
 }
->>>>>>> 92ab3102f836a5301231ea7de0eb1fda6b15425e
