@@ -275,7 +275,7 @@
         }
 
         .price-section .price {
-            font-size: 1.8rem;
+            font-size: 1.2rem;
             font-weight: 700;
             color: var(--primary-color);
         }
