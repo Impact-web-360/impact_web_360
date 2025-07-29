@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Impact Web - Détail du cours</title>
+    <title>Impact Web - Détail du cours: {{ $formation->title ?? 'Formation' }}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -214,6 +214,24 @@
         .course-description p i {
             color: var(--primary-color);
             margin-right: 0.5rem;
+        }
+
+        .course-description ul {
+            list-style: none; /* Supprime les puces par défaut */
+            padding-left: 0;
+        }
+
+        .course-description ul li {
+            color: var(--text-color-secondary);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .course-description ul li i {
+            color: var(--primary-color);
+            margin-right: 0.75rem;
+            font-size: 1.1rem;
         }
 
         /* Overview Card */
@@ -460,10 +478,10 @@
             </div>
             <div class="list-group list-group-flush">
                 <div class="sidebar-section-title text-secondary px-3 pt-3 pb-1">GENERAL</div>
-                <a href="{{ route('dashboard') }}" class="list-group-item list-group-item-action bg-dark text-white active">
+                <a href="{{ route('dashboard') }}" class="list-group-item list-group-item-action bg-dark text-white">
                     <i class="fas fa-home me-2"></i> Tableau de bord
                 </a>
-                <a href="{{ route('calendrier') }}" class="list-group-item list-group-item-action bg-dark text-white">
+                <a href="{{ route('calendrier') }}" class="list-group-item list-group-item-action bg-dark text-white ">
                     <i class="fas fa-calendar-alt me-2"></i> Calendrier
                 </a>
                 <a href="{{ route('messages') }}" class="list-group-item list-group-item-action bg-dark text-white">
@@ -477,7 +495,7 @@
                 <a href="{{ route('cours') }}" class="list-group-item list-group-item-action bg-dark text-white">
                     <i class="fas fa-book me-2"></i> Mes cours
                 </a>
-                <a href="{{ route('decouvrir') }}" class="list-group-item list-group-item-action bg-dark text-white">
+                <a href="{{ route('decouvrir') }}" class="list-group-item list-group-item-action bg-dark text-white active">
                     <i class="fas fa-search me-2"></i> Découvrir
                 </a>
 
@@ -515,7 +533,7 @@
                                 <a class="nav-link text-white" href="#"><i class="fas fa-search"></i></a>
                             </li>
                             <li class="nav-item me-3">
-                                <a class="nav-link text-white" href="#"><i class="fas fa-bell"></i></a>
+                                <a class="nav-link text-white" href="{{ route('notifications') }}"><i class="fas fa-bell"></i></a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-white d-flex align-items-center" href="{{ route('parametres') }}">
@@ -528,12 +546,17 @@
             </nav>
 
             <div class="container-fluid py-4 main-content">
+                @if($formation)
                 <div class="row">
                     <div class="col-lg-8 mb-4 animation-slide-in-up">
                         <div class="course-detail-section">
                             <div class="course-detail-header">
-                                <img src="logo.png" class="img-fluid" alt="Master Class: React JS et Tailwind CSS">
-                                <h3 class="text-white mb-4">Master Class: React JS et Tailwind CSS</h3>
+                                @if ($formation->image)
+                                    <img src="{{ asset('storage/' . $formation->image) }}" class="img-fluid" alt="Image de {{ $formation->title }}">
+                                @else
+                                    <img src="{{ asset('images/default-course.png') }}" class="img-fluid" alt="Image par défaut">
+                                @endif
+                                <h3 class="text-white mb-4">{{ $formation->title ?? 'Titre de la formation' }}</h3>
                             </div>
 
                             <ul class="nav nav-pills course-tabs mb-4" id="courseTab" role="tablist">
@@ -550,21 +573,28 @@
 
                             <div class="tab-content" id="courseTabContent">
                                 <div class="tab-pane fade show active course-description" id="description" role="tabpanel" aria-labelledby="description-tab">
-                                    <p>Bienvenue à la Master Class: React JS et Tailwind CSS! Ce cours complet est votre passerelle pour maîtriser l'art de construire des interfaces utilisateur modernes et réactives. Que vous soyez un développeur aguerri ou que vous débutiez, ce cours vous guidera à travers les subtilités de React JS et de Tailwind CSS.</p>
-                                    <p>Entrez dans des projets pratiques et des applications du monde réel qui renforceront votre compréhension de ces technologies puissantes. De l'architecture basée sur des composants dans React à l'approche utility-first du CSS Tailwind, cette classe fournit une exploration approfondie des outils et des techniques utilisés par les experts de l'industrie.</p>
-                                    <p><i class="fas fa-check-circle"></i> À la fin de ce cours, vous serez équipé des compétences nécessaires pour créer des applications web transparentes et visuellement étonnantes. Rejoignez-nous dans cette aventure de codage et libérez le potentiel de React JS et de Tailwind CSS dans vos projets. Codons, créons et élevons ensemble votre parcours de développement web!</p>
+                                    <p>{{ $formation->description ?? 'Pas de description détaillée disponible pour cette formation.' }}</p>
+                                    @if($formation->objectives && count(json_decode($formation->objectives)) > 0)
+                                        <p class="text-white fw-bold mt-4">Ce que vous apprendrez:</p>
+                                        <ul>
+                                            @foreach(json_decode($formation->objectives) as $objective)
+                                                <li><i class="fas fa-check-circle"></i> {{ $objective }}</li>
+                                            @endforeach
+                                        </ul>
+                                    @endif
                                 </div>
                                 <div class="tab-pane fade" id="tools" role="tabpanel" aria-labelledby="tools-tab">
                                     <p class="text-secondary">
                                         Voici les outils que vous utiliserez dans ce cours :
-                                        <ul>
-                                            <li><i class="fas fa-code"></i> VS Code</li>
-                                            <li><i class="fab fa-react"></i> React.js</li>
-                                            <li><i class="fas fa-paint-roller"></i> Tailwind CSS</li>
-                                            <li><i class="fas fa-terminal"></i> Node.js</li>
-                                            <li><i class="fas fa-database"></i> Firebase (ou autre base de données)</li>
-                                        </ul>
-                                        Assurez-vous d'avoir ces outils installés ou d'être prêt à les installer pour suivre le cours efficacement.
+                                        @if($formation->tools && count(json_decode($formation->tools)) > 0)
+                                            <ul>
+                                                @foreach(json_decode($formation->tools) as $tool)
+                                                    <li><i class="fas fa-toolbox"></i> {{ $tool }}</li>
+                                                @endforeach
+                                            </ul>
+                                        @else
+                                            <p class="text-secondary">Aucun outil spécifique n'a été listé pour cette formation.</p>
+                                        @endif
                                     </p>
                                 </div>
                                 <div class="tab-pane fade" id="comments" role="tabpanel" aria-labelledby="comments-tab">
@@ -580,25 +610,26 @@
                             <div class="row text-center mb-3">
                                 <div class="col-6 overview-item">
                                     <i class="fas fa-user-friends"></i>
-                                    <p><span class="value">52</span> inscrits</p>
+                                    <p><span class="value">{{ $formation->students_enrolled ?? '0' }}</span> inscrits</p>
                                 </div>
                                 <div class="col-6 overview-item">
                                     <i class="fas fa-book-open"></i>
-                                    <p><span class="value">16</span> Modules</p>
+                                    {{-- Supposons que $formation->modules est un JSON ou un tableau --}}
+                                    <p><span class="value">{{ ($formation->modules ? count(json_decode($formation->modules)) : 0) }}</span> Modules</p>
                                 </div>
                                 <div class="col-6 overview-item">
                                     <i class="fas fa-video"></i>
-                                    <p><span class="value">41</span> vidéos</p>
+                                    <p><span class="value">{{ $formation->total_videos ?? '0' }}</span> vidéos</p>
                                 </div>
                                 <div class="col-6 overview-item">
                                     <i class="fas fa-star"></i>
-                                    <p><span class="value">50</span> avis</p>
+                                    <p><span class="value">{{ $formation->reviews_count ?? '0' }}</span> avis</p>
                                 </div>
                             </div>
                             <div class="price-section">
                                 <div>
                                     <p class="text-secondary mb-0">Prix de vente</p>
-                                    <span class="price">$595</span>
+                                    <span class="price">{{ number_format($formation->price, 0, ',', '.') }} FCFA</span>
                                 </div>
                                 <button class="btn btn-add-to-cart"><i class="fas fa-shopping-bag me-2"></i> Passer à la caisse</button>
                             </div>
@@ -607,54 +638,50 @@
                         <div class="mentor-card">
                             <h5 class="text-white mb-3">À propos de Mentor</h5>
                             <div class="d-flex align-items-center mb-3">
-                                <img src="logo.png" alt="Mentor Avatar" class="mentor-avatar me-3">
+                                {{-- Placeholder pour l'avatar du mentor --}}
+                                @if($formation->mentor_avatar)
+                                    <img src="{{ asset('storage/' . $formation->mentor_avatar) }}" alt="Mentor Avatar" class="mentor-avatar me-3">
+                                @else
+                                    <img src="{{ asset('images/default-avatar.png') }}" alt="Mentor Avatar" class="mentor-avatar me-3">
+                                @endif
                                 <div>
-                                    <h6 class="mentor-name mb-0">Nina Kim</h6>
-                                    <p class="mentor-title">Développeur Web/Mobile</p>
+                                    <h6 class="mentor-name mb-0">{{ $formation->mentor ?? 'Nom du mentor' }}</h6>
+                                    <p class="mentor-title">{{ $formation->mentor_title ?? 'Titre du mentor' }}</p>
                                 </div>
                             </div>
-                            <p>Votre mentor expert dans le monde du développement web et mobile.</p>
-                            <p>Forte d'une grande expérience, Nina guide les futurs développeurs à travers les subtilités de la construction d'applications dynamiques et réactives.</p>
+                            <p>{{ $formation->mentor_bio ?? 'Description du mentor non disponible.' }}</p>
                             <p class="rating">
-                                <i class="fas fa-star"></i> 4.9/5 (120 avis)
+                                <i class="fas fa-star"></i> {{ number_format($formation->mentor_rating ?? 0, 1) }}/5 ({{ $formation->mentor_reviews_count ?? '0' }} avis)
                             </p>
                         </div>
 
                         <div class="modules-card">
                             <h5 class="text-white mb-3">Les Modules</h5>
                             <div class="module-list">
-                                <div class="module-item">
-                                    <span>01 Introduction à React JS</span>
-                                    <span>20min</span>
-                                </div>
-                                <div class="module-item">
-                                    <span>02 Bases de Tailwind CSS</span>
-                                    <span>30min</span>
-                                </div>
-                                <div class="module-item">
-                                    <span>03 Composants et Props</span>
-                                    <span>45min</span>
-                                </div>
-                                <div class="module-item">
-                                    <span>04 État et Cycle de Vie</span>
-                                    <span>60min</span>
-                                </div>
-                                <div class="module-item">
-                                    <span>05 Routage avec React Router</span>
-                                    <span>35min</span>
-                                </div>
-                                <div class="module-item">
-                                    <span>06 Création d'un Projet Réel</span>
-                                    <span>90min</span>
-                                </div>
-                                <div class="module-item">
-                                    <span>07 Déploiement et Optimisation</span>
-                                    <span>50min</span>
-                                </div>
+                                @if($formation->modules && count(json_decode($formation->modules)) > 0)
+                                    @foreach(json_decode($formation->modules) as $index => $module)
+                                        <div class="module-item">
+                                            <span>{{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }} {{ $module->title ?? 'Module sans titre' }}</span>
+                                            <span>{{ $module->duration ?? '0min' }}</span>
+                                        </div>
+                                    @endforeach
+                                @else
+                                    <div class="module-item">
+                                        <span class="text-secondary">Aucun module n'a été ajouté.</span>
+                                        <span></span>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>
                 </div>
+                @else
+                    <div class="alert alert-warning text-center" role="alert">
+                        <i class="fas fa-exclamation-triangle fa-2x mb-3"></i>
+                        <p>Oups ! Cette formation n'a pas été trouvée. Veuillez vérifier le lien ou retourner à la page de découverte.</p>
+                        <a href="{{ route('decouvrir') }}" class="btn btn-warning mt-2">Retourner à la page Découvrir</a>
+                    </div>
+                @endif
             </div>
         </div>
     </div>

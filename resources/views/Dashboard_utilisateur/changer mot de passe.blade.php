@@ -566,10 +566,7 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ms-auto mt-2 mt-lg-0 align-items-center">
                             <li class="nav-item me-3">
-                                <a class="nav-link text-white" href="#" aria-label="Search"><i class="fas fa-search"></i></a>
-                            </li>
-                            <li class="nav-item me-3">
-                                <a class="nav-link text-white" href="#" aria-label="Notifications"><i class="fas fa-bell"></i></a>
+                                <a class="nav-link text-white" href="{{ route('notifications') }}" aria-label="Notifications"><i class="fas fa-bell"></i></a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-white d-flex align-items-center" href="{{ route('parametres') }}">
