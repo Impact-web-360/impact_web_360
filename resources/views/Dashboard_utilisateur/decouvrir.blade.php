@@ -47,7 +47,7 @@
                 min-height: 100vh;
                 margin-left: -11rem; /* Cachée par défaut sur mobile */
                 transition: margin .25s ease-out;
-                width: 17rem;
+                width: 16rem;
                 background-color: var(--dark-sidebar-bg) !important;
                 border-right: 1px solid var(--border-color);
             }

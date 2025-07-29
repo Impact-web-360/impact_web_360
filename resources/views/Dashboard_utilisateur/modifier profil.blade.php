@@ -9,465 +9,465 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         /* Variables CSS pour faciliter la gestion des couleurs et espacements */
-:root {
-    --primary-color: #FF0000; /* Rouge vif pour correspondre à la maquette */
-    --secondary-color: #6c757d; /* Gris de Bootstrap pour les textes secondaires */
-    --dark-bg: #1A1A1A; /* Fond principal plus sombre */
-    --dark-sidebar-bg: #212121; /* Fond de la sidebar */
-    --dark-navbar-bg: #212121; /* Fond de la navbar (same as sidebar for consistency) */
-    --dark-card-bg: #2C2C2C; /* Fond des cartes et sections */
-    --border-color: #3A3A3A; /* Bordures subtiles */
-    --text-color-light: #F8F9FA; /* Texte principal clair */
-    --text-color-secondary: #B0B0B0; /* Texte secondaire, plus clair que --secondary-color */
-    --hero-section-bg-start: #3B2E74; /* Début du dégradé du hero (from Découvrir page) */
-    --hero-section-bg-end: #5A4893; /* Fin du dégradé du hero (from Découvrir page) */
-    --hero-text-color: #FFFFFF; /* Couleur du texte dans le hero (from Découvrir page) */
-    --hero-circle-color-1: rgba(100, 80, 150, 0.4); /* Cercles de fond du hero (from Découvrir page) */
-    --hero-circle-color-2: rgba(130, 110, 180, 0.4); /* (from Découvrir page) */
-    --button-active-bg: var(--primary-color); /* Couleur de fond des boutons actifs */
-    --button-inactive-bg: var(--dark-card-bg); /* Couleur de fond des boutons inactifs */
-    --button-text-inactive: var(--text-color-secondary);
-    --stars-gold: gold; /* Gold color for stars */
-
-    /* Specific to Settings Page */
-    --save-button-bg: #007bff; /* Blue for save button */
-    --save-button-hover: #0056b3;
-    --upload-area-bg: #2b2b3f;
-    --upload-area-border: #4a4a60;
-}
-
-body {
-    overflow-x: hidden;
-    background-color: var(--dark-bg);
-    color: var(--text-color-light);
-    font-family: Arial, sans-serif;
-    font-weight: 400; /* Poids de police par défaut */
-}
-
-/* Base layout with flexbox */
-#wrapper {
-    display: flex;
-}
-
-/* Sidebar Styling */
-#sidebar-wrapper {
-    min-height: 100vh;
-    margin-left: -17rem; /* Hidden by default on mobile */
-    transition: margin .25s ease-out;
-    width: 17rem;
-    background-color: var(--dark-sidebar-bg) !important;
-    border-right: 1px solid var(--border-color);
-    position: fixed; /* Fixed sidebar on screen */
-    z-index: 1030; /* Above content */
-    overflow-y: auto; /* Enable scrolling for long content */
-    scrollbar-width: thin; /* Firefox */
-    scrollbar-color: var(--primary-color) var(--dark-sidebar-bg); /* Firefox */
-}
-
-/* Webkit scrollbar for Chrome/Safari */
-#sidebar-wrapper::-webkit-scrollbar {
-    width: 8px;
-}
-
-#sidebar-wrapper::-webkit-scrollbar-track {
-    background: var(--dark-sidebar-bg);
-}
-
-#sidebar-wrapper::-webkit-scrollbar-thumb {
-    background-color: var(--primary-color);
-    border-radius: 10px;
-    border: 2px solid var(--dark-sidebar-bg);
-}
-
-#wrapper.toggled #sidebar-wrapper {
-    margin-left: 0;
-}
-
-#sidebar-wrapper .sidebar-heading {
-    padding: 1.5rem 1.25rem;
-    font-size: 1.2rem;
-    background-color: var(--dark-sidebar-bg);
-}
-
-#sidebar-wrapper .list-group {
-    width: 92%; /* Adjusted for inset active item */
-    margin: 0 auto; /* Center the list group */
-}
-
-#sidebar-wrapper .list-group-item {
-    padding: 0.75rem 1.25rem;
-    background-color: var(--dark-sidebar-bg);
-    color: var(--text-color-secondary);
-    border: none;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    border-radius: 5px; /* Consistent border-radius for all items */
-}
-
-#sidebar-wrapper .list-group-item.active {
-    background-color: var(--primary-color) !important;
-    color: var(--text-color-light) !important;
-    border-radius: 5px;
-    margin: 0 10px; /* Inset effect */
-}
-
-#sidebar-wrapper .list-group-item:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: var(--text-color-light);
-}
-
-.sidebar-section-title {
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    color: var(--text-color-secondary) !important;
-    padding: 10px 20px 5px; /* Adjust padding to align with links */
-}
-
-.sidebar-promo {
-    background-color: var(--primary-color);
-    color: var(--text-color-light);
-    border-radius: 10px;
-    padding: 15px;
-    margin-top: 30px;
-    width: 95%;
-}
-
-.sidebar-promo .star-rating i {
-    color: var(--stars-gold);
-}
-
-.sidebar-promo .btn-primary {
-    background-color: #fff !important;
-    color: var(--primary-color) !important;
-    border: none !important;
-    font-weight: bold;
-    padding: 8px 15px;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.sidebar-promo .btn-primary:hover {
-    background-color: #eee !important;
-    color: var(--primary-color) !important;
-}
-
-/* Page Content */
-#page-content-wrapper {
-    min-width: 100vw; /* Takes full width initially */
-    background-color: var(--dark-bg);
-    transition: margin-left .25s ease-out; /* For push effect */
-    padding-left: 0; /* Remove default padding */
-}
-
-/* Adjust content position when sidebar is open on mobile */
-#wrapper.toggled #page-content-wrapper {
-    margin-left: 17rem; /* Pushes content to the right when sidebar is visible */
-}
-
-/* Top Navbar */
-.navbar-dark {
-    background-color: var(--dark-bg) !important;
-}
-
-.bg-dark-secondary {
-    background-color: var(--dark-navbar-bg) !important; /* Use same color as sidebar for consistency */
-}
-
-/* Dropdown menus in Navbar */
-.dropdown-menu {
-    background-color: var(--dark-card-bg) !important;
-    border: 1px solid var(--border-color) !important;
-    border-radius: 0.5rem;
-}
-
-.dropdown-item {
-    color: var(--text-color-light) !important;
-    transition: background-color 0.2s ease, color 0.2s ease;
-}
-
-.dropdown-item:hover {
-    background-color: var(--primary-color) !important;
-    color: var(--text-color-light) !important;
-}
-
-.dropdown-divider {
-    border-top: 1px solid var(--border-color) !important;
-}
-
-/* Main Content Area */
-.main-content {
-    flex-grow: 1;
-    padding: 1.5rem !important;
-}
-
-/* Settings Page Specific Styles */
-.settings-menu-col {
-    padding-right: 20px; /* Space for the border-right */
-    border-right: 1px solid var(--border-color);
-}
-
-.settings-menu {
-    margin-top: 0;
-    padding-left: 0;
-}
-
-.settings-menu-title {
-    font-size: 0.9em;
-    color: var(--text-color-secondary);
-    padding: 10px 0 5px;
-    text-transform: uppercase;
-    font-weight: 600;
-}
-
-.settings-menu li a {
-    padding: 10px 15px;
-    font-size: 1em;
-    display: block;
-    color: var(--text-color-light);
-    text-decoration: none;
-    transition: all 0.3s ease;
-    border-radius: 5px;
-}
-
-.settings-menu li a i {
-    margin-right: 10px;
-    width: 20px;
-    text-align: center;
-}
-
-.settings-menu li a:hover {
-    background-color: var(--dark-card-bg); /* Use card background for hover */
-    color: var(--primary-color);
-    transform: translateX(3px);
-}
-
-.settings-menu li a.active {
-    background-color: var(--dark-card-bg); /* Use card background for active */
-    color: var(--primary-color);
-    font-weight: 600;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.logout-item {
-    padding-top: 20px;
-    margin-top: auto; /* Push to bottom if content allows */
-}
-
-.logout-item a {
-    color: var(--secondary-color) !important; /* Muted red for logout */
-}
-
-.logout-item a:hover {
-    background-color: var(--dark-card-bg);
-    color: var(--primary-color) !important; /* Primary color on hover for logout */
-}
-
-.profile-settings-form {
-    padding-left: 30px; /* More padding on the right side */
-}
-
-.form-section-title {
-    color: var(--text-color-light);
-    font-size: 1.5em;
-    font-weight: 600;
-}
-
-.profile-card {
-    background-color: var(--dark-card-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-.profile-card .card-title {
-    color: var(--text-color-light);
-    font-size: 1.2em;
-    font-weight: 600;
-    margin-bottom: 5px;
-}
-
-.profile-card .card-subtitle {
-    color: var(--text-color-secondary) !important;
-    font-size: 0.9em;
-}
-
-.form-label-custom {
-    color: var(--text-color-secondary);
-    font-weight: 500;
-    font-size: 0.95em;
-}
-
-.form-control-custom {
-    background-color: var(--dark-bg); /* Use darker background for input */
-    color: var(--text-color-light);
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    padding: 10px 15px;
-    transition: all 0.3s ease;
-}
-
-.form-control-custom:focus {
-    background-color: var(--dark-bg);
-    color: var(--text-color-light);
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 0.25rem rgba(255, 0, 0, 0.25); /* Primary color with transparency */
-    outline: none;
-}
-
-/* Profile Photo Upload */
-.profile-photo-upload .profile-img-preview {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    border: 3px solid var(--primary-color);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-    animation: fadeIn 0.5s ease-out;
-}
-
-.upload-area {
-    flex-grow: 1;
-    border: 2px dashed var(--upload-area-border);
-    background-color: var(--upload-area-bg);
-    border-radius: 10px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.upload-area:hover {
-    border-color: var(--primary-color);
-    background-color: rgba(255, 0, 0, 0.1);
-}
-
-.upload-icon {
-    font-size: 2.5em;
-    color: var(--primary-color);
-}
-
-.upload-text {
-    font-size: 0.95em;
-    color: var(--text-color-light);
-    margin-bottom: 0;
-}
-
-.upload-info {
-    font-size: 0.8em;
-    color: var(--text-color-secondary);
-    margin-bottom: 0;
-}
-
-/* Save Button */
-.btn-save {
-    background-color: var(--save-button-bg);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    padding: 12px 30px;
-    font-size: 1.1em;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-.btn-save:hover {
-    background-color: var(--save-button-hover);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-}
-
-
-/* Animations */
-.animation-fade-in {
-    animation: fadeIn 0.6s ease-out forwards;
-    opacity: 0; /* Starts hidden */
-}
-
-.animation-slide-in-up {
-    animation: slideInUp 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
-    opacity: 0; /* Starts hidden */
-}
-
-/* Keyframes for animations */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(15px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes slideInUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-
-/* Responsive Adjustments */
-@media (min-width: 992px) {
-    #sidebar-wrapper {
-        margin-left: 0; /* Sidebar visible on large screens */
-        position: relative; /* Allow flow on desktop */
-    }
-    #page-content-wrapper {
-        min-width: 0;
-        width: 100%;
-        margin-left: 0; /* Reset margin for desktop */
-    }
-    #sidebarToggle {
-        display: none !important; /* Hamburger button hidden on desktop */
-    }
-}
-
-@media (max-width: 991.98px) {
-    /* Sidebar is hidden by default due to margin-left: -17rem; */
-    /* #wrapper.toggled takes care of showing it. */
-
-    #page-content-wrapper {
-        width: 100%;
-    }
-    .navbar h2 {
-        font-size: 1.5rem;
-    }
-
-    .settings-menu-col {
-        border-right: none; /* Remove border on smaller screens */
-        padding-right: 15px;
-        margin-bottom: 30px; /* Add space below menu */
-    }
-
-    .profile-settings-form {
-        padding-left: 15px; /* Adjust padding */
-    }
-    #sidebar-wrapper{
-        position: absolute;
-    }
-}
-
-@media (max-width: 767.98px) {
-    .navbar-collapse {
-        display: none !important; /* Hide notification/user icons on very small screens */
-    }
-    .settings-menu-col, .profile-settings-form {
-        width: 100%; /* Full width on smaller screens */
-        padding-left: 15px;
-        padding-right: 15px;
-    }
-    #sidebar-wrapper{
-        position: absolute;
-    }
-}
-
-@media (max-width: 575.98px) {
-    .sidebar-promo {
-        margin-left: 0.5rem;
-        margin-right: 0.5rem;
-    }
-    .profile-photo-upload {
-        flex-direction: column;
-        align-items: center !important;
-    }
-    .profile-img-preview {
-        margin-bottom: 20px;
-        margin-right: 0 !important;
-    }
-    .upload-area {
-        width: 100%;
-    }
-}
+        :root {
+            --primary-color: #FF0000; /* Rouge vif pour correspondre à la maquette */
+            --secondary-color: #6c757d; /* Gris de Bootstrap pour les textes secondaires */
+            --dark-bg: #1A1A1A; /* Fond principal plus sombre */
+            --dark-sidebar-bg: #212121; /* Fond de la sidebar */
+            --dark-navbar-bg: #212121; /* Fond de la navbar (same as sidebar for consistency) */
+            --dark-card-bg: #2C2C2C; /* Fond des cartes et sections */
+            --border-color: #3A3A3A; /* Bordures subtiles */
+            --text-color-light: #F8F9FA; /* Texte principal clair */
+            --text-color-secondary: #B0B0B0; /* Texte secondaire, plus clair que --secondary-color */
+            --hero-section-bg-start: #3B2E74; /* Début du dégradé du hero (from Découvrir page) */
+            --hero-section-bg-end: #5A4893; /* Fin du dégradé du hero (from Découvrir page) */
+            --hero-text-color: #FFFFFF; /* Couleur du texte dans le hero (from Découvrir page) */
+            --hero-circle-color-1: rgba(100, 80, 150, 0.4); /* Cercles de fond du hero (from Découvrir page) */
+            --hero-circle-color-2: rgba(130, 110, 180, 0.4); /* (from Découvrir page) */
+            --button-active-bg: var(--primary-color); /* Couleur de fond des boutons actifs */
+            --button-inactive-bg: var(--dark-card-bg); /* Couleur de fond des boutons inactifs */
+            --button-text-inactive: var(--text-color-secondary);
+            --stars-gold: gold; /* Gold color for stars */
+
+            /* Specific to Settings Page */
+            --save-button-bg: #007bff; /* Blue for save button */
+            --save-button-hover: #0056b3;
+            --upload-area-bg: #2b2b3f;
+            --upload-area-border: #4a4a60;
+        }
+
+        body {
+            overflow-x: hidden;
+            background-color: var(--dark-bg);
+            color: var(--text-color-light);
+            font-family: Arial, sans-serif;
+            font-weight: 400; /* Poids de police par défaut */
+        }
+
+        /* Base layout with flexbox */
+        #wrapper {
+            display: flex;
+        }
+
+        /* Sidebar Styling */
+        #sidebar-wrapper {
+            min-height: 100vh;
+            margin-left: -17rem; /* Hidden by default on mobile */
+            transition: margin .25s ease-out;
+            width: 16rem;
+            background-color: var(--dark-sidebar-bg) !important;
+            border-right: 1px solid var(--border-color);
+            position: fixed; /* Fixed sidebar on screen */
+            z-index: 1030; /* Above content */
+            overflow-y: auto; /* Enable scrolling for long content */
+            scrollbar-width: thin; /* Firefox */
+            scrollbar-color: var(--primary-color) var(--dark-sidebar-bg); /* Firefox */
+        }
+
+        /* Webkit scrollbar for Chrome/Safari */
+        #sidebar-wrapper::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        #sidebar-wrapper::-webkit-scrollbar-track {
+            background: var(--dark-sidebar-bg);
+        }
+
+        #sidebar-wrapper::-webkit-scrollbar-thumb {
+            background-color: var(--primary-color);
+            border-radius: 10px;
+            border: 2px solid var(--dark-sidebar-bg);
+        }
+
+        #wrapper.toggled #sidebar-wrapper {
+            margin-left: 0;
+        }
+
+        #sidebar-wrapper .sidebar-heading {
+            padding: 1.5rem 1.25rem;
+            font-size: 1.2rem;
+            background-color: var(--dark-sidebar-bg);
+        }
+
+        #sidebar-wrapper .list-group {
+            width: 92%; /* Adjusted for inset active item */
+            margin: 0 auto; /* Center the list group */
+        }
+
+        #sidebar-wrapper .list-group-item {
+            padding: 0.75rem 1.25rem;
+            background-color: var(--dark-sidebar-bg);
+            color: var(--text-color-secondary);
+            border: none;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            border-radius: 5px; /* Consistent border-radius for all items */
+        }
+
+        #sidebar-wrapper .list-group-item.active {
+            background-color: var(--primary-color) !important;
+            color: var(--text-color-light) !important;
+            border-radius: 5px;
+            margin: 0px; /* Inset effect */
+        }
+
+        #sidebar-wrapper .list-group-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--text-color-light);
+        }
+
+        .sidebar-section-title {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: var(--text-color-secondary) !important;
+            padding: 10px 20px 5px; /* Adjust padding to align with links */
+        }
+
+        .sidebar-promo {
+            background-color: var(--primary-color);
+            color: var(--text-color-light);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 30px;
+            width: 85%;
+        }
+
+        .sidebar-promo .star-rating i {
+            color: var(--stars-gold);
+        }
+
+        .sidebar-promo .btn-primary {
+            background-color: #fff !important;
+            color: var(--primary-color) !important;
+            border: none !important;
+            font-weight: bold;
+            padding: 8px 15px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .sidebar-promo .btn-primary:hover {
+            background-color: #eee !important;
+            color: var(--primary-color) !important;
+        }
+
+        /* Page Content */
+        #page-content-wrapper {
+            min-width: 100vw; /* Takes full width initially */
+            background-color: var(--dark-bg);
+            transition: margin-left .25s ease-out; /* For push effect */
+            padding-left: 0; /* Remove default padding */
+        }
+
+        /* Adjust content position when sidebar is open on mobile */
+        #wrapper.toggled #page-content-wrapper {
+            margin-left: 17rem; /* Pushes content to the right when sidebar is visible */
+        }
+
+        /* Top Navbar */
+        .navbar-dark {
+            background-color: var(--dark-bg) !important;
+        }
+
+        .bg-dark-secondary {
+            background-color: var(--dark-navbar-bg) !important; /* Use same color as sidebar for consistency */
+        }
+
+        /* Dropdown menus in Navbar */
+        .dropdown-menu {
+            background-color: var(--dark-card-bg) !important;
+            border: 1px solid var(--border-color) !important;
+            border-radius: 0.5rem;
+        }
+
+        .dropdown-item {
+            color: var(--text-color-light) !important;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+
+        .dropdown-item:hover {
+            background-color: var(--primary-color) !important;
+            color: var(--text-color-light) !important;
+        }
+
+        .dropdown-divider {
+            border-top: 1px solid var(--border-color) !important;
+        }
+
+        /* Main Content Area */
+        .main-content {
+            flex-grow: 1;
+            padding: 1.5rem !important;
+        }
+
+        /* Settings Page Specific Styles */
+        .settings-menu-col {
+            padding-right: 20px; /* Space for the border-right */
+            border-right: 1px solid var(--border-color);
+        }
+
+        .settings-menu {
+            margin-top: 0;
+            padding-left: 0;
+        }
+
+        .settings-menu-title {
+            font-size: 0.9em;
+            color: var(--text-color-secondary);
+            padding: 10px 0 5px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .settings-menu li a {
+            padding: 10px 15px;
+            font-size: 1em;
+            display: block;
+            color: var(--text-color-light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-radius: 5px;
+        }
+
+        .settings-menu li a i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .settings-menu li a:hover {
+            background-color: var(--dark-card-bg); /* Use card background for hover */
+            color: var(--primary-color);
+            transform: translateX(3px);
+        }
+
+        .settings-menu li a.active {
+            background-color: var(--dark-card-bg); /* Use card background for active */
+            color: var(--primary-color);
+            font-weight: 600;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .logout-item {
+            padding-top: 20px;
+            margin-top: auto; /* Push to bottom if content allows */
+        }
+
+        .logout-item a {
+            color: var(--secondary-color) !important; /* Muted red for logout */
+        }
+
+        .logout-item a:hover {
+            background-color: var(--dark-card-bg);
+            color: var(--primary-color) !important; /* Primary color on hover for logout */
+        }
+
+        .profile-settings-form {
+            padding-left: 30px; /* More padding on the right side */
+        }
+
+        .form-section-title {
+            color: var(--text-color-light);
+            font-size: 1.5em;
+            font-weight: 600;
+        }
+
+        .profile-card {
+            background-color: var(--dark-card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .profile-card .card-title {
+            color: var(--text-color-light);
+            font-size: 1.2em;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .profile-card .card-subtitle {
+            color: var(--text-color-secondary) !important;
+            font-size: 0.9em;
+        }
+
+        .form-label-custom {
+            color: var(--text-color-secondary);
+            font-weight: 500;
+            font-size: 0.95em;
+        }
+
+        .form-control-custom {
+            background-color: var(--dark-bg); /* Use darker background for input */
+            color: var(--text-color-light);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 10px 15px;
+            transition: all 0.3s ease;
+        }
+
+        .form-control-custom:focus {
+            background-color: var(--dark-bg);
+            color: var(--text-color-light);
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.25rem rgba(255, 0, 0, 0.25); /* Primary color with transparency */
+            outline: none;
+        }
+
+        /* Profile Photo Upload */
+        .profile-photo-upload .profile-img-preview {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border: 3px solid var(--primary-color);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .upload-area {
+            flex-grow: 1;
+            border: 2px dashed var(--upload-area-border);
+            background-color: var(--upload-area-bg);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .upload-area:hover {
+            border-color: var(--primary-color);
+            background-color: rgba(255, 0, 0, 0.1);
+        }
+
+        .upload-icon {
+            font-size: 2.5em;
+            color: var(--primary-color);
+        }
+
+        .upload-text {
+            font-size: 0.95em;
+            color: var(--text-color-light);
+            margin-bottom: 0;
+        }
+
+        .upload-info {
+            font-size: 0.8em;
+            color: var(--text-color-secondary);
+            margin-bottom: 0;
+        }
+
+        /* Save Button */
+        .btn-save {
+            background-color: var(--save-button-bg);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 30px;
+            font-size: 1.1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-save:hover {
+            background-color: var(--save-button-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+
+        /* Animations */
+        .animation-fade-in {
+            animation: fadeIn 0.6s ease-out forwards;
+            opacity: 0; /* Starts hidden */
+        }
+
+        .animation-slide-in-up {
+            animation: slideInUp 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+            opacity: 0; /* Starts hidden */
+        }
+
+        /* Keyframes for animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+
+        /* Responsive Adjustments */
+        @media (min-width: 992px) {
+            #sidebar-wrapper {
+                margin-left: 0; /* Sidebar visible on large screens */
+                position: relative; /* Allow flow on desktop */
+            }
+            #page-content-wrapper {
+                min-width: 0;
+                width: 100%;
+                margin-left: 0; /* Reset margin for desktop */
+            }
+            #sidebarToggle {
+                display: none !important; /* Hamburger button hidden on desktop */
+            }
+        }
+
+        @media (max-width: 991.98px) {
+            /* Sidebar is hidden by default due to margin-left: -17rem; */
+            /* #wrapper.toggled takes care of showing it. */
+
+            #page-content-wrapper {
+                width: 100%;
+            }
+            .navbar h2 {
+                font-size: 1.5rem;
+            }
+
+            .settings-menu-col {
+                border-right: none; /* Remove border on smaller screens */
+                padding-right: 15px;
+                margin-bottom: 30px; /* Add space below menu */
+            }
+
+            .profile-settings-form {
+                padding-left: 15px; /* Adjust padding */
+            }
+            #sidebar-wrapper{
+                position: absolute;
+            }
+        }
+
+        @media (max-width: 767.98px) {
+            .navbar-collapse {
+                display: none !important; /* Hide notification/user icons on very small screens */
+            }
+            .settings-menu-col, .profile-settings-form {
+                width: 100%; /* Full width on smaller screens */
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+            #sidebar-wrapper{
+                position: absolute;
+            }
+        }
+
+        @media (max-width: 575.98px) {
+            .sidebar-promo {
+                margin-left: 0.5rem;
+                margin-right: 0.5rem;
+            }
+            .profile-photo-upload {
+                flex-direction: column;
+                align-items: center !important;
+            }
+            .profile-img-preview {
+                margin-bottom: 20px;
+                margin-right: 0 !important;
+            }
+            .upload-area {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body>

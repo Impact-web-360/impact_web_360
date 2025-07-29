@@ -46,77 +46,77 @@
         }
 
         /* Sidebar (Repris du dashboard, ajusté pour la cohérence) */
-#sidebar-wrapper {
-    min-height: 100vh;
-    margin-left: -12rem; /* Cachée par défaut sur mobile */
-    transition: margin .25s ease-out;
-    width: 17rem;
-    background-color: var(--dark-sidebar-bg) !important;
-    border-right: 1px solid var(--border-color);
-}
+        #sidebar-wrapper {
+            min-height: 100vh;
+            margin-left: -12rem; /* Cachée par défaut sur mobile */
+            transition: margin .25s ease-out;
+            width: 16rem;
+            background-color: var(--dark-sidebar-bg) !important;
+            border-right: 1px solid var(--border-color);
+        }
 
-#sidebar-wrapper .sidebar-heading {
-    padding: 1.5rem 1.25rem;
-    font-size: 1.2rem;
-    background-color: var(--dark-sidebar-bg);
-}
+        #sidebar-wrapper .sidebar-heading {
+            padding: 1.5rem 1.25rem;
+            font-size: 1.2rem;
+            background-color: var(--dark-sidebar-bg);
+        }
 
-#sidebar-wrapper .list-group {
-    width: 92%; /* Ajusté pour qu'il n'y ait pas de marge latérale par défaut */
-}
+        #sidebar-wrapper .list-group {
+            width: 92%; /* Ajusté pour qu'il n'y ait pas de marge latérale par défaut */
+        }
 
-#sidebar-wrapper .list-group-item {
-    padding: 0.75rem 1.25rem;
-    background-color: var(--dark-sidebar-bg);
-    color: var(--text-color-secondary);
-    border: none;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
+        #sidebar-wrapper .list-group-item {
+            padding: 0.75rem 1.25rem;
+            background-color: var(--dark-sidebar-bg);
+            color: var(--text-color-secondary);
+            border: none;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
 
-#sidebar-wrapper .list-group-item.active {
-    background-color: var(--primary-color) !important;
-    color: var(--text-color-light) !important;
-    border-radius: 5px;
-    margin: 0 10px; /* Ajoute un espace sur les côtés pour l'élément actif */
-}
+        #sidebar-wrapper .list-group-item.active {
+            background-color: var(--primary-color) !important;
+            color: var(--text-color-light) !important;
+            border-radius: 5px;
+            margin: 0px; /* Ajoute un espace sur les côtés pour l'élément actif */
+        }
 
-#sidebar-wrapper .list-group-item:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: var(--text-color-light);
-}
+        #sidebar-wrapper .list-group-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--text-color-light);
+        }
 
-.sidebar-section-title {
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    color: var(--text-color-secondary) !important;
-}
+        .sidebar-section-title {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: var(--text-color-secondary) !important;
+        }
 
-.sidebar-promo {
-    background-color: var(--primary-color);
-    color: var(--text-color-light);
-    border-radius: 10px;
-    padding: 15px;
-    margin-top: 30px;
-    width: 95%;
-}
+        .sidebar-promo {
+            background-color: var(--primary-color);
+            color: var(--text-color-light);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 30px;
+            width: 85%;
+        }
 
-.sidebar-promo .star-rating i {
-    color: var(--stars-gold);
-}
+        .sidebar-promo .star-rating i {
+            color: var(--stars-gold);
+        }
 
-.sidebar-promo .btn-primary {
-    background-color: #fff !important;
-    color: var(--primary-color) !important;
-    border: none !important;
-    font-weight: bold;
-    padding: 8px 15px;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
+        .sidebar-promo .btn-primary {
+            background-color: #fff !important;
+            color: var(--primary-color) !important;
+            border: none !important;
+            font-weight: bold;
+            padding: 8px 15px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
 
-.sidebar-promo .btn-primary:hover {
-    background-color: #eee !important;
-    color: var(--primary-color) !important;
-}
+        .sidebar-promo .btn-primary:hover {
+            background-color: #eee !important;
+            color: var(--primary-color) !important;
+        }
 
         /* Page Content */
         #page-content-wrapper {

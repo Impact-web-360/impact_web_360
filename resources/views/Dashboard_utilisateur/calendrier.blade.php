@@ -8,437 +8,437 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         :root {
-    --primary-color: red; /* Couleur principale des boutons/liens actifs (similaire à l'image du dashboard) */
-    --secondary-color: #555;
-    --dark-bg: #1c1c1c; /* Couleur de fond principale */
-    --dark-card-bg: #2a2a2a; /* Couleur de fond des cartes */
-    --dark-sidebar-bg: #212121; /* Couleur de fond de la sidebar */
-    --border-color: #333; /* Couleur des bordures */
-    --text-color-light: #f8f9fa; /* Texte clair pour les fonds sombres */
-    --text-color-secondary: #aaaaaa; /* Texte secondaire, gris */
-    --success-color: #28a745; /* Couleur de succès (pour la barre de progression) */
-    --info-color: #17a2b8; /* Couleur d'information (pour la barre de progression) */
-    /* Couleurs spécifiques aux événements du calendrier */
-    --event-success: #28a745; /* Vert pour Envato Mastery */
-    --event-danger: #dc3545; /* Rouge pour UI/UX Design Basic */
-    --event-primary: #0d6efd; /* Bleu pour Mastering Git */
-    --event-info: #0dcaf0; /* Cyan pour Live Class (plus clair que le bleu) */
-    --stars-gold: gold; /* Couleur des étoiles */
-}
-
-body {
-    overflow-x: hidden;
-    background-color: var(--dark-bg);
-    color: var(--text-color-light);
-    font-family: Arial, sans-serif; /* Police générique pour la compatibilité */
-}
-
-#wrapper {
-    display: flex;
-}
-
-/* Sidebar (Repris du dashboard, ajusté pour la cohérence) */
-#sidebar-wrapper {
-    min-height: 100vh;
-    margin-left: -11.3rem; /* Cachée par défaut sur mobile */
-    transition: margin .25s ease-out;
-    width: 15rem;
-    background-color: var(--dark-sidebar-bg) !important;
-    border-right: 1px solid var(--border-color);
-}
-
-
-#sidebar-wrapper .sidebar-heading {
-    padding: 1.5rem 1.25rem;
-    font-size: 1.2rem;
-    background-color: var(--dark-sidebar-bg);
-}
-
-#sidebar-wrapper .list-group {
-    width: 92%; /* Ajusté pour qu'il n'y ait pas de marge latérale par défaut */
-}
-
-#sidebar-wrapper .list-group-item {
-    padding: 0.75rem 1.25rem;
-    background-color: var(--dark-sidebar-bg);
-    color: var(--text-color-secondary);
-    border: none;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-#sidebar-wrapper .list-group-item.active {
-    background-color: var(--primary-color) !important;
-    color: var(--text-color-light) !important;
-    border-radius: 5px;
-    margin: 0 10px; /* Ajoute un espace sur les côtés pour l'élément actif */
-}
-
-#sidebar-wrapper .list-group-item:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: var(--text-color-light);
-}
-
-.sidebar-section-title {
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    color: var(--text-color-secondary) !important;
-}
-
-.sidebar-promo {
-    background-color: var(--primary-color);
-    color: var(--text-color-light);
-    border-radius: 10px;
-    padding: 15px;
-    margin-top: 30px;
-    width: 95%;
-}
-
-.sidebar-promo .star-rating i {
-    color: var(--stars-gold);
-}
-
-.sidebar-promo .btn-primary {
-    background-color: #fff !important;
-    color: var(--primary-color) !important;
-    border: none !important;
-    font-weight: bold;
-    padding: 8px 15px;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.sidebar-promo .btn-primary:hover {
-    background-color: #eee !important;
-    color: var(--primary-color) !important;
-}
-
-/* Page Content (Repris du dashboard) */
-#page-content-wrapper {
-    min-width: 100vw;
-    background-color: var(--dark-bg);
-}
-
-.navbar-dark {
-    background-color: var(--dark-bg) !important;
-}
-
-.bg-dark-secondary {
-    background-color: var(--dark-sidebar-bg) !important; /* Utilise la même couleur que la sidebar pour le topbar */
-}
-
-.main-content {
-    background-color: var(--dark-bg);
-}
-
-/* Cards (Repris du dashboard) */
-.bg-dark-card {
-    background-color: var(--dark-card-bg) !important;
-    border-color: var(--border-color) !important;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.bg-dark-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.25) !important;
-}
-
-.card-title {
-    color: var(--text-color-light);
-}
-
-.card-text {
-    color: var(--text-color-secondary);
-}
-
-.text-xs {
-    font-size: 0.65rem;
-    vertical-align: middle;
-}
-
-/* Specific button styles for calendar */
-.btn-icon-custom {
-    background-color: var(--border-color);
-    color: var(--text-color-light);
-    border-radius: 5px;
-    padding: 0.5rem 0.75rem;
-    border: none;
-    transition: background-color 0.2s ease-in-out;
-}
-
-.btn-icon-custom:hover {
-    background-color: rgba(255, 255, 255, 0.15);
-    color: var(--text-color-light);
-}
-
-.btn-icon-custom-sm {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: var(--text-color-secondary);
-    border-radius: 50%;
-    width: 25px;
-    height: 25px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-    font-size: 0.8rem;
-    border: none;
-    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-}
-
-.btn-icon-custom-sm:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-    color: var(--text-color-light);
-}
-
-/* Schedule Grid */
-.schedule-grid {
-    border: 1px solid var(--border-color);
-    border-radius: 0.5rem;
-    overflow: hidden;
-}
-
-.schedule-header {
-    background-color: var(--dark-card-bg); /* Cohérent avec les cartes */
-    padding: 0.75rem 0;
-    border-bottom: 1px solid var(--border-color);
-}
-
-.schedule-header .day-num {
-    font-size: 1.2rem;
-    font-weight: bold;
-}
-
-.schedule-header .day-name {
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    color: var(--text-color-secondary);
-}
-
-.schedule-body .schedule-row {
-    min-height: 80px; /* Hauteur de chaque ligne horaire */
-    border-bottom: 1px dashed rgba(255, 255, 255, 0.05);
-}
-
-.schedule-body .schedule-row:last-child {
-    border-bottom: none;
-}
-
-.schedule-body .time-col {
-    padding-top: 0.5rem;
-    font-size: 0.9rem;
-    color: var(--text-color-secondary);
-    min-width: 70px; /* Largeur fixe pour la colonne "Time" */
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-end;
-}
-
-.schedule-body .col {
-    position: relative;
-    border-left: 1px dashed rgba(255, 255, 255, 0.05);
-    padding: 0.5rem; /* Ajuster le padding pour les cellules */
-}
-
-.schedule-body .col:first-child {
-    border-left: none;
-}
-
-.event {
-    position: absolute;
-    width: calc(200% - 0rem); /* Prend toute la largeur de la cellule moins le padding */
-    left: -10rem;
-    padding: 0.5rem !important;
-    font-size: 0.9rem;
-    line-height: 1.3;
-    overflow: hidden;
-    z-index: 1; /* Pour que les événements se superposent aux lignes pointillées */
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    animation: fadeInScale 0.5s ease-out forwards; /* Animation d'apparition */
-    transform: scale(0.9); /* Commence plus petit */
-}
-
-.event:hover {
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-}
-
-.event .text-sm {
-    font-size: 0.8rem;
-    color: rgba(255, 255, 255, 0.8);
-}
-
-.event .text-xs {
-    font-size: 0.7rem;
-    color: var(--text-secondary);
-}
-
-/* Specific event colors */
-.event.bg-success { background-color: var(--accent-green) !important; }
-.event.bg-danger { background-color: var(--accent-red) !important; }
-.event.bg-primary { background-color: var(--accent-blue) !important; }
-.event.bg-info { background-color: var(--accent-cyan) !important; } /* Utilisez info pour le Live Class */
-
-
-/* Calendar Widget */
-.calendar-grid .calendar-header .col {
-    font-size: 0.9rem;
-    font-weight: bold;
-}
-
-.calendar-grid .calendar-body .calendar-day {
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.2s ease-in-out, border-radius 0.2s ease-in-out;
-}
-
-.calendar-grid .calendar-body .calendar-day:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 5px;
-}
-
-.calendar-grid .calendar-body .calendar-day.active { /* Utilise la classe "active" du dashboard */
-    background-color: var(--primary-color);
-    border-radius: 5px;
-    font-weight: bold;
-    color: var(--text-color-light) !important; /* Pour override text-danger */
-}
-
-.calendar-grid .calendar-body .calendar-day.text-secondary {
-    color: var(--text-color-secondary) !important;
-}
-
-/* Category List */
-.category-dot {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-}
-
-.list-group-flush .list-group-item {
-    background-color: transparent !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.list-group-flush .list-group-item:last-child {
-    border-bottom: none;
-}
-
-.list-group-flush .list-group-item .badge {
-    min-width: 25px;
-}
-
-/* Animations (Repris du dashboard) */
-@keyframes fadeInScale {
-    from {
-        opacity: 0;
-        transform: scale(0.9);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.card, .event, .btn.animate-button, .category-card {
-    animation: fadeIn 0.5s ease-out;
-}
-
-.animate-button {
-    background-color: var(--primary-color) !important;
-    border-color: var(--primary-color) !important;
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, background-color 0.2s ease-in-out;
-}
-
-.animate-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(247, 92, 78, 0.3); /* Utilise la couleur primaire */
-    background-color: #e04a40 !important; /* Darker shade on hover */
-    border-color: #e04a40 !important;
-}
-
-.animate-pulse {
-    animation: pulse 1s infinite alternate;
-}
-
-@keyframes pulse {
-    from {
-        transform: scale(1);
-        box-shadow: 0 0 0 0 rgba(247, 92, 78, 0.4); /* Utilise la couleur primaire */
-    }
-    to {
-        transform: scale(1.05);
-        box-shadow: 0 0 0 10px rgba(247, 92, 78, 0);
-    }
-}
-
-/* Responsive adjustments (Repris et ajusté) */
-@media (min-width: 992px) {
-    #sidebar-wrapper {
-        margin-left: 0;
-    }
-    #page-content-wrapper {
-        min-width: 0;
-        width: 100%;
-    }
-    #wrapper.toggled #sidebar-wrapper {
-        margin-left: -15rem; /* Sidebar se cache sur desktop si toggled */
-    }
-    /* Hide the toggle button on desktop */
-    #sidebarToggle {
-        display: none !important;
-    }
-}
-
-@media (max-width: 991.98px) {
-    #wrapper.toggled #sidebar-wrapper {
-        margin-left: 0;
-    }
-    #page-content-wrapper {
-        width: 100%;
-    }
-    .schedule-grid {
-        overflow-x: auto; /* Permet le défilement horizontal sur petits écrans */
-    }
-    .schedule-header, .schedule-body {
-        min-width: 700px; /* Assure que la grille ne se comprime pas trop */
-    }
-    .time-col {
-        min-width: 60px; /* Ajustement pour la colonne temps */
-    }
-}
-
-@media (max-width: 767.98px) {
-    .navbar .d-lg-block { /* Cache le texte de bienvenue sur petits écrans */
-        display: none !important;
-    }
-}
-
-/* Dropdown menu styling */
-.dropdown-menu.bg-dark-secondary {
-    background-color: var(--dark-card-bg) !important; /* Use dark card background for dropdown */
-    border-color: var(--border-color) !important;
-}
-
-.dropdown-item.text-white {
-    color: var(--text-color-light) !important;
-    background-color: transparent !important;
-}
-
-.dropdown-item.text-white:hover,
-.dropdown-item.text-white:focus {
-    background-color: var(--primary-color) !important; /* Highlight on hover */
-    color: var(--text-color-light) !important;
-}
-
-.dropdown-divider {
-    border-top: 1px solid var(--border-color) !important;
-}
+            --primary-color: red; /* Couleur principale des boutons/liens actifs (similaire à l'image du dashboard) */
+            --secondary-color: #555;
+            --dark-bg: #1c1c1c; /* Couleur de fond principale */
+            --dark-card-bg: #2a2a2a; /* Couleur de fond des cartes */
+            --dark-sidebar-bg: #212121; /* Couleur de fond de la sidebar */
+            --border-color: #333; /* Couleur des bordures */
+            --text-color-light: #f8f9fa; /* Texte clair pour les fonds sombres */
+            --text-color-secondary: #aaaaaa; /* Texte secondaire, gris */
+            --success-color: #28a745; /* Couleur de succès (pour la barre de progression) */
+            --info-color: #17a2b8; /* Couleur d'information (pour la barre de progression) */
+            /* Couleurs spécifiques aux événements du calendrier */
+            --event-success: #28a745; /* Vert pour Envato Mastery */
+            --event-danger: #dc3545; /* Rouge pour UI/UX Design Basic */
+            --event-primary: #0d6efd; /* Bleu pour Mastering Git */
+            --event-info: #0dcaf0; /* Cyan pour Live Class (plus clair que le bleu) */
+            --stars-gold: gold; /* Couleur des étoiles */
+        }
+
+        body {
+            overflow-x: hidden;
+            background-color: var(--dark-bg);
+            color: var(--text-color-light);
+            font-family: Arial, sans-serif; /* Police générique pour la compatibilité */
+        }
+
+        #wrapper {
+            display: flex;
+        }
+
+        /* Sidebar (Repris du dashboard, ajusté pour la cohérence) */
+        #sidebar-wrapper {
+            min-height: 100vh;
+            margin-left: -11.3rem; /* Cachée par défaut sur mobile */
+            transition: margin .25s ease-out;
+            width: 16rem;
+            background-color: var(--dark-sidebar-bg) !important;
+            border-right: 1px solid var(--border-color);
+        }
+
+
+        #sidebar-wrapper .sidebar-heading {
+            padding: 1.5rem 1.25rem;
+            font-size: 1.2rem;
+            background-color: var(--dark-sidebar-bg);
+        }
+
+        #sidebar-wrapper .list-group {
+            width: 92%; /* Ajusté pour qu'il n'y ait pas de marge latérale par défaut */
+        }
+
+        #sidebar-wrapper .list-group-item {
+            padding: 0.75rem 1.25rem;
+            background-color: var(--dark-sidebar-bg);
+            color: var(--text-color-secondary);
+            border: none;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        #sidebar-wrapper .list-group-item.active {
+            background-color: var(--primary-color) !important;
+            color: var(--text-color-light) !important;
+            border-radius: 5px;
+            margin: 0px; /* Ajoute un espace sur les côtés pour l'élément actif */
+        }
+
+        #sidebar-wrapper .list-group-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--text-color-light);
+        }
+
+        .sidebar-section-title {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: var(--text-color-secondary) !important;
+        }
+
+        .sidebar-promo {
+            background-color: var(--primary-color);
+            color: var(--text-color-light);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 30px;
+            width: 85%;
+        }
+
+        .sidebar-promo .star-rating i {
+            color: var(--stars-gold);
+        }
+
+        .sidebar-promo .btn-primary {
+            background-color: #fff !important;
+            color: var(--primary-color) !important;
+            border: none !important;
+            font-weight: bold;
+            padding: 8px 15px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .sidebar-promo .btn-primary:hover {
+            background-color: #eee !important;
+            color: var(--primary-color) !important;
+        }
+
+        /* Page Content (Repris du dashboard) */
+        #page-content-wrapper {
+            min-width: 100vw;
+            background-color: var(--dark-bg);
+        }
+
+        .navbar-dark {
+            background-color: var(--dark-bg) !important;
+        }
+
+        .bg-dark-secondary {
+            background-color: var(--dark-sidebar-bg) !important; /* Utilise la même couleur que la sidebar pour le topbar */
+        }
+
+        .main-content {
+            background-color: var(--dark-bg);
+        }
+
+        /* Cards (Repris du dashboard) */
+        .bg-dark-card {
+            background-color: var(--dark-card-bg) !important;
+            border-color: var(--border-color) !important;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .bg-dark-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.25) !important;
+        }
+
+        .card-title {
+            color: var(--text-color-light);
+        }
+
+        .card-text {
+            color: var(--text-color-secondary);
+        }
+
+        .text-xs {
+            font-size: 0.65rem;
+            vertical-align: middle;
+        }
+
+        /* Specific button styles for calendar */
+        .btn-icon-custom {
+            background-color: var(--border-color);
+            color: var(--text-color-light);
+            border-radius: 5px;
+            padding: 0.5rem 0.75rem;
+            border: none;
+            transition: background-color 0.2s ease-in-out;
+        }
+
+        .btn-icon-custom:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+            color: var(--text-color-light);
+        }
+
+        .btn-icon-custom-sm {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--text-color-secondary);
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            font-size: 0.8rem;
+            border: none;
+            transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+        }
+
+        .btn-icon-custom-sm:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: var(--text-color-light);
+        }
+
+        /* Schedule Grid */
+        .schedule-grid {
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+
+        .schedule-header {
+            background-color: var(--dark-card-bg); /* Cohérent avec les cartes */
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .schedule-header .day-num {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .schedule-header .day-name {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: var(--text-color-secondary);
+        }
+
+        .schedule-body .schedule-row {
+            min-height: 80px; /* Hauteur de chaque ligne horaire */
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.05);
+        }
+
+        .schedule-body .schedule-row:last-child {
+            border-bottom: none;
+        }
+
+        .schedule-body .time-col {
+            padding-top: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-color-secondary);
+            min-width: 70px; /* Largeur fixe pour la colonne "Time" */
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-end;
+        }
+
+        .schedule-body .col {
+            position: relative;
+            border-left: 1px dashed rgba(255, 255, 255, 0.05);
+            padding: 0.5rem; /* Ajuster le padding pour les cellules */
+        }
+
+        .schedule-body .col:first-child {
+            border-left: none;
+        }
+
+        .event {
+            position: absolute;
+            width: calc(200% - 0rem); /* Prend toute la largeur de la cellule moins le padding */
+            left: -10rem;
+            padding: 0.5rem !important;
+            font-size: 0.9rem;
+            line-height: 1.3;
+            overflow: hidden;
+            z-index: 1; /* Pour que les événements se superposent aux lignes pointillées */
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            animation: fadeInScale 0.5s ease-out forwards; /* Animation d'apparition */
+            transform: scale(0.9); /* Commence plus petit */
+        }
+
+        .event:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .event .text-sm {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .event .text-xs {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+        }
+
+        /* Specific event colors */
+        .event.bg-success { background-color: var(--accent-green) !important; }
+        .event.bg-danger { background-color: var(--accent-red) !important; }
+        .event.bg-primary { background-color: var(--accent-blue) !important; }
+        .event.bg-info { background-color: var(--accent-cyan) !important; } /* Utilisez info pour le Live Class */
+
+
+        /* Calendar Widget */
+        .calendar-grid .calendar-header .col {
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .calendar-grid .calendar-body .calendar-day {
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out, border-radius 0.2s ease-in-out;
+        }
+
+        .calendar-grid .calendar-body .calendar-day:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+        }
+
+        .calendar-grid .calendar-body .calendar-day.active { /* Utilise la classe "active" du dashboard */
+            background-color: var(--primary-color);
+            border-radius: 5px;
+            font-weight: bold;
+            color: var(--text-color-light) !important; /* Pour override text-danger */
+        }
+
+        .calendar-grid .calendar-body .calendar-day.text-secondary {
+            color: var(--text-color-secondary) !important;
+        }
+
+        /* Category List */
+        .category-dot {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .list-group-flush .list-group-item {
+            background-color: transparent !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .list-group-flush .list-group-item:last-child {
+            border-bottom: none;
+        }
+
+        .list-group-flush .list-group-item .badge {
+            min-width: 25px;
+        }
+
+        /* Animations (Repris du dashboard) */
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card, .event, .btn.animate-button, .category-card {
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .animate-button {
+            background-color: var(--primary-color) !important;
+            border-color: var(--primary-color) !important;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, background-color 0.2s ease-in-out;
+        }
+
+        .animate-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(247, 92, 78, 0.3); /* Utilise la couleur primaire */
+            background-color: #e04a40 !important; /* Darker shade on hover */
+            border-color: #e04a40 !important;
+        }
+
+        .animate-pulse {
+            animation: pulse 1s infinite alternate;
+        }
+
+        @keyframes pulse {
+            from {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(247, 92, 78, 0.4); /* Utilise la couleur primaire */
+            }
+            to {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 10px rgba(247, 92, 78, 0);
+            }
+        }
+
+        /* Responsive adjustments (Repris et ajusté) */
+        @media (min-width: 992px) {
+            #sidebar-wrapper {
+                margin-left: 0;
+            }
+            #page-content-wrapper {
+                min-width: 0;
+                width: 100%;
+            }
+            #wrapper.toggled #sidebar-wrapper {
+                margin-left: -15rem; /* Sidebar se cache sur desktop si toggled */
+            }
+            /* Hide the toggle button on desktop */
+            #sidebarToggle {
+                display: none !important;
+            }
+        }
+
+        @media (max-width: 991.98px) {
+            #wrapper.toggled #sidebar-wrapper {
+                margin-left: 0;
+            }
+            #page-content-wrapper {
+                width: 100%;
+            }
+            .schedule-grid {
+                overflow-x: auto; /* Permet le défilement horizontal sur petits écrans */
+            }
+            .schedule-header, .schedule-body {
+                min-width: 700px; /* Assure que la grille ne se comprime pas trop */
+            }
+            .time-col {
+                min-width: 60px; /* Ajustement pour la colonne temps */
+            }
+        }
+
+        @media (max-width: 767.98px) {
+            .navbar .d-lg-block { /* Cache le texte de bienvenue sur petits écrans */
+                display: none !important;
+            }
+        }
+
+        /* Dropdown menu styling */
+        .dropdown-menu.bg-dark-secondary {
+            background-color: var(--dark-card-bg) !important; /* Use dark card background for dropdown */
+            border-color: var(--border-color) !important;
+        }
+
+        .dropdown-item.text-white {
+            color: var(--text-color-light) !important;
+            background-color: transparent !important;
+        }
+
+        .dropdown-item.text-white:hover,
+        .dropdown-item.text-white:focus {
+            background-color: var(--primary-color) !important; /* Highlight on hover */
+            color: var(--text-color-light) !important;
+        }
+
+        .dropdown-divider {
+            border-top: 1px solid var(--border-color) !important;
+        }
     </style>
 </head>
 <body>

@@ -9,342 +9,342 @@
     
     <style>
         :root {
-    --primary-color: red; /* Couleur principale des boutons/liens actifs (similaire à l'image) */
-    --secondary-color: #555;
-    --dark-bg: #1c1c1c; /* Couleur de fond principale */
-    --dark-card-bg: #2a2a2a; /* Couleur de fond des cartes */
-    --dark-sidebar-bg: #212121; /* Couleur de fond de la sidebar */
-    --border-color: #333; /* Couleur des bordures */
-    --text-color-light: #f8f9fa; /* Texte clair pour les fonds sombres */
-    --text-color-secondary: #aaaaaa; /* Texte secondaire, gris */
-    --success-color: #28a745; /* Couleur de succès (pour la barre de progression) */
-    --info-color: #17a2b8; /* Couleur d'information (pour la barre de progression) */
-}
+            --primary-color: red; /* Couleur principale des boutons/liens actifs (similaire à l'image) */
+            --secondary-color: #555;
+            --dark-bg: #1c1c1c; /* Couleur de fond principale */
+            --dark-card-bg: #2a2a2a; /* Couleur de fond des cartes */
+            --dark-sidebar-bg: #212121; /* Couleur de fond de la sidebar */
+            --border-color: #333; /* Couleur des bordures */
+            --text-color-light: #f8f9fa; /* Texte clair pour les fonds sombres */
+            --text-color-secondary: #aaaaaa; /* Texte secondaire, gris */
+            --success-color: #28a745; /* Couleur de succès (pour la barre de progression) */
+            --info-color: #17a2b8; /* Couleur d'information (pour la barre de progression) */
+        }
 
-body {
-    overflow-x: hidden;
-    background-color: var(--dark-bg);
-    color: var(--text-color-light);
-    font-family: Arial, sans-serif; /* Police générique pour la compatibilité */
-}
+        body {
+            overflow-x: hidden;
+            background-color: var(--dark-bg);
+            color: var(--text-color-light);
+            font-family: Arial, sans-serif; /* Police générique pour la compatibilité */
+        }
 
-#wrapper {
-    display: flex;
-}
+        #wrapper {
+            display: flex;
+        }
 
-/* Sidebar */
-#sidebar-wrapper {
-    min-height: 100vh;
-    margin-left: -11.3rem; /* Cachée par défaut */
-    transition: margin .25s ease-out;
-    width: 15rem;
-    background-color: var(--dark-sidebar-bg) !important;
-    border-right: 1px solid var(--border-color);
-}
+        /* Sidebar */
+        #sidebar-wrapper {
+            min-height: 100vh;
+            margin-left: -11.3rem; /* Cachée par défaut */
+            transition: margin .25s ease-out;
+            width: 16rem;
+            background-color: var(--dark-sidebar-bg) !important;
+            border-right: 1px solid var(--border-color);
+        }
 
-#sidebar-wrapper .sidebar-heading {
-    padding: 1.5rem 1.25rem;
-    font-size: 1.2rem;
-    background-color: var(--dark-sidebar-bg);
-}
+        #sidebar-wrapper .sidebar-heading {
+            padding: 1.5rem 1.25rem;
+            font-size: 1.2rem;
+            background-color: var(--dark-sidebar-bg);
+        }
 
-#sidebar-wrapper .list-group {
-    width: 92%;
-}
+        #sidebar-wrapper .list-group {
+            width: 92%;
+        }
 
-#sidebar-wrapper .list-group-item {
-    padding: 0.75rem 1.25rem;
-    background-color: var(--dark-sidebar-bg);
-    color: var(--text-color-secondary);
-    border: none; /* Supprime les bordures par défaut des list-group-item */
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
+        #sidebar-wrapper .list-group-item {
+            padding: 0.75rem 1.25rem;
+            background-color: var(--dark-sidebar-bg);
+            color: var(--text-color-secondary);
+            border: none; /* Supprime les bordures par défaut des list-group-item */
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
 
-#sidebar-wrapper .list-group-item.active {
-    background-color: var(--primary-color) !important;
-    color: var(--text-color-light) !important;
-    border-radius: 5px; /* Bordures arrondies pour l'élément actif */
-    margin: 0 10px; /* Un peu d'espace sur les côtés */
-}
+        #sidebar-wrapper .list-group-item.active {
+            background-color: var(--primary-color) !important;
+            color: var(--text-color-light) !important;
+            border-radius: 5px; /* Bordures arrondies pour l'élément actif */
+            margin: 0px; /* Un peu d'espace sur les côtés */
+        }
 
-#sidebar-wrapper .list-group-item:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: var(--text-color-light);
-}
+        #sidebar-wrapper .list-group-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--text-color-light);
+        }
 
-.sidebar-section-title {
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    color: var(--text-color-secondary) !important;
-}
+        .sidebar-section-title {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: var(--text-color-secondary) !important;
+        }
 
-.sidebar-promo {
-    background-color: var(--primary-color);
-    color: var(--text-color-light);
-    border-radius: 10px;
-    padding: 15px;
-    margin-top: 30px;
-    width: 95%;
-}
+        .sidebar-promo {
+            background-color: var(--primary-color);
+            color: var(--text-color-light);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 30px;
+            width: 85%;
+        }
 
-.sidebar-promo .star-rating i {
-    color: gold; /* Couleur des étoiles */
-}
+        .sidebar-promo .star-rating i {
+            color: gold; /* Couleur des étoiles */
+        }
 
-.sidebar-promo .btn-primary {
-    background-color: #fff !important;
-    color: var(--primary-color) !important;
-    border: none !important;
-    font-weight: bold;
-    padding: 8px 15px;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
+        .sidebar-promo .btn-primary {
+            background-color: #fff !important;
+            color: var(--primary-color) !important;
+            border: none !important;
+            font-weight: bold;
+            padding: 8px 15px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
 
-.sidebar-promo .btn-primary:hover {
-    background-color: #eee !important;
-    color: var(--primary-color) !important;
-}
+        .sidebar-promo .btn-primary:hover {
+            background-color: #eee !important;
+            color: var(--primary-color) !important;
+        }
 
-/* Page Content */
-#page-content-wrapper {
-    min-width: 100vw;
-    background-color: var(--dark-bg);
-}
+        /* Page Content */
+        #page-content-wrapper {
+            min-width: 100vw;
+            background-color: var(--dark-bg);
+        }
 
-.navbar-dark {
-    background-color: var(--dark-bg) !important;
-}
+        .navbar-dark {
+            background-color: var(--dark-bg) !important;
+        }
 
-.bg-dark-secondary {
-    background-color: var(--dark-sidebar-bg) !important; /* Utilise la même couleur que la sidebar pour le topbar */
-}
+        .bg-dark-secondary {
+            background-color: var(--dark-sidebar-bg) !important; /* Utilise la même couleur que la sidebar pour le topbar */
+        }
 
-.main-content {
-    background-color: var(--dark-bg);
-}
+        .main-content {
+            background-color: var(--dark-bg);
+        }
 
-/* Cards */
-.bg-dark-card {
-    background-color: var(--dark-card-bg) !important;
-    border-color: var(--border-color) !important;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+        /* Cards */
+        .bg-dark-card {
+            background-color: var(--dark-card-bg) !important;
+            border-color: var(--border-color) !important;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
 
-.bg-dark-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.25) !important;
-}
+        .bg-dark-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.25) !important;
+        }
 
-.card-title {
-    color: var(--text-color-light);
-}
+        .card-title {
+            color: var(--text-color-light);
+        }
 
-.card-text {
-    color: var(--text-color-secondary);
-}
+        .card-text {
+            color: var(--text-color-secondary);
+        }
 
-.progress {
-    background-color: var(--border-color) !important;
-}
+        .progress {
+            background-color: var(--border-color) !important;
+        }
 
-.progress-bar {
-    border-radius: 2px;
-}
+        .progress-bar {
+            border-radius: 2px;
+        }
 
-.text-xs {
-    font-size: 0.65rem; /* Pour les petits cercles entre les textes */
-    vertical-align: middle;
-}
+        .text-xs {
+            font-size: 0.65rem; /* Pour les petits cercles entre les textes */
+            vertical-align: middle;
+        }
 
-/* Task List */
-.task-item .task-icon {
-    width: 45px;
-    height: 45px;
-    background-color: var(--border-color) !important;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.1rem;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-}
+        /* Task List */
+        .task-item .task-icon {
+            width: 45px;
+            height: 45px;
+            background-color: var(--border-color) !important;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
 
-.task-item:hover .task-icon {
-    background-color: var(--primary-color) !important;
-    transform: scale(1.05);
-}
+        .task-item:hover .task-icon {
+            background-color: var(--primary-color) !important;
+            transform: scale(1.05);
+        }
 
-.form-switch .form-check-input {
-    width: 2.5em;
-    height: 1.2em;
-    background-color: var(--border-color);
-    border-color: var(--border-color);
-    cursor: pointer;
-    transition: background-color 0.3s ease, border-color 0.3s ease;
-}
+        .form-switch .form-check-input {
+            width: 2.5em;
+            height: 1.2em;
+            background-color: var(--border-color);
+            border-color: var(--border-color);
+            cursor: pointer;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
 
-.form-switch .form-check-input:checked {
-    background-color: var(--success-color);
-    border-color: var(--success-color);
-}
+        .form-switch .form-check-input:checked {
+            background-color: var(--success-color);
+            border-color: var(--success-color);
+        }
 
-.form-check-label.text-success {
-    color: var(--success-color) !important;
-}
+        .form-check-label.text-success {
+            color: var(--success-color) !important;
+        }
 
-.form-check-label.text-secondary {
-    color: var(--text-color-secondary) !important;
-}
+        .form-check-label.text-secondary {
+            color: var(--text-color-secondary) !important;
+        }
 
-/* Calendar */
-.calendar-grid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 10px;
-    text-align: center;
-}
+        /* Calendar */
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+            text-align: center;
+        }
 
-.calendar-day-name {
-    font-weight: bold;
-    color: var(--text-color-secondary);
-    font-size: 0.85rem;
-}
+        .calendar-day-name {
+            font-weight: bold;
+            color: var(--text-color-secondary);
+            font-size: 0.85rem;
+        }
 
-.calendar-day {
-    padding: 8px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
+        .calendar-day {
+            padding: 8px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
 
-.calendar-day.text-secondary {
-    color: var(--text-color-secondary) !important; /* Jours du mois précédent/suivant */
-}
+        .calendar-day.text-secondary {
+            color: var(--text-color-secondary) !important; /* Jours du mois précédent/suivant */
+        }
 
-.calendar-day:not(.text-secondary):hover {
-    background-color: rgba(255, 255, 255, 0.1);
-}
+        .calendar-day:not(.text-secondary):hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
 
-.calendar-day.highlight {
-    background-color: var(--border-color); /* Jours avec des événements */
-    color: var(--text-color-light);
-}
+        .calendar-day.highlight {
+            background-color: var(--border-color); /* Jours avec des événements */
+            color: var(--text-color-light);
+        }
 
-.calendar-day.active {
-    background-color: var(--primary-color) !important; /* Jour actif */
-    color: var(--text-color-light);
-}
+        .calendar-day.active {
+            background-color: var(--primary-color) !important; /* Jour actif */
+            color: var(--text-color-light);
+        }
 
-/* Schedule */
-.schedule-item {
-    display: flex;
-    align-items: flex-start; /* Alignement en haut pour les horaires */
-}
+        /* Schedule */
+        .schedule-item {
+            display: flex;
+            align-items: flex-start; /* Alignement en haut pour les horaires */
+        }
 
-.schedule-time {
-    min-width: 80px; /* Largeur fixe pour l'heure */
-    text-align: right;
-    font-size: 0.85rem;
-    padding-top: 5px; /* Pour aligner avec le contenu de la carte */
-}
+        .schedule-time {
+            min-width: 80px; /* Largeur fixe pour l'heure */
+            text-align: right;
+            font-size: 0.85rem;
+            padding-top: 5px; /* Pour aligner avec le contenu de la carte */
+        }
 
-.schedule-content {
-    border-left: 2px solid var(--border-color); /* Ligne verticale */
-    padding-left: 15px;
-    position: relative;
-    flex-grow: 1;
-}
+        .schedule-content {
+            border-left: 2px solid var(--border-color); /* Ligne verticale */
+            padding-left: 15px;
+            position: relative;
+            flex-grow: 1;
+        }
 
-.schedule-content::before {
-    content: '';
-    position: absolute;
-    left: -7px; /* Positionne le cercle sur la ligne */
-    top: 10px;
-    width: 12px;
-    height: 12px;
-    background-color: var(--border-color); /* Cercle sur la ligne */
-    border-radius: 50%;
-    z-index: 1;
-}
+        .schedule-content::before {
+            content: '';
+            position: absolute;
+            left: -7px; /* Positionne le cercle sur la ligne */
+            top: 10px;
+            width: 12px;
+            height: 12px;
+            background-color: var(--border-color); /* Cercle sur la ligne */
+            border-radius: 50%;
+            z-index: 1;
+        }
 
-.schedule-content .schedule-event {
-    margin-bottom: 0.5rem; /* Espace entre les événements */
-}
+        .schedule-content .schedule-event {
+            margin-bottom: 0.5rem; /* Espace entre les événements */
+        }
 
-.schedule-content .schedule-event.bg-primary {
-    background-color: var(--primary-color) !important;
-    border-color: var(--primary-color) !important;
-}
+        .schedule-content .schedule-event.bg-primary {
+            background-color: var(--primary-color) !important;
+            border-color: var(--primary-color) !important;
+        }
 
-/* Animations */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-.course-card, .task-item, .calendar-card, .schedule-event {
-    animation: fadeIn 0.5s ease-out;
-}
+        .course-card, .task-item, .calendar-card, .schedule-event {
+            animation: fadeIn 0.5s ease-out;
+        }
 
-/* Responsive adjustments */
-@media (min-width: 992px) {
-    #sidebar-wrapper {
-        margin-left: 0;
-    }
-    #page-content-wrapper {
-        min-width: 0;
-        width: 100%;
-    }
-    #wrapper.toggled #sidebar-wrapper {
-        margin-left: 0rem;
-    }
-    /* Hide the toggle button on desktop */
-    #sidebarToggle {
-        display: none !important;
-    }
-}
+        /* Responsive adjustments */
+        @media (min-width: 992px) {
+            #sidebar-wrapper {
+                margin-left: 0;
+            }
+            #page-content-wrapper {
+                min-width: 0;
+                width: 100%;
+            }
+            #wrapper.toggled #sidebar-wrapper {
+                margin-left: 0rem;
+            }
+            /* Hide the toggle button on desktop */
+            #sidebarToggle {
+                display: none !important;
+            }
+        }
 
-@media (max-width: 991.98px) {
-    #wrapper.toggled #sidebar-wrapper {
-        margin-left: 0;
-    }
-    #page-content-wrapper {
-        width: 100%;
-    }
-}
+        @media (max-width: 991.98px) {
+            #wrapper.toggled #sidebar-wrapper {
+                margin-left: 0;
+            }
+            #page-content-wrapper {
+                width: 100%;
+            }
+        }
 
-/* Custom button for plus sign */
-.btn-primary.btn-sm.rounded-circle {
-    background-color: var(--primary-color) !important;
-    border-color: var(--primary-color) !important;
-    transition: background-color 0.3s ease, border-color 0.3s ease;
-}
+        /* Custom button for plus sign */
+        .btn-primary.btn-sm.rounded-circle {
+            background-color: var(--primary-color) !important;
+            border-color: var(--primary-color) !important;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
 
-.btn-primary.btn-sm.rounded-circle:hover {
-    background-color: #e04a40 !important; /* Darker shade on hover */
-    border-color: #e04a40 !important;
-}
+        .btn-primary.btn-sm.rounded-circle:hover {
+            background-color: #e04a40 !important; /* Darker shade on hover */
+            border-color: #e04a40 !important;
+        }
 
-/* Dropdown menu styling */
-.dropdown-menu.bg-dark-secondary {
-    background-color: var(--dark-card-bg) !important; /* Use dark card background for dropdown */
-    border-color: var(--border-color) !important;
-}
+        /* Dropdown menu styling */
+        .dropdown-menu.bg-dark-secondary {
+            background-color: var(--dark-card-bg) !important; /* Use dark card background for dropdown */
+            border-color: var(--border-color) !important;
+        }
 
-.dropdown-item.text-white {
-    color: var(--text-color-light) !important;
-    background-color: transparent !important;
-}
+        .dropdown-item.text-white {
+            color: var(--text-color-light) !important;
+            background-color: transparent !important;
+        }
 
-.dropdown-item.text-white:hover,
-.dropdown-item.text-white:focus {
-    background-color: var(--primary-color) !important; /* Highlight on hover */
-    color: var(--text-color-light) !important;
-}
+        .dropdown-item.text-white:hover,
+        .dropdown-item.text-white:focus {
+            background-color: var(--primary-color) !important; /* Highlight on hover */
+            color: var(--text-color-light) !important;
+        }
 
-.dropdown-divider {
-    border-top: 1px solid var(--border-color) !important;
-}
+        .dropdown-divider {
+            border-top: 1px solid var(--border-color) !important;
+        }
     </style>
 </head>
 <body>

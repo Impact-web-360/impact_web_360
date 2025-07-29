@@ -46,7 +46,7 @@
 
         /* Sidebar */
         #sidebar-wrapper {
-            width: 17rem;
+            width: 13rem;
             background-color: var(--dark-sidebar-bg) !important;
             border-right: 1px solid var(--border-color);
             flex-shrink: 0; /* Prevent sidebar from shrinking */
@@ -80,7 +80,7 @@
             background-color: var(--primary-color) !important;
             color: var(--text-color-light) !important;
             border-radius: 5px;
-            margin: 0 10px; /* Ajoute un espace sur les côtés pour l'élément actif */
+            margin: 0px; /* Ajoute un espace sur les côtés pour l'élément actif */
         }
 
         #sidebar-wrapper .list-group-item:hover {
@@ -100,7 +100,7 @@
             border-radius: 10px;
             padding: 15px;
             margin-top: 30px;
-            width: 95%;
+            width: 85%;
         }
 
         .sidebar-promo .star-rating i {

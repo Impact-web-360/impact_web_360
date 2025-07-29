@@ -9,501 +9,501 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         /* Variables CSS pour faciliter la gestion des couleurs et espacements */
-:root {
-    --primary-color: #FF0000; /* Rouge vif pour correspondre à la maquette */
-    --secondary-color: #6c757d; /* Gris de Bootstrap pour les textes secondaires */
-    --dark-bg: #1A1A1A; /* Fond principal plus sombre */
-    --dark-sidebar-bg: #212121; /* Fond de la sidebar */
-    --dark-navbar-bg: #212121; /* Fond de la navbar (same as sidebar for consistency) */
-    --dark-card-bg: #2C2C2C; /* Fond des cartes et sections */
-    --border-color: #3A3A3A; /* Bordures subtiles */
-    --text-color-light: #F8F9FA; /* Texte principal clair */
-    --text-color-secondary: #B0B0B0; /* Texte secondaire, plus clair que --secondary-color */
-    --hero-section-bg-start: #3B2E74; /* Début du dégradé du hero (from Découvrir page) */
-    --hero-section-bg-end: #5A4893; /* Fin du dégradé du hero (from Découvrir page) */
-    --hero-text-color: #FFFFFF; /* Couleur du texte dans le hero (from Découvrir page) */
-    --hero-circle-color-1: rgba(100, 80, 150, 0.4); /* Cercles de fond du hero (from Découvrir page) */
-    --hero-circle-color-2: rgba(130, 110, 180, 0.4); /* (from Découvrir page) */
-    --button-active-bg: var(--primary-color); /* Couleur de fond des boutons actifs */
-    --button-inactive-bg: var(--dark-card-bg); /* Couleur de fond des boutons inactifs */
-    --button-text-inactive: var(--text-color-secondary);
-    --stars-gold: gold; /* Gold color for stars */
+        :root {
+            --primary-color: #FF0000; /* Rouge vif pour correspondre à la maquette */
+            --secondary-color: #6c757d; /* Gris de Bootstrap pour les textes secondaires */
+            --dark-bg: #1A1A1A; /* Fond principal plus sombre */
+            --dark-sidebar-bg: #212121; /* Fond de la sidebar */
+            --dark-navbar-bg: #212121; /* Fond de la navbar (same as sidebar for consistency) */
+            --dark-card-bg: #2C2C2C; /* Fond des cartes et sections */
+            --border-color: #3A3A3A; /* Bordures subtiles */
+            --text-color-light: #F8F9FA; /* Texte principal clair */
+            --text-color-secondary: #B0B0B0; /* Texte secondaire, plus clair que --secondary-color */
+            --hero-section-bg-start: #3B2E74; /* Début du dégradé du hero (from Découvrir page) */
+            --hero-section-bg-end: #5A4893; /* Fin du dégradé du hero (from Découvrir page) */
+            --hero-text-color: #FFFFFF; /* Couleur du texte dans le hero (from Découvrir page) */
+            --hero-circle-color-1: rgba(100, 80, 150, 0.4); /* Cercles de fond du hero (from Découvrir page) */
+            --hero-circle-color-2: rgba(130, 110, 180, 0.4); /* (from Découvrir page) */
+            --button-active-bg: var(--primary-color); /* Couleur de fond des boutons actifs */
+            --button-inactive-bg: var(--dark-card-bg); /* Couleur de fond des boutons inactifs */
+            --button-text-inactive: var(--text-color-secondary);
+            --stars-gold: gold; /* Gold color for stars */
 
-    /* Specific to Settings Page */
-    --save-button-bg: #007bff; /* Blue for save button */
-    --save-button-hover: #0056b3;
-    --upload-area-bg: #2b2b3f;
-    --upload-area-border: #4a4a60;
+            /* Specific to Settings Page */
+            --save-button-bg: #007bff; /* Blue for save button */
+            --save-button-hover: #0056b3;
+            --upload-area-bg: #2b2b3f;
+            --upload-area-border: #4a4a60;
 
-    /* Specific to Payment Success Page */
-    --payment-card-bg: #2C2C2C; /* Slightly darker than main background for the card */
-    --payment-card-border: #3A3A3A;
-    --secondary-button-border: var(--border-color);
-}
+            /* Specific to Payment Success Page */
+            --payment-card-bg: #2C2C2C; /* Slightly darker than main background for the card */
+            --payment-card-border: #3A3A3A;
+            --secondary-button-border: var(--border-color);
+        }
 
-body {
-    overflow-x: hidden;
-    background-color: var(--dark-bg);
-    color: var(--text-color-light);
-    font-family: Arial, sans-serif;
-    font-weight: 400; /* Poids de police par défaut */
-}
+        body {
+            overflow-x: hidden;
+            background-color: var(--dark-bg);
+            color: var(--text-color-light);
+            font-family: Arial, sans-serif;
+            font-weight: 400; /* Poids de police par défaut */
+        }
 
-/* Base layout with flexbox */
-#wrapper {
-    display: flex;
-}
+        /* Base layout with flexbox */
+        #wrapper {
+            display: flex;
+        }
 
-/* Sidebar Styling */
-#sidebar-wrapper {
-    min-height: 100vh;
-    margin-left: -17rem; /* Hidden by default on mobile */
-    transition: margin .25s ease-out;
-    width: 17rem;
-    background-color: var(--dark-sidebar-bg) !important;
-    border-right: 1px solid var(--border-color);
-    position: fixed; /* Fixed sidebar on screen */
-    z-index: 1030; /* Above content */
-    overflow-y: auto; /* Enable scrolling for long content */
-    scrollbar-width: thin; /* Firefox */
-    scrollbar-color: var(--primary-color) var(--dark-sidebar-bg); /* Firefox */
-}
+        /* Sidebar Styling */
+        #sidebar-wrapper {
+            min-height: 100vh;
+            margin-left: -17rem; /* Hidden by default on mobile */
+            transition: margin .25s ease-out;
+            width: 16rem;
+            background-color: var(--dark-sidebar-bg) !important;
+            border-right: 1px solid var(--border-color);
+            position: fixed; /* Fixed sidebar on screen */
+            z-index: 1030; /* Above content */
+            overflow-y: auto; /* Enable scrolling for long content */
+            scrollbar-width: thin; /* Firefox */
+            scrollbar-color: var(--primary-color) var(--dark-sidebar-bg); /* Firefox */
+        }
 
-/* Webkit scrollbar for Chrome/Safari */
-#sidebar-wrapper::-webkit-scrollbar {
-    width: 8px;
-}
+        /* Webkit scrollbar for Chrome/Safari */
+        #sidebar-wrapper::-webkit-scrollbar {
+            width: 8px;
+        }
 
-#sidebar-wrapper::-webkit-scrollbar-track {
-    background: var(--dark-sidebar-bg);
-}
+        #sidebar-wrapper::-webkit-scrollbar-track {
+            background: var(--dark-sidebar-bg);
+        }
 
-#sidebar-wrapper::-webkit-scrollbar-thumb {
-    background-color: var(--primary-color);
-    border-radius: 10px;
-    border: 2px solid var(--dark-sidebar-bg);
-}
+        #sidebar-wrapper::-webkit-scrollbar-thumb {
+            background-color: var(--primary-color);
+            border-radius: 10px;
+            border: 2px solid var(--dark-sidebar-bg);
+        }
 
-#wrapper.toggled #sidebar-wrapper {
-    margin-left: 0;
-}
+        #wrapper.toggled #sidebar-wrapper {
+            margin-left: 0;
+        }
 
-#sidebar-wrapper .sidebar-heading {
-    padding: 1.5rem 1.25rem;
-    font-size: 1.2rem;
-    background-color: var(--dark-sidebar-bg);
-}
+        #sidebar-wrapper .sidebar-heading {
+            padding: 1.5rem 1.25rem;
+            font-size: 1.2rem;
+            background-color: var(--dark-sidebar-bg);
+        }
 
-#sidebar-wrapper .list-group {
-    width: 92%; /* Adjusted for inset active item */
-    margin: 0 auto; /* Center the list group */
-}
+        #sidebar-wrapper .list-group {
+            width: 92%; /* Adjusted for inset active item */
+            margin: 0 auto; /* Center the list group */
+        }
 
-#sidebar-wrapper .list-group-item {
-    padding: 0.75rem 1.25rem;
-    background-color: var(--dark-sidebar-bg);
-    color: var(--text-color-secondary);
-    border: none;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    border-radius: 5px; /* Consistent border-radius for all items */
-}
+        #sidebar-wrapper .list-group-item {
+            padding: 0.75rem 1.25rem;
+            background-color: var(--dark-sidebar-bg);
+            color: var(--text-color-secondary);
+            border: none;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            border-radius: 5px; /* Consistent border-radius for all items */
+        }
 
-#sidebar-wrapper .list-group-item.active {
-    background-color: var(--primary-color) !important;
-    color: var(--text-color-light) !important;
-    border-radius: 5px;
-    margin: 0px; /* Inset effect */
-}
+        #sidebar-wrapper .list-group-item.active {
+            background-color: var(--primary-color) !important;
+            color: var(--text-color-light) !important;
+            border-radius: 5px;
+            margin: 0px; /* Inset effect */
+        }
 
-#sidebar-wrapper .list-group-item:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: var(--text-color-light);
-}
+        #sidebar-wrapper .list-group-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--text-color-light);
+        }
 
-.sidebar-section-title {
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    color: var(--text-color-secondary) !important;
-    padding: 10px 20px 5px; /* Adjust padding to align with links */
-}
+        .sidebar-section-title {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: var(--text-color-secondary) !important;
+            padding: 10px 20px 5px; /* Adjust padding to align with links */
+        }
 
-.sidebar-promo {
-    background-color: var(--primary-color);
-    color: var(--text-color-light);
-    border-radius: 10px;
-    padding: 15px;
-    margin-top: 30px;
-    width: 85%;
-}
+        .sidebar-promo {
+            background-color: var(--primary-color);
+            color: var(--text-color-light);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 30px;
+            width: 85%;
+        }
 
-.sidebar-promo .star-rating i {
-    color: var(--stars-gold);
-}
+        .sidebar-promo .star-rating i {
+            color: var(--stars-gold);
+        }
 
-.sidebar-promo .btn-primary {
-    background-color: #fff !important;
-    color: var(--primary-color) !important;
-    border: none !important;
-    font-weight: bold;
-    padding: 8px 15px;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
+        .sidebar-promo .btn-primary {
+            background-color: #fff !important;
+            color: var(--primary-color) !important;
+            border: none !important;
+            font-weight: bold;
+            padding: 8px 15px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
 
-.sidebar-promo .btn-primary:hover {
-    background-color: #eee !important;
-    color: var(--primary-color) !important;
-}
+        .sidebar-promo .btn-primary:hover {
+            background-color: #eee !important;
+            color: var(--primary-color) !important;
+        }
 
-/* Page Content */
-#page-content-wrapper {
-    min-width: 100vw; /* Takes full width initially */
-    background-color: var(--dark-bg);
-    transition: margin-left .25s ease-out; /* For push effect */
-    padding-left: 0; /* Remove default padding */
-}
+        /* Page Content */
+        #page-content-wrapper {
+            min-width: 100vw; /* Takes full width initially */
+            background-color: var(--dark-bg);
+            transition: margin-left .25s ease-out; /* For push effect */
+            padding-left: 0; /* Remove default padding */
+        }
 
-/* Adjust content position when sidebar is open on mobile */
-#wrapper.toggled #page-content-wrapper {
-    margin-left: 17rem; /* Pushes content to the right when sidebar is visible */
-}
+        /* Adjust content position when sidebar is open on mobile */
+        #wrapper.toggled #page-content-wrapper {
+            margin-left: 17rem; /* Pushes content to the right when sidebar is visible */
+        }
 
-/* Top Navbar */
-.navbar-dark {
-    background-color: var(--dark-bg) !important;
-}
+        /* Top Navbar */
+        .navbar-dark {
+            background-color: var(--dark-bg) !important;
+        }
 
-.bg-dark-secondary {
-    background-color: var(--dark-navbar-bg) !important; /* Use same color as sidebar for consistency */
-}
+        .bg-dark-secondary {
+            background-color: var(--dark-navbar-bg) !important; /* Use same color as sidebar for consistency */
+        }
 
-/* Dropdown menus in Navbar */
-.dropdown-menu {
-    background-color: var(--dark-card-bg) !important;
-    border: 1px solid var(--border-color) !important;
-    border-radius: 0.5rem;
-}
+        /* Dropdown menus in Navbar */
+        .dropdown-menu {
+            background-color: var(--dark-card-bg) !important;
+            border: 1px solid var(--border-color) !important;
+            border-radius: 0.5rem;
+        }
 
-.dropdown-item {
-    color: var(--text-color-light) !important;
-    transition: background-color 0.2s ease, color 0.2s ease;
-}
+        .dropdown-item {
+            color: var(--text-color-light) !important;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
 
-.dropdown-item:hover {
-    background-color: var(--primary-color) !important;
-    color: var(--text-color-light) !important;
-}
+        .dropdown-item:hover {
+            background-color: var(--primary-color) !important;
+            color: var(--text-color-light) !important;
+        }
 
-.dropdown-divider {
-    border-top: 1px solid var(--border-color) !important;
-}
+        .dropdown-divider {
+            border-top: 1px solid var(--border-color) !important;
+        }
 
-/* Main Content Area */
-.main-content {
-    flex-grow: 1;
-    padding: 1.5rem !important;
-}
+        /* Main Content Area */
+        .main-content {
+            flex-grow: 1;
+            padding: 1.5rem !important;
+        }
 
-/* Payment Success Page Specific Styles */
-.payment-success-card {
-    background-color: var(--payment-card-bg);
-    border: 1px solid var(--payment-card-border);
-    border-radius: 1rem; /* Consistent large border-radius */
-    padding: 2rem;
-    max-width: 1000px; /* Limit width for readability */
-    margin: 0 auto; /* Center the card */
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-}
+        /* Payment Success Page Specific Styles */
+        .payment-success-card {
+            background-color: var(--payment-card-bg);
+            border: 1px solid var(--payment-card-border);
+            border-radius: 1rem; /* Consistent large border-radius */
+            padding: 2rem;
+            max-width: 1000px; /* Limit width for readability */
+            margin: 0 auto; /* Center the card */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
 
-.payment-success-card .card-header {
-    background-color: transparent;
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 1.5rem;
-    margin-bottom: 1.5rem;
-    font-size: 0.9rem;
-    font-weight: 500;
-}
+        .payment-success-card .card-header {
+            background-color: transparent;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
 
-.payment-success-card .card-body {
-    padding-top: 0;
-}
+        .payment-success-card .card-body {
+            padding-top: 0;
+        }
 
-.payment-details-section {
-    background-color: var(--dark-bg); /* Darker background for this section */
-    border-radius: 0.75rem;
-    padding: 2rem;
-    display: flex;
-    flex-wrap: wrap; /* Ensure responsiveness */
-    align-items: flex-start; /* Align items to the top */
-    position: relative; /* For illustration positioning */
-}
+        .payment-details-section {
+            background-color: var(--dark-bg); /* Darker background for this section */
+            border-radius: 0.75rem;
+            padding: 2rem;
+            display: flex;
+            flex-wrap: wrap; /* Ensure responsiveness */
+            align-items: flex-start; /* Align items to the top */
+            position: relative; /* For illustration positioning */
+        }
 
-.payment-info-col {
-    padding-right: 1.5rem; /* Space between columns */
-    border-right: 1px solid var(--border-color); /* Separator line */
-}
+        .payment-info-col {
+            padding-right: 1.5rem; /* Space between columns */
+            border-right: 1px solid var(--border-color); /* Separator line */
+        }
 
-.payment-summary > div span {
-    font-size: 0.95rem;
-}
+        .payment-summary > div span {
+            font-size: 0.95rem;
+        }
 
-.course-item {
-    padding: 1rem 0;
-    border-bottom: 1px solid var(--border-color);
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start; /* Align text to start */
-}
+        .course-item {
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start; /* Align text to start */
+        }
 
-.course-item:last-of-type {
-    border-bottom: none; /* No border for the last course item */
-    margin-bottom: 0 !important; /* Remove extra margin if any */
-}
+        .course-item:last-of-type {
+            border-bottom: none; /* No border for the last course item */
+            margin-bottom: 0 !important; /* Remove extra margin if any */
+        }
 
-.course-item .course-title {
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin-bottom: 0.25rem;
-}
+        .course-item .course-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
 
-.course-item .course-meta {
-    font-size: 0.85rem;
-    margin-bottom: 0.5rem;
-}
+        .course-item .course-meta {
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+        }
 
-.course-item .course-price {
-    font-size: 1.2rem;
-    font-weight: 700;
-    margin-left: auto; /* Push price to the right */
-}
+        .course-item .course-price {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-left: auto; /* Push price to the right */
+        }
 
-.paid-stamp {
-    width: 100px; /* Adjust size as needed */
-    height: auto;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%) rotate(-20deg); /* Position and rotate */
-    opacity: 0.8;
-    z-index: 1; /* Ensure it's above the text it overlays */
-    filter: drop-shadow(0 5px 10px rgba(0,0,0,0.5));
-}
+        .paid-stamp {
+            width: 100px; /* Adjust size as needed */
+            height: auto;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%) rotate(-20deg); /* Position and rotate */
+            opacity: 0.8;
+            z-index: 1; /* Ensure it's above the text it overlays */
+            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.5));
+        }
 
-.final-total {
-    border-top: 1px solid var(--border-color);
-    padding-top: 1rem;
-    margin-top: 1.5rem;
-}
+        .final-total {
+            border-top: 1px solid var(--border-color);
+            padding-top: 1rem;
+            margin-top: 1.5rem;
+        }
 
-.payment-illustration-col {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    padding-left: 1.5rem;
-}
+        .payment-illustration-col {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            padding-left: 1.5rem;
+        }
 
-.payment-illustration {
-    max-width: 80%; /* Adjust size */
-    height: auto;
-    position: relative;
-    z-index: 2; /* Ensure it's above the card illustration */
-}
+        .payment-illustration {
+            max-width: 80%; /* Adjust size */
+            height: auto;
+            position: relative;
+            z-index: 2; /* Ensure it's above the card illustration */
+        }
 
-.card-illustration {
-    position: absolute;
-    width: 150px; /* Smaller card illustration */
-    height: auto;
-    bottom: 5%;
-    left: 20%;
-    transform: rotate(15deg);
-    filter: drop-shadow(0 5px 15px rgba(0,0,0,0.4));
-    z-index: 1;
-}
+        .card-illustration {
+            position: absolute;
+            width: 150px; /* Smaller card illustration */
+            height: auto;
+            bottom: 5%;
+            left: 20%;
+            transform: rotate(15deg);
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.4));
+            z-index: 1;
+        }
 
-.button-group .btn {
-    padding: 0.8rem 2rem;
-    font-size: 1rem;
-    border-radius: 0.5rem;
-    font-weight: 600;
-    transition: all 0.3s ease;
-}
+        .button-group .btn {
+            padding: 0.8rem 2rem;
+            font-size: 1rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
 
-.button-group .btn-primary {
-    background-color: var(--primary-color) !important;
-    border-color: var(--primary-color) !important;
-    color: var(--text-color-light) !important;
-}
+        .button-group .btn-primary {
+            background-color: var(--primary-color) !important;
+            border-color: var(--primary-color) !important;
+            color: var(--text-color-light) !important;
+        }
 
-.button-group .btn-primary:hover {
-    background-color: darken(var(--primary-color), 10%) !important;
-    border-color: darken(var(--primary-color), 10%) !important;
-}
+        .button-group .btn-primary:hover {
+            background-color: darken(var(--primary-color), 10%) !important;
+            border-color: darken(var(--primary-color), 10%) !important;
+        }
 
-.button-group .btn-secondary-outline {
-    background-color: transparent;
-    border: 1px solid var(--secondary-button-border);
-    color: var(--text-color-secondary);
-}
+        .button-group .btn-secondary-outline {
+            background-color: transparent;
+            border: 1px solid var(--secondary-button-border);
+            color: var(--text-color-secondary);
+        }
 
-.button-group .btn-secondary-outline:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: var(--text-color-light);
-    border-color: var(--text-color-light);
-}
+        .button-group .btn-secondary-outline:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--text-color-light);
+            border-color: var(--text-color-light);
+        }
 
-/* Animations */
-.animation-fade-in {
-    animation: fadeIn 0.6s ease-out forwards;
-    opacity: 0; /* Starts hidden */
-}
+        /* Animations */
+        .animation-fade-in {
+            animation: fadeIn 0.6s ease-out forwards;
+            opacity: 0; /* Starts hidden */
+        }
 
-.animation-slide-in-up {
-    animation: slideInUp 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
-    opacity: 0; /* Starts hidden */
-}
+        .animation-slide-in-up {
+            animation: slideInUp 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+            opacity: 0; /* Starts hidden */
+        }
 
-.animation-illustration-bounce {
-    animation: bounce 2s infinite ease-in-out;
-}
+        .animation-illustration-bounce {
+            animation: bounce 2s infinite ease-in-out;
+        }
 
-.animation-illustration-slide {
-    animation: slideAndRotate 4s infinite ease-in-out alternate;
-}
+        .animation-illustration-slide {
+            animation: slideAndRotate 4s infinite ease-in-out alternate;
+        }
 
-/* Keyframes for animations */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(15px); }
-    to { opacity: 1; transform: translateY(0); }
-}
+        /* Keyframes for animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-@keyframes slideInUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-}
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-@keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-}
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
 
-@keyframes slideAndRotate {
-    0% { transform: translate(0, 0) rotate(15deg); }
-    50% { transform: translate(10px, -5px) rotate(18deg); }
-    100% { transform: translate(0, 0) rotate(15deg); }
-}
+        @keyframes slideAndRotate {
+            0% { transform: translate(0, 0) rotate(15deg); }
+            50% { transform: translate(10px, -5px) rotate(18deg); }
+            100% { transform: translate(0, 0) rotate(15deg); }
+        }
 
-/* Responsive Adjustments */
-@media (min-width: 992px) {
-    #sidebar-wrapper {
-        margin-left: 0; /* Sidebar visible on large screens */
-        position: relative; /* Allow flow on desktop */
-    }
-    #page-content-wrapper {
-        min-width: 0;
-        width: 100%;
-        margin-left: 0; /* Reset margin for desktop */
-    }
-    #sidebarToggle {
-        display: none !important; /* Hamburger button hidden on desktop */
-    }
-    .payment-info-col {
-        flex: 0 0 auto;
-        width: 50%; /* Take half width on large screens */
-    }
-    .payment-illustration-col {
-        flex: 0 0 auto;
-        width: 50%; /* Take half width on large screens */
-    }
-}
+        /* Responsive Adjustments */
+        @media (min-width: 992px) {
+            #sidebar-wrapper {
+                margin-left: 0; /* Sidebar visible on large screens */
+                position: relative; /* Allow flow on desktop */
+            }
+            #page-content-wrapper {
+                min-width: 0;
+                width: 100%;
+                margin-left: 0; /* Reset margin for desktop */
+            }
+            #sidebarToggle {
+                display: none !important; /* Hamburger button hidden on desktop */
+            }
+            .payment-info-col {
+                flex: 0 0 auto;
+                width: 50%; /* Take half width on large screens */
+            }
+            .payment-illustration-col {
+                flex: 0 0 auto;
+                width: 50%; /* Take half width on large screens */
+            }
+        }
 
-@media (max-width: 991.98px) {
-    #page-content-wrapper {
-        width: 100%;
-    }
-    .navbar h2 {
-        font-size: 1.5rem;
-    }
-    .payment-success-card {
-        padding: 1.5rem;
-    }
-    .payment-details-section {
-        flex-direction: column; /* Stack columns */
-        padding: 1.5rem;
-    }
-    .payment-info-col {
-        border-right: none; /* Remove border */
-        border-bottom: 1px solid var(--border-color); /* Add bottom border */
-        padding-right: 0;
-        padding-bottom: 1.5rem;
-        margin-bottom: 1.5rem;
-        width: 100%; /* Full width */
-    }
-    .payment-illustration-col {
-        padding-left: 0;
-        width: 100%; /* Full width */
-    }
-    .paid-stamp {
-        top: 25%; /* Adjust stamp position for smaller screens */
-    }
-    #sidebar-wrapper {
-        position: absolute; /* Allow flow on desktop */
-    }
-}
+        @media (max-width: 991.98px) {
+            #page-content-wrapper {
+                width: 100%;
+            }
+            .navbar h2 {
+                font-size: 1.5rem;
+            }
+            .payment-success-card {
+                padding: 1.5rem;
+            }
+            .payment-details-section {
+                flex-direction: column; /* Stack columns */
+                padding: 1.5rem;
+            }
+            .payment-info-col {
+                border-right: none; /* Remove border */
+                border-bottom: 1px solid var(--border-color); /* Add bottom border */
+                padding-right: 0;
+                padding-bottom: 1.5rem;
+                margin-bottom: 1.5rem;
+                width: 100%; /* Full width */
+            }
+            .payment-illustration-col {
+                padding-left: 0;
+                width: 100%; /* Full width */
+            }
+            .paid-stamp {
+                top: 25%; /* Adjust stamp position for smaller screens */
+            }
+            #sidebar-wrapper {
+                position: absolute; /* Allow flow on desktop */
+            }
+        }
 
-@media (max-width: 767.98px) {
-    .navbar-collapse {
-        display: none !important; /* Hide notification/user icons on very small screens */
-    }
-    .payment-success-card {
-        padding: 1rem;
-    }
-    .payment-success-card .card-header {
-        flex-wrap: wrap; /* Allow header items to wrap */
-        justify-content: center;
-        text-align: center;
-    }
-    .payment-success-card .card-header span, .payment-success-card .card-header i {
-        margin: 0.2rem 0.5rem !important; /* Adjust spacing */
-    }
-    .payment-illustration {
-        max-width: 90%; /* Make illustration slightly bigger */
-    }
-    .card-illustration {
-        width: 120px; /* Adjust size */
-        bottom: 10%;
-        left: 10%;
-    }
-    .button-group {
-        flex-direction: column;
-        align-items: center;
-    }
-    .button-group .btn {
-        width: 100%;
-        margin-right: 0 !important;
-        margin-bottom: 1rem; /* Space between stacked buttons */
-    }
-    #sidebar-wrapper {
-        position: absolute; /* Allow flow on desktop */
-    }
-}
+        @media (max-width: 767.98px) {
+            .navbar-collapse {
+                display: none !important; /* Hide notification/user icons on very small screens */
+            }
+            .payment-success-card {
+                padding: 1rem;
+            }
+            .payment-success-card .card-header {
+                flex-wrap: wrap; /* Allow header items to wrap */
+                justify-content: center;
+                text-align: center;
+            }
+            .payment-success-card .card-header span, .payment-success-card .card-header i {
+                margin: 0.2rem 0.5rem !important; /* Adjust spacing */
+            }
+            .payment-illustration {
+                max-width: 90%; /* Make illustration slightly bigger */
+            }
+            .card-illustration {
+                width: 120px; /* Adjust size */
+                bottom: 10%;
+                left: 10%;
+            }
+            .button-group {
+                flex-direction: column;
+                align-items: center;
+            }
+            .button-group .btn {
+                width: 100%;
+                margin-right: 0 !important;
+                margin-bottom: 1rem; /* Space between stacked buttons */
+            }
+            #sidebar-wrapper {
+                position: absolute; /* Allow flow on desktop */
+            }
+        }
 
-@media (max-width: 575.98px) {
-    .sidebar-promo {
-        margin-left: 0.5rem;
-        margin-right: 0.5rem;
-    }
-    .payment-success-card h3 {
-        font-size: 1.8rem;
-    }
-    .payment-success-card p {
-        font-size: 0.9rem;
-    }
-    .payment-details-section {
-        padding: 1rem;
-    }
-    .paid-stamp {
-        width: 80px; /* Smaller stamp on very small screens */
-    }
-}
+        @media (max-width: 575.98px) {
+            .sidebar-promo {
+                margin-left: 0.5rem;
+                margin-right: 0.5rem;
+            }
+            .payment-success-card h3 {
+                font-size: 1.8rem;
+            }
+            .payment-success-card p {
+                font-size: 0.9rem;
+            }
+            .payment-details-section {
+                padding: 1rem;
+            }
+            .paid-stamp {
+                width: 80px; /* Smaller stamp on very small screens */
+            }
+        }
     </style>
 </head>
 <body>
