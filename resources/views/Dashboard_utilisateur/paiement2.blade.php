@@ -112,7 +112,7 @@ body {
     background-color: var(--primary-color) !important;
     color: var(--text-color-light) !important;
     border-radius: 5px;
-    margin: 0 10px; /* Inset effect */
+    margin: 0px; /* Inset effect */
 }
 
 #sidebar-wrapper .list-group-item:hover {
@@ -133,7 +133,7 @@ body {
     border-radius: 10px;
     padding: 15px;
     margin-top: 30px;
-    width: 95%;
+    width: 85%;
 }
 
 .sidebar-promo .star-rating i {

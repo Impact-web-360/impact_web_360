@@ -64,8 +64,48 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', function () {
-        return 'Bienvenue dans le dashboard';
-    });
+        return view('dashboard_utilisateur.tableau de bord'); // page d'accueil
+    })->name('dashboard');
+
+    Route::get('/calendrier', function () {
+        return view('dashboard_utilisateur.calendrier');
+    })->name('calendrier');
+
+    Route::get('/messages', function () {
+        return view('dashboard_utilisateur.message');
+    })->name('messages');
+
+    Route::get('/cours', function () {
+        return view('dashboard_utilisateur.cours');
+    })->name('cours');
+
+    Route::get('/cours/details', function () {
+        return view('dashboard_utilisateur.details_cours');
+    })->name('cours.details');
+
+    Route::get('/paiement1', function () {
+        return view('dashboard_utilisateur.paiement1');
+    })->name('paiement1');
+
+    Route::get('/notifications', function () {
+        return view('dashboard_utilisateur.notification');
+    })->name('notifications');
+
+    Route::get('/parametres', function () {
+        return view('dashboard_utilisateur.parametre');
+    })->name('parametres');
+
+    Route::get('/changer-mot-de-passe', function () {
+        return view('dashboard_utilisateur.changer_mot_de_passe');
+    })->name('changer_mot_de_passe');
+
+    Route::get('/modifier-profil', function () {
+        return view('dashboard_utilisateur.modifier_profil');
+    })->name('modifier_profil');
+
+    Route::get('/decouvrir', function () {
+        return view('dashboard_utilisateur.decouvrir');
+    })->name('decouvrir');
 });
 
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
@@ -78,7 +118,7 @@ Route::get('/reset-password/{token}', [AuthController::class, 'showResetForm'])-
 Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('password.update');
 
 Route::middleware(['auth', 'admin'])->group(function () {
-    Route::get('/admin/dashboard',[DashboardController::class,'index'])->name('admin.dashboard');
+    Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
     Route::get('/dashboard/evenements', [EvenementController::class, 'index'])->name('evenements.index');
     Route::post('/dashboard/evenements', [EvenementController::class, 'store'])->name('evenements.store');
@@ -96,15 +136,16 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::put('/dashboard/intervenants/{intervenant}', [IntervenantController::class, 'update'])->name('intervenants.update');
     Route::delete('/dashboard/intervenants/{intervenant}', [IntervenantController::class, 'destroy'])->name('intervenants.destroy');
 
-     // Catégories
-        Route::resource('categories', CategorieController::class);
+    // Catégories
+    Route::resource('categories', CategorieController::class);
 
-        // Formations
-        Route::resource('formations', FormationController::class);
+    // Formations
+    Route::resource('formations', FormationController::class);
 
-        Route::get('formations/{formation}/modules', [ModuleController::class,''])->name('modules.create');
-    Route::post('formations/{formation}/modules', [ModuleController::class,'store'])->name('modules.store');
-        Route::put('formations/{formation}/modules/{module}', [ModuleController::class,'update'])->name('modules.update');
-        Route::delete('formations/{formation}/modules/{module}', [ModuleController::class,'destroy'])->name('modules.destroy');
-        Route::patch('formations/{formation}/modules/reorder', [ModuleController::class,'reorder'])->name('modules.reorder');
+
+    Route::get('formations/{formation}/modules', [ModuleController::class, ''])->name('modules.create');
+    Route::post('formations/{formation}/modules', [ModuleController::class, 'store'])->name('modules.store');
+    Route::put('formations/{formation}/modules/{module}', [ModuleController::class, 'update'])->name('modules.update');
+    Route::delete('formations/{formation}/modules/{module}', [ModuleController::class, 'destroy'])->name('modules.destroy');
+    Route::patch('formations/{formation}/modules/reorder', [ModuleController::class, 'reorder'])->name('modules.reorder');
 });

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Impact Web - Paramètres - Changer le mot de passe</title>
+    <title>Impact Web - Paramètres</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -29,24 +29,18 @@
     --button-text-inactive: var(--text-color-secondary);
     --stars-gold: gold; /* Gold color for stars */
 
-    /* Specific to Settings Page (including password section) */
+    /* Specific to Settings Page */
     --save-button-bg: #007bff; /* Blue for save button */
     --save-button-hover: #0056b3;
     --upload-area-bg: #2b2b3f;
     --upload-area-border: #4a4a60;
-    --input-group-bg: #3A3A3A; /* Background for the eye icon in password fields */
-
-    /* Specific to Payment Success Page */
-    --payment-card-bg: #2C2C2C; /* Slightly darker than main background for the card */
-    --payment-card-border: #3A3A3A;
-    --secondary-button-border: var(--border-color);
 }
 
 body {
     overflow-x: hidden;
     background-color: var(--dark-bg);
     color: var(--text-color-light);
-    font-family:Arial, sans-serif; 
+    font-family: Arial, sans-serif;
     font-weight: 400; /* Poids de police par défaut */
 }
 
@@ -204,7 +198,7 @@ body {
     padding: 1.5rem !important;
 }
 
-/* Settings Page General Styles (including the password page sub-section) */
+/* Settings Page Specific Styles */
 .settings-menu-col {
     padding-right: 20px; /* Space for the border-right */
     border-right: 1px solid var(--border-color);
@@ -266,8 +260,7 @@ body {
     color: var(--primary-color) !important; /* Primary color on hover for logout */
 }
 
-.password-settings-form,
-.profile-settings-form { /* Apply common padding to both forms */
+.profile-settings-form {
     padding-left: 30px; /* More padding on the right side */
 }
 
@@ -277,15 +270,13 @@ body {
     font-weight: 600;
 }
 
-.password-card,
-.profile-card { /* Common styling for card-like sections */
+.profile-card {
     background-color: var(--dark-card-bg);
     border: 1px solid var(--border-color);
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-.password-card .card-title,
 .profile-card .card-title {
     color: var(--text-color-light);
     font-size: 1.2em;
@@ -293,7 +284,6 @@ body {
     margin-bottom: 5px;
 }
 
-.password-card .card-subtitle,
 .profile-card .card-subtitle {
     color: var(--text-color-secondary) !important;
     font-size: 0.9em;
@@ -322,30 +312,7 @@ body {
     outline: none;
 }
 
-/* Password input group with eye icon */
-.password-input-group .form-control-custom {
-    border-right: none; /* Remove right border for seamless look with icon */
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-}
-
-.password-input-group .input-group-text {
-    background-color: var(--input-group-bg);
-    border: 1px solid var(--border-color);
-    border-left: none; /* Remove left border */
-    border-top-right-radius: 8px;
-    border-bottom-right-radius: 8px;
-    color: var(--text-color-secondary);
-    cursor: pointer;
-    padding: 10px 15px;
-    transition: background-color 0.3s ease;
-}
-
-.password-input-group .input-group-text:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-}
-
-/* Profile Photo Upload (from previous settings page) */
+/* Profile Photo Upload */
 .profile-photo-upload .profile-img-preview {
     width: 100px;
     height: 100px;
@@ -386,7 +353,7 @@ body {
     margin-bottom: 0;
 }
 
-/* Save Button (common for settings forms) */
+/* Save Button */
 .btn-save {
     background-color: var(--save-button-bg);
     color: white;
@@ -404,6 +371,7 @@ body {
     transform: translateY(-2px);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
+
 
 /* Animations */
 .animation-fade-in {
@@ -461,12 +429,11 @@ body {
         margin-bottom: 30px; /* Add space below menu */
     }
 
-    .password-settings-form,
     .profile-settings-form {
         padding-left: 15px; /* Adjust padding */
     }
-    #sidebar-wrapper {
-        position: absolute; /* Allow flow on desktop */
+    #sidebar-wrapper{
+        position: absolute;
     }
 }
 
@@ -474,15 +441,13 @@ body {
     .navbar-collapse {
         display: none !important; /* Hide notification/user icons on very small screens */
     }
-    .settings-menu-col,
-    .password-settings-form,
-    .profile-settings-form {
+    .settings-menu-col, .profile-settings-form {
         width: 100%; /* Full width on smaller screens */
         padding-left: 15px;
         padding-right: 15px;
     }
-    #sidebar-wrapper {
-        position: absolute; /* Allow flow on desktop */
+    #sidebar-wrapper{
+        position: absolute;
     }
 }
 
@@ -513,24 +478,24 @@ body {
             </div>
             <div class="list-group list-group-flush">
                 <div class="sidebar-section-title text-secondary px-3 pt-3 pb-1">GENERAL</div>
-                <a href="tableau de bord.html" class="list-group-item list-group-item-action bg-dark text-white">
+                <a href="{{ route('dashboard') }}" class="list-group-item list-group-item-action bg-dark text-white active">
                     <i class="fas fa-home me-2"></i> Tableau de bord
                 </a>
-                <a href="calendrier.html" class="list-group-item list-group-item-action bg-dark text-white ">
+                <a href="{{ route('calendrier') }}" class="list-group-item list-group-item-action bg-dark text-white">
                     <i class="fas fa-calendar-alt me-2"></i> Calendrier
                 </a>
-                <a href="message.html" class="list-group-item list-group-item-action bg-dark text-white">
+                <a href="{{ route('messages') }}" class="list-group-item list-group-item-action bg-dark text-white">
                     <i class="fas fa-comment-alt me-2"></i> Message
                 </a>
-                <a href="paiement.html" class="list-group-item list-group-item-action bg-dark text-white">
+                <a href="{{ route('paiement1') }}" class="list-group-item list-group-item-action bg-dark text-white">
                     <i class="fas fa-credit-card me-2"></i> Paiement
                 </a>
 
                 <div class="sidebar-section-title text-secondary px-3 pt-3 pb-1">COURS</div>
-                <a href="cours.html" class="list-group-item list-group-item-action bg-dark text-white">
+                <a href="{{ route('cours') }}" class="list-group-item list-group-item-action bg-dark text-white">
                     <i class="fas fa-book me-2"></i> Mes cours
                 </a>
-                <a href="decouvrir.html" class="list-group-item list-group-item-action bg-dark text-white">
+                <a href="{{ route('decouvrir') }}" class="list-group-item list-group-item-action bg-dark text-white">
                     <i class="fas fa-search me-2"></i> Découvrir
                 </a>
 
@@ -538,11 +503,11 @@ body {
                 <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
                     <i class="fas fa-question-circle me-2"></i> Soutien
                 </a>
-                <a href="parametre.html" class="list-group-item list-group-item-action bg-dark text-white active">
+                <a href="{{ route('parametres') }}" class="list-group-item list-group-item-action bg-dark text-white">
                     <i class="fas fa-cog me-2"></i> Paramètre
                 </a>
 
-                <div class="sidebar-promo p-3 mx-3 mt-4 rounded text-center ">
+                <div class="sidebar-promo p-3 mx-3 mt-4 rounded text-center">
                     <p class="text-white mb-2 fw-bold">Profitez de</p>
                     <p class="text-white fs-3 fw-bold mb-1">-30%</p>
                     <p class="text-white mb-2">sur la Formation en montage vidéo</p>
@@ -573,7 +538,7 @@ body {
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle text-white d-flex align-items-center" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <img src="logo.png" alt="Impact Web Logo" style="max-height: 50px;" class="rounded-circle me-2">
+                                    <img src="logo.png" alt="Impact Web Logo" style="max-height: 50px;">
                                     <span class="d-none d-md-block">Peter</span>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end bg-dark-secondary border-secondary" aria-labelledby="navbarDropdown">
@@ -594,8 +559,8 @@ body {
                         <ul class="list-unstyled settings-menu">
                             <li class="settings-menu-title">Profil de l'entreprise</li>
                             <li><a href="parametre.html"><i class="fas fa-cog me-2"></i> Général général</a></li>
-                            <li><a href="modifier profil.html"><i class="fas fa-user-edit me-2"></i> Modifier le profil</a></li>
-                            <li><a href="changer mot de passe.html" class="active"><i class="fas fa-key me-2"></i> Changer le mot de passe</a></li>
+                            <li><a href="modifier profil.html" class="active"><i class="fas fa-user-edit me-2"></i> Modifier le profil</a></li>
+                            <li><a href="changer mot de passe.html"><i class="fas fa-key me-2"></i> Changer le mot de passe</a></li>
                             <li><a href="notification.html"><i class="fas fa-bell me-2"></i> Notification</a></li>
                             <li><a href="#"><i class="fas fa-file-invoice-dollar me-2"></i> Souscription à un abonnement</a></li>
 
@@ -613,53 +578,76 @@ body {
                         </ul>
                     </div>
 
-                    <div class="col-md-8 col-lg-9 password-settings-form animation-fade-in" style="animation-delay: 0.2s;">
-                        <h4 class="form-section-title mb-4">Changer le mot de passe</h4>
-                        <p class="text-white-50 mb-4">
-                            Pour changer votre mot de passe, veuillez remplir les champs ci-dessous. Votre mot de passe doit contenir au moins 8 caractères, il doit également inclure au moins 1 lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial.
-                        </p>
+                    <div class="col-md-8 col-lg-9 profile-settings-form animation-fade-in" style="animation-delay: 0.2s;">
+                        <h4 class="form-section-title mb-4">Modifier le profil</h4>
 
-                        <div class="card password-card mb-4">
+                        <div class="card profile-card mb-4">
                             <div class="card-body">
-                                <h5 class="card-title">Mot de passe actuel</h5>
-                                <p class="card-subtitle mb-3 text-muted">Cela nous aidera à vérifier que c'est vraiment vous</p>
-                                <div class="input-group password-input-group">
-                                    <input type="password" class="form-control form-control-custom" id="currentPassword" value="••••••••">
-                                    <span class="input-group-text toggle-password" data-target="currentPassword">
-                                        <i class="fas fa-eye-slash"></i>
-                                    </span>
+                                <h5 class="card-title">Profil Public</h5>
+                                <p class="card-subtitle mb-3 text-muted">Ceci sera affiché sur votre profil</p>
+                                <div class="row mb-3 align-items-center">
+                                    <label for="name" class="col-sm-3 col-form-label form-label-custom">Nom</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control form-control-custom" id="name" value="Peter Parker">
+                                    </div>
+                                </div>
+                                <div class="row mb-3 align-items-center">
+                                    <label for="position" class="col-sm-3 col-form-label form-label-custom">Poste</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control form-control-custom" id="position" value="Développeur Web/Mobile Jr.">
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="card password-card mb-4">
+                        <div class="card profile-card mb-4">
                             <div class="card-body">
-                                <h5 class="card-title">Nouveau mot de passe</h5>
-                                <p class="card-subtitle mb-3 text-muted">Suivre nos directives de mot de passe assurera une expérience de connexion forte et protégée.</p>
-                                <div class="input-group password-input-group">
-                                    <input type="password" class="form-control form-control-custom" id="newPassword" value="••••••••">
-                                    <span class="input-group-text toggle-password" data-target="newPassword">
-                                        <i class="fas fa-eye-slash"></i>
-                                    </span>
+                                <h5 class="card-title">Photo de profil</h5>
+                                <p class="card-subtitle mb-3 text-muted">Choisissez votre meilleure photo qui vous représente</p>
+                                <div class="d-flex align-items-center profile-photo-upload">
+                                    <img src="logo.png" alt="Impact Web Logo" style="max-height: 50px;" class="rounded-circle profile-img-preview me-4">
+                                    <div class="upload-area text-center py-3 px-4">
+                                        <i class="fas fa-upload upload-icon mb-2"></i>
+                                        <p class="upload-text">Cliquez pour télécharger ou glisser-déposer</p>
+                                        <p class="upload-info">SVG, PNG, JPG ou GIF (max 800x600px)</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="card password-card mb-4">
+                        <div class="card profile-card mb-4">
                             <div class="card-body">
-                                <h5 class="card-title">Confirmer le nouveau mot de passe</h5>
-                                <p class="card-subtitle mb-3 text-muted">Assurez-vous que ce mot de passe correspond au précédent</p>
-                                <div class="input-group password-input-group">
-                                    <input type="password" class="form-control form-control-custom" id="confirmPassword" value="••••••••">
-                                    <span class="input-group-text toggle-password" data-target="confirmPassword">
-                                        <i class="fas fa-eye-slash"></i>
-                                    </span>
+                                <h5 class="card-title">Profil Social</h5>
+                                <p class="card-subtitle mb-3 text-muted">Cela sera également affiché sur votre profil</p>
+                                <div class="row mb-3 align-items-center">
+                                    <label for="twitter" class="col-sm-3 col-form-label form-label-custom">Accueil/Twitter /</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control form-control-custom" id="twitter" value="Peterparker">
+                                    </div>
+                                </div>
+                                <div class="row mb-3 align-items-center">
+                                    <label for="instagram" class="col-sm-3 col-form-label form-label-custom">Instagram.com/fr</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control form-control-custom" id="instagram" value="Peterparker">
+                                    </div>
+                                </div>
+                                <div class="row mb-3 align-items-center">
+                                    <label for="linkedin" class="col-sm-3 col-form-label form-label-custom">Accueil/Linkedin.com</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control form-control-custom" id="linkedin" value="Peterparker">
+                                    </div>
+                                </div>
+                                <div class="row mb-3 align-items-center">
+                                    <label for="facebook" class="col-sm-3 col-form-label form-label-custom">www.facebook.com</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control form-control-custom" id="facebook" value="Peterparker">
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="d-flex justify-content-end mt-4">
-                            <button class="btn btn-save">Changer le mot de passe</button>
+                            <button class="btn btn-save">Sauvegarder</button>
                         </div>
                     </div>
                 </div>
@@ -676,18 +664,6 @@ body {
         toggleButton.onclick = function () {
             el.classList.toggle("toggled");
         };
-
-        // Password Visibility Toggle
-        document.querySelectorAll('.toggle-password').forEach(function(toggle) {
-            toggle.addEventListener('click', function() {
-                const targetId = this.dataset.target;
-                const passwordInput = document.getElementById(targetId);
-                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-                passwordInput.setAttribute('type', type);
-                this.querySelector('i').classList.toggle('fa-eye');
-                this.querySelector('i').classList.toggle('fa-eye-slash');
-            });
-        });
     </script>
 </body>
 </html>

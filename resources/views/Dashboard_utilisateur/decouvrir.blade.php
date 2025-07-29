@@ -540,24 +540,24 @@ body {
             </div>
             <div class="list-group list-group-flush">
                 <div class="sidebar-section-title text-secondary px-3 pt-3 pb-1">GENERAL</div>
-                <a href="tableau de bord.html" class="list-group-item list-group-item-action bg-dark text-white">
+                <a href="{{ route('dashboard') }}" class="list-group-item list-group-item-action bg-dark text-white">
                     <i class="fas fa-home me-2"></i> Tableau de bord
                 </a>
-                <a href="calendrier.html" class="list-group-item list-group-item-action bg-dark text-white ">
+                <a href="{{ route('calendrier') }}" class="list-group-item list-group-item-action bg-dark text-white">
                     <i class="fas fa-calendar-alt me-2"></i> Calendrier
                 </a>
-                <a href="message.html" class="list-group-item list-group-item-action bg-dark text-white">
+                <a href="{{ route('messages') }}" class="list-group-item list-group-item-action bg-dark text-white">
                     <i class="fas fa-comment-alt me-2"></i> Message
                 </a>
-                <a href="paiement.html" class="list-group-item list-group-item-action bg-dark text-white">
+                <a href="{{ route('paiement1') }}" class="list-group-item list-group-item-action bg-dark text-white">
                     <i class="fas fa-credit-card me-2"></i> Paiement
                 </a>
 
                 <div class="sidebar-section-title text-secondary px-3 pt-3 pb-1">COURS</div>
-                <a href="cours.html" class="list-group-item list-group-item-action bg-dark text-white">
+                <a href="{{ route('cours') }}" class="list-group-item list-group-item-action bg-dark text-white">
                     <i class="fas fa-book me-2"></i> Mes cours
                 </a>
-                <a href="decouvrir.html" class="list-group-item list-group-item-action bg-dark text-white active">
+                <a href="{{ route('decouvrir') }}" class="list-group-item list-group-item-action bg-dark text-white active">
                     <i class="fas fa-search me-2"></i> Découvrir
                 </a>
 
@@ -565,11 +565,11 @@ body {
                 <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
                     <i class="fas fa-question-circle me-2"></i> Soutien
                 </a>
-                <a href="parametre.html" class="list-group-item list-group-item-action bg-dark text-white">
+                <a href="{{ route('parametres') }}" class="list-group-item list-group-item-action bg-dark text-white">
                     <i class="fas fa-cog me-2"></i> Paramètre
                 </a>
 
-                <div class="sidebar-promo p-3 mx-3 mt-4 rounded text-center ">
+                <div class="sidebar-promo p-3 mx-3 mt-4 rounded text-center">
                     <p class="text-white mb-2 fw-bold">Profitez de</p>
                     <p class="text-white fs-3 fw-bold mb-1">-30%</p>
                     <p class="text-white mb-2">sur la Formation en montage vidéo</p>
