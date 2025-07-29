@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Http\Controllers;
+
 use App\Models\Categorie; // Changé de Category à Categorie
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -51,7 +53,7 @@ class CategorieController extends Controller //
         $categorie->save();
 
         return redirect()->route('Dashboard.categories.index')
-                        ->with('success', 'Catégorie mise à jour avec succès.');
+            ->with('success', 'Catégorie mise à jour avec succès.');
     }
 
 

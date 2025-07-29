@@ -509,7 +509,7 @@ body {
     <div class="d-flex" id="wrapper">
         <div class="bg-dark sidebar" id="sidebar-wrapper">
             <div class="sidebar-heading text-white p-3 border-bottom border-secondary d-flex align-items-center">
-                <img src="logo.png" alt="Impact Web Logo" style="max-height: 140px;">
+                <img src="{{ asset('dossiers/image/Impact-Web-360-Logo1.png') }}" alt="Impact Web Logo" style="max-height: 140px;">
             </div>
             <div class="list-group list-group-flush">
                 <div class="sidebar-section-title text-secondary px-3 pt-3 pb-1">GENERAL</div>
@@ -571,17 +571,10 @@ body {
                             <li class="nav-item me-3">
                                 <a class="nav-link text-white" href="#" aria-label="Notifications"><i class="fas fa-bell"></i></a>
                             </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle text-white d-flex align-items-center" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <img src="logo.png" alt="Impact Web Logo" style="max-height: 50px;" class="rounded-circle me-2">
-                                    <span class="d-none d-md-block">Peter</span>
+                            <li class="nav-item">
+                                <a class="nav-link text-white d-flex align-items-center" href="{{ route('parametres') }}">
+                                    <i class="fa fa-user"></i>
                                 </a>
-                                <div class="dropdown-menu dropdown-menu-end bg-dark-secondary border-secondary" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item text-white" href="#">Profile</a>
-                                    <a class="dropdown-item text-white" href="#">Settings</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item text-white" href="#">Logout</a>
-                                </div>
                             </li>
                         </ul>
                     </div>

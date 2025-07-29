@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Formation;
 use App\Models\Categorie;
 use Illuminate\Http\Request;
@@ -50,9 +51,10 @@ class FormationController extends Controller
         return redirect()->route('Dashboard.formations.index')->with('success', 'Formation ajoutée avec succès!');
     }
 
-    public function editedit($id)
+    public function edit($id)
     {
         $formation = Formation::findOrFail($id);
+        $categories = Categorie::all();
         return view('Dashboard.formations.edit', compact('formation', 'categories'));
     }
 
@@ -77,7 +79,7 @@ class FormationController extends Controller
             }
             $imagePath = $request->file('image')->store('formations', 'public');
         } elseif ($request->input('clear_image')) {
-             if ($formation->image && Storage::disk('public')->exists($formation->image)) {
+            if ($formation->image && Storage::disk('public')->exists($formation->image)) {
                 Storage::disk('public')->delete($formation->image);
             }
             $imagePath = null;
@@ -103,7 +105,10 @@ class FormationController extends Controller
         if ($formation->image && Storage::disk('public')->exists($formation->image)) {
             Storage::disk('public')->delete($formation->image);
         }
+
         $formation->delete();
-        return redirect()->route('Dashboard.formations.index')->with('success', 'Formation supprimée avec succès!');
+
+        return redirect()->route('Dashboard.formations.index')
+            ->with('success', 'Formation supprimée avec succès!');
     }
 }
