@@ -212,28 +212,57 @@
 
   <section id="add-formation" class="mb-5">
     <h2 class="section-title"><i class="fas fa-plus-circle"></i> Ajouter une Nouvelle Formation</h2>
-    <div class="card card-custom p-4">
-      <form action="{{ route('formations.store') }}" method="POST">
-        @csrf
-        <div class="mb-3">
-          <label for="titre" class="form-label">Titre de la Formation</label>
-          <input type="text" class="form-control" id="titre" name="titre" placeholder="Entrez le titre de la formation" required>
-        </div>
-        <div class="mb-3">
-          <label for="description" class="form-label">Description</label>
-          <textarea class="form-control" id="description" name="description" rows="5" placeholder="Décrivez la formation en détail" required></textarea>
-        </div>
-        <div class="mb-4">
-          <label for="categorie_id" class="form-label">Catégorie</label>
-          <select class="form-select" id="categorie_id" name="categorie_id" required>
-            <option selected disabled>Sélectionnez une catégorie</option>
-            @foreach($categories as $cat)
-                <option value="{{ $cat->id }}">{{ $cat->nom }}</option>
-            @endforeach
-          </select>
-        </div>
-        <button type="submit" class="btn btn-danger"><i class="fas fa-save me-2"></i> Créer la Formation</button>
-      </form>
+    <div class="container mt-4">
+        <h2>Ajouter une Nouvelle Formation</h2>
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        <form action="{{ route('Dashboard.formations.store') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <div class="mb-3">
+                <label for="title" class="form-label text-dark">Titre de la Formation</label>
+                <input type="text" class="form-control" id="title" name="title" value="{{ old('title') }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="category_id" class="form-label text-dark">Catégorie</label>
+                <select class="form-select" id="category_id" name="category_id" required>
+                    <option value="">Sélectionner une catégorie</option>
+                    @foreach($categories as $categorie)
+                        <option value="{{ $categorie->id }}" {{ old('category_id') == $categorie->id ? 'selected' : '' }}>{{ $categorie->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="mentor" class="form-label text-dark">Nom du Mentor</label>
+                <input type="text" class="form-control" id="mentor" name="mentor" value="{{ old('mentor') }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label text-dark">Description</label>
+                <textarea class="form-control" id="description" name="description" rows="5">{{ old('description') }}</textarea>
+            </div>
+            <div class="mb-3">
+                <label for="image" class="form-label text-dark">Image de la Formation</label>
+                <input type="file" class="form-control" id="image" name="image" accept="image/*">
+                <div class="form-text text-secondary">Taille max : 2MB. Formats : JPG, PNG, GIF.</div>
+            </div>
+            <div class="mb-3">
+                <label for="price" class="form-label text-dark">Prix ($)</label>
+                <input type="number" step="0.01" class="form-control" id="price" name="price" value="{{ old('price') }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="rating" class="form-label text-dark">Note (sur 5)</label>
+                <input type="number" step="0.1" min="0" max="5" class="form-control" id="rating" name="rating" value="{{ old('rating', 0.0) }}">
+                <div class="form-text text-secondary">Ex: 4.5.</div>
+            </div>
+            <button type="submit" class="btn btn-danger">Ajouter la Formation</button>
+        </form>
     </div>
   </section>
 
@@ -256,63 +285,6 @@
       body.classList.remove('sidebar-open');
     }
   });
-
-  // Chart.js scripts are not strictly needed for this specific form page,
-  // but keeping them if this page is part of a larger dashboard rendering.
-  // If this is a standalone page, you can remove them to reduce load.
-
-  // Chart.js Statistiques (example, if you want to include charts on this page)
-  /*
-  const ctxStats = document.getElementById('statChart');
-  if (ctxStats) { // Check if the element exists before trying to get context
-      new Chart(ctxStats.getContext('2d'), {
-          type: 'bar',
-          data: {
-              labels: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin'],
-              datasets: [{
-                  label: 'Nouveaux Utilisateurs',
-                  data: [50, 80, 30, 70, 110, 90],
-                  backgroundColor: 'var(--main-color)',
-                  borderRadius: 5,
-                  barPercentage: 0.6
-              }]
-          },
-          options: {
-              responsive: true,
-              scales: {
-                  y: { beginAtZero: true, ticks: { stepSize: 20 } }
-              },
-              plugins: {
-                  legend: { display: true, labels: { color: '#333', font: { weight: 'bold' } } }
-              }
-          }
-      });
-  }
-  */
-
-  // Chart.js Répartition rôles (camembert) (example)
-  /*
-  const ctxRoles = document.getElementById('rolesChart');
-  if (ctxRoles) {
-      new Chart(ctxRoles.getContext('2d'), {
-          type: 'doughnut',
-          data: {
-              labels: ['Admin', 'Modérateurs', 'Utilisateurs'],
-              datasets: [{
-                  data: [5, 15, 80],
-                  backgroundColor: ['#c82333', '#e5534b', '#f8a5a0'],
-                  hoverOffset: 10
-              }]
-          },
-          options: {
-              responsive: true,
-              plugins: {
-                  legend: { position: 'bottom', labels: { font: { weight: 'bold' } } }
-              }
-          }
-      });
-  }
-  */
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

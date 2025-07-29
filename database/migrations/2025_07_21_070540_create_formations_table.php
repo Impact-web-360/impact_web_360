@@ -4,31 +4,25 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateFormationsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
+    public function up()
     {
         Schema::create('formations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('categorie_id')->constrained('categories')->cascadeOnDelete();
-            $table->string('titre');
-            $table->string('formateur')->nullable();
+            $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
+            $table->string('title');
             $table->text('description')->nullable();
-            $table->unsignedInteger('duree_minutes')->nullable(); // durée estimée
-            $table->string('image')->nullable(); // affiche/cover
-            $table->boolean('is_published')->default(false);
+            $table->string('mentor');
+            $table->string('image')->nullable(); // Chemin de l'image
+            $table->decimal('price', 8, 2);
+            $table->float('rating', 2, 1)->default(0.0); // Note sur 5, ex: 4.5
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('formations');
     }
-};
+}
