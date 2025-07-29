@@ -43,7 +43,6 @@ class CategorieController extends Controller //
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            // autres validations si besoin
         ]);
 
         $categorie = Categorie::findOrFail($id);

@@ -50,9 +50,10 @@ class FormationController extends Controller
         return redirect()->route('Dashboard.formations.index')->with('success', 'Formation ajoutée avec succès!');
     }
 
-    public function editedit($id)
+    public function edit($id)
     {
         $formation = Formation::findOrFail($id);
+        $categories = Categorie::all(); 
         return view('Dashboard.formations.edit', compact('formation', 'categories'));
     }
 
