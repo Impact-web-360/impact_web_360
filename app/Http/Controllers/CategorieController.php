@@ -54,9 +54,11 @@ class CategorieController extends Controller //
     }
 
 
-    public function destroy(Categorie $categorie) // Changé de Category $category à Categorie $categorie
+    public function destroy(Categorie $categorie)
     {
-        $categorie->delete(); // Changé $category à $categorie
-        return redirect()->route('Dashboard.categories.index')->with('success', 'Catégorie supprimée avec succès!');
+        $categorie->delete();
+        return redirect()->route('Dashboard.categories.index')
+            ->with('success', 'Catégorie supprimée avec succès!');
     }
+
 }

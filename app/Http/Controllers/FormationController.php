@@ -105,6 +105,7 @@ class FormationController extends Controller
             Storage::disk('public')->delete($formation->image);
         }
         $formation->delete();
+        $formation = Formation::findOrFail($id);
         return redirect()->route('Dashboard.formations.index')->with('success', 'Formation supprimée avec succès!');
     }
 }
