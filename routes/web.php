@@ -106,6 +106,7 @@ Route::middleware('auth')->group(function () {
     //decouvrir
     Route::get('/decouvrir', [DiscoverController::class, 'index'])->name('decouvrir');
 });
+Route::get('/formations/{id}', [FormationController::class, 'show'])->name('details');
 
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
@@ -165,6 +166,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
         ->name('Dashboard.formations.destroy');
     Route::put('/dashboard/formations/{id}', [FormationController::class, 'update'])
         ->name('Dashboard.formations.update');
+    
+
 
 
 

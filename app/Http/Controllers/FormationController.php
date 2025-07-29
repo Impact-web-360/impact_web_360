@@ -111,4 +111,11 @@ class FormationController extends Controller
         return redirect()->route('Dashboard.formations.index')
             ->with('success', 'Formation supprimée avec succès!');
     }
+
+    public function show($id)
+    {
+        $formation = Formation::findOrFail($id);
+        return view('Dashboard_utilisateur.details', compact('formation'));
+    }
+
 }

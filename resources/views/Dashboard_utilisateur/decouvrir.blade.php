@@ -266,6 +266,9 @@
                 border-radius: 0.75rem !important; /* Rayon plus grand pour les cartes */
                 overflow: hidden; /* Pour s'assurer que l'image est contenue */
                 transition: transform 0.3s ease, box-shadow 0.3s ease;
+                display: block; /* Make the whole card clickable */
+                text-decoration: none; /* Remove underline from link */
+                color: inherit; /* Inherit text color */
             }
 
             .course-card:hover {
@@ -613,7 +616,8 @@
                             <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4">
                                 @forelse($formations as $formation)
                                     <div class="col animation-fade-in" style="animation-delay: {{ 0.4 + $loop->index * 0.1 }}s;">
-                                        <div class="card course-card bg-dark-card border-secondary h-100">
+                                        {{-- Wrap the card content in an anchor tag --}}
+                                        <a href="{{ route('details', $formation->id) }}" class="card course-card bg-dark-card border-secondary h-100">
                                             @if ($formation->image)
                                                 <img src="{{ asset('storage/' . $formation->image) }}" class="card-img-top rounded-top-2" alt="{{ $formation->title }}">
                                             @else
@@ -635,24 +639,16 @@
                                                             <i class="fas fa-star text-secondary"></i>
                                                         @endfor
                                                     </div>
-                                                    <span class="text-primary fw-bold fs-5">${{ number_format($formation->price, 0, ',', '.') }}</span>
                                                 </div>
-                                            </div>
-                                            <span class="text-primary fw-bold fs-6">{{ number_format($formation->price, 0, ',', '.') }}FCFA</span>  
-                                        </div>
+                                                 <span class="text-primary fw-bold fs-5">{{ number_format($formation->price, 0, ',', '.') }}FCFA</span> 
+                                            </div> 
+                                        </a>
                                     </div>
                                 @empty
-<<<<<<< HEAD
-                                    <div class="col-12 text-center text-secondary py-5">
-                                        <i class="fas fa-box-open fa-3x mb-3"></i>
-                                        <p>Aucune formation trouvée pour cette catégorie, ou aucune formation n'a été ajoutée pour le moment.</p>
-                                    </div>
-=======
                                 <div class="col-12 text-center text-secondary py-5 ">
                                     <i class="fas fa-box-open fa-3x mb-3"></i>
                                     <p>Aucune formation trouvée pour cette catégorie, ou aucune formation n'a été ajoutée pour le moment.</p>
                                 </div>
->>>>>>> 92ab3102f836a5301231ea7de0eb1fda6b15425e
                                 @endforelse
                             </div>
                         </div>
