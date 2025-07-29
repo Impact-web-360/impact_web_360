@@ -12,6 +12,7 @@ use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\SocialAuthController;
 use App\Http\Controllers\SponsorController;
 use App\Http\Controllers\TicketController;
+use App\Http\Controllers\DiscoverController;
 use App\Http\Requests\FormationRequest;
 
 /*
@@ -102,10 +103,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/modifier-profil', function () {
         return view('dashboard_utilisateur.modifier_profil');
     })->name('modifier_profil');
-
-    Route::get('/decouvrir', function () {
-        return view('dashboard_utilisateur.decouvrir');
-    })->name('decouvrir');
+    //decouvrir
+    Route::get('/decouvrir', [DiscoverController::class, 'index'])->name('decouvrir');
 });
 
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');

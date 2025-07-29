@@ -1,23 +1,320 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dashboard Admin - Ajouter Formation</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    :root {
+      --main-color: #c82333;
+      --sidebar-bg: #212529;
+      --sidebar-hover: rgba(87, 86, 86, 1);
+      --text-light: #fff;
+      --card-bg: #fff;
+      --bg-color: #f4f6f9;
+    }
+
+    body {
+      margin: 0;
+      background-color: var(--bg-color);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    /* Sidebar */
+    #sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 250px;
+      height: 100vh;
+      background-color: var(--sidebar-bg);
+      color: var(--text-light);
+      padding-top: 2rem;
+      overflow-y: auto;
+      transition: transform 0.3s ease;
+      z-index: 1050;
+    }
+    #sidebar h4 {
+      text-align: center;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      letter-spacing: 1px;
+    }
+    #sidebar a.nav-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0.75rem 1.5rem;
+      color: var(--text-light);
+      font-weight: 600;
+      transition: background-color 0.3s, border-left 0.3s;
+      text-decoration: none;
+    }
+    #sidebar a.nav-link:hover,
+    #sidebar a.nav-link.active {
+      background-color: var(--sidebar-hover);
+      border-left: 4px solid var(--main-color);
+      text-decoration: none;
+    }
+
+    /* Sidebar scroll bar */
+    #sidebar::-webkit-scrollbar {
+      width: 6px;
+    }
+    #sidebar::-webkit-scrollbar-thumb {
+      background-color: var(--main-color);
+      border-radius: 10px;
+    }
+
+    /* Main content */
+    #content {
+      margin-left: 250px;
+      padding: 2rem 3rem;
+      transition: margin-left 0.3s ease;
+      min-height: 100vh;
+    }
+
+    /* Header (optional) */
+    header {
+      margin-bottom: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header h1 {
+      color: var(--main-color);
+      font-weight: 700;
+    }
+
+    /* Card styles */
+    .card-custom {
+      background-color: var(--card-bg);
+      border-radius: 1rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+      transition: transform 0.3s ease;
+    }
+    .card-custom:hover {
+      transform: translateY(-5px);
+    }
+    .card-icon {
+      font-size: 2.5rem;
+      color: var(--main-color);
+    }
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 700;
+      margin: 0;
+    }
+    .stat-label {
+      font-weight: 600;
+      color: #6c757d;
+    }
+
+    /* Section title */
+    .section-title {
+      color: var(--main-color);
+      font-weight: 700;
+      margin-bottom: 1rem;
+      font-size: 1.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* Responsive Sidebar toggle button */
+    #sidebarToggle {
+      display: none;
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      z-index: 1100;
+      background-color: var(--main-color);
+      border: none;
+      color: white;
+      padding: 0.5rem 0.75rem;
+      border-radius: 5px;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      transition: background-color 0.3s ease;
+    }
+    #sidebarToggle:hover {
+      background-color: #a71d2a;
+    }
+
+    /* Mobile & tablet */
+    @media (max-width: 991.98px) {
+      #sidebar {
+        transform: translateX(-260px);
+      }
+      header h1{
+        margin-left: 15%;
+      }
+      #sidebar.active {
+        transform: translateX(0);
+      }
+      #content {
+        margin-left: 0;
+        padding: 1rem 1.5rem;
+      }
+      #sidebarToggle {
+        display: block;
+      }
+      body.sidebar-open {
+        overflow: hidden;
+      }
+    }
+
+    /* Grid layout for dashboard widgets */
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    /* Tables responsive */
+    .table-responsive {
+      overflow-x: auto;
+    }
+
+  </style>
 </head>
 <body>
-<form action="{{ route('formations.store') }}" method="POST">
-    @csrf
-    <input type="text" name="titre" placeholder="Titre"><br>
-    <textarea name="description" placeholder="Description"></textarea><br>
-    <select name="categorie_id">
-        @foreach($categories as $cat)
-            <option value="{{ $cat->id }}">{{ $cat->nom }}</option>
-        @endforeach
-    </select><br>
-    <button type="submit">Créer</button>
-</form>
-</form>
+
+<button id="sidebarToggle" aria-label="Toggle menu">
+  <i class="fas fa-bars"></i>
+</button>
+
+<nav id="sidebar" aria-label="Sidebar Navigation">
+  <h4><i class="fa fa-cogs me-2"></i>Admin Panel</h4>
+  <a href="#stats" class="nav-link"><i class="fas fa-chart-bar"></i> Statistiques</a>
+  <a href="{{ route('evenements.index') }}" class="nav-link"><i class="fa fa-calendar-alt"></i>Événements</a>
+  <a href="{{ route('sponsors.index') }}" class="nav-link"><i class="fa fa-handshake"></i>Sponsors</a>
+  <a href="{{ route('formations.create')}}" class="nav-link active"><i class="fa fa-store"></i>Formations</a>
+  <a href="ajouter_intervenant.php" class="nav-link"><i class="fa fa-user"></i>Intervenants</a>
+  <a href="#users" class="nav-link"><i class="fas fa-users"></i> Utilisateurs</a>
+  <a href="{{ route('categories.index') }}" class="nav-link"><i class="fa fa-store"></i>Categorie</a>
+  <a href="#content" class="nav-link"><i class="fas fa-folder-open"></i> Contenus</a>
+  <a href="#messages" class="nav-link"><i class="fas fa-envelope"></i> Messages</a>
+  <a href="#calendar" class="nav-link"><i class="fas fa-calendar-alt"></i> Calendrier</a>
+  <a href="#logs" class="nav-link"><i class="fas fa-history"></i> Historique</a>
+  <a href="#settings" class="nav-link"><i class="fas fa-cogs"></i> Paramètres</a>
+  <a href="index.php" class="nav-link"><i class="fa fa-arrow-left"></i>Deconnexion</a>
+</nav>
+
+<main id="content" tabindex="-1">
+
+
+  <section id="add-formation" class="mb-5">
+    <h2 class="section-title"><i class="fas fa-plus-circle"></i> Ajouter une Nouvelle Formation</h2>
+    <div class="card card-custom p-4">
+      <form action="{{ route('formations.store') }}" method="POST">
+        @csrf
+        <div class="mb-3">
+          <label for="titre" class="form-label">Titre de la Formation</label>
+          <input type="text" class="form-control" id="titre" name="titre" placeholder="Entrez le titre de la formation" required>
+        </div>
+        <div class="mb-3">
+          <label for="description" class="form-label">Description</label>
+          <textarea class="form-control" id="description" name="description" rows="5" placeholder="Décrivez la formation en détail" required></textarea>
+        </div>
+        <div class="mb-4">
+          <label for="categorie_id" class="form-label">Catégorie</label>
+          <select class="form-select" id="categorie_id" name="categorie_id" required>
+            <option selected disabled>Sélectionnez une catégorie</option>
+            @foreach($categories as $cat)
+                <option value="{{ $cat->id }}">{{ $cat->nom }}</option>
+            @endforeach
+          </select>
+        </div>
+        <button type="submit" class="btn btn-danger"><i class="fas fa-save me-2"></i> Créer la Formation</button>
+      </form>
+    </div>
+  </section>
+
+  </main>
+
+<script>
+  const sidebar = document.getElementById('sidebar');
+  const sidebarToggle = document.getElementById('sidebarToggle');
+  const body = document.body;
+
+  sidebarToggle.addEventListener('click', () => {
+    sidebar.classList.toggle('active');
+    body.classList.toggle('sidebar-open');
+  });
+
+  // Close the sidebar if clicking outside (mobile)
+  document.addEventListener('click', (e) => {
+    if (window.innerWidth < 992 && !sidebar.contains(e.target) && !sidebarToggle.contains(e.target)) {
+      sidebar.classList.remove('active');
+      body.classList.remove('sidebar-open');
+    }
+  });
+
+  // Chart.js scripts are not strictly needed for this specific form page,
+  // but keeping them if this page is part of a larger dashboard rendering.
+  // If this is a standalone page, you can remove them to reduce load.
+
+  // Chart.js Statistiques (example, if you want to include charts on this page)
+  /*
+  const ctxStats = document.getElementById('statChart');
+  if (ctxStats) { // Check if the element exists before trying to get context
+      new Chart(ctxStats.getContext('2d'), {
+          type: 'bar',
+          data: {
+              labels: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin'],
+              datasets: [{
+                  label: 'Nouveaux Utilisateurs',
+                  data: [50, 80, 30, 70, 110, 90],
+                  backgroundColor: 'var(--main-color)',
+                  borderRadius: 5,
+                  barPercentage: 0.6
+              }]
+          },
+          options: {
+              responsive: true,
+              scales: {
+                  y: { beginAtZero: true, ticks: { stepSize: 20 } }
+              },
+              plugins: {
+                  legend: { display: true, labels: { color: '#333', font: { weight: 'bold' } } }
+              }
+          }
+      });
+  }
+  */
+
+  // Chart.js Répartition rôles (camembert) (example)
+  /*
+  const ctxRoles = document.getElementById('rolesChart');
+  if (ctxRoles) {
+      new Chart(ctxRoles.getContext('2d'), {
+          type: 'doughnut',
+          data: {
+              labels: ['Admin', 'Modérateurs', 'Utilisateurs'],
+              datasets: [{
+                  data: [5, 15, 80],
+                  backgroundColor: ['#c82333', '#e5534b', '#f8a5a0'],
+                  hoverOffset: 10
+              }]
+          },
+          options: {
+              responsive: true,
+              plugins: {
+                  legend: { position: 'bottom', labels: { font: { weight: 'bold' } } }
+              }
+          }
+      });
+  }
+  */
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

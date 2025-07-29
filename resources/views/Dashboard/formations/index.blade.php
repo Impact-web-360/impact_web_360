@@ -1,1 +1,0 @@
-<button><a href="{{ route('formations.create')}}">voir</a></button>
