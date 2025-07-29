@@ -638,13 +638,21 @@
                                                     <span class="text-primary fw-bold fs-5">${{ number_format($formation->price, 0, ',', '.') }}</span>
                                                 </div>
                                             </div>
+                                            <span class="text-primary fw-bold fs-6">{{ number_format($formation->price, 0, ',', '.') }}FCFA</span>  
                                         </div>
                                     </div>
                                 @empty
+<<<<<<< HEAD
                                     <div class="col-12 text-center text-secondary py-5">
                                         <i class="fas fa-box-open fa-3x mb-3"></i>
                                         <p>Aucune formation trouvée pour cette catégorie, ou aucune formation n'a été ajoutée pour le moment.</p>
                                     </div>
+=======
+                                <div class="col-12 text-center text-secondary py-5 ">
+                                    <i class="fas fa-box-open fa-3x mb-3"></i>
+                                    <p>Aucune formation trouvée pour cette catégorie, ou aucune formation n'a été ajoutée pour le moment.</p>
+                                </div>
+>>>>>>> 92ab3102f836a5301231ea7de0eb1fda6b15425e
                                 @endforelse
                             </div>
                         </div>

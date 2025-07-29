@@ -45,7 +45,6 @@ class CategorieController extends Controller //
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            // autres validations si besoin
         ]);
 
         $categorie = Categorie::findOrFail($id);
@@ -57,9 +56,15 @@ class CategorieController extends Controller //
     }
 
 
-    public function destroy(Categorie $categorie) // Changé de Category $category à Categorie $categorie
+    public function destroy(Categorie $categorie)
     {
-        $categorie->delete(); // Changé $category à $categorie
-        return redirect()->route('Dashboard.categories.index')->with('success', 'Catégorie supprimée avec succès!');
+        $categorie->delete();
+        return redirect()->route('Dashboard.categories.index')
+            ->with('success', 'Catégorie supprimée avec succès!');
     }
+<<<<<<< HEAD
 }
+=======
+
+}
+>>>>>>> 92ab3102f836a5301231ea7de0eb1fda6b15425e
