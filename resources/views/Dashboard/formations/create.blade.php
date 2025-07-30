@@ -252,11 +252,6 @@
                 <label for="price" class="form-label text-dark">Prix (FCFA)</label>
                 <input type="number" step="0.01" class="form-control" id="price" name="price" value="{{ old('price') }}" required>
             </div>
-            <div class="mb-3">
-                <label for="rating" class="form-label text-dark">Note globale (sur 5)</label>
-                <input type="number" step="0.1" min="0" max="5" class="form-control" id="rating" name="rating" value="{{ old('rating', 0.0) }}">
-                <div class="form-text text-secondary">Ex: 4.5.</div>
-            </div>
 
             <hr class="my-4">
             <h4 class="mb-3 text-dark">Informations sur le Mentor</h4>
@@ -273,15 +268,6 @@
                 <label for="mentor_avatar" class="form-label text-dark">Avatar du Mentor</label>
                 <input type="file" class="form-control" id="mentor_avatar" name="mentor_avatar" accept="image/*">
                 <div class="form-text text-secondary">Taille max : 2MB. Formats : JPG, PNG, GIF, SVG.</div>
-            </div>
-            <div class="mb-3">
-                <label for="mentor_rating" class="form-label text-dark">Note du Mentor (sur 5)</label>
-                <input type="number" step="0.1" min="0" max="5" class="form-control" id="mentor_rating" name="mentor_rating" value="{{ old('mentor_rating', 0.0) }}">
-                <div class="form-text text-secondary">Ex: 4.8.</div>
-            </div>
-            <div class="mb-3">
-                <label for="mentor_reviews_count" class="form-label text-dark">Nombre d'avis du Mentor</label>
-                <input type="number" min="0" class="form-control" id="mentor_reviews_count" name="mentor_reviews_count" value="{{ old('mentor_reviews_count', 0) }}">
             </div>
             <div class="mb-3">
                 <label for="mentor_bio" class="form-label text-dark">Biographie du Mentor</label>

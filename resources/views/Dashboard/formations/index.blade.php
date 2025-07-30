@@ -103,13 +103,10 @@
                     <th>Mentor</th>
                     <th>Titre Mentor</th>
                     <th>Avatar Mentor</th>
-                    <th>Note Mentor</th>
-                    <th>Avis Mentor</th>
                     <th>Objectifs</th>
                     <th>Outils</th>
                     <th>Vidéos</th>
                     <th>Prix</th>
-                    <th>Note</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -128,8 +125,6 @@
                                 <span class="text-muted">N/A</span>
                             @endif
                         </td>
-                        <td>{{ number_format($formation->mentor_rating ?? 0, 1) }}/5</td>
-                        <td>{{ $formation->mentor_reviews_count ?? 0 }}</td>
                         <td>
                             @if ($formation->objectives && count($formation->objectives) > 0)
                                 <ul class="compact-list">
@@ -153,8 +148,7 @@
                             @endif
                         </td>
                         <td>{{ $formation->total_videos ?? 0 }}</td>
-                        <td>${{ number_format($formation->price, 0, ',', '.') }}</td>
-                        <td>{{ number_format($formation->rating ?? 0, 1) }}</td>
+                        <td>{{ number_format($formation->price, 0, ',', '.') }}FCFA</td>
                         <td class="actions-btn-group">
                             <a href="{{ route('Dashboard.formations.edit', $formation->id) }}" class="btn btn-sm btn-warning">Modifier</a>
                             <form action="{{ route('Dashboard.formations.destroy', $formation->id) }}" method="POST" style="display:inline-block;">

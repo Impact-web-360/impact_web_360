@@ -286,14 +286,9 @@
             color: var(--text-color-light);
             border: none;
             border-radius: 0.5rem;
-            padding: 0.75rem 1.5rem;
-            font-weight: 600;
+            padding: 0.4rem 3rem;
+            font-weight: 500;
             transition: background-color 0.3s ease;
-        }
-
-        .btn-add-to-cart:hover {
-            background-color: darken(red, 10%); /* Darken primary color */
-            color: var(--text-color-light);
         }
 
         /* About Mentor Section */
@@ -655,13 +650,13 @@
                                     <p><span class="value">{{ is_array($formation->tools) ? count($formation->tools) : $formation->tools->count() }}</span> Outils</p>
                                 </div>
                             </div>
-                            <div class="price-section">
+                            <div class="price-section justify-content-center">
                                 <div>
                                     <p class="text-secondary mb-0">Prix de vente</p>
                                     <span class="price">{{ number_format($formation->price, 0, ',', '.') }} FCFA</span>
                                 </div>
-                                <button class="btn btn-add-to-cart"><i class="fas fa-shopping-bag me-2"></i> Passer à la caisse</button>
                             </div>
+                            <button class="btn btn-add-to-cart "><i class="fas fa-shopping-bag me-2"></i> Passer à la caisse</button>
                         </div>
 
                         <div class="mentor-card">
@@ -679,9 +674,6 @@
                                 </div>
                             </div>
                             <p>{{ $formation->mentor_bio ?? 'Description du mentor non disponible.' }}</p>
-                            <p class="rating">
-                                <i class="fas fa-star"></i> {{ number_format($formation->mentor_rating ?? 0, 1) }}/5 ({{ $formation->mentor_reviews_count ?? '0' }} avis)
-                            </p>
                         </div>
                     </div>
                 </div>

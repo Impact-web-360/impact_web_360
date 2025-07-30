@@ -624,19 +624,6 @@
                                                 <h5 class="card-title text-white">{{ $formation->title }}</h5>
                                                 {{-- Accéder au nom de la catégorie via la relation 'categorie' --}}
                                                 <p class="card-text text-secondary mb-2">{{ $formation->mentor }} - {{ $formation->categorie->name ?? 'Non classée' }}</p>
-                                                <div class="d-flex justify-content-between align-items-center">
-                                                    <div class="star-rating">
-                                                        @for ($i = 0; $i < floor($formation->rating); $i++)
-                                                            <i class="fas fa-star text-warning"></i>
-                                                        @endfor
-                                                        @if ($formation->rating - floor($formation->rating) > 0)
-                                                            <i class="fas fa-star-half-alt text-warning"></i>
-                                                        @endif
-                                                        @for ($i = 0; $i < (5 - ceil($formation->rating)); $i++)
-                                                            <i class="fas fa-star text-secondary"></i>
-                                                        @endfor
-                                                    </div>
-                                                </div>
                                                  <span class="text-primary fw-bold fs-5">{{ number_format($formation->price, 0, ',', '.') }}FCFA</span> 
                                             </div> 
                                         </a>
