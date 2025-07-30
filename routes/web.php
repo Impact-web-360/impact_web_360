@@ -135,6 +135,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/modifier-profil', function () {
         return view('dashboard_utilisateur.modifier_profil');
     })->name('modifier_profil');
+    Route::get('/souscription', function () {
+        return view('dashboard_utilisateur.souscription');
+    })->name('souscription');
     //decouvrir
     Route::get('/decouvrir', [DiscoverController::class, 'index'])->name('decouvrir');
 

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Impact Web - Paramètres</title>
+    <title>Impact Web - Paramètres - Général Général</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -47,12 +47,36 @@
             --stars-gold: gold;
             /* Gold color for stars */
 
-            /* Specific to Settings Page */
+            /* Specific to Settings Page (including password & general sections) */
             --save-button-bg: #007bff;
             /* Blue for save button */
             --save-button-hover: #0056b3;
             --upload-area-bg: #2b2b3f;
             --upload-area-border: #4a4a60;
+            --input-group-bg: #3A3A3A;
+            /* Background for the eye icon in password fields */
+            --switch-bg-off: #4F4F4F;
+            /* Off state of the toggle switch */
+            --switch-bg-on: #34C759;
+            /* Green for on state of toggle switch */
+
+
+            /* Specific to Payment Success Page */
+            --payment-card-bg: #2C2C2C;
+            /* Slightly darker than main background for the card */
+            --payment-card-border: #3A3A3A;
+            --secondary-button-border: var(--border-color);
+
+            --primary-bg: #1A1A1A;
+            --secondary-bg: #2C2C2C;
+            --text-color: #E0E0E0;
+            --light-text-color: #B0B0B0;
+            --accent-color: #007bff; /* Bootstrap primary blue */
+            --danger-color: #DC3545; /* Bootstrap danger red */
+            --border-color: #444444;
+            --input-bg: #3A3A3A;
+            --input-border: #555555;
+            --checkbox-checked: #28A745; /* Bootstrap success green */
         }
 
         body {
@@ -75,7 +99,7 @@
             margin-left: -17rem;
             /* Hidden by default on mobile */
             transition: margin .25s ease-out;
-            width: 16rem;
+            width: 17rem;
             background-color: var(--dark-sidebar-bg) !important;
             border-right: 1px solid var(--border-color);
             position: fixed;
@@ -234,7 +258,7 @@
             padding: 1.5rem !important;
         }
 
-        /* Settings Page Specific Styles */
+        /* Settings Page General Styles (common to all settings sub-pages) */
         .settings-menu-col {
             padding-right: 20px;
             /* Space for the border-right */
@@ -285,181 +309,251 @@
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
-        .logout-item {
-            padding-top: 20px;
-            margin-top: auto;
-            /* Push to bottom if content allows */
+        .page-description {
+            color: var(--light-text-color);
+            font-size: 1rem;
+            margin-bottom: 40px;
+            line-height: 1.6;
         }
 
-        .logout-item a {
-            color: var(--primary-color) !important;
-            /* Muted red for logout */
-        }
-
-        .logout-item a:hover {
-            background-color: var(--dark-card-bg);
-            color: var(--primary-color) !important;
-            /* Primary color on hover for logout */
-        }
-
-        .profile-settings-form {
-            padding-left: 30px;
-            /* More padding on the right side */
-        }
-
-        .form-section-title {
-            color: var(--text-color-light);
-            font-size: 1.5em;
-            font-weight: 600;
-        }
-
-        .profile-card {
-            background-color: var(--dark-card-bg);
+        .card {
+            background-color: var(--secondary-bg);
             border: 1px solid var(--border-color);
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
         }
 
-        .profile-card .card-title {
-            color: var(--text-color-light);
-            font-size: 1.2em;
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-title {
+            font-size: 1.3rem;
             font-weight: 600;
-            margin-bottom: 5px;
+            color: var(--text-color);
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
         }
 
-        .profile-card .card-subtitle {
-            color: var(--text-color-secondary) !important;
-            font-size: 0.9em;
+        .form-check {
+            margin-bottom: 18px;
+            padding-left: 0; /* Remove default padding for custom layout */
+            display: flex;
+            align-items: center;
         }
 
-        .form-label-custom {
-            color: var(--text-color-secondary);
-            font-weight: 500;
-            font-size: 0.95em;
-        }
-
-        .form-control-custom {
-            background-color: var(--dark-bg);
-            /* Use darker background for input */
-            color: var(--text-color-light);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 10px 15px;
-            transition: all 0.3s ease;
-        }
-
-        .form-control-custom:focus {
-            background-color: var(--dark-bg);
-            color: var(--text-color-light);
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 0.25rem rgba(255, 0, 0, 0.25);
-            /* Primary color with transparency */
-            outline: none;
-        }
-
-        /* Profile Photo Upload */
-        .profile-photo-upload .profile-img-preview {
-            width: 100px;
-            height: 100px;
-            object-fit: cover;
-            border: 3px solid var(--primary-color);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-            animation: fadeIn 0.5s ease-out;
-        }
-
-        .upload-area {
-            flex-grow: 1;
-            border: 2px dashed var(--upload-area-border);
-            background-color: var(--upload-area-bg);
-            border-radius: 10px;
+        .form-check-input[type="radio"] {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid var(--border-color);
+            background-color: var(--input-bg);
+            margin-right: 15px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            outline: none;
+            position: relative;
+            transition: border-color 0.3s ease, background-color 0.3s ease;
+            flex-shrink: 0; /* Prevent it from shrinking */
         }
 
-        .upload-area:hover {
-            border-color: var(--primary-color);
-            background-color: rgba(255, 0, 0, 0.1);
+        .form-check-input[type="radio"]:checked {
+            border-color: var(--checkbox-checked);
+            background-color: var(--checkbox-checked);
         }
 
-        .upload-icon {
-            font-size: 2.5em;
-            color: var(--primary-color);
+        .form-check-input[type="radio"]:checked::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: white;
+            transform: translate(-50%, -50%);
+            animation: radioCheck 0.2s ease-out forwards;
         }
 
-        .upload-text {
-            font-size: 0.95em;
-            color: var(--text-color-light);
-            margin-bottom: 0;
+        @keyframes radioCheck {
+            from { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+            to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
         }
 
-        .upload-info {
-            font-size: 0.8em;
-            color: var(--text-color-secondary);
-            margin-bottom: 0;
+        .form-check-label {
+            color: var(--text-color);
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 0; /* Remove default margin */
         }
 
-        /* Save Button */
-        .btn-save {
-            background-color: var(--save-button-bg);
-            color: white;
-            border: none;
+        .form-check-label strong {
+            font-weight: 500;
+            margin-bottom: 3px;
+        }
+
+        .form-check-label span {
+            color: var(--light-text-color);
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            color: var(--light-text-color);
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .form-control {
+            background-color: var(--input-bg);
+            border: 1px solid var(--input-border);
+            color: var(--text-color);
+            padding: 12px 15px;
             border-radius: 8px;
-            padding: 12px 30px;
-            font-size: 1.1em;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            height: auto; /* Override Bootstrap default height */
         }
 
-        .btn-save:hover {
-            background-color: var(--save-button-hover);
+        .form-control::placeholder {
+            color: var(--light-text-color);
+            opacity: 0.7;
+        }
+
+        .form-control:focus {
+            background-color: var(--input-bg); /* Keep background consistent */
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25); /* Bootstrap focus color */
+            color: var(--text-color);
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+
+        .form-row .col {
+            flex: 1;
+        }
+
+        .payment-options {
+            margin-top: 30px;
+        }
+
+        .toggle-switch {
+            display: flex;
+            align-items: center;
+            margin-top: 25px;
+        }
+
+        .toggle-switch .form-check-input {
+            width: 40px;
+            height: 20px;
+            border-radius: 20px;
+            background-color: var(--input-border);
+            border: none;
+            position: relative;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-right: 12px;
+            flex-shrink: 0;
+            -webkit-appearance: none; /* Hide default checkbox */
+            -moz-appearance: none;
+            appearance: none;
+        }
+
+        .toggle-switch .form-check-input:checked {
+            background-color: var(--checkbox-checked);
+        }
+
+        .toggle-switch .form-check-input::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: white;
+            transition: left 0.3s ease;
+        }
+
+        .toggle-switch .form-check-input:checked::after {
+            left: calc(100% - 18px); /* 40px - 2px padding - 16px width = 22px from left. so 40-22=18 */
+        }
+
+        .toggle-switch label {
+            font-size: 1rem;
+            color: var(--text-color);
+            margin-bottom: 0;
+            cursor: pointer;
+            line-height: 1.4;
+        }
+
+        .toggle-switch label span {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--light-text-color);
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 40px;
+            padding-top: 25px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .btn-cancel {
+            color: var(--danger-color);
+            background: none;
+            border: none;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: color 0.3s ease, transform 0.2s ease;
+        }
+
+        .btn-cancel:hover {
+            color: #ff6347; /* Slightly brighter red */
             transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
         }
 
-
-        /* Animations */
-        .animation-fade-in {
-            animation: fadeIn 0.6s ease-out forwards;
-            opacity: 0;
-            /* Starts hidden */
+        .btn-subscribe {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
         }
 
-        .animation-slide-in-up {
-            animation: slideInUp 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
-            opacity: 0;
-            /* Starts hidden */
+        .btn-subscribe:hover {
+            background-color: #0056b3; /* Darker blue */
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 123, 255, 0.4);
         }
 
-        /* Keyframes for animations */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(15px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes slideInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-
-        /* Responsive Adjustments */
+        /* Responsive adjustments */
         @media (min-width: 992px) {
-            #sidebar-wrapper {
+           #sidebar-wrapper {
                 margin-left: 0;
                 /* Sidebar visible on large screens */
                 position: relative;
@@ -477,45 +571,33 @@
                 display: none !important;
                 /* Hamburger button hidden on desktop */
             }
-        }
-
-        @media (max-width: 991.98px) {
-            /* Sidebar is hidden by default due to margin-left: -17rem; */
-            /* #wrapper.toggled takes care of showing it. */
-
-            #page-content-wrapper {
-                width: 100%;
+            .page-title {
+                font-size: 1.8rem;
             }
-
-            .navbar h2 {
-                font-size: 1.5rem;
+            .page-description {
+                font-size: 0.9rem;
             }
-
-            .settings-menu-col {
-                border-right: none;
-                /* Remove border on smaller screens */
-                padding-right: 15px;
-                margin-bottom: 30px;
-                /* Add space below menu */
+            .form-row {
+                flex-direction: column;
+                gap: 0;
             }
-
-            .profile-settings-form {
-                padding-left: 15px;
-                /* Adjust padding */
-            }
-
-            #sidebar-wrapper {
-                position: absolute;
+            .form-check-input[type="radio"] {
+                margin-left: 5px;
             }
         }
 
-        @media (max-width: 767.98px) {
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column; /* Stack sidebar and content */
+            }
             .navbar-collapse {
                 display: none !important;
                 /* Hide notification/user icons on very small screens */
             }
 
             .settings-menu-col,
+            .general-settings-form,
+            .password-settings-form,
             .profile-settings-form {
                 width: 100%;
                 /* Full width on smaller screens */
@@ -525,10 +607,28 @@
 
             #sidebar-wrapper {
                 position: absolute;
+                /* Allow flow on desktop */
+            }
+            .card {
+                padding: 20px;
+            }
+            .action-buttons {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .btn-subscribe {
+                width: 100%;
+                text-align: center;
+            }
+            .btn-cancel {
+                margin-top: 10px;
+            }
+            .form-check-input[type="radio"] {
+                margin-left: 5px;
             }
         }
 
-        @media (max-width: 575.98px) {
+        @media (max-width: 576px) {
             .sidebar-promo {
                 margin-left: 0.5rem;
                 margin-right: 0.5rem;
@@ -547,7 +647,27 @@
             .upload-area {
                 width: 100%;
             }
+            .page-title {
+                font-size: 1.5rem;
+            }
+            .card-title {
+                font-size: 1.1rem;
+            }
+            .form-check-label {
+                font-size: 1rem;
+            }
+            .form-check-label span {
+                font-size: 0.85rem;
+            }
+            .form-group label {
+                font-size: 0.85rem;
+            }
+            .form-check-input[type="radio"] {
+                margin-left: 5px;
+            }
         }
+
+        
     </style>
 </head>
 
@@ -630,10 +750,10 @@
                         <ul class="list-unstyled settings-menu">
                             <li class="settings-menu-title">Profil de l'entreprise</li>
                             <li><a href="{{ route('parametres') }}"><i class="fas fa-cog me-2"></i> Général général</a></li>
-                            <li><a href="{{ route('modifier profil') }}" class="active"><i class="fas fa-user-edit me-2"></i> Modifier le profil</a></li>
+                            <li><a href="{{ route('modifier profil') }}"><i class="fas fa-user-edit me-2"></i> Modifier le profil</a></li>
                             <li><a href="{{ route('changer mot de passe') }}"><i class="fas fa-key me-2"></i> Changer le mot de passe</a></li>
                             <li><a href="{{ route('notification') }}"><i class="fas fa-bell me-2"></i> Notification</a></li>
-                            <li><a href="{{ route('souscription') }}"><i class="fas fa-file-invoice-dollar me-2"></i> Souscription à un abonnement</a></li>
+                            <li><a href="{{ route('souscription') }}" class="active"><i class="fas fa-file-invoice-dollar me-2"></i> Souscription à un abonnement</a></li>
 
                             <li class="settings-menu-title mt-4">préférence</li>
                             <li><a href="#"><i class="fas fa-language me-2"></i> Langue de travail</a></li>
@@ -642,7 +762,6 @@
                             <li class="settings-menu-title mt-4">applications</li>
                             <li><a href="#"><i class="fas fa-share-alt me-2"></i> Médias sociaux</a></li>
                             <li><a href="#"><i class="fas fa-link me-2"></i> Intégration des applications</a></li>
-
 
                             <li class="mt-auto logout-item">
                                 <form action="{{ route('logout') }}" method="POST" id="logout-form">
@@ -655,89 +774,82 @@
                         </ul>
                     </div>
 
-                    <div class="col-md-8 col-lg-9 profile-settings-form animation-fade-in" style="animation-delay: 0.2s;">
-                        <h4 class="form-section-title mb-4">Modifier le profil</h4>
-                        @if(session('success'))
-                        <div class="alert alert-success">
-                            {{ session('success') }}
+                    <div class="col-md-8 col-lg-9 general-settings-form animation-fade-in" style="animation-delay: 0.2s;">
+                        <h1 class="page-title">Souscription à un abonnement</h1>
+                        <p class="page-description">
+                            Choisissez l'abonnement qui correspond à vos besoins. Les détails de votre souscription resteront
+                            confidentiels et pourront être modifiés à tout moment.
+                        </p>
+
+                        <div class="card mb-4 ">
+                            <h2 class="card-title">Formule d'abonnement</h2>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="subscriptionPlan" id="planGratuit" value="gratuit" checked>
+                                <label class="form-check-label" for="planGratuit">
+                                    <strong>Gratuit</strong>
+                                    <span>Accès limité aux cours</span>
+                                </label>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="subscriptionPlan" id="planStandard" value="standard">
+                                <label class="form-check-label" for="planStandard">
+                                    <strong>Standard — 9,99 €/mois</strong>
+                                    <span>Accès illimité aux cours de base</span>
+                                </label>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="subscriptionPlan" id="planPremium" value="premium">
+                                <label class="form-check-label" for="planPremium">
+                                    <strong>Premium — 19,99 €/mois</strong>
+                                    <span>Accès à tous les cours + support prioritaire</span>
+                                </label>
+                            </div>
                         </div>
-                        @endif
-                        <form method="POST" action="{{ route('profile.update') }}" enctype="multipart/form-data">
-                            @csrf
-                            @method('PUT')
 
-                            <div class="card profile-card mb-4">
-                                <div class="card-body">
-                                    <h5 class="card-title">Profil Public</h5>
-                                    <p class="card-subtitle mb-3 text-muted">Ceci sera affiché sur votre profil</p>
-                                    <div class="row mb-3 align-items-center">
-                                        <label for="name" class="col-sm-3 col-form-label form-label-custom">Nom complet</label>
-                                        <div class="col-sm-9">
-                                            <input type="text" class="form-control form-control-custom" id="name" name="nom" value="{{ old('nom', Auth::user()->nom) }}">
-                                        </div>
+                        <div class="card payment-options">
+                            <h2 class="card-title">Détails de paiement</h2>
+
+                            <div class="form-group">
+                                <label for="nomSurCarte">Nom sur la carte</label>
+                                <input type="text" class="form-control" id="nomSurCarte" placeholder="Nom complet">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="numeroCarte">Numéro de carte</label>
+                                <input type="text" class="form-control" id="numeroCarte" placeholder="XXXX XXXX XXXX XXXX">
+                            </div>
+
+                            <div class="form-row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="dateExpiration">Date d'expiration</label>
+                                        <input type="text" class="form-control" id="dateExpiration" placeholder="MM / AA">
                                     </div>
-                                    <div class="row mb-3 align-items-center">
-                                        <label for="poste" class="col-sm-3 col-form-label form-label-custom">Poste</label>
-                                        <div class="col-sm-9">
-                                            <input type="text" class="form-control form-control-custom" id="poste" name="poste" value="{{ old('poste', Auth::user()->poste) }}">
-                                        </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="codeSecurite">Code de sécurité (CVV)</label>
+                                        <input type="text" class="form-control" id="codeSecurite" placeholder="XXX">
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="card profile-card mb-4">
-                                <div class="card-body">
-                                    <h5 class="card-title">Photo de profil</h5>
-                                    <p class="card-subtitle mb-3 text-muted">Choisissez votre meilleure photo qui vous représente</p>
-                                    <div class="d-flex align-items-center profile-photo-upload">
-                                        <img src="{{ Auth::user()->image ? asset('storage/' . Auth::user()->image) : asset('logo.png') }}" alt="Photo de profil" style="max-height: 100px; max-width: 100px;" class="rounded-circle profile-img-preview me-4">
-                                        <div class="upload-area text-center py-3 px-4">
-                                            <label for="image" style="cursor: pointer;">
-                                                <i class="fas fa-upload upload-icon mb-2"></i>
-                                                <p class="upload-text">Cliquez pour télécharger ou glisser-déposer</p>
-                                                <p class="upload-info">SVG, PNG, JPG ou GIF (max 800x600px)</p>
-                                            </label>
-                                            <input type="file" name="image" id="image" accept=".jpg,.jpeg,.png,.gif,.svg" class="form-control d-none">
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="toggle-switch">
+                                <input class="form-check-input" type="checkbox" id="autoRenewalToggle" checked>
+                                <label for="autoRenewalToggle">
+                                    Activer le renouvellement automatique
+                                    <span>(vous recevez une notification avant expiration)</span>
+                                </label>
                             </div>
+                        </div>
 
-                            <div class="card profile-card mb-4">
-                                <div class="card-body">
-                                    <h5 class="card-title">Profil Social</h5>
-                                    <p class="card-subtitle mb-3 text-muted">Cela sera également affiché sur votre profil</p>
-                                    <div class="row mb-3 align-items-center">
-                                        <label for="tiktok" class="col-sm-3 col-form-label form-label-custom">Tiktok</label>
-                                        <div class="col-sm-9">
-                                            <input type="text" class="form-control form-control-custom" id="tiktok" name="tiktok" value="{{ old('tiktok', Auth::user()->tiktok) }}">
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3 align-items-center">
-                                        <label for="instagram" class="col-sm-3 col-form-label form-label-custom">Instagram</label>
-                                        <div class="col-sm-9">
-                                            <input type="text" class="form-control form-control-custom" id="instagram" name="instagram" value="{{ old('instagram', Auth::user()->instagram) }}">
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3 align-items-center">
-                                        <label for="linkedin" class="col-sm-3 col-form-label form-label-custom">LinkedIn</label>
-                                        <div class="col-sm-9">
-                                            <input type="text" class="form-control form-control-custom" id="linkedin" name="linkedin" value="{{ old('linkedin', Auth::user()->linkedin) }}">
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3 align-items-center">
-                                        <label for="facebook" class="col-sm-3 col-form-label form-label-custom">Facebook</label>
-                                        <div class="col-sm-9">
-                                            <input type="text" class="form-control form-control-custom" id="facebook" name="facebook" value="{{ old('facebook', Auth::user()->facebook) }}">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="d-flex justify-content-end mt-4">
-                                <button type="submit" class="btn btn-save">Sauvegarder</button>
-                            </div>
-                        </form>
+                        <div class="action-buttons">
+                            <button type="button" class="btn-cancel">Annuler l'abonnement</button>
+                            <button type="submit" class="btn-subscribe">Souscrire maintenant</button>
+                        </div>
                     </div>
                 </div>
             </div>

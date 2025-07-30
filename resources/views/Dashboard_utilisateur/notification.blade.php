@@ -690,7 +690,7 @@
                             <li><a href="{{ route('modifier profil') }}"><i class="fas fa-user-edit me-2"></i> Modifier le profil</a></li>
                             <li><a href="{{ route('changer mot de passe') }}"><i class="fas fa-key me-2"></i> Changer le mot de passe</a></li>
                             <li><a href="{{ route('notification') }}" class="active"><i class="fas fa-bell me-2"></i> Notification</a></li>
-                            <li><a href="#"><i class="fas fa-file-invoice-dollar me-2"></i> Souscription à un abonnement</a></li>
+                            <li><a href="{{ route('souscription') }}"><i class="fas fa-file-invoice-dollar me-2"></i> Souscription à un abonnement</a></li>
 
                             <li class="settings-menu-title mt-4">préférence</li>
                             <li><a href="#"><i class="fas fa-language me-2"></i> Langue de travail</a></li>
