@@ -619,7 +619,7 @@
                                                 @endforeach
                                             @else
                                                 <div class="module-item">
-                                                    <span class="text-secondary">Aucun module n'a été ajouté.</span>
+                                                    <span class="text-secondary">Vous n'avez pas accès aux modules.</span>
                                                     <span></span>
                                                 </div>
                                             @endif
@@ -653,10 +653,22 @@
                             <div class="price-section justify-content-center">
                                 <div>
                                     <p class="text-secondary mb-0">Prix de vente</p>
-                                    <span class="price">{{ number_format($formation->price, 0, ',', '.') }} FCFA</span>
+                                    @if ($formation->price == 0)
+                                        <span class="price free">GRATUIT</span>
+                                    @else
+                                        <span class="price">{{ number_format($formation->price, 0, ',', '.') }} FCFA</span>
+                                    @endif
                                 </div>
                             </div>
-                            <button class="btn btn-add-to-cart "><i class="fas fa-shopping-bag me-2"></i> Passer à la caisse</button>
+                            @if ($formation->price == 0)
+                                <a href="#" class="btn btn-add-to-cart">
+                                    <i class="fas fa-play-circle me-2"></i> Accéder au cours
+                                </a>
+                            @else
+                                <a href="#" class="btn btn-add-to-cart">
+                                    <i class="fas fa-shopping-bag me-2"></i> Passer à la caisse
+                                </a>
+                            @endif
                         </div>
 
                         <div class="mentor-card">

@@ -294,14 +294,14 @@
                 font-weight: 600;
                 color: var(--text-color-light);
                 margin-bottom: 0.5rem;
-                min-height: 2.8em; /* Assure une hauteur minimale pour 2 lignes de texte */
+                min-height: 2em; /* Assure une hauteur minimale pour 2 lignes de texte */
                 overflow: hidden; /* Cache le texte qui dépasse */
                 text-overflow: ellipsis; /* Ajoute des points de suspension si le texte est tronqué */
             }
 
             .course-card .card-text { /* Pour le nom du mentor */
                 color: var(--text-color-secondary);
-                font-size: 0.9rem;
+                font-size: 1rem;
                 margin-bottom: 0.75rem;
             }
 
@@ -622,10 +622,16 @@
                                             @endif
                                             <div class="card-body">
                                                 <h5 class="card-title text-white">{{ $formation->title }}</h5>
-                                                {{-- Accéder au nom de la catégorie via la relation 'categorie' --}}
-                                                <p class="card-text text-secondary mb-2">{{ $formation->mentor }} - {{ $formation->categorie->name ?? 'Non classée' }}</p>
-                                                 <span class="text-primary fw-bold fs-5">{{ number_format($formation->price, 0, ',', '.') }}FCFA</span> 
-                                            </div> 
+                                                <p class="card-text text-secondary mb-2">{{ $formation->mentor }}</p>
+                                                <p class="card-text text-secondary mb-2">{{ $formation->categorie->name ?? 'Non classée' }}</p>
+                                                
+                                                {{-- Condition pour afficher Gratuit ou le prix --}}
+                                                @if ($formation->price == 0)
+                                                    <span class="text-success fw-bold fs-5">GRATUIT</span>
+                                                @else
+                                                    <span class="text-primary fw-bold fs-5">{{ number_format($formation->price, 0, ',', '.') }} FCFA</span>
+                                                @endif
+                                            </div>
                                         </a>
                                     </div>
                                 @empty

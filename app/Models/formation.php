@@ -18,7 +18,6 @@ class Formation extends Model
         'image',
         'objectives',
         'tools',
-        'students_enrolled',
         'reviews_count',
         'price',
         'rating', 

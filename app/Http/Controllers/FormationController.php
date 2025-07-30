@@ -33,14 +33,10 @@ class FormationController extends Controller
             'objectives.*' => 'nullable|string', // Pour valider chaque élément du tableau
             'tools' => 'nullable|array',
             'tools.*' => 'nullable|string', // Pour valider chaque élément du tableau
-            'students_enrolled' => 'nullable|integer|min:0',
-            'reviews_count' => 'nullable|integer|min:0',
             'price' => 'required|numeric|min:0',
-            'rating' => 'nullable|numeric|min:0|max:5',
             'mentor' => 'nullable|string|max:255',
             'mentor_title' => 'nullable|string|max:255',
             'mentor_avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'mentor_rating' => 'nullable|numeric|min:0|max:5',
             'mentor_reviews_count' => 'nullable|integer|min:0',
             'mentor_bio' => 'nullable|string',
         ]);
@@ -88,20 +84,14 @@ class FormationController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'clear_image' => 'nullable|boolean', // Pour la case à cocher "supprimer l'image"
             'objectives' => 'nullable|array',
-            'objectives.*' => 'nullable|string',
+            'objectives.*' => 'nullable|string', // Pour valider chaque élément du tableau
             'tools' => 'nullable|array',
-            'tools.*' => 'nullable|string',
-            'students_enrolled' => 'nullable|integer|min:0',
-            'reviews_count' => 'nullable|integer|min:0',
+            'tools.*' => 'nullable|string', // Pour valider chaque élément du tableau
             'price' => 'required|numeric|min:0',
-            'rating' => 'nullable|numeric|min:0|max:5',
             'mentor' => 'nullable|string|max:255',
             'mentor_title' => 'nullable|string|max:255',
             'mentor_avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'clear_mentor_avatar' => 'nullable|boolean', // Pour la case à cocher "supprimer l'avatar"
-            'mentor_rating' => 'nullable|numeric|min:0|max:5',
             'mentor_reviews_count' => 'nullable|integer|min:0',
             'mentor_bio' => 'nullable|string',
         ]);
