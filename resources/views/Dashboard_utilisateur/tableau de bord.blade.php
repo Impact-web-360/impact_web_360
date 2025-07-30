@@ -413,7 +413,7 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-white d-flex align-items-center" href="{{ route('parametres') }}">
-                                    <i class="fa fa-user"></i>
+                                    <img src="{{ Auth::user()->image ? asset('storage/' . Auth::user()->image) : asset('logo.png') }}" alt="Photo de profil" style="max-height: 50px;" class="rounded-circle profile-img-preview me-4">
                                 </a>
                             </li>
                         </ul>

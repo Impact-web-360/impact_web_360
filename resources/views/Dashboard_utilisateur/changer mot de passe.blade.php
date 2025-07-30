@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,34 +11,30 @@
     <style>
         /* Variables CSS pour faciliter la gestion des couleurs et espacements */
         :root {
-            --primary-color: #FF0000; /* Rouge vif pour correspondre à la maquette */
-            --secondary-color: #6c757d; /* Gris de Bootstrap pour les textes secondaires */
-            --dark-bg: #1A1A1A; /* Fond principal plus sombre */
-            --dark-sidebar-bg: #212121; /* Fond de la sidebar */
-            --dark-navbar-bg: #212121; /* Fond de la navbar (same as sidebar for consistency) */
-            --dark-card-bg: #2C2C2C; /* Fond des cartes et sections */
-            --border-color: #3A3A3A; /* Bordures subtiles */
-            --text-color-light: #F8F9FA; /* Texte principal clair */
-            --text-color-secondary: #B0B0B0; /* Texte secondaire, plus clair que --secondary-color */
-            --hero-section-bg-start: #3B2E74; /* Début du dégradé du hero (from Découvrir page) */
-            --hero-section-bg-end: #5A4893; /* Fin du dégradé du hero (from Découvrir page) */
-            --hero-text-color: #FFFFFF; /* Couleur du texte dans le hero (from Découvrir page) */
-            --hero-circle-color-1: rgba(100, 80, 150, 0.4); /* Cercles de fond du hero (from Découvrir page) */
-            --hero-circle-color-2: rgba(130, 110, 180, 0.4); /* (from Découvrir page) */
-            --button-active-bg: var(--primary-color); /* Couleur de fond des boutons actifs */
-            --button-inactive-bg: var(--dark-card-bg); /* Couleur de fond des boutons inactifs */
+            --primary-color: #FF0000;
+            --secondary-color: #6c757d;
+            --dark-bg: #1A1A1A;
+            --dark-sidebar-bg: #212121;
+            --dark-navbar-bg: #212121;
+            --dark-card-bg: #2C2C2C;
+            --border-color: #3A3A3A;
+            --text-color-light: #F8F9FA;
+            --text-color-secondary: #B0B0B0;
+            --hero-section-bg-start: #3B2E74;
+            --hero-section-bg-end: #5A4893;
+            --hero-text-color: #FFFFFF;
+            --hero-circle-color-1: rgba(100, 80, 150, 0.4);
+            --hero-circle-color-2: rgba(130, 110, 180, 0.4);
+            --button-active-bg: var(--primary-color);
+            --button-inactive-bg: var(--dark-card-bg);
             --button-text-inactive: var(--text-color-secondary);
-            --stars-gold: gold; /* Gold color for stars */
-
-            /* Specific to Settings Page (including password section) */
-            --save-button-bg: #007bff; /* Blue for save button */
+            --stars-gold: gold;
+            --save-button-bg: #007bff;
             --save-button-hover: #0056b3;
             --upload-area-bg: #2b2b3f;
             --upload-area-border: #4a4a60;
-            --input-group-bg: #3A3A3A; /* Background for the eye icon in password fields */
-
-            /* Specific to Payment Success Page */
-            --payment-card-bg: #2C2C2C; /* Slightly darker than main background for the card */
+            --input-group-bg: #3A3A3A;
+            --payment-card-bg: #2C2C2C;
             --payment-card-border: #3A3A3A;
             --secondary-button-border: var(--border-color);
         }
@@ -46,8 +43,8 @@
             overflow-x: hidden;
             background-color: var(--dark-bg);
             color: var(--text-color-light);
-            font-family:Arial, sans-serif; 
-            font-weight: 400; /* Poids de police par défaut */
+            font-family: Arial, sans-serif;
+            font-weight: 400;
         }
 
         /* Base layout with flexbox */
@@ -58,19 +55,18 @@
         /* Sidebar Styling */
         #sidebar-wrapper {
             min-height: 100vh;
-            margin-left: -17rem; /* Hidden by default on mobile */
+            margin-left: -17rem;
             transition: margin .25s ease-out;
             width: 16rem;
             background-color: var(--dark-sidebar-bg) !important;
             border-right: 1px solid var(--border-color);
-            position: fixed; /* Fixed sidebar on screen */
-            z-index: 1030; /* Above content */
-            overflow-y: auto; /* Enable scrolling for long content */
-            scrollbar-width: thin; /* Firefox */
-            scrollbar-color: var(--primary-color) var(--dark-sidebar-bg); /* Firefox */
+            position: fixed;
+            z-index: 1030;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary-color) var(--dark-sidebar-bg);
         }
 
-        /* Webkit scrollbar for Chrome/Safari */
         #sidebar-wrapper::-webkit-scrollbar {
             width: 8px;
         }
@@ -96,8 +92,8 @@
         }
 
         #sidebar-wrapper .list-group {
-            width: 92%; /* Adjusted for inset active item */
-            margin: 0 auto; /* Center the list group */
+            width: 92%;
+            margin: 0 auto;
         }
 
         #sidebar-wrapper .list-group-item {
@@ -106,14 +102,14 @@
             color: var(--text-color-secondary);
             border: none;
             transition: background-color 0.3s ease, color 0.3s ease;
-            border-radius: 5px; /* Consistent border-radius for all items */
+            border-radius: 5px;
         }
 
         #sidebar-wrapper .list-group-item.active {
             background-color: var(--primary-color) !important;
             color: var(--text-color-light) !important;
             border-radius: 5px;
-            margin: 0px; /* Inset effect */
+            margin: 0px;
         }
 
         #sidebar-wrapper .list-group-item:hover {
@@ -125,7 +121,7 @@
             font-size: 0.8rem;
             text-transform: uppercase;
             color: var(--text-color-secondary) !important;
-            padding: 10px 20px 5px; /* Adjust padding to align with links */
+            padding: 10px 20px 5px;
         }
 
         .sidebar-promo {
@@ -157,15 +153,14 @@
 
         /* Page Content */
         #page-content-wrapper {
-            min-width: 100vw; /* Takes full width initially */
+            min-width: 100vw;
             background-color: var(--dark-bg);
-            transition: margin-left .25s ease-out; /* For push effect */
-            padding-left: 0; /* Remove default padding */
+            transition: margin-left .25s ease-out;
+            padding-left: 0;
         }
 
-        /* Adjust content position when sidebar is open on mobile */
         #wrapper.toggled #page-content-wrapper {
-            margin-left: 17rem; /* Pushes content to the right when sidebar is visible */
+            margin-left: 17rem;
         }
 
         /* Top Navbar */
@@ -174,7 +169,7 @@
         }
 
         .bg-dark-secondary {
-            background-color: var(--dark-navbar-bg) !important; /* Use same color as sidebar for consistency */
+            background-color: var(--dark-navbar-bg) !important;
         }
 
         /* Dropdown menus in Navbar */
@@ -204,9 +199,9 @@
             padding: 1.5rem !important;
         }
 
-        /* Settings Page General Styles (including the password page sub-section) */
+        /* Settings Page General Styles */
         .settings-menu-col {
-            padding-right: 20px; /* Space for the border-right */
+            padding-right: 20px;
             border-right: 1px solid var(--border-color);
         }
 
@@ -240,13 +235,13 @@
         }
 
         .settings-menu li a:hover {
-            background-color: var(--dark-card-bg); /* Use card background for hover */
+            background-color: var(--dark-card-bg);
             color: var(--primary-color);
             transform: translateX(3px);
         }
 
         .settings-menu li a.active {
-            background-color: var(--dark-card-bg); /* Use card background for active */
+            background-color: var(--dark-card-bg);
             color: var(--primary-color);
             font-weight: 600;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -254,21 +249,21 @@
 
         .logout-item {
             padding-top: 20px;
-            margin-top: auto; /* Push to bottom if content allows */
+            margin-top: auto;
         }
 
         .logout-item a {
-            color: var(--secondary-color) !important; /* Muted red for logout */
+            color: var(--primary-color) !important;
         }
 
         .logout-item a:hover {
             background-color: var(--dark-card-bg);
-            color: var(--primary-color) !important; /* Primary color on hover for logout */
+            color: var(--primary-color) !important;
         }
 
         .password-settings-form,
-        .profile-settings-form { /* Apply common padding to both forms */
-            padding-left: 30px; /* More padding on the right side */
+        .profile-settings-form {
+            padding-left: 30px;
         }
 
         .form-section-title {
@@ -278,7 +273,7 @@
         }
 
         .password-card,
-        .profile-card { /* Common styling for card-like sections */
+        .profile-card {
             background-color: var(--dark-card-bg);
             border: 1px solid var(--border-color);
             border-radius: 10px;
@@ -306,7 +301,7 @@
         }
 
         .form-control-custom {
-            background-color: var(--dark-bg); /* Use darker background for input */
+            background-color: var(--dark-bg);
             color: var(--text-color-light);
             border: 1px solid var(--border-color);
             border-radius: 8px;
@@ -318,34 +313,44 @@
             background-color: var(--dark-bg);
             color: var(--text-color-light);
             border-color: var(--primary-color);
-            box-shadow: 0 0 0 0.25rem rgba(255, 0, 0, 0.25); /* Primary color with transparency */
+            box-shadow: 0 0 0 0.25rem rgba(255, 0, 0, 0.25);
             outline: none;
         }
 
-        /* Password input group with eye icon */
+        /* Password input group with eye icon - MODIFIED FOR BETTER FUNCTIONALITY */
+        .password-input-group {
+            position: relative;
+        }
+
         .password-input-group .form-control-custom {
-            border-right: none; /* Remove right border for seamless look with icon */
-            border-top-right-radius: 0;
-            border-bottom-right-radius: 0;
+            padding-right: 45px;
+            /* Space for eye icon */
+            border-radius: 8px;
+            width: 100%;
         }
 
         .password-input-group .input-group-text {
-            background-color: var(--input-group-bg);
-            border: 1px solid var(--border-color);
-            border-left: none; /* Remove left border */
-            border-top-right-radius: 8px;
-            border-bottom-right-radius: 8px;
-            color: var(--text-color-secondary);
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 100%;
+            background-color: transparent;
+            border: none;
             cursor: pointer;
-            padding: 10px 15px;
-            transition: background-color 0.3s ease;
+            z-index: 5;
+            width: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-color-secondary);
+            transition: color 0.3s ease;
         }
 
         .password-input-group .input-group-text:hover {
-            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--primary-color);
         }
 
-        /* Profile Photo Upload (from previous settings page) */
+        /* Profile Photo Upload */
         .profile-photo-upload .profile-img-preview {
             width: 100px;
             height: 100px;
@@ -386,7 +391,7 @@
             margin-bottom: 0;
         }
 
-        /* Save Button (common for settings forms) */
+        /* Save Button */
         .btn-save {
             background-color: var(--save-button-bg);
             color: white;
@@ -408,81 +413,96 @@
         /* Animations */
         .animation-fade-in {
             animation: fadeIn 0.6s ease-out forwards;
-            opacity: 0; /* Starts hidden */
+            opacity: 0;
         }
 
         .animation-slide-in-up {
             animation: slideInUp 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
-            opacity: 0; /* Starts hidden */
+            opacity: 0;
         }
 
-        /* Keyframes for animations */
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         @keyframes slideInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
 
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
         /* Responsive Adjustments */
         @media (min-width: 992px) {
             #sidebar-wrapper {
-                margin-left: 0; /* Sidebar visible on large screens */
-                position: relative; /* Allow flow on desktop */
+                margin-left: 0;
+                position: relative;
             }
+
             #page-content-wrapper {
                 min-width: 0;
                 width: 100%;
-                margin-left: 0; /* Reset margin for desktop */
+                margin-left: 0;
             }
+
             #sidebarToggle {
-                display: none !important; /* Hamburger button hidden on desktop */
+                display: none !important;
             }
         }
 
         @media (max-width: 991.98px) {
-            /* Sidebar is hidden by default due to margin-left: -17rem; */
-            /* #wrapper.toggled takes care of showing it. */
-
             #page-content-wrapper {
                 width: 100%;
             }
+
             .navbar h2 {
                 font-size: 1.5rem;
             }
 
             .settings-menu-col {
-                border-right: none; /* Remove border on smaller screens */
+                border-right: none;
                 padding-right: 15px;
-                margin-bottom: 30px; /* Add space below menu */
+                margin-bottom: 30px;
             }
 
             .password-settings-form,
             .profile-settings-form {
-                padding-left: 15px; /* Adjust padding */
+                padding-left: 15px;
             }
+
             #sidebar-wrapper {
-                position: absolute; /* Allow flow on desktop */
+                position: absolute;
             }
         }
 
         @media (max-width: 767.98px) {
             .navbar-collapse {
-                display: none !important; /* Hide notification/user icons on very small screens */
+                display: none !important;
             }
+
             .settings-menu-col,
             .password-settings-form,
             .profile-settings-form {
-                width: 100%; /* Full width on smaller screens */
+                width: 100%;
                 padding-left: 15px;
                 padding-right: 15px;
             }
+
             #sidebar-wrapper {
-                position: absolute; /* Allow flow on desktop */
+                position: absolute;
             }
         }
 
@@ -491,20 +511,24 @@
                 margin-left: 0.5rem;
                 margin-right: 0.5rem;
             }
+
             .profile-photo-upload {
                 flex-direction: column;
                 align-items: center !important;
             }
+
             .profile-img-preview {
                 margin-bottom: 20px;
                 margin-right: 0 !important;
             }
+
             .upload-area {
                 width: 100%;
             }
         }
     </style>
 </head>
+
 <body>
     <div class="d-flex" id="wrapper">
         <div class="bg-dark sidebar" id="sidebar-wrapper">
@@ -513,7 +537,7 @@
             </div>
             <div class="list-group list-group-flush">
                 <div class="sidebar-section-title text-secondary px-3 pt-3 pb-1">GENERAL</div>
-                <a href="{{ route('dashboard') }}" class="list-group-item list-group-item-action bg-dark text-white active">
+                <a href="{{ route('dashboard') }}" class="list-group-item list-group-item-action bg-dark text-white">
                     <i class="fas fa-home me-2"></i> Tableau de bord
                 </a>
                 <a href="{{ route('calendrier') }}" class="list-group-item list-group-item-action bg-dark text-white">
@@ -538,7 +562,7 @@
                 <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
                     <i class="fas fa-question-circle me-2"></i> Soutien
                 </a>
-                <a href="{{ route('parametres') }}" class="list-group-item list-group-item-action bg-dark text-white">
+                <a href="{{ route('parametres') }}" class="list-group-item list-group-item-action bg-dark text-white active">
                     <i class="fas fa-cog me-2"></i> Paramètre
                 </a>
 
@@ -570,7 +594,7 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-white d-flex align-items-center" href="{{ route('parametres') }}">
-                                    <i class="fa fa-user"></i>
+                                    <img src="{{ Auth::user()->image ? asset('storage/' . Auth::user()->image) : asset('logo.png') }}" alt="Photo de profil" style="max-height: 50px;" class="rounded-circle profile-img-preview me-4">
                                 </a>
                             </li>
                         </ul>
@@ -583,10 +607,10 @@
                     <div class="col-md-4 col-lg-3 settings-menu-col animation-slide-in-up">
                         <ul class="list-unstyled settings-menu">
                             <li class="settings-menu-title">Profil de l'entreprise</li>
-                            <li><a href="parametre.html"><i class="fas fa-cog me-2"></i> Général général</a></li>
-                            <li><a href="modifier profil.html"><i class="fas fa-user-edit me-2"></i> Modifier le profil</a></li>
-                            <li><a href="changer mot de passe.html" class="active"><i class="fas fa-key me-2"></i> Changer le mot de passe</a></li>
-                            <li><a href="notification.html"><i class="fas fa-bell me-2"></i> Notification</a></li>
+                            <li><a href="{{ route('parametres') }}"><i class="fas fa-cog me-2"></i> Général général</a></li>
+                            <li><a href="{{ route('modifier profil') }}"><i class="fas fa-user-edit me-2"></i> Modifier le profil</a></li>
+                            <li><a href="{{ route('changer mot de passe') }}" class="active"><i class="fas fa-key me-2"></i> Changer le mot de passe</a></li>
+                            <li><a href="{{ route('notification') }}"><i class="fas fa-bell me-2"></i> Notification</a></li>
                             <li><a href="#"><i class="fas fa-file-invoice-dollar me-2"></i> Souscription à un abonnement</a></li>
 
                             <li class="settings-menu-title mt-4">préférence</li>
@@ -598,7 +622,12 @@
                             <li><a href="#"><i class="fas fa-link me-2"></i> Intégration des applications</a></li>
 
                             <li class="mt-auto logout-item">
-                                <a href="#" class="text-danger"><i class="fas fa-sign-out-alt me-2"></i> Se déconnecter</a>
+                                <form action="{{ route('logout') }}" method="POST" id="logout-form">
+                                    @csrf
+                                    <a href="Déconnexion" class="text-danger" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                        <i class="fas fa-sign-out-alt me-2"></i> Se déconnecter
+                                    </a>
+                                </form>
                             </li>
                         </ul>
                     </div>
@@ -609,48 +638,64 @@
                             Pour changer votre mot de passe, veuillez remplir les champs ci-dessous. Votre mot de passe doit contenir au moins 8 caractères, il doit également inclure au moins 1 lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial.
                         </p>
 
-                        <div class="card password-card mb-4">
-                            <div class="card-body">
-                                <h5 class="card-title">Mot de passe actuel</h5>
-                                <p class="card-subtitle mb-3 text-muted">Cela nous aidera à vérifier que c'est vraiment vous</p>
-                                <div class="input-group password-input-group">
-                                    <input type="password" class="form-control form-control-custom" id="currentPassword" value="••••••••">
-                                    <span class="input-group-text toggle-password" data-target="currentPassword">
-                                        <i class="fas fa-eye-slash"></i>
-                                    </span>
+                        <form method="POST" action="{{ route('password.update') }}">
+                            @csrf
+                            @method('PUT')
+
+                            <div class="card password-card mb-4">
+                                <div class="card-body">
+                                    <h5 class="card-title">Mot de passe actuel</h5>
+                                    <p class="card-subtitle mb-3 text-muted">Cela nous aidera à vérifier que c'est vraiment vous</p>
+
+                                    @if(session('success'))
+                                    <div class="alert alert-success">{{ session('success') }}</div>
+                                    @endif
+                                    @if(session('error'))
+                                    <div class="alert alert-danger">{{ session('error') }}</div>
+                                    @endif
+
+                                    <div class="password-input-group">
+                                        <input type="password" name="current_password" id="current_password" class="form-control form-control-custom" required>
+                                        <span class="input-group-text toggle-password" data-target="current_password">
+                                            <i class="fas fa-eye-slash"></i>
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="card password-card mb-4">
-                            <div class="card-body">
-                                <h5 class="card-title">Nouveau mot de passe</h5>
-                                <p class="card-subtitle mb-3 text-muted">Suivre nos directives de mot de passe assurera une expérience de connexion forte et protégée.</p>
-                                <div class="input-group password-input-group">
-                                    <input type="password" class="form-control form-control-custom" id="newPassword" value="••••••••">
-                                    <span class="input-group-text toggle-password" data-target="newPassword">
-                                        <i class="fas fa-eye-slash"></i>
-                                    </span>
+                            <div class="card password-card mb-4">
+                                <div class="card-body">
+                                    <h5 class="card-title">Nouveau mot de passe</h5>
+                                    <p class="card-subtitle mb-3 text-muted">Suivre nos directives de mot de passe assurera une expérience de connexion forte et protégée.</p>
+                                    <div class="password-input-group">
+                                        <input type="password" name="new_password" id="new_password" class="form-control form-control-custom" required>
+                                        @error('new_password')
+                                        <small class="text-danger d-block mt-2">{{ $message }}</small>
+                                        @enderror
+                                        <span class="input-group-text toggle-password" data-target="new_password">
+                                            <i class="fas fa-eye-slash"></i>
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="card password-card mb-4">
-                            <div class="card-body">
-                                <h5 class="card-title">Confirmer le nouveau mot de passe</h5>
-                                <p class="card-subtitle mb-3 text-muted">Assurez-vous que ce mot de passe correspond au précédent</p>
-                                <div class="input-group password-input-group">
-                                    <input type="password" class="form-control form-control-custom" id="confirmPassword" value="••••••••">
-                                    <span class="input-group-text toggle-password" data-target="confirmPassword">
-                                        <i class="fas fa-eye-slash"></i>
-                                    </span>
+                            <div class="card password-card mb-4">
+                                <div class="card-body">
+                                    <h5 class="card-title">Confirmer le nouveau mot de passe</h5>
+                                    <p class="card-subtitle mb-3 text-muted">Assurez-vous que ce mot de passe correspond au précédent</p>
+                                    <div class="password-input-group">
+                                        <input type="password" name="new_password_confirmation" id="new_password_confirmation" class="form-control form-control-custom" required>
+                                        <span class="input-group-text toggle-password" data-target="new_password_confirmation">
+                                            <i class="fas fa-eye-slash"></i>
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="d-flex justify-content-end mt-4">
-                            <button class="btn btn-save">Changer le mot de passe</button>
-                        </div>
+                            <div class="d-flex justify-content-end mt-4">
+                                <button type="submit" class="btn btn-save">Sauvegarder</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -660,24 +705,35 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script>
         // Sidebar Toggle Script
-        var el = document.getElementById("wrapper");
-        var toggleButton = document.getElementById("sidebarToggle");
-
-        toggleButton.onclick = function () {
-            el.classList.toggle("toggled");
+        document.getElementById("sidebarToggle").onclick = function() {
+            document.getElementById("wrapper").classList.toggle("toggled");
         };
 
-        // Password Visibility Toggle
-        document.querySelectorAll('.toggle-password').forEach(function(toggle) {
-            toggle.addEventListener('click', function() {
-                const targetId = this.dataset.target;
-                const passwordInput = document.getElementById(targetId);
-                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-                passwordInput.setAttribute('type', type);
-                this.querySelector('i').classList.toggle('fa-eye');
-                this.querySelector('i').classList.toggle('fa-eye-slash');
+        // Enhanced Password Visibility Toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggleButtons = document.querySelectorAll('.toggle-password');
+
+            toggleButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('data-target');
+                    const passwordInput = document.getElementById(targetId);
+                    const icon = this.querySelector('i');
+
+                    if (passwordInput.type === 'password') {
+                        passwordInput.type = 'text';
+                        icon.classList.replace('fa-eye-slash', 'fa-eye');
+                    } else {
+                        passwordInput.type = 'password';
+                        icon.classList.replace('fa-eye', 'fa-eye-slash');
+                    }
+                });
+
+                // Style du curseur
+                button.style.cursor = 'pointer';
             });
         });
     </script>
 </body>
+
 </html>

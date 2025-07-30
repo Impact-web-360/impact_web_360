@@ -122,7 +122,7 @@
     <form method="POST" action="{{ route('register') }}">
       @csrf
       <div class="input-box mb-3">
-        <input type="text" class="form-control" name="name" placeholder="Entrer votre nom" required>
+        <input type="text" class="form-control" name="name" placeholder="Entrer votre nom complet" required>
         <i class="fa-regular fa-user"></i>
         @error('name') <small class="text-danger">{{ $message }}</small> @enderror
       </div>

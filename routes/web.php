@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\DashboardController;
@@ -13,6 +14,8 @@ use App\Http\Controllers\SocialAuthController;
 use App\Http\Controllers\SponsorController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\DiscoverController;
+use App\Http\Controllers\ParametresController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Requests\FormationRequest;
 
 /*
@@ -37,6 +40,35 @@ Route::get('/sponsors', [HomeController::class, 'sponsor'])->name('sponsor');
 Route::get('/intervenant', [HomeController::class, 'intervenant'])->name('intervenant');
 
 Route::get('/evenement', [HomeController::class, 'evenement'])->name('evenement');
+
+//Paramètres
+Route::get('/modifier profil', function () {
+    return view('dashboard_utilisateur.modifier profil');
+})->name('modifier profil');
+
+//Changer de mot de passe
+Route::get('/changer mot de passe', function () {
+    return view('dashboard_utilisateur.changer mot de passe');
+})->name('changer mot de passe');
+
+//Notification
+Route::get('/notification', function () {
+    return view('dashboard_utilisateur.notification');
+})->name('notification');
+
+//Profil update
+Route::post('/parametres/update', [ParametresController::class, 'update'])->name('parametres.update');
+Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update')->middleware('auth');
+Route::put('/password/update', [ProfileController::class, 'updatePassword'])->name('password.update')->middleware('auth');
+
+//Logout
+Route::post('/logout', function () {
+    Auth::logout();
+    return redirect('/login')->with('success', 'Déconnecté avec succès.');
+})->name('logout')->middleware('auth');
+
+
+
 
 
 

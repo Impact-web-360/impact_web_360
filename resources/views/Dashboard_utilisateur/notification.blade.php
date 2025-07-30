@@ -261,7 +261,7 @@
         }
 
         .logout-item a {
-            color: var(--secondary-color) !important; /* Muted red for logout */
+            color: var(--primary-color) !important; /* Muted red for logout */
         }
 
         .logout-item a:hover {
@@ -616,7 +616,7 @@
             </div>
             <div class="list-group list-group-flush">
                 <div class="sidebar-section-title text-secondary px-3 pt-3 pb-1">GENERAL</div>
-                <a href="{{ route('dashboard') }}" class="list-group-item list-group-item-action bg-dark text-white active">
+                <a href="{{ route('dashboard') }}" class="list-group-item list-group-item-action bg-dark text-white">
                     <i class="fas fa-home me-2"></i> Tableau de bord
                 </a>
                 <a href="{{ route('calendrier') }}" class="list-group-item list-group-item-action bg-dark text-white">
@@ -641,7 +641,7 @@
                 <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
                     <i class="fas fa-question-circle me-2"></i> Soutien
                 </a>
-                <a href="{{ route('parametres') }}" class="list-group-item list-group-item-action bg-dark text-white">
+                <a href="{{ route('parametres') }}" class="list-group-item list-group-item-action bg-dark text-white active">
                     <i class="fas fa-cog me-2"></i> Paramètre
                 </a>
 
@@ -673,7 +673,7 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-white d-flex align-items-center" href="{{ route('parametres') }}">
-                                    <i class="fa fa-user"></i>
+                                    <img src="{{ Auth::user()->image ? asset('storage/' . Auth::user()->image) : asset('logo.png') }}" alt="Photo de profil" style="max-height: 50px;" class="rounded-circle profile-img-preview me-4">
                                 </a>
                             </li>
                         </ul>
@@ -686,10 +686,10 @@
                     <div class="col-md-4 col-lg-3 settings-menu-col animation-slide-in-up">
                         <ul class="list-unstyled settings-menu">
                             <li class="settings-menu-title">Profil de l'entreprise</li>
-                            <li><a href="parametre.html"><i class="fas fa-cog me-2"></i> Général général</a></li>
-                            <li><a href="modifier profil.html"><i class="fas fa-user-edit me-2"></i> Modifier le profil</a></li>
-                            <li><a href="changer mot de passe.html"><i class="fas fa-key me-2"></i> Changer le mot de passe</a></li>
-                            <li><a href="notification.html" class="active"><i class="fas fa-bell me-2"></i> Notification</a></li>
+                            <li><a href="{{ route('parametres') }}"><i class="fas fa-cog me-2"></i> Général général</a></li>
+                            <li><a href="{{ route('modifier profil') }}"><i class="fas fa-user-edit me-2"></i> Modifier le profil</a></li>
+                            <li><a href="{{ route('changer mot de passe') }}"><i class="fas fa-key me-2"></i> Changer le mot de passe</a></li>
+                            <li><a href="{{ route('notification') }}" class="active"><i class="fas fa-bell me-2"></i> Notification</a></li>
                             <li><a href="#"><i class="fas fa-file-invoice-dollar me-2"></i> Souscription à un abonnement</a></li>
 
                             <li class="settings-menu-title mt-4">préférence</li>
@@ -701,7 +701,12 @@
                             <li><a href="#"><i class="fas fa-link me-2"></i> Intégration des applications</a></li>
 
                             <li class="mt-auto logout-item">
-                                <a href="#" class="text-danger"><i class="fas fa-sign-out-alt me-2"></i> Se déconnecter</a>
+                                <form action="{{ route('logout') }}" method="POST" id="logout-form">
+                                    @csrf
+                                    <a href="Déconnexion" class="text-danger" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                        <i class="fas fa-sign-out-alt me-2"></i> Se déconnecter
+                                    </a>
+                                </form>
                             </li>
                         </ul>
                     </div>

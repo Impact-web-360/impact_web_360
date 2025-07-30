@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,27 +11,45 @@
     <style>
         /* Variables CSS pour faciliter la gestion des couleurs et espacements */
         :root {
-            --primary-color: #FF0000; /* Rouge vif pour correspondre à la maquette */
-            --secondary-color: #6c757d; /* Gris de Bootstrap pour les textes secondaires */
-            --dark-bg: #1A1A1A; /* Fond principal plus sombre */
-            --dark-sidebar-bg: #212121; /* Fond de la sidebar */
-            --dark-navbar-bg: #212121; /* Fond de la navbar (same as sidebar for consistency) */
-            --dark-card-bg: #2C2C2C; /* Fond des cartes et sections */
-            --border-color: #3A3A3A; /* Bordures subtiles */
-            --text-color-light: #F8F9FA; /* Texte principal clair */
-            --text-color-secondary: #B0B0B0; /* Texte secondaire, plus clair que --secondary-color */
-            --hero-section-bg-start: #3B2E74; /* Début du dégradé du hero (from Découvrir page) */
-            --hero-section-bg-end: #5A4893; /* Fin du dégradé du hero (from Découvrir page) */
-            --hero-text-color: #FFFFFF; /* Couleur du texte dans le hero (from Découvrir page) */
-            --hero-circle-color-1: rgba(100, 80, 150, 0.4); /* Cercles de fond du hero (from Découvrir page) */
-            --hero-circle-color-2: rgba(130, 110, 180, 0.4); /* (from Découvrir page) */
-            --button-active-bg: var(--primary-color); /* Couleur de fond des boutons actifs */
-            --button-inactive-bg: var(--dark-card-bg); /* Couleur de fond des boutons inactifs */
+            --primary-color: #FF0000;
+            /* Rouge vif pour correspondre à la maquette */
+            --secondary-color: #6c757d;
+            /* Gris de Bootstrap pour les textes secondaires */
+            --dark-bg: #1A1A1A;
+            /* Fond principal plus sombre */
+            --dark-sidebar-bg: #212121;
+            /* Fond de la sidebar */
+            --dark-navbar-bg: #212121;
+            /* Fond de la navbar (same as sidebar for consistency) */
+            --dark-card-bg: #2C2C2C;
+            /* Fond des cartes et sections */
+            --border-color: #3A3A3A;
+            /* Bordures subtiles */
+            --text-color-light: #F8F9FA;
+            /* Texte principal clair */
+            --text-color-secondary: #B0B0B0;
+            /* Texte secondaire, plus clair que --secondary-color */
+            --hero-section-bg-start: #3B2E74;
+            /* Début du dégradé du hero (from Découvrir page) */
+            --hero-section-bg-end: #5A4893;
+            /* Fin du dégradé du hero (from Découvrir page) */
+            --hero-text-color: #FFFFFF;
+            /* Couleur du texte dans le hero (from Découvrir page) */
+            --hero-circle-color-1: rgba(100, 80, 150, 0.4);
+            /* Cercles de fond du hero (from Découvrir page) */
+            --hero-circle-color-2: rgba(130, 110, 180, 0.4);
+            /* (from Découvrir page) */
+            --button-active-bg: var(--primary-color);
+            /* Couleur de fond des boutons actifs */
+            --button-inactive-bg: var(--dark-card-bg);
+            /* Couleur de fond des boutons inactifs */
             --button-text-inactive: var(--text-color-secondary);
-            --stars-gold: gold; /* Gold color for stars */
+            --stars-gold: gold;
+            /* Gold color for stars */
 
             /* Specific to Settings Page */
-            --save-button-bg: #007bff; /* Blue for save button */
+            --save-button-bg: #007bff;
+            /* Blue for save button */
             --save-button-hover: #0056b3;
             --upload-area-bg: #2b2b3f;
             --upload-area-border: #4a4a60;
@@ -41,7 +60,8 @@
             background-color: var(--dark-bg);
             color: var(--text-color-light);
             font-family: Arial, sans-serif;
-            font-weight: 400; /* Poids de police par défaut */
+            font-weight: 400;
+            /* Poids de police par défaut */
         }
 
         /* Base layout with flexbox */
@@ -52,16 +72,22 @@
         /* Sidebar Styling */
         #sidebar-wrapper {
             min-height: 100vh;
-            margin-left: -17rem; /* Hidden by default on mobile */
+            margin-left: -17rem;
+            /* Hidden by default on mobile */
             transition: margin .25s ease-out;
             width: 16rem;
             background-color: var(--dark-sidebar-bg) !important;
             border-right: 1px solid var(--border-color);
-            position: fixed; /* Fixed sidebar on screen */
-            z-index: 1030; /* Above content */
-            overflow-y: auto; /* Enable scrolling for long content */
-            scrollbar-width: thin; /* Firefox */
-            scrollbar-color: var(--primary-color) var(--dark-sidebar-bg); /* Firefox */
+            position: fixed;
+            /* Fixed sidebar on screen */
+            z-index: 1030;
+            /* Above content */
+            overflow-y: auto;
+            /* Enable scrolling for long content */
+            scrollbar-width: thin;
+            /* Firefox */
+            scrollbar-color: var(--primary-color) var(--dark-sidebar-bg);
+            /* Firefox */
         }
 
         /* Webkit scrollbar for Chrome/Safari */
@@ -90,8 +116,10 @@
         }
 
         #sidebar-wrapper .list-group {
-            width: 92%; /* Adjusted for inset active item */
-            margin: 0 auto; /* Center the list group */
+            width: 92%;
+            /* Adjusted for inset active item */
+            margin: 0 auto;
+            /* Center the list group */
         }
 
         #sidebar-wrapper .list-group-item {
@@ -100,14 +128,16 @@
             color: var(--text-color-secondary);
             border: none;
             transition: background-color 0.3s ease, color 0.3s ease;
-            border-radius: 5px; /* Consistent border-radius for all items */
+            border-radius: 5px;
+            /* Consistent border-radius for all items */
         }
 
         #sidebar-wrapper .list-group-item.active {
             background-color: var(--primary-color) !important;
             color: var(--text-color-light) !important;
             border-radius: 5px;
-            margin: 0px; /* Inset effect */
+            margin: 0px;
+            /* Inset effect */
         }
 
         #sidebar-wrapper .list-group-item:hover {
@@ -119,7 +149,8 @@
             font-size: 0.8rem;
             text-transform: uppercase;
             color: var(--text-color-secondary) !important;
-            padding: 10px 20px 5px; /* Adjust padding to align with links */
+            padding: 10px 20px 5px;
+            /* Adjust padding to align with links */
         }
 
         .sidebar-promo {
@@ -151,15 +182,19 @@
 
         /* Page Content */
         #page-content-wrapper {
-            min-width: 100vw; /* Takes full width initially */
+            min-width: 100vw;
+            /* Takes full width initially */
             background-color: var(--dark-bg);
-            transition: margin-left .25s ease-out; /* For push effect */
-            padding-left: 0; /* Remove default padding */
+            transition: margin-left .25s ease-out;
+            /* For push effect */
+            padding-left: 0;
+            /* Remove default padding */
         }
 
         /* Adjust content position when sidebar is open on mobile */
         #wrapper.toggled #page-content-wrapper {
-            margin-left: 17rem; /* Pushes content to the right when sidebar is visible */
+            margin-left: 17rem;
+            /* Pushes content to the right when sidebar is visible */
         }
 
         /* Top Navbar */
@@ -168,7 +203,8 @@
         }
 
         .bg-dark-secondary {
-            background-color: var(--dark-navbar-bg) !important; /* Use same color as sidebar for consistency */
+            background-color: var(--dark-navbar-bg) !important;
+            /* Use same color as sidebar for consistency */
         }
 
         /* Dropdown menus in Navbar */
@@ -200,7 +236,8 @@
 
         /* Settings Page Specific Styles */
         .settings-menu-col {
-            padding-right: 20px; /* Space for the border-right */
+            padding-right: 20px;
+            /* Space for the border-right */
             border-right: 1px solid var(--border-color);
         }
 
@@ -234,13 +271,15 @@
         }
 
         .settings-menu li a:hover {
-            background-color: var(--dark-card-bg); /* Use card background for hover */
+            background-color: var(--dark-card-bg);
+            /* Use card background for hover */
             color: var(--primary-color);
             transform: translateX(3px);
         }
 
         .settings-menu li a.active {
-            background-color: var(--dark-card-bg); /* Use card background for active */
+            background-color: var(--dark-card-bg);
+            /* Use card background for active */
             color: var(--primary-color);
             font-weight: 600;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -248,20 +287,24 @@
 
         .logout-item {
             padding-top: 20px;
-            margin-top: auto; /* Push to bottom if content allows */
+            margin-top: auto;
+            /* Push to bottom if content allows */
         }
 
         .logout-item a {
-            color: var(--secondary-color) !important; /* Muted red for logout */
+            color: var(--primary-color) !important;
+            /* Muted red for logout */
         }
 
         .logout-item a:hover {
             background-color: var(--dark-card-bg);
-            color: var(--primary-color) !important; /* Primary color on hover for logout */
+            color: var(--primary-color) !important;
+            /* Primary color on hover for logout */
         }
 
         .profile-settings-form {
-            padding-left: 30px; /* More padding on the right side */
+            padding-left: 30px;
+            /* More padding on the right side */
         }
 
         .form-section-title {
@@ -296,7 +339,8 @@
         }
 
         .form-control-custom {
-            background-color: var(--dark-bg); /* Use darker background for input */
+            background-color: var(--dark-bg);
+            /* Use darker background for input */
             color: var(--text-color-light);
             border: 1px solid var(--border-color);
             border-radius: 8px;
@@ -308,7 +352,8 @@
             background-color: var(--dark-bg);
             color: var(--text-color-light);
             border-color: var(--primary-color);
-            box-shadow: 0 0 0 0.25rem rgba(255, 0, 0, 0.25); /* Primary color with transparency */
+            box-shadow: 0 0 0 0.25rem rgba(255, 0, 0, 0.25);
+            /* Primary color with transparency */
             outline: none;
         }
 
@@ -376,39 +421,61 @@
         /* Animations */
         .animation-fade-in {
             animation: fadeIn 0.6s ease-out forwards;
-            opacity: 0; /* Starts hidden */
+            opacity: 0;
+            /* Starts hidden */
         }
 
         .animation-slide-in-up {
             animation: slideInUp 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
-            opacity: 0; /* Starts hidden */
+            opacity: 0;
+            /* Starts hidden */
         }
 
         /* Keyframes for animations */
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         @keyframes slideInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
 
         /* Responsive Adjustments */
         @media (min-width: 992px) {
             #sidebar-wrapper {
-                margin-left: 0; /* Sidebar visible on large screens */
-                position: relative; /* Allow flow on desktop */
+                margin-left: 0;
+                /* Sidebar visible on large screens */
+                position: relative;
+                /* Allow flow on desktop */
             }
+
             #page-content-wrapper {
                 min-width: 0;
                 width: 100%;
-                margin-left: 0; /* Reset margin for desktop */
+                margin-left: 0;
+                /* Reset margin for desktop */
             }
+
             #sidebarToggle {
-                display: none !important; /* Hamburger button hidden on desktop */
+                display: none !important;
+                /* Hamburger button hidden on desktop */
             }
         }
 
@@ -419,34 +486,44 @@
             #page-content-wrapper {
                 width: 100%;
             }
+
             .navbar h2 {
                 font-size: 1.5rem;
             }
 
             .settings-menu-col {
-                border-right: none; /* Remove border on smaller screens */
+                border-right: none;
+                /* Remove border on smaller screens */
                 padding-right: 15px;
-                margin-bottom: 30px; /* Add space below menu */
+                margin-bottom: 30px;
+                /* Add space below menu */
             }
 
             .profile-settings-form {
-                padding-left: 15px; /* Adjust padding */
+                padding-left: 15px;
+                /* Adjust padding */
             }
-            #sidebar-wrapper{
+
+            #sidebar-wrapper {
                 position: absolute;
             }
         }
 
         @media (max-width: 767.98px) {
             .navbar-collapse {
-                display: none !important; /* Hide notification/user icons on very small screens */
+                display: none !important;
+                /* Hide notification/user icons on very small screens */
             }
-            .settings-menu-col, .profile-settings-form {
-                width: 100%; /* Full width on smaller screens */
+
+            .settings-menu-col,
+            .profile-settings-form {
+                width: 100%;
+                /* Full width on smaller screens */
                 padding-left: 15px;
                 padding-right: 15px;
             }
-            #sidebar-wrapper{
+
+            #sidebar-wrapper {
                 position: absolute;
             }
         }
@@ -456,20 +533,24 @@
                 margin-left: 0.5rem;
                 margin-right: 0.5rem;
             }
+
             .profile-photo-upload {
                 flex-direction: column;
                 align-items: center !important;
             }
+
             .profile-img-preview {
                 margin-bottom: 20px;
                 margin-right: 0 !important;
             }
+
             .upload-area {
                 width: 100%;
             }
         }
     </style>
 </head>
+
 <body>
     <div class="d-flex" id="wrapper">
         <div class="bg-dark sidebar" id="sidebar-wrapper">
@@ -478,7 +559,7 @@
             </div>
             <div class="list-group list-group-flush">
                 <div class="sidebar-section-title text-secondary px-3 pt-3 pb-1">GENERAL</div>
-                <a href="{{ route('dashboard') }}" class="list-group-item list-group-item-action bg-dark text-white active">
+                <a href="{{ route('dashboard') }}" class="list-group-item list-group-item-action bg-dark text-white">
                     <i class="fas fa-home me-2"></i> Tableau de bord
                 </a>
                 <a href="{{ route('calendrier') }}" class="list-group-item list-group-item-action bg-dark text-white">
@@ -503,7 +584,7 @@
                 <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
                     <i class="fas fa-question-circle me-2"></i> Soutien
                 </a>
-                <a href="{{ route('parametres') }}" class="list-group-item list-group-item-action bg-dark text-white">
+                <a href="{{ route('parametres') }}" class="list-group-item list-group-item-action bg-dark text-white active">
                     <i class="fas fa-cog me-2"></i> Paramètre
                 </a>
 
@@ -535,7 +616,7 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-white d-flex align-items-center" href="{{ route('parametres') }}">
-                                    <i class="fa fa-user"></i>
+                                    <img src="{{ Auth::user()->image ? asset('storage/' . Auth::user()->image) : asset('logo.png') }}" alt="Photo de profil" style="max-height: 50px;" class="rounded-circle profile-img-preview me-4">
                                 </a>
                             </li>
                         </ul>
@@ -548,10 +629,10 @@
                     <div class="col-md-4 col-lg-3 settings-menu-col animation-slide-in-up">
                         <ul class="list-unstyled settings-menu">
                             <li class="settings-menu-title">Profil de l'entreprise</li>
-                            <li><a href="parametre.html"><i class="fas fa-cog me-2"></i> Général général</a></li>
-                            <li><a href="modifier profil.html" class="active"><i class="fas fa-user-edit me-2"></i> Modifier le profil</a></li>
-                            <li><a href="changer mot de passe.html"><i class="fas fa-key me-2"></i> Changer le mot de passe</a></li>
-                            <li><a href="notification.html"><i class="fas fa-bell me-2"></i> Notification</a></li>
+                            <li><a href="{{ route('parametres') }}"><i class="fas fa-cog me-2"></i> Général général</a></li>
+                            <li><a href="{{ route('modifier profil') }}" class="active"><i class="fas fa-user-edit me-2"></i> Modifier le profil</a></li>
+                            <li><a href="{{ route('changer mot de passe') }}"><i class="fas fa-key me-2"></i> Changer le mot de passe</a></li>
+                            <li><a href="{{ route('notification') }}"><i class="fas fa-bell me-2"></i> Notification</a></li>
                             <li><a href="#"><i class="fas fa-file-invoice-dollar me-2"></i> Souscription à un abonnement</a></li>
 
                             <li class="settings-menu-title mt-4">préférence</li>
@@ -562,83 +643,101 @@
                             <li><a href="#"><i class="fas fa-share-alt me-2"></i> Médias sociaux</a></li>
                             <li><a href="#"><i class="fas fa-link me-2"></i> Intégration des applications</a></li>
 
+
                             <li class="mt-auto logout-item">
-                                <a href="#" class="text-danger"><i class="fas fa-sign-out-alt me-2"></i> Se déconnecter</a>
+                                <form action="{{ route('logout') }}" method="POST" id="logout-form">
+                                    @csrf
+                                    <a href="Déconnexion" class="text-danger" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                        <i class="fas fa-sign-out-alt me-2"></i> Se déconnecter
+                                    </a>
+                                </form>
                             </li>
                         </ul>
                     </div>
 
                     <div class="col-md-8 col-lg-9 profile-settings-form animation-fade-in" style="animation-delay: 0.2s;">
                         <h4 class="form-section-title mb-4">Modifier le profil</h4>
+                        @if(session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                        @endif
+                        <form method="POST" action="{{ route('profile.update') }}" enctype="multipart/form-data">
+                            @csrf
+                            @method('PUT')
 
-                        <div class="card profile-card mb-4">
-                            <div class="card-body">
-                                <h5 class="card-title">Profil Public</h5>
-                                <p class="card-subtitle mb-3 text-muted">Ceci sera affiché sur votre profil</p>
-                                <div class="row mb-3 align-items-center">
-                                    <label for="name" class="col-sm-3 col-form-label form-label-custom">Nom</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control form-control-custom" id="name" value="Peter Parker">
+                            <div class="card profile-card mb-4">
+                                <div class="card-body">
+                                    <h5 class="card-title">Profil Public</h5>
+                                    <p class="card-subtitle mb-3 text-muted">Ceci sera affiché sur votre profil</p>
+                                    <div class="row mb-3 align-items-center">
+                                        <label for="name" class="col-sm-3 col-form-label form-label-custom">Nom complet</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control form-control-custom" id="name" name="nom" value="{{ old('nom', Auth::user()->nom) }}">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row mb-3 align-items-center">
-                                    <label for="position" class="col-sm-3 col-form-label form-label-custom">Poste</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control form-control-custom" id="position" value="Développeur Web/Mobile Jr.">
+                                    <div class="row mb-3 align-items-center">
+                                        <label for="poste" class="col-sm-3 col-form-label form-label-custom">Poste</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control form-control-custom" id="poste" name="poste" value="{{ old('poste', Auth::user()->poste) }}">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="card profile-card mb-4">
-                            <div class="card-body">
-                                <h5 class="card-title">Photo de profil</h5>
-                                <p class="card-subtitle mb-3 text-muted">Choisissez votre meilleure photo qui vous représente</p>
-                                <div class="d-flex align-items-center profile-photo-upload">
-                                    <img src="logo.png" alt="Impact Web Logo" style="max-height: 50px;" class="rounded-circle profile-img-preview me-4">
-                                    <div class="upload-area text-center py-3 px-4">
-                                        <i class="fas fa-upload upload-icon mb-2"></i>
-                                        <p class="upload-text">Cliquez pour télécharger ou glisser-déposer</p>
-                                        <p class="upload-info">SVG, PNG, JPG ou GIF (max 800x600px)</p>
+                            <div class="card profile-card mb-4">
+                                <div class="card-body">
+                                    <h5 class="card-title">Photo de profil</h5>
+                                    <p class="card-subtitle mb-3 text-muted">Choisissez votre meilleure photo qui vous représente</p>
+                                    <div class="d-flex align-items-center profile-photo-upload">
+                                        <img src="{{ Auth::user()->image ? asset('storage/' . Auth::user()->image) : asset('logo.png') }}" alt="Photo de profil" style="max-height: 100px; max-width: 100px;" class="rounded-circle profile-img-preview me-4">
+                                        <div class="upload-area text-center py-3 px-4">
+                                            <label for="image" style="cursor: pointer;">
+                                                <i class="fas fa-upload upload-icon mb-2"></i>
+                                                <p class="upload-text">Cliquez pour télécharger ou glisser-déposer</p>
+                                                <p class="upload-info">SVG, PNG, JPG ou GIF (max 800x600px)</p>
+                                            </label>
+                                            <input type="file" name="image" id="image" accept=".jpg,.jpeg,.png,.gif,.svg" class="form-control d-none">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="card profile-card mb-4">
-                            <div class="card-body">
-                                <h5 class="card-title">Profil Social</h5>
-                                <p class="card-subtitle mb-3 text-muted">Cela sera également affiché sur votre profil</p>
-                                <div class="row mb-3 align-items-center">
-                                    <label for="twitter" class="col-sm-3 col-form-label form-label-custom">Accueil/Twitter /</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control form-control-custom" id="twitter" value="Peterparker">
+                            <div class="card profile-card mb-4">
+                                <div class="card-body">
+                                    <h5 class="card-title">Profil Social</h5>
+                                    <p class="card-subtitle mb-3 text-muted">Cela sera également affiché sur votre profil</p>
+                                    <div class="row mb-3 align-items-center">
+                                        <label for="tiktok" class="col-sm-3 col-form-label form-label-custom">Tiktok</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control form-control-custom" id="tiktok" name="tiktok" value="{{ old('tiktok', Auth::user()->tiktok) }}">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row mb-3 align-items-center">
-                                    <label for="instagram" class="col-sm-3 col-form-label form-label-custom">Instagram.com/fr</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control form-control-custom" id="instagram" value="Peterparker">
+                                    <div class="row mb-3 align-items-center">
+                                        <label for="instagram" class="col-sm-3 col-form-label form-label-custom">Instagram</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control form-control-custom" id="instagram" name="instagram" value="{{ old('instagram', Auth::user()->instagram) }}">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row mb-3 align-items-center">
-                                    <label for="linkedin" class="col-sm-3 col-form-label form-label-custom">Accueil/Linkedin.com</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control form-control-custom" id="linkedin" value="Peterparker">
+                                    <div class="row mb-3 align-items-center">
+                                        <label for="linkedin" class="col-sm-3 col-form-label form-label-custom">LinkedIn</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control form-control-custom" id="linkedin" name="linkedin" value="{{ old('linkedin', Auth::user()->linkedin) }}">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row mb-3 align-items-center">
-                                    <label for="facebook" class="col-sm-3 col-form-label form-label-custom">www.facebook.com</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control form-control-custom" id="facebook" value="Peterparker">
+                                    <div class="row mb-3 align-items-center">
+                                        <label for="facebook" class="col-sm-3 col-form-label form-label-custom">Facebook</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control form-control-custom" id="facebook" name="facebook" value="{{ old('facebook', Auth::user()->facebook) }}">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="d-flex justify-content-end mt-4">
-                            <button class="btn btn-save">Sauvegarder</button>
-                        </div>
+                            <div class="d-flex justify-content-end mt-4">
+                                <button type="submit" class="btn btn-save">Sauvegarder</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -651,9 +750,10 @@
         var el = document.getElementById("wrapper");
         var toggleButton = document.getElementById("sidebarToggle");
 
-        toggleButton.onclick = function () {
+        toggleButton.onclick = function() {
             el.classList.toggle("toggled");
         };
     </script>
 </body>
+
 </html>
