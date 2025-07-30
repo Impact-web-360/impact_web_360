@@ -1,3 +1,4 @@
+
 <?php
 
 use Illuminate\Database\Migrations\Migration;
@@ -13,10 +14,12 @@ return new class extends Migration
     {
         Schema::create('modules', function (Blueprint $table) {
             $table->id();
-            $table->string('titre');
-            $table->string('fichier')->nullable(); // Assuming 'fichier' is a file path or URL
-            $table->string('video')->nullable();
-            $table->foreignId('formation_id')->constrained('formations')->cascadeOnDelete();
+            $table->foreignId('formation_id')->constrained()->onDelete('cascade'); // Clé étrangère
+            $table->string('title');
+            $table->string('file_path')->nullable(); // Chemin vers le fichier du module (ex: PDF)
+            $table->string('video_path')->nullable(); // Chemin vers la vidéo du module
+            $table->string('duration')->nullable(); // Ex: "30min"
+            $table->integer('order')->default(0); // Pour trier les modules
             $table->timestamps();
         });
     }

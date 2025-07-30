@@ -12,18 +12,14 @@ class Categorie extends Model // Changé de Category à Categorie
 
     protected $fillable = ['name', 'slug'];
 
-    // Par défaut, Eloquent cherche la table "categories" pour le modèle "Categorie"
-    // Si votre table s'appelle différemment (ex: "categories_table"), vous devriez ajouter:
-    // protected $table = 'categories_table';
-
     // Génère le slug automatiquement avant de sauvegarder
     protected static function booted()
     {
-        static::creating(function ($categorie) { // $category à $categorie
+        static::creating(function ($categorie) { // 
             $categorie->slug = Str::slug($categorie->name);
         });
 
-        static::updating(function ($categorie) { // $category à $categorie
+        static::updating(function ($categorie) { // 
             $categorie->slug = Str::slug($categorie->name);
         });
     }

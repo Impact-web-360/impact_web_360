@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Formation;
 use App\Models\Categorie;
+use App\Models\Module;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -23,87 +24,131 @@ class FormationController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'title' => 'required|max:255',
+        $validatedData = $request->validate([ // Capturez les données validées
             'category_id' => 'required|exists:categories,id',
-            'mentor' => 'required|max:255',
-            'description' => 'nullable',
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'objectives' => 'nullable|array',
+            'objectives.*' => 'nullable|string', // Pour valider chaque élément du tableau
+            'tools' => 'nullable|array',
+            'tools.*' => 'nullable|string', // Pour valider chaque élément du tableau
+            'students_enrolled' => 'nullable|integer|min:0',
+            'reviews_count' => 'nullable|integer|min:0',
             'price' => 'required|numeric|min:0',
             'rating' => 'nullable|numeric|min:0|max:5',
+            'mentor' => 'nullable|string|max:255',
+            'mentor_title' => 'nullable|string|max:255',
+            'mentor_avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'mentor_rating' => 'nullable|numeric|min:0|max:5',
+            'mentor_reviews_count' => 'nullable|integer|min:0',
+            'mentor_bio' => 'nullable|string',
         ]);
 
-        $imagePath = null;
+        // Gérer l'upload de l'image principale
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('formations', 'public');
+            $validatedData['image'] = $request->file('image')->store('formations', 'public');
+        } else {
+            $validatedData['image'] = null; // Assurez-vous que le champ est null si pas d'image
         }
 
-        Formation::create([
-            'title' => $request->title,
-            'category_id' => $request->category_id,
-            'mentor' => $request->mentor,
-            'description' => $request->description,
-            'image' => $imagePath,
-            'price' => $request->price,
-            'rating' => $request->rating ?? 0.0,
-        ]);
+        // Gérer l'upload de l'avatar du mentor
+        if ($request->hasFile('mentor_avatar')) {
+            $validatedData['mentor_avatar'] = $request->file('mentor_avatar')->store('mentors/avatars', 'public');
+        } else {
+            $validatedData['mentor_avatar'] = null; // Assurez-vous que le champ est null si pas d'avatar
+        }
+
+        // Les champs 'objectives' et 'tools' seront déjà des tableaux grâce à $validatedData
+        // S'assurer que les valeurs par défaut sont appliquées si non fournies
+        $validatedData['students_enrolled'] = $validatedData['students_enrolled'] ?? 0;
+        $validatedData['reviews_count'] = $validatedData['reviews_count'] ?? 0;
+        $validatedData['rating'] = $validatedData['rating'] ?? 0.0;
+        $validatedData['mentor_rating'] = $validatedData['mentor_rating'] ?? 0.0;
+        $validatedData['mentor_reviews_count'] = $validatedData['mentor_reviews_count'] ?? 0;
+
+        Formation::create($validatedData); // Crée la formation avec toutes les données validées
 
         return redirect()->route('Dashboard.formations.index')->with('success', 'Formation ajoutée avec succès!');
     }
-
-    public function edit($id)
-    {
-        $formation = Formation::findOrFail($id);
-        $categories = Categorie::all();
-        return view('Dashboard.formations.edit', compact('formation', 'categories'));
-    }
+        public function edit($id)
+        {
+            $formation = Formation::findOrFail($id);
+            $categories = Categorie::all();
+            return view('Dashboard.formations.edit', compact('formation', 'categories'));
+        }
 
 
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'title' => 'required|max:255',
+        $formation = Formation::findOrFail($id); // Récupérez la formation en premier !
+
+        $validatedData = $request->validate([
             'category_id' => 'required|exists:categories,id',
-            'mentor' => 'required|max:255',
-            'description' => 'nullable',
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'clear_image' => 'nullable|boolean', // Pour la case à cocher "supprimer l'image"
+            'objectives' => 'nullable|array',
+            'objectives.*' => 'nullable|string',
+            'tools' => 'nullable|array',
+            'tools.*' => 'nullable|string',
+            'students_enrolled' => 'nullable|integer|min:0',
+            'reviews_count' => 'nullable|integer|min:0',
             'price' => 'required|numeric|min:0',
             'rating' => 'nullable|numeric|min:0|max:5',
+            'mentor' => 'nullable|string|max:255',
+            'mentor_title' => 'nullable|string|max:255',
+            'mentor_avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'clear_mentor_avatar' => 'nullable|boolean', // Pour la case à cocher "supprimer l'avatar"
+            'mentor_rating' => 'nullable|numeric|min:0|max:5',
+            'mentor_reviews_count' => 'nullable|integer|min:0',
+            'mentor_bio' => 'nullable|string',
         ]);
 
-        $imagePath = $formation->image;
+        // Gestion de l'image principale
         if ($request->hasFile('image')) {
-            // Supprime l'ancienne image si elle existe
             if ($formation->image && Storage::disk('public')->exists($formation->image)) {
                 Storage::disk('public')->delete($formation->image);
             }
-            $imagePath = $request->file('image')->store('formations', 'public');
-        } elseif ($request->input('clear_image')) {
+            $validatedData['image'] = $request->file('image')->store('formations', 'public');
+        } elseif (isset($validatedData['clear_image']) && $validatedData['clear_image']) {
             if ($formation->image && Storage::disk('public')->exists($formation->image)) {
                 Storage::disk('public')->delete($formation->image);
             }
-            $imagePath = null;
+            $validatedData['image'] = null;
+        } else {
+            $validatedData['image'] = $formation->image; // Conserver l'ancienne image si rien de nouveau
         }
-        $formation = Formation::findOrFail($id);
 
-        $formation->update([
-            'title' => $request->title,
-            'category_id' => $request->category_id,
-            'mentor' => $request->mentor,
-            'description' => $request->description,
-            'image' => $imagePath,
-            'price' => $request->price,
-            'rating' => $request->rating ?? 0.0,
-        ]);
+        // Gestion de l'avatar du mentor
+        if ($request->hasFile('mentor_avatar')) {
+            if ($formation->mentor_avatar && Storage::disk('public')->exists($formation->mentor_avatar)) {
+                Storage::disk('public')->delete($formation->mentor_avatar);
+            }
+            $validatedData['mentor_avatar'] = $request->file('mentor_avatar')->store('mentors/avatars', 'public');
+        } elseif (isset($validatedData['clear_mentor_avatar']) && $validatedData['clear_mentor_avatar']) {
+            if ($formation->mentor_avatar && Storage::disk('public')->exists($formation->mentor_avatar)) {
+                Storage::disk('public')->delete($formation->mentor_avatar);
+            }
+            $validatedData['mentor_avatar'] = null;
+        } else {
+            $validatedData['mentor_avatar'] = $formation->mentor_avatar; // Conserver l'ancien avatar
+        }
+
+        // Mettre à jour la formation avec toutes les données validées
+        $formation->update($validatedData);
 
         return redirect()->route('Dashboard.formations.index')->with('success', 'Formation mise à jour avec succès!');
     }
-
 
     public function destroy(Formation $formation)
     {
         if ($formation->image && Storage::disk('public')->exists($formation->image)) {
             Storage::disk('public')->delete($formation->image);
+        }
+        if ($formation->mentor_avatar && Storage::disk('public')->exists($formation->mentor_avatar)) {
+            Storage::disk('public')->delete($formation->mentor_avatar);
         }
 
         $formation->delete();
@@ -115,7 +160,10 @@ class FormationController extends Controller
     public function show($id)
     {
         $formation = Formation::findOrFail($id);
+        $formation->load(['modules', 'categorie']);
+
         return view('Dashboard_utilisateur.details', compact('formation'));
     }
 
-}
+    
+};

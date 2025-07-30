@@ -192,13 +192,14 @@
 
 <nav id="sidebar" aria-label="Sidebar Navigation">
   <h4><i class="fa fa-cogs me-2"></i>Admin Panel</h4>
-  <a href="#stats" class="nav-link"><i class="fas fa-chart-bar"></i> Statistiques</a>
+  <a href="#stats" class="nav-link active"><i class="fas fa-chart-bar"></i> Statistiques</a>
   <a href="{{ route('evenements.index') }}" class="nav-link"><i class="fa fa-calendar-alt"></i>Événements</a>
   <a href="{{ route('sponsors.index') }}" class="nav-link"><i class="fa fa-handshake"></i>Sponsors</a>
-  <a href="{{ route('formations.create')}}" class="nav-link active"><i class="fa fa-store"></i>Formations</a>
+  <a href="{{ route('formations.index')}}" class="nav-link"><i class="fa fa-user"></i>Formation</a>
+  <a href="{{ route('categories.index')}}" class="nav-link"><i class="fa fa-user"></i>Catégorie</a>
+  <a href="{{ route('modules.index')}}" class="nav-link"><i class="fa fa-user"></i>Modules</a>
   <a href="ajouter_intervenant.php" class="nav-link"><i class="fa fa-user"></i>Intervenants</a>
   <a href="#users" class="nav-link"><i class="fas fa-users"></i> Utilisateurs</a>
-  <a href="{{ route('categories.index') }}" class="nav-link"><i class="fa fa-store"></i>Categorie</a>
   <a href="#content" class="nav-link"><i class="fas fa-folder-open"></i> Contenus</a>
   <a href="#messages" class="nav-link"><i class="fas fa-envelope"></i> Messages</a>
   <a href="#calendar" class="nav-link"><i class="fas fa-calendar-alt"></i> Calendrier</a>
@@ -213,7 +214,6 @@
   <section id="add-formation" class="mb-5">
     <h2 class="section-title"><i class="fas fa-plus-circle"></i> Ajouter une Nouvelle Formation</h2>
     <div class="container mt-4">
-        <h2>Ajouter une Nouvelle Formation</h2>
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
@@ -240,35 +240,101 @@
                 </select>
             </div>
             <div class="mb-3">
-                <label for="mentor" class="form-label text-dark">Nom du Mentor</label>
-                <input type="text" class="form-control" id="mentor" name="mentor" value="{{ old('mentor') }}" required>
-            </div>
-            <div class="mb-3">
                 <label for="description" class="form-label text-dark">Description</label>
                 <textarea class="form-control" id="description" name="description" rows="5">{{ old('description') }}</textarea>
             </div>
             <div class="mb-3">
                 <label for="image" class="form-label text-dark">Image de la Formation</label>
                 <input type="file" class="form-control" id="image" name="image" accept="image/*">
-                <div class="form-text text-secondary">Taille max : 2MB. Formats : JPG, PNG, GIF.</div>
+                <div class="form-text text-secondary">Taille max : 2MB. Formats : JPG, PNG, GIF, SVG.</div>
             </div>
             <div class="mb-3">
-                <label for="price" class="form-label text-dark">Prix ($)</label>
+                <label for="price" class="form-label text-dark">Prix (FCFA)</label>
                 <input type="number" step="0.01" class="form-control" id="price" name="price" value="{{ old('price') }}" required>
             </div>
             <div class="mb-3">
-                <label for="rating" class="form-label text-dark">Note (sur 5)</label>
+                <label for="rating" class="form-label text-dark">Note globale (sur 5)</label>
                 <input type="number" step="0.1" min="0" max="5" class="form-control" id="rating" name="rating" value="{{ old('rating', 0.0) }}">
                 <div class="form-text text-secondary">Ex: 4.5.</div>
             </div>
-            <button type="submit" class="btn btn-danger">Ajouter la Formation</button>
+
+            <hr class="my-4">
+            <h4 class="mb-3 text-dark">Informations sur le Mentor</h4>
+
+            <div class="mb-3">
+                <label for="mentor" class="form-label text-dark">Nom du Mentor</label>
+                <input type="text" class="form-control" id="mentor" name="mentor" value="{{ old('mentor') }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="mentor_title" class="form-label text-dark">Titre du Mentor</label>
+                <input type="text" class="form-control" id="mentor_title" name="mentor_title" value="{{ old('mentor_title') }}">
+            </div>
+            <div class="mb-3">
+                <label for="mentor_avatar" class="form-label text-dark">Avatar du Mentor</label>
+                <input type="file" class="form-control" id="mentor_avatar" name="mentor_avatar" accept="image/*">
+                <div class="form-text text-secondary">Taille max : 2MB. Formats : JPG, PNG, GIF, SVG.</div>
+            </div>
+            <div class="mb-3">
+                <label for="mentor_rating" class="form-label text-dark">Note du Mentor (sur 5)</label>
+                <input type="number" step="0.1" min="0" max="5" class="form-control" id="mentor_rating" name="mentor_rating" value="{{ old('mentor_rating', 0.0) }}">
+                <div class="form-text text-secondary">Ex: 4.8.</div>
+            </div>
+            <div class="mb-3">
+                <label for="mentor_reviews_count" class="form-label text-dark">Nombre d'avis du Mentor</label>
+                <input type="number" min="0" class="form-control" id="mentor_reviews_count" name="mentor_reviews_count" value="{{ old('mentor_reviews_count', 0) }}">
+            </div>
+            <div class="mb-3">
+                <label for="mentor_bio" class="form-label text-dark">Biographie du Mentor</label>
+                <textarea class="form-control" id="mentor_bio" name="mentor_bio" rows="3">{{ old('mentor_bio') }}</textarea>
+            </div>
+
+            <hr class="my-4">
+            <h4 class="mb-3 text-dark">Objectifs de la Formation</h4>
+            <div id="objectives-container">
+                @if(old('objectives'))
+                    @foreach(old('objectives') as $objective)
+                        <div class="input-group mb-2">
+                            <input type="text" name="objectives[]" class="form-control" value="{{ $objective }}" placeholder="Ajouter un objectif">
+                            <button type="button" class="btn btn-outline-danger remove-objective-field"><i class="fas fa-minus"></i></button>
+                        </div>
+                    @endforeach
+                @else
+                    <div class="input-group mb-2">
+                        <input type="text" name="objectives[]" class="form-control" placeholder="Ajouter un objectif">
+                        <button type="button" class="btn btn-outline-danger remove-objective-field"><i class="fas fa-minus"></i></button>
+                    </div>
+                @endif
+            </div>
+            <button type="button" class="btn btn-info btn-sm mb-3" id="add-objective-field"><i class="fas fa-plus"></i> Ajouter un objectif</button>
+
+            <hr class="my-4">
+            <h4 class="mb-3 text-dark">Outils Utilisés</h4>
+            <div id="tools-container">
+                @if(old('tools'))
+                    @foreach(old('tools') as $tool)
+                        <div class="input-group mb-2">
+                            <input type="text" name="tools[]" class="form-control" value="{{ $tool }}" placeholder="Ajouter un outil">
+                            <button type="button" class="btn btn-outline-danger remove-tool-field"><i class="fas fa-minus"></i></button>
+                        </div>
+                    @endforeach
+                @else
+                    <div class="input-group mb-2">
+                        <input type="text" name="tools[]" class="form-control" placeholder="Ajouter un outil">
+                        <button type="button" class="btn btn-outline-danger remove-tool-field"><i class="fas fa-minus"></i></button>
+                    </div>
+                @endif
+            </div>
+            <button type="button" class="btn btn-info btn-sm mb-3" id="add-tool-field"><i class="fas fa-plus"></i> Ajouter un outil</button>
+            <br>
+            <button type="submit" class="btn btn-danger mt-4">Ajouter la Formation</button>
         </form>
     </div>
   </section>
 
-  </main>
+</main>
 
 <script>
+  // Sidebar toggle logic
   const sidebar = document.getElementById('sidebar');
   const sidebarToggle = document.getElementById('sidebarToggle');
   const body = document.body;
@@ -278,11 +344,59 @@
     body.classList.toggle('sidebar-open');
   });
 
-  // Close the sidebar if clicking outside (mobile)
   document.addEventListener('click', (e) => {
     if (window.innerWidth < 992 && !sidebar.contains(e.target) && !sidebarToggle.contains(e.target)) {
       sidebar.classList.remove('active');
       body.classList.remove('sidebar-open');
+    }
+  });
+
+  // Dynamic fields for Objectives
+  document.getElementById('add-objective-field').addEventListener('click', function() {
+    const container = document.getElementById('objectives-container');
+    const newField = document.createElement('div');
+    newField.classList.add('input-group', 'mb-2');
+    newField.innerHTML = `
+      <input type="text" name="objectives[]" class="form-control" placeholder="Ajouter un objectif">
+      <button type="button" class="btn btn-outline-danger remove-objective-field"><i class="fas fa-minus"></i></button>
+    `;
+    container.appendChild(newField);
+  });
+
+  document.getElementById('objectives-container').addEventListener('click', function(e) {
+    if (e.target.classList.contains('remove-objective-field') || e.target.closest('.remove-objective-field')) {
+      const button = e.target.closest('.remove-objective-field');
+      // Ensure at least one field remains
+      if (this.querySelectorAll('.input-group').length > 1) {
+        button.closest('.input-group').remove();
+      } else {
+        // Optionnel: vider le champ au lieu de le supprimer si c'est le dernier
+        button.closest('.input-group').querySelector('input').value = '';
+      }
+    }
+  });
+
+  // Dynamic fields for Tools
+  document.getElementById('add-tool-field').addEventListener('click', function() {
+    const container = document.getElementById('tools-container');
+    const newField = document.createElement('div');
+    newField.classList.add('input-group', 'mb-2');
+    newField.innerHTML = `
+      <input type="text" name="tools[]" class="form-control" placeholder="Ajouter un outil">
+      <button type="button" class="btn btn-outline-danger remove-tool-field"><i class="fas fa-minus"></i></button>
+    `;
+    container.appendChild(newField);
+  });
+
+  document.getElementById('tools-container').addEventListener('click', function(e) {
+    if (e.target.classList.contains('remove-tool-field') || e.target.closest('.remove-tool-field')) {
+      const button = e.target.closest('.remove-tool-field');
+      // Ensure at least one field remains
+      if (this.querySelectorAll('.input-group').length > 1) {
+        button.closest('.input-group').remove();
+      } else {
+        button.closest('.input-group').querySelector('input').value = '';
+      }
     }
   });
 </script>

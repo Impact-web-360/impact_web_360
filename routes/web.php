@@ -105,8 +105,10 @@ Route::middleware('auth')->group(function () {
     })->name('modifier_profil');
     //decouvrir
     Route::get('/decouvrir', [DiscoverController::class, 'index'])->name('decouvrir');
+
+    Route::get('/formations/{id}', [FormationController::class, 'show'])->name('details');
 });
-Route::get('/formations/{id}', [FormationController::class, 'show'])->name('details');
+
 
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
@@ -167,6 +169,22 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::put('/dashboard/formations/{id}', [FormationController::class, 'update'])
         ->name('Dashboard.formations.update');
     
+
+
+    //Modules
+    Route::resource('modules', ModuleController::class);
+    Route::get('/dashboard/modules/create', [ModuleController::class, 'create'])
+        ->name('Dashboard.modules.create');
+    Route::get('/dashboard/modules/index', [ModuleController::class, 'index'])
+        ->name('Dashboard.modules.index');
+    Route::get('/dashboard/modules/{module}/edit', [ModuleController::class, 'edit'])
+    ->name('Dashboard.modules.edit');
+    Route::post('/dashboard/modules/store', [ModuleController::class, 'store'])
+        ->name('Dashboard.modules.store');
+    Route::delete('/dashboard/modules/{module}', [ModuleController::class, 'destroy'])
+        ->name('Dashboard.modules.destroy');
+    Route::put('/dashboard/modules/{module}', [ModuleController::class, 'update'])
+        ->name('Dashboard.modules.update');
 
 
 
