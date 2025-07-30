@@ -7,6 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet" />
     <style>
         /* Variables CSS pour faciliter la gestion des couleurs et espacements */
         :root {
@@ -567,17 +568,17 @@
                                     <button class="nav-link" id="tools-tab" data-bs-toggle="tab" data-bs-target="#tools" type="button" role="tab" aria-controls="tools" aria-selected="false">Outils de travail</button>
                                 </li>
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="comments-tab" data-bs-toggle="tab" data-bs-target="#comments" type="button" role="tab" aria-controls="comments" aria-selected="false">Commentaires</button>
+                                    <button class="nav-link" id="comments-tab" data-bs-toggle="tab" data-bs-target="#comments" type="button" role="tab" aria-controls="comments" aria-selected="false">Modules</button>
                                 </li>
                             </ul>
 
                             <div class="tab-content" id="courseTabContent">
                                 <div class="tab-pane fade show active course-description" id="description" role="tabpanel" aria-labelledby="description-tab">
                                     <p>{{ $formation->description ?? 'Pas de description détaillée disponible pour cette formation.' }}</p>
-                                    @if($formation->objectives && count(json_decode($formation->objectives)) > 0)
+                                    @if($formation->objectives && count($formation->objectives) > 0)
                                         <p class="text-white fw-bold mt-4">Ce que vous apprendrez:</p>
                                         <ul>
-                                            @foreach(json_decode($formation->objectives) as $objective)
+                                            @foreach($formation->objectives as $objective)
                                                 <li><i class="fas fa-check-circle"></i> {{ $objective }}</li>
                                             @endforeach
                                         </ul>
@@ -586,9 +587,9 @@
                                 <div class="tab-pane fade" id="tools" role="tabpanel" aria-labelledby="tools-tab">
                                     <p class="text-secondary">
                                         Voici les outils que vous utiliserez dans ce cours :
-                                        @if($formation->tools && count(json_decode($formation->tools)) > 0)
+                                        @if($formation->tools && count($formation->tools) > 0)
                                             <ul>
-                                                @foreach(json_decode($formation->tools) as $tool)
+                                                @foreach($formation->tools as $tool)
                                                     <li><i class="fas fa-toolbox"></i> {{ $tool }}</li>
                                                 @endforeach
                                             </ul>
@@ -597,33 +598,61 @@
                                         @endif
                                     </p>
                                 </div>
+                                
                                 <div class="tab-pane fade" id="comments" role="tabpanel" aria-labelledby="comments-tab">
-                                    <p class="text-secondary">Pas de commentaires pour le moment. Soyez le premier à laisser un avis!</p>
+                                    <div class="modules-card">
+                                        <div class="module-list">
+                                            @if($formation->modules->count() > 0)
+                                                @foreach($formation->modules as $index => $module)
+                                                    <div class="module-item">
+                                                        <span>{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }} {{ $module->title ?? 'Module sans titre' }}</span>
+                                                        <span>
+                                                        @if($module->duration)
+                                                            @if($module->duration >= 60)
+                                                            {{ floor($module->duration / 60) }} heure{{ floor($module->duration / 60) > 1 ? 's' : '' }}
+                                                            @if($module->duration % 60 > 0)
+                                                                {{ $module->duration % 60 }} minute{{ $module->duration % 60 > 1 ? 's' : '' }}
+                                                            @endif
+                                                            @else
+                                                            {{ $module->duration }} minute{{ $module->duration > 1 ? 's' : '' }}
+                                                            @endif
+                                                        @else
+                                                            Durée non renseignée
+                                                        @endif
+                                                        </span>
+                                                    </div>
+                                                @endforeach
+                                            @else
+                                                <div class="module-item">
+                                                    <span class="text-secondary">Aucun module n'a été ajouté.</span>
+                                                    <span></span>
+                                                </div>
+                                            @endif
+                                        </div>
                                     </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-
                     <div class="col-lg-4 animation-fade-in" style="animation-delay: 0.3s;">
                         <div class="overview-card">
                             <h5 class="text-white mb-3">Aperçu général</h5>
                             <div class="row text-center mb-3">
                                 <div class="col-6 overview-item">
                                     <i class="fas fa-user-friends"></i>
-                                    <p><span class="value">{{ $formation->students_enrolled ?? '0' }}</span> inscrits</p>
+                                    <p><span class="value">{{ $formation->students_enrolled }}</span> Inscrits</p>
                                 </div>
                                 <div class="col-6 overview-item">
                                     <i class="fas fa-book-open"></i>
-                                    {{-- Supposons que $formation->modules est un JSON ou un tableau --}}
-                                    <p><span class="value">{{ ($formation->modules ? count(json_decode($formation->modules)) : 0) }}</span> Modules</p>
+                                    <p><span class="value">{{ $formation->modules->count() }}</span> Modules</p>
                                 </div>
                                 <div class="col-6 overview-item">
                                     <i class="fas fa-video"></i>
-                                    <p><span class="value">{{ $formation->total_videos ?? '0' }}</span> vidéos</p>
+                                    <p><span class="value">{{ $formation->total_videos }}</span> Vidéos</p>
                                 </div>
                                 <div class="col-6 overview-item">
-                                    <i class="fas fa-star"></i>
-                                    <p><span class="value">{{ $formation->reviews_count ?? '0' }}</span> avis</p>
+                                    <i class="bi bi-tools"></i>
+                                    <p><span class="value">{{ is_array($formation->tools) ? count($formation->tools) : $formation->tools->count() }}</span> Outils</p>
                                 </div>
                             </div>
                             <div class="price-section">
@@ -653,25 +682,6 @@
                             <p class="rating">
                                 <i class="fas fa-star"></i> {{ number_format($formation->mentor_rating ?? 0, 1) }}/5 ({{ $formation->mentor_reviews_count ?? '0' }} avis)
                             </p>
-                        </div>
-
-                        <div class="modules-card">
-                            <h5 class="text-white mb-3">Les Modules</h5>
-                            <div class="module-list">
-                                @if($formation->modules && count(json_decode($formation->modules)) > 0)
-                                    @foreach(json_decode($formation->modules) as $index => $module)
-                                        <div class="module-item">
-                                            <span>{{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }} {{ $module->title ?? 'Module sans titre' }}</span>
-                                            <span>{{ $module->duration ?? '0min' }}</span>
-                                        </div>
-                                    @endforeach
-                                @else
-                                    <div class="module-item">
-                                        <span class="text-secondary">Aucun module n'a été ajouté.</span>
-                                        <span></span>
-                                    </div>
-                                @endif
-                            </div>
                         </div>
                     </div>
                 </div>

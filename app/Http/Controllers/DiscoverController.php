@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Categorie; 
 use App\Models\Formation;
+use App\Models\Module;
 use Illuminate\Http\Request;
 
 class DiscoverController extends Controller
@@ -31,4 +32,4 @@ class DiscoverController extends Controller
 
         return view('Dashboard_utilisateur.decouvrir', compact('categories', 'formations'));
     }
-}
+};
