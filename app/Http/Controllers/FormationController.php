@@ -57,10 +57,6 @@ class FormationController extends Controller
 
         // Les champs 'objectives' et 'tools' seront déjà des tableaux grâce à $validatedData
         // S'assurer que les valeurs par défaut sont appliquées si non fournies
-        $validatedData['students_enrolled'] = $validatedData['students_enrolled'] ?? 0;
-        $validatedData['reviews_count'] = $validatedData['reviews_count'] ?? 0;
-        $validatedData['rating'] = $validatedData['rating'] ?? 0.0;
-        $validatedData['mentor_rating'] = $validatedData['mentor_rating'] ?? 0.0;
         $validatedData['mentor_reviews_count'] = $validatedData['mentor_reviews_count'] ?? 0;
 
         Formation::create($validatedData); // Crée la formation avec toutes les données validées

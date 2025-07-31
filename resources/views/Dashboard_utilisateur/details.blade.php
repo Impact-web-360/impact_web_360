@@ -615,7 +615,7 @@
                                                 @endforeach
                                             @else
                                                 <div class="module-item">
-                                                    <span class="text-secondary">Vous n'avez pas accès aux modules.</span>
+                                                    <span class="text-secondary">Aucun module pour le moment.</span>
                                                     <span></span>
                                                 </div>
                                             @endif
