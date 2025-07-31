@@ -142,6 +142,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/decouvrir', [DiscoverController::class, 'index'])->name('decouvrir');
 
     Route::get('/formations/{id}', [FormationController::class, 'show'])->name('details');
+    //caisse
+    Route::get('/caisse', function () {
+        return view('dashboard_utilisateur.caisse');
+    })->name('caisse');
+
 });
 
 
