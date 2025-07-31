@@ -671,9 +671,6 @@
                 <a href="{{ route('calendrier') }}" class="list-group-item list-group-item-action bg-dark text-white">
                     <i class="fas fa-calendar-alt me-2"></i> Calendrier
                 </a>
-                <a href="{{ route('messages') }}" class="list-group-item list-group-item-action bg-dark text-white">
-                    <i class="fas fa-comment-alt me-2"></i> Message
-                </a>
                 <a href="{{ route('paiement1') }}" class="list-group-item list-group-item-action bg-dark text-white">
                     <i class="fas fa-credit-card me-2"></i> Paiement
                 </a>
@@ -694,7 +691,7 @@
                     <i class="fas fa-cog me-2"></i> Paramètre
                 </a>
 
-                <div class="sidebar-promo p-3 mx-3 mt-4 rounded text-center">
+                <!--<div class="sidebar-promo p-3 mx-3 mt-4 rounded text-center">
                     <p class="text-white mb-2 fw-bold">Profitez de</p>
                     <p class="text-white fs-3 fw-bold mb-1">-30%</p>
                     <p class="text-white mb-2">sur la Formation en montage vidéo</p>
@@ -706,7 +703,7 @@
                         <i class="fas fa-star text-warning"></i>
                     </div>
                     <button class="btn btn-primary w-100 rounded-pill">Profitez!</button>
-                </div>
+                </div>-->
             </div>
         </div>
 
@@ -739,7 +736,6 @@
                             <li><a href="{{ route('modifier profil') }}"><i class="fas fa-user-edit me-2"></i> Modifier le profil</a></li>
                             <li><a href="{{ route('changer mot de passe') }}"><i class="fas fa-key me-2"></i> Changer le mot de passe</a></li>
                             <li><a href="{{ route('notification') }}"><i class="fas fa-bell me-2"></i> Notification</a></li>
-                            <li><a href="{{ route('souscription') }}"><i class="fas fa-file-invoice-dollar me-2"></i> Souscription à un abonnement</a></li>
 
                             <li class="settings-menu-title mt-4">préférence</li>
                             <li><a href="#"><i class="fas fa-language me-2"></i> Langue de travail</a></li>
@@ -747,7 +743,6 @@
 
                             <li class="settings-menu-title mt-4">applications</li>
                             <li><a href="#"><i class="fas fa-share-alt me-2"></i> Médias sociaux</a></li>
-                            <li><a href="#"><i class="fas fa-link me-2"></i> Intégration des applications</a></li>
 
                             <li class="mt-auto logout-item">
                                 <form action="{{ route('logout') }}" method="POST" id="logout-form">
@@ -803,38 +798,6 @@
                                     </div>
                                 </form>
                             </div>
-                        </div>
-
-                        <div class="card general-card mb-4">
-                            <div class="card-body">
-                                <h5 class="card-title">Réglage du Message</h5>
-                                <p class="card-subtitle mb-3 text-muted">Définissez vos préférences pour des messages clairs et accessibles pouvant être partagés avec tout le monde.</p>
-                                <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <span class="text-white-50">Afficher lire le reçu</span>
-                                    <div class="form-check form-switch custom-switch">
-                                        <input class="form-check-input" type="checkbox" id="readReceipts" checked>
-                                        <label class="form-check-label d-none" for="readReceipts">Toggle read receipts</label>
-                                    </div>
-                                </div>
-                                <p class="text-muted small-text mb-3">Informez les personnes avec lesquelles vous envoyez des messages lorsque vous avez vu leurs messages.</p>
-
-                                <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <span class="text-white-50">Autoriser le message pour tous</span>
-                                    <div class="form-check form-switch custom-switch">
-                                        <input class="form-check-input" type="checkbox" id="allowAllMessages" checked>
-                                        <label class="form-check-label d-none" for="allowAllMessages">Toggle allow all messages</label>
-                                    </div>
-                                </div>
-                                <p class="text-muted small-text mb-4">Chaque membre du groupe bien sûr est bienvenu pour discuter avec vous à tout moment.</p>
-
-                                <div class="mt-4">
-                                    <button class="btn btn-link text-danger p-0 delete-account-btn">Supprimer le compte</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="d-flex justify-content-end mt-4">
-                            <button class="btn btn-save">Sauvegarder</button>
                         </div>
                     </div>
                 </div>

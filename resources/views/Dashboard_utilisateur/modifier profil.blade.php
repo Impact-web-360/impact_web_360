@@ -565,9 +565,6 @@
                 <a href="{{ route('calendrier') }}" class="list-group-item list-group-item-action bg-dark text-white">
                     <i class="fas fa-calendar-alt me-2"></i> Calendrier
                 </a>
-                <a href="{{ route('messages') }}" class="list-group-item list-group-item-action bg-dark text-white">
-                    <i class="fas fa-comment-alt me-2"></i> Message
-                </a>
                 <a href="{{ route('paiement1') }}" class="list-group-item list-group-item-action bg-dark text-white">
                     <i class="fas fa-credit-card me-2"></i> Paiement
                 </a>
@@ -588,7 +585,7 @@
                     <i class="fas fa-cog me-2"></i> Paramètre
                 </a>
 
-                <div class="sidebar-promo p-3 mx-3 mt-4 rounded text-center">
+                <!--<div class="sidebar-promo p-3 mx-3 mt-4 rounded text-center">
                     <p class="text-white mb-2 fw-bold">Profitez de</p>
                     <p class="text-white fs-3 fw-bold mb-1">-30%</p>
                     <p class="text-white mb-2">sur la Formation en montage vidéo</p>
@@ -600,7 +597,7 @@
                         <i class="fas fa-star text-warning"></i>
                     </div>
                     <button class="btn btn-primary w-100 rounded-pill">Profitez!</button>
-                </div>
+                </div>-->
             </div>
         </div>
 
@@ -633,7 +630,6 @@
                             <li><a href="{{ route('modifier profil') }}" class="active"><i class="fas fa-user-edit me-2"></i> Modifier le profil</a></li>
                             <li><a href="{{ route('changer mot de passe') }}"><i class="fas fa-key me-2"></i> Changer le mot de passe</a></li>
                             <li><a href="{{ route('notification') }}"><i class="fas fa-bell me-2"></i> Notification</a></li>
-                            <li><a href="{{ route('souscription') }}"><i class="fas fa-file-invoice-dollar me-2"></i> Souscription à un abonnement</a></li>
 
                             <li class="settings-menu-title mt-4">préférence</li>
                             <li><a href="#"><i class="fas fa-language me-2"></i> Langue de travail</a></li>
@@ -641,7 +637,6 @@
 
                             <li class="settings-menu-title mt-4">applications</li>
                             <li><a href="#"><i class="fas fa-share-alt me-2"></i> Médias sociaux</a></li>
-                            <li><a href="#"><i class="fas fa-link me-2"></i> Intégration des applications</a></li>
 
 
                             <li class="mt-auto logout-item">

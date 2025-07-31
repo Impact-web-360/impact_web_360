@@ -105,9 +105,6 @@ Route::middleware('auth')->group(function () {
         return view('dashboard_utilisateur.calendrier');
     })->name('calendrier');
 
-    Route::get('/messages', function () {
-        return view('dashboard_utilisateur.message');
-    })->name('messages');
 
     Route::get('/cours', function () {
         return view('dashboard_utilisateur.cours');
@@ -136,9 +133,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/modifier-profil', function () {
         return view('dashboard_utilisateur.modifier_profil');
     })->name('modifier_profil');
-    Route::get('/souscription', function () {
-        return view('dashboard_utilisateur.souscription');
-    })->name('souscription');
     //decouvrir
     Route::get('/decouvrir', [DiscoverController::class, 'index'])->name('decouvrir');
 
