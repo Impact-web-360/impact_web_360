@@ -5,10 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Impact Web - Paiement</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css"
+        rel="stylesheet" />
     <style>
         /* Variables CSS pour faciliter la gestion des couleurs et espacements */
         :root {
@@ -744,109 +748,172 @@
 
             <div class="container-fluid py-4 main-content">
                 <div class="row">
-                    <div class="col-md-8 col-lg-12 general-settings-form animation-fade-in" style="animation-delay: 0.2s;">
-                        <h1 class="page-title">Finalisez votre paiement</h1>
+                    <div class="col-md-8 col-lg-12 general-settings-form animation-fade-in"
+                        style="animation-delay: 0.2s;">
+                        <h1 class="page-title">Finalisez votre paiement pour la formation:</h1>
                         <p class="page-description">
-                            Sélectionnez votre formule d'abonnement et choisissez votre méthode de paiement préférée.
+                            Le coût total de cette formation est de .
+                            Sélectionnez votre méthode de paiement préférée.
                         </p>
                         <div class="card payment-details-card">
                             <h2 class="card-title">Méthode de paiement</h2>
 
+                            {{-- Affichage des messages flash de Laravel (succès, erreur, info) --}}
+                            @if (session('error'))
+                                <div class="alert alert-danger" role="alert">
+                                    {{ session('error') }}
+                                </div>
+                            @endif
+                            @if (session('success'))
+                                <div class="alert alert-success" role="alert">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
+                            @if (session('info'))
+                                <div class="alert alert-info" role="alert">
+                                    {{ session('info') }}
+                                </div>
+                            @endif
+
+                            {{-- Affichage des erreurs de validation de formulaire --}}
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+
                             <div class="payment-method-selection mb-4">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="paymentMethod" id="methodMomo" value="momo" checked>
+                                    <input class="form-check-input" type="radio" name="paymentMethod" id="methodMomo"
+                                        value="momo" {{ old('paymentMethod', 'momo') == 'momo' ? 'checked' : '' }}>
                                     <label class="form-check-label" for="methodMomo">
                                         Paiement Mobile Money (Bénin)
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="paymentMethod" id="methodCard" value="card">
+                                    <input class="form-check-input" type="radio" name="paymentMethod" id="methodCard"
+                                        value="card" {{ old('paymentMethod') == 'card' ? 'checked' : '' }}>
                                     <label class="form-check-label" for="methodCard">
                                         Carte de Crédit/Débit (International)
                                     </label>
                                 </div>
                             </div>
 
-                            <form id="paymentForm">
-                                <div id="momoPaymentSection" class="payment-section active">
+                            {{-- Le formulaire doit pointer vers la route de traitement avec l'ID de la formation --}}
+                            <form id="paymentForm" method="POST"
+                                action="">
+                                @csrf {{-- Directive Laravel pour la protection CSRF --}}
+
+                                <div id="momoPaymentSection" class="payment-section">
                                     <div class="form-group">
                                         <label for="momoOperator">Opérateur Mobile Money</label>
-                                        <select class="form-control" id="momoOperator" required>
+                                        <select class="form-control" id="momoOperator" name="momoOperator" required>
                                             <option value="">Sélectionner un opérateur</option>
-                                            <option value="MTN_MoMo">MTN Mobile Money</option>
-                                            <option value="Moov_MoMo">Moov Money</option>
+                                            <option value="MTN_MoMo"
+                                                {{ old('momoOperator') == 'MTN_MoMo' ? 'selected' : '' }}>MTN Mobile Money
+                                            </option>
+                                            <option value="Moov_MoMo"
+                                                {{ old('momoOperator') == 'Moov_MoMo' ? 'selected' : '' }}>Moov Money
+                                            </option>
                                         </select>
                                     </div>
                                     <div class="form-group">
                                         <label for="momoNumber">Numéro Mobile Money</label>
-                                        <input type="tel" class="form-control" id="momoNumber" placeholder="Ex: 01xxxxxxxx" pattern="[0-9]{10}" title="Veuillez entrer un numéro de téléphone à 8 chiffres" required>
+                                        <input type="tel" class="form-control" id="momoNumber" name="momoNumber"
+                                            placeholder="Ex: 01xxxxxxxx"
+                                           pattern="^(0[1-9][0-9]{8}|[0-9]{8})$"
+                                            title="Veuillez entrer un numéro de téléphone à 8 ou 10 chiffres (commençant par 0x)"
+                                            required value="{{ old('momoNumber', $user->telephone ?? '') }}">
                                     </div>
                                     <p class="text-secondary small mt-3">
-                                        Après avoir cliqué sur "Payer maintenant", une requête de paiement sera envoyée à votre téléphone.
-                                        Veuillez confirmer le paiement sur votre appareil.
+                                        Après avoir cliqué sur "Payer maintenant", une requête de paiement sera envoyée à
+                                        votre téléphone. Veuillez confirmer le paiement sur votre appareil.
                                     </p>
                                 </div>
 
                                 <div id="cardPaymentSection" class="payment-section">
                                     <div class="form-group">
                                         <label for="nomSurCarte">Nom sur la carte</label>
-                                        <input type="text" class="form-control" id="nomSurCarte" placeholder="Nom complet">
+                                        <input type="text" class="form-control" id="nomSurCarte" name="nomSurCarte"
+                                            placeholder="Nom complet" value="">
                                     </div>
 
                                     <div class="form-group">
                                         <label for="numeroCarte">Numéro de carte</label>
-                                        <input type="text" class="form-control" id="numeroCarte" placeholder="XXXX XXXX XXXX XXXX" pattern="[0-9]{13,16}" title="Un numéro de carte valide contient 13 à 16 chiffres">
+                                        <input type="text" class="form-control" id="numeroCarte" name="numeroCarte"
+                                            placeholder="XXXX XXXX XXXX XXXX"
+                                            pattern="[0-9]{13,19}"
+                                            title="Un numéro de carte valide contient entre 13 et 19 chiffres"
+                                            value="{{ old('numeroCarte') }}">
                                     </div>
 
                                     <div class="form-row">
                                         <div class="col">
                                             <div class="form-group">
-                                                <label for="dateExpiration">Date d'expiration</label>
-                                                <input type="text" class="form-control" id="dateExpiration" placeholder="MM / AA" pattern="(0[1-9]|1[0-2])\s?\/\s?([0-9]{2})" title="Format MM / AA (ex: 12 / 28)">
+                                                <label for="dateExpiration">Date d'expiration (MM/AA)</label>
+                                                <input type="text" class="form-control" id="dateExpiration"
+                                                    name="dateExpiration" placeholder="MM/AA"
+                                                    pattern="(0[1-9]|1[0-2])\s?\/\s?([0-9]{2})"
+                                                    title="Format MM/AA (ex: 12/28)" value="{{ old('dateExpiration') }}">
                                             </div>
                                         </div>
                                         <div class="col">
                                             <div class="form-group">
                                                 <label for="codeSecurite">Code de sécurité (CVV)</label>
-                                                <input type="text" class="form-control" id="codeSecurite" placeholder="XXX" pattern="[0-9]{3,4}" title="CVV à 3 ou 4 chiffres">
+                                                <input type="text" class="form-control" id="codeSecurite"
+                                                    name="codeSecurite" placeholder="XXX"
+                                                    pattern="[0-9]{3,4}"
+                                                    title="CVV à 3 ou 4 chiffres" value="{{ old('codeSecurite') }}">
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="adresseFacturation">Adresse de facturation</label>
-                                        <input type="text" class="form-control" id="adresseFacturation" placeholder="Votre adresse">
+                                        <input type="text" class="form-control" id="adresseFacturation"
+                                            name="adresseFacturation" placeholder="Votre adresse"
+                                            value="{{ old('adresseFacturation') }}">
                                     </div>
 
                                     <div class="form-group">
                                         <label for="ville">Ville</label>
-                                        <input type="text" class="form-control" id="ville" placeholder="Votre ville">
+                                        <input type="text" class="form-control" id="ville" name="ville"
+                                            placeholder="Votre ville" value="{{ old('ville', $user->ville ?? '') }}">
                                     </div>
 
                                     <div class="form-row">
                                         <div class="col">
                                             <div class="form-group">
                                                 <label for="codePostal">Code postal</label>
-                                                <input type="text" class="form-control" id="codePostal" placeholder="Ex: 75001">
+                                                <input type="text" class="form-control" id="codePostal"
+                                                    name="codePostal" placeholder="Ex: 75001"
+                                                    value="{{ old('codePostal') }}">
                                             </div>
                                         </div>
                                         <div class="col">
                                             <div class="form-group">
                                                 <label for="pays">Pays</label>
-                                                <select class="form-control" id="pays">
+                                                <select class="form-control" id="pays" name="pays">
                                                     <option value="">Sélectionner un pays</option>
-                                                    <option value="Benin" selected>Bénin</option>
-                                                    <option value="France">France</option>
-                                                    <option value="Canada">Canada</option>
-                                                    <option value="USA">États-Unis</option>
-                                                    </select>
+                                                    {{-- Utilisation de Auth::user()->pays pour pré-sélectionner --}}
+                                                    <option value="Benin" {{ old('pays', $user->pays ?? '') == 'Benin' ? 'selected' : '' }}>Bénin</option>
+                                                    <option value="France" {{ old('pays') == 'France' ? 'selected' : '' }}>France</option>
+                                                    <option value="Canada" {{ old('pays') == 'Canada' ? 'selected' : '' }}>Canada</option>
+                                                    <option value="USA" {{ old('pays') == 'USA' ? 'selected' : '' }}>États-Unis</option>
+                                                    {{-- Ajoutez d'autres pays au besoin --}}
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="toggle-switch">
-                                    <input class="form-check-input" type="checkbox" id="autoRenewalToggle" checked>
+                                    <input class="form-check-input" type="checkbox" id="autoRenewalToggle"
+                                        name="autoRenewalToggle" {{ old('autoRenewalToggle') ? 'checked' : '' }}>
                                     <label for="autoRenewalToggle">
                                         Activer le renouvellement automatique
                                         <span>(vous recevrez une notification avant expiration)</span>
@@ -872,18 +939,18 @@
         var el = document.getElementById("wrapper");
         var toggleButton = document.getElementById("sidebarToggle");
 
-        toggleButton.onclick = function () {
+        toggleButton.onclick = function() {
             el.classList.toggle("toggled");
         };
 
-        // Définir 'Paiement' dans la barre latérale comme actif
-        document.addEventListener('DOMContentLoaded', function () {
+        // Définir 'Paiement' dans la barre latérale comme actif (si pertinent)
+        document.addEventListener('DOMContentLoaded', function() {
             const sidebarLinks = document.querySelectorAll('#sidebar-wrapper .list-group-item');
             sidebarLinks.forEach(link => {
                 link.classList.remove('active');
             });
-            // Correction ici: Utilisez la bonne sélecteur pour votre lien de paiement
-            const paiementLink = document.querySelector('a[href*="paiement"]'); // Plus générique si l'URL est dynamique
+            // Cible le lien de paiement avec la route spécifique
+            const paiementLink = document.querySelector('a[href*=""]');
             if (paiementLink) {
                 paiementLink.classList.add('active');
             }
@@ -893,19 +960,17 @@
             const cardRadio = document.getElementById('methodCard');
             const momoSection = document.getElementById('momoPaymentSection');
             const cardSection = document.getElementById('cardPaymentSection');
-            const paymentForm = document.getElementById('paymentForm');
 
             function togglePaymentSections() {
+                // Gérer les attributs 'required' pour la validation côté client
                 if (momoRadio.checked) {
                     momoSection.classList.add('active');
                     cardSection.classList.remove('active');
-                    // Définir les attributs 'required' pour les champs MoMo
                     momoSection.querySelectorAll('input, select').forEach(input => input.setAttribute('required', ''));
                     cardSection.querySelectorAll('input, select').forEach(input => input.removeAttribute('required'));
                 } else if (cardRadio.checked) {
                     momoSection.classList.remove('active');
                     cardSection.classList.add('active');
-                    // Définir les attributs 'required' pour les champs de carte
                     cardSection.querySelectorAll('input, select').forEach(input => input.setAttribute('required', ''));
                     momoSection.querySelectorAll('input, select').forEach(input => input.removeAttribute('required'));
                 }
@@ -915,55 +980,15 @@
             momoRadio.addEventListener('change', togglePaymentSections);
             cardRadio.addEventListener('change', togglePaymentSections);
 
-            // Bascule initiale basée sur l'état coché par défaut
-            togglePaymentSections();
-
-            // Exemple de soumission de formulaire (vous enverriez normalement ceci à un backend)
-            paymentForm.addEventListener('submit', function(event) {
-                event.preventDefault(); // Empêcher la soumission par défaut du formulaire
-
-                // Il n'y a pas de 'subscriptionPlan' dans le HTML fourni, donc cette ligne peut causer une erreur.
-                // Assurez-vous d'avoir un élément radio group avec name="subscriptionPlan" si vous voulez l'utiliser.
-                // Pour l'instant, je vais commenter ou modifier cette ligne pour éviter l'erreur.
-                let selectedPlan = "Non spécifié"; // Valeur par défaut si aucun plan n'est sélectionné dans le formulaire actuel
-
-                let paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
-                let autoRenewal = document.getElementById('autoRenewalToggle').checked;
-
-                console.log('Plan sélectionné :', selectedPlan);
-                console.log('Méthode de paiement :', paymentMethod);
-                console.log('Renouvellement automatique :', autoRenewal);
-
-                if (paymentMethod === 'momo') {
-                    let momoOperator = document.getElementById('momoOperator').value;
-                    let momoNumber = document.getElementById('momoNumber').value;
-                    console.log('Opérateur MoMo :', momoOperator);
-                    console.log('Numéro MoMo :', momoNumber);
-                    alert(Paiement MoMo via ${momoOperator} pour ${selectedPlan} en cours. Veuillez confirmer sur votre téléphone.);
-                    // Ici, vous intégreriez avec une passerelle de paiement MoMo
-                } else if (paymentMethod === 'card') {
-                    let cardName = document.getElementById('nomSurCarte').value;
-                    let cardNumber = document.getElementById('numeroCarte').value;
-                    let expiryDate = document.getElementById('dateExpiration').value;
-                    let cvv = document.getElementById('codeSecurite').value;
-                    let billingAddress = document.getElementById('adresseFacturation').value;
-                    let city = document.getElementById('ville').value;
-                    let postalCode = document.getElementById('codePostal').value;
-                    let country = document.getElementById('pays').value;
-
-                    console.log('Nom sur la carte :', cardName);
-                    console.log('Numéro de carte :', cardNumber);
-                    console.log('Date d\'expiration :', expiryDate);
-                    console.log('CVV :', cvv);
-                    console.log('Adresse de facturation :', billingAddress);
-                    console.log('Ville :', city);
-                    console.log('Code postal :', postalCode);
-                    console.log('Pays :', country);
-                    alert(Paiement par carte pour ${selectedPlan} en cours.);
-                    // Ici, vous intégreriez avec une passerelle de paiement internationale (par ex. Stripe, PayPal)
-                }
-                
-            });
+            // Bascule initiale basée sur l'état coché par défaut ou sur old('paymentMethod')
+            // Ceci assure que la section correcte est affichée si le formulaire est rechargé après une erreur de validation
+            const initialPaymentMethod = "{{ old('paymentMethod', 'momo') }}"; // 'momo' par défaut
+            if (initialPaymentMethod === 'card') {
+                cardRadio.checked = true;
+            } else {
+                momoRadio.checked = true;
+            }
+            togglePaymentSections(); // Appeler une fois au chargement pour définir l'état initial des champs 'required'
         });
     </script>
 </body>

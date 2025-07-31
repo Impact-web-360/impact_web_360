@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -61,10 +62,16 @@ class User extends Authenticatable
 
     
 
-    public function formation()
+    public function formations(): BelongsToMany
     {
-        return $this->belongsToMany(Formation::class, 'user_formation', 'id_user', 'id_formation')
-            ->withTimestamps();
+        return $this->belongsToMany(Formation::class, 'user_formations')
+                    ->withPivot('payment_status', 'payment_method', 'transaction_id', 'paid_amount')
+                    ->withTimestamps();
+    }
+
+    public function hasAccessToFormation(int $formationId): bool
+    {
+        return $this->formations()->where('formation_id', $formationId)->wherePivot('payment_status', 'completed')->exists();
     }
 
     public function evenement()
@@ -74,3 +81,5 @@ class User extends Authenticatable
     }
 
 }
+
+
