@@ -174,7 +174,6 @@
         .course-detail-header img {
             width: 100%;
             height: 250px;
-            object-fit: cover;
             border-radius: 0.5rem;
             margin-bottom: 1.5rem;
         }
