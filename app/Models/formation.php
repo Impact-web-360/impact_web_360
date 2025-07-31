@@ -6,13 +6,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany; // Ajoutez ceci
 
 class Formation extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'category_id', 
+        'category_id',
         'title',
         'description',
         'image',
@@ -20,7 +21,7 @@ class Formation extends Model
         'tools',
         'reviews_count',
         'price',
-        'rating', 
+        'rating',
         'mentor',
         'mentor_title',
         'mentor_avatar',
@@ -33,15 +34,15 @@ class Formation extends Model
         'objectives' => 'array',
         'tools' => 'array',
         'price' => 'decimal:2',
-        'rating' => 'float', 
+        'rating' => 'float',
         'mentor_rating' => 'decimal:1',
     ];
-   
-    public function categorie() 
+
+    public function categorie(): BelongsTo // Spécifiez le type de retour
     {
-        return $this->belongsTo(Categorie::class, 'category_id'); 
+        return $this->belongsTo(Categorie::class, 'category_id');
     }
-    
+
     /**
      * Une formation a plusieurs modules.
      */
@@ -52,11 +53,25 @@ class Formation extends Model
 
     /**
      * Accesseur pour calculer le nombre total de vidéos à partir des modules.
-     * Si vous voulez le stocker en base, vous devrez ajuster.
+     * Note: Si vous aviez une colonne 'total_videos' dans la DB comme dans la migration précédente,
+     * cet accesseur peut remplacer son besoin si le calcul est toujours dynamique.
+     * Sinon, vous devrez le mettre à jour lors de l'ajout/suppression de modules.
      */
     public function getTotalVideosAttribute(): int
     {
-        // Compte le nombre de modules qui ont une vidéo_path non nulle
         return $this->modules()->whereNotNull('video_path')->count();
+    }
+
+    /**
+     * Les utilisateurs qui ont acheté cette formation.
+     * Cette relation est cruciale pour le suivi des paiements.
+     */
+    public function users(): BelongsToMany // Spécifiez le type de retour
+    {
+        // Assurez-vous que 'user_formations' est bien le nom de votre table pivot.
+        // Les withPivot sont essentiels pour récupérer les colonnes de la table pivot.
+        return $this->belongsToMany(User::class, 'user_formations')
+                    ->withPivot('status', 'paid_at', 'amount_paid', 'auto_renewal_enabled', 'fedapay_transaction_id')
+                    ->withTimestamps();
     }
 }

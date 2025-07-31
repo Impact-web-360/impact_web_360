@@ -661,7 +661,7 @@
                                     <i class="fas fa-play-circle me-2"></i> Accéder au cours
                                 </a>
                             @else
-                                <a href="{{ route('caisse') }}" class="btn btn-add-to-cart">
+                                <a href="{{ route('caisse', ['formationId' => $formation->id]) }}" class="btn btn-add-to-cart">
                                     <i class="fas fa-shopping-bag me-2"></i> Passer à la caisse
                                 </a>
                             @endif

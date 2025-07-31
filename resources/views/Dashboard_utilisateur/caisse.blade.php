@@ -684,7 +684,8 @@
                 <a href="{{ route('messages') }}" class="list-group-item list-group-item-action bg-dark text-white">
                     <i class="fas fa-comment-alt me-2"></i> Message
                 </a>
-                <a href="{{ route('paiement1') }}"
+                
+                <a href="{{ route('caisse', ['formationId' => $formation->id ?? 1]) }}"
                     class="list-group-item list-group-item-action bg-dark text-white active">
                     <i class="fas fa-credit-card me-2"></i> Paiement
                 </a>
@@ -750,10 +751,11 @@
                 <div class="row">
                     <div class="col-md-8 col-lg-12 general-settings-form animation-fade-in"
                         style="animation-delay: 0.2s;">
-                                <h1 class="page-title">Finalisez votre paiement pour la formation:</h1>
+                        {{-- Utilisation de la variable $formation passée par le contrôleur --}}
+                        <h1 class="page-title">Finalisez votre paiement pour la formation: *{{ $formation->title }}*</h1>
                         <p class="page-description">
-                            Le coût total de cette formation est de *[Montant de la Formation]*.
-                            Veuillez procéder au paiement via *Fedapay*.
+                            Le coût total de cette formation est de *{{ number_format($formation->price, 0, ',', ' ') }} XOF*.
+                            Veuillez procéder au paiement via Fedapay.
                         </p>
                         <div class="card payment-details-card">
                             <h2 class="card-title">Paiement via Fedapay</h2>
@@ -786,10 +788,11 @@
                                 </div>
                             @endif
 
-                            {{-- Le formulaire doit pointer vers la route de traitement avec l'ID de la formation --}}
-                            {{-- REMPLACER "YOUR_COURSE_ID" par l'ID réel de la formation si nécessaire --}}
-                            <form id="paymentForm" method="POST" action="">
+                            <form id="paymentForm" action="{{ route('caisse.process') }}" method="POST">
                                 @csrf {{-- Directive Laravel pour la protection CSRF --}}
+
+                                {{-- Champ caché pour l'ID de la formation --}}
+                                <input type="hidden" name="formation_id" value="{{ $formation->id }}">
 
                                 {{-- Section pour Fedapay - toujours visible --}}
                                 <div id="fedapayPaymentSection" class="payment-section active">
@@ -800,10 +803,13 @@
                                     <div class="form-group">
                                         <label for="fedapayNumber">Numéro de Téléphone</label>
                                         <input type="tel" class="form-control" id="fedapayNumber" name="fedapayNumber"
-                                            placeholder="Ex: 01xxxxxxxx"
-                                            pattern="^(0[1-9][0-9]{8}|[0-9]{8})$"
+                                            placeholder="Ex: +229xxxxxxxxxx"
+                                            pattern="^(\+[0-9]{8,15}|0[1-9][0-9]{8})$"
                                             title="Veuillez entrer un numéro de téléphone à 8 ou 10 chiffres (commençant par 0x)"
                                             required value="{{ old('fedapayNumber', $user->telephone ?? '') }}">
+                                            @error('fedapayNumber')
+                                                <div class="text-danger mt-2">{{ $message }}</div>
+                                            @enderror
                                     </div>
                                     <p class="text-secondary small mt-3">
                                         Assurez-vous que le numéro est correct. Vous serez redirigé pour choisir votre mode de paiement (Mobile Money ou Carte) sur la plateforme Fedapay.
@@ -848,11 +854,21 @@
             sidebarLinks.forEach(link => {
                 link.classList.remove('active');
             });
-            // Cible le lien de paiement avec la route spécifique
-            const paiementLink = document.querySelector('a[href*="paiement1"]');
+            // Cible le lien de paiement avec la route spécifique, en s'assurant qu'il correspond à l'ID de la formation actuelle
+            // Cette partie suppose que l'ID de la formation est dans l'URL ou accessible globalement si le lien doit rester actif.
+            // Pour ce scénario, le lien actif devrait être déterminé par la route active, pas juste le texte.
+            const currentPath = window.location.pathname;
+            const paiementLink = document.querySelector(a[href="${currentPath}"]); // Correspond à l'URL exacte si possible
             if (paiementLink) {
                 paiementLink.classList.add('active');
+            } else {
+                // Fallback si l'URL ne correspond pas exactement, active le lien de paiement générique
+                const genericPaiementLink = document.querySelector('a[href*="paiement"]');
+                if (genericPaiementLink) {
+                    genericPaiementLink.classList.add('active');
+                }
             }
+
 
             // Puisqu'il n'y a qu'une seule méthode, nous n'avons pas besoin de logique de bascule.
             // Assurez-vous simplement que la section Fedapay est active par défaut.

@@ -59,27 +59,18 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-
-    
-
+    /**
+     * Les formations que l'utilisateur a achetées.
+     * Utilise le modèle pivot UserFormation.
+     */
     public function formations(): BelongsToMany
     {
         return $this->belongsToMany(Formation::class, 'user_formations')
-                    ->withPivot('payment_status', 'payment_method', 'transaction_id', 'paid_amount')
+                    ->using(UserFormation::class) // Spécifie le modèle de la table pivot
+                    ->withPivot('status', 'paid_at', 'amount_paid', 'auto_renewal_enabled', 'fedapay_transaction_id')
                     ->withTimestamps();
-    }
 
-    public function hasAccessToFormation(int $formationId): bool
-    {
-        return $this->formations()->where('formation_id', $formationId)->wherePivot('payment_status', 'completed')->exists();
-    }
 
-    public function evenement()
-    {
-        return $this->belongsToMany(Evenement::class, 'user_evenement', 'id_user', 'id_evenement')
-            ->withTimestamps();
     }
 
 }
-
-

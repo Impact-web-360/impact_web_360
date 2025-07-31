@@ -17,6 +17,7 @@ use App\Http\Controllers\DiscoverController;
 use App\Http\Controllers\ParametresController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Requests\FormationRequest;
+use App\Http\Controllers\PaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -143,9 +144,19 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/formations/{id}', [FormationController::class, 'show'])->name('details');
     //caisse
-    Route::get('/caisse', function () {
-        return view('dashboard_utilisateur.caisse');
-    })->name('caisse');
+    Route::get('/fedapay/callback', [PaymentController::class, 'handleFedapayCallback'])->name('fedapay.callback');
+    Route::post('/fedapay/webhook', [PaymentController::class, 'handleWebhook'])->name('fedapay.webhook');
+    Route::post('/fedapay/callback/{user_formation_id}', [PaymentController::class, 'handleCallback'])->name('fedapay.callback');
+
+    Route::get('/caisse/{formationId}', [PaymentController::class, 'showPaymentForm'])
+    ->name('caisse');
+    Route::post('/caisse', [PaymentController::class, 'processPayment'])
+    ->name('caisse.process');
+    
+    Route::get('/paiement_success', [PaymentController::class, 'showPaymentSuccess'])
+    ->name('Dashboard_utilisateur.paiement_success');
+    Route::get('/paiement_failure', [PaymentController::class, 'showPaymentFailure'])
+    ->name('Dashboard_utilisateur.paiement_failure');
 
 });
 

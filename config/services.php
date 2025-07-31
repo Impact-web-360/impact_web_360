@@ -43,4 +43,11 @@ return [
     'redirect' => env('FACEBOOK_REDIRECT_URI'),
 ],
 
+'fedapay' => [
+        'secret_key' => env('FEDAPAY_SECRET_KEY'),
+        'public_key' => env('FEDAPAY_PUBLIC_KEY'),
+        'webhook_secret' => env('FEDAPAY_WEBHOOK_SECRET'),
+        'environment' => env('FEDAPAY_ENV', 'sandbox'),
+],
+
 ];
