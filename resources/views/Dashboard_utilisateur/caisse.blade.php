@@ -750,13 +750,13 @@
                 <div class="row">
                     <div class="col-md-8 col-lg-12 general-settings-form animation-fade-in"
                         style="animation-delay: 0.2s;">
-                        <h1 class="page-title">Finalisez votre paiement pour la formation:</h1>
+                                <h1 class="page-title">Finalisez votre paiement pour la formation:</h1>
                         <p class="page-description">
-                            Le coût total de cette formation est de .
-                            Sélectionnez votre méthode de paiement préférée.
+                            Le coût total de cette formation est de *[Montant de la Formation]*.
+                            Veuillez procéder au paiement via *Fedapay*.
                         </p>
                         <div class="card payment-details-card">
-                            <h2 class="card-title">Méthode de paiement</h2>
+                            <h2 class="card-title">Paiement via Fedapay</h2>
 
                             {{-- Affichage des messages flash de Laravel (succès, erreur, info) --}}
                             @if (session('error'))
@@ -786,129 +786,28 @@
                                 </div>
                             @endif
 
-                            <div class="payment-method-selection mb-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="paymentMethod" id="methodMomo"
-                                        value="momo" {{ old('paymentMethod', 'momo') == 'momo' ? 'checked' : '' }}>
-                                    <label class="form-check-label" for="methodMomo">
-                                        Paiement Mobile Money (Bénin)
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="paymentMethod" id="methodCard"
-                                        value="card" {{ old('paymentMethod') == 'card' ? 'checked' : '' }}>
-                                    <label class="form-check-label" for="methodCard">
-                                        Carte de Crédit/Débit (International)
-                                    </label>
-                                </div>
-                            </div>
-
                             {{-- Le formulaire doit pointer vers la route de traitement avec l'ID de la formation --}}
-                            <form id="paymentForm" method="POST"
-                                action="">
+                            {{-- REMPLACER "YOUR_COURSE_ID" par l'ID réel de la formation si nécessaire --}}
+                            <form id="paymentForm" method="POST" action="">
                                 @csrf {{-- Directive Laravel pour la protection CSRF --}}
 
-                                <div id="momoPaymentSection" class="payment-section">
+                                {{-- Section pour Fedapay - toujours visible --}}
+                                <div id="fedapayPaymentSection" class="payment-section active">
+                                    <p class="text-secondary small">
+                                        Vous serez redirigé vers la page sécurisée de Fedapay pour compléter votre paiement.
+                                        Veuillez saisir votre numéro de téléphone pour la transaction.
+                                    </p>
                                     <div class="form-group">
-                                        <label for="momoOperator">Opérateur Mobile Money</label>
-                                        <select class="form-control" id="momoOperator" name="momoOperator" required>
-                                            <option value="">Sélectionner un opérateur</option>
-                                            <option value="MTN_MoMo"
-                                                {{ old('momoOperator') == 'MTN_MoMo' ? 'selected' : '' }}>MTN Mobile Money
-                                            </option>
-                                            <option value="Moov_MoMo"
-                                                {{ old('momoOperator') == 'Moov_MoMo' ? 'selected' : '' }}>Moov Money
-                                            </option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="momoNumber">Numéro Mobile Money</label>
-                                        <input type="tel" class="form-control" id="momoNumber" name="momoNumber"
+                                        <label for="fedapayNumber">Numéro de Téléphone</label>
+                                        <input type="tel" class="form-control" id="fedapayNumber" name="fedapayNumber"
                                             placeholder="Ex: 01xxxxxxxx"
-                                           pattern="^(0[1-9][0-9]{8}|[0-9]{8})$"
+                                            pattern="^(0[1-9][0-9]{8}|[0-9]{8})$"
                                             title="Veuillez entrer un numéro de téléphone à 8 ou 10 chiffres (commençant par 0x)"
-                                            required value="{{ old('momoNumber', $user->telephone ?? '') }}">
+                                            required value="{{ old('fedapayNumber', $user->telephone ?? '') }}">
                                     </div>
                                     <p class="text-secondary small mt-3">
-                                        Après avoir cliqué sur "Payer maintenant", une requête de paiement sera envoyée à
-                                        votre téléphone. Veuillez confirmer le paiement sur votre appareil.
+                                        Assurez-vous que le numéro est correct. Vous serez redirigé pour choisir votre mode de paiement (Mobile Money ou Carte) sur la plateforme Fedapay.
                                     </p>
-                                </div>
-
-                                <div id="cardPaymentSection" class="payment-section">
-                                    <div class="form-group">
-                                        <label for="nomSurCarte">Nom sur la carte</label>
-                                        <input type="text" class="form-control" id="nomSurCarte" name="nomSurCarte"
-                                            placeholder="Nom complet" value="">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="numeroCarte">Numéro de carte</label>
-                                        <input type="text" class="form-control" id="numeroCarte" name="numeroCarte"
-                                            placeholder="XXXX XXXX XXXX XXXX"
-                                            pattern="[0-9]{13,19}"
-                                            title="Un numéro de carte valide contient entre 13 et 19 chiffres"
-                                            value="{{ old('numeroCarte') }}">
-                                    </div>
-
-                                    <div class="form-row">
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <label for="dateExpiration">Date d'expiration (MM/AA)</label>
-                                                <input type="text" class="form-control" id="dateExpiration"
-                                                    name="dateExpiration" placeholder="MM/AA"
-                                                    pattern="(0[1-9]|1[0-2])\s?\/\s?([0-9]{2})"
-                                                    title="Format MM/AA (ex: 12/28)" value="{{ old('dateExpiration') }}">
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <label for="codeSecurite">Code de sécurité (CVV)</label>
-                                                <input type="text" class="form-control" id="codeSecurite"
-                                                    name="codeSecurite" placeholder="XXX"
-                                                    pattern="[0-9]{3,4}"
-                                                    title="CVV à 3 ou 4 chiffres" value="{{ old('codeSecurite') }}">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="adresseFacturation">Adresse de facturation</label>
-                                        <input type="text" class="form-control" id="adresseFacturation"
-                                            name="adresseFacturation" placeholder="Votre adresse"
-                                            value="{{ old('adresseFacturation') }}">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="ville">Ville</label>
-                                        <input type="text" class="form-control" id="ville" name="ville"
-                                            placeholder="Votre ville" value="{{ old('ville', $user->ville ?? '') }}">
-                                    </div>
-
-                                    <div class="form-row">
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <label for="codePostal">Code postal</label>
-                                                <input type="text" class="form-control" id="codePostal"
-                                                    name="codePostal" placeholder="Ex: 75001"
-                                                    value="{{ old('codePostal') }}">
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <label for="pays">Pays</label>
-                                                <select class="form-control" id="pays" name="pays">
-                                                    <option value="">Sélectionner un pays</option>
-                                                    {{-- Utilisation de Auth::user()->pays pour pré-sélectionner --}}
-                                                    <option value="Benin" {{ old('pays', $user->pays ?? '') == 'Benin' ? 'selected' : '' }}>Bénin</option>
-                                                    <option value="France" {{ old('pays') == 'France' ? 'selected' : '' }}>France</option>
-                                                    <option value="Canada" {{ old('pays') == 'Canada' ? 'selected' : '' }}>Canada</option>
-                                                    <option value="USA" {{ old('pays') == 'USA' ? 'selected' : '' }}>États-Unis</option>
-                                                    {{-- Ajoutez d'autres pays au besoin --}}
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
 
                                 <div class="toggle-switch">
@@ -950,45 +849,16 @@
                 link.classList.remove('active');
             });
             // Cible le lien de paiement avec la route spécifique
-            const paiementLink = document.querySelector('a[href*=""]');
+            const paiementLink = document.querySelector('a[href*="paiement1"]');
             if (paiementLink) {
                 paiementLink.classList.add('active');
             }
 
-            // Logique de sélection du mode de paiement
-            const momoRadio = document.getElementById('methodMomo');
-            const cardRadio = document.getElementById('methodCard');
-            const momoSection = document.getElementById('momoPaymentSection');
-            const cardSection = document.getElementById('cardPaymentSection');
-
-            function togglePaymentSections() {
-                // Gérer les attributs 'required' pour la validation côté client
-                if (momoRadio.checked) {
-                    momoSection.classList.add('active');
-                    cardSection.classList.remove('active');
-                    momoSection.querySelectorAll('input, select').forEach(input => input.setAttribute('required', ''));
-                    cardSection.querySelectorAll('input, select').forEach(input => input.removeAttribute('required'));
-                } else if (cardRadio.checked) {
-                    momoSection.classList.remove('active');
-                    cardSection.classList.add('active');
-                    cardSection.querySelectorAll('input, select').forEach(input => input.setAttribute('required', ''));
-                    momoSection.querySelectorAll('input, select').forEach(input => input.removeAttribute('required'));
-                }
-            }
-
-            // Ajouter les écouteurs d'événements
-            momoRadio.addEventListener('change', togglePaymentSections);
-            cardRadio.addEventListener('change', togglePaymentSections);
-
-            // Bascule initiale basée sur l'état coché par défaut ou sur old('paymentMethod')
-            // Ceci assure que la section correcte est affichée si le formulaire est rechargé après une erreur de validation
-            const initialPaymentMethod = "{{ old('paymentMethod', 'momo') }}"; // 'momo' par défaut
-            if (initialPaymentMethod === 'card') {
-                cardRadio.checked = true;
-            } else {
-                momoRadio.checked = true;
-            }
-            togglePaymentSections(); // Appeler une fois au chargement pour définir l'état initial des champs 'required'
+            // Puisqu'il n'y a qu'une seule méthode, nous n'avons pas besoin de logique de bascule.
+            // Assurez-vous simplement que la section Fedapay est active par défaut.
+            const fedapaySection = document.getElementById('fedapayPaymentSection');
+            fedapaySection.classList.add('active');
+            document.getElementById('fedapayNumber').setAttribute('required', '');
         });
     </script>
 </body>
