@@ -20,6 +20,7 @@ use App\Http\Requests\FormationRequest;
 use App\Http\Controllers\PaymentController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use App\Http\Controllers\ThemeController;
+use App\Http\Controllers\SupportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -181,7 +182,9 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),
 
             Route::post('/themes', [ThemeController::class, 'update'])->name('themes.update');
 
-            });
+            Route::get('/soutien', [SupportController::class, 'index'])->name('soutien');
+            Route::post('/soutien', [SupportController::class, 'submitContactForm'])->name('soutien.contact');
+    });
 });
 
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
