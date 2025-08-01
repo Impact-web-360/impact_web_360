@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="{{ app()->getLocale() }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mon emploi du temps - Impact Web</title>
+    <title>{{ __('Mon emploi du temps') }} - Impact Web</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
@@ -439,9 +439,125 @@
         .dropdown-divider {
             border-top: 1px solid var(--border-color) !important;
         }
+
+                 :root {
+        --primary-color: #FF0000;
+        --secondary-color: #6c757d;
+        --dark-bg: #1A1A1A;
+        --dark-sidebar-bg: #212121;
+        --dark-card-bg: #2C2C2C;
+        --border-color: #3A3A3A;
+        --text-color-light: #F8F9FA;
+        --text-color-secondary: #B0B0B0;
+        --save-button-bg: #007bff;
+        --save-button-hover: #0056b3;
+        --switch-bg-off: #4F4F4F;
+        --input-group-bg: #3A3A3A;
+        }
+
+        body {
+        background-color: var(--dark-bg);
+        color: var(--text-color-light);
+        }
+
+        .bg-dark,
+        .bg-dark-secondary {
+        background-color: var(--dark-sidebar-bg) !important;
+        }
+
+        .list-group-item {
+        background-color: var(--dark-sidebar-bg);
+        color: var(--text-color-secondary);
+        }
+
+        .themes-card {
+        background-color: var(--dark-card-bg);
+        border-color: var(--border-color);
+        }
+
+        /* --- Thème Clair --- */
+        body.theme-light {
+        --primary-color: #0d6efd;
+        --secondary-color: #6c757d;
+        --dark-bg: #F0F2F5; /* Fond principal clair */
+        --dark-sidebar-bg: #000; /* Sidebar plus sombre */
+        --dark-card-bg: #FFFFFF; /* Cartes blanches */
+        --border-color: #CED4DA;
+        --text-color-light: #212529; /* Texte sombre */
+        --text-color-secondary: #6c757d;
+        --save-button-bg: #0d6efd;
+        --save-button-hover: #0a58ca;
+        --switch-bg-off: #ADB5BD;
+        --input-group-bg: #E9ECEF;
+        }
+
+        body.theme-light .list-group-item {
+        background-color: var(--dark-sidebar-bg);
+        color: var(--text-color-light);
+        }
+
+        body.theme-light .list-group-item:hover {
+        background-color: #DEE2E6;
+        color: var(--primary-color);
+        }
+
+        body.theme-light .list-group-item.active {
+        background-color: var(--primary-color) !important;
+        color: #FFFFFF !important;
+        }
+
+        /* --- Thème Sepia --- */
+        body.theme-sepia {
+        --primary-color: #8B4513;
+        --secondary-color: #708090;
+        --dark-bg: #F4EEDD;
+        --dark-sidebar-bg: #A39686;
+        --dark-card-bg: #E8E0D2;
+        --border-color: #CDB7A3;
+        --text-color-light: #5C4C42;
+        --text-color-secondary: #708090;
+        --save-button-bg: #8B4513;
+        --save-button-hover: #65300F;
+        --switch-bg-off: #BDB7A3;
+        --input-group-bg: #CDB7A3;
+        }
+
+        /* --- Thème Contrast (Haut Contraste) --- */
+        body.theme-contrast {
+        --primary-color: #00FF00;
+        --secondary-color: #FFFFFF;
+        --dark-bg: #000000;
+        --dark-sidebar-bg: #111111;
+        --dark-card-bg: #1c1c1c;
+        --border-color: #00FF00;
+        --text-color-light: #FFFFFF;
+        --text-color-secondary: #00FF00;
+        --save-button-bg: #00FF00;
+        --save-button-hover: #00CC00;
+        --switch-bg-off: #FFFFFF;
+        --input-group-bg: #222222;
+        }
+
+        /* --- Thème Blue (Bleu) --- */
+        body.theme-blue {
+        --primary-color: #3498db;
+        --secondary-color: #90A4AE;
+        --dark-bg: #1e2c4a;
+        --dark-sidebar-bg: #1a2a4b;
+        --dark-card-bg: #2c426b;
+        --border-color: #3e5c91;
+        --text-color-light: #e8eaf6;
+        --text-color-secondary: #90a4ae;
+        --save-button-bg: #3498db;
+        --save-button-hover: #2980b9;
+        --switch-bg-off: #3e5c91;
+        --input-group-bg: #2c426b;
+        }
+
+
     </style>
 </head>
-<body>
+<body class="theme-{{ $userTheme ?? 'dark' }}">
 
     <div class="d-flex" id="wrapper">
         <div class="bg-dark sidebar" id="sidebar-wrapper">
@@ -449,53 +565,39 @@
                 <img src="{{ asset('dossiers/image/Impact-Web-360-Logo1.png') }}" alt="Impact Web Logo" style="max-height: 140px;">
             </div>
             <div class="list-group list-group-flush">
-                <div class="sidebar-section-title text-secondary px-3 pt-3 pb-1">GENERAL</div>
+                <div class="sidebar-section-title text-secondary px-3 pt-3 pb-1">{{ __('GENERAL') }}</div>
                 <a href="{{ route('dashboard') }}" class="list-group-item list-group-item-action bg-dark text-white">
-                    <i class="fas fa-home me-2"></i> Tableau de bord
+                    <i class="fas fa-home me-2"></i> {{ __('Tableau de bord') }}
                 </a>
                 <a href="{{ route('calendrier') }}" class="list-group-item list-group-item-action bg-dark text-white active">
-                    <i class="fas fa-calendar-alt me-2"></i> Calendrier
+                    <i class="fas fa-calendar-alt me-2"></i> {{ __('Calendrier') }}
                 </a>
                 <a href="{{ route('paiement1') }}" class="list-group-item list-group-item-action bg-dark text-white">
-                    <i class="fas fa-credit-card me-2"></i> Paiement
+                    <i class="fas fa-credit-card me-2"></i> {{ __('Paiement') }}
                 </a>
 
-                <div class="sidebar-section-title text-secondary px-3 pt-3 pb-1">COURS</div>
+                <div class="sidebar-section-title text-secondary px-3 pt-3 pb-1">{{ __('COURS') }}</div>
                 <a href="{{ route('cours') }}" class="list-group-item list-group-item-action bg-dark text-white">
-                    <i class="fas fa-book me-2"></i> Mes cours
+                    <i class="fas fa-book me-2"></i> {{ __('Mes cours') }}
                 </a>
                 <a href="{{ route('decouvrir') }}" class="list-group-item list-group-item-action bg-dark text-white">
-                    <i class="fas fa-search me-2"></i> Découvrir
+                    <i class="fas fa-search me-2"></i> {{ __('Découvrir') }}
                 </a>
 
-                <div class="sidebar-section-title text-secondary px-3 pt-3 pb-1">OTHER</div>
+                <div class="sidebar-section-title text-secondary px-3 pt-3 pb-1">{{ __('OTHER') }}</div>
                 <a href="{{ route('soutien') }}" class="list-group-item list-group-item-action bg-dark text-white">
-                    <i class="fas fa-question-circle me-2"></i> Soutien
+                    <i class="fas fa-question-circle me-2"></i> {{ __('Soutien') }}
                 </a>
                 <a href="{{ route('parametres') }}" class="list-group-item list-group-item-action bg-dark text-white">
-                    <i class="fas fa-cog me-2"></i> Paramètre
+                    <i class="fas fa-cog me-2"></i> {{ __('Paramètre') }}
                 </a>
-
-                <!--<div class="sidebar-promo p-3 mx-3 mt-4 rounded text-center">
-                    <p class="text-white mb-2 fw-bold">Profitez de</p>
-                    <p class="text-white fs-3 fw-bold mb-1">-30%</p>
-                    <p class="text-white mb-2">sur la Formation en montage vidéo</p>
-                    <div class="star-rating mb-3">
-                        <i class="fas fa-star text-warning"></i>
-                        <i class="fas fa-star text-warning"></i>
-                        <i class="fas fa-star text-warning"></i>
-                        <i class="fas fa-star text-warning"></i>
-                        <i class="fas fa-star text-warning"></i>
-                    </div>
-                    <button class="btn btn-primary w-100 rounded-pill">Profitez!</button>
-                </div>-->
             </div>
         </div>
         <div id="page-content-wrapper">
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark-secondary border-bottom border-secondary py-3">
                 <div class="container-fluid">
                     <button class="btn btn-danger d-lg-none" id="sidebarToggle"><i class="fas fa-bars"></i></button>
-                    <h2 class="text-white mb-0 ms-3">Mon emploi du temps</h2>
+                    <h2 class="text-white mb-0 ms-3">{{ __('Mon emploi du temps') }}</h2>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ms-auto mt-2 mt-lg-0 align-items-center">
                             <li class="nav-item me-3">
@@ -503,7 +605,7 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-white d-flex align-items-center" href="{{ route('parametres') }}">
-                                    <img src="{{ Auth::user()->image ? asset('storage/' . Auth::user()->image) : asset('logo.png') }}" alt="Photo de profil" style="max-height: 50px;" class="rounded-circle profile-img-preview me-4">
+                                    <img src="{{ Auth::user()->image ? asset('storage/' . Auth::user()->image) : asset('logo.png') }}" alt="{{ __('Photo de profil') }}" style="max-height: 50px;" class="rounded-circle profile-img-preview me-4">
                                 </a>
                             </li>
                         </ul>
@@ -516,7 +618,7 @@
                     <div class="col-lg-8">
                         <div class="card bg-dark-card p-3 mb-4 rounded-lg shadow-sm">
                             <div class="d-flex justify-content-between align-items-center">
-                                <h5 class="text-white mb-0">Planifier une tâche <span class="text-secondary ms-2">Semaine 2 de novembre 2023</span></h5>
+                                <h5 class="text-white mb-0">{{ __('Planifier une tâche') }} <span class="text-secondary ms-2">{{ __('Semaine 2 de novembre 2023') }}</span></h5>
                                 <div class="d-flex align-items-center">
                                     <button class="btn btn-sm btn-icon-custom me-2"><i class="fas fa-ellipsis-v"></i></button>
                                     <button class="btn btn-sm btn-icon-custom"><i class="fas fa-times"></i></button>
@@ -526,34 +628,34 @@
 
                         <div class="schedule-grid bg-dark-card">
                             <div class="schedule-header row gx-0">
-                                <div class="col-1 time-col text-white text-end pe-3">Time</div>
+                                <div class="col-1 time-col text-white text-end pe-3">{{ __('Time') }}</div>
                                 <div class="col text-center text-white">
                                     <div class="day-num">5</div>
-                                    <div class="day-name">Mon</div>
+                                    <div class="day-name">{{ __('Mon') }}</div>
                                 </div>
                                 <div class="col text-center text-white">
                                     <div class="day-num">6</div>
-                                    <div class="day-name">Tue</div>
+                                    <div class="day-name">{{ __('Tue') }}</div>
                                 </div>
                                 <div class="col text-center text-white">
                                     <div class="day-num">7</div>
-                                    <div class="day-name">Wed</div>
+                                    <div class="day-name">{{ __('Wed') }}</div>
                                 </div>
                                 <div class="col text-center text-white">
                                     <div class="day-num">8</div>
-                                    <div class="day-name">Thu</div>
+                                    <div class="day-name">{{ __('Thu') }}</div>
                                 </div>
                                 <div class="col text-center text-danger">
                                     <div class="day-num">9</div>
-                                    <div class="day-name">Fri</div>
+                                    <div class="day-name">{{ __('Fri') }}</div>
                                 </div>
                                 <div class="col text-center text-white">
                                     <div class="day-num">10</div>
-                                    <div class="day-name">Sat</div>
+                                    <div class="day-name">{{ __('Sat') }}</div>
                                 </div>
                                 <div class="col text-center text-white">
                                     <div class="day-num">11</div>
-                                    <div class="day-name">Sun</div>
+                                    <div class="day-name">{{ __('Sun') }}</div>
                                 </div>
                             </div>
                             <div class="schedule-body">
@@ -565,8 +667,8 @@
                                     <div class="col"></div>
                                     <div class="col">
                                         <div class="event bg-success text-white p-2 rounded-3" style="animation-delay: 0.1s;">
-                                            <p class="mb-1 fw-bold">Envato Mastery</p>
-                                            <p class="mb-1 text-sm">Apprendre une nouvelle partie</p>
+                                            <p class="mb-1 fw-bold">{{ __('Envato Mastery') }}</p>
+                                            <p class="mb-1 text-sm">{{ __('Apprendre une nouvelle partie') }}</p>
                                             <p class="mb-0 text-xs text-secondary">08h00 - 09h00</p>
                                             <button class="btn btn-sm btn-icon-custom-sm position-absolute top-0 end-0 mt-1 me-1"><i class="fas fa-ellipsis-h"></i></button>
                                         </div>
@@ -591,8 +693,8 @@
                                     <div class="col"></div>
                                     <div class="col">
                                         <div class="event bg-danger text-white p-2 rounded-3" >
-                                            <p class="mb-1 fw-bold">UI/UX Design Basic</p>
-                                            <p class="mb-1 text-sm">Terminez la tâche 12</p>
+                                            <p class="mb-1 fw-bold">{{ __('UI/UX Design Basic') }}</p>
+                                            <p class="mb-1 text-sm">{{ __('Terminez la tâche 12') }}</p>
                                             <p class="mb-0 text-xs text-secondary">10h00 - 12h00</p>
                                             <button class="btn btn-sm btn-icon-custom-sm position-absolute top-0 end-0 mt-1 me-1"><i class="fas fa-ellipsis-h"></i></button>
                                         </div>
@@ -630,8 +732,8 @@
                                     <div class="col"></div>
                                     <div class="col">
                                         <div class="event bg-primary text-white p-2 rounded-3" >
-                                            <p class="mb-1 fw-bold">Mastering Git & Vercel app</p>
-                                            <p class="mb-1 text-sm">Apprendre une nouvelle partie</p>
+                                            <p class="mb-1 fw-bold">{{ __('Mastering Git & Vercel app') }}</p>
+                                            <p class="mb-1 text-sm">{{ __('Apprendre une nouvelle partie') }}</p>
                                             <p class="mb-0 text-xs text-secondary">13h00 - 14h00</p>
                                             <button class="btn btn-sm btn-icon-custom-sm position-absolute top-0 end-0 mt-1 me-1"><i class="fas fa-ellipsis-h"></i></button>
                                         </div>
@@ -668,8 +770,8 @@
                                     <div class="col"></div>
                                     <div class="col">
                                         <div class="event bg-info text-white p-2 rounded-3" >
-                                            <p class="mb-1 fw-bold">Live Class</p>
-                                            <p class="mb-1 text-sm">Comment gagner de l'argent avec...</p>
+                                            <p class="mb-1 fw-bold">{{ __('Live Class') }}</p>
+                                            <p class="mb-1 text-sm">{{ __('Comment gagner de l\'argent avec...') }}</p>
                                             <p class="mb-0 text-xs text-secondary">16h00 - 18h00</p>
                                             <button class="btn btn-sm btn-icon-custom-sm position-absolute top-0 end-0 mt-1 me-1"><i class="fas fa-ellipsis-h"></i></button>
                                         </div>
@@ -691,24 +793,24 @@
 
                     <div class="col-lg-4">
                         <button class="btn btn-primary w-100 p-3 mb-4 rounded-lg shadow-sm animate-button">
-                            <i class="fas fa-plus-circle me-2"></i> Ajouter un nouvel événement
+                            <i class="fas fa-plus-circle me-2"></i> {{ __('Ajouter un nouvel événement') }}
                         </button>
 
                         <div class="card bg-dark-card p-3 mb-4 rounded-lg shadow-sm calendar-card">
                             <div class="d-flex justify-content-between align-items-center mb-3">
                                 <a href="#" class="text-white text-decoration-none"><i class="fas fa-chevron-left"></i></a>
-                                <h6 class="text-white mb-0 fw-bold">Novembre 2023</h6>
+                                <h6 class="text-white mb-0 fw-bold">{{ __('Novembre 2023') }}</h6>
                                 <a href="#" class="text-white text-decoration-none"><i class="fas fa-chevron-right"></i></a>
                             </div>
                             <div class="calendar-grid text-white">
                                 <div class="calendar-header row gx-0 text-secondary mb-2">
-                                    <div class="col text-center">Mo</div>
-                                    <div class="col text-center">Tu</div>
-                                    <div class="col text-center">We</div>
-                                    <div class="col text-center">Th</div>
-                                    <div class="col text-center">Fr</div>
-                                    <div class="col text-center">Sa</div>
-                                    <div class="col text-center">Su</div>
+                                    <div class="col text-center">{{ __('Mo') }}</div>
+                                    <div class="col text-center">{{ __('Tu') }}</div>
+                                    <div class="col text-center">{{ __('We') }}</div>
+                                    <div class="col text-center">{{ __('Th') }}</div>
+                                    <div class="col text-center">{{ __('Fr') }}</div>
+                                    <div class="col text-center">{{ __('Sa') }}</div>
+                                    <div class="col text-center">{{ __('Su') }}</div>
                                 </div>
                                 <div class="calendar-body row gx-0">
                                     <div class="col text-center text-secondary calendar-day">29</div>
@@ -723,7 +825,8 @@
                                     <div class="col text-center calendar-day">6</div>
                                     <div class="col text-center calendar-day">7</div>
                                     <div class="col text-center calendar-day">8</div>
-                                    <div class="col text-center calendar-day highlight active">9</div> <div class="col text-center calendar-day">10</div>
+                                    <div class="col text-center calendar-day highlight active">9</div>
+                                    <div class="col text-center calendar-day">10</div>
                                     <div class="col text-center calendar-day">11</div>
 
                                     <div class="col text-center calendar-day">12</div>
@@ -759,31 +862,31 @@
 
                         <div class="card bg-dark-card p-3 rounded-lg shadow-sm category-card">
                             <div class="d-flex justify-content-between align-items-center mb-3">
-                                <h6 class="text-white mb-0">Liste des catégories</h6>
+                                <h6 class="text-white mb-0">{{ __('Liste des catégories') }}</h6>
                                <button class="btn btn-sm btn-danger rounded-circle animate-pulse"><i class="fas fa-plus"></i></button>
                             </div>
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item bg-transparent text-white d-flex justify-content-between align-items-center px-0">
                                     <div class="d-flex align-items-center">
-                                        <span class="category-dot bg-success me-2"></span> Envato Mastery
+                                        <span class="category-dot bg-success me-2"></span> {{ __('Envato Mastery') }}
                                     </div>
                                     <span class="badge bg-secondary rounded-pill">1</span>
                                 </li>
                                 <li class="list-group-item bg-transparent text-white d-flex justify-content-between align-items-center px-0">
                                     <div class="d-flex align-items-center">
-                                        <span class="category-dot bg-danger me-2"></span> UI/UX Design Basic
+                                        <span class="category-dot bg-danger me-2"></span> {{ __('UI/UX Design Basic') }}
                                     </div>
                                     <span class="badge bg-secondary rounded-pill">1</span>
                                 </li>
                                 <li class="list-group-item bg-transparent text-white d-flex justify-content-between align-items-center px-0">
                                     <div class="d-flex align-items-center">
-                                        <span class="category-dot bg-primary me-2"></span> Mastering Git & Vercel app
+                                        <span class="category-dot bg-primary me-2"></span> {{ __('Mastering Git & Vercel app') }}
                                     </div>
                                     <span class="badge bg-secondary rounded-pill">1</span>
                                 </li>
                                 <li class="list-group-item bg-transparent text-white d-flex justify-content-between align-items-center px-0">
                                     <div class="d-flex align-items-center">
-                                        <span class="category-dot bg-info me-2"></span> Live Class
+                                        <span class="category-dot bg-info me-2"></span> {{ __('Live Class') }}
                                     </div>
                                     <span class="badge bg-secondary rounded-pill">1</span>
                                 </li>

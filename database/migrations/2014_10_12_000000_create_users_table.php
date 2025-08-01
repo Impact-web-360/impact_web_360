@@ -22,7 +22,8 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->string('description')->nullable();
             $table->string('biographie')->nullable();
-            $table->string('theme')->nullable();
+            $table->string('theme')->default('dark');
+            $table->string('langue_de_travail')->default('fr');
             $table->string('facebook')->nullable();
                 $table->string('whatsapp')->nullable();
                 $table->string('linkedin')->nullable();

@@ -18,6 +18,8 @@ use App\Http\Controllers\ParametresController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Requests\FormationRequest;
 use App\Http\Controllers\PaymentController;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use App\Http\Controllers\ThemeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -96,80 +98,91 @@ Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard_utilisateur.tableau de bord'); // page d'accueil
-    })->name('dashboard');
+// web.php
 
-    Route::get('/calendrier', function () {
-        return view('dashboard_utilisateur.calendrier');
-    })->name('calendrier');
+Route::group(['prefix' => LaravelLocalization::setLocale(),
+    'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
+], function(){
+    // Toutes vos routes qui nécessitent d'être traduites
+    // seront préfixées par la locale (ex: /en/dashboard, /fr/dashboard)
+        Route::middleware('auth')->group(function () {
+            Route::get('/dashboard', function () {
+                return view('dashboard_utilisateur.tableau de bord'); // page d'accueil
+            })->name('dashboard');
+
+            Route::get('/calendrier', function () {
+                return view('dashboard_utilisateur.calendrier');
+            })->name('calendrier');
 
 
-    Route::get('/cours', function () {
-        return view('dashboard_utilisateur.cours');
-    })->name('cours');
+            Route::get('/cours', function () {
+                return view('dashboard_utilisateur.cours');
+            })->name('cours');
 
-    Route::get('/cours/details', function () {
-        return view('dashboard_utilisateur.details_cours');
-    })->name('cours.details');
+            Route::get('/cours/details', function () {
+                return view('dashboard_utilisateur.details_cours');
+            })->name('cours.details');
 
-    Route::get('/paiement1', function () {
-        return view('dashboard_utilisateur.paiement1');
-    })->name('paiement1');
+            Route::get('/paiement1', function () {
+                return view('dashboard_utilisateur.paiement1');
+            })->name('paiement1');
 
-    Route::get('/notifications', function () {
-        return view('dashboard_utilisateur.notification');
-    })->name('notifications');
+            Route::get('/notifications', function () {
+                return view('dashboard_utilisateur.notification');
+            })->name('notifications');
 
-    Route::get('/parametres', function () {
-        return view('dashboard_utilisateur.parametre');
-    })->name('parametres');
+            Route::get('/parametres', function () {
+                return view('dashboard_utilisateur.parametre');
+            })->name('parametres');
 
-    Route::get('/langues', function () {
-        return view('dashboard_utilisateur.langues');
-    })->name('langues');
 
-    Route::get('/themes', function () {
-        return view('dashboard_utilisateur.themes');
-    })->name('themes');
+            Route::get('/themes', function () {
+                return view('dashboard_utilisateur.themes');
+            })->name('themes');
 
-    Route::get('/media', function () {
-        return view('dashboard_utilisateur.media');
-    })->name('media');
+            Route::get('/media', function () {
+                return view('dashboard_utilisateur.media');
+            })->name('media');
 
-    Route::get('/soutien', function () {
-        return view('dashboard_utilisateur.soutien');
-    })->name('soutien');
+            Route::get('/soutien', function () {
+                return view('dashboard_utilisateur.soutien');
+            })->name('soutien');
 
-    Route::get('/changer-mot-de-passe', function () {
-        return view('dashboard_utilisateur.changer_mot_de_passe');
-    })->name('changer_mot_de_passe');
+            Route::get('/changer-mot-de-passe', function () {
+                return view('dashboard_utilisateur.changer_mot_de_passe');
+            })->name('changer_mot_de_passe');
 
-    Route::get('/modifier-profil', function () {
-        return view('dashboard_utilisateur.modifier_profil');
-    })->name('modifier_profil');
-    //decouvrir
-    Route::get('/decouvrir', [DiscoverController::class, 'index'])->name('decouvrir');
+            Route::get('/modifier-profil', function () {
+                return view('dashboard_utilisateur.modifier_profil');
+            })->name('modifier_profil');
+            //decouvrir
+            Route::get('/decouvrir', [DiscoverController::class, 'index'])->name('decouvrir');
 
-    Route::get('/formations/{id}', [FormationController::class, 'show'])->name('details');
-    //caisse
-    Route::get('/fedapay/callback', [PaymentController::class, 'handleFedapayCallback'])->name('fedapay.callback');
-    Route::post('/fedapay/webhook', [PaymentController::class, 'handleWebhook'])->name('fedapay.webhook');
-    Route::post('/fedapay/callback/{user_formation_id}', [PaymentController::class, 'handleCallback'])->name('fedapay.callback');
+            Route::get('/formations/{id}', [FormationController::class, 'show'])->name('details');
+            //caisse
+            Route::get('/fedapay/callback', [PaymentController::class, 'handleFedapayCallback'])->name('fedapay.callback');
+            Route::post('/fedapay/webhook', [PaymentController::class, 'handleWebhook'])->name('fedapay.webhook');
+            Route::post('/fedapay/callback/{user_formation_id}', [PaymentController::class, 'handleCallback'])->name('fedapay.callback');
 
-    Route::get('/caisse/{formationId}', [PaymentController::class, 'showPaymentForm'])
-    ->name('caisse');
-    Route::post('/caisse', [PaymentController::class, 'processPayment'])
-    ->name('caisse.process');
-    
-    Route::get('/paiement_success', [PaymentController::class, 'showPaymentSuccess'])
-    ->name('Dashboard_utilisateur.paiement_success');
-    Route::get('/paiement_failure', [PaymentController::class, 'showPaymentFailure'])
-    ->name('Dashboard_utilisateur.paiement_failure');
+            Route::get('/caisse/{formationId}', [PaymentController::class, 'showPaymentForm'])
+            ->name('caisse');
+            Route::post('/caisse', [PaymentController::class, 'processPayment'])
+            ->name('caisse.process');
+            
+            Route::get('/paiement_success', [PaymentController::class, 'showPaymentSuccess'])
+            ->name('Dashboard_utilisateur.paiement_success');
+            Route::get('/paiement_failure', [PaymentController::class, 'showPaymentFailure'])
+            ->name('Dashboard_utilisateur.paiement_failure');
 
+            // Route pour afficher la page des paramètres de langue
+            Route::get('/langues', [ParametresController::class, 'showLanguageSettings'])->name('langues');
+            // Route pour traiter la mise à jour de la langue
+            Route::post('/langues', [ParametresController::class, 'updateLanguage'])->name('update.language');
+
+            Route::post('/themes', [ThemeController::class, 'update'])->name('themes.update');
+
+            });
 });
-
 
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);

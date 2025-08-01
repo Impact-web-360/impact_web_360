@@ -463,9 +463,124 @@
                 font-size: 1.3rem;
             }
         }
+
+                 :root {
+        --primary-color: #FF0000;
+        --secondary-color: #6c757d;
+        --dark-bg: #1A1A1A;
+        --dark-sidebar-bg: #212121;
+        --dark-card-bg: #2C2C2C;
+        --border-color: #3A3A3A;
+        --text-color-light: #F8F9FA;
+        --text-color-secondary: #B0B0B0;
+        --save-button-bg: #007bff;
+        --save-button-hover: #0056b3;
+        --switch-bg-off: #4F4F4F;
+        --input-group-bg: #3A3A3A;
+        }
+
+        body {
+        background-color: var(--dark-bg);
+        color: var(--text-color-light);
+        }
+
+        .bg-dark,
+        .bg-dark-secondary {
+        background-color: var(--dark-sidebar-bg) !important;
+        }
+
+        .list-group-item {
+        background-color: var(--dark-sidebar-bg);
+        color: var(--text-color-secondary);
+        }
+
+        .themes-card {
+        background-color: var(--dark-card-bg);
+        border-color: var(--border-color);
+        }
+
+        /* --- Thème Clair --- */
+        body.theme-light {
+        --primary-color: #0d6efd;
+        --secondary-color: #6c757d;
+        --dark-bg: #F0F2F5; /* Fond principal clair */
+         --dark-sidebar-bg: #000; /* Sidebar plus sombre */
+        --dark-card-bg: #FFFFFF; /* Cartes blanches */
+        --border-color: #CED4DA;
+        --text-color-light: #212529; /* Texte sombre */
+        --text-color-secondary: #6c757d;
+        --save-button-bg: #0d6efd;
+        --save-button-hover: #0a58ca;
+        --switch-bg-off: #ADB5BD;
+        --input-group-bg: #E9ECEF;
+        }
+
+        body.theme-light .list-group-item {
+        background-color: var(--dark-sidebar-bg);
+        color: var(--text-color-light);
+        }
+
+        body.theme-light .list-group-item:hover {
+        background-color: #DEE2E6;
+        color: var(--primary-color);
+        }
+
+        body.theme-light .list-group-item.active {
+        background-color: var(--primary-color) !important;
+        color: #FFFFFF !important;
+        }
+
+        /* --- Thème Sepia --- */
+        body.theme-sepia {
+        --primary-color: #8B4513;
+        --secondary-color: #708090;
+        --dark-bg: #F4EEDD;
+        --dark-sidebar-bg: #A39686;
+        --dark-card-bg: #E8E0D2;
+        --border-color: #CDB7A3;
+        --text-color-light: #5C4C42;
+        --text-color-secondary: #708090;
+        --save-button-bg: #8B4513;
+        --save-button-hover: #65300F;
+        --switch-bg-off: #BDB7A3;
+        --input-group-bg: #CDB7A3;
+        }
+
+        /* --- Thème Contrast (Haut Contraste) --- */
+        body.theme-contrast {
+        --primary-color: #00FF00;
+        --secondary-color: #FFFFFF;
+        --dark-bg: #000000;
+        --dark-sidebar-bg: #111111;
+        --dark-card-bg: #1c1c1c;
+        --border-color: #00FF00;
+        --text-color-light: #FFFFFF;
+        --text-color-secondary: #00FF00;
+        --save-button-bg: #00FF00;
+        --save-button-hover: #00CC00;
+        --switch-bg-off: #FFFFFF;
+        --input-group-bg: #222222;
+        }
+
+        /* --- Thème Blue (Bleu) --- */
+        body.theme-blue {
+        --primary-color: #3498db;
+        --secondary-color: #90A4AE;
+        --dark-bg: #1e2c4a;
+        --dark-sidebar-bg: #1a2a4b;
+        --dark-card-bg: #2c426b;
+        --border-color: #3e5c91;
+        --text-color-light: #e8eaf6;
+        --text-color-secondary: #90a4ae;
+        --save-button-bg: #3498db;
+        --save-button-hover: #2980b9;
+        --switch-bg-off: #3e5c91;
+        --input-group-bg: #2c426b;
+        }
+
     </style>
 </head>
-<body>
+<body class="theme-{{ $userTheme ?? 'dark' }}">
     <div class="d-flex" id="wrapper">
         <div class="bg-dark sidebar" id="sidebar-wrapper">
             <div class="sidebar-heading text-white p-3 border-bottom border-secondary d-flex align-items-center">

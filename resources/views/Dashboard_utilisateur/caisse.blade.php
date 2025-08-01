@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="{{ app()->getLocale() }}">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Impact Web - Paiement</title>
+    <title>{{ __('Impact Web - Paiement') }}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
@@ -14,7 +14,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css"
         rel="stylesheet" />
     <style>
-        /* Variables CSS pour faciliter la gestion des couleurs et espacements */
+        /* [Votre CSS reste le même] */
         :root {
             --primary-color: #FF0000;
             /* Rouge vif pour correspondre à la maquette */
@@ -631,10 +631,126 @@
                 /* Adjust as needed */
             }
         }
+
+                 :root {
+        --primary-color: #FF0000;
+        --secondary-color: #6c757d;
+        --dark-bg: #1A1A1A;
+        --dark-sidebar-bg: #212121;
+        --dark-card-bg: #2C2C2C;
+        --border-color: #3A3A3A;
+        --text-color-light: #F8F9FA;
+        --text-color-secondary: #B0B0B0;
+        --save-button-bg: #007bff;
+        --save-button-hover: #0056b3;
+        --switch-bg-off: #4F4F4F;
+        --input-group-bg: #3A3A3A;
+        }
+
+        body {
+        background-color: var(--dark-bg);
+        color: var(--text-color-light);
+        }
+
+        .bg-dark,
+        .bg-dark-secondary {
+        background-color: var(--dark-sidebar-bg) !important;
+        }
+
+        .list-group-item {
+        background-color: var(--dark-sidebar-bg);
+        color: var(--text-color-secondary);
+        }
+
+        .themes-card {
+        background-color: var(--dark-card-bg);
+        border-color: var(--border-color);
+        }
+
+        /* --- Thème Clair --- */
+        body.theme-light {
+        --primary-color: #0d6efd;
+        --secondary-color: #6c757d;
+        --dark-bg: #F0F2F5; /* Fond principal clair */
+        --dark-sidebar-bg: #000; /* Sidebar plus sombre */
+        --dark-card-bg: #FFFFFF; /* Cartes blanches */
+        --border-color: #CED4DA;
+        --text-color-light: #212529; /* Texte sombre */
+        --text-color-secondary: #6c757d;
+        --save-button-bg: #0d6efd;
+        --save-button-hover: #0a58ca;
+        --switch-bg-off: #ADB5BD;
+        --input-group-bg: #E9ECEF;
+        }
+
+        body.theme-light .list-group-item {
+        background-color: var(--dark-sidebar-bg);
+        color: var(--text-color-light);
+        }
+
+        body.theme-light .list-group-item:hover {
+        background-color: #DEE2E6;
+        color: var(--primary-color);
+        }
+
+        body.theme-light .list-group-item.active {
+        background-color: var(--primary-color) !important;
+        color: #FFFFFF !important;
+        }
+
+        /* --- Thème Sepia --- */
+        body.theme-sepia {
+        --primary-color: #8B4513;
+        --secondary-color: #708090;
+        --dark-bg: #F4EEDD;
+        --dark-sidebar-bg: #A39686;
+        --dark-card-bg: #E8E0D2;
+        --border-color: #CDB7A3;
+        --text-color-light: #5C4C42;
+        --text-color-secondary: #708090;
+        --save-button-bg: #8B4513;
+        --save-button-hover: #65300F;
+        --switch-bg-off: #BDB7A3;
+        --input-group-bg: #CDB7A3;
+        }
+
+        /* --- Thème Contrast (Haut Contraste) --- */
+        body.theme-contrast {
+        --primary-color: #00FF00;
+        --secondary-color: #FFFFFF;
+        --dark-bg: #000000;
+        --dark-sidebar-bg: #111111;
+        --dark-card-bg: #1c1c1c;
+        --border-color: #00FF00;
+        --text-color-light: #FFFFFF;
+        --text-color-secondary: #00FF00;
+        --save-button-bg: #00FF00;
+        --save-button-hover: #00CC00;
+        --switch-bg-off: #FFFFFF;
+        --input-group-bg: #222222;
+        }
+
+        /* --- Thème Blue (Bleu) --- */
+        body.theme-blue {
+        --primary-color: #3498db;
+        --secondary-color: #90A4AE;
+        --dark-bg: #1e2c4a;
+        --dark-sidebar-bg: #1a2a4b;
+        --dark-card-bg: #2c426b;
+        --border-color: #3e5c91;
+        --text-color-light: #e8eaf6;
+        --text-color-secondary: #90a4ae;
+        --save-button-bg: #3498db;
+        --save-button-hover: #2980b9;
+        --switch-bg-off: #3e5c91;
+        --input-group-bg: #2c426b;
+        }
+
+
     </style>
 </head>
 
-<body>
+<body class="theme-{{ $userTheme ?? 'dark' }}">
     <div class="d-flex" id="wrapper">
         <div class="bg-dark sidebar" id="sidebar-wrapper">
             <div class="sidebar-heading text-white p-3 border-bottom border-secondary d-flex align-items-center">
@@ -642,33 +758,33 @@
                     style="max-height: 140px;">
             </div>
             <div class="list-group list-group-flush">
-                <div class="sidebar-section-title text-secondary px-3 pt-3 pb-1">GENERAL</div>
+                <div class="sidebar-section-title text-secondary px-3 pt-3 pb-1">{{ __('GENERAL') }}</div>
                 <a href="{{ route('dashboard') }}" class="list-group-item list-group-item-action bg-dark text-white">
-                    <i class="fas fa-home me-2"></i> Tableau de bord
+                    <i class="fas fa-home me-2"></i> {{ __('Tableau de bord') }}
                 </a>
                 <a href="{{ route('calendrier') }}" class="list-group-item list-group-item-action bg-dark text-white">
-                    <i class="fas fa-calendar-alt me-2"></i> Calendrier
+                    <i class="fas fa-calendar-alt me-2"></i> {{ __('Calendrier') }}
                 </a>
                 
                 <a href="{{ route('caisse', ['formationId' => $formation->id ?? 1]) }}"
                     class="list-group-item list-group-item-action bg-dark text-white active">
-                    <i class="fas fa-credit-card me-2"></i> Paiement
+                    <i class="fas fa-credit-card me-2"></i> {{ __('Paiement') }}
                 </a>
 
-                <div class="sidebar-section-title text-secondary px-3 pt-3 pb-1">COURS</div>
+                <div class="sidebar-section-title text-secondary px-3 pt-3 pb-1">{{ __('COURS') }}</div>
                 <a href="{{ route('cours') }}" class="list-group-item list-group-item-action bg-dark text-white">
-                    <i class="fas fa-book me-2"></i> Mes cours
+                    <i class="fas fa-book me-2"></i> {{ __('Mes cours') }}
                 </a>
                 <a href="{{ route('decouvrir') }}" class="list-group-item list-group-item-action bg-dark text-white">
-                    <i class="fas fa-search me-2"></i> Découvrir
+                    <i class="fas fa-search me-2"></i> {{ __('Découvrir') }}
                 </a>
 
-                <div class="sidebar-section-title text-secondary px-3 pt-3 pb-1">OTHER</div>
+                <div class="sidebar-section-title text-secondary px-3 pt-3 pb-1">{{ __('OTHER') }}</div>
                 <a href="{{ route('soutien') }}" class="list-group-item list-group-item-action bg-dark text-white">
-                    <i class="fas fa-question-circle me-2"></i> Soutien
+                    <i class="fas fa-question-circle me-2"></i> {{ __('Soutien') }}
                 </a>
                 <a href="{{ route('parametres') }}" class="list-group-item list-group-item-action bg-dark text-white">
-                    <i class="fas fa-cog me-2"></i> Paramètre
+                    <i class="fas fa-cog me-2"></i> {{ __('Paramètre') }}
                 </a>
             </div>
         </div>
@@ -678,18 +794,18 @@
                 <div class="container-fluid">
                     <button class="btn btn-danger d-lg-none" id="sidebarToggle" aria-label="Toggle sidebar"><i
                             class="fas fa-bars"></i></button>
-                    <h2 class="text-white mb-0 ms-3">Paiement</h2>
+                    <h2 class="text-white mb-0 ms-3">{{ __('Paiement') }}</h2>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ms-auto mt-2 mt-lg-0 align-items-center">
                             <li class="nav-item me-3">
                                 <a class="nav-link text-white" href="{{ route('notifications') }}"
-                                    aria-label="Notifications"><i class="fas fa-bell"></i></a>
+                                    aria-label="{{ __('Notifications') }}"><i class="fas fa-bell"></i></a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-white d-flex align-items-center"
                                     href="{{ route('parametres') }}">
                                     <img src="{{ Auth::user()->image ? asset('storage/' . Auth::user()->image) : asset('logo.png') }}"
-                                        alt="Photo de profil" style="max-height: 50px;"
+                                        alt="{{ __('Photo de profil') }}" style="max-height: 50px;"
                                         class="rounded-circle profile-img-preview me-4">
                                 </a>
                             </li>
@@ -702,16 +818,13 @@
                 <div class="row">
                     <div class="col-md-8 col-lg-12 general-settings-form animation-fade-in"
                         style="animation-delay: 0.2s;">
-                        {{-- Utilisation de la variable $formation passée par le contrôleur --}}
-                        <h1 class="page-title">Finalisez votre paiement pour la formation: {{ $formation->title }}</h1>
+                        <h1 class="page-title">{{ __('Finalisez votre paiement pour la formation: :title', ['title' => $formation->title]) }}</h1>
                         <p class="page-description">
-                            Le coût total de cette formation est de {{ number_format($formation->price, 0, ',', ' ') }} XOF.
-                            Veuillez procéder au paiement via Fedapay.
+                            {{ __('Le coût total de cette formation est de :price XOF. Veuillez procéder au paiement via Fedapay.', ['price' => number_format($formation->price, 0, ',', ' ')]) }}
                         </p>
                         <div class="card payment-details-card">
-                            <h2 class="card-title">Paiement via Fedapay</h2>
+                            <h2 class="card-title">{{ __('Paiement via Fedapay') }}</h2>
 
-                            {{-- Affichage des messages flash de Laravel (succès, erreur, info) --}}
                             @if (session('error'))
                                 <div class="alert alert-danger" role="alert">
                                     {{ session('error') }}
@@ -728,7 +841,6 @@
                                 </div>
                             @endif
 
-                            {{-- Affichage des erreurs de validation de formulaire --}}
                             @if ($errors->any())
                                 <div class="alert alert-danger">
                                     <ul>
@@ -740,35 +852,32 @@
                             @endif
 
                             <form id="paymentForm" action="{{ route('caisse.process') }}" method="POST">
-                                @csrf {{-- Directive Laravel pour la protection CSRF --}}
+                                @csrf
 
-                                {{-- Champ caché pour l'ID de la formation --}}
                                 <input type="hidden" name="formation_id" value="{{ $formation->id }}">
 
-                                {{-- Section pour Fedapay - toujours visible --}}
                                 <div id="fedapayPaymentSection" class="payment-section active">
                                     <p class="text-secondary small">
-                                        Vous serez redirigé vers la page sécurisée de Fedapay pour compléter votre paiement.
-                                        Veuillez saisir votre numéro de téléphone pour la transaction.
+                                        {{ __('Vous serez redirigé vers la page sécurisée de Fedapay pour compléter votre paiement. Veuillez saisir votre numéro de téléphone pour la transaction.') }}
                                     </p>
                                     <div class="form-group">
-                                        <label for="fedapayNumber">Numéro de Téléphone</label>
+                                        <label for="fedapayNumber">{{ __('Numéro de Téléphone') }}</label>
                                         <input type="tel" class="form-control" id="fedapayNumber" name="fedapayNumber"
-                                            placeholder="Ex: +229xxxxxxxxxx"
+                                            placeholder="{{ __('Ex: +229xxxxxxxxxx') }}"
                                             pattern="^(\+[0-9]{8,15}|0[1-9][0-9]{8})$"
-                                            title="Veuillez entrer un numéro de téléphone à 8 ou 10 chiffres (commençant par 0x)"
+                                            title="{{ __('Veuillez entrer un numéro de téléphone à 8 ou 10 chiffres (commençant par 0x)') }}"
                                             required value="{{ old('fedapayNumber', $user->telephone ?? '') }}">
                                             @error('fedapayNumber')
                                                 <div class="text-danger mt-2">{{ $message }}</div>
                                             @enderror
                                     </div>
                                     <p class="text-secondary small mt-3">
-                                        Assurez-vous que le numéro est correct. Vous serez redirigé pour choisir votre mode de paiement (Mobile Money ou Carte) sur la plateforme Fedapay.
+                                        {{ __('Assurez-vous que le numéro est correct. Vous serez redirigé pour choisir votre mode de paiement (Mobile Money ou Carte) sur la plateforme Fedapay.') }}
                                     </p>
                                 </div>
 
                                 <div class="action-buttons">
-                                    <button type="submit" class="btn-subscribe">Payer maintenant</button>
+                                    <button type="submit" class="btn-subscribe">{{ __('Payer maintenant') }}</button>
                                 </div>
                             </form>
                         </div>
@@ -782,15 +891,12 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
     <script>
-        // Script de bascule de la barre latérale
         var el = document.getElementById("wrapper");
         var toggleButton = document.getElementById("sidebarToggle");
 
         toggleButton.onclick = function() {
             el.classList.toggle("toggled");
         };
-
-        
     </script>
 </body>
 

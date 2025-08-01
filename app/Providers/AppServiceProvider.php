@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Auth;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -33,5 +35,13 @@ class AppServiceProvider extends ServiceProvider
             // ...
         ]
     ]);
+     View::composer('*', function ($view) {
+        if (Auth::check()) {
+            $view->with('userTheme', Auth::user()->theme);
+        } else {
+            $view->with('userTheme', 'dark'); // Thème par défaut pour les non-connectés
+        }
+    });
+
 }
 }

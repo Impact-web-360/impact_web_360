@@ -468,6 +468,128 @@
             opacity: 0; /* Starts hidden */
         }
 
+
+        :root {
+        --primary-color: #FF0000;
+        --secondary-color: #6c757d;
+        --dark-bg: #1A1A1A;
+        --dark-sidebar-bg: #212121;
+        --dark-card-bg: #2C2C2C;
+        --border-color: #3A3A3A;
+        --text-color-light: #F8F9FA;
+        --text-color-secondary: #B0B0B0;
+        --save-button-bg: #007bff;
+        --save-button-hover: #0056b3;
+        --switch-bg-off: #4F4F4F;
+        --input-group-bg: #3A3A3A;
+        }
+
+        body {
+        background-color: var(--dark-bg);
+        color: var(--text-color-light);
+        }
+
+        .bg-dark,
+        .bg-dark-secondary {
+        background-color: var(--dark-sidebar-bg) !important;
+        }
+
+        .list-group-item {
+        background-color: var(--dark-sidebar-bg);
+        color: var(--text-color-secondary);
+        }
+
+        .themes-card {
+        background-color: var(--dark-card-bg);
+        border-color: var(--border-color);
+        }
+
+        /* --- Thème Clair --- */
+        body.theme-light {
+        --primary-color: #0d6efd;
+        --secondary-color: #6c757d;
+        --dark-bg: #F0F2F5; /* Fond principal clair */
+         --dark-sidebar-bg: #000; /* Sidebar plus sombre */
+        --dark-card-bg: #FFFFFF; /* Cartes blanches */
+        --border-color: #CED4DA;
+        --text-color-light: #212529; /* Texte sombre */
+        --text-color-secondary: #6c757d;
+        --save-button-bg: #0d6efd;
+        --save-button-hover: #0a58ca;
+        --switch-bg-off: #ADB5BD;
+        --input-group-bg: #E9ECEF;
+        }
+
+        body.theme-light .list-group-item {
+        background-color: var(--dark-sidebar-bg);
+        color: var(--text-color-light);
+        }
+
+        body.theme-light .list-group-item:hover {
+        background-color: #DEE2E6;
+        color: var(--primary-color);
+        }
+
+        body.theme-light .list-group-item.active {
+        background-color: var(--primary-color) !important;
+        color: #FFFFFF !important;
+        }
+
+        /* --- Thème Sepia --- */
+        body.theme-sepia {
+        --primary-color: #8B4513;
+        --secondary-color: #708090;
+        --dark-bg: #F4EEDD;
+        --dark-sidebar-bg: #A39686;
+        --dark-card-bg: #E8E0D2;
+        --border-color: #CDB7A3;
+        --text-color-light: #5C4C42;
+        --text-color-secondary: #708090;
+        --save-button-bg: #8B4513;
+        --save-button-hover: #65300F;
+        --switch-bg-off: #BDB7A3;
+        --input-group-bg: #CDB7A3;
+        }
+
+        /* --- Thème Contrast (Haut Contraste) --- */
+        body.theme-contrast {
+        --primary-color: #00FF00;
+        --secondary-color: #FFFFFF;
+        --dark-bg: #000000;
+        --dark-sidebar-bg: #111111;
+        --dark-card-bg: #1c1c1c;
+        --border-color: #00FF00;
+        --text-color-light: #FFFFFF;
+        --text-color-secondary: #00FF00;
+        --save-button-bg: #00FF00;
+        --save-button-hover: #00CC00;
+        --switch-bg-off: #FFFFFF;
+        --input-group-bg: #222222;
+        }
+
+        /* --- Thème Blue (Bleu) --- */
+        body.theme-blue {
+        --primary-color: #3498db;
+        --secondary-color: #90A4AE;
+        --dark-bg: #1e2c4a;
+        --dark-sidebar-bg: #1a2a4b;
+        --dark-card-bg: #2c426b;
+        --border-color: #3e5c91;
+        --text-color-light: #e8eaf6;
+        --text-color-secondary: #90a4ae;
+        --save-button-bg: #3498db;
+        --save-button-hover: #2980b9;
+        --switch-bg-off: #3e5c91;
+        --input-group-bg: #2c426b;
+        }
+
+        /*
+        Le thème "Système" ne nécessite pas de CSS spécifique ici.
+        Il dépend de la logique JavaScript ou d'un CSS conditionnel
+        pour basculer entre le thème clair et sombre en fonction
+        des préférences de l'OS de l'utilisateur.
+        */
+
         /* Keyframes for animations */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(15px); }
@@ -547,7 +669,7 @@
         }
     </style>
 </head>
-<body>
+<body class="theme-{{ $userTheme ?? 'dark' }}">
     <div class="d-flex" id="wrapper">
         <div class="bg-dark sidebar" id="sidebar-wrapper">
             <div class="sidebar-heading text-white p-3 border-bottom border-secondary d-flex align-items-center">
@@ -634,74 +756,80 @@
                     <div class="col-md-8 col-lg-9 themes-settings-form animation-fade-in" style="animation-delay: 0.2s;">
                         <h4 class="form-section-title mb-4">Thèmes abordés</h4>
 
-                        <div class="card themes-card mb-4">
-                            <div class="card-body">
-                                <h5 class="card-title">Sélection du thème</h5>
-                                <p class="card-subtitle mb-4 text-muted">Personnalisez votre interface en choisissant un thème de couleur qui vous plaît. Les thèmes de couleurs n'affectent que votre compte.</p>
+                        <form method="POST" action="{{ route('themes.update') }}" id="theme-form">
+                            @csrf
+                            
+                            <input type="hidden" name="theme" id="selected-theme" value="{{ Auth::user()->theme ?? 'dark' }}">
 
-                                <div class="theme-selection-container">
-                                    <div class="theme-card active" data-theme="dark">
-                                        <div class="theme-check-icon"><i class="fas fa-check"></i></div>
-                                        <div class="theme-card-preview preview-dark">
-                                            <div class="theme-card-preview-header"></div>
-                                            <div class="theme-card-preview-content"></div>
-                                        </div>
-                                        <p class="theme-card-title">Sombre</p>
-                                    </div>
+                            <div class="card themes-card mb-4">
+                                <div class="card-body">
+                                    <h5 class="card-title">Sélection du thème</h5>
+                                    <p class="card-subtitle mb-4 text-muted">Personnalisez votre interface en choisissant un thème de couleur qui vous plaît. Les thèmes de couleurs n'affectent que votre compte.</p>
 
-                                    <div class="theme-card" data-theme="light">
-                                        <div class="theme-check-icon"><i class="fas fa-check"></i></div>
-                                        <div class="theme-card-preview preview-light">
-                                            <div class="theme-card-preview-header"></div>
-                                            <div class="theme-card-preview-content"></div>
+                                    <div class="theme-selection-container">
+                                        <div class="theme-card @if((Auth::user()->theme ?? 'dark') == 'dark') active @endif" data-theme="dark">
+                                            <div class="theme-check-icon"><i class="fas fa-check"></i></div>
+                                            <div class="theme-card-preview preview-dark">
+                                                <div class="theme-card-preview-header"></div>
+                                                <div class="theme-card-preview-content"></div>
+                                            </div>
+                                            <p class="theme-card-title">Sombre</p>
                                         </div>
-                                        <p class="theme-card-title">Clair</p>
-                                    </div>
 
-                                    <div class="theme-card" data-theme="sepia">
-                                        <div class="theme-check-icon"><i class="fas fa-check"></i></div>
-                                        <div class="theme-card-preview preview-sepia">
-                                            <div class="theme-card-preview-header"></div>
-                                            <div class="theme-card-preview-content"></div>
+                                        <div class="theme-card @if((Auth::user()->theme ?? '') == 'light') active @endif" data-theme="light">
+                                            <div class="theme-check-icon"><i class="fas fa-check"></i></div>
+                                            <div class="theme-card-preview preview-light">
+                                                <div class="theme-card-preview-header"></div>
+                                                <div class="theme-card-preview-content"></div>
+                                            </div>
+                                            <p class="theme-card-title">Clair</p>
                                         </div>
-                                        <p class="theme-card-title">Sepia</p>
-                                    </div>
 
-                                    <div class="theme-card" data-theme="system">
-                                        <div class="theme-check-icon"><i class="fas fa-check"></i></div>
-                                        <div class="theme-card-preview preview-system">
-                                            <div class="theme-card-preview-header"></div>
-                                            <div class="theme-card-preview-content"></div>
+                                        <div class="theme-card @if((Auth::user()->theme ?? '') == 'sepia') active @endif" data-theme="sepia">
+                                            <div class="theme-check-icon"><i class="fas fa-check"></i></div>
+                                            <div class="theme-card-preview preview-sepia">
+                                                <div class="theme-card-preview-header"></div>
+                                                <div class="theme-card-preview-content"></div>
+                                            </div>
+                                            <p class="theme-card-title">Sepia</p>
                                         </div>
-                                        <p class="theme-card-title">Système</p>
-                                    </div>
-                                    
-                                    <div class="theme-card" data-theme="contrast">
-                                        <div class="theme-check-icon"><i class="fas fa-check"></i></div>
-                                        <div class="theme-card-preview preview-contrast">
-                                            <div class="theme-card-preview-header"></div>
-                                            <div class="theme-card-preview-content"></div>
+                                        
+                                        <div class="theme-card @if((Auth::user()->theme ?? '') == 'system') active @endif" data-theme="system">
+                                            <div class="theme-check-icon"><i class="fas fa-check"></i></div>
+                                            <div class="theme-card-preview preview-system">
+                                                <div class="theme-card-preview-header"></div>
+                                                <div class="theme-card-preview-content"></div>
+                                            </div>
+                                            <p class="theme-card-title">Système</p>
                                         </div>
-                                        <p class="theme-card-title">Haut Contraste</p>
-                                    </div>
 
-                                    <div class="theme-card" data-theme="blue">
-                                        <div class="theme-check-icon"><i class="fas fa-check"></i></div>
-                                        <div class="theme-card-preview preview-blue">
-                                            <div class="theme-card-preview-header"></div>
-                                            <div class="theme-card-preview-content"></div>
+                                        <div class="theme-card @if((Auth::user()->theme ?? '') == 'contrast') active @endif" data-theme="contrast">
+                                            <div class="theme-check-icon"><i class="fas fa-check"></i></div>
+                                            <div class="theme-card-preview preview-contrast">
+                                                <div class="theme-card-preview-header"></div>
+                                                <div class="theme-card-preview-content"></div>
+                                            </div>
+                                            <p class="theme-card-title">Haut Contraste</p>
                                         </div>
-                                        <p class="theme-card-title">Bleu</p>
+
+                                        <div class="theme-card @if((Auth::user()->theme ?? '') == 'blue') active @endif" data-theme="blue">
+                                            <div class="theme-check-icon"><i class="fas fa-check"></i></div>
+                                            <div class="theme-card-preview preview-blue">
+                                                <div class="theme-card-preview-header"></div>
+                                                <div class="theme-card-preview-content"></div>
+                                            </div>
+                                            <p class="theme-card-title">Bleu</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="d-flex justify-content-end mt-4">
-                            <button class="btn btn-save">Sauvegarder</button>
-                        </div>
-                    </div>
-                </div>
+                            <div class="d-flex justify-content-end mt-4">
+                                <button type="submit" class="btn btn-save">Sauvegarder</button>
+                            </div>
+                        </form>
+                    </div>               
+                 </div>
             </div>
         </div>
     </div>
@@ -716,16 +844,66 @@
             el.classList.toggle("toggled");
         };
 
-        // Script pour gérer la sélection des thèmes
+        // Dans votre script JS à la fin de la page
         document.addEventListener('DOMContentLoaded', function() {
             const themeCards = document.querySelectorAll('.theme-card');
+            const selectedThemeInput = document.getElementById('selected-theme');
+
             themeCards.forEach(card => {
                 card.addEventListener('click', function() {
+                    // Supprimer la classe 'active' de toutes les cartes
                     themeCards.forEach(c => c.classList.remove('active'));
+                    // Ajouter la classe 'active' à la carte cliquée
                     this.classList.add('active');
+                    // Mettre à jour la valeur de l'input caché
+                    selectedThemeInput.value = this.dataset.theme;
                 });
             });
         });
+
+        const selectedThemeInput = document.getElementById('selected-theme');
+    const body = document.body;
+
+    // Définir le thème "Système"
+    function applySystemTheme() {
+        const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        body.classList.remove('theme-dark', 'theme-light', 'theme-sepia', 'theme-contrast', 'theme-blue');
+        if (isDark) {
+            body.classList.add('theme-dark');
+        } else {
+            body.classList.add('theme-light');
+        }
+    }
+
+    // Écouter le changement de préférence du système
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+        // Applique le thème système uniquement si l'utilisateur a choisi ce thème
+        if (selectedThemeInput.value === 'system') {
+            applySystemTheme();
+        }
+    });
+
+    // Écouter les clics sur les cartes
+    themeCards.forEach(card => {
+        card.addEventListener('click', function() {
+            themeCards.forEach(c => c.classList.remove('active'));
+            this.classList.add('active');
+            selectedThemeInput.value = this.dataset.theme;
+
+            // Appliquer le thème immédiatement pour un aperçu
+            body.classList.remove('theme-dark', 'theme-light', 'theme-sepia', 'theme-contrast', 'theme-blue');
+            if (this.dataset.theme === 'system') {
+                applySystemTheme();
+            } else {
+                body.classList.add('theme-' + this.dataset.theme);
+            }
+        });
+    });
+
+    // Au chargement de la page, si le thème est "système", l'appliquer
+    if (selectedThemeInput.value === 'system') {
+        applySystemTheme();
+    }
     </script>
 </body>
 </html>

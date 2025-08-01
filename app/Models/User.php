@@ -28,6 +28,7 @@ class User extends Authenticatable
         'type',
         'telephone',
         'theme',
+        'langue_de_travail',
         'biographie',
         'email',
         'password',
