@@ -635,8 +635,6 @@
 
                         <form method="POST" action="{{ route('password.update') }}">
                             @csrf
-                            @method('PUT')
-
                             <div class="card password-card mb-4">
                                 <div class="card-body">
                                     <h5 class="card-title">Mot de passe actuel</h5>

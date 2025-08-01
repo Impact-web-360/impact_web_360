@@ -184,34 +184,6 @@
             padding: 10px 20px 5px;
             /* Adjust padding to align with links */
         }
-
-        .sidebar-promo {
-            background-color: var(--primary-color);
-            color: var(--text-color-light);
-            border-radius: 10px;
-            padding: 15px;
-            margin-top: 30px;
-            width: 85%;
-        }
-
-        .sidebar-promo .star-rating i {
-            color: var(--stars-gold);
-        }
-
-        .sidebar-promo .btn-primary {
-            background-color: #fff !important;
-            color: var(--primary-color) !important;
-            border: none !important;
-            font-weight: bold;
-            padding: 8px 15px;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-
-        .sidebar-promo .btn-primary:hover {
-            background-color: #eee !important;
-            color: var(--primary-color) !important;
-        }
-
         /* Page Content */
         #page-content-wrapper {
             min-width: 100vw;
@@ -619,10 +591,6 @@
         }
 
         @media (max-width: 576px) {
-            .sidebar-promo {
-                margin-left: 0.5rem;
-                margin-right: 0.5rem;
-            }
 
             .profile-photo-upload {
                 flex-direction: column;
@@ -681,9 +649,6 @@
                 <a href="{{ route('calendrier') }}" class="list-group-item list-group-item-action bg-dark text-white">
                     <i class="fas fa-calendar-alt me-2"></i> Calendrier
                 </a>
-                <a href="{{ route('messages') }}" class="list-group-item list-group-item-action bg-dark text-white">
-                    <i class="fas fa-comment-alt me-2"></i> Message
-                </a>
                 
                 <a href="{{ route('caisse', ['formationId' => $formation->id ?? 1]) }}"
                     class="list-group-item list-group-item-action bg-dark text-white active">
@@ -705,20 +670,6 @@
                 <a href="{{ route('parametres') }}" class="list-group-item list-group-item-action bg-dark text-white">
                     <i class="fas fa-cog me-2"></i> Paramètre
                 </a>
-
-                <div class="sidebar-promo p-3 mx-3 mt-4 rounded text-center">
-                    <p class="text-white mb-2 fw-bold">Profitez de</p>
-                    <p class="text-white fs-3 fw-bold mb-1">-30%</p>
-                    <p class="text-white mb-2">sur la Formation en montage vidéo</p>
-                    <div class="star-rating mb-3">
-                        <i class="fas fa-star text-warning"></i>
-                        <i class="fas fa-star text-warning"></i>
-                        <i class="fas fa-star text-warning"></i>
-                        <i class="fas fa-star text-warning"></i>
-                        <i class="fas fa-star text-warning"></i>
-                    </div>
-                    <button class="btn btn-primary w-100 rounded-pill">Profitez!</button>
-                </div>
             </div>
         </div>
 
@@ -752,9 +703,9 @@
                     <div class="col-md-8 col-lg-12 general-settings-form animation-fade-in"
                         style="animation-delay: 0.2s;">
                         {{-- Utilisation de la variable $formation passée par le contrôleur --}}
-                        <h1 class="page-title">Finalisez votre paiement pour la formation: *{{ $formation->title }}*</h1>
+                        <h1 class="page-title">Finalisez votre paiement pour la formation: {{ $formation->title }}</h1>
                         <p class="page-description">
-                            Le coût total de cette formation est de *{{ number_format($formation->price, 0, ',', ' ') }} XOF*.
+                            Le coût total de cette formation est de {{ number_format($formation->price, 0, ',', ' ') }} XOF.
                             Veuillez procéder au paiement via Fedapay.
                         </p>
                         <div class="card payment-details-card">
@@ -816,15 +767,6 @@
                                     </p>
                                 </div>
 
-                                <div class="toggle-switch">
-                                    <input class="form-check-input" type="checkbox" id="autoRenewalToggle"
-                                        name="autoRenewalToggle" {{ old('autoRenewalToggle') ? 'checked' : '' }}>
-                                    <label for="autoRenewalToggle">
-                                        Activer le renouvellement automatique
-                                        <span>(vous recevrez une notification avant expiration)</span>
-                                    </label>
-                                </div>
-
                                 <div class="action-buttons">
                                     <button type="submit" class="btn-subscribe">Payer maintenant</button>
                                 </div>
@@ -848,34 +790,7 @@
             el.classList.toggle("toggled");
         };
 
-        // Définir 'Paiement' dans la barre latérale comme actif (si pertinent)
-        document.addEventListener('DOMContentLoaded', function() {
-            const sidebarLinks = document.querySelectorAll('#sidebar-wrapper .list-group-item');
-            sidebarLinks.forEach(link => {
-                link.classList.remove('active');
-            });
-            // Cible le lien de paiement avec la route spécifique, en s'assurant qu'il correspond à l'ID de la formation actuelle
-            // Cette partie suppose que l'ID de la formation est dans l'URL ou accessible globalement si le lien doit rester actif.
-            // Pour ce scénario, le lien actif devrait être déterminé par la route active, pas juste le texte.
-            const currentPath = window.location.pathname;
-            const paiementLink = document.querySelector(a[href="${currentPath}"]); // Correspond à l'URL exacte si possible
-            if (paiementLink) {
-                paiementLink.classList.add('active');
-            } else {
-                // Fallback si l'URL ne correspond pas exactement, active le lien de paiement générique
-                const genericPaiementLink = document.querySelector('a[href*="paiement"]');
-                if (genericPaiementLink) {
-                    genericPaiementLink.classList.add('active');
-                }
-            }
-
-
-            // Puisqu'il n'y a qu'une seule méthode, nous n'avons pas besoin de logique de bascule.
-            // Assurez-vous simplement que la section Fedapay est active par défaut.
-            const fedapaySection = document.getElementById('fedapayPaymentSection');
-            fedapaySection.classList.add('active');
-            document.getElementById('fedapayNumber').setAttribute('required', '');
-        });
+        
     </script>
 </body>
 

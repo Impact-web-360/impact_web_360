@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
         body {
-            background-color: #f8f9fa;
+            background-color: #000;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -17,10 +17,10 @@
         }
         .container-box {
             background-color: #fff;
-            padding: 40px;
-            border-radius: 8px;
+            padding: 20px;
+            border-radius: 30px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            max-width: 600px;
+            max-width: 700px;
             width: 100%;
         }
         .icon-failure {
@@ -29,7 +29,7 @@
             margin-bottom: 20px;
         }
         h1 {
-            color: #333;
+            color: #e01b1b;
             margin-bottom: 15px;
             font-size: 2.5rem;
         }

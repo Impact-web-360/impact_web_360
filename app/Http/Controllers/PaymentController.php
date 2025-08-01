@@ -48,7 +48,6 @@ class PaymentController extends Controller
                     'regex:/^(\+[0-9]{8,15}|0[1-9][0-9]{8})$/'
                 ],
                 'formation_id' => 'required|integer|exists:formations,id',
-                'autoRenewalToggle' => 'nullable|boolean',
         ]);
 
 
@@ -64,7 +63,6 @@ class PaymentController extends Controller
             [
                 'status' => 'pending', // Statut initial de la tentative
                 'amount_paid' => $formation->price, // Montant attendu
-                'auto_renewal_enabled' => $request->has('autoRenewalToggle'),
                 'paid_at' => null, // Réinitialiser en cas de nouvelle tentative après échec
                 'fedapay_transaction_id' => null, // Sera mis à jour après la création de la charge Fedapay ou par le webhook
             ]
@@ -72,7 +70,7 @@ class PaymentController extends Controller
 
         try {
             \FedaPay\FedaPay::setApiKey(config('services.fedapay.secret_key'));
-            \FedaPay\FedaPay::setEnvironment('sandbox'); // IMPORTANT : 'sandbox' pour les tests, 'live' pour la production
+            \FedaPay\FedaPay::setEnvironment('live'); // IMPORTANT : 'sandbox' pour les tests, 'live' pour la production
 
             $phone_number = $request->input('fedapayNumber');
             $amount = (int) $formation->price;
@@ -90,7 +88,6 @@ class PaymentController extends Controller
                     'user_id' => $user->id,
                     'formation_id' => $formation->id,
                     'user_formation_id' => $userFormation->id, // L'ID de notre entrée pivot est crucial ici
-                    'auto_renewal' => $request->has('autoRenewalToggle') ? true : false,
                 ],
                 
             ]);

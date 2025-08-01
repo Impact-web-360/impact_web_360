@@ -53,7 +53,7 @@ class ProfileController extends Controller
             'new_password' => 'required|string|min:8|confirmed',
         ]);
 
-        dd($request->all());
+        
         
         $user = Auth::user();
 
