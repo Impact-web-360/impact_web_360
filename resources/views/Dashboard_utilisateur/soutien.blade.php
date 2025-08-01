@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Impact Web - Paiement Réussi</title>
+    <title>Impact Web - Soutien</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -34,11 +34,27 @@
             --save-button-hover: #0056b3;
             --upload-area-bg: #2b2b3f;
             --upload-area-border: #4a4a60;
+            --input-group-bg: #3A3A3A; /* Background for the eye icon in password fields */
+            --switch-bg-off: #4F4F4F; /* Off state of the toggle switch */
+            --switch-bg-on: #34C759; /* Green for on state of toggle switch */
+            --social-link-bg: #444; /* Background for social link input */
+            --social-link-border: #555;
+            --social-link-icon-bg: #3A3A3A;
+            --social-link-icon-color: #B0B0B0;
+
 
             /* Specific to Payment Success Page */
             --payment-card-bg: #2C2C2C; /* Slightly darker than main background for the card */
             --payment-card-border: #3A3A3A;
             --secondary-button-border: var(--border-color);
+
+            /* Theme specific colors */
+            --theme-light-bg: #F8F9FA;
+            --theme-light-text: #1A1A1A;
+            --theme-dark-bg: #1A1A1A;
+            --theme-dark-text: #F8F9FA;
+            --theme-dark-card: #2C2C2C;
+            --theme-dark-sidebar: #212121;
         }
 
         body {
@@ -132,6 +148,7 @@
             color: var(--text-color-light);
             border-radius: 10px;
             padding: 15px;
+            margin-top: 30px;
             width: 85%;
         }
 
@@ -202,116 +219,130 @@
             padding: 1.5rem !important;
         }
 
-        /* Payment Filters */
-                .payment-filters {
-                    background-color: var(--dark-bg);
-                    border-bottom: 1px solid var(--border-color);
-                }
-
-                .filter-buttons .btn {
-                    background-color: var(--secondary-button-bg);
-                    color: var(--text-color-light);
-                    border: 1px solid var(--border-color);
-                    border-radius: 8px;
-                    padding: 8px 20px;
-                    margin-right: 5px; /* Space between buttons */
-                    transition: background-color 0.3s ease, color 0.3s ease;
-                }
-                .filter-buttons .btn:last-child {
-                    margin-right: 0;
-                }
-
-                .filter-buttons .btn.active {
-                    background-color: var(--primary-color);
-                    color: white;
-                    border-color: var(--primary-color);
-                    box-shadow: 0 2px 5px rgba(255, 107, 107, 0.3);
-                }
-                .filter-buttons .btn:not(.active):hover {
-                    background-color: #444444;
-                    color: var(--text-light);
-                }
-
-                .sort-button {
-                    background-color: var(--secondary-button-bg);
-                    color: var(--text-light);
-                    border: 1px solid var(--border-color);
-                    border-radius: 8px;
-                    padding: 8px 20px;
-                    transition: background-color 0.3s ease, color 0.3s ease;
-                }
-                .sort-button:hover {
-                    background-color: #444444;
-                    color: var(--text-light);
-                    border-color: #666666;
-                }
-
-                
-            .payment-card {
-            background-color: #1c1c1c;
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin-bottom: 1rem;
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 1rem;
-            font-size: 12px;
-            }
-            .payment-card img {
-            width: 60px;
-            height: 60px;
+        /* Support Page Specific Styles */
+        .support-header {
+            text-align: center;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+            background-color: var(--dark-card-bg);
             border-radius: 10px;
-            object-fit: cover;
-            }
+        }
+        .support-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-color-light);
+        }
+        .support-header p {
+            font-size: 1.1rem;
+            color: var(--text-color-secondary);
+        }
 
-            .payment-info {
-            flex: 1;
-            min-width: 200px;
-            }
+        .support-section {
+            margin-bottom: 3rem;
+        }
+        .support-section h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--text-color-light);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
 
-            .payment-details {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            align-items: center;
-            justify-content: flex-end;
-            flex: 1;
-            }
+        .accordion-item {
+            background-color: var(--dark-card-bg);
+            border: 1px solid var(--border-color);
+            margin-bottom: 10px;
+            border-radius: 8px;
+        }
 
-            .detail-item {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            min-width: 80px;
-            }
+        .accordion-button {
+            background-color: var(--dark-card-bg) !important;
+            color: var(--text-color-light) !important;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+        .accordion-button:not(.collapsed) {
+            color: var(--primary-color) !important;
+            background-color: var(--dark-card-bg) !important;
+            box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.125);
+        }
+        .accordion-button:focus {
+            box-shadow: none;
+            border-color: var(--primary-color);
+        }
+        .accordion-button::after {
+            filter: invert(1);
+        }
 
-            .detail-label {
-            margin: 0;
-            color: #aaa;
-            }
+        .accordion-body {
+            background-color: var(--dark-card-bg);
+            color: var(--text-color-secondary);
+        }
 
-            .detail-value {
-            margin: 0;
-            font-weight: bold;
-            }
+        .contact-form-card {
+            background-color: var(--dark-card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 2rem;
+        }
 
+        .form-control {
+            background-color: var(--dark-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-color-light);
+            transition: border-color 0.3s ease;
+        }
+        .form-control:focus {
+            background-color: var(--dark-bg);
+            color: var(--text-color-light);
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.25rem rgba(255, 0, 0, 0.25);
+        }
+        .form-control::placeholder {
+            color: var(--text-color-secondary);
+        }
 
+        .btn-submit {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 30px;
+            font-size: 1.1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
 
-            .status-text {
-            font-weight: bold;
-            }
-            .status-pending { color: #ffc107; }
-            .status-success { color: #4caf50; }
-            .status-failed { color: #f44336; }
+        .btn-submit:hover {
+            background-color: #cc0000;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
 
+        /* Animations */
+        .animation-fade-in {
+            animation: fadeIn 0.6s ease-out forwards;
+            opacity: 0; /* Starts hidden */
+        }
 
+        .animation-slide-in-up {
+            animation: slideInUp 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+            opacity: 0; /* Starts hidden */
+        }
 
-                /* --- Animations --- */
-                @keyframes pulse {
-                    0% { transform: scale(1); opacity: 1; }
-                    100% { transform: scale(1.03); opacity: 0.9; }
-                }
+        /* Keyframes for animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
 
         /* Responsive Adjustments */
         @media (min-width: 992px) {
@@ -327,19 +358,23 @@
             #sidebarToggle {
                 display: none !important; /* Hamburger button hidden on desktop */
             }
-            
         }
 
         @media (max-width: 991.98px) {
+            /* Sidebar is hidden by default due to margin-left: -17rem; */
+            /* #wrapper.toggled takes care of showing it. */
+
             #page-content-wrapper {
                 width: 100%;
             }
             .navbar h2 {
                 font-size: 1.5rem;
             }
-            
-            #sidebar-wrapper {
-                position: absolute; /* Allow flow on desktop */
+
+            .settings-menu-col {
+                border-right: none; /* Remove border on smaller screens */
+                padding-right: 15px;
+                margin-bottom: 30px; /* Add space below menu */
             }
         }
 
@@ -347,47 +382,25 @@
             .navbar-collapse {
                 display: none !important; /* Hide notification/user icons on very small screens */
             }
-            .payment-filters {
-                        flex-direction: column;
-                        align-items: flex-start;
-                    }
-                    .filter-buttons {
-                        width: 100%;
-                        margin-bottom: 15px;
-                        flex-wrap: wrap; /* Allow buttons to wrap */
-                    }
-                    .filter-buttons .btn {
-                        margin-bottom: 10px;
-                        width: calc(50% - 10px); /* Two buttons per row */
-                    }
-                    .filter-buttons .btn:nth-child(even) {
-                        margin-right: 0;
-                    }
+            .support-header h1 {
+                font-size: 2rem;
+            }
+            .support-header p {
+                font-size: 1rem;
+            }
+            .support-section h2 {
+                font-size: 1.5rem;
+            }
+            #sidebar-wrapper {
+                position: absolute; /* Allow flow on desktop */
+            }
+        }
 
-                    .sort-button {
-                        width: 100%;
-                    }
-
-                    #sidebar-wrapper {
-                        position: absolute; /* Allow flow on desktop */
-                    }
-                    .payment-card {
-                        flex-direction: column;
-                        align-items: flex-start;
-                    }
-                    
-                    .payment-details {
-                        width: 100%;
-                        justify-content: space-between;
-                        margin-top: 1rem;
-                        padding-top: 1rem;
-                        border-top: 1px solid #2d2d2d;
-                    }
-                    
-                    .detail-item {
-                        align-items: flex-start;
-                    }
-
+        @media (max-width: 575.98px) {
+            .sidebar-promo {
+                margin-left: 0.5rem;
+                margin-right: 0.5rem;
+            }
         }
     </style>
 </head>
@@ -405,7 +418,7 @@
                 <a href="{{ route('calendrier') }}" class="list-group-item list-group-item-action bg-dark text-white">
                     <i class="fas fa-calendar-alt me-2"></i> Calendrier
                 </a>
-                <a href="{{ route('paiement1') }}" class="list-group-item list-group-item-action bg-dark text-white active">
+                <a href="{{ route('paiement1') }}" class="list-group-item list-group-item-action bg-dark text-white">
                     <i class="fas fa-credit-card me-2"></i> Paiement
                 </a>
 
@@ -418,26 +431,12 @@
                 </a>
 
                 <div class="sidebar-section-title text-secondary px-3 pt-3 pb-1">OTHER</div>
-                <a href="{{ route('soutien') }}" class="list-group-item list-group-item-action bg-dark text-white">
+                <a href="{{ route('soutien') }}" class="list-group-item list-group-item-action bg-dark text-white active">
                     <i class="fas fa-question-circle me-2"></i> Soutien
                 </a>
                 <a href="{{ route('parametres') }}" class="list-group-item list-group-item-action bg-dark text-white">
                     <i class="fas fa-cog me-2"></i> Paramètre
                 </a>
-
-                <!--<div class="sidebar-promo p-3 mx-3 mt-4 rounded text-center">
-                    <p class="text-white mb-2 fw-bold">Profitez de</p>
-                    <p class="text-white fs-3 fw-bold mb-1">-30%</p>
-                    <p class="text-white mb-2">sur la Formation en montage vidéo</p>
-                    <div class="star-rating mb-3">
-                        <i class="fas fa-star text-warning"></i>
-                        <i class="fas fa-star text-warning"></i>
-                        <i class="fas fa-star text-warning"></i>
-                        <i class="fas fa-star text-warning"></i>
-                        <i class="fas fa-star text-warning"></i>
-                    </div>
-                    <button class="btn btn-primary w-100 rounded-pill">Profitez!</button>
-                </div>-->
             </div>
         </div>
 
@@ -445,7 +444,7 @@
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark-secondary border-bottom border-secondary py-3">
                 <div class="container-fluid">
                     <button class="btn btn-danger d-lg-none" id="sidebarToggle" aria-label="Toggle sidebar"><i class="fas fa-bars"></i></button>
-                    <h2 class="text-white mb-0 ms-3">Paiement</h2>
+                    <h2 class="text-white mb-0 ms-3">Soutien</h2>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ms-auto mt-2 mt-lg-0 align-items-center">
                             <li class="nav-item me-3">
@@ -461,78 +460,85 @@
                 </div>
             </nav>
 
-            <div class="payment-filters d-flex justify-content-between align-items-center px-4 py-3">
-                    <div class="btn-group filter-buttons" role="group" aria-label="Payment Filters">
-                        <button type="button" class="btn btn-secondary active">Tous les</button>
-                        <button type="button" class="btn btn-secondary">En attente de paiement</button>
-                        <button type="button" class="btn btn-secondary">Réussir</button>
-                        <button type="button" class="btn btn-secondary">Échoué</button>
-                    </div>
-                    <button class="btn btn-outline-secondary sort-button">Trier par Date <i class="fas fa-sort-down ms-2"></i></button>
-            </div>
-
-                <div class="payment-list px-4 py-3">
-
-                    <div class="payment-card">
-                        <img src="logo.png" alt="Thumbnail">
-                        <div class="payment-info">
-                        <h6 class="mb-1">Envato Mastery: construire un modèle de revenu passif à partir de la vente</h6>
-                        <p class="mb-0">16 Modules • 41 vidéos</p>
-                        </div>
-                        <div class="payment-details">
-                        <div class="detail-item">
-                            <p class="detail-label">Prix:</p>
-                            <p class="detail-value text-success">€ 99,99</p>
-                        </div>
-                        <div class="detail-item">
-                            <p class="detail-label">Temps restant:</p>
-                            <p class="detail-value text-success">2 jours</p>
-                        </div>
-                        <div class="detail-item">
-                            <p class="status-text status-pending">En attente</p>
-                        </div>
+            <div class="container-fluid py-4 main-content">
+                <div class="row justify-content-center">
+                    <div class="col-lg-10">
+                        <div class="support-header animation-fade-in" style="animation-delay: 0.2s;">
+                            <h1 class="mb-2">Centre d'aide et de soutien</h1>
+                            <p class="mb-0">Trouvez des réponses à vos questions ou contactez-nous directement.</p>
                         </div>
                     </div>
+                </div>
 
-                    <div class="payment-card">
-                        <img src="logo.png" alt="Thumbnail">
-                        <div class="payment-info">
-                        <h6 class="mb-1">Envato Mastery: construire un modèle de revenu passif à partir de la vente</h6>
-                        <p class="mb-0">16 Modules • 41 vidéos</p>
+                <div class="row justify-content-center">
+                    <div class="col-lg-10">
+                        <div class="support-section animation-fade-in" style="animation-delay: 0.4s;">
+                            <h2 class="text-center">Questions fréquemment posées</h2>
+                            <div class="accordion" id="faqAccordion">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingOne">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                            Comment puis-je modifier mon profil ?
+                                        </button>
+                                    </h2>
+                                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                                        <div class="accordion-body">
+                                            Pour modifier votre profil, allez dans les *Paramètres, puis sélectionnez **Modifier le profil*. Vous pourrez y mettre à jour vos informations personnelles.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingTwo">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                            Quels modes de paiement sont acceptés ?
+                                        </button>
+                                    </h2>
+                                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                                        <div class="accordion-body">
+                                            Nous acceptons les cartes de crédit (Visa, Mastercard, American Express), PayPal, ainsi que les virements bancaires pour les abonnements annuels.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingThree">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                            Comment puis-je signaler un problème technique ?
+                                        </button>
+                                    </h2>
+                                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+                                        <div class="accordion-body">
+                                            Vous pouvez signaler un problème en utilisant le formulaire de contact ci-dessous. Décrivez le problème en détail et notre équipe vous répondra dans les plus brefs délais.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="payment-details">
-                        <div class="detail-item">
-                            <p class="detail-label">Prix:</p>
-                            <p class="detail-value text-success">€ 99,99</p>
-                        </div>
-                        <div class="detail-item">
-                            <p class="detail-label">Temps restant:</p>
-                            <p class="detail-value text-success">2 jours</p>
-                        </div>
-                        <div class="detail-item">
-                            <p class="status-text status-pending">En attente</p>
-                        </div>
-                        </div>
-                    </div>
 
-                    <div class="payment-card">
-                        <img src="logo.png" alt="Thumbnail">
-                        <div class="payment-info">
-                        <h6 class="mb-1">Envato Mastery: construire un modèle de revenu passif à partir de la vente</h6>
-                        <p class="mb-0">16 Modules • 41 vidéos</p>
-                        </div>
-                        <div class="payment-details">
-                        <div class="detail-item">
-                            <p class="detail-label">Prix:</p>
-                            <p class="detail-value text-success">€ 99,99</p>
-                        </div>
-                        <div class="detail-item">
-                            <p class="detail-label">Temps restant:</p>
-                            <p class="detail-value text-success">2 jours</p>
-                        </div>
-                        <div class="detail-item">
-                            <p class="status-text status-pending">En attente</p>
-                        </div>
+                        <div class="support-section animation-fade-in" style="animation-delay: 0.6s;">
+                            <h2 class="text-center">Contacter le support</h2>
+                            <div class="contact-form-card">
+                                <form>
+                                    <div class="mb-3">
+                                        <label for="inputName" class="form-label">Votre nom</label>
+                                        <input type="text" class="form-control" id="inputName" placeholder="Entrez votre nom complet">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="inputEmail" class="form-label">Adresse e-mail</label>
+                                        <input type="email" class="form-control" id="inputEmail" placeholder="Entrez votre adresse e-mail">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="inputSubject" class="form-label">Sujet</label>
+                                        <input type="text" class="form-control" id="inputSubject" placeholder="Ex: Problème de connexion, question de facturation...">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="inputMessage" class="form-label">Votre message</label>
+                                        <textarea class="form-control" id="inputMessage" rows="5" placeholder="Décrivez votre problème ou question en détail..."></textarea>
+                                    </div>
+                                    <div class="d-grid mt-4">
+                                        <button type="submit" class="btn btn-submit">Envoyer le message</button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>

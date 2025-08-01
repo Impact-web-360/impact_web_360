@@ -556,7 +556,7 @@
                 </a>
 
                 <div class="sidebar-section-title text-secondary px-3 pt-3 pb-1">OTHER</div>
-                <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
+                <a href="{{ route('soutien') }}" class="list-group-item list-group-item-action bg-dark text-white">
                     <i class="fas fa-question-circle me-2"></i> Soutien
                 </a>
                 <a href="{{ route('parametres') }}" class="list-group-item list-group-item-action bg-dark text-white active">
@@ -610,11 +610,11 @@
                             <li><a href="{{ route('notification') }}"><i class="fas fa-bell me-2"></i> Notification</a></li>
 
                             <li class="settings-menu-title mt-4">préférence</li>
-                            <li><a href="#"><i class="fas fa-language me-2"></i> Langue de travail</a></li>
-                            <li><a href="#"><i class="fas fa-palette me-2"></i> Thèmes abordés</a></li>
+                            <li><a href="{{ route('langues') }}"><i class="fas fa-language me-2"></i> Langue de travail</a></li>
+                            <li><a href="{{ route('themes') }}"><i class="fas fa-palette me-2"></i> Thèmes abordés</a></li>
 
                             <li class="settings-menu-title mt-4">applications</li>
-                            <li><a href="#"><i class="fas fa-share-alt me-2"></i> Médias sociaux</a></li>
+                            <li><a href="{{ route('media') }}"><i class="fas fa-share-alt me-2"></i> Médias sociaux</a></li>
 
                             <li class="mt-auto logout-item">
                                 <form action="{{ route('logout') }}" method="POST" id="logout-form">

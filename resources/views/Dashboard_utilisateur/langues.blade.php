@@ -1,69 +1,46 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Impact Web - Paramètres - Général Général</title>
+    <title>Impact Web - Paramètres - Langue de travail</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         /* Variables CSS pour faciliter la gestion des couleurs et espacements */
         :root {
-            --primary-color: #FF0000;
-            /* Rouge vif pour correspondre à la maquette */
-            --secondary-color: #6c757d;
-            /* Gris de Bootstrap pour les textes secondaires */
-            --dark-bg: #1A1A1A;
-            /* Fond principal plus sombre */
-            --dark-sidebar-bg: #212121;
-            /* Fond de la sidebar */
-            --dark-navbar-bg: #212121;
-            /* Fond de la navbar (same as sidebar for consistency) */
-            --dark-card-bg: #2C2C2C;
-            /* Fond des cartes et sections */
-            --border-color: #3A3A3A;
-            /* Bordures subtiles */
-            --text-color-light: #F8F9FA;
-            /* Texte principal clair */
-            --text-color-secondary: #B0B0B0;
-            /* Texte secondaire, plus clair que --secondary-color */
-            --hero-section-bg-start: #3B2E74;
-            /* Début du dégradé du hero (from Découvrir page) */
-            --hero-section-bg-end: #5A4893;
-            /* Fin du dégradé du hero (from Découvrir page) */
-            --hero-text-color: #FFFFFF;
-            /* Couleur du texte dans le hero (from Découvrir page) */
-            --hero-circle-color-1: rgba(100, 80, 150, 0.4);
-            /* Cercles de fond du hero (from Découvrir page) */
-            --hero-circle-color-2: rgba(130, 110, 180, 0.4);
-            /* (from Découvrir page) */
-            --button-active-bg: var(--primary-color);
-            /* Couleur de fond des boutons actifs */
-            --button-inactive-bg: var(--dark-card-bg);
-            /* Couleur de fond des boutons inactifs */
+            --primary-color: #FF0000; /* Rouge vif pour correspondre à la maquette */
+            --secondary-color: #6c757d; /* Gris de Bootstrap pour les textes secondaires */
+            --dark-bg: #1A1A1A; /* Fond principal plus sombre */
+            --dark-sidebar-bg: #212121; /* Fond de la sidebar */
+            --dark-navbar-bg: #212121; /* Fond de la navbar (same as sidebar for consistency) */
+            --dark-card-bg: #2C2C2C; /* Fond des cartes et sections */
+            --border-color: #3A3A3A; /* Bordures subtiles */
+            --text-color-light: #F8F9FA; /* Texte principal clair */
+            --text-color-secondary: #B0B0B0; /* Texte secondaire, plus clair que --secondary-color */
+            --hero-section-bg-start: #3B2E74; /* Début du dégradé du hero (from Découvrir page) */
+            --hero-section-bg-end: #5A4893; /* Fin du dégradé du hero (from Découvrir page) */
+            --hero-text-color: #FFFFFF; /* Couleur du texte dans le hero (from Découvrir page) */
+            --hero-circle-color-1: rgba(100, 80, 150, 0.4); /* Cercles de fond du hero (from Découvrir page) */
+            --hero-circle-color-2: rgba(130, 110, 180, 0.4); /* (from Découvrir page) */
+            --button-active-bg: var(--primary-color); /* Couleur de fond des boutons actifs */
+            --button-inactive-bg: var(--dark-card-bg); /* Couleur de fond des boutons inactifs */
             --button-text-inactive: var(--text-color-secondary);
-            --stars-gold: gold;
-            /* Gold color for stars */
+            --stars-gold: gold; /* Gold color for stars */
 
-            /* Specific to Settings Page (including password & general sections) */
-            --save-button-bg: #007bff;
-            /* Blue for save button */
+            /* Specific to Settings Page */
+            --save-button-bg: #007bff; /* Blue for save button */
             --save-button-hover: #0056b3;
             --upload-area-bg: #2b2b3f;
             --upload-area-border: #4a4a60;
-            --input-group-bg: #3A3A3A;
-            /* Background for the eye icon in password fields */
-            --switch-bg-off: #4F4F4F;
-            /* Off state of the toggle switch */
-            --switch-bg-on: #34C759;
-            /* Green for on state of toggle switch */
+            --input-group-bg: #3A3A3A; /* Background for the eye icon in password fields */
+            --switch-bg-off: #4F4F4F; /* Off state of the toggle switch */
+            --switch-bg-on: #34C759; /* Green for on state of toggle switch */
 
 
             /* Specific to Payment Success Page */
-            --payment-card-bg: #2C2C2C;
-            /* Slightly darker than main background for the card */
+            --payment-card-bg: #2C2C2C; /* Slightly darker than main background for the card */
             --payment-card-border: #3A3A3A;
             --secondary-button-border: var(--border-color);
         }
@@ -73,8 +50,7 @@
             background-color: var(--dark-bg);
             color: var(--text-color-light);
             font-family: Arial, sans-serif;
-            font-weight: 400;
-            /* Poids de police par défaut */
+            font-weight: 400; /* Poids de police par défaut */
         }
 
         /* Base layout with flexbox */
@@ -85,22 +61,16 @@
         /* Sidebar Styling */
         #sidebar-wrapper {
             min-height: 100vh;
-            margin-left: -17rem;
-            /* Hidden by default on mobile */
+            margin-left: -17rem; /* Hidden by default on mobile */
             transition: margin .25s ease-out;
-            width: 17rem;
+            width: 16rem;
             background-color: var(--dark-sidebar-bg) !important;
             border-right: 1px solid var(--border-color);
-            position: fixed;
-            /* Fixed sidebar on screen */
-            z-index: 1030;
-            /* Above content */
-            overflow-y: auto;
-            /* Enable scrolling for long content */
-            scrollbar-width: thin;
-            /* Firefox */
-            scrollbar-color: var(--primary-color) var(--dark-sidebar-bg);
-            /* Firefox */
+            position: fixed; /* Fixed sidebar on screen */
+            z-index: 1030; /* Above content */
+            overflow-y: auto; /* Enable scrolling for long content */
+            scrollbar-width: thin; /* Firefox */
+            scrollbar-color: var(--primary-color) var(--dark-sidebar-bg); /* Firefox */
         }
 
         /* Webkit scrollbar for Chrome/Safari */
@@ -129,10 +99,8 @@
         }
 
         #sidebar-wrapper .list-group {
-            width: 92%;
-            /* Adjusted for inset active item */
-            margin: 0 auto;
-            /* Center the list group */
+            width: 92%; /* Adjusted for inset active item */
+            margin: 0 auto; /* Center the list group */
         }
 
         #sidebar-wrapper .list-group-item {
@@ -141,16 +109,14 @@
             color: var(--text-color-secondary);
             border: none;
             transition: background-color 0.3s ease, color 0.3s ease;
-            border-radius: 5px;
-            /* Consistent border-radius for all items */
+            border-radius: 5px; /* Consistent border-radius for all items */
         }
 
         #sidebar-wrapper .list-group-item.active {
             background-color: var(--primary-color) !important;
             color: var(--text-color-light) !important;
             border-radius: 5px;
-            margin: 0px;
-            /* Inset effect */
+            margin: 0px; /* Inset effect */
         }
 
         #sidebar-wrapper .list-group-item:hover {
@@ -162,8 +128,7 @@
             font-size: 0.8rem;
             text-transform: uppercase;
             color: var(--text-color-secondary) !important;
-            padding: 10px 20px 5px;
-            /* Adjust padding to align with links */
+            padding: 10px 20px 5px; /* Adjust padding to align with links */
         }
 
         .sidebar-promo {
@@ -195,19 +160,15 @@
 
         /* Page Content */
         #page-content-wrapper {
-            min-width: 100vw;
-            /* Takes full width initially */
+            min-width: 100vw; /* Takes full width initially */
             background-color: var(--dark-bg);
-            transition: margin-left .25s ease-out;
-            /* For push effect */
-            padding-left: 0;
-            /* Remove default padding */
+            transition: margin-left .25s ease-out; /* For push effect */
+            padding-left: 0; /* Remove default padding */
         }
 
         /* Adjust content position when sidebar is open on mobile */
         #wrapper.toggled #page-content-wrapper {
-            margin-left: 17rem;
-            /* Pushes content to the right when sidebar is visible */
+            margin-left: 17rem; /* Pushes content to the right when sidebar is visible */
         }
 
         /* Top Navbar */
@@ -216,8 +177,7 @@
         }
 
         .bg-dark-secondary {
-            background-color: var(--dark-navbar-bg) !important;
-            /* Use same color as sidebar for consistency */
+            background-color: var(--dark-navbar-bg) !important; /* Use same color as sidebar for consistency */
         }
 
         /* Dropdown menus in Navbar */
@@ -249,8 +209,7 @@
 
         /* Settings Page General Styles (common to all settings sub-pages) */
         .settings-menu-col {
-            padding-right: 20px;
-            /* Space for the border-right */
+            padding-right: 20px; /* Space for the border-right */
             border-right: 1px solid var(--border-color);
         }
 
@@ -284,15 +243,13 @@
         }
 
         .settings-menu li a:hover {
-            background-color: var(--dark-card-bg);
-            /* Use card background for hover */
+            background-color: var(--dark-card-bg); /* Use card background for hover */
             color: var(--primary-color);
             transform: translateX(3px);
         }
 
         .settings-menu li a.active {
-            background-color: var(--dark-card-bg);
-            /* Use card background for active */
+            background-color: var(--dark-card-bg); /* Use card background for active */
             color: var(--primary-color);
             font-weight: 600;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -300,27 +257,24 @@
 
         .logout-item {
             padding-top: 20px;
-            margin-top: auto;
-            /* Push to bottom if content allows */
+            margin-top: auto; /* Push to bottom if content allows */
         }
 
         .logout-item a {
-            color: var(--primary-color) !important;
-            /* Muted red for logout */
+            color: var(--primary-color) !important; /* Muted red for logout */
         }
 
         .logout-item a:hover {
             background-color: var(--dark-card-bg);
-            color: var(--primary-color) !important;
-            /* Primary color on hover for logout */
+            color: var(--primary-color) !important; /* Primary color on hover for logout */
         }
 
         .general-settings-form,
         .password-settings-form,
-        .profile-settings-form {
-            /* Apply common padding to all settings forms */
-            padding-left: 30px;
-            /* More padding on the right side */
+        .profile-settings-form,
+        .notification-settings-form,
+        .language-settings-form { /* Apply common padding to all settings forms */
+            padding-left: 30px; /* More padding on the right side */
         }
 
         .form-section-title {
@@ -331,8 +285,9 @@
 
         .general-card,
         .password-card,
-        .profile-card {
-            /* Common styling for card-like sections */
+        .profile-card,
+        .notification-card,
+        .language-card { /* Common styling for card-like sections */
             background-color: var(--dark-card-bg);
             border: 1px solid var(--border-color);
             border-radius: 10px;
@@ -341,7 +296,9 @@
 
         .general-card .card-title,
         .password-card .card-title,
-        .profile-card .card-title {
+        .profile-card .card-title,
+        .notification-card .card-title,
+        .language-card .card-title {
             color: var(--text-color-light);
             font-size: 1.2em;
             font-weight: 600;
@@ -350,7 +307,9 @@
 
         .general-card .card-subtitle,
         .password-card .card-subtitle,
-        .profile-card .card-subtitle {
+        .profile-card .card-subtitle,
+        .notification-card .card-subtitle,
+        .language-card .card-subtitle {
             color: var(--text-color-secondary) !important;
             font-size: 0.9em;
         }
@@ -362,8 +321,7 @@
         }
 
         .form-control-custom {
-            background-color: var(--dark-bg);
-            /* Use darker background for input */
+            background-color: var(--dark-bg); /* Use darker background for input */
             color: var(--text-color-light);
             border: 1px solid var(--border-color);
             border-radius: 8px;
@@ -375,15 +333,13 @@
             background-color: var(--dark-bg);
             color: var(--text-color-light);
             border-color: var(--primary-color);
-            box-shadow: 0 0 0 0.25rem rgba(255, 0, 0, 0.25);
-            /* Primary color with transparency */
+            box-shadow: 0 0 0 0.25rem rgba(255, 0, 0, 0.25); /* Primary color with transparency */
             outline: none;
         }
 
         /* Password input group with eye icon (from previous settings page) */
         .password-input-group .form-control-custom {
-            border-right: none;
-            /* Remove right border for seamless look with icon */
+            border-right: none; /* Remove right border for seamless look with icon */
             border-top-right-radius: 0;
             border-bottom-right-radius: 0;
         }
@@ -391,8 +347,7 @@
         .password-input-group .input-group-text {
             background-color: var(--input-group-bg);
             border: 1px solid var(--border-color);
-            border-left: none;
-            /* Remove left border */
+            border-left: none; /* Remove left border */
             border-top-right-radius: 8px;
             border-bottom-right-radius: 8px;
             color: var(--text-color-secondary);
@@ -406,6 +361,12 @@
         }
 
         /* Profile Photo Upload (from previous settings page) */
+        .profile-photo-upload {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap; /* Allow wrapping on small screens */
+        }
+
         .profile-photo-upload .profile-img-preview {
             width: 100px;
             height: 100px;
@@ -448,12 +409,9 @@
 
         /* Custom Toggle Switches */
         .custom-switch .form-check-input {
-            width: 3.2em;
-            /* Wider switch */
-            height: 1.6em;
-            /* Taller switch */
-            border-radius: 0.8em;
-            /* Match height for perfect capsule */
+            width: 3.2em; /* Wider switch */
+            height: 1.6em; /* Taller switch */
+            border-radius: 0.8em; /* Match height for perfect capsule */
             background-color: var(--switch-bg-off);
             border-color: var(--switch-bg-off);
             transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
@@ -466,29 +424,26 @@
         }
 
         .custom-switch .form-check-input:focus {
-            box-shadow: 0 0 0 0.25rem rgba(52, 199, 89, 0.25);
-            /* Green focus shadow */
+            box-shadow: 0 0 0 0.25rem rgba(52, 199, 89, 0.25); /* Green focus shadow */
             border-color: var(--switch-bg-on);
+            outline: none;
         }
 
         .custom-switch .form-check-input:not(:checked):focus {
-            box-shadow: 0 0 0 0.25rem rgba(79, 79, 79, 0.25);
-            /* Grey focus shadow for off state */
+            box-shadow: 0 0 0 0.25rem rgba(79, 79, 79, 0.25); /* Grey focus shadow for off state */
             border-color: var(--switch-bg-off);
         }
 
-        /* Small text below toggles */
+        /* Small text below toggles (from previous settings page) */
         .small-text {
             font-size: 0.85em;
-            margin-top: -0.5rem;
-            /* Pull closer to the toggle */
+            margin-top: -0.5rem; /* Pull closer to the toggle */
             margin-bottom: 1rem;
         }
 
-        /* Delete Account Button */
+        /* Delete Account Button (from previous settings page) */
         .delete-account-btn {
-            color: var(--primary-color) !important;
-            /* Red color for delete action */
+            color: var(--primary-color) !important; /* Red color for delete action */
             font-weight: 500;
             text-decoration: none;
             transition: color 0.2s ease;
@@ -497,6 +452,98 @@
         .delete-account-btn:hover {
             color: darken(var(--primary-color), 10%) !important;
             text-decoration: underline;
+        }
+
+        /* Checkbox styling (for Notification page) */
+        .custom-checkbox .form-check-input[type="checkbox"] {
+            width: 1.5em; /* Standard checkbox size */
+            height: 1.5em;
+            border-radius: 0.25em; /* Small border radius for checkbox */
+            background-color: var(--dark-bg);
+            border: 1px solid var(--border-color);
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+            cursor: pointer;
+            vertical-align: middle; /* Align checkbox with text */
+        }
+
+        .custom-checkbox .form-check-input[type="checkbox"]:checked {
+            background-color: var(--primary-color); /* Primary color when checked */
+            border-color: var(--primary-color);
+        }
+
+        .custom-checkbox .form-check-input[type="checkbox"]:focus {
+            box-shadow: 0 0 0 0.25rem rgba(255, 0, 0, 0.25);
+            border-color: var(--primary-color);
+            outline: none;
+        }
+
+        .custom-checkbox .form-check-input[type="checkbox"]:checked:focus {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .custom-checkbox .form-check-label {
+            color: var(--text-color-secondary);
+            font-size: 1em;
+            cursor: pointer;
+        }
+
+        /* Radio button for language selection */
+        .custom-radio {
+            position: relative;
+            padding-left: 2em; /* Space for the custom radio */
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .custom-radio input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .checkmark {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            height: 20px;
+            width: 20px;
+            background-color: var(--dark-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            transform: translateY(-50%);
+        }
+
+        .custom-radio:hover .checkmark {
+            background-color: var(--dark-card-bg);
+        }
+
+        .custom-radio input:checked ~ .checkmark {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+
+        .custom-radio input:checked ~ .checkmark:after {
+            display: block;
+        }
+
+        .custom-radio .checkmark:after {
+            top: 50%;
+            left: 50%;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: white;
+            transform: translate(-50%, -50%);
         }
 
         /* Save Button (common for settings forms) */
@@ -521,61 +568,39 @@
         /* Animations */
         .animation-fade-in {
             animation: fadeIn 0.6s ease-out forwards;
-            opacity: 0;
-            /* Starts hidden */
+            opacity: 0; /* Starts hidden */
         }
 
         .animation-slide-in-up {
             animation: slideInUp 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
-            opacity: 0;
-            /* Starts hidden */
+            opacity: 0; /* Starts hidden */
         }
 
         /* Keyframes for animations */
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(15px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes slideInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
 
         /* Responsive Adjustments */
         @media (min-width: 992px) {
             #sidebar-wrapper {
-                margin-left: 0;
-                /* Sidebar visible on large screens */
-                position: relative;
-                /* Allow flow on desktop */
+                margin-left: 0; /* Sidebar visible on large screens */
+                position: relative; /* Allow flow on desktop */
             }
-
             #page-content-wrapper {
                 min-width: 0;
                 width: 100%;
-                margin-left: 0;
-                /* Reset margin for desktop */
+                margin-left: 0; /* Reset margin for desktop */
             }
-
             #sidebarToggle {
-                display: none !important;
-                /* Hamburger button hidden on desktop */
+                display: none !important; /* Hamburger button hidden on desktop */
             }
         }
 
@@ -586,51 +611,55 @@
             #page-content-wrapper {
                 width: 100%;
             }
-
             .navbar h2 {
                 font-size: 1.5rem;
             }
 
             .settings-menu-col {
-                border-right: none;
-                /* Remove border on smaller screens */
+                border-right: none; /* Remove border on smaller screens */
                 padding-right: 15px;
-                margin-bottom: 30px;
-                /* Add space below menu */
+                margin-bottom: 30px; /* Add space below menu */
             }
 
             .general-settings-form,
             .password-settings-form,
-            .profile-settings-form {
-                padding-left: 15px;
-                /* Adjust padding */
+            .profile-settings-form,
+            .notification-settings-form,
+            .language-settings-form {
+                padding-left: 15px; /* Adjust padding */
             }
-
             #sidebar-wrapper {
-                position: absolute;
-                /* Allow flow on desktop */
+                position: absolute; /* Allow flow on desktop */
             }
         }
 
         @media (max-width: 767.98px) {
             .navbar-collapse {
-                display: none !important;
-                /* Hide notification/user icons on very small screens */
+                display: none !important; /* Hide notification/user icons on very small screens */
             }
-
             .settings-menu-col,
             .general-settings-form,
             .password-settings-form,
-            .profile-settings-form {
-                width: 100%;
-                /* Full width on smaller screens */
+            .profile-settings-form,
+            .notification-settings-form,
+            .language-settings-form {
+                width: 100%; /* Full width on smaller screens */
                 padding-left: 15px;
                 padding-right: 15px;
             }
-
+            .profile-photo-upload {
+                flex-direction: column;
+                align-items: center !important;
+            }
+            .profile-img-preview {
+                margin-bottom: 20px;
+                margin-right: 0 !important;
+            }
+            .upload-area {
+                width: 100%;
+            }
             #sidebar-wrapper {
-                position: absolute;
-                /* Allow flow on desktop */
+                position: absolute; /* Allow flow on desktop */
             }
         }
 
@@ -639,24 +668,9 @@
                 margin-left: 0.5rem;
                 margin-right: 0.5rem;
             }
-
-            .profile-photo-upload {
-                flex-direction: column;
-                align-items: center !important;
-            }
-
-            .profile-img-preview {
-                margin-bottom: 20px;
-                margin-right: 0 !important;
-            }
-
-            .upload-area {
-                width: 100%;
-            }
         }
     </style>
 </head>
-
 <body>
     <div class="d-flex" id="wrapper">
         <div class="bg-dark sidebar" id="sidebar-wrapper">
@@ -691,20 +705,7 @@
                     <i class="fas fa-cog me-2"></i> Paramètre
                 </a>
 
-                <!--<div class="sidebar-promo p-3 mx-3 mt-4 rounded text-center">
-                    <p class="text-white mb-2 fw-bold">Profitez de</p>
-                    <p class="text-white fs-3 fw-bold mb-1">-30%</p>
-                    <p class="text-white mb-2">sur la Formation en montage vidéo</p>
-                    <div class="star-rating mb-3">
-                        <i class="fas fa-star text-warning"></i>
-                        <i class="fas fa-star text-warning"></i>
-                        <i class="fas fa-star text-warning"></i>
-                        <i class="fas fa-star text-warning"></i>
-                        <i class="fas fa-star text-warning"></i>
-                    </div>
-                    <button class="btn btn-primary w-100 rounded-pill">Profitez!</button>
-                </div>-->
-            </div>
+                </div>
         </div>
 
         <div id="page-content-wrapper">
@@ -732,14 +733,14 @@
                     <div class="col-md-4 col-lg-3 settings-menu-col animation-slide-in-up">
                         <ul class="list-unstyled settings-menu">
                             <li class="settings-menu-title">Profil de l'entreprise</li>
-                            <li><a href="{{ route('parametres') }}" class="active"><i class="fas fa-cog me-2"></i> Général général</a></li>
+                            <li><a href="{{ route('parametres') }}"><i class="fas fa-cog me-2"></i> Général général</a></li>
                             <li><a href="{{ route('modifier profil') }}"><i class="fas fa-user-edit me-2"></i> Modifier le profil</a></li>
                             <li><a href="{{ route('changer mot de passe') }}"><i class="fas fa-key me-2"></i> Changer le mot de passe</a></li>
                             <li><a href="{{ route('notification') }}"><i class="fas fa-bell me-2"></i> Notification</a></li>
 
                             <li class="settings-menu-title mt-4">préférence</li>
-                            <li><a href="{{ route('langues') }}"><i class="fas fa-language me-2"></i> Langue de travail</a></li>
-                            <li><a href="{{ route('themes') }}" ><i class="fas fa-palette me-2"></i> Thèmes abordés</a></li>
+                            <li><a href="{{ route('langues') }}" class="active"><i class="fas fa-language me-2"></i> Langue de travail</a></li>
+                            <li><a href="{{ route('themes') }}"><i class="fas fa-palette me-2"></i> Thèmes abordés</a></li>
 
                             <li class="settings-menu-title mt-4">applications</li>
                             <li><a href="{{ route('media') }}"><i class="fas fa-share-alt me-2"></i> Médias sociaux</a></li>
@@ -755,49 +756,41 @@
                         </ul>
                     </div>
 
-                    <div class="col-md-8 col-lg-9 general-settings-form animation-fade-in" style="animation-delay: 0.2s;">
-                        <h4 class="form-section-title mb-4">Général général</h4>
+                    <div class="col-md-8 col-lg-9 language-settings-form animation-fade-in" style="animation-delay: 0.2s;">
+                        <h4 class="form-section-title mb-4">Langue de travail</h4>
 
-                        @if(session('success'))
-                        <div class="alert alert-success">
-                            {{ session('success') }}
-                        </div>
-                        @endif
-
-                        <div class="card general-card mb-4">
+                        <div class="card language-card mb-4">
                             <div class="card-body">
-                                <h5 class="card-title">Renseignements personnels</h5>
-                                <p class="card-subtitle mb-3 text-muted">Vos informations personnelles sont strictement confidentielles et inaccessibles à d'autres. Nous accordons la priorité à votre vie privée, en veillant à ce que toutes vos données personnelles restent sécurisées et privées.</p>
+                                <h5 class="card-title">Choisir la langue d'affichage</h5>
+                                <p class="card-subtitle mb-4 text-muted">Sélectionnez la langue que vous préférez pour naviguer sur la plateforme. Cela n'affecte pas la langue du contenu des cours, seulement l'interface utilisateur.</p>
 
-                                <form method="POST" action="{{ route('parametres.update') }}">
-                                    @csrf
+                                <div class="mb-3 d-flex align-items-center">
+                                    <label class="custom-radio me-3 text-white-50">Français
+                                        <input type="radio" checked="checked" name="language" value="fr">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <small class="text-muted ms-auto">Langue actuelle</small>
+                                </div>
 
-                                    <div class="row mb-3 align-items-center">
-                                        <label for="email" class="col-sm-3 col-form-label form-label-custom">Courriel:</label>
-                                        <div class="col-sm-9">
-                                            <input type="email" name="email" class="form-control form-control-custom" id="email" value="{{ auth()->user()->email }}">
-                                        </div>
-                                    </div>
+                                <div class="mb-3">
+                                    <label class="custom-radio text-white-50">Anglais
+                                        <input type="radio" name="language" value="en">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label class="custom-radio text-white-50">Espagnol
+                                        <input type="radio" name="language" value="es">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
 
-                                    <div class="row mb-3 align-items-center">
-                                        <label for="telephone" class="col-sm-3 col-form-label form-label-custom">Téléphone portable</label>
-                                        <div class="col-sm-9">
-                                            <input type="text" name="telephone" class="form-control form-control-custom" id="telephone" value="{{ auth()->user()->telephone }}">
-                                        </div>
-                                    </div>
-
-                                    <div class="row mb-3 align-items-center">
-                                        <label for="dob" class="col-sm-3 col-form-label form-label-custom">Date de naissance</label>
-                                        <div class="col-sm-9">
-                                            <input type="date" name="dob" class="form-control form-control-custom" id="dob" value="{{ auth()->user()->dob }}">
-                                        </div>
-                                    </div>
-
-                                    <div class="d-flex justify-content-end mt-4">
-                                        <button type="submit" class="btn btn-save">Sauvegarder</button>
-                                    </div>
-                                </form>
                             </div>
+                        </div>
+
+                        <div class="d-flex justify-content-end mt-4">
+                            <button class="btn btn-save">Sauvegarder</button>
                         </div>
                     </div>
                 </div>
@@ -811,10 +804,9 @@
         var el = document.getElementById("wrapper");
         var toggleButton = document.getElementById("sidebarToggle");
 
-        toggleButton.onclick = function() {
+        toggleButton.onclick = function () {
             el.classList.toggle("toggled");
         };
     </script>
 </body>
-
 </html>

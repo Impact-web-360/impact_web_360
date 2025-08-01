@@ -126,6 +126,22 @@ Route::middleware('auth')->group(function () {
         return view('dashboard_utilisateur.parametre');
     })->name('parametres');
 
+    Route::get('/langues', function () {
+        return view('dashboard_utilisateur.langues');
+    })->name('langues');
+
+    Route::get('/themes', function () {
+        return view('dashboard_utilisateur.themes');
+    })->name('themes');
+
+    Route::get('/media', function () {
+        return view('dashboard_utilisateur.media');
+    })->name('media');
+
+    Route::get('/soutien', function () {
+        return view('dashboard_utilisateur.soutien');
+    })->name('soutien');
+
     Route::get('/changer-mot-de-passe', function () {
         return view('dashboard_utilisateur.changer_mot_de_passe');
     })->name('changer_mot_de_passe');

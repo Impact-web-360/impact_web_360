@@ -573,7 +573,7 @@
                 </a>
 
                 <div class="sidebar-section-title text-secondary px-3 pt-3 pb-1">OTHER</div>
-                <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
+                <a href="{{ route('soutien') }}" class="list-group-item list-group-item-action bg-dark text-white">
                     <i class="fas fa-question-circle me-2"></i> Soutien
                 </a>
                 <a href="{{ route('parametres') }}" class="list-group-item list-group-item-action bg-dark text-white">
