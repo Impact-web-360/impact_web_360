@@ -159,6 +159,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),
             //decouvrir
             Route::get('/decouvrir', [DiscoverController::class, 'index'])->name('decouvrir');
 
+            Route::get('/formation_gratuite/{formationId}', [FormationController::class, 'showContenu'])->name('formation_gratuite');
             Route::get('/formations/{id}', [FormationController::class, 'show'])->name('details');
             //caisse
             Route::get('/fedapay/callback', [PaymentController::class, 'handleFedapayCallback'])->name('fedapay.callback');

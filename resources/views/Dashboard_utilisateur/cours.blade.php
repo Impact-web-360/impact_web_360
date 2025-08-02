@@ -545,7 +545,7 @@
             }
         }
 
-                 :root {
+            :root {
         --primary-color: #FF0000;
         --secondary-color: #6c757d;
         --dark-bg: #1A1A1A;
@@ -585,7 +585,7 @@
         --primary-color: #0d6efd;
         --secondary-color: #6c757d;
         --dark-bg: #F0F2F5; /* Fond principal clair */
-        --dark-sidebar-bg: #000; /* Sidebar plus sombre */
+         --dark-sidebar-bg: #000; /* Sidebar plus sombre */
         --dark-card-bg: #FFFFFF; /* Cartes blanches */
         --border-color: #CED4DA;
         --text-color-light: #212529; /* Texte sombre */
@@ -658,8 +658,6 @@
         --switch-bg-off: #3e5c91;
         --input-group-bg: #2c426b;
         }
-
-
     </style>
 </head>
 <body class="theme-{{ $userTheme ?? 'dark' }}">
@@ -689,7 +687,7 @@
                 </a>
 
                 <div class="sidebar-section-title text-secondary px-3 pt-3 pb-1">OTHER</div>
-                <a href="{{ route('soutien') }}" class="list-group-item list-group-item-action bg-dark text-white">
+                <a href="" class="list-group-item list-group-item-action bg-dark text-white">
                     <i class="fas fa-question-circle me-2"></i> Soutien
                 </a>
                 <a href="{{ route('parametres') }}" class="list-group-item list-group-item-action bg-dark text-white">

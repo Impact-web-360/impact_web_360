@@ -176,6 +176,7 @@
             height: 250px;
             border-radius: 0.5rem;
             margin-bottom: 1.5rem;
+            object-fit: cover;
         }
 
         .course-detail-header h3 {
@@ -464,120 +465,181 @@
             }
         }
 
-                 :root {
-        --primary-color: #FF0000;
-        --secondary-color: #6c757d;
-        --dark-bg: #1A1A1A;
-        --dark-sidebar-bg: #212121;
-        --dark-card-bg: #2C2C2C;
-        --border-color: #3A3A3A;
-        --text-color-light: #F8F9FA;
-        --text-color-secondary: #B0B0B0;
-        --save-button-bg: #007bff;
-        --save-button-hover: #0056b3;
-        --switch-bg-off: #4F4F4F;
-        --input-group-bg: #3A3A3A;
+        :root {
+            --primary-color: #FF0000;
+            --secondary-color: #6c757d;
+            --dark-bg: #1A1A1A;
+            --dark-sidebar-bg: #212121;
+            --dark-card-bg: #2C2C2C;
+            --border-color: #3A3A3A;
+            --text-color-light: #F8F9FA;
+            --text-color-secondary: #B0B0B0;
+            --save-button-bg: #007bff;
+            --save-button-hover: #0056b3;
+            --switch-bg-off: #4F4F4F;
+            --input-group-bg: #3A3A3A;
         }
 
         body {
-        background-color: var(--dark-bg);
-        color: var(--text-color-light);
+            background-color: var(--dark-bg);
+            color: var(--text-color-light);
         }
 
         .bg-dark,
         .bg-dark-secondary {
-        background-color: var(--dark-sidebar-bg) !important;
+            background-color: var(--dark-sidebar-bg) !important;
         }
 
         .list-group-item {
-        background-color: var(--dark-sidebar-bg);
-        color: var(--text-color-secondary);
+            background-color: var(--dark-sidebar-bg);
+            color: var(--text-color-secondary);
         }
 
         .themes-card {
-        background-color: var(--dark-card-bg);
-        border-color: var(--border-color);
+            background-color: var(--dark-card-bg);
+            border-color: var(--border-color);
         }
 
         /* --- Thème Clair --- */
         body.theme-light {
-        --primary-color: #0d6efd;
-        --secondary-color: #6c757d;
-        --dark-bg: #F0F2F5; /* Fond principal clair */
-         --dark-sidebar-bg: #000; /* Sidebar plus sombre */
-        --dark-card-bg: #FFFFFF; /* Cartes blanches */
-        --border-color: #CED4DA;
-        --text-color-light: #212529; /* Texte sombre */
-        --text-color-secondary: #6c757d;
-        --save-button-bg: #0d6efd;
-        --save-button-hover: #0a58ca;
-        --switch-bg-off: #ADB5BD;
-        --input-group-bg: #E9ECEF;
+            --primary-color: #0d6efd;
+            --secondary-color: #6c757d;
+            --dark-bg: #F0F2F5; /* Fond principal clair */
+            --dark-sidebar-bg: #000; /* Sidebar plus sombre */
+            --dark-card-bg: #FFFFFF; /* Cartes blanches */
+            --border-color: #CED4DA;
+            --text-color-light: #212529; /* Texte sombre */
+            --text-color-secondary: #6c757d;
+            --save-button-bg: #0d6efd;
+            --save-button-hover: #0a58ca;
+            --switch-bg-off: #ADB5BD;
+            --input-group-bg: #E9ECEF;
         }
 
         body.theme-light .list-group-item {
-        background-color: var(--dark-sidebar-bg);
-        color: var(--text-color-light);
+            background-color: var(--dark-sidebar-bg);
+            color: var(--text-color-light);
         }
 
         body.theme-light .list-group-item:hover {
-        background-color: #DEE2E6;
-        color: var(--primary-color);
+            background-color: #DEE2E6;
+            color: var(--primary-color);
         }
 
         body.theme-light .list-group-item.active {
-        background-color: var(--primary-color) !important;
-        color: #FFFFFF !important;
+            background-color: var(--primary-color) !important;
+            color: #FFFFFF !important;
         }
 
         /* --- Thème Sepia --- */
         body.theme-sepia {
-        --primary-color: #8B4513;
-        --secondary-color: #708090;
-        --dark-bg: #F4EEDD;
-        --dark-sidebar-bg: #A39686;
-        --dark-card-bg: #E8E0D2;
-        --border-color: #CDB7A3;
-        --text-color-light: #5C4C42;
-        --text-color-secondary: #708090;
-        --save-button-bg: #8B4513;
-        --save-button-hover: #65300F;
-        --switch-bg-off: #BDB7A3;
-        --input-group-bg: #CDB7A3;
+            --primary-color: #8B4513;
+            --secondary-color: #708090;
+            --dark-bg: #F4EEDD;
+            --dark-sidebar-bg: #A39686;
+            --dark-card-bg: #E8E0D2;
+            --border-color: #CDB7A3;
+            --text-color-light: #5C4C42;
+            --text-color-secondary: #708090;
+            --save-button-bg: #8B4513;
+            --save-button-hover: #65300F;
+            --switch-bg-off: #BDB7A3;
+            --input-group-bg: #CDB7A3;
         }
 
         /* --- Thème Contrast (Haut Contraste) --- */
         body.theme-contrast {
-        --primary-color: #00FF00;
-        --secondary-color: #FFFFFF;
-        --dark-bg: #000000;
-        --dark-sidebar-bg: #111111;
-        --dark-card-bg: #1c1c1c;
-        --border-color: #00FF00;
-        --text-color-light: #FFFFFF;
-        --text-color-secondary: #00FF00;
-        --save-button-bg: #00FF00;
-        --save-button-hover: #00CC00;
-        --switch-bg-off: #FFFFFF;
-        --input-group-bg: #222222;
+            --primary-color: #00FF00;
+            --secondary-color: #FFFFFF;
+            --dark-bg: #000000;
+            --dark-sidebar-bg: #111111;
+            --dark-card-bg: #1c1c1c;
+            --border-color: #00FF00;
+            --text-color-light: #FFFFFF;
+            --text-color-secondary: #00FF00;
+            --save-button-bg: #00FF00;
+            --save-button-hover: #00CC00;
+            --switch-bg-off: #FFFFFF;
+            --input-group-bg: #222222;
         }
 
         /* --- Thème Blue (Bleu) --- */
         body.theme-blue {
-        --primary-color: #3498db;
-        --secondary-color: #90A4AE;
-        --dark-bg: #1e2c4a;
-        --dark-sidebar-bg: #1a2a4b;
-        --dark-card-bg: #2c426b;
-        --border-color: #3e5c91;
-        --text-color-light: #e8eaf6;
-        --text-color-secondary: #90a4ae;
-        --save-button-bg: #3498db;
-        --save-button-hover: #2980b9;
-        --switch-bg-off: #3e5c91;
-        --input-group-bg: #2c426b;
+            --primary-color: #3498db;
+            --secondary-color: #90A4AE;
+            --dark-bg: #1e2c4a;
+            --dark-sidebar-bg: #1a2a4b;
+            --dark-card-bg: #2c426b;
+            --border-color: #3e5c91;
+            --text-color-light: #e8eaf6;
+            --text-color-secondary: #90a4ae;
+            --save-button-bg: #3498db;
+            --save-button-hover: #2980b9;
+            --switch-bg-off: #3e5c91;
+            --input-group-bg: #2c426b;
+        }
+        
+        /* Styles spécifiques pour les cartes de modules */
+        .module-card {
+            background-color: var(--dark-sidebar-bg); /* Un peu plus sombre pour la distinction */
+            border: 1px solid var(--border-color);
+            border-radius: 0.75rem;
+            padding: 1.25rem;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
+        .module-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .module-title {
+            color: var(--text-color-light);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .module-duration {
+            color: var(--text-color-secondary);
+            font-size: 0.9rem;
+        }
+
+        .module-video-container {
+            border-radius: 0.5rem;
+            overflow: hidden;
+            line-height: 0;
+        }
+
+        .module-video-container video {
+            border-radius: 0.5rem;
+        }
+
+        .btn-primary-custom {
+            background-color: var(--primary-color);
+            border: none;
+            color: var(--text-color-light);
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary-custom:hover {
+            background-color: #ff3333; /* Une nuance plus foncée au survol */
+        }
+
+        .btn-download {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .btn-download:hover {
+            background-color: var(--primary-color);
+            color: var(--text-color-light);
+        }
     </style>
 </head>
 <body class="theme-{{ $userTheme ?? 'dark' }}">
@@ -613,27 +675,13 @@
                 <a href="{{ route('parametres') }}" class="list-group-item list-group-item-action bg-dark text-white">
                     <i class="fas fa-cog me-2"></i> Paramètre
                 </a>
-
-                <!--<div class="sidebar-promo p-3 mx-3 mt-4 rounded text-center">
-                    <p class="text-white mb-2 fw-bold">Profitez de</p>
-                    <p class="text-white fs-3 fw-bold mb-1">-30%</p>
-                    <p class="text-white mb-2">sur la Formation en montage vidéo</p>
-                    <div class="star-rating mb-3">
-                        <i class="fas fa-star text-warning"></i>
-                        <i class="fas fa-star text-warning"></i>
-                        <i class="fas fa-star text-warning"></i>
-                        <i class="fas fa-star text-warning"></i>
-                        <i class="fas fa-star text-warning"></i>
-                    </div>
-                    <button class="btn btn-primary w-100 rounded-pill">Profitez!</button>
-                </div>-->
             </div>
         </div>
         <div id="page-content-wrapper">
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark-secondary border-bottom border-secondary py-3">
                 <div class="container-fluid">
                     <button class="btn btn-danger d-lg-none" id="sidebarToggle"><i class="fas fa-bars"></i></button>
-                    <h2 class="text-white mb-0 ms-3">Détail du cours</h2>
+                    <h2 class="text-white mb-0 ms-3">Cours</h2>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ms-auto mt-2 mt-lg-0 align-items-center">
                             <li class="nav-item me-3">
@@ -652,148 +700,53 @@
             <div class="container-fluid py-4 main-content">
                 @if($formation)
                 <div class="row">
-                    <div class="col-lg-8 mb-4 animation-slide-in-up">
+                    <div class="col-lg-12 mb-4 animation-slide-in-up">
                         <div class="course-detail-section">
                             <div class="course-detail-header">
-                                @if ($formation->image)
-                                    <img src="{{ asset('storage/' . $formation->image) }}" class="img-fluid" alt="Image de {{ $formation->title }}">
-                                @else
-                                    <img src="{{ asset('images/default-course.png') }}" class="img-fluid" alt="Image par défaut">
-                                @endif
-                                <h3 class="text-white mb-4">{{ $formation->title ?? 'Titre de la formation' }}</h3>
+                                <h3 class="text-white mt-4 mb-4">{{ $formation->title ?? 'Titre de la formation' }}</h3>
+                                <p class="text-secondary">{{ $formation->description ?? 'Description de la formation.' }}</p>
                             </div>
 
-                            <ul class="nav nav-pills course-tabs mb-4" id="courseTab" role="tablist">
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link active" id="description-tab" data-bs-toggle="tab" data-bs-target="#description" type="button" role="tab" aria-controls="description" aria-selected="true">Description</button>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="tools-tab" data-bs-toggle="tab" data-bs-target="#tools" type="button" role="tab" aria-controls="tools" aria-selected="false">Outils de travail</button>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="comments-tab" data-bs-toggle="tab" data-bs-target="#comments" type="button" role="tab" aria-controls="comments" aria-selected="false">Modules</button>
-                                </li>
-                            </ul>
+                            <div class="mt-5">
+                                <h4 class="text-white mb-4">Contenu de la formation</h4>
+                                @if($formation->modules->count() > 0)
+                                    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+                                        @foreach($formation->modules as $index => $module)
+                                            <div class="col">
+                                                <div class="module-card">
+                                                    <h5 class="module-title mb-2">Module {{ $index + 1 }}</h5>
+                                                    <p class="module-duration mb-3">
+                                                        <i class="far fa-clock me-1"></i> Durée : {{ $module->duration }} min
+                                                    </p>
+                                                    @if(!empty($module->video_path))
+                                                        <div class="module-video-container mb-3">
+                                                            <video width="100%" controls>
+                                                                <source src="{{ asset('storage/' . $module->video_path) }}" type="video/mp4">
+                                                                Votre navigateur ne supporte pas la lecture de cette vidéo.
+                                                            </video>
+                                                        </div>
+                                                    @endif
 
-                            <div class="tab-content" id="courseTabContent">
-                                <div class="tab-pane fade show active course-description" id="description" role="tabpanel" aria-labelledby="description-tab">
-                                    <p>{{ $formation->description ?? 'Pas de description détaillée disponible pour cette formation.' }}</p>
-                                    @if($formation->objectives && count($formation->objectives) > 0)
-                                        <p class="text-white fw-bold mt-4">Ce que vous apprendrez:</p>
-                                        <ul>
-                                            @foreach($formation->objectives as $objective)
-                                                <li><i class="fas fa-check-circle"></i> {{ $objective }}</li>
-                                            @endforeach
-                                        </ul>
-                                    @endif
-                                </div>
-                                <div class="tab-pane fade" id="tools" role="tabpanel" aria-labelledby="tools-tab">
-                                    <p class="text-secondary">
-                                        Voici les outils que vous utiliserez dans ce cours :
-                                        @if($formation->tools && count($formation->tools) > 0)
-                                            <ul>
-                                                @foreach($formation->tools as $tool)
-                                                    <li><i class="fas fa-toolbox"></i> {{ $tool }}</li>
-                                                @endforeach
-                                            </ul>
-                                        @else
-                                            <p class="text-secondary">Aucun outil spécifique n'a été listé pour cette formation.</p>
-                                        @endif
-                                    </p>
-                                </div>
-                                
-                                <div class="tab-pane fade" id="comments" role="tabpanel" aria-labelledby="comments-tab">
-                                    <div class="modules-card">
-                                        <div class="module-list">
-                                            @if($formation->modules->count() > 0)
-                                                @foreach($formation->modules as $index => $module)
-                                                    <div class="module-item">
-                                                        <span>{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }} {{ $module->title ?? 'Module sans titre' }}</span>
-                                                        <span>
-                                                        @if($module->duration)
-                                                            @if($module->duration >= 60)
-                                                            {{ floor($module->duration / 60) }} heure{{ floor($module->duration / 60) > 1 ? 's' : '' }}
-                                                            @if($module->duration % 60 > 0)
-                                                                {{ $module->duration % 60 }} minute{{ $module->duration % 60 > 1 ? 's' : '' }}
-                                                            @endif
-                                                            @else
-                                                            {{ $module->duration }} minute{{ $module->duration > 1 ? 's' : '' }}
-                                                            @endif
+                                                    <div class="d-flex justify-content-between align-items-center mt-auto">
+                                                        @if(!empty($module->file_path))
+                                                            <a href="{{ asset('storage/' . $module->file_path) }}" target="_blank" class="btn btn-sm btn-download">
+                                                                <i class="fas fa-download me-1"></i> Télécharger le fichier
+                                                            </a>
                                                         @else
-                                                            Durée non renseignée
+                                                            <span class="text-muted">Aucun fichier</span>
                                                         @endif
-                                                        </span>
+                                                        
                                                     </div>
-                                                @endforeach
-                                            @else
-                                                <div class="module-item">
-                                                    <span class="text-secondary">Aucun module pour le moment.</span>
-                                                    <span></span>
                                                 </div>
-                                            @endif
-                                        </div>
+                                            </div>
+                                        @endforeach
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 animation-fade-in" style="animation-delay: 0.3s;">
-                        <div class="overview-card">
-                            <h5 class="text-white mb-3">Aperçu général</h5>
-                            <div class="row text-center mb-3">
-                                <div class="col-6 overview-item">
-                                    <i class="fas fa-user-friends"></i>
-                                    <p><span class="value">{{ $formation->students_enrolled }}</span> Inscrits</p>
-                                </div>
-                                <div class="col-6 overview-item">
-                                    <i class="fas fa-book-open"></i>
-                                    <p><span class="value">{{ $formation->modules->count() }}</span> Modules</p>
-                                </div>
-                                <div class="col-6 overview-item">
-                                    <i class="fas fa-video"></i>
-                                    <p><span class="value">{{ $formation->total_videos }}</span> Vidéos</p>
-                                </div>
-                                <div class="col-6 overview-item">
-                                    <i class="bi bi-tools"></i>
-                                    <p><span class="value">{{ is_array($formation->tools) ? count($formation->tools) : $formation->tools->count() }}</span> Outils</p>
-                                </div>
-                            </div>
-                            <div class="price-section justify-content-center">
-                                <div>
-                                    <p class="text-secondary mb-0">Prix de vente</p>
-                                    @if ($formation->price == 0)
-                                        <span class="price free">GRATUIT</span>
-                                    @else
-                                        <span class="price">{{ number_format($formation->price, 0, ',', '.') }} FCFA</span>
-                                    @endif
-                                </div>
-                            </div>
-                            @if ($formation->price == 0)
-                                <a href="{{ route('formation_gratuite', ['formationId' => $formation->id]) }}" class="btn btn-add-to-cart">
-                                    <i class="fas fa-play-circle me-2"></i> Accéder au cours
-                                </a>
-                            @else
-                                <a href="{{ route('caisse', ['formationId' => $formation->id]) }}" class="btn btn-add-to-cart">
-                                    <i class="fas fa-shopping-bag me-2"></i> Passer à la caisse
-                                </a>
-                            @endif
-                        </div>
-
-                        <div class="mentor-card">
-                            <h5 class="text-white mb-3">À propos de Mentor</h5>
-                            <div class="d-flex align-items-center mb-3">
-                                {{-- Placeholder pour l'avatar du mentor --}}
-                                @if($formation->mentor_avatar)
-                                    <img src="{{ asset('storage/' . $formation->mentor_avatar) }}" alt="Mentor Avatar" class="mentor-avatar me-3">
                                 @else
-                                    <img src="{{ asset('images/default-avatar.png') }}" alt="Mentor Avatar" class="mentor-avatar me-3">
+                                    <div class="alert alert-info text-center" role="alert">
+                                        Aucun module disponible pour cette formation.
+                                    </div>
                                 @endif
-                                <div>
-                                    <h6 class="mentor-name mb-0">{{ $formation->mentor ?? 'Nom du mentor' }}</h6>
-                                    <p class="mentor-title">{{ $formation->mentor_title ?? 'Titre du mentor' }}</p>
-                                </div>
                             </div>
-                            <p>{{ $formation->mentor_bio ?? 'Description du mentor non disponible.' }}</p>
                         </div>
                     </div>
                 </div>
@@ -807,7 +760,6 @@
             </div>
         </div>
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script>
         var el = document.getElementById("wrapper");
@@ -819,4 +771,3 @@
     </script>
 </body>
 </html>
-

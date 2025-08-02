@@ -69,8 +69,9 @@ class PaymentController extends Controller
         );
 
         try {
-            \FedaPay\FedaPay::setApiKey(config('services.fedapay.secret_key'));
-            \FedaPay\FedaPay::setEnvironment('live'); // IMPORTANT : 'sandbox' pour les tests, 'live' pour la production
+            \FedaPay\FedaPay::setApiKey(env('FEDAPAY_SECRET_KEY'));
+            \FedaPay\FedaPay::setEnvironment(env('FEDAPAY_ENV', 'live'));
+            // IMPORTANT : 'sandbox' pour les tests, 'live' pour la production
 
             $phone_number = $request->input('fedapayNumber');
             $amount = (int) $formation->price;
@@ -91,6 +92,7 @@ class PaymentController extends Controller
                 ],
                 
             ]);
+            dd($transaction);
 
             // Mettez à jour l'entrée user_formation avec l'ID de transaction Fedapay
             $userFormation->fedapay_transaction_id = $transaction->id;

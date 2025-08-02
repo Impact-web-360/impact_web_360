@@ -150,6 +150,15 @@ class FormationController extends Controller
 
         return view('Dashboard_utilisateur.details', compact('formation'));
     }
+    public function showContenu($formationId)
+    {
+        
+        $formation = Formation::findOrFail($formationId);
+        $formation->load(['modules', 'categorie']);
+
+        return view('Dashboard_utilisateur.formation_gratuite', compact('formation'));
+    }
+    
 
     
 };
