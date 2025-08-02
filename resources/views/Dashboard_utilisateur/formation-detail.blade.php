@@ -464,7 +464,7 @@
                                     
                                     <div class="flex-shrink-0 d-flex flex-column flex-md-row align-items-md-center gap-3">
                                         @if(!empty($module->video_path))
-                                            <a href="#video-{{ $module->id }}" class="btn btn-sm btn-primary-custom" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="video-{{ $module->id }}">
+                                            <a href="#video-{{ $module->id }}" class="btn btn-danger" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="video-{{ $module->id }}">
                                                 <i class="fas fa-play me-1"></i> Voir la vidéo
                                             </a>
                                         @endif

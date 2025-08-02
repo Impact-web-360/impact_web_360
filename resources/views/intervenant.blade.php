@@ -88,7 +88,7 @@
           <li class="nav-item"><a class="nav-link" href="{{ route('evenement') }}">Événements</a></li>
           <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">E-learning</a></li>
           <li class="nav-item"><a class="nav-link active" href="{{ route('intervenant') }}">Intervenants</a></li>
-          <li class="nav-item"><a class="nav-link" href="{{ route('billet') }}">Billetterie</a></li>
+          <li class="nav-item"><a class="nav-link" href="">Billetterie</a></li>
           <li class="nav-item"><a class="nav-link" href="{{ route('boutique') }}">Boutique</a></li>
           <li class="nav-item"><a class="btn btn-light mx-2" href="{{ route('login') }}">Se connecter</a></li>
           <li class="nav-item"><a class="btn btn-inscrire" href="{{ route('register') }}">S'inscrire</a></li>

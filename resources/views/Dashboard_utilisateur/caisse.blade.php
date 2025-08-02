@@ -812,71 +812,43 @@
                 </div>
             </nav>
 
-            <div class="container-fluid py-4 main-content">
-                <div class="row">
-                    <div class="col-md-8 col-lg-12 general-settings-form animation-fade-in"
-                        style="animation-delay: 0.2s;">
-                        <h1 class="page-title">{{ __('Finalisez votre paiement pour la formation: :title', ['title' => $formation->title]) }}</h1>
-                        <p class="page-description">
-                            {{ __('Le coût total de cette formation est de :price XOF. Veuillez procéder au paiement via Fedapay.', ['price' => number_format($formation->price, 0, ',', ' ')]) }}
-                        </p>
-                        <div class="card payment-details-card">
-                            <h2 class="card-title">{{ __('Paiement via Fedapay') }}</h2>
-
-                            @if (session('error'))
-                                <div class="alert alert-danger" role="alert">
-                                    {{ session('error') }}
-                                </div>
-                            @endif
-                            @if (session('success'))
-                                <div class="alert alert-success" role="alert">
-                                    {{ session('success') }}
-                                </div>
-                            @endif
-                            @if (session('info'))
-                                <div class="alert alert-info" role="alert">
-                                    {{ session('info') }}
-                                </div>
-                            @endif
-
-                            @if ($errors->any())
-                                <div class="alert alert-danger">
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            @endif
-
-                            <form id="paymentForm" action="{{ route('caisse.process') }}" method="POST">
+            <div id="page-content-wrapper">
+                <!-- 💳 Formulaire de paiement Monero -->
+                <div class="container mt-4">
+                    <div class="card bg-dark text-white border-secondary">
+                        <div class="card-header">
+                            <h4 class="mb-0">{{ __('Formulaire de paiement Monero') }}</h4>
+                        </div>
+                        <div class="card-body">
+                            <form method="POST" action="">
                                 @csrf
 
-                                <input type="hidden" name="formation_id" value="{{ $formation->id }}">
-
-                                <div id="fedapayPaymentSection" class="payment-section active">
-                                    <p class="text-secondary small">
-                                        {{ __('Vous serez redirigé vers la page sécurisée de Fedapay pour compléter votre paiement. Veuillez saisir votre numéro de téléphone pour la transaction.') }}
-                                    </p>
-                                    <div class="form-group">
-                                        <label for="fedapayNumber">{{ __('Numéro de Téléphone') }}</label>
-                                        <input type="tel" class="form-control" id="fedapayNumber" name="fedapayNumber"
-                                            placeholder="{{ __('Ex: +229xxxxxxxxxx') }}"
-                                            pattern="^(\+[0-9]{8,15}|0[1-9][0-9]{8})$"
-                                            title="{{ __('Veuillez entrer un numéro de téléphone à 8 ou 10 chiffres (commençant par 0x)') }}"
-                                            required value="{{ old('fedapayNumber', $user->telephone ?? '') }}">
-                                            @error('fedapayNumber')
-                                                <div class="text-danger mt-2">{{ $message }}</div>
-                                            @enderror
-                                    </div>
-                                    <p class="text-secondary small mt-3">
-                                        {{ __('Assurez-vous que le numéro est correct. Vous serez redirigé pour choisir votre mode de paiement (Mobile Money ou Carte) sur la plateforme Fedapay.') }}
-                                    </p>
+                                <div class="mb-3">
+                                    <label for="first_name" class="form-label">{{ __('Prénom') }}</label>
+                                    <input type="text" name="first_name" class="form-control bg-dark text-white border-secondary" required>
                                 </div>
 
-                                <div class="action-buttons">
-                                    <button type="submit" class="btn-subscribe">{{ __('Payer maintenant') }}</button>
+                                <div class="mb-3">
+                                    <label for="last_name" class="form-label">{{ __('Nom') }}</label>
+                                    <input type="text" name="last_name" class="form-control bg-dark text-white border-secondary" required>
                                 </div>
+
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">{{ __('Email') }}</label>
+                                    <input type="email" name="email" class="form-control bg-dark text-white border-secondary" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="amount" class="form-label">{{ __('Montant (en XMR)') }}</label>
+                                    <input type="number" name="amount" step="0.0001" class="form-control bg-dark text-white border-secondary" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="description" class="form-label">{{ __('Description') }}</label>
+                                    <input type="text" name="description" value="Paiement Monero" class="form-control bg-dark text-white border-secondary" required>
+                                </div>
+
+                                <button type="submit" class="btn btn-danger">{{ __('Payer avec Monero') }}</button>
                             </form>
                         </div>
                     </div>
