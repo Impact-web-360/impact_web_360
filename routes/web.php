@@ -26,6 +26,10 @@ use App\Http\Controllers\CalendrierController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\MediaController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\EmploieController;
+
+
+
 
 
 
@@ -325,4 +329,12 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::put('formations/{formation}/modules/{module}', [ModuleController::class, 'update'])->name('modules.update');
     Route::delete('formations/{formation}/modules/{module}', [ModuleController::class, 'destroy'])->name('modules.destroy');
     Route::patch('formations/{formation}/modules/reorder', [ModuleController::class, 'reorder'])->name('modules.reorder');
+    
+    // Emploies
+    Route::get('/dashboard/emploies', [EmploieController::class, 'index'])->name('emploies.index');
+    Route::get('/dashboard/emploies/create', [EmploieController::class, 'create'])->name('emploies.create');
+    Route::post('/dashboard/emploies', [EmploieController::class, 'store'])->name('emploies.store');
+    Route::get('/dashboard/emploies/{emploie}/edit', [EmploieController::class, 'edit'])->name('emploies.edit');
+    Route::put('/dashboard/emploies/{emploie}', [EmploieController::class, 'update'])->name('emploies.update');
+    Route::delete('/dashboard/emploies/{emploie}', [EmploieController::class, 'destroy'])->name('emploies.destroy');
 });

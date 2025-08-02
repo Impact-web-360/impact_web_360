@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Admin - Gestion des Articles</title>
+    <title>Admin - Gestion des Emplois</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -407,8 +407,8 @@
                 <a href="{{ route('categories.index')}}" class="nav-link"><i class="fa fa-user"></i>Catégorie</a>
                 <a href="{{ route('formations.index')}}" class="nav-link"><i class="fa fa-user"></i>Formation</a>
                 <a href="{{ route('modules.index')}}" class="nav-link"><i class="fa fa-user"></i>Modules</a>
-                <a href="{{ route('articles.index')}}" class="nav-link active"><i class="fa fa-shopping-basket"></i>Articles</a>
-                <a href="{{ route('emploies.index')}}" class="nav-link"><i class="fa fa-briefcase"></i>Emplois</a>
+                <a href="{{ route('articles.index')}}" class="nav-link"><i class="fa fa-shopping-basket"></i>Articles</a>
+                <a href="{{ route('emploies.index')}}" class="nav-link active"><i class="fa fa-briefcase"></i>Emplois</a>
                 <a href="{{ route('intervenants.index') }}" class="nav-link"><i class="fa fa-user"></i>Intervenants</a>
                 <a href="#users" class="nav-link"><i class="fas fa-users"></i> Utilisateurs</a>
                 <a href="#content" class="nav-link"><i class="fas fa-folder-open"></i> Contenus</a>
@@ -426,7 +426,7 @@
             </nav>
 
             <main class="col-md-9 ms-sm-auto col-lg-10 content">
-                <h2 id="articles">🛍️ Gestion des articles</h2>
+                <h2 id="emploies">💼 Gestion des emplois</h2>
 
                 @if(session('success'))
                     <div class="alert alert-success">
@@ -445,18 +445,18 @@
                 @endif
 
                 <div class="card mb-4">
-                    <button class="btn btn-danger mb-3" data-bs-toggle="modal" data-bs-target="#addArticleModal">
-                        <i class="fa fa-plus"></i> Ajouter un article
+                    <button class="btn btn-danger mb-3" data-bs-toggle="modal" data-bs-target="#addEmploieModal">
+                        <i class="fa fa-plus"></i> Ajouter un emploi
                     </button>
 
                     <div class="row">
-                        @forelse ($articles as $article)
+                        @forelse ($emploies as $emploie)
                             <div class="col-md-6 col-lg-4 mb-4 d-flex">
                                 <div class="card w-100 d-flex flex-column justify-content-between bg-light shadow">
                                     <div class="image-wrapper">
-                                        @if($article->image)
-                                            <img src="{{ asset('storage/' . $article->image) }}" class="card-img-top"
-                                                alt="Image de l'article" style="height: 200px; object-fit: cover;">
+                                        @if($emploie->logo)
+                                            <img src="{{ asset('storage/' . $emploie->logo) }}" class="card-img-top"
+                                                alt="Logo de l'emploi" style="height: 200px; object-fit: cover;">
                                         @else
                                             <img src="{{ asset('dossiers/image/default.png') }}" class="card-img-top"
                                                 alt="Image par défaut" style="height: 200px; object-fit: cover;">
@@ -464,27 +464,23 @@
                                     </div>
 
                                     <div class="card-body d-flex flex-column">
-                                        <h5 class="card-title mb-3">{{ $article->nom }}</h5>
-                                        <p class="card-text">{{ $article->description }}</p>
-                                        <p class="card-text"><strong>{{ number_format($article->prix, 0, ',', ' ') }}
-                                                FCFA</strong></p>
-                                        <p class="card-text"><strong>Type:</strong> {{ $article->type }}</p>
-                                        <p class="card-text"><strong>Taille:</strong> {{ $article->taille }}</p>
-                                        @if($article->couleur)
-                                        <p class="card-text">
-                                            <strong>Couleur:</strong> 
-                                            <span style="display:inline-block;width:15px;height:15px;background-color:{{ $article->couleur }};border-radius:50%;border:1px solid #000;"></span>
-                                        </p>
-                                        @endif
-
+                                        <h5 class="card-title mb-3">{{ $emploie->nom }}</h5>
+                                        <p class="card-text"><strong>Promoteur:</strong> {{ $emploie->promoteur }}</p>
+                                        <p class="card-text"><strong>Localisation:</strong> {{ $emploie->localisation ?? 'Non spécifiée' }}</p>
+                                        <p class="card-text"><strong>Type:</strong> {{ $emploie->type }}</p>
+                                        <p class="card-text"><strong>Catégorie:</strong> {{ $emploie->categorie }}</p>
+                                        
                                         <div class="mt-auto">
                                             <div class="mb-2">
-                                                <a href="{{ route('articles.edit', $article->id) }}"
+                                                <a href="{{ $emploie->lien }}" target="_blank" class="btn btn-outline-info btn-sm me-2">
+                                                    <i class="fas fa-link"></i> Voir l'offre
+                                                </a>
+                                                <a href="{{ route('emploies.edit', $emploie->id) }}"
                                                     class="btn btn-outline-primary btn-sm me-2">
                                                     <i class="fas fa-edit"></i> Modifier
                                                 </a>
 
-                                                <form method="POST" action="{{ route('articles.destroy', $article->id) }}"
+                                                <form method="POST" action="{{ route('emploies.destroy', $emploie->id) }}"
                                                     onsubmit="return confirm('Confirmer la suppression ?');"
                                                     style="display:inline;">
                                                     @csrf
@@ -500,7 +496,7 @@
                             </div>
                         @empty
                             <div class="col-12">
-                                <p class="text-center">Aucun article disponible pour le moment.</p>
+                                <p class="text-center">Aucun emploi disponible pour le moment.</p>
                             </div>
                         @endforelse
                     </div>
@@ -509,70 +505,69 @@
         </div>
     </div>
 
-    <!-- Modal Ajouter Article -->
-    <div class="modal fade" id="addArticleModal" tabindex="-1" aria-hidden="true">
+    <!-- Modal Ajouter Emploi -->
+    <div class="modal fade" id="addEmploieModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-scrollable">
-            <form method="POST" action="{{ route('articles.store') }}" enctype="multipart/form-data"
+            <form method="POST" action="{{ route('emploies.store') }}" enctype="multipart/form-data"
                 class="modal-content">
                 @csrf
                 <div class="modal-header bg-danger text-white">
-                    <h5 class="modal-title" id="addArticleLabel">Ajouter un article</h5>
+                    <h5 class="modal-title" id="addEmploieLabel">Ajouter un emploi</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
                 </div>
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label for="nom" class="form-label">Nom de l'article</label>
+                        <label for="nom" class="form-label">Nom de l'emploi</label>
                         <input type="text" class="form-control" id="nom" name="nom" required>
                     </div>
 
                     <div class="mb-3">
-                        <label for="description" class="form-label">Description</label>
-                        <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
+                        <label for="promoteur" class="form-label">Promoteur</label>
+                        <input type="text" class="form-control" id="promoteur" name="promoteur" required>
                     </div>
 
-                <div class="mb-3">
-                    <label for="prix" class="form-label">Prix (FCFA)</label>
-                    <input type="number" class="form-control" id="prix" name="prix" min="0" step="1" required>
-                </div>
+                    <div class="mb-3">
+                        <label for="localisation" class="form-label">Localisation</label>
+                        <input type="text" class="form-control" id="localisation" name="localisation">
+                    </div>
 
-                <div class="mb-3">
-                    <label for="type-modal" class="form-label">Type</label>
-                    <select class="form-control" id="type-modal" name="type" required>
-                        <option value="">-- Sélectionner un type --</option>
-                        <option value="T-shirt">T-shirt</option>
-                        <option value="Hoodie">Hoodie</option>
-                        <option value="Jeans">Jeans</option>
-                        <option value="Short">Short</option>
-                        <option value="Shirt">Shirt</option>
-                        <option value="Accessoires">Accessoires</option>
-                        <option value="Autre">Autre</option>
-                    </select>
-                </div>
+                    <div class="mb-3">
+                        <label for="lien" class="form-label">Lien vers l'offre</label>
+                        <input type="url" class="form-control" id="lien" name="lien" required>
+                    </div>
 
-                <div class="mb-3">
-                    <label for="couleur-modal" class="form-label">Couleur</label>
-                    <input type="color" class="form-control form-control-color" id="couleur-modal" name="couleur">
-                </div>
+                    <div class="mb-3">
+                        <label for="type-modal" class="form-label">Type</label>
+                        <select class="form-control" id="type-modal" name="type" required>
+                            <option value="">-- Sélectionner un type --</option>
+                            <option value="stage">Stage</option>
+                            <option value="freelance">Freelance</option>
+                            <option value="temps plein">Temps plein</option>
+                            <option value="temps partiel">Temps partiel</option>
+                            <option value="contrat">Contrat</option>
+                            <option value="autre">Autre</option>
+                        </select>
+                    </div>
 
-                <div class="mb-3">
-                    <label for="taille-modal" class="form-label">Taille</label>
-                    <select class="form-control" id="taille-modal" name="taille">
-                        <option value="">-- Sélectionner une taille --</option>
-                        <option value="XXS">XXS</option>
-                        <option value="XS">XS</option>
-                        <option value="S">S</option>
-                        <option value="M">M</option>
-                        <option value="L">L</option>
-                        <option value="XL">XL</option>
-                        <option value="XXL">XXL</option>
-                        <option value="4XL">4XL</option>
-                    </select>
-                </div>
+                    <div class="mb-3">
+                        <label for="categorie-modal" class="form-label">Catégorie</label>
+                        <select class="form-control" id="categorie-modal" name="categorie" required>
+                            <option value="">-- Sélectionner une catégorie --</option>
+                            <option value="marketing">Marketing</option>
+                            <option value="communication">Communication</option>
+                            <option value="design">Design</option>
+                            <option value="commerce">Commerce</option>
+                            <option value="informatique">Informatique</option>
+                            <option value="finance">Finance</option>
+                            <option value="ressources humaines">Ressources humaines</option>
+                            <option value="autre">Autre</option>
+                        </select>
+                    </div>
 
-                <div class="mb-3">
-                    <label for="image" class="form-label">Image</label>
-                    <input type="file" class="form-control" id="image" name="image" required>
-                </div>
+                    <div class="mb-3">
+                        <label for="logo" class="form-label">Logo</label>
+                        <input type="file" class="form-control" id="logo" name="logo">
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
