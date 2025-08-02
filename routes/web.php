@@ -21,6 +21,8 @@ use App\Http\Controllers\PaymentController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use App\Http\Controllers\ThemeController;
 use App\Http\Controllers\SupportController;
+use App\Http\Controllers\CoursController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -116,9 +118,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),
             })->name('calendrier');
 
 
-            Route::get('/cours', function () {
-                return view('dashboard_utilisateur.cours');
-            })->name('cours');
+            
 
             Route::get('/cours/details', function () {
                 return view('dashboard_utilisateur.details_cours');
@@ -161,6 +161,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),
 
             Route::get('/formation_gratuite/{formationId}', [FormationController::class, 'showContenu'])->name('formation_gratuite');
             Route::get('/formations/{id}', [FormationController::class, 'show'])->name('details');
+
             //caisse
             Route::get('/fedapay/callback', [PaymentController::class, 'handleFedapayCallback'])->name('fedapay.callback');
             Route::post('/fedapay/webhook', [PaymentController::class, 'handleWebhook'])->name('fedapay.webhook');
@@ -185,6 +186,14 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),
 
             Route::get('/soutien', [SupportController::class, 'index'])->name('soutien');
             Route::post('/soutien', [SupportController::class, 'submitContactForm'])->name('soutien.contact');
+
+            Route::post('/ajouter-cours/{formation}', [CoursController::class, 'ajouterFormation'])
+            ->name('ajouter-cours');
+            //Route::get('/cours', [CoursController::class, 'index'])->name('cours');
+            Route::match(['get', 'post'], '/cours', [CoursController::class, 'index'])->name('cours');
+            Route::get('/cours/{formation}', [CoursController::class, 'showFormation'])->name('formation.show');
+
+
     });
 });
 

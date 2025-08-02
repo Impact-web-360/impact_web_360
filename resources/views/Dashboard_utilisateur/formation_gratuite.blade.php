@@ -681,7 +681,7 @@
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark-secondary border-bottom border-secondary py-3">
                 <div class="container-fluid">
                     <button class="btn btn-danger d-lg-none" id="sidebarToggle"><i class="fas fa-bars"></i></button>
-                    <h2 class="text-white mb-0 ms-3">Cours</h2>
+                    <h2 class="text-white mb-0 ms-3">Formation</h2>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ms-auto mt-2 mt-lg-0 align-items-center">
                             <li class="nav-item me-3">
@@ -696,60 +696,69 @@
                     </div>
                 </div>
             </nav>
+            
 
-            <div class="container-fluid py-4 main-content">
-                @if($formation)
-                <div class="row">
-                    <div class="col-lg-12 mb-4 animation-slide-in-up">
-                        <div class="course-detail-section">
-                            <div class="course-detail-header">
-                                <h3 class="text-white mt-4 mb-4">{{ $formation->title ?? 'Titre de la formation' }}</h3>
-                                <p class="text-secondary">{{ $formation->description ?? 'Description de la formation.' }}</p>
-                            </div>
+                <div class="container-fluid py-4 main-content">
+                    @if($formation)
+                    <form action="{{ route('ajouter-cours', ['formation' => $formation->id]) }}" method="POST">
+                        @csrf
+                        
+                        <div class="row">
+                            <div class="col-lg-12 mb-4 animation-slide-in-up">
+                                <div class="course-detail-section">
+                                    <div class="course-detail-header">
+                                        <h3 class="text-white mt-4 mb-4">{{ $formation->title ?? 'Titre de la formation' }}</h3>
+                                        <p class="text-secondary">{{ $formation->description ?? 'Description de la formation.' }}</p>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary-custom">
+                                        <i class="fas fa-plus me-2"></i> Ajouter à mes cours
+                                    </button>
+                                    <div class="mt-5">
+                                        <h4 class="text-white mb-4">Contenu de la formation</h4>
+                                        @if($formation->modules->count() > 0)
+                                            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+                                                @foreach($formation->modules as $index => $module)
+                                                    <div class="col">
+                                                        <div class="module-card">
+                                                            <h5 class="module-title mb-2">{{ $index + 1 }}.{{ $module->title }}</h5>
+                                                            <p class="module-duration mb-3">
+                                                                <i class="far fa-clock me-1"></i> Durée : {{ $module->duration }} min
+                                                            </p>
+                                                            @if(!empty($module->video_path))
+                                                                <div class="module-video-container mb-3">
+                                                                    <video width="100%" controls>
+                                                                        <source src="{{ asset('storage/' . $module->video_path) }}" type="video/mp4">
+                                                                        Votre navigateur ne supporte pas la lecture de cette vidéo.
+                                                                    </video>
+                                                                </div>
+                                                            @endif
 
-                            <div class="mt-5">
-                                <h4 class="text-white mb-4">Contenu de la formation</h4>
-                                @if($formation->modules->count() > 0)
-                                    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
-                                        @foreach($formation->modules as $index => $module)
-                                            <div class="col">
-                                                <div class="module-card">
-                                                    <h5 class="module-title mb-2">Module {{ $index + 1 }}</h5>
-                                                    <p class="module-duration mb-3">
-                                                        <i class="far fa-clock me-1"></i> Durée : {{ $module->duration }} min
-                                                    </p>
-                                                    @if(!empty($module->video_path))
-                                                        <div class="module-video-container mb-3">
-                                                            <video width="100%" controls>
-                                                                <source src="{{ asset('storage/' . $module->video_path) }}" type="video/mp4">
-                                                                Votre navigateur ne supporte pas la lecture de cette vidéo.
-                                                            </video>
+                                                            <div class="d-flex justify-content-between align-items-center mt-auto">
+                                                                @if(!empty($module->file_path))
+                                                                    <a href="{{ asset('storage/' . $module->file_path) }}" target="_blank" class="btn btn-sm btn-download">
+                                                                        <i class="fas fa-download me-1"></i> Télécharger le fichier
+                                                                    </a>
+                                                                @else
+                                                                    <span class="text-muted">Aucun fichier</span>
+                                                                @endif
+                                                                
+                                                            </div>
                                                         </div>
-                                                    @endif
-
-                                                    <div class="d-flex justify-content-between align-items-center mt-auto">
-                                                        @if(!empty($module->file_path))
-                                                            <a href="{{ asset('storage/' . $module->file_path) }}" target="_blank" class="btn btn-sm btn-download">
-                                                                <i class="fas fa-download me-1"></i> Télécharger le fichier
-                                                            </a>
-                                                        @else
-                                                            <span class="text-muted">Aucun fichier</span>
-                                                        @endif
-                                                        
                                                     </div>
-                                                </div>
+                                                @endforeach
                                             </div>
-                                        @endforeach
+                                        @else
+                                            <div class="alert alert-info text-center" role="alert">
+                                                Aucun module disponible pour cette formation.
+                                            </div>
+                                        @endif
                                     </div>
-                                @else
-                                    <div class="alert alert-info text-center" role="alert">
-                                        Aucun module disponible pour cette formation.
-                                    </div>
-                                @endif
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
+           
                 @else
                     <div class="alert alert-warning text-center" role="alert">
                         <i class="fas fa-exclamation-triangle fa-2x mb-3"></i>

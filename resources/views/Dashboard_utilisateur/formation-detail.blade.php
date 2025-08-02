@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Impact Web - Mes Cours</title>
+    <title>Impact Web - Formation : {{ $formation->title }}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Variables CSS pour faciliter la gestion des couleurs et espacements */
+         /* Variables CSS pour faciliter la gestion des couleurs et espacements */
         :root {
             --primary-color: red; /* Rouge plus vif pour correspondre à la maquette */
             --secondary-color: #6c757d; /* Gris de Bootstrap pour les textes secondaires */
@@ -127,17 +127,6 @@
             background-color: var(--dark-bg);
             min-width: 0; /* Ensures it can shrink if needed */
         }
-        .navbar-dark {
-            background-color: var(--dark-bg) !important;
-        }
-
-        .bg-dark-secondary {
-            background-color: var(--dark-sidebar-bg) !important;
-        }
-
-        .main-content {
-            padding: 1.5rem !important;
-        }
 
         /* Dropdown menus in Navbar */
         .dropdown-menu {
@@ -160,11 +149,17 @@
             border-top: 1px solid var(--border-color) !important;
         }
 
-        /* Main Content Area */
+        .navbar-dark {
+            background-color: var(--dark-bg) !important;
+        }
+
+        .bg-dark-secondary {
+            background-color: var(--dark-sidebar-bg) !important;
+        }
+
         .main-content {
             padding: 1.5rem !important;
         }
-
 
         .section-header {
             font-size: 1.5rem;
@@ -175,72 +170,68 @@
             padding-left: 1rem;
         }
         
-        .course-card-link {
-            text-decoration: none;
-            color: inherit;
+        .module-list {
+            list-style: none;
+            padding: 0;
         }
-
-        .course-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            overflow: hidden;
+        
+        .module-list-item {
             background-color: var(--dark-card-bg);
             border: 1px solid var(--border-color);
-            border-radius: 0.75rem;
-            cursor: pointer;
-        }
-
-        .course-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
-        }
-
-        .course-card .card-img {
-            height: 150px;
-            object-fit: cover;
-            width: 100%;
-        }
-
-        .progress-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: rgba(0, 0, 0, 0.6);
-            color: var(--text-color-light);
-            padding: 0.5rem 1rem;
-            font-size: 0.8rem;
-            font-weight: bold;
+            border-radius: 0.5rem;
+            padding: 1rem 1.5rem;
+            margin-bottom: 1rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
         
-        .card-body {
-            padding: 1rem;
+        .module-list-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
 
-        .card-title {
+        .module-header {
             font-size: 1.1rem;
             font-weight: 600;
-            color: var(--text-color-light);
-            margin-bottom: 0.5rem;
         }
         
-        .card-subtitle {
+        .module-duration {
             font-size: 0.9rem;
             color: var(--text-color-secondary);
-            margin-bottom: 1rem;
-        }
-
-        .btn-primary-custom {
-            background-color: var(--primary-color);
-            border: none;
-            color: white;
-            transition: background-color 0.2s ease;
         }
         
-        .btn-primary-custom:hover {
+        .module-video-container {
+            border-radius: 0.5rem;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+        
+        .btn-download {
+            background-color: var(--primary-color);
+            color: var(--text-color-light);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .btn-download:hover {
             background-color: #E60000;
         }
 
-         @media (min-width: 992px) {
+        .back-button {
+            background-color: var(--dark-card-bg);
+            color: var(--text-color-light);
+            border: 1px solid var(--border-color);
+            transition: background-color 0.3s ease;
+        }
+        
+        .back-button:hover {
+            background-color: var(--border-color);
+            color: var(--text-color-light);
+        }
+        
+         /* Responsive Adjustments */
+        @media (min-width: 992px) {
             #sidebar-wrapper {
                 margin-left: 0; /* Sidebar visible on large screens */
             }
@@ -279,45 +270,6 @@
                 font-size: 0.9rem;
             }
         }
-
-        @media (max-width: 767.98px) {
-            .navbar-collapse {
-                display: none !important; 
-            }
-            .course-detail-header img {
-                height: 200px;
-            }
-            .course-detail-section {
-                padding: 1rem;
-            }
-            .overview-item {
-                margin-bottom: 1rem;
-            }
-            .overview-item:last-child {
-                margin-bottom: 0;
-            }
-            .price-section {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            .price-section .price {
-                margin-bottom: 0.5rem;
-            }
-            .btn-add-to-cart {
-                width: 100%;
-            }
-        }
-
-        @media (max-width: 575.98px) {
-            .sidebar-promo {
-                margin-left: 0.5rem;
-                margin-right: 0.5rem;
-            }
-            .course-detail-header h3 {
-                font-size: 0.5rem;
-            }
-        }
-
                  :root {
         --primary-color: #FF0000;
         --secondary-color: #6c757d;
@@ -450,7 +402,6 @@
                 <a href="{{ route('paiement1') }}" class="list-group-item list-group-item-action bg-dark text-white">
                     <i class="fas fa-credit-card me-2"></i> Paiement
                 </a>
-
                 <div class="sidebar-section-title text-secondary px-3 pt-3 pb-1">COURS</div>
                 <a href="{{ route('cours') }}" class="list-group-item list-group-item-action bg-dark text-white active">
                     <i class="fas fa-book me-2"></i> Mes cours
@@ -458,7 +409,6 @@
                 <a href="{{ route('decouvrir') }}" class="list-group-item list-group-item-action bg-dark text-white">
                     <i class="fas fa-search me-2"></i> Découvrir
                 </a>
-
                 <div class="sidebar-section-title text-secondary px-3 pt-3 pb-1">OTHER</div>
                 <a href="" class="list-group-item list-group-item-action bg-dark text-white">
                     <i class="fas fa-question-circle me-2"></i> Soutien
@@ -473,7 +423,7 @@
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark-secondary border-bottom border-secondary py-3">
                 <div class="container-fluid">
                     <button class="btn btn-danger d-lg-none" id="sidebarToggle"><i class="fas fa-bars"></i></button>
-                    <h2 class="text-white mb-0 ms-3">Mes Cours</h2>
+                    <h2 class="text-white mb-0 ms-3">{{ $formation->title }}</h2>
                     <div class="collapse navbar-collapse">
                         <ul class="navbar-nav ms-auto mt-2 mt-lg-0 align-items-center">
                             <li class="nav-item me-3">
@@ -490,59 +440,69 @@
             </nav>
 
             <div class="container-fluid py-4 main-content">
-                @if(session('success'))
-                    <div class="alert alert-success">{{ session('success') }}</div>
-                @endif
-                @if(session('warning'))
-                    <div class="alert alert-warning">{{ session('warning') }}</div>
-                @endif
+                <div class="d-flex align-items-center mb-4">
+                    <a href="{{ route('cours') }}" class="btn back-button me-3">
+                        <i class="fas fa-arrow-left me-2"></i>
+                        Retour à mes cours
+                    </a>
+                </div>
 
-                <div class="enrolled-courses-section animation-fade-in">
-                    <h3 class="section-header">
-                        <i class="fas fa-book me-3"></i>
-                        Toutes mes formations
-                    </h3>
-                    
-                    @if($formations->count() > 0)
-                        <div class="row">
-                            @foreach($formations as $formation)
-                                <div class="col-12 col-md-6 col-lg-4 mb-4">
-                                    <a href="{{ route('formation.show', ['formation' => $formation->id]) }}" class="course-card-link">
-                                        <div class="course-card">
-                                            <div class="position-relative">
-                                                <img src="{{ asset('storage/' . $formation->image) }}" alt="{{ $formation->title }}" class="img-fluid rounded-top-3 card-img">
-                                            </div>
-                                            <div class="card-body">
-                                                <h5 class="card-title">{{ Str::limit($formation->title, 50) }}</h5>
-                                                <p class="card-subtitle mb-2">{{ $formation->modules->count() }} modules</p>
-                                                <div class="d-flex justify-content-between align-items-center mt-3">
-                                                    <div class="text-secondary">
-                                                        <i class="fas fa-user-tie me-1"></i>{{ $formation->mentor ?? 'Nom du mentor' }}
-                                                    </div>
-                                                    <a href="{{ route('formation.show', ['formation' => $formation->id]) }}" class="btn btn-primary-custom btn-sm">
-                                                        <i class="fas fa-play me-1"></i> Démarrer
-                                                    </a>
-                                                </div>
-                                            </div>
+                <div class="course-section mb-5 p-4 rounded bg-dark-card-bg border border-color">
+                    <div class="course-header mb-3">
+                        <h3 class="text-white">{{ $formation->title }}</h3>
+                        <p class="text-secondary">{{ $formation->modules->count() }} modules disponibles</p>
+                    </div>
+
+                    @if($formation->modules->count() > 0)
+                        <ul class="module-list">
+                            @foreach($formation->modules as $index => $module)
+                                <li class="module-list-item d-flex flex-column flex-md-row align-items-md-center">
+                                    <div class="flex-grow-1 mb-3 mb-md-0">
+                                        <h5 class="module-header text-white">{{ $index + 1 }}. {{ $module->title }}</h5>
+                                        <p class="module-duration mb-0"><i class="far fa-clock me-1"></i> Durée : {{ $module->duration }} min</p>
+                                    </div>
+                                    
+                                    <div class="flex-shrink-0 d-flex flex-column flex-md-row align-items-md-center gap-3">
+                                        @if(!empty($module->video_path))
+                                            <a href="#video-{{ $module->id }}" class="btn btn-sm btn-primary-custom" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="video-{{ $module->id }}">
+                                                <i class="fas fa-play me-1"></i> Voir la vidéo
+                                            </a>
+                                        @endif
+                                        @if(!empty($module->file_path))
+                                            <a href="{{ asset('storage/' . $module->file_path) }}" target="_blank" class="btn btn-sm btn-download">
+                                                <i class="fas fa-download me-1"></i> Télécharger le fichier
+                                            </a>
+                                        @endif
+                                    </div>
+                                </li>
+                                
+                                <li class="mb-4">
+                                    <div class="collapse" id="video-{{ $module->id }}">
+                                        <div class="module-video-container mt-2">
+                                            <video width="100%" controls>
+                                                <source src="{{ asset('storage/' . $module->video_path) }}" type="video/mp4">
+                                                Votre navigateur ne supporte pas la lecture de cette vidéo.
+                                            </video>
                                         </div>
-                                    </a>
-                                </div>
+                                    </div>
+                                </li>
                             @endforeach
-                        </div>
+                        </ul>
                     @else
-                        <div class="alert alert-info text-center" role="alert">
-                            Vous n'avez pas encore de cours. <a href="{{ route('decouvrir') }}">Découvrez nos formations !</a>
+                        <div class="alert alert-info" role="alert">
+                            Cette formation n'a pas encore de modules.
                         </div>
                     @endif
                 </div>
             </div>
         </div>
     </div>
-    
+        
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script>
         var el = document.getElementById("wrapper");
         var toggleButton = document.getElementById("sidebarToggle");
+
         toggleButton.onclick = function () {
             el.classList.toggle("toggled");
         };
