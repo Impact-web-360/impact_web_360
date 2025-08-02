@@ -405,8 +405,8 @@
         <a href="#stats"><i class="fas fa-chart-bar"></i> Statistiques</a>
         <a href="{{ route('evenements.index') }}" class="nav-link nav-link active"><i class="fa fa-calendar-alt"></i>Événements</a>
         <a href="{{ route('sponsors.index') }}" class="nav-link"><i class="fa fa-handshake"></i>Sponsors</a>
-        <a href="boutique.php" class="nav-link"><i class="fa fa-store"></i>Boutique</a>
-        <a href="ajouter_intervenant.php" class="nav-link"><i class="fa fa-user"></i>Intervenants</a>
+        <a href="{{ route('articles.index') }}" class="nav-link"><i class="fa fa-store"></i>Boutique</a>
+        <a href="{{ route('intervenants.index') }}" class="nav-link"><i class="fa fa-user"></i>Intervenants</a>
         <a href="#users" class="nav-link"><i class="fas fa-users"></i> Utilisateurs</a>
         <a href="#content" class="nav-link"><i class="fas fa-folder-open"></i> Contenus</a>
         <a href="#messages" class="nav-link"><i class="fas fa-envelope"></i> Messages</a>

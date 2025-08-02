@@ -785,8 +785,9 @@
                                 <a class="nav-link text-white" href="{{ route('notifications') }}" aria-label="Notifications"><i class="fas fa-bell"></i></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-white d-flex align-items-center" href="{{ route('parametres') }}">
-                                    <img src="{{ Auth::user()->image ? asset('storage/' . Auth::user()->image) : asset('logo.png') }}" alt="Photo de profil" style="max-height: 50px;" class="rounded-circle profile-img-preview me-4">
+                                <a class="nav-link text-white d-flex align-items-center " href="{{ route('parametres') }}">
+                                    <img src="{{ asset(Auth::user()->image && Auth::user()->image !== 'photos/default.svg' ? 'storage/' . Auth::user()->image . '?v=' . time() : 'dossiers/image/default.png') }}"
+                                     alt="Photo de profil" class="rounded-circle" style="max-height: 40px;">
                                 </a>
                             </li>
                         </ul>

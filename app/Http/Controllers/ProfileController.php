@@ -14,37 +14,51 @@ class ProfileController extends Controller
     public function update(Request $request)
     {
         $request->validate([
-            'nom' => 'required|string|max:255',
+            'nom' => 'nullable|string|max:255',
             'poste' => 'nullable|string|max:255',
             'image' => 'nullable|image|mimes:jpg,png,jpeg|max:2048',
             'facebook' => 'nullable|url',
             'instagram' => 'nullable|url',
             'linkedin' => 'nullable|url',
             'tiktok' => 'nullable|url',
+            'youtube' => 'nullable|url',
+            'whatsapp' => 'nullable|url',
         ]);
 
         $user = Auth::user();
-        $user->nom = $request->input('nom');
-        $user->poste = $request->input('poste');
 
+        if ($request->filled('nom')) {
+            $user->nom = $request->input('nom');
+        }
+
+        if ($request->filled('poste')) {
+            $user->poste = $request->input('poste');
+        }
+
+        // Mise à jour de l'image seule
         if ($request->hasFile('image')) {
-            if ($user->image) {
-                Storage::delete($user->image);
+            // Supprime l'ancienne image si elle existe et n'est pas la photo par défaut
+            if ($user->image && $user->image !== 'photos/default.svg') {
+                Storage::disk('public')->delete($user->image);
             }
 
             $path = $request->file('image')->store('photos', 'public');
-            $user->image = $path;
+            $user->image = $path;  // Juste le chemin relatif, pas de 'storage/' devant !
         }
 
-        $user->tiktok = $request->input('tiktok');
-        $user->instagram = $request->input('instagram');
-        $user->linkedin = $request->input('linkedin');
-        $user->facebook = $request->input('facebook');
+
+        // Réseaux sociaux
+        foreach (['facebook', 'instagram', 'linkedin', 'tiktok', 'youtube', 'whatsapp'] as $field) {
+            if ($request->filled($field)) {
+                $user->$field = $request->input($field);
+            }
+        }
 
         $user->save();
 
         return back()->with('success', 'Profil mis à jour avec succès.');
     }
+
 
     public function updatePassword(Request $request)
     {
@@ -53,8 +67,8 @@ class ProfileController extends Controller
             'new_password' => 'required|string|min:8|confirmed',
         ]);
 
-        
-        
+
+
         $user = Auth::user();
 
         if (!Hash::check($request->current_password, $user->password)) {

@@ -201,6 +201,7 @@
   <a href="{{ route('categories.index')}}" class="nav-link"><i class="fa fa-user"></i>Catégorie</a>
   <a href="{{ route('formations.index')}}" class="nav-link"><i class="fa fa-user"></i>Formation</a>
   <a href="{{ route('modules.index')}}" class="nav-link"><i class="fa fa-user"></i>Modules</a>
+  <a href="{{ route('articles.index')}}" class="nav-link"><i class="fa fa-shopping-basket"></i>Articles</a>
   <a href="ajouter_intervenant.php" class="nav-link"><i class="fa fa-user"></i>Intervenants</a>
   <a href="#calendar" class="nav-link"><i class="fas fa-calendar-alt"></i> Calendrier</a>
   <a href="#logs" class="nav-link"><i class="fas fa-history"></i> Historique</a>

@@ -24,6 +24,8 @@ use App\Http\Controllers\SupportController;
 use App\Http\Controllers\CoursController;
 use App\Http\Controllers\CalendrierController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\MediaController;
+use App\Http\Controllers\ArticleController;
 
 
 
@@ -69,6 +71,9 @@ Route::get('/notification', function () {
 Route::post('/parametres/update', [ParametresController::class, 'update'])->name('parametres.update');
 Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update')->middleware('auth');
 Route::put('/password/update', [ProfileController::class, 'updatePassword'])->name('password.update')->middleware('auth');
+
+//Media
+Route::post('/media/store', [MediaController::class, 'store'])->name('media.store');
 
 //Logout
 Route::post('/logout', function () {
@@ -240,6 +245,14 @@ Route::middleware(['auth', 'admin'])->group(function () {
         ->name('Dashboard.categories.destroy');
     Route::put('/dashboard/categories/{id}', [CategorieController::class, 'update'])
         ->name('Dashboard.categories.update');
+
+        // Articles
+    Route::get('/dashboard/articles', [ArticleController::class, 'index'])->name('articles.index');
+    Route::get('/dashboard/articles/create', [ArticleController::class, 'create'])->name('articles.create');
+    Route::post('/dashboard/articles', [ArticleController::class, 'store'])->name('articles.store');
+    Route::get('/dashboard/articles/{article}/edit', [ArticleController::class, 'edit'])->name('articles.edit');
+    Route::put('/dashboard/articles/{article}', [ArticleController::class, 'update'])->name('articles.update');
+    Route::delete('/dashboard/articles/{article}', [ArticleController::class, 'destroy'])->name('articles.destroy');
 
 
     // Formations
