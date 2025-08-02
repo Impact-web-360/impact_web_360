@@ -52,7 +52,8 @@
 
     .filters {
       background-color: rgba(28, 31, 38, 0);
-      padding: 0 10px;
+      padding: 20px;
+      border: solid 0.5px #1C1F26;
       border-radius: 10px;
       color: white;
     }
@@ -69,10 +70,6 @@
     }
 
     .product-item {
-      display: none;
-    }
-
-    .product-item.visible {
       display: block;
     }
 
@@ -87,6 +84,14 @@
       overflow: hidden;
       margin-bottom: 10px;
     }
+
+    .center-button {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      /* Ajustez la marge si nécessaire */
+    }
+
 
     .product-image {
       width: 100%;
@@ -330,10 +335,6 @@
       }
 
       /* Affichage en une seule colonne sur mobile */
-      .col-12.col-md-4 {
-        flex: 0 0 100%;
-        max-width: 100%;
-      }
 
       .product-item {
         display: none;
@@ -346,18 +347,27 @@
 
     /* Ajout de media queries supplémentaires pour de meilleurs responsives */
     @media (max-width: 768px) {
+
       .product-image-container {
-        height: 150px;
+        height: 200px;
       }
 
       .product-info {
-        padding: 10px;
+        padding: 15px;
+      }
+
+      .product-info h5 {
+        margin-bottom: -30px;
+      }
+
+      .center-button {
+        margin-top: 50px;
       }
     }
 
     @media (max-width: 576px) {
       .product-image-container {
-        height: 120px;
+        height: 200px;
       }
 
       .product-card {
@@ -396,9 +406,9 @@
 
   <!-- CONTENU -->
   <div class="container-fluid py-5 px-5" style="margin-top: 100px; margin-bottom: 50px;">
-    <div class="row">
+    <div class="row v-tab">
       <!-- Filtres -->
-      <div class="col-12 col-md-3 mb-4">
+      <div class="col-12 col-md-4 col-lg-3 mb-4">
         <button class="btn border-dark w-100 mb-3 d-md-none text-light" data-bs-toggle="collapse"
           data-bs-target="#filtersCollapse">
           Filtres <i class="fas fa-chevron-down"></i>
@@ -406,45 +416,76 @@
         <div class="collapse d-md-block" id="filtersCollapse">
           <div class="filters">
             <h5>Filtres</h5>
-            <form method="GET" action="boutique.php">
+            <form method="GET" action="{{ route('boutique') }}">
+              <hr>
               <h6><label for="type">Type</label></h6>
               <select id="type" name="type" class="form-select custom-select mt-2 mb-3">
                 <option value="">-- Tous --</option>
+                <option value="T-shirt" {{ request('type') == 'T-shirt' ? 'selected' : '' }}>T-shirt</option>
+                <option value="Hoodie" {{ request('type') == 'Hoodie' ? 'selected' : '' }}>Hoodie</option>
+                <option value="Jeans" {{ request('type') == 'Jeans' ? 'selected' : '' }}>Jeans</option>
+                <option value="Short" {{ request('type') == 'Short' ? 'selected' : '' }}>Short</option>
+                <option value="Shirt" {{ request('type') == 'Shirt' ? 'selected' : '' }}>Shirt</option>
+                <option value="Accessoires" {{ request('type') == 'Accessoires' ? 'selected' : '' }}>Accessoires</option>
+                <option value="Autre" {{ request('type') == 'Autre' ? 'selected' : '' }}>Autre</option>
               </select>
 
-              <label for="max_price" class="fw-bold">Prix : FCFA</label>
-              <input type="range" class="form-range mb-3" min="1000" max="15000" step="500" id="max_price"
-                name="max_price">
+              <hr>
+
+              <label for="max_price" class="fw-bold">Prix : &nbsp;</label><span
+                id="price-value">{{ request('max_price', 150000) }} FCFA</span>
+              <input type="range" class="form-range mb-3" min="1000" max="500000" step="500" id="max_price"
+                name="max_price" value="{{ request('max_price', 50000) }}">
+
+              <hr>
 
 
               <h6><label>Couleur</label></h6>
-              <label class="filter-color-btn">
-                <input type="radio" name="color" value="" style="display:none" ;>
-              </label>
-              <br>
-              <label><input type="radio" name="color" value=""> Toutes les couleurs</label>
+              <div class="d-flex flex-wrap">
+                @if(isset($couleurs))
+              @foreach($couleurs as $couleur)
+            <div class="me-2 mb-2">
+            <input type="radio" name="color" value="{{ $couleur }}"
+            id="color-{{ str_replace('#', '', $couleur) }}" {{ request('color') == $couleur ? 'checked' : '' }}
+            style="display: none;">
+            <label for="color-{{ str_replace('#', '', $couleur) }}" class="filter-color-btn"
+            style="background-color: {{ $couleur }}; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; border: 2px solid #fff;"></label>
+            </div>
+          @endforeach
+        @endif
+              </div>
 
               <hr>
 
               <h6><label for="size">Taille</label></h6>
               <select id="size" name="size" class="form-select custom-select mt-2 mb-3">
                 <option value="">-- Toutes --</option>
-
-
+                <option value="XXS" {{ request('size') == 'XXS' ? 'selected' : '' }}>XXS</option>
+                <option value="XS" {{ request('size') == 'XS' ? 'selected' : '' }}>XS</option>
+                <option value="S" {{ request('size') == 'S' ? 'selected' : '' }}>S</option>
+                <option value="M" {{ request('size') == 'M' ? 'selected' : '' }}>M</option>
+                <option value="L" {{ request('size') == 'L' ? 'selected' : '' }}>L</option>
+                <option value="XL" {{ request('size') == 'XL' ? 'selected' : '' }}>XL</option>
+                <option value="XXL" {{ request('size') == 'XXL' ? 'selected' : '' }}>XXL</option>
+                <option value="4XL" {{ request('size') == '4XL' ? 'selected' : '' }}>4XL</option>
               </select>
 
-              <button type="submit" class="btn btn-danger w-100 mb-3">Appliquer</button>
+              <hr>
+
+              <button type="submit" class="btn btn-danger w-100 mt-2">Appliquer</button>
+              <a href="{{ route('boutique') }}" class="btn btn-outline-light w-100 mt-3">Réinitialiser</a>
             </form>
           </div>
         </div>
       </div>
 
       <!-- Produits -->
-      <div class="col-12 col-md-9">
+      <div class="col-12 col-md-8 col-lg-9">
         <div class="row" id="product-list">
           @if(isset($articles) && $articles->count() > 0)
           @foreach($articles as $index => $article)
-        <div class="col-12 col-md-4 mb-4 product-item {{ $index < 6 ? 'visible' : '' }}" data-index="{{ $index }}">
+        <div class="col-12 col-sm-6 col-md-4 mb-4 product-item" data-index="{{ $index }}"
+        data-type="{{ $article->type }}" data-size="{{ $article->taille }}" data-color="{{ $article->couleur }}">
         <a href="#" class="product-link">
           <div class="product-card">
           <div class="product-image-container">
@@ -459,10 +500,16 @@
         </div>
         @endforeach
       @else
-        <p class="text-center">Aucun produit disponible pour le moment.</p>
+        <div class="col-12">
+        <div class="text-center">
+          <h3 class="mb-4">Aucun produit disponible pour le moment</h3>
+          <p class="mb-4">Nous travaillons activement à l'ajout de nouveaux produits dans notre boutique.</p>
+          <p>Revenez bientôt pour découvrir nos nouveautés !</p>
+        </div>
+        </div>
       @endif
         </div>
-        <div class="text-center mt-3">
+        <div class="center-button">
           <button id="toggleProductsBtn" class="btn btn-danger">Voir plus</button>
         </div>
       </div>
@@ -549,26 +596,37 @@
     document.addEventListener('DOMContentLoaded', function () {
       const productItems = document.querySelectorAll('.product-item');
       const toggleBtn = document.getElementById('toggleProductsBtn');
-      let isExpanded = false;
+      const priceSlider = document.getElementById('max_price');
+      const priceValue = document.getElementById('price-value');
+      let isExpanded = false; // Par défaut, les produits sont masqués
 
-      // Fonction pour afficher seulement les 6 premiers
-      function showInitialProducts() {
-        productItems.forEach((item, index) => {
-          if (index < 6) {
-            item.classList.add('visible');
-          } else {
-            item.classList.remove('visible');
-          }
+      // Mise à jour de l'affichage de la valeur du curseur de prix
+      if (priceSlider && priceValue) {
+        priceSlider.addEventListener('input', function () {
+          priceValue.textContent = this.value + ' FCFA';
         });
-        toggleBtn.textContent = 'Voir plus';
-        isExpanded = false;
       }
 
       // Fonction pour afficher tous les produits
       function showAllProducts() {
-        productItems.forEach(item => item.classList.add('visible'));
+        productItems.forEach((item) => {
+          item.style.display = 'block';
+        });
         toggleBtn.textContent = 'Voir moins';
         isExpanded = true;
+      }
+
+      // Fonction pour masquer certains produits (6 premiers seulement)
+      function showInitialProducts() {
+        productItems.forEach((item, index) => {
+          if (index < 6) {
+            item.style.display = 'block';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+        toggleBtn.textContent = 'Voir plus';
+        isExpanded = false;
       }
 
       // Gérer le clic sur le bouton
@@ -578,25 +636,23 @@
             showAllProducts();
           } else {
             showInitialProducts();
-            // Scroll vers le haut de la liste des produits
             document.getElementById('product-list').scrollIntoView({ behavior: 'smooth' });
           }
         });
       }
+
+      // Initial display - show initial products
+      showInitialProducts();
+
+      // Afficher le bouton "Voir plus" seulement s'il y a plus de 6 produits
+      if (productItems.length <= 6) {
+        toggleBtn.style.display = 'none'; // Masquer le bouton si 6 ou moins
+      } else {
+        toggleBtn.style.display = 'block'; // Afficher le bouton si plus de 6
+      }
     });
   </script>
 
-
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const toggler = document.querySelector('.navbar-toggler');
-      const hamburger = document.getElementById('hamburgerBtn');
-
-      toggler.addEventListener('click', () => {
-        hamburger.classList.toggle('active');
-      });
-    });
-  </script>
 </body>
 
 </html>

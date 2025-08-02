@@ -98,7 +98,39 @@ Route::post('/tickets', [TicketController::class, 'store'])->name('tickets.store
 Route::resource('tickets', TicketController::class)->except(['create', 'store']);
 
 Route::get('/boutique', function () {
-    return view('boutique');
+    $query = \App\Models\article::query();
+    
+    // Appliquer le filtrage seulement si des paramètres de filtre sont présents dans la requête
+    // Cela se produit lorsque l'utilisateur clique sur le bouton "Appliquer"
+    if (request()->hasAny(['type', 'size', 'color', 'max_price'])) {
+        // Filtrage par type
+        if (request('type')) {
+            $query->where('type', request('type'));
+        }
+        
+        // Filtrage par taille
+        if (request('size')) {
+            $query->where('taille', request('size'));
+        }
+        
+        // Filtrage par couleur
+        if (request('color')) {
+            $query->where('couleur', request('color'));
+        }
+        
+        // Filtrage par prix maximum
+        if (request('max_price')) {
+            $query->where('prix', '<=', request('max_price'));
+        }
+    }
+    
+    // Récupérer tous les articles (filtrés seulement si des filtres sont appliqués via le formulaire)
+    $articles = $query->get();
+    
+    // Récupérer les couleurs uniques des articles existants
+    $couleurs = \App\Models\article::whereNotNull('couleur')->where('couleur', '!=', '')->distinct('couleur')->pluck('couleur');
+    
+    return view('boutique', compact('articles', 'couleurs'));
 })->name('boutique');
 
 Route::get('auth/google', [SocialAuthController::class, 'redirectToGoogle']);

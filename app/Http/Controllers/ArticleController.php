@@ -27,6 +27,9 @@ class ArticleController extends Controller
                 'description' => 'required|string',
                 'image'       => 'required|image',
                 'prix'        => 'required|numeric|min:0',
+                'type'        => 'required|string',
+                'couleur'     => 'nullable|string',
+                'taille'      => 'nullable|string',
             ]);
 
             if ($request->hasFile('image')) {
@@ -40,6 +43,9 @@ class ArticleController extends Controller
             $article->description = $data['description'];
             $article->image       = $data['image'];
             $article->prix        = $data['prix'];
+            $article->type        = $data['type'];
+            $article->couleur     = $data['couleur'];
+            $article->taille      = $data['taille'];
             $article->save();
 
             return redirect()->route('articles.index')->with('success', 'Article créé !');
@@ -64,11 +70,13 @@ class ArticleController extends Controller
             'description' => 'required|string',
             'image'       => 'nullable|image',
             'prix'        => 'required|numeric|min:0',
+            'type'        => 'required|string',
+            'couleur'     => 'nullable|string',
+            'taille'      => 'nullable|string',
         ]);
 
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('articles', 'public');
-            // stocke "articles/xyz.jpg" en DB
             $data['image'] = $path;
         }
 

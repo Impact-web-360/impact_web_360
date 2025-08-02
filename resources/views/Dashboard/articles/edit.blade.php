@@ -465,6 +465,40 @@
               </div>
 
               <div class="mb-3">
+                <label for="type" class="form-label">Type</label>
+                <select class="form-control" id="type" name="type" required>
+                  <option value="">-- Sélectionner un type --</option>
+                  <option value="T-shirt" {{ (old('type', $article->type) == 'T-shirt') ? 'selected' : '' }}>T-shirt</option>
+                  <option value="Hoodie" {{ (old('type', $article->type) == 'Hoodie') ? 'selected' : '' }}>Hoodie</option>
+                  <option value="Jeans" {{ (old('type', $article->type) == 'Jeans') ? 'selected' : '' }}>Jeans</option>
+                  <option value="Short" {{ (old('type', $article->type) == 'Short') ? 'selected' : '' }}>Short</option>
+                  <option value="Shirt" {{ (old('type', $article->type) == 'Shirt') ? 'selected' : '' }}>Shirt</option>
+                  <option value="Accessoires" {{ (old('type', $article->type) == 'Accessoires') ? 'selected' : '' }}>Accessoires</option>
+                  <option value="Autre" {{ (old('type', $article->type) == 'Autre') ? 'selected' : '' }}>Autre</option>
+                </select>
+              </div>
+
+              <div class="mb-3">
+                <label for="couleur" class="form-label">Couleur</label>
+                <input type="color" class="form-control form-control-color" id="couleur" name="couleur" value="{{ old('couleur', $article->couleur) }}">
+              </div>
+
+              <div class="mb-3">
+                <label for="taille" class="form-label">Taille</label>
+                <select class="form-control" id="taille" name="taille">
+                  <option value="">-- Sélectionner une taille --</option>
+                  <option value="XXS" {{ (old('taille', $article->taille) == 'XXS') ? 'selected' : '' }}>XXS</option>
+                  <option value="XS" {{ (old('taille', $article->taille) == 'XS') ? 'selected' : '' }}>XS</option>
+                  <option value="S" {{ (old('taille', $article->taille) == 'S') ? 'selected' : '' }}>S</option>
+                  <option value="M" {{ (old('taille', $article->taille) == 'M') ? 'selected' : '' }}>M</option>
+                  <option value="L" {{ (old('taille', $article->taille) == 'L') ? 'selected' : '' }}>L</option>
+                  <option value="XL" {{ (old('taille', $article->taille) == 'XL') ? 'selected' : '' }}>XL</option>
+                  <option value="XXL" {{ (old('taille', $article->taille) == 'XXL') ? 'selected' : '' }}>XXL</option>
+                  <option value="4XL" {{ (old('taille', $article->taille) == '4XL') ? 'selected' : '' }}>4XL</option>
+                </select>
+              </div>
+
+              <div class="mb-3">
                 <label for="image" class="form-label">Image</label>
                 <input type="file" class="form-control" id="image" name="image">
                 @if($article->image)

@@ -467,6 +467,14 @@
                                         <p class="card-text">{{ $article->description }}</p>
                                         <p class="card-text"><strong>{{ number_format($article->prix, 0, ',', ' ') }}
                                                 FCFA</strong></p>
+                                        <p class="card-text"><strong>Type:</strong> {{ $article->type }}</p>
+                                        <p class="card-text"><strong>Taille:</strong> {{ $article->taille }}</p>
+                                        @if($article->couleur)
+                                        <p class="card-text">
+                                            <strong>Couleur:</strong> 
+                                            <span style="display:inline-block;width:15px;height:15px;background-color:{{ $article->couleur }};border-radius:50%;border:1px solid #000;"></span>
+                                        </p>
+                                        @endif
 
                                         <div class="mt-auto">
                                             <div class="mb-2">
@@ -521,15 +529,49 @@
                         <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
                     </div>
 
-                    <div class="mb-3">
-                        <label for="prix" class="form-label">Prix (FCFA)</label>
-                        <input type="number" class="form-control" id="prix" name="prix" min="0" step="1" required>
-                    </div>
+                <div class="mb-3">
+                    <label for="prix" class="form-label">Prix (FCFA)</label>
+                    <input type="number" class="form-control" id="prix" name="prix" min="0" step="1" required>
+                </div>
 
-                    <div class="mb-3">
-                        <label for="image" class="form-label">Image</label>
-                        <input type="file" class="form-control" id="image" name="image" required>
-                    </div>
+                <div class="mb-3">
+                    <label for="type-modal" class="form-label">Type</label>
+                    <select class="form-control" id="type-modal" name="type" required>
+                        <option value="">-- Sélectionner un type --</option>
+                        <option value="T-shirt">T-shirt</option>
+                        <option value="Hoodie">Hoodie</option>
+                        <option value="Jeans">Jeans</option>
+                        <option value="Short">Short</option>
+                        <option value="Shirt">Shirt</option>
+                        <option value="Accessoires">Accessoires</option>
+                        <option value="Autre">Autre</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="couleur-modal" class="form-label">Couleur</label>
+                    <input type="color" class="form-control form-control-color" id="couleur-modal" name="couleur">
+                </div>
+
+                <div class="mb-3">
+                    <label for="taille-modal" class="form-label">Taille</label>
+                    <select class="form-control" id="taille-modal" name="taille">
+                        <option value="">-- Sélectionner une taille --</option>
+                        <option value="XXS">XXS</option>
+                        <option value="XS">XS</option>
+                        <option value="S">S</option>
+                        <option value="M">M</option>
+                        <option value="L">L</option>
+                        <option value="XL">XL</option>
+                        <option value="XXL">XXL</option>
+                        <option value="4XL">4XL</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="image" class="form-label">Image</label>
+                    <input type="file" class="form-control" id="image" name="image" required>
+                </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
