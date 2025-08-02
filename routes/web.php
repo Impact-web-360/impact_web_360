@@ -173,8 +173,6 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),
 
             Route::get('/caisse/{formationId}', [PaymentController::class, 'showPaymentForm'])
             ->name('caisse');
-            Route::post('/caisse', [PaymentController::class, 'processPayment'])
-            ->name('caisse.process');
             
             Route::get('/paiement_success', [PaymentController::class, 'showPaymentSuccess'])
             ->name('Dashboard_utilisateur.paiement_success');

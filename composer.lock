@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fed4463bbc8b8966c4b7d1847117a502",
+    "content-hash": "a3887604a5609eed5a9d513a4ee02099",
     "packages": [
         {
             "name": "brick/math",
@@ -2228,6 +2228,81 @@
                 }
             ],
             "time": "2024-03-13T08:44:33+00:00"
+        },
+        {
+            "name": "moneroo/moneroo-laravel",
+            "version": "v0.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/MonerooHQ/moneroo-laravel.git",
+                "reference": "849a6b75fe1b1567921408167669de317a768d3b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/MonerooHQ/moneroo-laravel/zipball/849a6b75fe1b1567921408167669de317a768d3b",
+                "reference": "849a6b75fe1b1567921408167669de317a768d3b",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^7.7",
+                "illuminate/contracts": "^9.0 || ^10.0 || ^11.0",
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "axazara/php-cs": "^0.3",
+                "insolita/unused-scanner": "^2.4",
+                "larastan/larastan": "^2.9",
+                "nunomaduro/collision": "^6.0",
+                "orchestra/testbench": "^7.40",
+                "phpstan/extension-installer": "^1.4",
+                "phpstan/phpstan-deprecation-rules": "^1.2",
+                "phpstan/phpstan-phpunit": "^1.4",
+                "phpunit/phpunit": "^9.6",
+                "spatie/laravel-ray": "^1.32"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "MonerooPayout": "Moneroo\\Laravel\\Facades\\PayoutFacade",
+                        "MonerooPayment": "Moneroo\\Laravel\\Facades\\PaymentFacade"
+                    },
+                    "providers": [
+                        "Moneroo\\Laravel\\Providers\\MonerooServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Moneroo\\Laravel\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Axa Zara Core Dev",
+                    "role": "Developer"
+                }
+            ],
+            "description": "This official Laravel Package for Laravel to interact with Moneroo API.",
+            "homepage": "https://docs.moneroo.io/",
+            "keywords": [
+                "AxaZara",
+                "laravel",
+                "mobile-money",
+                "moneroo",
+                "moneroo-laravel",
+                "moneroo.io",
+                "payment"
+            ],
+            "support": {
+                "issues": "https://github.com/MonerooHQ/moneroo-laravel/issues",
+                "source": "https://github.com/MonerooHQ/moneroo-laravel/tree/v0.1.2"
+            },
+            "time": "2025-01-31T01:07:55+00:00"
         },
         {
             "name": "monolog/monolog",

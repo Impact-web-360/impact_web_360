@@ -322,7 +322,7 @@
             border: 2px solid var(--border-color);
             border-radius: 10px;
             padding: 15px;
-            width: 200px;
+            width: 150px;
             cursor: pointer;
             transition: all 0.3s ease;
             position: relative;
