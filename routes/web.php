@@ -23,6 +23,8 @@ use App\Http\Controllers\ThemeController;
 use App\Http\Controllers\SupportController;
 use App\Http\Controllers\CoursController;
 use App\Http\Controllers\CalendrierController;
+use App\Http\Controllers\EventController;
+
 
 
 /*
@@ -191,7 +193,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),
             Route::get('/cours/{formation}', [CoursController::class, 'showFormation'])->name('formation.show');
 
             Route::get('/calendrier', [CalendrierController::class, 'index'])->name('calendrier')->middleware('auth');
-
+            Route::post('/events', [EventController::class, 'store'])->name('events.store');
 
     });
 });

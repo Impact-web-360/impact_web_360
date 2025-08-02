@@ -39,7 +39,7 @@
 
         #sidebar-wrapper {
             min-height: 100vh;
-            margin-left: -12rem;
+            margin-left: -16rem;
             transition: margin .25s ease-out;
             width: 16rem;
             background-color: var(--dark-sidebar-bg) !important;
@@ -240,25 +240,33 @@
         }
 
         .calendar-grid .calendar-header .col {
-            font-size: 0.9rem;
+            font-size: 0.5rem;
             font-weight: bold;
         }
 
+        .calendar-grid .calendar-header .col,
+        .calendar-grid .calendar-body .col {
+            padding: 0.3rem 0.6rem; /* Ajuste le padding pour un meilleur espacement */
+            font-size: 0.5rem;
+        }
+
         .calendar-grid .calendar-body .calendar-day {
-            padding: 0.5rem 1rem;
-            font-size: 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 35px; /* Définit une hauteur fixe pour les cellules */
+            border-radius: 5px; /* Arrondi les coins */
             cursor: pointer;
             transition: background-color 0.2s ease-in-out, border-radius 0.2s ease-in-out;
         }
 
         .calendar-grid .calendar-body .calendar-day:hover {
             background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 5px;
         }
 
         .calendar-grid .calendar-body .calendar-day.active {
-            background-color: var(--primary-color);
-            border-radius: 5px;
+            background-color: var(--primary-color) !important;
             font-weight: bold;
             color: var(--text-color-light) !important;
         }
@@ -432,12 +440,16 @@
                 <div class="row">
                     <div class="col-lg-8">
                         <div class="card bg-dark-card p-3 mb-4 rounded-lg shadow-sm">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <h5 class="text-white mb-0">{{ __('Planifier une tâche') }} <span class="text-secondary ms-2">{{ __('Semaine du') }} {{ $startOfWeek->isoFormat('D MMMM YYYY') }}</span></h5>
-                                <div class="d-flex align-items-center">
-                                    <button class="btn btn-sm btn-icon-custom me-2"><i class="fas fa-ellipsis-v"></i></button>
-                                    <button class="btn btn-sm btn-icon-custom"><i class="fas fa-times"></i></button>
-                                </div>
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <a href="{{ route('calendrier', ['date' => $startOfWeek->clone()->subWeek()->toDateString()]) }}" class="btn btn-dark-card text-white">
+                                    <i class="fas fa-chevron-left"></i>
+                                </a>
+                                <h5 class="text-white mb-0 text-center">
+                                    {{ $startOfWeek->isoFormat('D MMMM YYYY') }} - {{ $endOfWeek->isoFormat('D MMMM YYYY') }}
+                                </h5>
+                                <a href="{{ route('calendrier', ['date' => $startOfWeek->clone()->addWeek()->toDateString()]) }}" class="btn btn-dark-card text-white">
+                                    <i class="fas fa-chevron-right"></i>
+                                </a>
                             </div>
                         </div>
 
@@ -483,7 +495,7 @@
                     </div>
 
                     <div class="col-lg-4">
-                        <button class="btn btn-primary w-100 p-3 mb-4 rounded-lg shadow-sm animate-button">
+                        <button class="btn btn-primary w-100 p-3 mb-4 rounded-lg shadow-sm animate-button" data-bs-toggle="modal" data-bs-target="#addEventModal">
                             <i class="fas fa-plus-circle me-2"></i> {{ __('Ajouter un nouvel événement') }}
                         </button>
 
@@ -502,47 +514,38 @@
                                     <div class="col text-center">{{ __('Fr') }}</div>
                                     <div class="col text-center">{{ __('Sa') }}</div>
                                     <div class="col text-center">{{ __('Su') }}</div>
+                                    
                                 </div>
                                 <div class="calendar-body row gx-0">
-                                    <div class="col text-center text-secondary calendar-day">29</div>
-                                    <div class="col text-center text-secondary calendar-day">30</div>
-                                    <div class="col text-center text-secondary calendar-day">31</div>
-                                    <div class="col text-center calendar-day">1</div>
-                                    <div class="col text-center calendar-day">2</div>
-                                    <div class="col text-center calendar-day">3</div>
-                                    <div class="col text-center calendar-day">4</div>
-                                    <div class="col text-center calendar-day">5</div>
-                                    <div class="col text-center calendar-day">6</div>
-                                    <div class="col text-center calendar-day">7</div>
-                                    <div class="col text-center calendar-day">8</div>
-                                    <div class="col text-center calendar-day highlight active">9</div>
-                                    <div class="col text-center calendar-day">10</div>
-                                    <div class="col text-center calendar-day">11</div>
-                                    <div class="col text-center calendar-day">12</div>
-                                    <div class="col text-center calendar-day">13</div>
-                                    <div class="col text-center calendar-day">14</div>
-                                    <div class="col text-center calendar-day">15</div>
-                                    <div class="col text-center calendar-day">16</div>
-                                    <div class="col text-center calendar-day">17</div>
-                                    <div class="col text-center calendar-day">18</div>
-                                    <div class="col text-center calendar-day">19</div>
-                                    <div class="col text-center calendar-day">20</div>
-                                    <div class="col text-center calendar-day">21</div>
-                                    <div class="col text-center calendar-day">22</div>
-                                    <div class="col text-center calendar-day">23</div>
-                                    <div class="col text-center calendar-day">24</div>
-                                    <div class="col text-center calendar-day">25</div>
-                                    <div class="col text-center calendar-day">26</div>
-                                    <div class="col text-center calendar-day">27</div>
-                                    <div class="col text-center calendar-day">28</div>
-                                    <div class="col text-center calendar-day">29</div>
-                                    <div class="col text-center calendar-day">30</div>
-                                    <div class="col text-center text-secondary calendar-day">1</div>
-                                    <div class="col text-center text-secondary calendar-day">2</div>
-                                    <div class="col text-center text-secondary calendar-day">3</div>
-                                    <div class="col text-center text-secondary calendar-day">4</div>
-                                    <div class="col text-center text-secondary calendar-day">5</div>
-                                    <div class="col text-center text-secondary calendar-day">6</div>
+                                    <div class="calendar-body row gx-0">
+                                        @php
+                                            // Calcule le début du mois de la semaine affichée
+                                            $startOfMonth = $startOfWeek->clone()->startOfMonth();
+                                            // Calcule le nombre de jours à afficher avant le début du mois
+                                            $startDayOfWeek = $startOfMonth->dayOfWeekIso - 1; // ISO 8601, Lundi = 1
+                                            
+                                            // Calcule le nombre total de cellules (jours) à afficher
+                                            $totalDays = $startOfMonth->daysInMonth + $startDayOfWeek;
+                                            $totalCells = ceil($totalDays / 7) * 8;
+                                            
+                                            $currentDay = $startOfMonth->clone()->subDays($startDayOfWeek);
+                                        @endphp
+
+                                        @for ($i = 0; $i < $totalCells; $i++)
+                                            @php
+                                                $isSameMonth = $currentDay->isSameMonth($startOfMonth);
+                                                $isActive = $currentDay->isSameDay($startOfWeek);
+                                                $dayClass = $isSameMonth ? '' : 'text-secondary';
+                                                $activeClass = $isActive ? 'highlight active' : '';
+                                            @endphp
+                                            <div class="col text-center calendar-day {{ $dayClass }} {{ $activeClass }}">
+                                                {{ $currentDay->format('j') }}
+                                            </div>
+                                            @php
+                                                $currentDay->addDay();
+                                            @endphp
+                                        @endfor
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -576,7 +579,7 @@
                 <h5 class="modal-title" id="addEventModalLabel">{{ __('Ajouter un nouvel événement') }}</h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="" method="POST">
+            <form action="{{ route('events.store') }}" method="POST">
                 @csrf
                 <div class="modal-body">
                     <div class="mb-3">

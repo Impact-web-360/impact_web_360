@@ -1,5 +1,7 @@
 <?php
 
+// app/Models/Event.php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -11,7 +13,7 @@ class Event extends Model
 
     protected $fillable = [
         'user_id',
-        'formation_id', // <-- Assurez-vous d'avoir ce champ dans la migration
+        'formation_id',
         'title',
         'description',
         'start_time',
@@ -19,7 +21,22 @@ class Event extends Model
         'color',
     ];
 
-    // ...
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'start_time' => 'datetime',
+        'end_time' => 'datetime',
+    ];
+
+    // ... (vos relations belongsTo ou autres méthodes)
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function formation()
     {
