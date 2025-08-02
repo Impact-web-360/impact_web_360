@@ -22,6 +22,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use App\Http\Controllers\ThemeController;
 use App\Http\Controllers\SupportController;
 use App\Http\Controllers\CoursController;
+use App\Http\Controllers\CalendrierController;
 
 
 /*
@@ -113,10 +114,6 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),
                 return view('dashboard_utilisateur.tableau de bord'); // page d'accueil
             })->name('dashboard');
 
-            Route::get('/calendrier', function () {
-                return view('dashboard_utilisateur.calendrier');
-            })->name('calendrier');
-
 
             
 
@@ -192,6 +189,8 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),
             //Route::get('/cours', [CoursController::class, 'index'])->name('cours');
             Route::match(['get', 'post'], '/cours', [CoursController::class, 'index'])->name('cours');
             Route::get('/cours/{formation}', [CoursController::class, 'showFormation'])->name('formation.show');
+
+            Route::get('/calendrier', [CalendrierController::class, 'index'])->name('calendrier')->middleware('auth');
 
 
     });
