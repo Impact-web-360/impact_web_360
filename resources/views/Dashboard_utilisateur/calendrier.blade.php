@@ -568,6 +568,67 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="addEventModal" tabindex="-1" aria-labelledby="addEventModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-dark-card text-white">
+            <div class="modal-header border-bottom-0">
+                <h5 class="modal-title" id="addEventModalLabel">{{ __('Ajouter un nouvel événement') }}</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="" method="POST">
+                @csrf
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="eventTitle" class="form-label">{{ __('Titre de l\'événement') }}</label>
+                        <input type="text" class="form-control bg-dark text-white border-secondary" id="eventTitle" name="title" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="eventDescription" class="form-label">{{ __('Description') }}</label>
+                        <textarea class="form-control bg-dark text-white border-secondary" id="eventDescription" name="description"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="eventFormation" class="form-label">{{ __('Formation') }}</label>
+                        <select class="form-select bg-dark text-white border-secondary" id="eventFormation" name="formation_id" required>
+                            <option selected disabled>{{ __('Sélectionnez une formation') }}</option>
+                            @foreach($formations as $formation)
+                                <option value="{{ $formation->id }}">{{ $formation->title }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="eventStartDate" class="form-label">{{ __('Date de début') }}</label>
+                            <input type="date" class="form-control bg-dark text-white border-secondary" id="eventStartDate" name="start_date" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="eventStartTime" class="form-label">{{ __('Heure de début') }}</label>
+                            <input type="time" class="form-control bg-dark text-white border-secondary" id="eventStartTime" name="start_time" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="eventEndDate" class="form-label">{{ __('Date de fin') }}</label>
+                            <input type="date" class="form-control bg-dark text-white border-secondary" id="eventEndDate" name="end_date" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="eventEndTime" class="form-label">{{ __('Heure de fin') }}</label>
+                            <input type="time" class="form-control bg-dark text-white border-secondary" id="eventEndTime" name="end_time" required>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="eventColor" class="form-label">{{ __('Couleur de l\'événement') }}</label>
+                        <input type="color" class="form-control form-control-color bg-dark border-secondary" id="eventColor" name="color" value="#FF0000" title="Choisissez une couleur">
+                    </div>
+                </div>
+                <div class="modal-footer border-top-0">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('Annuler') }}</button>
+                    <button type="submit" class="btn btn-primary animate-button">{{ __('Enregistrer') }}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script>
         var el = document.getElementById("wrapper");
