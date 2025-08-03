@@ -67,7 +67,7 @@
     .ticket-header {
       background-color: #000066;
       display: flex;
-      justify-content: space-between;
+      justify-content: space-between;   
       align-items: center;
       border-top-left-radius: 1rem;
       border-top-right-radius: 1rem;
