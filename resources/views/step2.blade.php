@@ -339,7 +339,8 @@
 
   <!-- NAVBAR -->
   <nav class="navbar navbar-expand-lg navbar-dark fixed-top navbar-custom container">
-    <a class="navbar-brand" href="index.php"><img src="logo.png" alt="Logo Impact Web" /></a>
+    <a class="navbar-brand" href="index.php"><img src="{{ asset('dossiers/image/Impact-Web-360-Logo1.png') }}"
+        alt="Logo Impact Web" /></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
       <div class="hamburger" id="hamburgerBtn">
         <span></span>
@@ -349,14 +350,14 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link" href="index.php">Accueil</a></li>
-        <li class="nav-item"><a class="nav-link" href="evenement.php">Événements</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">E-learning</a></li>
-        <li class="nav-item"><a class="nav-link" href="intervenant.php">Intervenants</a></li>
-        <li class="nav-item"><a class="nav-link active" href="#">Billetterie</a></li>
-        <li class="nav-item"><a class="nav-link" href="boutique.php">Boutique</a></li>
-        <li class="nav-item"><a class="btn btn-light mx-2" href="connexion.html">Se connecter</a></li>
-        <li class="nav-item"><a class="btn btn-inscrire" href="inscription.html">S'inscrire</a></li>
+        <li class="nav-item"><a class="nav-link " href="{{ route('home') }}">Acceuil</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ route('evenement') }}">Événements</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">E-learning</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ route('intervenant') }}">Intervenants</a></li>
+        <li class="nav-item"><a class="nav-link active" href="{{ route('step1') }}">Billetterie</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ route('boutique') }}">Boutique</a></li>
+        <li class="nav-item"><a class="btn btn-light mx-2" href="{{ route('login') }}">Se connecter</a></li>
+        <li class="nav-item"><a class="btn btn-inscrire" href="{{ route('register') }}">S'inscrire</a></li>
       </ul>
     </div>
   </nav>
