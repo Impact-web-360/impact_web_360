@@ -13,7 +13,7 @@
     body {
       background-color: black;
       color: white;
-      font-family: 'Montserrat', sans-serif;
+      font-family: 'Segoe UI', sans-serif;
       scroll-behavior: smooth;
       overflow-x: hidden;
     }

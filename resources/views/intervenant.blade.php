@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
-    body { background-color: black; color: white; font-family: 'Montserrat', sans-serif; scroll-behavior: smooth; overflow-x: hidden; }
+    body { background-color: black; color: white; font-family: 'Segoe UI', sans-serif;; scroll-behavior: smooth; overflow-x: hidden; }
     .navbar-custom { background-color: #000066; border-radius: 15px; margin-top: 20px; padding: 10px 20px; height: 70px; }
     .navbar-brand img { max-height: 160px; width: auto; }
     .btn-inscrire { background: red; color: white; border: none; border-radius: 8px; }

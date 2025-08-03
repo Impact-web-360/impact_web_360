@@ -331,6 +331,18 @@
         display: none;
         /* Optionnel : cache la barre de scroll */
       }
+
+      .ticket-header h5{
+        font-size: 15px;
+      }
+
+      .ticket-body-left h5{
+        font-size: 15px;
+      }
+
+      .qr-code img{
+        width: 70%;
+      }
     }
   </style>
 </head>
@@ -339,7 +351,8 @@
 
   <!-- NAVBAR -->
   <nav class="navbar navbar-expand-lg navbar-dark fixed-top navbar-custom container">
-    <a class="navbar-brand" href="index.php"><img src="logo.png" alt="Logo Impact Web" /></a>
+    <a class="navbar-brand" href="index.php"><img src="{{ asset('dossiers/image/Impact-Web-360-Logo1.png') }}"
+        alt="Logo Impact Web" /></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
       <div class="hamburger" id="hamburgerBtn">
         <span></span>
@@ -349,14 +362,14 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link" href="index.php">Accueil</a></li>
-        <li class="nav-item"><a class="nav-link" href="evenement.php">Événements</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">E-learning</a></li>
-        <li class="nav-item"><a class="nav-link" href="intervenant.php">Intervenants</a></li>
-        <li class="nav-item"><a class="nav-link active" href="#">Billetterie</a></li>
-        <li class="nav-item"><a class="nav-link" href="boutique.php">Boutique</a></li>
-        <li class="nav-item"><a class="btn btn-light mx-2" href="connexion.html">Se connecter</a></li>
-        <li class="nav-item"><a class="btn btn-inscrire" href="inscription.html">S'inscrire</a></li>
+        <li class="nav-item"><a class="nav-link " href="{{ route('home') }}">Acceuil</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ route('evenement') }}">Événements</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">E-learning</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ route('intervenant') }}">Intervenants</a></li>
+        <li class="nav-item"><a class="nav-link active" href="{{ route('step1') }}">Billetterie</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ route('boutique') }}">Boutique</a></li>
+        <li class="nav-item"><a class="btn btn-light mx-2" href="{{ route('login') }}">Se connecter</a></li>
+        <li class="nav-item"><a class="btn btn-inscrire" href="{{ route('register') }}">S'inscrire</a></li>
       </ul>
     </div>
   </nav>
@@ -369,12 +382,12 @@
         <div class="text-end"><strong></strong></div>
       </div>
       <div class="d-flex justify-content-center align-items-center p-3">
-        <div>
-          <h5>Date et heure</h5>
+        <div class="ticket-body-left">
+          <h5 >Date et heure</h5>
           <h6></h6>
           <p></p>
         </div>
-        <div class="align-self-center">
+        <div class="align-self-center qr-code">
           <img
             src="https://api.qrserver.com/v1/create-qr-code/?data=ImpactWeb360-2025&size=100x100&bgcolor=255-51-0&color=255-255-255"
             alt="QR Code">
@@ -387,64 +400,100 @@
       </div>
     </div>
 
-<div class="step-nav mt-5 text-dark text-center">
-    <div class="step-container">
-      <span><strong class="text-primary"><a href="{{ route('step1') }}"> Informations</a></strong></span>
-      <span class="mx-2 text-muted">&gt;</span>
-      <span><a href="{{ route('step2') }}">Réservation de siège</a> </span>
-      <span class="mx-2 text-muted">&gt;</span>
-      <span><a href="{{ route('step3') }}">Confirmation</a></span>
-      <span class="mx-2 text-muted">&gt;</span>
-      <span>Paiement</span>
-    </div>
+    <div class="row justify-content-center">
+      <div class="col-12">
+        <div class="step-nav mt-5 text-dark text-center">
+          <div class="step-container d-flex justify-content-center align-items-center flex-wrap gap-2">
 
+            <!-- Étape 1 -->
+            <span>
+              <a href="{{ route('step1') }}" class="text-decoration-none">
+                <span class="d-none d-md-inline text-dark">Informations</span>
+                <span class="d-inline d-md-none step-icon"><i class="fa-regular fa-user text-dark"></i></span>
+              </a>
+            </span>
 
-    <form action="{{ route('step2.post') }}" method="POST" onsubmit="">
-      @csrf
-      <div class="seat-map shadow">
-        <h4>Choisissez votre catégorie</h4>
-        <div class=" mt-3" id="grid">
-          <p> -----------------------------------------</p>
-          <p> □□□□□ Scène □□□□□ </p>
-          <p> -----------------------------------------</p>
-          <p> 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨</p>
-          <p> 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 ← VIP</p>
-          <p> -----------------------------------------</p>
-          <p> 🟩 🟩 🟩 🟩 🟩 🟩 ← Étudiants</p>
-          <p> 🟩 🟩 🟩 🟩 🟩 🟩 🟩 🟩 🟩 </p>
-          <p> ----------------------------------------- </p>
-          <p> 🟦 🟦 🟦 🟩 🟩 </p>
-          <p> 🟦 🟦 🟦 🟩 🟩 </p>
-          <p> 🟦 🟦 🟦 🟩 🟩 </p>
-          <p> 🟦 🟦 🟦 🟩 🟩 </p>
-          <p> 🟦 🟦 🟦 🟩 🟩 </p>
-          <p> 🟦 🟦 🟦 🟩 🟩 </p>
-          <p> ----------------------------------------- </p>
-          <center>
-            <h4>Légende</h4>
-          </center>
-          <center>
-            <div class="d-flex mt-3 justify-content-center legend">
-              <div class="me-2">
-                <label for="" class="fw-bold fs-7">🟨 VIP</label>
-                <input type="radio" name="categorie" value="VIP">
-              </div>
-              <div class="me-2">
-                <label for="" class="fw-bold fs-7">🟩 Étudiants</label>
-                <input type="radio" name="categorie" value="Etudiant">
-              </div>
-              <div class="me-2">
-                <label for="" class="fw-bold fs-7">🟦 Participants</label>
-                <input type="radio" name="categorie" value="Participant">
-              </div>
-            </div>
-          </center>
+            <span class="mx-2 text-muted">></span>
+
+            <!-- Étape 2 -->
+            <span>
+              <a href="{{ route('step2') }}" class="text-decoration-none">
+                <span class="d-none d-md-inline fw-bold text-primary">Réservation de siège</span>
+                <span class="d-inline d-md-none step-icon"><i class="fa-solid fa-couch"></i></span>
+              </a>
+            </span>
+
+            <span class="mx-2 text-muted">></span>
+
+            <!-- Étape 3 -->
+            <span>
+              <a href="{{ route('step3') }}" class="text-decoration-none">
+                <span class="d-none d-md-inline text-dark">Confirmation</span>
+                <span class="d-inline d-md-none step-icon text-reset"><i class="fa-regular fa-circle-check text-dark"></i></i></span>
+              </a>
+            </span>
+
+            <span class="mx-2 text-muted">></span>
+
+            <!-- Étape 4 (non cliquable) -->
+            <span>
+              <span>
+                <span class="d-none d-md-inline text-dark">Paiement</span>
+                <span class="d-inline d-md-none step-icon"><i class="bi bi-credit-card"></i></span>
+              </span>
+            </span>
+
+          </div>
         </div>
+
+        <form action="{{ route('step2.post') }}" method="POST" onsubmit="" class="mt-4">
+          @csrf
+          <div class="seat-map shadow">
+            <h4>Choisissez votre catégorie</h4>
+            <div class=" mt-3" id="grid">
+              <p> -----------------------------------------</p>
+              <p> □□□□□ Scène □□□□□ </p>
+              <p> -----------------------------------------</p>
+              <p> 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨</p>
+              <p> 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 ← VIP</p>
+              <p> -----------------------------------------</p>
+              <p> 🟩 🟩 🟩 🟩 🟩 🟩 ← Étudiants</p>
+              <p> 🟩 🟩 🟩 🟩 🟩 🟩 🟩 🟩 🟩 </p>
+              <p> ----------------------------------------- </p>
+              <p> 🟦 🟦 🟦 🟩 🟩 </p>
+              <p> 🟦 🟦 🟦 🟩 🟩 </p>
+              <p> 🟦 🟦 🟦 🟩 🟩 </p>
+              <p> 🟦 🟦 🟦 🟩 🟩 </p>
+              <p> 🟦 🟦 🟦 🟩 🟩 </p>
+              <p> 🟦 🟦 🟦 🟩 🟩 </p>
+              <p> ----------------------------------------- </p>
+              <center>
+                <h4>Légende</h4>
+              </center>
+              <center>
+                <div class="d-flex mt-3 justify-content-center legend">
+                  <div class="me-2">
+                    <label for="" class="fw-bold fs-7">🟨 VIP</label>
+                    <input type="radio" name="categorie" value="VIP">
+                  </div>
+                  <div class="me-2">
+                    <label for="" class="fw-bold fs-7">🟩 Étudiants</label>
+                    <input type="radio" name="categorie" value="Etudiant">
+                  </div>
+                  <div class="me-2">
+                    <label for="" class="fw-bold fs-7">🟦 Participants</label>
+                    <input type="radio" name="categorie" value="Participant">
+                  </div>
+                </div>
+              </center>
+            </div>
+          </div>
+          <div class="text-center">
+            <button type="submit" class="btn btn-suivant">Suivant</button>
+          </div>
+        </form>
       </div>
-      <div class="text-center">
-        <button type="submit" class="btn btn-suivant">Suivant</button>
-      </div>
-    </form>
+    </div>
   </div>
 
 

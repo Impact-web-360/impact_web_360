@@ -28,11 +28,11 @@ class SupportController extends Controller
         ]);
 
         // Option 1: Envoyer un e-mail
-        Mail::to('support@impactweb360.com')->send(new ContactFormMail($validatedData));
+        Mail::to('nifenevra@gmail.com')->send(new ContactFormMail($validatedData));
 
         // Option 2: Stocker le message dans la base de données (nécessite une nouvelle table)
         // \App\Models\ContactMessage::create($validatedData);
 
-        return back()->with('Dashboard_utilisateur.soutien', 'Votre message a été envoyé avec succès ! Nous vous répondrons dans les plus brefs délais.');
+        return back()->with('soutien', 'Votre message a été envoyé avec succès ! Nous vous répondrons dans les plus brefs délais.');
     }
 }

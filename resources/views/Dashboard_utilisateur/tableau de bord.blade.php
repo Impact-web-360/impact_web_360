@@ -724,42 +724,6 @@
                     </div>
 
                     <div class="col-lg-4">
-                        <div class="card bg-dark-card border-secondary text-white shadow-sm mb-4 calendar-card">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <a href="#" class="text-white text-decoration-none"><i
-                                            class="fas fa-chevron-left"></i></a>
-                                    <h6 class="mb-0 fw-bold">Novembre 2023</h6>
-                                    <a href="#" class="text-white text-decoration-none"><i
-                                            class="fas fa-chevron-right"></i></a>
-                                </div>
-                                <div class="calendar-grid text-center">
-                                    <div class="calendar-day-name text-secondary">Mo</div>
-                                    <div class="calendar-day-name text-secondary">Tu</div>
-                                    <div class="calendar-day-name text-secondary">We</div>
-                                    <div class="calendar-day-name text-secondary">Th</div>
-                                    <div class="calendar-day-name text-secondary">Fr</div>
-                                    <div class="calendar-day-name text-secondary">Sa</div>
-                                    <div class="calendar-day-name text-secondary">Su</div>
-
-                                    <div class="calendar-day text-secondary">29</div>
-                                    <div class="calendar-day text-secondary">30</div>
-                                    <div class="calendar-day text-secondary">31</div>
-                                    <div class="calendar-day">1</div>
-                                    <div class="calendar-day">2</div>
-                                    <div class="calendar-day">3</div>
-                                    <div class="calendar-day">4</div>
-                                    <div class="calendar-day">5</div>
-                                    <div class="calendar-day">6</div>
-                                    <div class="calendar-day">7</div>
-                                    <div class="calendar-day">8</div>
-                                    <div class="calendar-day highlight">9</div>
-                                    <div class="calendar-day highlight active">10</div>
-                                    <div class="calendar-day">11</div>
-                                </div>
-                            </div>
-                        </div>
-
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <h4 class="text-white mb-0">Mon emploi du temps</h4>
                             <button
