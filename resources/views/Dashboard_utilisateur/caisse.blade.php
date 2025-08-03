@@ -813,43 +813,23 @@
             </nav>
 
             <div id="page-content-wrapper">
-                <!-- 💳 Formulaire de paiement Monero -->
                 <div class="container mt-4">
                     <div class="card bg-dark text-white border-secondary">
                         <div class="card-header">
-                            <h4 class="mb-0">{{ __('Formulaire de paiement Monero') }}</h4>
+                            <h4 class="mb-0">{{ __('Paiement de la formation : ') . $formation->title }}</h4>
+                            <p class="text-secondary mt-2">{{ __('Prix total : ') . number_format($formation->price, 0, ',', '.') . ' FCFA' }}</p>
                         </div>
                         <div class="card-body">
-                            <form method="POST" action="">
-                                @csrf
-
-                                <div class="mb-3">
-                                    <label for="first_name" class="form-label">{{ __('Prénom') }}</label>
-                                    <input type="text" name="first_name" class="form-control bg-dark text-white border-secondary" required>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="last_name" class="form-label">{{ __('Nom') }}</label>
-                                    <input type="text" name="last_name" class="form-control bg-dark text-white border-secondary" required>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="email" class="form-label">{{ __('Email') }}</label>
-                                    <input type="email" name="email" class="form-control bg-dark text-white border-secondary" required>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="amount" class="form-label">{{ __('Montant (en XMR)') }}</label>
-                                    <input type="number" name="amount" step="0.0001" class="form-control bg-dark text-white border-secondary" required>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="description" class="form-label">{{ __('Description') }}</label>
-                                    <input type="text" name="description" value="Paiement Monero" class="form-control bg-dark text-white border-secondary" required>
-                                </div>
-
-                                <button type="submit" class="btn btn-danger">{{ __('Payer avec Monero') }}</button>
-                            </form>
+                            @if (session('error'))
+                                <div class="alert alert-danger">{{ session('error') }}</div>
+                            @endif
+                            <p class="text-white">
+                                Pour payer, cliquez sur le bouton ci-dessous. Vous serez redirigé vers une page
+                                dédiée où vous trouverez les instructions de paiement Monero.
+                            </p>
+                            <a href="{{ route('monero', $formation->id) }}" class="btn btn-danger">
+                                {{ __('Payer avec Monero') }}
+                            </a>
                         </div>
                     </div>
                 </div>

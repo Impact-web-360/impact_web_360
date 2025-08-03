@@ -15,27 +15,18 @@ class CreatePaymentsTable extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            
-            // Liens vers les autres tables
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('formation_id')->constrained()->onDelete('cascade');
-            
-            // Détails du montant
-            $table->decimal('amount_xof', 10, 2)->comment('Montant de la formation en XOF.');
-            $table->decimal('amount_monero', 16, 12)->comment('Montant converti en XMR.');
-            
-            // Informations spécifiques à Monero
-            $table->string('monero_address')->unique()->comment('Adresse de paiement Monero générée.');
-            $table->string('monero_payment_id')->unique()->nullable()->comment('Identifiant de paiement Monero.');
-            $table->string('tx_hash')->nullable()->comment('Hash de la transaction après détection.');
-            
-            // Statut et date d'expiration
-            $table->string('status')->default('pending')->comment('Statut du paiement (pending, paid, expired, etc.).');
-            $table->timestamp('expires_at')->comment('Moment où le paiement est considéré comme expiré.');
-            
+            $table->decimal('amount_xof', 10, 2);
+            $table->decimal('amount_monero', 16, 12);
+            $table->string('monero_address')->unique();
+            $table->string('monero_payment_id')->unique();
+            $table->string('status')->default('pending');
+            $table->timestamp('expires_at')->nullable();
             $table->timestamps();
         });
     }
+
 
     /**
      * Reverse the migrations.

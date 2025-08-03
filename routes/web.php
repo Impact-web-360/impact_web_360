@@ -209,6 +209,17 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),
 
             Route::get('/caisse/{formationId}', [PaymentController::class, 'showPaymentForm'])
             ->name('caisse');
+
+             // Route pour initier le paiement Monero et afficher l'adresse
+            Route::get('/monero/{formationId}', [PaymentController::class, 'createMoneroPayment'])
+            ->name('monero');
+
+            // Route (optionnelle) pour vérifier le statut du paiement via AJAX
+            Route::get('/monero/status/{formationId}', [PaymentController::class, 'checkPaymentStatus'])->
+            name('monero.status');
+
+            // Route de l'API pour le callback de NOWPayments
+            Route::post('/api/payment/callback/nowpayments', [PaymentController::class, 'handleNOWPaymentsCallback'])->name('paiement.callback.nowpayments');
             
             Route::get('/paiement_success', [PaymentController::class, 'showPaymentSuccess'])
             ->name('Dashboard_utilisateur.paiement_success');
