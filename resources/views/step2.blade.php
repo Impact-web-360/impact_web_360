@@ -331,6 +331,18 @@
         display: none;
         /* Optionnel : cache la barre de scroll */
       }
+
+      .ticket-header h5{
+        font-size: 15px;
+      }
+
+      .ticket-body-left h5{
+        font-size: 15px;
+      }
+
+      .qr-code img{
+        width: 70%;
+      }
     }
   </style>
 </head>
@@ -370,12 +382,12 @@
         <div class="text-end"><strong></strong></div>
       </div>
       <div class="d-flex justify-content-center align-items-center p-3">
-        <div>
-          <h5>Date et heure</h5>
+        <div class="ticket-body-left">
+          <h5 >Date et heure</h5>
           <h6></h6>
           <p></p>
         </div>
-        <div class="align-self-center">
+        <div class="align-self-center qr-code">
           <img
             src="https://api.qrserver.com/v1/create-qr-code/?data=ImpactWeb360-2025&size=100x100&bgcolor=255-51-0&color=255-255-255"
             alt="QR Code">

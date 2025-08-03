@@ -276,11 +276,35 @@
       }
     }
 
+    @media (max-width: 768px) {
+      .card {
+        margin: 1rem;
+        border-radius: 1rem !important;
+      }
+
+      .card-footer {
+        border-bottom-left-radius: 1rem !important;
+        border-bottom-right-radius: 1rem !important;
+        padding: 1.5rem !important;
+      }
+
+      .div-form {
+        padding: 1rem;
+      }
+
+      .btn-suivant {
+        margin-bottom: 50px;
+        padding: 10px 30px;
+      }
+    }
+
     @media (max-width: 576px) {
+
       .step-nav {
         font-size: 14px;
         line-height: 1.8;
       }
+
 
       .step-nav span {
         display: inline-block;
@@ -296,6 +320,31 @@
         /* Optionnel : cache la barre de scroll */
       }
 
+      .card {
+        margin: 0.5rem;
+      }
+
+      .div-form{
+        padding: 2rem;
+      }
+
+      .ticket-header h5{
+        font-size: 15px;
+      }
+
+      .ticket-body-left h5{
+        font-size: 15px;
+      }
+
+      .qr-code img{
+        width: 70%;
+      }
+
+      .btn-promo{
+        font-size: 15px;
+        width: 100%;
+        color: black;
+      }
     }
   </style>
 </head>
@@ -334,12 +383,12 @@
         <div class="text-end"><strong></strong></div>
       </div>
       <div class="d-flex justify-content-center align-items-center p-3">
-        <div>
-          <h5>Date et heure</h5>
+        <div class="ticket-body-left">
+          <h5 >Date et heure</h5>
           <h6></h6>
           <p></p>
         </div>
-        <div class="align-self-center">
+        <div class="align-self-center qr-code">
           <img
             src="https://api.qrserver.com/v1/create-qr-code/?data=ImpactWeb360-2025&size=100x100&bgcolor=255-51-0&color=255-255-255"
             alt="QR Code">
@@ -399,33 +448,29 @@
     <form class="form-section animate__animated animate__fadeInUp" method="POST" action="{{ route('tickets.store') }}">
       @csrf
 
-      <div class="div-form">
+      <!-- Formulaire -->
+      <div class="div-form mt-4">
         <div class="row">
           <div class="col-md-6 mb-3">
             <input type="text" class="form-control p-3 rounded-4" name="nom" placeholder="Nom de famille"
               value="{{ $step1['nom'] ?? '' }}" required>
           </div>
-
           <div class="col-md-6 mb-3">
             <input type="text" class="form-control p-3 rounded-4" name="prenom" placeholder="Prénom"
               value="{{ $step1['prenom'] ?? '' }}" required>
           </div>
-
           <div class="col-md-6 mb-3">
             <input type="text" class="form-control p-3 rounded-4" name="pays" placeholder="Pays"
               value="{{ $step1['pays'] ?? '' }}" required>
           </div>
-
           <div class="col-md-6 mb-3">
             <input type="text" class="form-control p-3 rounded-4" name="ville" placeholder="Ville"
               value="{{ $step1['ville'] ?? '' }}" required>
           </div>
-
           <div class="col-md-6 mb-3">
             <input type="text" class="form-control p-3 rounded-4" name="telephone" placeholder="Téléphone"
               value="{{ $step1['telephone'] ?? '' }}" required>
           </div>
-
           <div class="col-md-6">
             <input type="email" class="form-control p-3 rounded-4" name="email" placeholder="Email"
               value="{{ $step1['email'] ?? '' }}" required>
@@ -433,31 +478,59 @@
         </div>
       </div>
 
-      <div class="card border-none mt-5 border-0 rounded-5 mx-auto w-50">
+      <!-- Carte avec réduction -->
+      <div class="card mt-3 mx-auto border-0 rounded-5" style="max-width: 600px;">
         <div class="card-body">
           <hr class="mt-5">
-          <div class="d-flex p-3 justify-content-between text-body-secondary">
+          <div class="text-body-secondary p-2 d-flex justify-content-between card-subtitle">
             <h6>Billet: </h6>
-            <h6>100.000 FCFA</h6>
+            <h6>100.000FCFA</h6>
           </div>
-          <div class="d-flex p-3 justify-content-between text-body-secondary">
+          <div class="d-flex justify-content-between p-2 text-body-secondary card-subtitle">
             <h6>Rabais: </h6>
-            <h6>---</h6>
+            <h6 id="rabais-display">---</h6>
           </div>
-          <div class="mx-auto p-2">
-            <button type="button" class="btn text-center p-3 fw-bold mx-auto text-danger rounded-5 align-self-center w-100" style="border: solid 1px #ff4500">J'ai un code promo</button>
-          </div>
+          <center>
+            <button type="button" class="btn btn-promo text-danger rounded-5 mb-3 w-50 p-2" data-bs-toggle="modal"
+              data-bs-target="#exampleModal" style="border: solid 1px #ff4500;">
+              J'ai un code promo
+            </button>
+          </center>
         </div>
-        <div class="card-footer justify-content-between p-4 d-flex align-items-center text-light" style="background-color: #ff4500; border-bottom-left-radius: 2rem; border-bottom-right-radius: 2rem;">
-          <span class="fs-5">Résumé total</span> 
+        <div class="card-footer justify-content-between p-3 d-flex align-items-center text-light"
+          style="background-color: #ff4500;border-bottom-left-radius: 2rem; border-bottom-right-radius: 2rem;">
+          <span class="fs-5">Résumé total</span>
           <span class="fs-4">100.000 FCFA</span>
         </div>
       </div>
-
       <div class="text-center">
         <button type="submit" class="btn btn-suivant">Payer</button>
       </div>
     </form>
+
+    <!-- MODAL PROMO -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Code Promo</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form id="promoForm">
+              <input type="text" class="form-control" name="code_promo" id="codePromoInput"
+                placeholder="Entrez votre code promo ici">
+              <p class="text-muted mt-2">Si vous avez un code promo, entrez-le ici pour bénéficier d'une réduction sur
+                votre billet.</p>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+            <button type="button" class="btn btn-primary" id="applyPromoBtn">Enregistrer</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- ===== FOOTER ===== -->
@@ -514,15 +587,91 @@
       </div>
     </div>
   </footer>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const toggler = document.querySelector('.navbar-toggler');
-      const hamburger = document.getElementById('hamburgerBtn');
 
-      toggler.addEventListener('click', () => {
-        hamburger.classList.toggle('active');
-      });
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      console.log('DOM fully loaded and parsed');
+
+      // Gestion du code promo
+      const applyPromoBtn = document.getElementById('applyPromoBtn');
+      const promoModalElement = document.getElementById('exampleModal');
+
+      if (applyPromoBtn && promoModalElement) {
+        console.log('Promo elements found');
+
+        applyPromoBtn.addEventListener('click', function (e) {
+          console.log('Apply promo button clicked');
+          e.preventDefault();
+
+          const codeInput = document.getElementById('codePromoInput');
+          const code = codeInput ? codeInput.value.trim() : '';
+
+          console.log('Code entered:', code);
+
+          if (!code) {
+            alert('Veuillez entrer un code promo.');
+            return;
+          }
+
+          // Simulation de validation du code promo
+          if (code === "IMPACT25") {
+            const rabaisDisplay = document.getElementById('rabais-display');
+            if (rabaisDisplay) {
+              rabaisDisplay.textContent = '-25%';
+              console.log('Discount applied');
+            }
+
+            // Fermer le modal
+            try {
+              // Essayer d'abord avec l'API Bootstrap
+              if (typeof bootstrap !== 'undefined' && bootstrap.Modal) {
+                console.log('Using Bootstrap Modal API');
+                const modal = bootstrap.Modal.getInstance(promoModalElement);
+                if (modal) {
+                  modal.hide();
+                } else {
+                  // Si l'instance n'existe pas, créer une nouvelle
+                  const newModal = new bootstrap.Modal(promoModalElement);
+                  newModal.hide();
+                }
+              } else {
+                // Méthode de repli : cliquer sur le bouton de fermeture
+                console.log('Using fallback method to close modal');
+                const closeModalBtn = promoModalElement.querySelector('[data-bs-dismiss="modal"]');
+                if (closeModalBtn) {
+                  closeModalBtn.click();
+                } else {
+                  console.log('No close button found, trying manual hide');
+                  // Dernière méthode de repli
+                  promoModalElement.classList.remove('show');
+                  const backdrop = document.querySelector('.modal-backdrop');
+                  if (backdrop) {
+                    backdrop.classList.remove('show');
+                  }
+                }
+              }
+            } catch (error) {
+              console.error('Error closing modal:', error);
+            }
+
+            alert('Code promo appliqué : 25% de réduction !');
+          } else {
+            alert('Code promo invalide. Veuillez réessayer.');
+          }
+        });
+      } else {
+        console.log('Promo elements not found');
+      }
+
+      // Gestion du menu hamburger
+      const hamburger = document.getElementById('hamburgerBtn');
+      if (hamburger) {
+        hamburger.addEventListener('click', function () {
+          this.classList.toggle('active');
+        });
+      }
     });
   </script>
 </body>
