@@ -30,7 +30,7 @@
             overflow-x: hidden;
             background-color: var(--dark-bg);
             color: var(--text-color-light);
-            font-family: 'Poppins', sans-serif;
+            font-family: Arial, sans-serif;
         }
 
         #wrapper {
