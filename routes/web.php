@@ -49,6 +49,10 @@ Route::get('/modifier profil', function () {
     return view('dashboard_utilisateur.modifier profil');
 })->name('modifier profil');
 
+Route::get('/profil', function () {
+    return view('Dashboard.Ticket.CodePromo');
+})->name('profil');
+
 //Changer de mot de passe
 Route::get('/changer mot de passe', function () {
     return view('dashboard_utilisateur.changer mot de passe');
@@ -70,9 +74,14 @@ Route::post('/logout', function () {
     return redirect('/login')->with('success', 'Déconnecté avec succès.');
 })->name('logout')->middleware('auth');
 
+// Enregistrement ticket
+Route::post('/billetterie/store', [TicketController::class, 'store'])->name('tickets.store');
 
+// Liste des tickets (dashboard)
+Route::get('/dashboard/tickets', [TicketController::class, 'index'])->name('tickets.index');
 
-
+// Promo AJAX
+Route::post('/valider-code-promo', [TicketController::class, 'validerCodePromo'])->name('code.promo.valider');
 
 
 // Étapes réservation
@@ -193,8 +202,13 @@ Route::post('/forgot-password', [AuthController::class, 'sendResetLink'])->name(
 Route::get('/reset-password/{token}', [AuthController::class, 'showResetForm'])->name('password.reset');
 Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('password.update');
 
+
+
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+
+    Route::resource('admin/codes-promos', App\Http\Controllers\CodePromoController::class)->except(['show', 'edit', 'update']);
+
 
     Route::get('/dashboard/evenements', [EvenementController::class, 'index'])->name('evenements.index');
     Route::post('/dashboard/evenements', [EvenementController::class, 'store'])->name('evenements.store');

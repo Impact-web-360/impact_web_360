@@ -208,9 +208,9 @@
     <div class="step-container">
       <span><strong class="text-primary"><a href="{{ route('step1') }}"> Informations</a></strong></span>
       <span class="mx-2 text-muted">&gt;</span>
-      <span><a href="{{ route('step2') }}">Réservation de siège</a> </span>
+      <span><a href="#">Réservation de siège</a> </span>
       <span class="mx-2 text-muted">&gt;</span>
-      <span><a href="{{ route('step3') }}">Confirmation</a></span>
+      <span><a href="#">Confirmation</a></span>
       <span class="mx-2 text-muted">&gt;</span>
       <span>Paiement</span>
     </div>

@@ -181,11 +181,14 @@
     </nav>
 
 <div class="container" style="margin-top: 150px;">
+
+
+<div class="container" style="margin-top: 150px;">
   <div class="ticket text-center animate__animated animate__fadeIn">
     <div class="ticket-header p-3">
-          <img src="" alt="Logo">
-          <h5>Impact Web 360 – Édition 2025</h5>
-          <div class="text-end"><strong></strong></div>
+      <img src="" alt="Logo">
+      <h5>Impact Web 360 – Édition 2025</h5>
+      <div class="text-end"><strong></strong></div>
     </div>
     <div class="d-flex justify-content-center align-items-center p-3">
       <div>
@@ -204,7 +207,7 @@
     </div>
   </div>
 
-  <div class="step-nav mt-5 text-dark text-center">
+    <div class="step-nav mt-5 text-dark text-center">
     <div class="step-container">
       <span><strong class="text-primary"><a href="{{ route('step1') }}"> Informations</a></strong></span>
       <span class="mx-2 text-muted">&gt;</span>
@@ -215,55 +218,104 @@
       <span>Paiement</span>
     </div>
   </div>
- <form class="form-section animate__animated animate__fadeInUp" method="POST" action="{{ route('tickets.store') }}">
-    @csrf
-    <div class="alert alert-danger"></div>
-   
-    <div class="row div-form">
-        <div class="col-md-6 mb-3">
-            <input type="text" class="form-control p-3 rounded-4" name="nom" placeholder="Nom de famille" value="{{ $step1['nom'] ?? '' }}" required>
-        </div>
 
-        <div class="col-md-6 mb-3">
-            <input type="text" class="form-control p-3 rounded-4" name="prenom" placeholder="Prénom" value="{{ $step1['prenom'] ?? '' }}" required>
-        </div>
+  <!-- Formulaire -->
+        <div class="div-form mt-4">
+            <form>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <input type="text" class="form-control p-3 rounded-4" name="prenom" placeholder="Prénom" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <input type="text" class="form-control p-3 rounded-4" name="pays" placeholder="Pays" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <input type="text" class="form-control p-3 rounded-4" name="ville" placeholder="Ville" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <input type="text" class="form-control p-3 rounded-4" name="telephone" placeholder="Téléphone" required>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="email" class="form-control p-3 rounded-4" name="email" placeholder="Email" required>
+                    </div>
+                </div>
 
-        <div class="col-md-6 mb-3">
-            <input type="text" class="form-control p-3 rounded-4" name="pays" placeholder="Pays" value="{{ $step1['pays'] ?? '' }}" required>
-        </div>
+                <!-- Carte avec réduction -->
+                <div class="card mt-3 mx-auto rounded-5" style="max-width: 600px">
+                    <div class="card-body">
+                        <hr>
+                        <div class="row text-body-secondary card-subtitle mb-2">
+                            <h6 class="col-md-8">Billet: </h6>
+                            <h6 class="col-md-4">100.000FCFA</h6>
+                        </div>
+                        <div class="row text-body-secondary card-subtitle mb-2">
+                            <h6 class="col-md-8">Rabais: </h6>
+                            <h6 class="col-md-4" id="rabais-display">-</h6>
+                        </div>
+                        <center>
+                            <button type="button" class="btn btn-light text-danger rounded-5 mb-3 w-50" 
+                                    data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                J'ai un code promo
+                            </button>
+                        </center>
+                    </div>
+                    <div class="card-footer d-flex text-white fw-bold" 
+                         style="background-color: #ff4500; border-bottom-left-radius: 2rem; border-bottom-right-radius: 2rem;">
+                        <p class="m-0">Résumé total</p>
+                    </div>
+                </div>
 
-        <div class="col-md-6 mb-3">
-            <input type="text" class="form-control p-3 rounded-4" name="ville" placeholder="Ville" value="{{ $step1['ville'] ?? '' }}" required>
-        </div>
+                <!-- MODAL PROMO -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Code Promo</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="promoForm">
+                                    <input type="text" class="form-control" name="code_promo" id="codePromoInput" 
+                                           placeholder="Entrez votre code promo ici">
+                                    <p class="text-muted mt-2">Si vous avez un code promo, entrez-le ici pour bénéficier d'une réduction sur votre billet.</p>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                                <button type="button" class="btn btn-primary" id="applyPromoBtn">Enregistrer</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-        <div class="col-md-6 mb-3">
-            <input type="text" class="form-control p-3 rounded-4" name="telephone" placeholder="Téléphone" value="{{ $step1['telephone'] ?? '' }}" required>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-suivant">Payer</button>
+                </div>
+            </form>
         </div>
+    
 
-        <div class="col-md-6">
-            <input type="email" class="form-control p-3 rounded-4" name="email" placeholder="Email" value="{{ $step1['email'] ?? '' }}" required>
-        </div>
-</div>
-
-<div class="card mt-3 justify-content-center rounded-5 w-50" >
-  <div class="card-body">
-    <hr>
-    <div class="row text-body-secondary card-subtitle mb-2">
-         <h6 class="col-md-8">Billet: </h6>
-         <h6 class="col-md-4">100.000FCFA</h6>
+    <!-- MODAL PROMO -->
+    <!-- MODAL PROMO -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="promoForm" action="{{ route('code.promo.valider') }}" method="post">
+          @csrf
+          <input type="text" class="form-control" name="code_promo" id="codePromoInput" placeholder="Entrez votre code promo ici">
+          <p class="text-muted">Si vous avez un code promo, entrez-le ici pour bénéficier d'une réduction sur votre billet.</p>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+        <button type="button" class="btn btn-primary" id="applyPromoBtn">Enregistrer</button>
+      </div>
     </div>
-    <br>
-        <div class="row text-body-secondary card-subtitle mb-2">
-         <h6 class="col-md-8">Rabais: </h6>
-         <h6 class="col-md-4">-</h6>
-        </div>
-    <center>
-    <button type="button" class="btn btn-light text-center text-danger rounded-5 mb-3 justify-content-center align-item-center w-50">J'ai un code promo</button>
   </div>
-  <div class="card-footer justify-content-between align-items-center d-flex text-body-secondary text-white fw-bold" style="background-color: #ff4500; text-align:center; color: white; border-bottom-left-radius: 2rem; border-bottom-right-radius: 2rem;">
-        <p style="text-align:center;">Résumé total</p>
-  </div>
-  </center>
 </div>
 
     <div class="text-center">
@@ -271,6 +323,9 @@
     </div>
   </form>
 </div>
+
+<!-- STYLES MODAL BLUR FIX -->
+
 
 <!-- ===== FOOTER ===== -->
   <footer class="footer text-white pt-5">
@@ -326,17 +381,37 @@
       </div>
     </div>
   </footer>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-      document.addEventListener('DOMContentLoaded', () => {
-        const toggler = document.querySelector('.navbar-toggler');
-        const hamburger = document.getElementById('hamburgerBtn');
-
-        toggler.addEventListener('click', () => {
-          hamburger.classList.toggle('active');
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Gestion du code promo
+            document.getElementById('applyPromoBtn').addEventListener('click', function () {
+                const code = document.getElementById('codePromoInput').value;
+                
+                // Simulation de validation du code promo
+                if (code === "IMPACT25") {
+                    document.getElementById('rabais-display').textContent = '-25%';
+                    
+                    // Fermer le modal
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('exampleModal'));
+                    modal.hide();
+                    
+                    alert('Code promo appliqué : 25% de réduction !');
+                } else {
+                    alert('Code promo invalide. Veuillez réessayer.');
+                }
+            });
+            
+            // Gestion du menu hamburger
+            const hamburger = document.getElementById('hamburgerBtn');
+            if (hamburger) {
+                hamburger.addEventListener('click', function () {
+                    this.classList.toggle('active');
+                });
+            }
         });
-      });
-</script>
+    </script>
 </body>
 </html>
 
