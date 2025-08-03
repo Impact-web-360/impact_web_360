@@ -67,8 +67,11 @@ class TicketController extends Controller
             return response()->json(['success' => false, 'message' => 'Catégorie non sélectionnée']);
         }
 
-        // Utiliser la méthode statique pour obtenir le prix
-        $prixInitial = \App\Models\PrixCategorie::getPrixParCategorie($categorie);
+        $prixCategorie = \App\Models\PrixCategorie::where('categorie', strtolower($categorie))->first();
+
+        if (!$prixCategorie) {
+            return response()->json(['success' => false, 'message' => 'Catégorie inconnue']);
+        }
 
         $promo = CodePromo::where('code', $code)
             ->where('actif', true)
@@ -83,6 +86,7 @@ class TicketController extends Controller
         }
 
         $reduction = $promo->reduction;
+        $prixInitial = $prixCategorie->prix;
         $prixReduit = $prixInitial - ($prixInitial * $reduction / 100);
 
         // Stocker la réduction
@@ -107,17 +111,16 @@ class TicketController extends Controller
             session('step2')
         );
 
-        // Utiliser la méthode statique pour obtenir le prix
-        $prix = \App\Models\PrixCategorie::getPrixParCategorie($data['categorie']);
+        $prixCategorie = \App\Models\PrixCategorie::where('categorie', strtolower($data['categorie']))->first();
+        $prix = $prixCategorie ? $prixCategorie->prix : 0;
 
         // Si une réduction a déjà été enregistrée via session
         $reduction = session('reduction');
         if ($reduction) {
-            $data['promo_code'] = $reduction['code'];
+            $data['code_promo'] = $reduction['code'];
             $prix = $reduction['prix_final'];
         }
 
-        // Ajouter le prix aux données
         $data['prix'] = $prix;
 
         Ticket::create($data);

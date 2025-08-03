@@ -67,7 +67,7 @@
     .ticket-header {
       background-color: #000066;
       display: flex;
-      justify-content: space-between;
+      justify-content: space-between;   
       align-items: center;
       border-top-left-radius: 1rem;
       border-top-right-radius: 1rem;
@@ -375,12 +375,18 @@
     </div>
   </nav>
 
-  <div class="container" style="margin-top: 150px;">
-    <div class="ticket text-center animate__animated animate__fadeIn">
-      <div class="ticket-header p-3">
-        <img src="" alt="Logo">
-        <h5>Impact Web 360 – Édition 2025</h5>
-        <div class="text-end"><strong></strong></div>
+<div class="container" style="margin-top: 150px;">
+  <div class="ticket text-center animate__animated animate__fadeIn">
+    <div class="ticket-header p-3">
+          <img src="" alt="Logo">
+          <h5>Impact Web 360 – Édition 2025</h5>
+          <div class="text-end"><strong></strong></div>
+    </div>
+    <div class="d-flex justify-content-center align-items-center p-3">
+      <div>
+        <h5>Date et heure</h5>
+        <h6></h6>
+        <p></p>
       </div>
       <div class="d-flex justify-content-center align-items-center p-3">
         <div class="ticket-body-left">
@@ -533,6 +539,74 @@
     </div>
   </div>
 
+  <div class="step-nav mt-5 text-dark text-center">
+    <div class="step-container">
+      <span><strong class="text-primary"><a href="{{ route('step1') }}"> Informations</a></strong></span>
+      <span class="mx-2 text-muted">&gt;</span>
+      <span><a href="{{ route('step2') }}">Réservation de siège</a> </span>
+      <span class="mx-2 text-muted">&gt;</span>
+      <span><a href="{{ route('step3') }}">Confirmation</a></span>
+      <span class="mx-2 text-muted">&gt;</span>
+      <span>Paiement</span>
+    </div>
+  </div>
+ <form class="form-section animate__animated animate__fadeInUp" method="POST" action="{{ route('tickets.store') }}">
+    @csrf
+    <div class="alert alert-danger"></div>
+   
+    <div class="row div-form">
+        <div class="col-md-6 mb-3">
+            <input type="text" class="form-control p-3 rounded-4" name="nom" placeholder="Nom de famille" value="{{ $step1['nom'] ?? '' }}" required>
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <input type="text" class="form-control p-3 rounded-4" name="prenom" placeholder="Prénom" value="{{ $step1['prenom'] ?? '' }}" required>
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <input type="text" class="form-control p-3 rounded-4" name="pays" placeholder="Pays" value="{{ $step1['pays'] ?? '' }}" required>
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <input type="text" class="form-control p-3 rounded-4" name="ville" placeholder="Ville" value="{{ $step1['ville'] ?? '' }}" required>
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <input type="text" class="form-control p-3 rounded-4" name="telephone" placeholder="Téléphone" value="{{ $step1['telephone'] ?? '' }}" required>
+        </div>
+
+        <div class="col-md-6">
+            <input type="email" class="form-control p-3 rounded-4" name="email" placeholder="Email" value="{{ $step1['email'] ?? '' }}" required>
+        </div>
+</div>
+
+<div class="card mt-3 justify-content-center rounded-5 w-50" >
+  <div class="card-body">
+    <hr>
+    <div class="row text-body-secondary card-subtitle mb-2">
+         <h6 class="col-md-8">Billet: </h6>
+         <h6 class="col-md-4">100.000FCFA</h6>
+    </div>
+    <br>
+        <div class="row text-body-secondary card-subtitle mb-2">
+         <h6 class="col-md-8">Rabais: </h6>
+         <h6 class="col-md-4">-</h6>
+        </div>
+    <center>
+    <button type="button" class="btn btn-light text-center text-danger rounded-5 mb-3 justify-content-center align-item-center w-50">J'ai un code promo</button>
+  </div>
+  <div class="card-footer justify-content-between align-items-center d-flex text-body-secondary text-white fw-bold" style="background-color: #ff4500; text-align:center; color: white; border-bottom-left-radius: 2rem; border-bottom-right-radius: 2rem;">
+        <p style="text-align:center;">Résumé total</p>
+  </div>
+  </center>
+</div>
+
+    <div class="text-center">
+      <button type="submit" class="btn btn-suivant">Payer</button>
+    </div>
+  </form>
+</div>
+
   <!-- ===== FOOTER ===== -->
   <footer class="footer text-white pt-5">
     <div class="container">
@@ -587,6 +661,7 @@
       </div>
     </div>
   </footer>
+<<<<<<< HEAD
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -674,6 +749,19 @@
       }
     });
   </script>
+=======
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const toggler = document.querySelector('.navbar-toggler');
+        const hamburger = document.getElementById('hamburgerBtn');
+
+        toggler.addEventListener('click', () => {
+          hamburger.classList.toggle('active');
+        });
+      });
+</script>
+>>>>>>> 2fd0461ba106876398c09754b803a84b81291993
 </body>
 
 </html>
