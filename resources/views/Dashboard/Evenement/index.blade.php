@@ -145,7 +145,6 @@
       background-color: var(--background-app);
       /* Use main app background */
       border-radius: 10px;
-
     }
 
     /* Header actions (New Event, Feed, Shuffle) */
