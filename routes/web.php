@@ -173,10 +173,6 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),
                 return view('dashboard_utilisateur.details_cours');
             })->name('cours.details');
 
-            Route::get('/paiement1', function () {
-                return view('dashboard_utilisateur.paiement1');
-            })->name('paiement1');
-
             Route::get('/notifications', function () {
                 return view('dashboard_utilisateur.notification');
             })->name('notifications');
@@ -253,6 +249,9 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),
 
             Route::get('/calendrier', [CalendrierController::class, 'index'])->name('calendrier')->middleware('auth');
             Route::post('/events', [EventController::class, 'store'])->name('events.store');
+
+            Route::get('/paiement1/{status?}', [PaymentController::class, 'paiement1'])
+            ->name('paiement1');
 
     });
 });

@@ -579,79 +579,70 @@
             </nav>
 
             <div class="payment-filters d-flex justify-content-between align-items-center px-4 py-3">
-                    <div class="btn-group filter-buttons" role="group" aria-label="Payment Filters">
-                        <button type="button" class="btn btn-secondary active">Tous les</button>
-                        <button type="button" class="btn btn-secondary">En attente de paiement</button>
-                        <button type="button" class="btn btn-secondary">Réussir</button>
-                        <button type="button" class="btn btn-secondary">Échoué</button>
-                    </div>
-                    <button class="btn btn-outline-secondary sort-button">Trier par Date <i class="fas fa-sort-down ms-2"></i></button>
+                <div class="btn-group filter-buttons" role="group" aria-label="Payment Filters">
+                    <a href="{{ route('paiement1') }}" class="btn btn-secondary {{ is_null($status) ? 'active' : '' }}">Tous les</a>
+                    <a href="{{ route('paiement1', ['status' => 'pending']) }}" class="btn btn-secondary {{ $status === 'pending' ? 'active' : '' }}">En attente de paiement</a>
+                    <a href="{{ route('paiement1', ['status' => 'paid']) }}" class="btn btn-secondary {{ $status === 'paid' ? 'active' : '' }}">Réussir</a>
+                    <a href="{{ route('paiement1', ['status' => 'failed']) }}" class="btn btn-secondary {{ $status === 'failed' ? 'active' : '' }}">Échoué</a>
+                </div>
+                <button class="btn btn-outline-secondary sort-button">Trier par Date <i class="fas fa-sort-down ms-2"></i></button>
             </div>
 
                 <div class="payment-list px-4 py-3">
-
-                    <div class="payment-card">
-                        <img src="logo.png" alt="Thumbnail">
-                        <div class="payment-info">
-                        <h6 class="mb-1">Envato Mastery: construire un modèle de revenu passif à partir de la vente</h6>
-                        <p class="mb-0">16 Modules • 41 vidéos</p>
+                    @forelse($Payments as $payment)
+                        <div class="payment-card">
+                            <img src="{{ asset('dossiers/images/' . $payment->formation->thumbnail) }}" alt="Thumbnail">
+                            <div class="payment-info">
+                                <h6 class="mb-1">{{ $payment->formation->title }}</h6>
+                                <p class="mb-0">{{ $payment->formation->modules_count }} Modules • {{ $payment->formation->videos_count }} vidéos</p>
+                            </div>
+                            <div class="payment-details">
+                                <div class="detail-item">
+                                    <p class="detail-label">Prix:</p>
+                                    <p class="detail-value text-success">
+                                        {{ number_format($payment->amount_xof, 0, ',', '.') }} FCFA
+                                    </p>
+                                </div>
+                                <div class="detail-item">
+                                    <p class="detail-label">Temps restant:</p>
+                                    @if ($payment->status === 'pending')
+                                        {{-- Logique pour le temps restant avant expiration, si vous en avez une --}}
+                                        <p class="detail-value text-warning">{{ $payment->created_at->diffForHumans(['parts' => 2]) }}</p>
+                                    @else
+                                        <p class="detail-value text-muted">--</p>
+                                    @endif
+                                </div>
+                                <div class="detail-item">
+                                    @php
+                                        $statusClass = '';
+                                        $statusText = '';
+                                        switch ($payment->status) {
+                                            case 'pending':
+                                                $statusClass = 'status-pending';
+                                                $statusText = 'En attente';
+                                                break;
+                                            case 'paid':
+                                                $statusClass = 'status-success';
+                                                $statusText = 'Réussi';
+                                                break;
+                                            case 'failed':
+                                                $statusClass = 'status-failed';
+                                                $statusText = 'Échoué';
+                                                break;
+                                            default:
+                                                $statusClass = '';
+                                                $statusText = 'Inconnu';
+                                        }
+                                    @endphp
+                                    <p class="status-text {{ $statusClass }}">{{ $statusText }}</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="payment-details">
-                        <div class="detail-item">
-                            <p class="detail-label">Prix:</p>
-                            <p class="detail-value text-success">€ 99,99</p>
+                    @empty
+                        <div class="alert alert-info text-center">
+                            Vous n'avez pas encore de paiements en attente ou terminés.
                         </div>
-                        <div class="detail-item">
-                            <p class="detail-label">Temps restant:</p>
-                            <p class="detail-value text-success">2 jours</p>
-                        </div>
-                        <div class="detail-item">
-                            <p class="status-text status-pending">En attente</p>
-                        </div>
-                        </div>
-                    </div>
-
-                    <div class="payment-card">
-                        <img src="logo.png" alt="Thumbnail">
-                        <div class="payment-info">
-                        <h6 class="mb-1">Envato Mastery: construire un modèle de revenu passif à partir de la vente</h6>
-                        <p class="mb-0">16 Modules • 41 vidéos</p>
-                        </div>
-                        <div class="payment-details">
-                        <div class="detail-item">
-                            <p class="detail-label">Prix:</p>
-                            <p class="detail-value text-success">€ 99,99</p>
-                        </div>
-                        <div class="detail-item">
-                            <p class="detail-label">Temps restant:</p>
-                            <p class="detail-value text-success">2 jours</p>
-                        </div>
-                        <div class="detail-item">
-                            <p class="status-text status-pending">En attente</p>
-                        </div>
-                        </div>
-                    </div>
-
-                    <div class="payment-card">
-                        <img src="logo.png" alt="Thumbnail">
-                        <div class="payment-info">
-                        <h6 class="mb-1">Envato Mastery: construire un modèle de revenu passif à partir de la vente</h6>
-                        <p class="mb-0">16 Modules • 41 vidéos</p>
-                        </div>
-                        <div class="payment-details">
-                        <div class="detail-item">
-                            <p class="detail-label">Prix:</p>
-                            <p class="detail-value text-success">€ 99,99</p>
-                        </div>
-                        <div class="detail-item">
-                            <p class="detail-label">Temps restant:</p>
-                            <p class="detail-value text-success">2 jours</p>
-                        </div>
-                        <div class="detail-item">
-                            <p class="status-text status-pending">En attente</p>
-                        </div>
-                        </div>
-                    </div>
+                    @endforelse
                 </div>
             </div>
         </div>

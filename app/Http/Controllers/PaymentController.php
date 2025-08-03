@@ -133,4 +133,29 @@ class PaymentController extends Controller
             return 60000;
         }
     }
+
+    public function paiement1($status = null)
+    {
+        $user = Auth::user();
+
+        $query = Payment::where('user_id', $user->id)
+            ->with('formation')
+            ->orderBy('created_at', 'desc');
+
+        // On filtre seulement si $status est valide
+        if ($status && in_array($status, ['pending', 'paid', 'failed'])) {
+            $query->where('status', $status);
+        } else {
+            $status = null; // Forcer la valeur à null si aucun filtre valide
+        }
+
+        $Payments = $query->get();
+
+        return view('Dashboard_utilisateur.paiement1', [
+            'user' => $user,
+            'Payments' => $Payments,
+            'status' => $status // On passe toujours le status à la vue
+        ]);
+    }
+
 }
