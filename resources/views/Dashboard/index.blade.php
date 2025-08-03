@@ -204,10 +204,10 @@
   <a href="{{ route('articles.index')}}" class="nav-link"><i class="fa fa-shopping-basket"></i>Articles</a>
   <a href="{{ route('emploies.index')}}" class="nav-link"><i class="fa fa-briefcase"></i>Emplois</a>
   <a href="ajouter_intervenant.php" class="nav-link"><i class="fa fa-user"></i>Intervenants</a>
-  <a href="#calendar" class="nav-link"><i class="fas fa-calendar-alt"></i> Calendrier</a>
+  <a href="{{ route('billet')}}" class="nav-link"><i class="fas fa-calendar-alt "></i> Tickets</a>
   <a href="#logs" class="nav-link"><i class="fas fa-history"></i> Historique</a>
   <a href="#settings" class="nav-link"><i class="fas fa-cogs"></i> Paramètres</a>
-  <a href="index.php" class="nav-link"><i class="fa fa-arrow-left"></i>Deconnexion</a>
+  <a href="{{ route('logout')}}" class="nav-link"><i class="fa fa-arrow-left"></i>Deconnexion</a>
 </nav>
 
 <main id="content" tabindex="-1">

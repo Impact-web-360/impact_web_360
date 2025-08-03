@@ -49,6 +49,13 @@ class HomeController extends Controller
         return view('evenement', compact('sponsors', 'evenements','intervenants'));
     }
 
+    public function ticket()
+    {
+        $evenements = Evenement::all();
+
+        return view('Dashboard.Ticket.CodePromo', compact('evenements'));
+    }
+
     public function boutique()
     {
         $articles = article::all();

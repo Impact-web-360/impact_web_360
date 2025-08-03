@@ -470,13 +470,15 @@
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="eventSelect" class="form-label">Événement</label>
-                                    <select class="form-select" id="eventSelect">
+                                    @foreach ($evenements as $evenement)
+                                        <select class="form-select" id="eventSelect">
                                         <option selected>Sélectionner un événement</option>
-                                        <option>Impact Web 360 - Conférence</option>
+                                        <option value="{{$evenement->id}}">{{$evenement->nom}}</option>
                                         <option>Atelier Marketing Digital</option>
                                         <option>Formation SEO Avancé</option>
                                         <option>Webinaire E-commerce</option>
-                                    </select>
+                                        </select>
+                                    @endforeach
                                 </div>
                                 
                                 <div class="mb-3">
