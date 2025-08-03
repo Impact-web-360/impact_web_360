@@ -366,91 +366,92 @@
       </div>
     </div>
 
-    <div class="step-nav mt-5 text-dark text-center">
-      <div class="step-container d-flex justify-content-center align-items-center flex-wrap gap-2">
+    <div class="row justify-content-center">
+      <div class="col-12">
+        <div class="step-nav mt-5 text-dark text-center">
+          <div class="step-container d-flex justify-content-center align-items-center flex-wrap gap-2">
 
-        <!-- Étape 1 -->
-        <span>
-          <a href="{{ route('step1') }}" class="text-decoration-none">
-            <span class="d-none d-md-inline fw-bold text-primary">Informations</span>
-            <span class="d-inline d-md-none step-icon"><i class="fa-regular fa-user"></i></span>
-          </a>
-        </span>
+            <!-- Étape 1 -->
+            <span>
+              <a href="{{ route('step1') }}" class="text-decoration-none">
+                <span class="d-none d-md-inline fw-bold text-primary">Informations</span>
+                <span class="d-inline d-md-none step-icon"><i class="fa-regular fa-user"></i></span>
+              </a>
+            </span>
 
-        <span class="mx-2 text-muted">&gt;</span>
+            <span class="mx-2 text-muted">></span>
 
-        <!-- Étape 2 -->
-        <span>
-          <a href="{{ route('step2') }}" class="text-decoration-none">
-            <span class="d-none d-md-inline text-dark">Réservation de siège</span>
-            <span class="d-inline d-md-none step-icon"><i class="fa-solid fa-couch text-dark"></i></span>
-          </a>
-        </span>
+            <!-- Étape 2 -->
+            <span>
+              <a href="{{ route('step2') }}" class="text-decoration-none">
+                <span class="d-none d-md-inline text-dark">Réservation de siège</span>
+                <span class="d-inline d-md-none step-icon"><i class="fa-solid fa-couch text-dark"></i></span>
+              </a>
+            </span>
 
-        <span class="mx-2 text-muted">&gt;</span>
+            <span class="mx-2 text-muted">></span>
 
-        <!-- Étape 3 -->
-        <span>
-          <a href="{{ route('step3') }}" class="text-decoration-none">
-            <span class="d-none d-md-inline text-dark">Confirmation</span>
-            <span class="d-inline d-md-none step-icon text-reset"><i class="fa-regular fa-circle-check text-dark"></i></i></span>
-          </a>
-        </span>
+            <!-- Étape 3 -->
+            <span>
+              <a href="{{ route('step3') }}" class="text-decoration-none">
+                <span class="d-none d-md-inline text-dark">Confirmation</span>
+                <span class="d-inline d-md-none step-icon text-reset"><i class="fa-regular fa-circle-check text-dark"></i></i></span>
+              </a>
+            </span>
 
-        <span class="mx-2 text-muted">&gt;</span>
+            <span class="mx-2 text-muted">></span>
 
-        <!-- Étape 4 (non cliquable) -->
-        <span>
-          <span>
-            <span class="d-none d-md-inline text-dark">Paiement</span>
-            <span class="d-inline d-md-none step-icon"><i class="bi bi-credit-card"></i></span>
-          </span>
-        </span>
+            <!-- Étape 4 (non cliquable) -->
+            <span>
+              <span>
+                <span class="d-none d-md-inline text-dark">Paiement</span>
+                <span class="d-inline d-md-none step-icon"><i class="bi bi-credit-card"></i></span>
+              </span>
+            </span>
 
+          </div>
+        </div>
+
+        <form class="form-section animate__animated animate__fadeInUp" method="POST" action="{{ route('step1.post') }}">
+          @csrf
+
+          <div class="div-form mt-4">
+            <input type="hidden" name="id_evenement" value="">
+            <div class="row g-3">
+              <div class="col-md-6"><input type="text" class="form-control p-3 rounded-4" name="prenom" placeholder="Prénom"
+                  required></div>
+              <div class="col-md-6"><input type="text" class="form-control p-3 rounded-4" name="nom"
+                  placeholder="Nom de famille" required></div>
+              <div class="col-md-12">
+                <select name="pays" class="form-control text-muted p-3 rounded-4">
+                  <option value="">Sélectionnez un pays</option>
+                  @foreach($countries as $code => $name)
+              <option value="{{ $name }}">{{ $name }}</option>
+            @endforeach
+                </select>
+              </div>
+              <div class="col-md-6"><input type="text" class="form-control p-3 rounded-4" name="ville" placeholder="Ville">
+              </div>
+              <div class="col-md-6 d-flex gap-2">
+                <select name="indicatif" class="form-control rounded-4 w-25" required>
+                  <option value="">Indicatif</option>
+                  @foreach($dialCodes as $code => $dial)
+              <option value="{{ $dial }}">{{ $name }} ({{ $dial }})</option>
+            @endforeach
+                </select>
+                <input type="text" name="telephone" class="form-control rounded-4" placeholder="Numéro" required>
+              </div>
+
+              <div class="col-md-12"><input type="email" class="form-control p-3 rounded-4" name="email"
+                  placeholder="E-mail" required></div>
+            </div>
+          </div>
+          <div class="text-center">
+            <button type="submit" class="btn btn-suivant">Suivant</button>
+          </div>
+        </form>
       </div>
     </div>
-  </div>
-
-
-
-    <form class="form-section animate__animated animate__fadeInUp" method="POST" action="{{ route('step1.post') }}">
-      @csrf
-
-      <div class="div-form">
-        <input type="hidden" name="id_evenement" value="">
-        <div class="row g-3">
-          <div class="col-md-6"><input type="text" class="form-control p-3 rounded-4" name="prenom" placeholder="Prénom"
-              required></div>
-          <div class="col-md-6"><input type="text" class="form-control p-3 rounded-4" name="nom"
-              placeholder="Nom de famille" required></div>
-          <div class="col-md-12">
-            <select name="pays" class="form-control text-muted p-3 rounded-4">
-              <option value="">Sélectionnez un pays</option>
-              @foreach($countries as $code => $name)
-          <option value="{{ $name }}">{{ $name }}</option>
-        @endforeach
-            </select>
-          </div>
-          <div class="col-md-6"><input type="text" class="form-control p-3 rounded-4" name="ville" placeholder="Ville">
-          </div>
-          <div class="col-md-6 d-flex gap-2">
-            <select name="indicatif" class="form-control rounded-4 w-25" required>
-              <option value="">Indicatif</option>
-              @foreach($dialCodes as $code => $dial)
-          <option value="{{ $dial }}">{{ $name }} ({{ $dial }})</option>
-        @endforeach
-            </select>
-            <input type="text" name="telephone" class="form-control rounded-4" placeholder="Numéro" required>
-          </div>
-
-          <div class="col-md-12"><input type="email" class="form-control p-3 rounded-4" name="email"
-              placeholder="E-mail" required></div>
-        </div>
-      </div>
-      <div class="text-center">
-        <button type="submit" class="btn btn-suivant">Suivant</button>
-      </div>
-    </form>
   </div>
 
   <!-- ===== FOOTER ===== -->
