@@ -61,9 +61,9 @@ Route::get('/modifier profil', function () {
     return view('dashboard_utilisateur.modifier profil');
 })->name('modifier profil');
 
-Route::get('/profil', function () {
+Route::get('/billet', function () {
     return view('Dashboard.Ticket.CodePromo');
-})->name('profil');
+})->name('billet');
 
 //Changer de mot de passe
 Route::get('/changer mot de passe', function () {
@@ -97,6 +97,7 @@ Route::get('/dashboard/tickets', [TicketController::class, 'index'])->name('tick
 
 // Promo AJAX
 Route::post('/valider-code-promo', [TicketController::class, 'validerCodePromo'])->name('code.promo.valider');
+Route::get('/valider-code-promo', [HomeController::class, 'ticket']);
 
 
 // Étapes réservation
