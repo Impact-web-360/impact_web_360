@@ -633,22 +633,39 @@
                         <div class="support-section animation-fade-in" style="animation-delay: 0.6s;">
                             <h2 class="text-center">Contacter le support</h2>
                             <div class="contact-form-card">
-                                <form>
+                                <form action="{{ route('soutien.contact') }}" method="POST">
+                                    @csrf
+                                    @if ($errors->any())
+                                        <div class="alert alert-danger">
+                                            <ul>
+                                                @foreach ($errors->all() as $error)
+                                                    <li>{{ $error }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
+
+                                    @if (session('success'))
+                                        <div class="alert alert-success">
+                                            {{ session('success') }}
+                                        </div>
+                                    @endif
+
                                     <div class="mb-3">
                                         <label for="inputName" class="form-label">Votre nom</label>
-                                        <input type="text" class="form-control" id="inputName" placeholder="Entrez votre nom complet">
+                                        <input type="text" class="form-control" id="inputName" name="name" placeholder="Entrez votre nom complet" value="{{ old('name') }}">
                                     </div>
                                     <div class="mb-3">
                                         <label for="inputEmail" class="form-label">Adresse e-mail</label>
-                                        <input type="email" class="form-control" id="inputEmail" placeholder="Entrez votre adresse e-mail">
+                                        <input type="email" class="form-control" id="inputEmail" name="email" placeholder="Entrez votre adresse e-mail" value="{{ old('email') }}">
                                     </div>
                                     <div class="mb-3">
                                         <label for="inputSubject" class="form-label">Sujet</label>
-                                        <input type="text" class="form-control" id="inputSubject" placeholder="Ex: Problème de connexion, question de facturation...">
+                                        <input type="text" class="form-control" id="inputSubject" name="subject" placeholder="Ex: Problème de connexion, question de facturation..." value="{{ old('subject') }}">
                                     </div>
                                     <div class="mb-3">
                                         <label for="inputMessage" class="form-label">Votre message</label>
-                                        <textarea class="form-control" id="inputMessage" rows="5" placeholder="Décrivez votre problème ou question en détail..."></textarea>
+                                        <textarea class="form-control" id="inputMessage" name="message" rows="5" placeholder="Décrivez votre problème ou question en détail...">{{ old('message') }}</textarea>
                                     </div>
                                     <div class="d-grid mt-4">
                                         <button type="submit" class="btn btn-submit">Envoyer le message</button>

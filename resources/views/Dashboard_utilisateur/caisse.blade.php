@@ -802,11 +802,9 @@
                                     aria-label="{{ __('Notifications') }}"><i class="fas fa-bell"></i></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-white d-flex align-items-center"
-                                    href="{{ route('parametres') }}">
-                                    <img src="{{ Auth::user()->image ? asset('storage/' . Auth::user()->image) : asset('logo.png') }}"
-                                        alt="{{ __('Photo de profil') }}" style="max-height: 50px;"
-                                        class="rounded-circle profile-img-preview me-4">
+                                <a class="nav-link text-white d-flex align-items-center " href="{{ route('parametres') }}">
+                                    <img src="{{ asset(Auth::user()->image && Auth::user()->image !== 'photos/default.svg' ? 'storage/' . Auth::user()->image . '?v=' . time() : 'dossiers/image/default.png') }}"
+                                     alt="Photo de profil" class="rounded-circle" style="max-height: 40px;">
                                 </a>
                             </li>
                         </ul>
@@ -814,72 +812,24 @@
                 </div>
             </nav>
 
-            <div class="container-fluid py-4 main-content">
-                <div class="row">
-                    <div class="col-md-8 col-lg-12 general-settings-form animation-fade-in"
-                        style="animation-delay: 0.2s;">
-                        <h1 class="page-title">{{ __('Finalisez votre paiement pour la formation: :title', ['title' => $formation->title]) }}</h1>
-                        <p class="page-description">
-                            {{ __('Le coût total de cette formation est de :price XOF. Veuillez procéder au paiement via Fedapay.', ['price' => number_format($formation->price, 0, ',', ' ')]) }}
-                        </p>
-                        <div class="card payment-details-card">
-                            <h2 class="card-title">{{ __('Paiement via Fedapay') }}</h2>
-
+            <div id="page-content-wrapper">
+                <div class="container mt-4">
+                    <div class="card bg-dark text-white border-secondary">
+                        <div class="card-header">
+                            <h4 class="mb-0">{{ __('Paiement de la formation : ') . $formation->title }}</h4>
+                            <p class="text-secondary mt-2">{{ __('Prix total : ') . number_format($formation->price, 0, ',', '.') . ' FCFA' }}</p>
+                        </div>
+                        <div class="card-body">
                             @if (session('error'))
-                                <div class="alert alert-danger" role="alert">
-                                    {{ session('error') }}
-                                </div>
+                                <div class="alert alert-danger">{{ session('error') }}</div>
                             @endif
-                            @if (session('success'))
-                                <div class="alert alert-success" role="alert">
-                                    {{ session('success') }}
-                                </div>
-                            @endif
-                            @if (session('info'))
-                                <div class="alert alert-info" role="alert">
-                                    {{ session('info') }}
-                                </div>
-                            @endif
-
-                            @if ($errors->any())
-                                <div class="alert alert-danger">
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            @endif
-
-                            <form id="paymentForm" action="{{ route('caisse.process') }}" method="POST">
-                                @csrf
-
-                                <input type="hidden" name="formation_id" value="{{ $formation->id }}">
-
-                                <div id="fedapayPaymentSection" class="payment-section active">
-                                    <p class="text-secondary small">
-                                        {{ __('Vous serez redirigé vers la page sécurisée de Fedapay pour compléter votre paiement. Veuillez saisir votre numéro de téléphone pour la transaction.') }}
-                                    </p>
-                                    <div class="form-group">
-                                        <label for="fedapayNumber">{{ __('Numéro de Téléphone') }}</label>
-                                        <input type="tel" class="form-control" id="fedapayNumber" name="fedapayNumber"
-                                            placeholder="{{ __('Ex: +229xxxxxxxxxx') }}"
-                                            pattern="^(\+[0-9]{8,15}|0[1-9][0-9]{8})$"
-                                            title="{{ __('Veuillez entrer un numéro de téléphone à 8 ou 10 chiffres (commençant par 0x)') }}"
-                                            required value="{{ old('fedapayNumber', $user->telephone ?? '') }}">
-                                            @error('fedapayNumber')
-                                                <div class="text-danger mt-2">{{ $message }}</div>
-                                            @enderror
-                                    </div>
-                                    <p class="text-secondary small mt-3">
-                                        {{ __('Assurez-vous que le numéro est correct. Vous serez redirigé pour choisir votre mode de paiement (Mobile Money ou Carte) sur la plateforme Fedapay.') }}
-                                    </p>
-                                </div>
-
-                                <div class="action-buttons">
-                                    <button type="submit" class="btn-subscribe">{{ __('Payer maintenant') }}</button>
-                                </div>
-                            </form>
+                            <p class="text-white">
+                                Pour payer, cliquez sur le bouton ci-dessous. Vous serez redirigé vers une page
+                                dédiée où vous trouverez les instructions de paiement Monero.
+                            </p>
+                            <a href="{{ route('monero', $formation->id) }}" class="btn btn-danger">
+                                {{ __('Payer avec Monero') }}
+                            </a>
                         </div>
                     </div>
                 </div>

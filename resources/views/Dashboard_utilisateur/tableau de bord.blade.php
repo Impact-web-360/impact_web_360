@@ -1,31 +1,45 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Impact Web - Dashboard</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <style>
         :root {
-            --primary-color: red; /* Couleur principale des boutons/liens actifs (similaire à l'image) */
+            --primary-color: red;
+            /* Couleur principale des boutons/liens actifs (similaire à l'image) */
             --secondary-color: #555;
-            --dark-bg: #1c1c1c; /* Couleur de fond principale */
-            --dark-card-bg: #2a2a2a; /* Couleur de fond des cartes */
-            --dark-sidebar-bg: #212121; /* Couleur de fond de la sidebar */
-            --border-color: #333; /* Couleur des bordures */
-            --text-color-light: #f8f9fa; /* Texte clair pour les fonds sombres */
-            --text-color-secondary: #aaaaaa; /* Texte secondaire, gris */
-            --success-color: #28a745; /* Couleur de succès (pour la barre de progression) */
-            --info-color: #17a2b8; /* Couleur d'information (pour la barre de progression) */
+            --dark-bg: #1c1c1c;
+            /* Couleur de fond principale */
+            --dark-card-bg: #2a2a2a;
+            /* Couleur de fond des cartes */
+            --dark-sidebar-bg: #212121;
+            /* Couleur de fond de la sidebar */
+            --border-color: #333;
+            /* Couleur des bordures */
+            --text-color-light: #f8f9fa;
+            /* Texte clair pour les fonds sombres */
+            --text-color-secondary: #aaaaaa;
+            /* Texte secondaire, gris */
+            --success-color: #28a745;
+            /* Couleur de succès (pour la barre de progression) */
+            --info-color: #17a2b8;
+            /* Couleur d'information (pour la barre de progression) */
         }
 
         body {
             overflow-x: hidden;
             background-color: var(--dark-bg);
             color: var(--text-color-light);
-            font-family: Arial, sans-serif; /* Police générique pour la compatibilité */
+            font-family: Arial, sans-serif;
+            /* Police générique pour la compatibilité */
         }
 
         #wrapper {
@@ -35,7 +49,8 @@
         /* Sidebar */
         #sidebar-wrapper {
             min-height: 100vh;
-            margin-left: -11.3rem; /* Cachée par défaut */
+            margin-left: -11.3rem;
+            /* Cachée par défaut */
             transition: margin .25s ease-out;
             width: 16rem;
             background-color: var(--dark-sidebar-bg) !important;
@@ -56,15 +71,18 @@
             padding: 0.75rem 1.25rem;
             background-color: var(--dark-sidebar-bg);
             color: var(--text-color-secondary);
-            border: none; /* Supprime les bordures par défaut des list-group-item */
+            border: none;
+            /* Supprime les bordures par défaut des list-group-item */
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         #sidebar-wrapper .list-group-item.active {
             background-color: var(--primary-color) !important;
             color: var(--text-color-light) !important;
-            border-radius: 5px; /* Bordures arrondies pour l'élément actif */
-            margin: 0px; /* Un peu d'espace sur les côtés */
+            border-radius: 5px;
+            /* Bordures arrondies pour l'élément actif */
+            margin: 0px;
+            /* Un peu d'espace sur les côtés */
         }
 
         #sidebar-wrapper .list-group-item:hover {
@@ -88,7 +106,8 @@
         }
 
         .sidebar-promo .star-rating i {
-            color: gold; /* Couleur des étoiles */
+            color: gold;
+            /* Couleur des étoiles */
         }
 
         .sidebar-promo .btn-primary {
@@ -116,7 +135,8 @@
         }
 
         .bg-dark-secondary {
-            background-color: var(--dark-sidebar-bg) !important; /* Utilise la même couleur que la sidebar pour le topbar */
+            background-color: var(--dark-sidebar-bg) !important;
+            /* Utilise la même couleur que la sidebar pour le topbar */
         }
 
         .main-content {
@@ -152,7 +172,8 @@
         }
 
         .text-xs {
-            font-size: 0.65rem; /* Pour les petits cercles entre les textes */
+            font-size: 0.65rem;
+            /* Pour les petits cercles entre les textes */
             vertical-align: middle;
         }
 
@@ -218,7 +239,8 @@
         }
 
         .calendar-day.text-secondary {
-            color: var(--text-color-secondary) !important; /* Jours du mois précédent/suivant */
+            color: var(--text-color-secondary) !important;
+            /* Jours du mois précédent/suivant */
         }
 
         .calendar-day:not(.text-secondary):hover {
@@ -226,30 +248,36 @@
         }
 
         .calendar-day.highlight {
-            background-color: var(--border-color); /* Jours avec des événements */
+            background-color: var(--border-color);
+            /* Jours avec des événements */
             color: var(--text-color-light);
         }
 
         .calendar-day.active {
-            background-color: var(--primary-color) !important; /* Jour actif */
+            background-color: var(--primary-color) !important;
+            /* Jour actif */
             color: var(--text-color-light);
         }
 
         /* Schedule */
         .schedule-item {
             display: flex;
-            align-items: flex-start; /* Alignement en haut pour les horaires */
+            align-items: flex-start;
+            /* Alignement en haut pour les horaires */
         }
 
         .schedule-time {
-            min-width: 80px; /* Largeur fixe pour l'heure */
+            min-width: 80px;
+            /* Largeur fixe pour l'heure */
             text-align: right;
             font-size: 0.85rem;
-            padding-top: 5px; /* Pour aligner avec le contenu de la carte */
+            padding-top: 5px;
+            /* Pour aligner avec le contenu de la carte */
         }
 
         .schedule-content {
-            border-left: 2px solid var(--border-color); /* Ligne verticale */
+            border-left: 2px solid var(--border-color);
+            /* Ligne verticale */
             padding-left: 15px;
             position: relative;
             flex-grow: 1;
@@ -258,17 +286,20 @@
         .schedule-content::before {
             content: '';
             position: absolute;
-            left: -7px; /* Positionne le cercle sur la ligne */
+            left: -7px;
+            /* Positionne le cercle sur la ligne */
             top: 10px;
             width: 12px;
             height: 12px;
-            background-color: var(--border-color); /* Cercle sur la ligne */
+            background-color: var(--border-color);
+            /* Cercle sur la ligne */
             border-radius: 50%;
             z-index: 1;
         }
 
         .schedule-content .schedule-event {
-            margin-bottom: 0.5rem; /* Espace entre les événements */
+            margin-bottom: 0.5rem;
+            /* Espace entre les événements */
         }
 
         .schedule-content .schedule-event.bg-primary {
@@ -278,11 +309,21 @@
 
         /* Animations */
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .course-card, .task-item, .calendar-card, .schedule-event {
+        .course-card,
+        .task-item,
+        .calendar-card,
+        .schedule-event {
             animation: fadeIn 0.5s ease-out;
         }
 
@@ -291,13 +332,16 @@
             #sidebar-wrapper {
                 margin-left: 0;
             }
+
             #page-content-wrapper {
                 min-width: 0;
                 width: 100%;
             }
+
             #wrapper.toggled #sidebar-wrapper {
                 margin-left: 0rem;
             }
+
             /* Hide the toggle button on desktop */
             #sidebarToggle {
                 display: none !important;
@@ -308,6 +352,7 @@
             #wrapper.toggled #sidebar-wrapper {
                 margin-left: 0;
             }
+
             #page-content-wrapper {
                 width: 100%;
             }
@@ -321,13 +366,15 @@
         }
 
         .btn-primary.btn-sm.rounded-circle:hover {
-            background-color: #e04a40 !important; /* Darker shade on hover */
+            background-color: #e04a40 !important;
+            /* Darker shade on hover */
             border-color: #e04a40 !important;
         }
 
         /* Dropdown menu styling */
         .dropdown-menu.bg-dark-secondary {
-            background-color: var(--dark-card-bg) !important; /* Use dark card background for dropdown */
+            background-color: var(--dark-card-bg) !important;
+            /* Use dark card background for dropdown */
             border-color: var(--border-color) !important;
         }
 
@@ -338,7 +385,8 @@
 
         .dropdown-item.text-white:hover,
         .dropdown-item.text-white:focus {
-            background-color: var(--primary-color) !important; /* Highlight on hover */
+            background-color: var(--primary-color) !important;
+            /* Highlight on hover */
             color: var(--text-color-light) !important;
         }
 
@@ -346,132 +394,137 @@
             border-top: 1px solid var(--border-color) !important;
         }
 
-                 :root {
-        --primary-color: #FF0000;
-        --secondary-color: #6c757d;
-        --dark-bg: #1A1A1A;
-        --dark-sidebar-bg: #212121;
-        --dark-card-bg: #2C2C2C;
-        --border-color: #3A3A3A;
-        --text-color-light: #F8F9FA;
-        --text-color-secondary: #B0B0B0;
-        --save-button-bg: #007bff;
-        --save-button-hover: #0056b3;
-        --switch-bg-off: #4F4F4F;
-        --input-group-bg: #3A3A3A;
+        :root {
+            --primary-color: #FF0000;
+            --secondary-color: #6c757d;
+            --dark-bg: #1A1A1A;
+            --dark-sidebar-bg: #212121;
+            --dark-card-bg: #2C2C2C;
+            --border-color: #3A3A3A;
+            --text-color-light: #F8F9FA;
+            --text-color-secondary: #B0B0B0;
+            --save-button-bg: #007bff;
+            --save-button-hover: #0056b3;
+            --switch-bg-off: #4F4F4F;
+            --input-group-bg: #3A3A3A;
         }
 
         body {
-        background-color: var(--dark-bg);
-        color: var(--text-color-light);
+            background-color: var(--dark-bg);
+            color: var(--text-color-light);
         }
 
         .bg-dark,
         .bg-dark-secondary {
-        background-color: var(--dark-sidebar-bg) !important;
+            background-color: var(--dark-sidebar-bg) !important;
         }
 
         .list-group-item {
-        background-color: var(--dark-sidebar-bg);
-        color: var(--text-color-secondary);
+            background-color: var(--dark-sidebar-bg);
+            color: var(--text-color-secondary);
         }
 
         .themes-card {
-        background-color: var(--dark-card-bg);
-        border-color: var(--border-color);
+            background-color: var(--dark-card-bg);
+            border-color: var(--border-color);
         }
 
         /* --- Thème Clair --- */
         body.theme-light {
-        --primary-color: #0d6efd;
-        --secondary-color: #6c757d;
-        --dark-bg: #F0F2F5; /* Fond principal clair */
-         --dark-sidebar-bg: #000; /* Sidebar plus sombre */
-        --dark-card-bg: #FFFFFF; /* Cartes blanches */
-        --border-color: #CED4DA;
-        --text-color-light: #212529; /* Texte sombre */
-        --text-color-secondary: #6c757d;
-        --save-button-bg: #0d6efd;
-        --save-button-hover: #0a58ca;
-        --switch-bg-off: #ADB5BD;
-        --input-group-bg: #E9ECEF;
+            --primary-color: #0d6efd;
+            --secondary-color: #6c757d;
+            --dark-bg: #F0F2F5;
+            /* Fond principal clair */
+            --dark-sidebar-bg: #000;
+            /* Sidebar plus sombre */
+            --dark-card-bg: #FFFFFF;
+            /* Cartes blanches */
+            --border-color: #CED4DA;
+            --text-color-light: #212529;
+            /* Texte sombre */
+            --text-color-secondary: #6c757d;
+            --save-button-bg: #0d6efd;
+            --save-button-hover: #0a58ca;
+            --switch-bg-off: #ADB5BD;
+            --input-group-bg: #E9ECEF;
         }
 
         body.theme-light .list-group-item {
-        background-color: var(--dark-sidebar-bg);
-        color: var(--text-color-light);
+            background-color: var(--dark-sidebar-bg);
+            color: var(--text-color-light);
         }
 
         body.theme-light .list-group-item:hover {
-        background-color: #DEE2E6;
-        color: var(--primary-color);
+            background-color: #DEE2E6;
+            color: var(--primary-color);
         }
 
         body.theme-light .list-group-item.active {
-        background-color: var(--primary-color) !important;
-        color: #FFFFFF !important;
+            background-color: var(--primary-color) !important;
+            color: #FFFFFF !important;
         }
 
         /* --- Thème Sepia --- */
         body.theme-sepia {
-        --primary-color: #8B4513;
-        --secondary-color: #708090;
-        --dark-bg: #F4EEDD;
-        --dark-sidebar-bg: #A39686;
-        --dark-card-bg: #E8E0D2;
-        --border-color: #CDB7A3;
-        --text-color-light: #5C4C42;
-        --text-color-secondary: #708090;
-        --save-button-bg: #8B4513;
-        --save-button-hover: #65300F;
-        --switch-bg-off: #BDB7A3;
-        --input-group-bg: #CDB7A3;
+            --primary-color: #8B4513;
+            --secondary-color: #708090;
+            --dark-bg: #F4EEDD;
+            --dark-sidebar-bg: #A39686;
+            --dark-card-bg: #E8E0D2;
+            --border-color: #CDB7A3;
+            --text-color-light: #5C4C42;
+            --text-color-secondary: #708090;
+            --save-button-bg: #8B4513;
+            --save-button-hover: #65300F;
+            --switch-bg-off: #BDB7A3;
+            --input-group-bg: #CDB7A3;
         }
 
         /* --- Thème Contrast (Haut Contraste) --- */
         body.theme-contrast {
-        --primary-color: #00FF00;
-        --secondary-color: #FFFFFF;
-        --dark-bg: #000000;
-        --dark-sidebar-bg: #111111;
-        --dark-card-bg: #1c1c1c;
-        --border-color: #00FF00;
-        --text-color-light: #FFFFFF;
-        --text-color-secondary: #00FF00;
-        --save-button-bg: #00FF00;
-        --save-button-hover: #00CC00;
-        --switch-bg-off: #FFFFFF;
-        --input-group-bg: #222222;
+            --primary-color: #00FF00;
+            --secondary-color: #FFFFFF;
+            --dark-bg: #000000;
+            --dark-sidebar-bg: #111111;
+            --dark-card-bg: #1c1c1c;
+            --border-color: #00FF00;
+            --text-color-light: #FFFFFF;
+            --text-color-secondary: #00FF00;
+            --save-button-bg: #00FF00;
+            --save-button-hover: #00CC00;
+            --switch-bg-off: #FFFFFF;
+            --input-group-bg: #222222;
         }
 
         /* --- Thème Blue (Bleu) --- */
         body.theme-blue {
-        --primary-color: #3498db;
-        --secondary-color: #90A4AE;
-        --dark-bg: #1e2c4a;
-        --dark-sidebar-bg: #1a2a4b;
-        --dark-card-bg: #2c426b;
-        --border-color: #3e5c91;
-        --text-color-light: #e8eaf6;
-        --text-color-secondary: #90a4ae;
-        --save-button-bg: #3498db;
-        --save-button-hover: #2980b9;
-        --switch-bg-off: #3e5c91;
-        --input-group-bg: #2c426b;
+            --primary-color: #3498db;
+            --secondary-color: #90A4AE;
+            --dark-bg: #1e2c4a;
+            --dark-sidebar-bg: #1a2a4b;
+            --dark-card-bg: #2c426b;
+            --border-color: #3e5c91;
+            --text-color-light: #e8eaf6;
+            --text-color-secondary: #90a4ae;
+            --save-button-bg: #3498db;
+            --save-button-hover: #2980b9;
+            --switch-bg-off: #3e5c91;
+            --input-group-bg: #2c426b;
         }
-
-
     </style>
 </head>
+
 <body class="theme-{{ $userTheme ?? 'dark' }}">
     <div class="d-flex" id="wrapper">
         <div class="bg-dark sidebar" id="sidebar-wrapper">
             <div class="sidebar-heading text-white p-3 border-bottom border-secondary d-flex align-items-center">
-                <img src="{{ asset('dossiers/image/Impact-Web-360-Logo1.png') }}" alt="Impact Web Logo" style="max-height: 140px;">
+                <img src="{{ asset('dossiers/image/Impact-Web-360-Logo1.png') }}" alt="Impact Web Logo"
+                    style="max-height: 140px;">
             </div>
             <div class="list-group list-group-flush">
                 <div class="sidebar-section-title text-secondary px-3 pt-3 pb-1">GENERAL</div>
-                <a href="{{ route('dashboard') }}" class="list-group-item list-group-item-action bg-dark text-white active">
+                <a href="{{ route('dashboard') }}"
+                    class="list-group-item list-group-item-action bg-dark text-white active">
                     <i class="fas fa-home me-2"></i> Tableau de bord
                 </a>
                 <a href="{{ route('calendrier') }}" class="list-group-item list-group-item-action bg-dark text-white">
@@ -520,11 +573,13 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ms-auto mt-2 mt-lg-0 align-items-center">
                             <li class="nav-item me-3">
-                                <a class="nav-link text-white" href="{{ route('notifications') }}"><i class="fas fa-bell"></i></a>
+                                <a class="nav-link text-white" href="{{ route('notifications') }}"><i
+                                        class="fas fa-bell"></i></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-white d-flex align-items-center" href="{{ route('parametres') }}">
-                                    <img src="{{ Auth::user()->image ? asset('storage/' . Auth::user()->image) : asset('logo.png') }}" alt="Photo de profil" style="max-height: 50px;" class="rounded-circle profile-img-preview me-4">
+                                <a class="nav-link text-white d-flex align-items-center " href="{{ route('parametres') }}">
+                                    <img src="{{ asset(Auth::user()->image && Auth::user()->image !== 'photos/default.svg' ? 'storage/' . Auth::user()->image . '?v=' . time() : 'dossiers/image/default.png') }}"
+                                     alt="Photo de profil" class="rounded-circle" style="max-height: 40px; margin-right: 20px;">
                                 </a>
                             </li>
                         </ul>
@@ -544,12 +599,15 @@
                                 <div class="card bg-dark-card border-secondary text-white shadow-sm h-100 course-card">
                                     <div class="card-body">
                                         <div class="d-flex align-items-center mb-3">
-                                            <img src="logo.png" alt="Impact Web Logo" style="max-height: 100px;" class="rounded-circle me-2">
+                                            <img src="logo.png" alt="Impact Web Logo" style="max-height: 100px;"
+                                                class="rounded-circle me-2">
                                             <h5 class="card-title mb-0">Envato Mastery</h5>
                                         </div>
-                                        <p class="card-text text-secondary mb-2">Créez un revenu passif à partir de...</p>
+                                        <p class="card-text text-secondary mb-2">Créez un revenu passif à partir de...
+                                        </p>
                                         <div class="progress bg-secondary mb-2" style="height: 5px;">
-                                            <div class="progress-bar bg-success" role="progressbar" style="width: 70%;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+                                            <div class="progress-bar bg-success" role="progressbar" style="width: 70%;"
+                                                aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
                                         <small class="text-secondary">3,2 heures prises / 10 heures</small>
                                     </div>
@@ -559,12 +617,15 @@
                                 <div class="card bg-dark-card border-secondary text-white shadow-sm h-100 course-card">
                                     <div class="card-body">
                                         <div class="d-flex align-items-center mb-3">
-                                            <img src="logo.png" alt="Impact Web Logo" style="max-height: 100px;" class="rounded-circle me-2">
+                                            <img src="logo.png" alt="Impact Web Logo" style="max-height: 100px;"
+                                                class="rounded-circle me-2">
                                             <h5 class="card-title mb-0">Google</h5>
                                         </div>
-                                        <p class="card-text text-secondary mb-2">Maîtriser Git et l'application Vercel Devenez Pro...</p>
+                                        <p class="card-text text-secondary mb-2">Maîtriser Git et l'application Vercel
+                                            Devenez Pro...</p>
                                         <div class="progress bg-secondary mb-2" style="height: 5px;">
-                                            <div class="progress-bar bg-info" role="progressbar" style="width: 40%;" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+                                            <div class="progress-bar bg-info" role="progressbar" style="width: 40%;"
+                                                aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
                                         <small class="text-secondary">2,5 heures prises / 6 heures</small>
                                     </div>
@@ -580,16 +641,20 @@
                             <div class="card bg-dark-card border-secondary text-white shadow-sm mb-3 task-item">
                                 <div class="card-body d-flex align-items-center justify-content-between">
                                     <div class="d-flex align-items-center">
-                                        <div class="task-icon me-3 bg-secondary rounded-circle d-flex align-items-center justify-content-center">
+                                        <div
+                                            class="task-icon me-3 bg-secondary rounded-circle d-flex align-items-center justify-content-center">
                                             <i class="fas fa-book-open text-white"></i>
                                         </div>
                                         <div>
                                             <p class="mb-0 fw-bold">Apprendre une nouvelle partie</p>
-                                            <small class="text-secondary">Envato Mastery <i class="fas fa-circle ms-1 me-1 text-xs"></i> Mr. Reynold <i class="fas fa-circle ms-1 me-1 text-xs"></i> Théorie</small>
+                                            <small class="text-secondary">Envato Mastery <i
+                                                    class="fas fa-circle ms-1 me-1 text-xs"></i> Mr. Reynold <i
+                                                    class="fas fa-circle ms-1 me-1 text-xs"></i> Théorie</small>
                                         </div>
                                     </div>
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" role="switch" id="task1" checked>
+                                        <input class="form-check-input" type="checkbox" role="switch" id="task1"
+                                            checked>
                                         <label class="form-check-label text-success ms-2" for="task1">Fait</label>
                                     </div>
                                 </div>
@@ -597,16 +662,20 @@
                             <div class="card bg-dark-card border-secondary text-white shadow-sm mb-3 task-item">
                                 <div class="card-body d-flex align-items-center justify-content-between">
                                     <div class="d-flex align-items-center">
-                                        <div class="task-icon me-3 bg-secondary rounded-circle d-flex align-items-center justify-content-center">
+                                        <div
+                                            class="task-icon me-3 bg-secondary rounded-circle d-flex align-items-center justify-content-center">
                                             <i class="fas fa-book-open text-white"></i>
                                         </div>
                                         <div>
                                             <p class="mb-0 fw-bold">Apprendre une nouvelle partie</p>
-                                            <small class="text-secondary">Mastering Figma <i class="fas fa-circle ms-1 me-1 text-xs"></i> Ms. Dyana <i class="fas fa-circle ms-1 me-1 text-xs"></i> Théorie</small>
+                                            <small class="text-secondary">Mastering Figma <i
+                                                    class="fas fa-circle ms-1 me-1 text-xs"></i> Ms. Dyana <i
+                                                    class="fas fa-circle ms-1 me-1 text-xs"></i> Théorie</small>
                                         </div>
                                     </div>
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" role="switch" id="task2" checked>
+                                        <input class="form-check-input" type="checkbox" role="switch" id="task2"
+                                            checked>
                                         <label class="form-check-label text-success ms-2" for="task2">Fait</label>
                                     </div>
                                 </div>
@@ -614,12 +683,15 @@
                             <div class="card bg-dark-card border-secondary text-white shadow-sm mb-3 task-item">
                                 <div class="card-body d-flex align-items-center justify-content-between">
                                     <div class="d-flex align-items-center">
-                                        <div class="task-icon me-3 bg-secondary rounded-circle d-flex align-items-center justify-content-center">
+                                        <div
+                                            class="task-icon me-3 bg-secondary rounded-circle d-flex align-items-center justify-content-center">
                                             <i class="fas fa-book-open text-white"></i>
                                         </div>
                                         <div>
                                             <p class="mb-0 fw-bold">Apprendre une nouvelle partie</p>
-                                            <small class="text-secondary">Mastering Git & Vercel <i class="fas fa-circle ms-1 me-1 text-xs"></i> Ms. Gynda <i class="fas fa-circle ms-1 me-1 text-xs"></i> Théorie</small>
+                                            <small class="text-secondary">Mastering Git & Vercel <i
+                                                    class="fas fa-circle ms-1 me-1 text-xs"></i> Ms. Gynda <i
+                                                    class="fas fa-circle ms-1 me-1 text-xs"></i> Théorie</small>
                                         </div>
                                     </div>
                                     <div class="form-check form-switch">
@@ -631,12 +703,15 @@
                             <div class="card bg-dark-card border-secondary text-white shadow-sm mb-3 task-item">
                                 <div class="card-body d-flex align-items-center justify-content-between">
                                     <div class="d-flex align-items-center">
-                                        <div class="task-icon me-3 bg-secondary rounded-circle d-flex align-items-center justify-content-center">
+                                        <div
+                                            class="task-icon me-3 bg-secondary rounded-circle d-flex align-items-center justify-content-center">
                                             <i class="fas fa-book-open text-white"></i>
                                         </div>
                                         <div>
                                             <p class="mb-0 fw-bold">Apprendre une nouvelle partie</p>
-                                            <small class="text-secondary">Design System Basic <i class="fas fa-circle ms-1 me-1 text-xs"></i> Ms. Nina <i class="fas fa-circle ms-1 me-1 text-xs"></i> Théorie</small>
+                                            <small class="text-secondary">Design System Basic <i
+                                                    class="fas fa-circle ms-1 me-1 text-xs"></i> Ms. Nina <i
+                                                    class="fas fa-circle ms-1 me-1 text-xs"></i> Théorie</small>
                                         </div>
                                     </div>
                                     <div class="form-check form-switch">
@@ -652,9 +727,11 @@
                         <div class="card bg-dark-card border-secondary text-white shadow-sm mb-4 calendar-card">
                             <div class="card-body">
                                 <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <a href="#" class="text-white text-decoration-none"><i class="fas fa-chevron-left"></i></a>
+                                    <a href="#" class="text-white text-decoration-none"><i
+                                            class="fas fa-chevron-left"></i></a>
                                     <h6 class="mb-0 fw-bold">Novembre 2023</h6>
-                                    <a href="#" class="text-white text-decoration-none"><i class="fas fa-chevron-right"></i></a>
+                                    <a href="#" class="text-white text-decoration-none"><i
+                                            class="fas fa-chevron-right"></i></a>
                                 </div>
                                 <div class="calendar-grid text-center">
                                     <div class="calendar-day-name text-secondary">Mo</div>
@@ -685,7 +762,9 @@
 
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <h4 class="text-white mb-0">Mon emploi du temps</h4>
-                            <button class="btn btn-primary btn-sm rounded-circle d-flex align-items-center justify-content-center" style="width: 30px; height: 30px;"><i class="fas fa-plus"></i></button>
+                            <button
+                                class="btn btn-primary btn-sm rounded-circle d-flex align-items-center justify-content-center"
+                                style="width: 30px; height: 30px;"><i class="fas fa-plus"></i></button>
                         </div>
                         <div class="schedule-list">
                             <div class="schedule-item mb-3">
@@ -693,7 +772,7 @@
                                 <div class="schedule-content flex-grow-1">
                                     <div class="card bg-dark-card border-secondary text-white shadow-sm schedule-event">
                                         <div class="card-body py-2 px-3">
-                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -723,7 +802,7 @@
                                 <div class="schedule-content flex-grow-1">
                                     <div class="card bg-dark-card border-secondary text-white shadow-sm schedule-event">
                                         <div class="card-body py-2 px-3">
-                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -732,7 +811,7 @@
                                 <div class="schedule-content flex-grow-1">
                                     <div class="card bg-dark-card border-secondary text-white shadow-sm schedule-event">
                                         <div class="card-body py-2 px-3">
-                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -741,7 +820,7 @@
                                 <div class="schedule-content flex-grow-1">
                                     <div class="card bg-dark-card border-secondary text-white shadow-sm schedule-event">
                                         <div class="card-body py-2 px-3">
-                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -750,9 +829,11 @@
                 </div>
             </div>
         </div>
-        </div>
+    </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
     <script>
         var el = document.getElementById("wrapper");
         var toggleButton = document.getElementById("sidebarToggle");
@@ -762,4 +843,5 @@
         };
     </script>
 </body>
+
 </html>

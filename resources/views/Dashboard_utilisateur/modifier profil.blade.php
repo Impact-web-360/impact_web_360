@@ -5,9 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Impact Web - Paramètres</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <style>
         /* Variables CSS pour faciliter la gestion des couleurs et espacements */
         :root {
@@ -549,121 +553,123 @@
             }
         }
 
-                 :root {
-        --primary-color: #FF0000;
-        --secondary-color: #6c757d;
-        --dark-bg: #1A1A1A;
-        --dark-sidebar-bg: #212121;
-        --dark-card-bg: #2C2C2C;
-        --border-color: #3A3A3A;
-        --text-color-light: #F8F9FA;
-        --text-color-secondary: #B0B0B0;
-        --save-button-bg: #007bff;
-        --save-button-hover: #0056b3;
-        --switch-bg-off: #4F4F4F;
-        --input-group-bg: #3A3A3A;
+        :root {
+            --primary-color: #FF0000;
+            --secondary-color: #6c757d;
+            --dark-bg: #1A1A1A;
+            --dark-sidebar-bg: #212121;
+            --dark-card-bg: #2C2C2C;
+            --border-color: #3A3A3A;
+            --text-color-light: #F8F9FA;
+            --text-color-secondary: #B0B0B0;
+            --save-button-bg: #007bff;
+            --save-button-hover: #0056b3;
+            --switch-bg-off: #4F4F4F;
+            --input-group-bg: #3A3A3A;
         }
 
         body {
-        background-color: var(--dark-bg);
-        color: var(--text-color-light);
+            background-color: var(--dark-bg);
+            color: var(--text-color-light);
         }
 
         .bg-dark,
         .bg-dark-secondary {
-        background-color: var(--dark-sidebar-bg) !important;
+            background-color: var(--dark-sidebar-bg) !important;
         }
 
         .list-group-item {
-        background-color: var(--dark-sidebar-bg);
-        color: var(--text-color-secondary);
+            background-color: var(--dark-sidebar-bg);
+            color: var(--text-color-secondary);
         }
 
         .themes-card {
-        background-color: var(--dark-card-bg);
-        border-color: var(--border-color);
+            background-color: var(--dark-card-bg);
+            border-color: var(--border-color);
         }
 
         /* --- Thème Clair --- */
         body.theme-light {
-        --primary-color: #0d6efd;
-        --secondary-color: #6c757d;
-        --dark-bg: #F0F2F5; /* Fond principal clair */
-        --dark-sidebar-bg: #000; /* Sidebar plus sombre */
-        --dark-card-bg: #FFFFFF; /* Cartes blanches */
-        --border-color: #CED4DA;
-        --text-color-light: #212529; /* Texte sombre */
-        --text-color-secondary: #6c757d;
-        --save-button-bg: #0d6efd;
-        --save-button-hover: #0a58ca;
-        --switch-bg-off: #ADB5BD;
-        --input-group-bg: #E9ECEF;
+            --primary-color: #0d6efd;
+            --secondary-color: #6c757d;
+            --dark-bg: #F0F2F5;
+            /* Fond principal clair */
+            --dark-sidebar-bg: #000;
+            /* Sidebar plus sombre */
+            --dark-card-bg: #FFFFFF;
+            /* Cartes blanches */
+            --border-color: #CED4DA;
+            --text-color-light: #212529;
+            /* Texte sombre */
+            --text-color-secondary: #6c757d;
+            --save-button-bg: #0d6efd;
+            --save-button-hover: #0a58ca;
+            --switch-bg-off: #ADB5BD;
+            --input-group-bg: #E9ECEF;
         }
 
         body.theme-light .list-group-item {
-        background-color: var(--dark-sidebar-bg);
-        color: var(--text-color-light);
+            background-color: var(--dark-sidebar-bg);
+            color: var(--text-color-light);
         }
 
         body.theme-light .list-group-item:hover {
-        background-color: #DEE2E6;
-        color: var(--primary-color);
+            background-color: #DEE2E6;
+            color: var(--primary-color);
         }
 
         body.theme-light .list-group-item.active {
-        background-color: var(--primary-color) !important;
-        color: #FFFFFF !important;
+            background-color: var(--primary-color) !important;
+            color: #FFFFFF !important;
         }
 
         /* --- Thème Sepia --- */
         body.theme-sepia {
-        --primary-color: #8B4513;
-        --secondary-color: #708090;
-        --dark-bg: #F4EEDD;
-        --dark-sidebar-bg: #A39686;
-        --dark-card-bg: #E8E0D2;
-        --border-color: #CDB7A3;
-        --text-color-light: #5C4C42;
-        --text-color-secondary: #708090;
-        --save-button-bg: #8B4513;
-        --save-button-hover: #65300F;
-        --switch-bg-off: #BDB7A3;
-        --input-group-bg: #CDB7A3;
+            --primary-color: #8B4513;
+            --secondary-color: #708090;
+            --dark-bg: #F4EEDD;
+            --dark-sidebar-bg: #A39686;
+            --dark-card-bg: #E8E0D2;
+            --border-color: #CDB7A3;
+            --text-color-light: #5C4C42;
+            --text-color-secondary: #708090;
+            --save-button-bg: #8B4513;
+            --save-button-hover: #65300F;
+            --switch-bg-off: #BDB7A3;
+            --input-group-bg: #CDB7A3;
         }
 
         /* --- Thème Contrast (Haut Contraste) --- */
         body.theme-contrast {
-        --primary-color: #00FF00;
-        --secondary-color: #FFFFFF;
-        --dark-bg: #000000;
-        --dark-sidebar-bg: #111111;
-        --dark-card-bg: #1c1c1c;
-        --border-color: #00FF00;
-        --text-color-light: #FFFFFF;
-        --text-color-secondary: #00FF00;
-        --save-button-bg: #00FF00;
-        --save-button-hover: #00CC00;
-        --switch-bg-off: #FFFFFF;
-        --input-group-bg: #222222;
+            --primary-color: #00FF00;
+            --secondary-color: #FFFFFF;
+            --dark-bg: #000000;
+            --dark-sidebar-bg: #111111;
+            --dark-card-bg: #1c1c1c;
+            --border-color: #00FF00;
+            --text-color-light: #FFFFFF;
+            --text-color-secondary: #00FF00;
+            --save-button-bg: #00FF00;
+            --save-button-hover: #00CC00;
+            --switch-bg-off: #FFFFFF;
+            --input-group-bg: #222222;
         }
 
         /* --- Thème Blue (Bleu) --- */
         body.theme-blue {
-        --primary-color: #3498db;
-        --secondary-color: #90A4AE;
-        --dark-bg: #1e2c4a;
-        --dark-sidebar-bg: #1a2a4b;
-        --dark-card-bg: #2c426b;
-        --border-color: #3e5c91;
-        --text-color-light: #e8eaf6;
-        --text-color-secondary: #90a4ae;
-        --save-button-bg: #3498db;
-        --save-button-hover: #2980b9;
-        --switch-bg-off: #3e5c91;
-        --input-group-bg: #2c426b;
+            --primary-color: #3498db;
+            --secondary-color: #90A4AE;
+            --dark-bg: #1e2c4a;
+            --dark-sidebar-bg: #1a2a4b;
+            --dark-card-bg: #2c426b;
+            --border-color: #3e5c91;
+            --text-color-light: #e8eaf6;
+            --text-color-secondary: #90a4ae;
+            --save-button-bg: #3498db;
+            --save-button-hover: #2980b9;
+            --switch-bg-off: #3e5c91;
+            --input-group-bg: #2c426b;
         }
-
-
     </style>
 </head>
 
@@ -671,7 +677,8 @@
     <div class="d-flex" id="wrapper">
         <div class="bg-dark sidebar" id="sidebar-wrapper">
             <div class="sidebar-heading text-white p-3 border-bottom border-secondary d-flex align-items-center">
-                <img src="{{ asset('dossiers/image/Impact-Web-360-Logo1.png') }}" alt="Impact Web Logo" style="max-height: 140px;">
+                <img src="{{ asset('dossiers/image/Impact-Web-360-Logo1.png') }}" alt="Impact Web Logo"
+                    style="max-height: 140px;">
             </div>
             <div class="list-group list-group-flush">
                 <div class="sidebar-section-title text-secondary px-3 pt-3 pb-1">GENERAL</div>
@@ -697,7 +704,8 @@
                 <a href="{{ route('soutien') }}" class="list-group-item list-group-item-action bg-dark text-white">
                     <i class="fas fa-question-circle me-2"></i> Soutien
                 </a>
-                <a href="{{ route('parametres') }}" class="list-group-item list-group-item-action bg-dark text-white active">
+                <a href="{{ route('parametres') }}"
+                    class="list-group-item list-group-item-action bg-dark text-white active">
                     <i class="fas fa-cog me-2"></i> Paramètre
                 </a>
 
@@ -720,16 +728,19 @@
         <div id="page-content-wrapper">
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark-secondary border-bottom border-secondary py-3">
                 <div class="container-fluid">
-                    <button class="btn btn-danger d-lg-none" id="sidebarToggle" aria-label="Toggle sidebar"><i class="fas fa-bars"></i></button>
+                    <button class="btn btn-danger d-lg-none" id="sidebarToggle" aria-label="Toggle sidebar"><i
+                            class="fas fa-bars"></i></button>
                     <h2 class="text-white mb-0 ms-3">Paramètres</h2>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ms-auto mt-2 mt-lg-0 align-items-center">
                             <li class="nav-item me-3">
-                                <a class="nav-link text-white" href="{{ route('notifications') }}" aria-label="Notifications"><i class="fas fa-bell"></i></a>
+                                <a class="nav-link text-white" href="{{ route('notifications') }}"
+                                    aria-label="Notifications"><i class="fas fa-bell"></i></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-white d-flex align-items-center" href="{{ route('parametres') }}">
-                                    <img src="{{ Auth::user()->image ? asset('storage/' . Auth::user()->image) : asset('logo.png') }}" alt="Photo de profil" style="max-height: 50px;" class="rounded-circle profile-img-preview me-4">
+                                <a class="nav-link text-white d-flex align-items-center " href="{{ route('parametres') }}">
+                                    <img src="{{ asset(Auth::user()->image && Auth::user()->image !== 'photos/default.svg' ? 'storage/' . Auth::user()->image . '?v=' . time() : 'dossiers/image/default.png') }}"
+                                     alt="Photo de profil" class="rounded-circle" style="max-height: 40px;">
                                 </a>
                             </li>
                         </ul>
@@ -742,22 +753,30 @@
                     <div class="col-md-4 col-lg-3 settings-menu-col animation-slide-in-up">
                         <ul class="list-unstyled settings-menu">
                             <li class="settings-menu-title">Profil de l'entreprise</li>
-                            <li><a href="{{ route('parametres') }}"><i class="fas fa-cog me-2"></i> Général général</a></li>
-                            <li><a href="{{ route('modifier profil') }}" class="active"><i class="fas fa-user-edit me-2"></i> Modifier le profil</a></li>
-                            <li><a href="{{ route('changer mot de passe') }}"><i class="fas fa-key me-2"></i> Changer le mot de passe</a></li>
-                            <li><a href="{{ route('notification') }}"><i class="fas fa-bell me-2"></i> Notification</a></li>
+                            <li><a href="{{ route('parametres') }}"><i class="fas fa-cog me-2"></i> Général général</a>
+                            </li>
+                            <li><a href="{{ route('modifier profil') }}" class="active"><i
+                                        class="fas fa-user-edit me-2"></i> Modifier le profil</a></li>
+                            <li><a href="{{ route('changer mot de passe') }}"><i class="fas fa-key me-2"></i> Changer le
+                                    mot de passe</a></li>
+                            <li><a href="{{ route('notification') }}"><i class="fas fa-bell me-2"></i> Notification</a>
+                            </li>
 
                             <li class="settings-menu-title mt-4">préférence</li>
-                            <li><a href="{{ route('langues') }}"><i class="fas fa-language me-2"></i> Langue de travail</a></li>
-                            <li><a href="{{ route('themes') }}" ><i class="fas fa-palette me-2"></i> Thèmes abordés</a></li>
+                            <li><a href="{{ route('langues') }}"><i class="fas fa-language me-2"></i> Langue de
+                                    travail</a></li>
+                            <li><a href="{{ route('themes') }}"><i class="fas fa-palette me-2"></i> Thèmes abordés</a>
+                            </li>
 
                             <li class="settings-menu-title mt-4">applications</li>
-                            <li><a href="{{ route('media') }}"><i class="fas fa-share-alt me-2"></i> Médias sociaux</a></li>
+                            <li><a href="{{ route('media') }}"><i class="fas fa-share-alt me-2"></i> Médias sociaux</a>
+                            </li>
 
                             <li class="mt-auto logout-item">
                                 <form action="{{ route('logout') }}" method="POST" id="logout-form">
                                     @csrf
-                                    <a href="Déconnexion" class="text-danger" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    <a href="Déconnexion" class="text-danger"
+                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                         <i class="fas fa-sign-out-alt me-2"></i> Se déconnecter
                                     </a>
                                 </form>
@@ -765,12 +784,15 @@
                         </ul>
                     </div>
 
-                    <div class="col-md-8 col-lg-9 profile-settings-form animation-fade-in" style="animation-delay: 0.2s;">
+                    <div class="col-md-8 col-lg-9 profile-settings-form animation-fade-in"
+                        style="animation-delay: 0.2s;">
                         <h4 class="form-section-title mb-4">Modifier le profil</h4>
                         @if(session('success'))
-                        <div class="alert alert-success">
-                            {{ session('success') }}
-                        </div>
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                {{ session('success') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Fermer"></button>
+                            </div>
                         @endif
                         <form method="POST" action="{{ route('profile.update') }}" enctype="multipart/form-data">
                             @csrf
@@ -781,15 +803,19 @@
                                     <h5 class="card-title">Profil Public</h5>
                                     <p class="card-subtitle mb-3 text-muted">Ceci sera affiché sur votre profil</p>
                                     <div class="row mb-3 align-items-center">
-                                        <label for="name" class="col-sm-3 col-form-label form-label-custom">Nom complet</label>
+                                        <label for="name" class="col-sm-3 col-form-label form-label-custom">Nom
+                                            complet</label>
                                         <div class="col-sm-9">
-                                            <input type="text" class="form-control form-control-custom" id="name" name="nom" value="{{ old('nom', Auth::user()->nom) }}">
+                                            <input type="text" class="form-control form-control-custom" id="name"
+                                                name="nom" value="{{ old('nom', Auth::user()->nom) }}">
                                         </div>
                                     </div>
                                     <div class="row mb-3 align-items-center">
-                                        <label for="poste" class="col-sm-3 col-form-label form-label-custom">Poste</label>
+                                        <label for="poste"
+                                            class="col-sm-3 col-form-label form-label-custom">Poste</label>
                                         <div class="col-sm-9">
-                                            <input type="text" class="form-control form-control-custom" id="poste" name="poste" value="{{ old('poste', Auth::user()->poste) }}">
+                                            <input type="text" class="form-control form-control-custom" id="poste"
+                                                name="poste" value="{{ old('poste', Auth::user()->poste) }}">
                                         </div>
                                     </div>
                                 </div>
@@ -798,16 +824,20 @@
                             <div class="card profile-card mb-4">
                                 <div class="card-body">
                                     <h5 class="card-title">Photo de profil</h5>
-                                    <p class="card-subtitle mb-3 text-muted">Choisissez votre meilleure photo qui vous représente</p>
+                                    <p class="card-subtitle mb-3 text-muted">Choisissez votre meilleure photo qui vous
+                                        représente</p>
                                     <div class="d-flex align-items-center profile-photo-upload">
-                                        <img src="{{ Auth::user()->image ? asset('storage/' . Auth::user()->image) : asset('logo.png') }}" alt="Photo de profil" style="max-height: 100px; max-width: 100px;" class="rounded-circle profile-img-preview me-4">
+                                        <img src="{{ asset(Auth::user()->image && Auth::user()->image !== 'photos/default.svg' ? 'storage/' . Auth::user()->image . '?v=' . time() : 'dossiers/image/default.png') }}"
+                                            alt="Photo de profil" style="max-height: 100px; max-width: 100px;"
+                                            class="rounded-circle profile-img-preview me-4">
                                         <div class="upload-area text-center py-3 px-4">
                                             <label for="image" style="cursor: pointer;">
                                                 <i class="fas fa-upload upload-icon mb-2"></i>
                                                 <p class="upload-text">Cliquez pour télécharger ou glisser-déposer</p>
                                                 <p class="upload-info">SVG, PNG, JPG ou GIF (max 800x600px)</p>
                                             </label>
-                                            <input type="file" name="image" id="image" accept=".jpg,.jpeg,.png,.gif,.svg" class="form-control d-none">
+                                            <input type="file" name="image" id="image"
+                                                accept=".jpg,.jpeg,.png,.gif,.svg" class="form-control d-none">
                                         </div>
                                     </div>
                                 </div>
@@ -816,29 +846,55 @@
                             <div class="card profile-card mb-4">
                                 <div class="card-body">
                                     <h5 class="card-title">Profil Social</h5>
-                                    <p class="card-subtitle mb-3 text-muted">Cela sera également affiché sur votre profil</p>
+                                    <p class="card-subtitle mb-3 text-muted">Cela sera également affiché sur votre
+                                        profil</p>
                                     <div class="row mb-3 align-items-center">
-                                        <label for="tiktok" class="col-sm-3 col-form-label form-label-custom">Tiktok</label>
+                                        <label for="tiktok"
+                                            class="col-sm-3 col-form-label form-label-custom">Tiktok</label>
                                         <div class="col-sm-9">
-                                            <input type="text" class="form-control form-control-custom" id="tiktok" name="tiktok" value="{{ old('tiktok', Auth::user()->tiktok) }}">
+                                            <input type="text" class="form-control form-control-custom" id="tiktok"
+                                                name="tiktok" value="{{ old('tiktok', Auth::user()->tiktok) }}">
                                         </div>
                                     </div>
                                     <div class="row mb-3 align-items-center">
-                                        <label for="instagram" class="col-sm-3 col-form-label form-label-custom">Instagram</label>
+                                        <label for="instagram"
+                                            class="col-sm-3 col-form-label form-label-custom">Instagram</label>
                                         <div class="col-sm-9">
-                                            <input type="text" class="form-control form-control-custom" id="instagram" name="instagram" value="{{ old('instagram', Auth::user()->instagram) }}">
+                                            <input type="text" class="form-control form-control-custom" id="instagram"
+                                                name="instagram"
+                                                value="{{ old('instagram', Auth::user()->instagram) }}">
                                         </div>
                                     </div>
                                     <div class="row mb-3 align-items-center">
-                                        <label for="linkedin" class="col-sm-3 col-form-label form-label-custom">LinkedIn</label>
+                                        <label for="whatsapp"
+                                            class="col-sm-3 col-form-label form-label-custom">Whatsapp</label>
                                         <div class="col-sm-9">
-                                            <input type="text" class="form-control form-control-custom" id="linkedin" name="linkedin" value="{{ old('linkedin', Auth::user()->linkedin) }}">
+                                            <input type="text" class="form-control form-control-custom" id="whatsapp"
+                                                name="whatsapp" value="{{ old('whatsapp', Auth::user()->whatsapp) }}">
                                         </div>
                                     </div>
                                     <div class="row mb-3 align-items-center">
-                                        <label for="facebook" class="col-sm-3 col-form-label form-label-custom">Facebook</label>
+                                        <label for="youtube"
+                                            class="col-sm-3 col-form-label form-label-custom">YouTube</label>
                                         <div class="col-sm-9">
-                                            <input type="text" class="form-control form-control-custom" id="facebook" name="facebook" value="{{ old('facebook', Auth::user()->facebook) }}">
+                                            <input type="text" class="form-control form-control-custom" id="youtube"
+                                                name="youtube" value="{{ old('youtube', Auth::user()->youtube) }}">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3 align-items-center">
+                                        <label for="linkedin"
+                                            class="col-sm-3 col-form-label form-label-custom">LinkedIn</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control form-control-custom" id="linkedin"
+                                                name="linkedin" value="{{ old('linkedin', Auth::user()->linkedin) }}">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3 align-items-center">
+                                        <label for="facebook"
+                                            class="col-sm-3 col-form-label form-label-custom">Facebook</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control form-control-custom" id="facebook"
+                                                name="facebook" value="{{ old('facebook', Auth::user()->facebook) }}">
                                         </div>
                                     </div>
                                 </div>
@@ -854,13 +910,15 @@
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
     <script>
         // Sidebar Toggle Script
         var el = document.getElementById("wrapper");
         var toggleButton = document.getElementById("sidebarToggle");
 
-        toggleButton.onclick = function() {
+        toggleButton.onclick = function () {
             el.classList.toggle("toggled");
         };
     </script>

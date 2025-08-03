@@ -15,6 +15,7 @@ class emploie extends Model
         'localisation',
         'promoteur',
         'lien',
-        
+        'type',
+        'categorie',
     ];
 }

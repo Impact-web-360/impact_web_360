@@ -20,6 +20,18 @@ use App\Http\Requests\FormationRequest;
 use App\Http\Controllers\PaymentController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use App\Http\Controllers\ThemeController;
+use App\Http\Controllers\SupportController;
+use App\Http\Controllers\CoursController;
+use App\Http\Controllers\CalendrierController;
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\MediaController;
+use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\EmploieController;
+
+
+
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -68,6 +80,9 @@ Route::post('/parametres/update', [ParametresController::class, 'update'])->name
 Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update')->middleware('auth');
 Route::put('/password/update', [ProfileController::class, 'updatePassword'])->name('password.update')->middleware('auth');
 
+//Media
+Route::post('/media/store', [MediaController::class, 'store'])->name('media.store');
+
 //Logout
 Route::post('/logout', function () {
     Auth::logout();
@@ -96,7 +111,39 @@ Route::post('/tickets', [TicketController::class, 'store'])->name('tickets.store
 Route::resource('tickets', TicketController::class)->except(['create', 'store']);
 
 Route::get('/boutique', function () {
-    return view('boutique');
+    $query = \App\Models\article::query();
+    
+    // Appliquer le filtrage seulement si des paramètres de filtre sont présents dans la requête
+    // Cela se produit lorsque l'utilisateur clique sur le bouton "Appliquer"
+    if (request()->hasAny(['type', 'size', 'color', 'max_price'])) {
+        // Filtrage par type
+        if (request('type')) {
+            $query->where('type', request('type'));
+        }
+        
+        // Filtrage par taille
+        if (request('size')) {
+            $query->where('taille', request('size'));
+        }
+        
+        // Filtrage par couleur
+        if (request('color')) {
+            $query->where('couleur', request('color'));
+        }
+        
+        // Filtrage par prix maximum
+        if (request('max_price')) {
+            $query->where('prix', '<=', request('max_price'));
+        }
+    }
+    
+    // Récupérer tous les articles (filtrés seulement si des filtres sont appliqués via le formulaire)
+    $articles = $query->get();
+    
+    // Récupérer les couleurs uniques des articles existants
+    $couleurs = \App\Models\article::whereNotNull('couleur')->where('couleur', '!=', '')->distinct('couleur')->pluck('couleur');
+    
+    return view('boutique', compact('articles', 'couleurs'));
 })->name('boutique');
 
 Route::get('auth/google', [SocialAuthController::class, 'redirectToGoogle']);
@@ -119,14 +166,8 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),
                 return view('dashboard_utilisateur.tableau de bord'); // page d'accueil
             })->name('dashboard');
 
-            Route::get('/calendrier', function () {
-                return view('dashboard_utilisateur.calendrier');
-            })->name('calendrier');
 
-
-            Route::get('/cours', function () {
-                return view('dashboard_utilisateur.cours');
-            })->name('cours');
+            
 
             Route::get('/cours/details', function () {
                 return view('dashboard_utilisateur.details_cours');
@@ -167,7 +208,9 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),
             //decouvrir
             Route::get('/decouvrir', [DiscoverController::class, 'index'])->name('decouvrir');
 
+            Route::get('/formation_gratuite/{formationId}', [FormationController::class, 'showContenu'])->name('formation_gratuite');
             Route::get('/formations/{id}', [FormationController::class, 'show'])->name('details');
+
             //caisse
             Route::get('/fedapay/callback', [PaymentController::class, 'handleFedapayCallback'])->name('fedapay.callback');
             Route::post('/fedapay/webhook', [PaymentController::class, 'handleWebhook'])->name('fedapay.webhook');
@@ -175,8 +218,17 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),
 
             Route::get('/caisse/{formationId}', [PaymentController::class, 'showPaymentForm'])
             ->name('caisse');
-            Route::post('/caisse', [PaymentController::class, 'processPayment'])
-            ->name('caisse.process');
+
+             // Route pour initier le paiement Monero et afficher l'adresse
+            Route::get('/monero/{formationId}', [PaymentController::class, 'createMoneroPayment'])
+            ->name('monero');
+
+            // Route (optionnelle) pour vérifier le statut du paiement via AJAX
+            Route::get('/monero/status/{formationId}', [PaymentController::class, 'checkPaymentStatus'])->
+            name('monero.status');
+
+            // Route de l'API pour le callback de NOWPayments
+            Route::post('/api/payment/callback/nowpayments', [PaymentController::class, 'handleNOWPaymentsCallback'])->name('paiement.callback.nowpayments');
             
             Route::get('/paiement_success', [PaymentController::class, 'showPaymentSuccess'])
             ->name('Dashboard_utilisateur.paiement_success');
@@ -190,7 +242,19 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),
 
             Route::post('/themes', [ThemeController::class, 'update'])->name('themes.update');
 
-            });
+            Route::get('/soutien', [SupportController::class, 'index'])->name('soutien');
+            Route::post('/soutien', [SupportController::class, 'submitContactForm'])->name('soutien.contact');
+
+            Route::post('/ajouter-cours/{formation}', [CoursController::class, 'ajouterFormation'])
+            ->name('ajouter-cours');
+            //Route::get('/cours', [CoursController::class, 'index'])->name('cours');
+            Route::match(['get', 'post'], '/cours', [CoursController::class, 'index'])->name('cours');
+            Route::get('/cours/{formation}', [CoursController::class, 'showFormation'])->name('formation.show');
+
+            Route::get('/calendrier', [CalendrierController::class, 'index'])->name('calendrier')->middleware('auth');
+            Route::post('/events', [EventController::class, 'store'])->name('events.store');
+
+    });
 });
 
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
@@ -241,6 +305,14 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::put('/dashboard/categories/{id}', [CategorieController::class, 'update'])
         ->name('Dashboard.categories.update');
 
+        // Articles
+    Route::get('/dashboard/articles', [ArticleController::class, 'index'])->name('articles.index');
+    Route::get('/dashboard/articles/create', [ArticleController::class, 'create'])->name('articles.create');
+    Route::post('/dashboard/articles', [ArticleController::class, 'store'])->name('articles.store');
+    Route::get('/dashboard/articles/{article}/edit', [ArticleController::class, 'edit'])->name('articles.edit');
+    Route::put('/dashboard/articles/{article}', [ArticleController::class, 'update'])->name('articles.update');
+    Route::delete('/dashboard/articles/{article}', [ArticleController::class, 'destroy'])->name('articles.destroy');
+
 
     // Formations
     Route::resource('formations', FormationController::class);
@@ -282,4 +354,12 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::put('formations/{formation}/modules/{module}', [ModuleController::class, 'update'])->name('modules.update');
     Route::delete('formations/{formation}/modules/{module}', [ModuleController::class, 'destroy'])->name('modules.destroy');
     Route::patch('formations/{formation}/modules/reorder', [ModuleController::class, 'reorder'])->name('modules.reorder');
+    
+    // Emploies
+    Route::get('/dashboard/emploies', [EmploieController::class, 'index'])->name('emploies.index');
+    Route::get('/dashboard/emploies/create', [EmploieController::class, 'create'])->name('emploies.create');
+    Route::post('/dashboard/emploies', [EmploieController::class, 'store'])->name('emploies.store');
+    Route::get('/dashboard/emploies/{emploie}/edit', [EmploieController::class, 'edit'])->name('emploies.edit');
+    Route::put('/dashboard/emploies/{emploie}', [EmploieController::class, 'update'])->name('emploies.update');
+    Route::delete('/dashboard/emploies/{emploie}', [EmploieController::class, 'destroy'])->name('emploies.destroy');
 });

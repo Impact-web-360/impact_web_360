@@ -13,6 +13,9 @@ class article extends Model
         'description',
         'image',
         'prix',
+        'type',
+        'couleur',
+        'taille',
     ];
     public function client()
     {

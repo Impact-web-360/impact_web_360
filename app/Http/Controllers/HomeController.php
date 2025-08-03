@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Sponsor;
 use App\Models\Evenement;
 use App\Models\User;
+use App\Models\article;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -46,6 +47,12 @@ class HomeController extends Controller
         $intervenants = User::where('type', 'intervenant')->get();
 
         return view('evenement', compact('sponsors', 'evenements','intervenants'));
+    }
+
+    public function boutique()
+    {
+        $articles = article::all();
+        return view('boutique', compact('articles'));
     }
 
     /**

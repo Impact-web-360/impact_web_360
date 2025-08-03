@@ -6,47 +6,45 @@
     <title>{{ __('Mon emploi du temps') }} - Impact Web</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: red; /* Couleur principale des boutons/liens actifs (similaire à l'image du dashboard) */
-            --secondary-color: #555;
-            --dark-bg: #1c1c1c; /* Couleur de fond principale */
-            --dark-card-bg: #2a2a2a; /* Couleur de fond des cartes */
-            --dark-sidebar-bg: #212121; /* Couleur de fond de la sidebar */
-            --border-color: #333; /* Couleur des bordures */
-            --text-color-light: #f8f9fa; /* Texte clair pour les fonds sombres */
-            --text-color-secondary: #aaaaaa; /* Texte secondaire, gris */
-            --success-color: #28a745; /* Couleur de succès (pour la barre de progression) */
-            --info-color: #17a2b8; /* Couleur d'information (pour la barre de progression) */
-            /* Couleurs spécifiques aux événements du calendrier */
-            --event-success: #28a745; /* Vert pour Envato Mastery */
-            --event-danger: #dc3545; /* Rouge pour UI/UX Design Basic */
-            --event-primary: #0d6efd; /* Bleu pour Mastering Git */
-            --event-info: #0dcaf0; /* Cyan pour Live Class (plus clair que le bleu) */
-            --stars-gold: gold; /* Couleur des étoiles */
+            --primary-color: #FF0000;
+            --secondary-color: #6c757d;
+            --dark-bg: #1A1A1A;
+            --dark-card-bg: #2C2C2C;
+            --dark-sidebar-bg: #212121;
+            --border-color: #3A3A3A;
+            --text-color-light: #F8F9FA;
+            --text-color-secondary: #B0B0B0;
+            --success-color: #28a745;
+            --info-color: #17a2b8;
+            --event-success: #28a745;
+            --event-danger: #dc3545;
+            --event-primary: #0d6efd;
+            --event-info: #0dcaf0;
+            --stars-gold: gold;
         }
 
         body {
             overflow-x: hidden;
             background-color: var(--dark-bg);
             color: var(--text-color-light);
-            font-family: Arial, sans-serif; /* Police générique pour la compatibilité */
+            font-family: Arial, sans-serif;
         }
 
         #wrapper {
             display: flex;
         }
 
-        /* Sidebar (Repris du dashboard, ajusté pour la cohérence) */
         #sidebar-wrapper {
             min-height: 100vh;
-            margin-left: -11.3rem; /* Cachée par défaut sur mobile */
+            margin-left: -16rem;
             transition: margin .25s ease-out;
             width: 16rem;
             background-color: var(--dark-sidebar-bg) !important;
             border-right: 1px solid var(--border-color);
         }
-
 
         #sidebar-wrapper .sidebar-heading {
             padding: 1.5rem 1.25rem;
@@ -55,7 +53,7 @@
         }
 
         #sidebar-wrapper .list-group {
-            width: 92%; /* Ajusté pour qu'il n'y ait pas de marge latérale par défaut */
+            width: 92%;
         }
 
         #sidebar-wrapper .list-group-item {
@@ -70,7 +68,7 @@
             background-color: var(--primary-color) !important;
             color: var(--text-color-light) !important;
             border-radius: 5px;
-            margin: 0px; /* Ajoute un espace sur les côtés pour l'élément actif */
+            margin: 0px;
         }
 
         #sidebar-wrapper .list-group-item:hover {
@@ -83,38 +81,11 @@
             text-transform: uppercase;
             color: var(--text-color-secondary) !important;
         }
-
-        .sidebar-promo {
-            background-color: var(--primary-color);
-            color: var(--text-color-light);
-            border-radius: 10px;
-            padding: 15px;
-            margin-top: 30px;
-            width: 85%;
-        }
-
-        .sidebar-promo .star-rating i {
-            color: var(--stars-gold);
-        }
-
-        .sidebar-promo .btn-primary {
-            background-color: #fff !important;
-            color: var(--primary-color) !important;
-            border: none !important;
-            font-weight: bold;
-            padding: 8px 15px;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-
-        .sidebar-promo .btn-primary:hover {
-            background-color: #eee !important;
-            color: var(--primary-color) !important;
-        }
-
-        /* Page Content (Repris du dashboard) */
+        
         #page-content-wrapper {
-            min-width: 100vw;
+            flex-grow: 1;
             background-color: var(--dark-bg);
+            min-width: 0;
         }
 
         .navbar-dark {
@@ -122,14 +93,13 @@
         }
 
         .bg-dark-secondary {
-            background-color: var(--dark-sidebar-bg) !important; /* Utilise la même couleur que la sidebar pour le topbar */
+            background-color: var(--dark-sidebar-bg) !important;
         }
 
         .main-content {
-            background-color: var(--dark-bg);
+            padding: 1.5rem !important;
         }
 
-        /* Cards (Repris du dashboard) */
         .bg-dark-card {
             background-color: var(--dark-card-bg) !important;
             border-color: var(--border-color) !important;
@@ -154,7 +124,6 @@
             vertical-align: middle;
         }
 
-        /* Specific button styles for calendar */
         .btn-icon-custom {
             background-color: var(--border-color);
             color: var(--text-color-light);
@@ -189,7 +158,6 @@
             color: var(--text-color-light);
         }
 
-        /* Schedule Grid */
         .schedule-grid {
             border: 1px solid var(--border-color);
             border-radius: 0.5rem;
@@ -197,7 +165,7 @@
         }
 
         .schedule-header {
-            background-color: var(--dark-card-bg); /* Cohérent avec les cartes */
+            background-color: var(--dark-card-bg);
             padding: 0.75rem 0;
             border-bottom: 1px solid var(--border-color);
         }
@@ -214,7 +182,7 @@
         }
 
         .schedule-body .schedule-row {
-            min-height: 80px; /* Hauteur de chaque ligne horaire */
+            min-height: 80px;
             border-bottom: 1px dashed rgba(255, 255, 255, 0.05);
         }
 
@@ -226,7 +194,7 @@
             padding-top: 0.5rem;
             font-size: 0.9rem;
             color: var(--text-color-secondary);
-            min-width: 70px; /* Largeur fixe pour la colonne "Time" */
+            min-width: 70px;
             display: flex;
             align-items: flex-start;
             justify-content: flex-end;
@@ -235,7 +203,7 @@
         .schedule-body .col {
             position: relative;
             border-left: 1px dashed rgba(255, 255, 255, 0.05);
-            padding: 0.5rem; /* Ajuster le padding pour les cellules */
+            padding: 0.5rem;
         }
 
         .schedule-body .col:first-child {
@@ -244,16 +212,16 @@
 
         .event {
             position: absolute;
-            width: calc(200% - 0rem); /* Prend toute la largeur de la cellule moins le padding */
-            left: -10rem;
+            width: calc(100% - 1rem); /* Prend toute la largeur de la cellule */
+            left: 0.5rem;
             padding: 0.5rem !important;
             font-size: 0.9rem;
             line-height: 1.3;
             overflow: hidden;
-            z-index: 1; /* Pour que les événements se superposent aux lignes pointillées */
+            z-index: 1;
             transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-            animation: fadeInScale 0.5s ease-out forwards; /* Animation d'apparition */
-            transform: scale(0.9); /* Commence plus petit */
+            animation: fadeInScale 0.5s ease-out forwards;
+            transform: scale(0.9);
         }
 
         .event:hover {
@@ -271,43 +239,42 @@
             color: var(--text-secondary);
         }
 
-        /* Specific event colors */
-        .event.bg-success { background-color: var(--accent-green) !important; }
-        .event.bg-danger { background-color: var(--accent-red) !important; }
-        .event.bg-primary { background-color: var(--accent-blue) !important; }
-        .event.bg-info { background-color: var(--accent-cyan) !important; } /* Utilisez info pour le Live Class */
-
-
-        /* Calendar Widget */
         .calendar-grid .calendar-header .col {
-            font-size: 0.9rem;
+            font-size: 0.5rem;
             font-weight: bold;
         }
 
+        .calendar-grid .calendar-header .col,
+        .calendar-grid .calendar-body .col {
+            padding: 0.3rem 0.6rem; /* Ajuste le padding pour un meilleur espacement */
+            font-size: 0.5rem;
+        }
+
         .calendar-grid .calendar-body .calendar-day {
-            padding: 0.5rem 1rem;
-            font-size: 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 35px; /* Définit une hauteur fixe pour les cellules */
+            border-radius: 5px; /* Arrondi les coins */
             cursor: pointer;
             transition: background-color 0.2s ease-in-out, border-radius 0.2s ease-in-out;
         }
 
         .calendar-grid .calendar-body .calendar-day:hover {
             background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 5px;
         }
 
-        .calendar-grid .calendar-body .calendar-day.active { /* Utilise la classe "active" du dashboard */
-            background-color: var(--primary-color);
-            border-radius: 5px;
+        .calendar-grid .calendar-body .calendar-day.active {
+            background-color: var(--primary-color) !important;
             font-weight: bold;
-            color: var(--text-color-light) !important; /* Pour override text-danger */
+            color: var(--text-color-light) !important;
         }
 
         .calendar-grid .calendar-body .calendar-day.text-secondary {
             color: var(--text-color-secondary) !important;
         }
 
-        /* Category List */
         .category-dot {
             display: inline-block;
             width: 10px;
@@ -328,7 +295,6 @@
             min-width: 25px;
         }
 
-        /* Animations (Repris du dashboard) */
         @keyframes fadeInScale {
             from {
                 opacity: 0;
@@ -357,8 +323,8 @@
 
         .animate-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(247, 92, 78, 0.3); /* Utilise la couleur primaire */
-            background-color: #e04a40 !important; /* Darker shade on hover */
+            box-shadow: 0 8px 20px rgba(247, 92, 78, 0.3);
+            background-color: #e04a40 !important;
             border-color: #e04a40 !important;
         }
 
@@ -369,7 +335,7 @@
         @keyframes pulse {
             from {
                 transform: scale(1);
-                box-shadow: 0 0 0 0 rgba(247, 92, 78, 0.4); /* Utilise la couleur primaire */
+                box-shadow: 0 0 0 0 rgba(247, 92, 78, 0.4);
             }
             to {
                 transform: scale(1.05);
@@ -377,7 +343,6 @@
             }
         }
 
-        /* Responsive adjustments (Repris et ajusté) */
         @media (min-width: 992px) {
             #sidebar-wrapper {
                 margin-left: 0;
@@ -387,9 +352,8 @@
                 width: 100%;
             }
             #wrapper.toggled #sidebar-wrapper {
-                margin-left: -15rem; /* Sidebar se cache sur desktop si toggled */
+                margin-left: -15rem;
             }
-            /* Hide the toggle button on desktop */
             #sidebarToggle {
                 display: none !important;
             }
@@ -403,162 +367,24 @@
                 width: 100%;
             }
             .schedule-grid {
-                overflow-x: auto; /* Permet le défilement horizontal sur petits écrans */
+                overflow-x: auto;
             }
             .schedule-header, .schedule-body {
-                min-width: 700px; /* Assure que la grille ne se comprime pas trop */
+                min-width: 700px;
             }
             .time-col {
-                min-width: 60px; /* Ajustement pour la colonne temps */
+                min-width: 60px;
             }
         }
 
         @media (max-width: 767.98px) {
-            .navbar .d-lg-block { /* Cache le texte de bienvenue sur petits écrans */
+            .navbar .d-lg-block {
                 display: none !important;
             }
         }
-
-        /* Dropdown menu styling */
-        .dropdown-menu.bg-dark-secondary {
-            background-color: var(--dark-card-bg) !important; /* Use dark card background for dropdown */
-            border-color: var(--border-color) !important;
-        }
-
-        .dropdown-item.text-white {
-            color: var(--text-color-light) !important;
-            background-color: transparent !important;
-        }
-
-        .dropdown-item.text-white:hover,
-        .dropdown-item.text-white:focus {
-            background-color: var(--primary-color) !important; /* Highlight on hover */
-            color: var(--text-color-light) !important;
-        }
-
-        .dropdown-divider {
-            border-top: 1px solid var(--border-color) !important;
-        }
-
-                 :root {
-        --primary-color: #FF0000;
-        --secondary-color: #6c757d;
-        --dark-bg: #1A1A1A;
-        --dark-sidebar-bg: #212121;
-        --dark-card-bg: #2C2C2C;
-        --border-color: #3A3A3A;
-        --text-color-light: #F8F9FA;
-        --text-color-secondary: #B0B0B0;
-        --save-button-bg: #007bff;
-        --save-button-hover: #0056b3;
-        --switch-bg-off: #4F4F4F;
-        --input-group-bg: #3A3A3A;
-        }
-
-        body {
-        background-color: var(--dark-bg);
-        color: var(--text-color-light);
-        }
-
-        .bg-dark,
-        .bg-dark-secondary {
-        background-color: var(--dark-sidebar-bg) !important;
-        }
-
-        .list-group-item {
-        background-color: var(--dark-sidebar-bg);
-        color: var(--text-color-secondary);
-        }
-
-        .themes-card {
-        background-color: var(--dark-card-bg);
-        border-color: var(--border-color);
-        }
-
-        /* --- Thème Clair --- */
-        body.theme-light {
-        --primary-color: #0d6efd;
-        --secondary-color: #6c757d;
-        --dark-bg: #F0F2F5; /* Fond principal clair */
-        --dark-sidebar-bg: #000; /* Sidebar plus sombre */
-        --dark-card-bg: #FFFFFF; /* Cartes blanches */
-        --border-color: #CED4DA;
-        --text-color-light: #212529; /* Texte sombre */
-        --text-color-secondary: #6c757d;
-        --save-button-bg: #0d6efd;
-        --save-button-hover: #0a58ca;
-        --switch-bg-off: #ADB5BD;
-        --input-group-bg: #E9ECEF;
-        }
-
-        body.theme-light .list-group-item {
-        background-color: var(--dark-sidebar-bg);
-        color: var(--text-color-light);
-        }
-
-        body.theme-light .list-group-item:hover {
-        background-color: #DEE2E6;
-        color: var(--primary-color);
-        }
-
-        body.theme-light .list-group-item.active {
-        background-color: var(--primary-color) !important;
-        color: #FFFFFF !important;
-        }
-
-        /* --- Thème Sepia --- */
-        body.theme-sepia {
-        --primary-color: #8B4513;
-        --secondary-color: #708090;
-        --dark-bg: #F4EEDD;
-        --dark-sidebar-bg: #A39686;
-        --dark-card-bg: #E8E0D2;
-        --border-color: #CDB7A3;
-        --text-color-light: #5C4C42;
-        --text-color-secondary: #708090;
-        --save-button-bg: #8B4513;
-        --save-button-hover: #65300F;
-        --switch-bg-off: #BDB7A3;
-        --input-group-bg: #CDB7A3;
-        }
-
-        /* --- Thème Contrast (Haut Contraste) --- */
-        body.theme-contrast {
-        --primary-color: #00FF00;
-        --secondary-color: #FFFFFF;
-        --dark-bg: #000000;
-        --dark-sidebar-bg: #111111;
-        --dark-card-bg: #1c1c1c;
-        --border-color: #00FF00;
-        --text-color-light: #FFFFFF;
-        --text-color-secondary: #00FF00;
-        --save-button-bg: #00FF00;
-        --save-button-hover: #00CC00;
-        --switch-bg-off: #FFFFFF;
-        --input-group-bg: #222222;
-        }
-
-        /* --- Thème Blue (Bleu) --- */
-        body.theme-blue {
-        --primary-color: #3498db;
-        --secondary-color: #90A4AE;
-        --dark-bg: #1e2c4a;
-        --dark-sidebar-bg: #1a2a4b;
-        --dark-card-bg: #2c426b;
-        --border-color: #3e5c91;
-        --text-color-light: #e8eaf6;
-        --text-color-secondary: #90a4ae;
-        --save-button-bg: #3498db;
-        --save-button-hover: #2980b9;
-        --switch-bg-off: #3e5c91;
-        --input-group-bg: #2c426b;
-        }
-
-
     </style>
 </head>
-<body class="theme-{{ $userTheme ?? 'dark' }}">
-
+<body class="theme-dark">
     <div class="d-flex" id="wrapper">
         <div class="bg-dark sidebar" id="sidebar-wrapper">
             <div class="sidebar-heading text-white p-3 border-bottom border-secondary d-flex align-items-center">
@@ -566,29 +392,27 @@
             </div>
             <div class="list-group list-group-flush">
                 <div class="sidebar-section-title text-secondary px-3 pt-3 pb-1">{{ __('GENERAL') }}</div>
-                <a href="{{ route('dashboard') }}" class="list-group-item list-group-item-action bg-dark text-white">
+                <a href="{{ route('dashboard') }}" class="list-group-item list-group-action bg-dark text-white">
                     <i class="fas fa-home me-2"></i> {{ __('Tableau de bord') }}
                 </a>
-                <a href="{{ route('calendrier') }}" class="list-group-item list-group-item-action bg-dark text-white active">
+                <a href="{{ route('calendrier') }}" class="list-group-item list-group-action bg-dark text-white active">
                     <i class="fas fa-calendar-alt me-2"></i> {{ __('Calendrier') }}
                 </a>
-                <a href="{{ route('paiement1') }}" class="list-group-item list-group-item-action bg-dark text-white">
+                <a href="{{ route('paiement1') }}" class="list-group-item list-group-action bg-dark text-white">
                     <i class="fas fa-credit-card me-2"></i> {{ __('Paiement') }}
                 </a>
-
                 <div class="sidebar-section-title text-secondary px-3 pt-3 pb-1">{{ __('COURS') }}</div>
-                <a href="{{ route('cours') }}" class="list-group-item list-group-item-action bg-dark text-white">
+                <a href="{{ route('cours') }}" class="list-group-item list-group-action bg-dark text-white">
                     <i class="fas fa-book me-2"></i> {{ __('Mes cours') }}
                 </a>
-                <a href="{{ route('decouvrir') }}" class="list-group-item list-group-item-action bg-dark text-white">
+                <a href="{{ route('decouvrir') }}" class="list-group-item list-group-action bg-dark text-white">
                     <i class="fas fa-search me-2"></i> {{ __('Découvrir') }}
                 </a>
-
                 <div class="sidebar-section-title text-secondary px-3 pt-3 pb-1">{{ __('OTHER') }}</div>
-                <a href="{{ route('soutien') }}" class="list-group-item list-group-item-action bg-dark text-white">
+                <a href="{{ route('soutien') }}" class="list-group-item list-group-action bg-dark text-white">
                     <i class="fas fa-question-circle me-2"></i> {{ __('Soutien') }}
                 </a>
-                <a href="{{ route('parametres') }}" class="list-group-item list-group-item-action bg-dark text-white">
+                <a href="{{ route('parametres') }}" class="list-group-item list-group-action bg-dark text-white">
                     <i class="fas fa-cog me-2"></i> {{ __('Paramètre') }}
                 </a>
             </div>
@@ -604,202 +428,82 @@
                                 <a class="nav-link text-white" href="{{ route('notifications') }}"><i class="fas fa-bell"></i></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-white d-flex align-items-center" href="{{ route('parametres') }}">
-                                    <img src="{{ Auth::user()->image ? asset('storage/' . Auth::user()->image) : asset('logo.png') }}" alt="{{ __('Photo de profil') }}" style="max-height: 50px;" class="rounded-circle profile-img-preview me-4">
+                                <a class="nav-link text-white d-flex align-items-center " href="{{ route('parametres') }}">
+                                    <img src="{{ asset(Auth::user()->image && Auth::user()->image !== 'photos/default.svg' ? 'storage/' . Auth::user()->image . '?v=' . time() : 'dossiers/image/default.png') }}"
+                                     alt="Photo de profil" class="rounded-circle" style="max-height: 40px;">
                                 </a>
                             </li>
                         </ul>
                     </div>
                 </div>
             </nav>
-
             <div class="container-fluid p-4 main-content">
                 <div class="row">
                     <div class="col-lg-8">
                         <div class="card bg-dark-card p-3 mb-4 rounded-lg shadow-sm">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <h5 class="text-white mb-0">{{ __('Planifier une tâche') }} <span class="text-secondary ms-2">{{ __('Semaine 2 de novembre 2023') }}</span></h5>
-                                <div class="d-flex align-items-center">
-                                    <button class="btn btn-sm btn-icon-custom me-2"><i class="fas fa-ellipsis-v"></i></button>
-                                    <button class="btn btn-sm btn-icon-custom"><i class="fas fa-times"></i></button>
-                                </div>
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <a href="{{ route('calendrier', ['date' => $startOfWeek->clone()->subWeek()->toDateString()]) }}" class="btn btn-dark-card text-white">
+                                    <i class="fas fa-chevron-left"></i>
+                                </a>
+                                <h5 class="text-white mb-0 text-center">
+                                    {{ $startOfWeek->isoFormat('D MMMM YYYY') }} - {{ $endOfWeek->isoFormat('D MMMM YYYY') }}
+                                </h5>
+                                <a href="{{ route('calendrier', ['date' => $startOfWeek->clone()->addWeek()->toDateString()]) }}" class="btn btn-dark-card text-white">
+                                    <i class="fas fa-chevron-right"></i>
+                                </a>
                             </div>
                         </div>
 
                         <div class="schedule-grid bg-dark-card">
                             <div class="schedule-header row gx-0">
                                 <div class="col-1 time-col text-white text-end pe-3">{{ __('Time') }}</div>
-                                <div class="col text-center text-white">
-                                    <div class="day-num">5</div>
-                                    <div class="day-name">{{ __('Mon') }}</div>
-                                </div>
-                                <div class="col text-center text-white">
-                                    <div class="day-num">6</div>
-                                    <div class="day-name">{{ __('Tue') }}</div>
-                                </div>
-                                <div class="col text-center text-white">
-                                    <div class="day-num">7</div>
-                                    <div class="day-name">{{ __('Wed') }}</div>
-                                </div>
-                                <div class="col text-center text-white">
-                                    <div class="day-num">8</div>
-                                    <div class="day-name">{{ __('Thu') }}</div>
-                                </div>
-                                <div class="col text-center text-danger">
-                                    <div class="day-num">9</div>
-                                    <div class="day-name">{{ __('Fri') }}</div>
-                                </div>
-                                <div class="col text-center text-white">
-                                    <div class="day-num">10</div>
-                                    <div class="day-name">{{ __('Sat') }}</div>
-                                </div>
-                                <div class="col text-center text-white">
-                                    <div class="day-num">11</div>
-                                    <div class="day-name">{{ __('Sun') }}</div>
-                                </div>
+                                @for ($i = 0; $i < 7; $i++)
+                                    @php
+                                        $day = $startOfWeek->clone()->addDays($i);
+                                    @endphp
+                                    <div class="col text-center text-white {{ $day->isToday() ? 'text-danger' : '' }}">
+                                        <div class="day-num">{{ $day->format('j') }}</div>
+                                        <div class="day-name">{{ $day->isoFormat('ddd') }}</div>
+                                    </div>
+                                @endfor
                             </div>
                             <div class="schedule-body">
-                                <div class="schedule-row row gx-0">
-                                    <div class="col-1 time-col text-secondary text-end pe-3">08:00</div>
-                                    <div class="col"></div>
-                                    <div class="col"></div>
-                                    <div class="col"></div>
-                                    <div class="col"></div>
-                                    <div class="col">
-                                        <div class="event bg-success text-white p-2 rounded-3" style="animation-delay: 0.1s;">
-                                            <p class="mb-1 fw-bold">{{ __('Envato Mastery') }}</p>
-                                            <p class="mb-1 text-sm">{{ __('Apprendre une nouvelle partie') }}</p>
-                                            <p class="mb-0 text-xs text-secondary">08h00 - 09h00</p>
-                                            <button class="btn btn-sm btn-icon-custom-sm position-absolute top-0 end-0 mt-1 me-1"><i class="fas fa-ellipsis-h"></i></button>
-                                        </div>
+                                @for ($hour = 8; $hour <= 17; $hour++)
+                                    <div class="schedule-row row gx-0">
+                                        <div class="col-1 time-col text-secondary text-end pe-3">{{ sprintf('%02d:00', $hour) }}</div>
+                                        @for ($i = 0; $i < 7; $i++)
+                                            <div class="col">
+                                                @php
+                                                    $day = $startOfWeek->clone()->addDays($i);
+                                                    $event = $events->first(function ($event) use ($day, $hour) {
+                                                        return $event->start_time->isSameDay($day) && $event->start_time->hour == $hour;
+                                                    });
+                                                @endphp
+                                                @if($event)
+                                                    <div class="event text-white p-2 rounded-3" style="background-color: {{ $event->color }};">
+                                                        <p class="mb-1 fw-bold">{{ $event->title }}</p>
+                                                        <p class="mb-1 text-sm">{{ $event->description }}</p>
+                                                        <p class="mb-0 text-xs text-secondary">{{ $event->start_time->format('H:i') }} - {{ $event->end_time->format('H:i') }}</p>
+                                                        <button class="btn btn-sm btn-icon-custom-sm position-absolute top-0 end-0 mt-1 me-1"><i class="fas fa-ellipsis-h"></i></button>
+                                                    </div>
+                                                @endif
+                                            </div>
+                                        @endfor
                                     </div>
-                                    <div class="col"></div>
-                                    <div class="col"></div>
-                                </div>
-                                <div class="schedule-row row gx-0">
-                                    <div class="col-1 time-col text-secondary text-end pe-3">09:00</div>
-                                    <div class="col"></div>
-                                    <div class="col"></div>
-                                    <div class="col"></div>
-                                    <div class="col"></div>
-                                    <div class="col"></div>
-                                    <div class="col"></div>
-                                    <div class="col"></div>
-                                </div>
-                                <div class="schedule-row row gx-0">
-                                    <div class="col-1 time-col text-secondary text-end pe-3">10:00</div>
-                                    <div class="col"></div>
-                                    <div class="col"></div>
-                                    <div class="col"></div>
-                                    <div class="col">
-                                        <div class="event bg-danger text-white p-2 rounded-3" >
-                                            <p class="mb-1 fw-bold">{{ __('UI/UX Design Basic') }}</p>
-                                            <p class="mb-1 text-sm">{{ __('Terminez la tâche 12') }}</p>
-                                            <p class="mb-0 text-xs text-secondary">10h00 - 12h00</p>
-                                            <button class="btn btn-sm btn-icon-custom-sm position-absolute top-0 end-0 mt-1 me-1"><i class="fas fa-ellipsis-h"></i></button>
-                                        </div>
-                                    </div>
-                                    <div class="col"></div>
-                                    <div class="col"></div>
-                                    <div class="col"></div>
-                                </div>
-                                <div class="schedule-row row gx-0">
-                                    <div class="col-1 time-col text-secondary text-end pe-3">11:00</div>
-                                    <div class="col"></div>
-                                    <div class="col"></div>
-                                    <div class="col"></div>
-                                    <div class="col"></div>
-                                    <div class="col"></div>
-                                    <div class="col"></div>
-                                    <div class="col"></div>
-                                </div>
-                                <div class="schedule-row row gx-0">
-                                    <div class="col-1 time-col text-secondary text-end pe-3">12:00</div>
-                                    <div class="col"></div>
-                                    <div class="col"></div>
-                                    <div class="col"></div>
-                                    <div class="col"></div>
-                                    <div class="col"></div>
-                                    <div class="col"></div>
-                                    <div class="col"></div>
-                                </div>
-                                <div class="schedule-row row gx-0">
-                                    <div class="col-1 time-col text-secondary text-end pe-3">13:00</div>
-                                    <div class="col"></div>
-                                    <div class="col"></div>
-                                    <div class="col"></div>
-                                    <div class="col"></div>
-                                    <div class="col"></div>
-                                    <div class="col">
-                                        <div class="event bg-primary text-white p-2 rounded-3" >
-                                            <p class="mb-1 fw-bold">{{ __('Mastering Git & Vercel app') }}</p>
-                                            <p class="mb-1 text-sm">{{ __('Apprendre une nouvelle partie') }}</p>
-                                            <p class="mb-0 text-xs text-secondary">13h00 - 14h00</p>
-                                            <button class="btn btn-sm btn-icon-custom-sm position-absolute top-0 end-0 mt-1 me-1"><i class="fas fa-ellipsis-h"></i></button>
-                                        </div>
-                                    </div>
-                                    <div class="col"></div>
-                                </div>
-                                <div class="schedule-row row gx-0">
-                                    <div class="col-1 time-col text-secondary text-end pe-3">14:00</div>
-                                    <div class="col"></div>
-                                    <div class="col"></div>
-                                    <div class="col"></div>
-                                    <div class="col"></div>
-                                    <div class="col"></div>
-                                    <div class="col"></div>
-                                    <div class="col"></div>
-                                </div>
-                                <div class="schedule-row row gx-0">
-                                    <div class="col-1 time-col text-secondary text-end pe-3">15:00</div>
-                                    <div class="col"></div>
-                                    <div class="col"></div>
-                                    <div class="col"></div>
-                                    <div class="col"></div>
-                                    <div class="col"></div>
-                                    <div class="col"></div>
-                                    <div class="col"></div>
-                                </div>
-                                <div class="schedule-row row gx-0">
-                                    <div class="col-1 time-col text-secondary text-end pe-3">16:00</div>
-                                    <div class="col"></div>
-                                    <div class="col"></div>
-                                    <div class="col"></div>
-                                    <div class="col"></div>
-                                    <div class="col"></div>
-                                    <div class="col"></div>
-                                    <div class="col">
-                                        <div class="event bg-info text-white p-2 rounded-3" >
-                                            <p class="mb-1 fw-bold">{{ __('Live Class') }}</p>
-                                            <p class="mb-1 text-sm">{{ __('Comment gagner de l\'argent avec...') }}</p>
-                                            <p class="mb-0 text-xs text-secondary">16h00 - 18h00</p>
-                                            <button class="btn btn-sm btn-icon-custom-sm position-absolute top-0 end-0 mt-1 me-1"><i class="fas fa-ellipsis-h"></i></button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="schedule-row row gx-0">
-                                    <div class="col-1 time-col text-secondary text-end pe-3">17:00</div>
-                                    <div class="col"></div>
-                                    <div class="col"></div>
-                                    <div class="col"></div>
-                                    <div class="col"></div>
-                                    <div class="col"></div>
-                                    <div class="col"></div>
-                                    <div class="col"></div>
-                                </div>
+                                @endfor
                             </div>
                         </div>
                     </div>
 
                     <div class="col-lg-4">
-                        <button class="btn btn-primary w-100 p-3 mb-4 rounded-lg shadow-sm animate-button">
+                        <button class="btn btn-primary w-100 p-3 mb-4 rounded-lg shadow-sm animate-button" data-bs-toggle="modal" data-bs-target="#addEventModal">
                             <i class="fas fa-plus-circle me-2"></i> {{ __('Ajouter un nouvel événement') }}
                         </button>
 
                         <div class="card bg-dark-card p-3 mb-4 rounded-lg shadow-sm calendar-card">
                             <div class="d-flex justify-content-between align-items-center mb-3">
                                 <a href="#" class="text-white text-decoration-none"><i class="fas fa-chevron-left"></i></a>
-                                <h6 class="text-white mb-0 fw-bold">{{ __('Novembre 2023') }}</h6>
+                                <h6 class="text-white mb-0 fw-bold">{{ $startOfWeek->isoFormat('MMMM YYYY') }}</h6>
                                 <a href="#" class="text-white text-decoration-none"><i class="fas fa-chevron-right"></i></a>
                             </div>
                             <div class="calendar-grid text-white">
@@ -811,51 +515,38 @@
                                     <div class="col text-center">{{ __('Fr') }}</div>
                                     <div class="col text-center">{{ __('Sa') }}</div>
                                     <div class="col text-center">{{ __('Su') }}</div>
+                                    
                                 </div>
                                 <div class="calendar-body row gx-0">
-                                    <div class="col text-center text-secondary calendar-day">29</div>
-                                    <div class="col text-center text-secondary calendar-day">30</div>
-                                    <div class="col text-center text-secondary calendar-day">31</div>
-                                    <div class="col text-center calendar-day">1</div>
-                                    <div class="col text-center calendar-day">2</div>
-                                    <div class="col text-center calendar-day">3</div>
-                                    <div class="col text-center calendar-day">4</div>
+                                    <div class="calendar-body row gx-0">
+                                        @php
+                                            // Calcule le début du mois de la semaine affichée
+                                            $startOfMonth = $startOfWeek->clone()->startOfMonth();
+                                            // Calcule le nombre de jours à afficher avant le début du mois
+                                            $startDayOfWeek = $startOfMonth->dayOfWeekIso - 1; // ISO 8601, Lundi = 1
+                                            
+                                            // Calcule le nombre total de cellules (jours) à afficher
+                                            $totalDays = $startOfMonth->daysInMonth + $startDayOfWeek;
+                                            $totalCells = ceil($totalDays / 7) * 8;
+                                            
+                                            $currentDay = $startOfMonth->clone()->subDays($startDayOfWeek);
+                                        @endphp
 
-                                    <div class="col text-center calendar-day">5</div>
-                                    <div class="col text-center calendar-day">6</div>
-                                    <div class="col text-center calendar-day">7</div>
-                                    <div class="col text-center calendar-day">8</div>
-                                    <div class="col text-center calendar-day highlight active">9</div>
-                                    <div class="col text-center calendar-day">10</div>
-                                    <div class="col text-center calendar-day">11</div>
-
-                                    <div class="col text-center calendar-day">12</div>
-                                    <div class="col text-center calendar-day">13</div>
-                                    <div class="col text-center calendar-day">14</div>
-                                    <div class="col text-center calendar-day">15</div>
-                                    <div class="col text-center calendar-day">16</div>
-                                    <div class="col text-center calendar-day">17</div>
-                                    <div class="col text-center calendar-day">18</div>
-
-                                    <div class="col text-center calendar-day">19</div>
-                                    <div class="col text-center calendar-day">20</div>
-                                    <div class="col text-center calendar-day">21</div>
-                                    <div class="col text-center calendar-day">22</div>
-                                    <div class="col text-center calendar-day">23</div>
-                                    <div class="col text-center calendar-day">24</div>
-                                    <div class="col text-center calendar-day">25</div>
-
-                                    <div class="col text-center calendar-day">26</div>
-                                    <div class="col text-center calendar-day">27</div>
-                                    <div class="col text-center calendar-day">28</div>
-                                    <div class="col text-center calendar-day">29</div>
-                                    <div class="col text-center calendar-day">30</div>
-                                    <div class="col text-center text-secondary calendar-day">1</div>
-                                    <div class="col text-center text-secondary calendar-day">2</div>
-                                    <div class="col text-center text-secondary calendar-day">3</div>
-                                    <div class="col text-center text-secondary calendar-day">4</div>
-                                    <div class="col text-center text-secondary calendar-day">5</div>
-                                    <div class="col text-center text-secondary calendar-day">6</div>
+                                        @for ($i = 0; $i < $totalCells; $i++)
+                                            @php
+                                                $isSameMonth = $currentDay->isSameMonth($startOfMonth);
+                                                $isActive = $currentDay->isSameDay($startOfWeek);
+                                                $dayClass = $isSameMonth ? '' : 'text-secondary';
+                                                $activeClass = $isActive ? 'highlight active' : '';
+                                            @endphp
+                                            <div class="col text-center calendar-day {{ $dayClass }} {{ $activeClass }}">
+                                                {{ $currentDay->format('j') }}
+                                            </div>
+                                            @php
+                                                $currentDay->addDay();
+                                            @endphp
+                                        @endfor
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -863,33 +554,17 @@
                         <div class="card bg-dark-card p-3 rounded-lg shadow-sm category-card">
                             <div class="d-flex justify-content-between align-items-center mb-3">
                                 <h6 class="text-white mb-0">{{ __('Liste des catégories') }}</h6>
-                               <button class="btn btn-sm btn-danger rounded-circle animate-pulse"><i class="fas fa-plus"></i></button>
+                                <button class="btn btn-sm btn-danger rounded-circle animate-pulse"><i class="fas fa-plus"></i></button>
                             </div>
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item bg-transparent text-white d-flex justify-content-between align-items-center px-0">
-                                    <div class="d-flex align-items-center">
-                                        <span class="category-dot bg-success me-2"></span> {{ __('Envato Mastery') }}
-                                    </div>
-                                    <span class="badge bg-secondary rounded-pill">1</span>
-                                </li>
-                                <li class="list-group-item bg-transparent text-white d-flex justify-content-between align-items-center px-0">
-                                    <div class="d-flex align-items-center">
-                                        <span class="category-dot bg-danger me-2"></span> {{ __('UI/UX Design Basic') }}
-                                    </div>
-                                    <span class="badge bg-secondary rounded-pill">1</span>
-                                </li>
-                                <li class="list-group-item bg-transparent text-white d-flex justify-content-between align-items-center px-0">
-                                    <div class="d-flex align-items-center">
-                                        <span class="category-dot bg-primary me-2"></span> {{ __('Mastering Git & Vercel app') }}
-                                    </div>
-                                    <span class="badge bg-secondary rounded-pill">1</span>
-                                </li>
-                                <li class="list-group-item bg-transparent text-white d-flex justify-content-between align-items-center px-0">
-                                    <div class="d-flex align-items-center">
-                                        <span class="category-dot bg-info me-2"></span> {{ __('Live Class') }}
-                                    </div>
-                                    <span class="badge bg-secondary rounded-pill">1</span>
-                                </li>
+                                @foreach($formations as $formation)
+                                    <li class="list-group-item bg-transparent text-white d-flex justify-content-between align-items-center px-0">
+                                        <div class="d-flex align-items-center">
+                                            <span class="category-dot me-2" style="background-color: #{{ substr(md5($formation->id), 0, 6) }};"></span> {{ $formation->title }}
+                                        </div>
+                                        <span class="badge bg-secondary rounded-pill">{{ $formation->events->count() }}</span>
+                                    </li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>
@@ -898,11 +573,70 @@
         </div>
     </div>
 
+    <div class="modal fade" id="addEventModal" tabindex="-1" aria-labelledby="addEventModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-dark-card text-white">
+            <div class="modal-header border-bottom-0">
+                <h5 class="modal-title" id="addEventModalLabel">{{ __('Ajouter un nouvel événement') }}</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="{{ route('events.store') }}" method="POST">
+                @csrf
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="eventTitle" class="form-label">{{ __('Titre de l\'événement') }}</label>
+                        <input type="text" class="form-control bg-dark text-white border-secondary" id="eventTitle" name="title" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="eventDescription" class="form-label">{{ __('Description') }}</label>
+                        <textarea class="form-control bg-dark text-white border-secondary" id="eventDescription" name="description"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="eventFormation" class="form-label">{{ __('Formation') }}</label>
+                        <select class="form-select bg-dark text-white border-secondary" id="eventFormation" name="formation_id" required>
+                            <option selected disabled>{{ __('Sélectionnez une formation') }}</option>
+                            @foreach($formations as $formation)
+                                <option value="{{ $formation->id }}">{{ $formation->title }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="eventStartDate" class="form-label">{{ __('Date de début') }}</label>
+                            <input type="date" class="form-control bg-dark text-white border-secondary" id="eventStartDate" name="start_date" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="eventStartTime" class="form-label">{{ __('Heure de début') }}</label>
+                            <input type="time" class="form-control bg-dark text-white border-secondary" id="eventStartTime" name="start_time" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="eventEndDate" class="form-label">{{ __('Date de fin') }}</label>
+                            <input type="date" class="form-control bg-dark text-white border-secondary" id="eventEndDate" name="end_date" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="eventEndTime" class="form-label">{{ __('Heure de fin') }}</label>
+                            <input type="time" class="form-control bg-dark text-white border-secondary" id="eventEndTime" name="end_time" required>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="eventColor" class="form-label">{{ __('Couleur de l\'événement') }}</label>
+                        <input type="color" class="form-control form-control-color bg-dark border-secondary" id="eventColor" name="color" value="#FF0000" title="Choisissez une couleur">
+                    </div>
+                </div>
+                <div class="modal-footer border-top-0">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('Annuler') }}</button>
+                    <button type="submit" class="btn btn-primary animate-button">{{ __('Enregistrer') }}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script>
         var el = document.getElementById("wrapper");
         var toggleButton = document.getElementById("sidebarToggle");
-
         toggleButton.onclick = function () {
             el.classList.toggle("toggled");
         };

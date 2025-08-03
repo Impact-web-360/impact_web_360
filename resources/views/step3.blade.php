@@ -1,194 +1,337 @@
-
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Impact Web 360 - Billetterie</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
   <style>
-    body { background-color: #0e0e12; color: white; font-family: 'Segoe UI', sans-serif; }
-    .navbar-custom { background-color: #000066; border-radius: 15px; margin-top: 20px; padding: 10px 20px; height: 70px; }
-    .navbar-brand img { max-height: 160px; width: auto; }
-    .btn-inscrire { background: linear-gradient(90deg, #ff4d00, #ff3300); color: white; border: none; border-radius: 8px; }
-    .btn-inscrire:hover { background: linear-gradient(90deg, #e63c00, #cc2900); }
-    .btn-outline-light { border-radius: 8px; }
-    .ticket { background: #ff3300; color: white; border-radius: 1rem; margin-top: 2rem; flex-wrap: wrap; text-align: center; gap: 1rem; }
-    .ticket .d-flex > div {flex: 1 1 30%;min-width: 100px;}
-    .ticket img {max-width: 100%; height: auto;}
-    .ticket-header {background-color: #000066; display: flex; justify-content: space-between; align-items: center; border-top-left-radius: 1rem; border-top-right-radius: 1rem; padding: 1rem;}
-    .div-form { background-color: white; border-radius: 1rem; padding: 2rem; color: black; margin-top: 1rem; }
-    .step-nav { background-color: #f8f9fa; padding: 1rem; border-radius: 1rem; font-weight: 500;font-size: 16px; flex-wrap: wrap; overflow-x: auto; }
-    .step-container {white-space: nowrap;font-weight: 500;font-size: 16px;display: inline-block;}
-    .btn-orange { background-color: #ff2d0a; color: white; border-radius: 20px; }
-    .btn-suivant { margin-top: 40px; margin-bottom: 150px; background: #ff3d00; color: white; border-radius: 30px; padding: 10px 50px; font-weight: bold; font-size: 16px; }
-    .btn-suivant:hover { background: #cc2900; }
-    .btn-orange:hover { background: linear-gradient(90deg, #e63c00, #cc2900); color: white;}
-    .footer { background-color: #000066; color: #ccccff; }
-    .footer-links a { color: #ccccff; text-decoration: none; display: block; margin-bottom: 0.5rem; transition: all 0.3s ease; }
-    .footer-links a:hover { color: #ff4500; padding-left: 4px;}
-    .social-icon { display: inline-block; background-color: #ff4500; color: white; width: 36px; height: 36px; text-align: center; line-height: 36px; border-radius: 50%; margin: 0 5px; font-size: 16px;transition: transform 0.3s ease, background-color 0.3s ease; }
-    .social-icon:hover { transform: scale(1.1); background-color: #cc3700; }
+    body {
+      background-color: #0e0e12;
+      color: white;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .navbar-custom {
+      background-color: #000066;
+      border-radius: 15px;
+      margin-top: 20px;
+      padding: 10px 20px;
+      height: 70px;
+    }
+
+    .navbar-brand img {
+      max-height: 160px;
+      width: auto;
+    }
+
+    .btn-inscrire {
+      background: linear-gradient(90deg, #ff4d00, #ff3300);
+      color: white;
+      border: none;
+      border-radius: 8px;
+    }
+
+    .btn-inscrire:hover {
+      background: linear-gradient(90deg, #e63c00, #cc2900);
+    }
+
+    .btn-outline-light {
+      border-radius: 8px;
+    }
+
+    .ticket {
+      background: #ff3300;
+      color: white;
+      border-radius: 1rem;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+      text-align: center;
+      gap: 1rem;
+    }
+
+    .ticket .d-flex>div {
+      flex: 1 1 30%;
+      min-width: 100px;
+    }
+
+    .ticket img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .ticket-header {
+      background-color: #000066;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top-left-radius: 1rem;
+      border-top-right-radius: 1rem;
+      padding: 1rem;
+    }
+
+    .div-form {
+      background-color: white;
+      border-radius: 1rem;
+      padding: 2rem;
+      color: black;
+      margin-top: 1rem;
+    }
+
+    .step-nav {
+      background-color: #f8f9fa;
+      padding: 1rem;
+      border-radius: 1rem;
+      font-weight: 500;
+      font-size: 16px;
+      flex-wrap: wrap;
+      overflow-x: auto;
+    }
+
+    .step-container {
+      white-space: nowrap;
+      font-weight: 500;
+      font-size: 16px;
+      display: inline-block;
+    }
+
+    .btn-orange {
+      background-color: #ff2d0a;
+      color: white;
+      border-radius: 20px;
+    }
+
+    .btn-suivant {
+      margin-top: 40px;
+      margin-bottom: 150px;
+      background: #ff3d00;
+      color: white;
+      border-radius: 30px;
+      padding: 10px 50px;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .btn-suivant:hover {
+      background: #cc2900;
+    }
+
+    .btn-orange:hover {
+      background: linear-gradient(90deg, #e63c00, #cc2900);
+      color: white;
+    }
+
+    .footer {
+      background-color: #000066;
+      color: #ccccff;
+    }
+
+    .footer-links a {
+      color: #ccccff;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 0.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: #ff4500;
+      padding-left: 4px;
+    }
+
+    .social-icon {
+      display: inline-block;
+      background-color: #ff4500;
+      color: white;
+      width: 36px;
+      height: 36px;
+      text-align: center;
+      line-height: 36px;
+      border-radius: 50%;
+      margin: 0 5px;
+      font-size: 16px;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+
+    .social-icon:hover {
+      transform: scale(1.1);
+      background-color: #cc3700;
+    }
 
     @media (max-width: 976px) {
-    .navbar-brand img {
-      margin-top: -65px;
-      max-height: 180px;
-      margin-left: -30px;
-    }
-    .navbar-brand {
-      max-height: 50px;
-    }
-    .navbar-custom {
-      margin-top: 10px;
-      border-radius: 15px;
-      width: 100vw;
-    }
-    .img-fluid {
-      margin-top: -60px;
-      margin-bottom: -60px;
-    }
-    .product-card {
-      margin-top: 30px;
-    }
-    .yes {
-      margin-bottom: 10px;
-    }
-    .yes2 {
-      margin-top: 10px;
-    }
-    .newsletter-section input[type="email"],
-    .newsletter-section button {
-      width: 90%;
-    }
+      .navbar-brand img {
+        margin-top: -65px;
+        max-height: 180px;
+        margin-left: -30px;
+      }
 
-    #navbarNav {
-      background-color: rgb(0, 0, 102);
-      width: 100%;
-      padding: 40px;
-      position: absolute;
-      top: 59px;
-      left: 0;
-      z-index: 999;
-      text-align: left;
-      border-bottom-left-radius: 15px;
-      border-bottom-right-radius: 15px;
-    }
+      .navbar-brand {
+        max-height: 50px;
+      }
 
-    #navbarNav .nav-link {
-      text-align: left;
-      font-size: 22px;
-      margin-top: 10px;
-    }
+      .navbar-custom {
+        margin-top: 10px;
+        border-radius: 15px;
+        width: 100vw;
+      }
 
-    #navbarNav .btn {
-      margin-top: 50px;
-      width: 100%;
-    }
+      .img-fluid {
+        margin-top: -60px;
+        margin-bottom: -60px;
+      }
 
-    #navbarNav .btn-inscrire {
-      margin: 8px;
-      text-align: center;
-    }
+      .product-card {
+        margin-top: 30px;
+      }
 
-    .hamburger {
-          width: 30px;
-          height: 22px;
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          cursor: pointer;
-          z-index: 1001;
-          border: none;
-        }
+      .yes {
+        margin-bottom: 10px;
+      }
 
-        .hamburger span {
-          height: 3px;
-          background-color: white;
-          border-radius: 2px;
-          transition: all 0.4s ease;
-          border: none;
-        }
+      .yes2 {
+        margin-top: 10px;
+      }
 
-        .navbar-toggler {
+      .newsletter-section input[type="email"],
+      .newsletter-section button {
+        width: 90%;
+      }
+
+      #navbarNav {
+        background-color: rgb(0, 0, 102);
+        width: 100%;
+        padding: 40px;
+        position: absolute;
+        top: 59px;
+        left: 0;
+        z-index: 999;
+        text-align: left;
+        border-bottom-left-radius: 15px;
+        border-bottom-right-radius: 15px;
+      }
+
+      #navbarNav .nav-link {
+        text-align: left;
+        font-size: 22px;
+        margin-top: 10px;
+      }
+
+      #navbarNav .btn {
+        margin-top: 50px;
+        width: 100%;
+      }
+
+      #navbarNav .btn-inscrire {
+        margin: 8px;
+        text-align: center;
+      }
+
+      .hamburger {
+        width: 30px;
+        height: 22px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        cursor: pointer;
+        z-index: 1001;
+        border: none;
+      }
+
+      .hamburger span {
+        height: 3px;
+        background-color: white;
+        border-radius: 2px;
+        transition: all 0.4s ease;
+        border: none;
+      }
+
+      .navbar-toggler {
         border: none !important;
         background: transparent !important;
         box-shadow: none !important;
         outline: none !important;
-        }
+      }
 
 
-        /* Animation croix */
-        .hamburger.active span:nth-child(1) {
-          transform: rotate(45deg) translate(5px, 5px);
-        }
-        .hamburger.active span:nth-child(2) {
-          opacity: 0;
-        }
-        .hamburger.active span:nth-child(3) {
-          transform: rotate(-45deg) translate(8px, -9px);
-        }
-        /* Supprimer styles Bootstrap par défaut */
-        .navbar-toggler-icon {
+      /* Animation croix */
+      .hamburger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+
+      .hamburger.active span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .hamburger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(8px, -9px);
+      }
+
+      /* Supprimer styles Bootstrap par défaut */
+      .navbar-toggler-icon {
         background-image: none !important;
-        }
-  }
+      }
+    }
 
     @media (max-width: 576px) {
-    .step-nav {
-      font-size: 14px;
-      line-height: 1.8;
-    }
+      .step-nav {
+        font-size: 14px;
+        line-height: 1.8;
+      }
 
-    .step-nav span {
-      display: inline-block;
-      margin: 2px 5px;
-    }
+      .step-nav span {
+        display: inline-block;
+        margin: 2px 5px;
+      }
 
-    .step-container {font-size: 14px;}
-    .step-nav::-webkit-scrollbar {
-      display: none; /* Optionnel : cache la barre de scroll */
-    }
+      .step-container {
+        font-size: 14px;
+      }
+
+      .step-nav::-webkit-scrollbar {
+        display: none;
+        /* Optionnel : cache la barre de scroll */
+      }
 
     }
   </style>
 </head>
+
 <body>
-<!-- NAVBAR -->
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top navbar-custom container">
-      <a class="navbar-brand" href="index.php"><img src="{{ asset('dossiers/image/Impact-Web-360-Logo1.png') }}" alt="Logo Impact Web" /></a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <div class="hamburger"  id="hamburgerBtn">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link " href="{{ route('home') }}">Acceuil</a></li>
-          <li class="nav-item"><a class="nav-link" href="{{ route('evenement') }}">Événements</a></li>
-          <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">E-learning</a></li>
-          <li class="nav-item"><a class="nav-link" href="{{ route('intervenant') }}">Intervenants</a></li>
-          <li class="nav-item"><a class="nav-link active" href="{{ route('step1') }}">Billetterie</a></li>
-          <li class="nav-item"><a class="nav-link" href="{{ route('boutique') }}">Boutique</a></li>
-          <li class="nav-item"><a class="btn btn-light mx-2" href="{{ route('login') }}">Se connecter</a></li>
-          <li class="nav-item"><a class="btn btn-inscrire" href="{{ route('register') }}">S'inscrire</a></li>
-        </ul>
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top navbar-custom container">
+    <a class="navbar-brand" href="index.php"><img src="{{ asset('dossiers/image/Impact-Web-360-Logo1.png') }}"
+        alt="Logo Impact Web" /></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <div class="hamburger" id="hamburgerBtn">
+        <span></span>
+        <span></span>
+        <span></span>
       </div>
-    </nav>
-
-<div class="container" style="margin-top: 150px;">
-
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link " href="{{ route('home') }}">Acceuil</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ route('evenement') }}">Événements</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">E-learning</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ route('intervenant') }}">Intervenants</a></li>
+        <li class="nav-item"><a class="nav-link active" href="{{ route('step1') }}">Billetterie</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ route('boutique') }}">Boutique</a></li>
+        <li class="nav-item"><a class="btn btn-light mx-2" href="{{ route('login') }}">Se connecter</a></li>
+        <li class="nav-item"><a class="btn btn-inscrire" href="{{ route('register') }}">S'inscrire</a></li>
+      </ul>
+    </div>
+  </nav>
 
 <div class="container" style="margin-top: 150px;">
   <div class="ticket text-center animate__animated animate__fadeIn">
     <div class="ticket-header p-3">
-      <img src="" alt="Logo">
-      <h5>Impact Web 360 – Édition 2025</h5>
-      <div class="text-end"><strong></strong></div>
+          <img src="" alt="Logo">
+          <h5>Impact Web 360 – Édition 2025</h5>
+          <div class="text-end"><strong></strong></div>
     </div>
     <div class="d-flex justify-content-center align-items-center p-3">
       <div>
@@ -207,7 +350,7 @@
     </div>
   </div>
 
-    <div class="step-nav mt-5 text-dark text-center">
+  <div class="step-nav mt-5 text-dark text-center">
     <div class="step-container">
       <span><strong class="text-primary"><a href="{{ route('step1') }}"> Informations</a></strong></span>
       <span class="mx-2 text-muted">&gt;</span>
@@ -218,104 +361,55 @@
       <span>Paiement</span>
     </div>
   </div>
-
-  <!-- Formulaire -->
-        <div class="div-form mt-4">
-            <form>
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <input type="text" class="form-control p-3 rounded-4" name="prenom" placeholder="Prénom" required>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <input type="text" class="form-control p-3 rounded-4" name="pays" placeholder="Pays" required>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <input type="text" class="form-control p-3 rounded-4" name="ville" placeholder="Ville" required>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <input type="text" class="form-control p-3 rounded-4" name="telephone" placeholder="Téléphone" required>
-                    </div>
-                    <div class="col-md-6">
-                        <input type="email" class="form-control p-3 rounded-4" name="email" placeholder="Email" required>
-                    </div>
-                </div>
-
-                <!-- Carte avec réduction -->
-                <div class="card mt-3 mx-auto rounded-5" style="max-width: 600px">
-                    <div class="card-body">
-                        <hr>
-                        <div class="row text-body-secondary card-subtitle mb-2">
-                            <h6 class="col-md-8">Billet: </h6>
-                            <h6 class="col-md-4">100.000FCFA</h6>
-                        </div>
-                        <div class="row text-body-secondary card-subtitle mb-2">
-                            <h6 class="col-md-8">Rabais: </h6>
-                            <h6 class="col-md-4" id="rabais-display">-</h6>
-                        </div>
-                        <center>
-                            <button type="button" class="btn btn-light text-danger rounded-5 mb-3 w-50" 
-                                    data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                J'ai un code promo
-                            </button>
-                        </center>
-                    </div>
-                    <div class="card-footer d-flex text-white fw-bold" 
-                         style="background-color: #ff4500; border-bottom-left-radius: 2rem; border-bottom-right-radius: 2rem;">
-                        <p class="m-0">Résumé total</p>
-                    </div>
-                </div>
-
-                <!-- MODAL PROMO -->
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Code Promo</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form id="promoForm">
-                                    <input type="text" class="form-control" name="code_promo" id="codePromoInput" 
-                                           placeholder="Entrez votre code promo ici">
-                                    <p class="text-muted mt-2">Si vous avez un code promo, entrez-le ici pour bénéficier d'une réduction sur votre billet.</p>
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                                <button type="button" class="btn btn-primary" id="applyPromoBtn">Enregistrer</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="text-center">
-                    <button type="submit" class="btn btn-suivant">Payer</button>
-                </div>
-            </form>
+ <form class="form-section animate__animated animate__fadeInUp" method="POST" action="{{ route('tickets.store') }}">
+    @csrf
+    <div class="alert alert-danger"></div>
+   
+    <div class="row div-form">
+        <div class="col-md-6 mb-3">
+            <input type="text" class="form-control p-3 rounded-4" name="nom" placeholder="Nom de famille" value="{{ $step1['nom'] ?? '' }}" required>
         </div>
-    
 
-    <!-- MODAL PROMO -->
-    <!-- MODAL PROMO -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form id="promoForm" action="{{ route('code.promo.valider') }}" method="post">
-          @csrf
-          <input type="text" class="form-control" name="code_promo" id="codePromoInput" placeholder="Entrez votre code promo ici">
-          <p class="text-muted">Si vous avez un code promo, entrez-le ici pour bénéficier d'une réduction sur votre billet.</p>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-        <button type="button" class="btn btn-primary" id="applyPromoBtn">Enregistrer</button>
-      </div>
+        <div class="col-md-6 mb-3">
+            <input type="text" class="form-control p-3 rounded-4" name="prenom" placeholder="Prénom" value="{{ $step1['prenom'] ?? '' }}" required>
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <input type="text" class="form-control p-3 rounded-4" name="pays" placeholder="Pays" value="{{ $step1['pays'] ?? '' }}" required>
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <input type="text" class="form-control p-3 rounded-4" name="ville" placeholder="Ville" value="{{ $step1['ville'] ?? '' }}" required>
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <input type="text" class="form-control p-3 rounded-4" name="telephone" placeholder="Téléphone" value="{{ $step1['telephone'] ?? '' }}" required>
+        </div>
+
+        <div class="col-md-6">
+            <input type="email" class="form-control p-3 rounded-4" name="email" placeholder="Email" value="{{ $step1['email'] ?? '' }}" required>
+        </div>
+</div>
+
+<div class="card mt-3 justify-content-center rounded-5 w-50" >
+  <div class="card-body">
+    <hr>
+    <div class="row text-body-secondary card-subtitle mb-2">
+         <h6 class="col-md-8">Billet: </h6>
+         <h6 class="col-md-4">100.000FCFA</h6>
     </div>
+    <br>
+        <div class="row text-body-secondary card-subtitle mb-2">
+         <h6 class="col-md-8">Rabais: </h6>
+         <h6 class="col-md-4">-</h6>
+        </div>
+    <center>
+    <button type="button" class="btn btn-light text-center text-danger rounded-5 mb-3 justify-content-center align-item-center w-50">J'ai un code promo</button>
   </div>
+  <div class="card-footer justify-content-between align-items-center d-flex text-body-secondary text-white fw-bold" style="background-color: #ff4500; text-align:center; color: white; border-bottom-left-radius: 2rem; border-bottom-right-radius: 2rem;">
+        <p style="text-align:center;">Résumé total</p>
+  </div>
+  </center>
 </div>
 
     <div class="text-center">
@@ -324,10 +418,7 @@
   </form>
 </div>
 
-<!-- STYLES MODAL BLUR FIX -->
-
-
-<!-- ===== FOOTER ===== -->
+  <!-- ===== FOOTER ===== -->
   <footer class="footer text-white pt-5">
     <div class="container">
       <div class="row">
@@ -381,37 +472,17 @@
       </div>
     </div>
   </footer>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Gestion du code promo
-            document.getElementById('applyPromoBtn').addEventListener('click', function () {
-                const code = document.getElementById('codePromoInput').value;
-                
-                // Simulation de validation du code promo
-                if (code === "IMPACT25") {
-                    document.getElementById('rabais-display').textContent = '-25%';
-                    
-                    // Fermer le modal
-                    const modal = bootstrap.Modal.getInstance(document.getElementById('exampleModal'));
-                    modal.hide();
-                    
-                    alert('Code promo appliqué : 25% de réduction !');
-                } else {
-                    alert('Code promo invalide. Veuillez réessayer.');
-                }
-            });
-            
-            // Gestion du menu hamburger
-            const hamburger = document.getElementById('hamburgerBtn');
-            if (hamburger) {
-                hamburger.addEventListener('click', function () {
-                    this.classList.toggle('active');
-                });
-            }
-        });
-    </script>
-</body>
-</html>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const toggler = document.querySelector('.navbar-toggler');
+        const hamburger = document.getElementById('hamburgerBtn');
 
+        toggler.addEventListener('click', () => {
+          hamburger.classList.toggle('active');
+        });
+      });
+</script>
+</body>
+
+</html>

@@ -640,13 +640,14 @@
                                 <a class="nav-link text-white" href="{{ route('notifications') }}"><i class="fas fa-bell"></i></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-white d-flex align-items-center" href="{{ route('parametres') }}">
-                                    <img src="{{ Auth::user()->image ? asset('storage/' . Auth::user()->image) : asset('logo.png') }}" alt="Photo de profil" style="max-height: 50px;" class="rounded-circle profile-img-preview me-4">
+                                <a class="nav-link text-white d-flex align-items-center " href="{{ route('parametres') }}">
+                                    <img src="{{ asset(Auth::user()->image && Auth::user()->image !== 'photos/default.svg' ? 'storage/' . Auth::user()->image . '?v=' . time() : 'dossiers/image/default.png') }}"
+                                     alt="Photo de profil" class="rounded-circle" style="max-height: 40px;">
                                 </a>
                             </li>
                         </ul>
                     </div>
-                </div>
+                </div> 
             </nav>
 
             <div class="container-fluid py-4 main-content">
@@ -769,7 +770,7 @@
                                 </div>
                             </div>
                             @if ($formation->price == 0)
-                                <a href="#" class="btn btn-add-to-cart">
+                                <a href="{{ route('formation_gratuite', ['formationId' => $formation->id]) }}" class="btn btn-add-to-cart">
                                     <i class="fas fa-play-circle me-2"></i> Accéder au cours
                                 </a>
                             @else
@@ -819,3 +820,4 @@
     </script>
 </body>
 </html>
+

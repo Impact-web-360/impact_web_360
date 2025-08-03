@@ -74,4 +74,9 @@ class Formation extends Model
                     ->withPivot('status', 'paid_at', 'amount_paid', 'auto_renewal_enabled', 'fedapay_transaction_id')
                     ->withTimestamps();
     }
+
+    public function events()
+    {
+        return $this->hasMany(Event::class, 'formation_id');
+    }
 }

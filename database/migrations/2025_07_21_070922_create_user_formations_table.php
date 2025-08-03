@@ -17,7 +17,6 @@ return new class extends Migration
             $table->id(); // Identifiant unique pour chaque enregistrement dans la table pivot
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); // Clé étrangère vers la table 'users'
             $table->foreignId('formation_id')->constrained('formations')->onDelete('cascade'); // Clé étrangère vers la table 'formations'
-
             $table->string('status')->default('pending'); // Statut du paiement: 'pending', 'paid', 'failed', 'refunded', 'awaiting_webhook_confirmation'
             $table->timestamp('paid_at')->nullable(); // Date et heure du paiement réussi
             $table->decimal('amount_paid', 10, 2)->nullable(); // Montant réellement payé
