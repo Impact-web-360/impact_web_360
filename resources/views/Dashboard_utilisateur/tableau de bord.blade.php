@@ -568,7 +568,7 @@
                 <div class="container-fluid">
                     <button class="btn btn-danger d-lg-none" id="sidebarToggle"><i class="fas fa-bars"></i></button>
                     <div class="navbar-text text-white ms-3 d-none d-lg-block">
-                        Bienvenue, Peter ! <br> Boostons vos connaissances aujourd'hui et apprenons de nouvelles choses
+                        Bienvenue, {{ Auth::user()->nom }} ! <br> Boostons vos connaissances aujourd'hui et apprenons de nouvelles choses
                     </div>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ms-auto mt-2 mt-lg-0 align-items-center">
@@ -592,134 +592,83 @@
                     <div class="col-lg-8">
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <h4 class="text-white mb-0">Mes cours</h4>
-                            <a href="#" class="text-decoration-none text-primary">Tout voir</a>
+                            <a href="{{ route('cours') }}" class="text-decoration-none text-primary">Tout voir</a>
                         </div>
                         <div class="row mb-4">
-                            <div class="col-md-6 mb-3">
-                                <div class="card bg-dark-card border-secondary text-white shadow-sm h-100 course-card">
-                                    <div class="card-body">
-                                        <div class="d-flex align-items-center mb-3">
-                                            <img src="logo.png" alt="Impact Web Logo" style="max-height: 100px;"
-                                                class="rounded-circle me-2">
-                                            <h5 class="card-title mb-0">Envato Mastery</h5>
+                            @forelse($userFormations as $formation)
+                                <div class="col-md-6 mb-4">
+                                    <div class="card bg-dark-card border-secondary text-white shadow-sm h-100 course-card">
+                                        <div class="d-flex align-items-center p-3">
+                                            <img src="{{ asset('dossiers/image/Impact-Web-360-Logo1.png') }}" alt="Formation Logo"
+                                                class="course-logo me-3 rounded-circle" style="max-height: 80px; max-width: 80px;">
+                                            
+                                            <div class="flex-grow-1">
+                                                <h5 class="card-title fw-bold mb-1">{{ Str::limit($formation->title, 40) }}</h5>
+                                                <p class="text-secondary mb-1">
+                                                    <i class="fas fa-user-tie me-1"></i> {{ $formation->mentor ?? 'Nom du mentor' }}
+                                                </p>
+                                                <p class="text-secondary mb-0">
+                                                    <i class="fas fa-book-open me-1"></i> {{ $formation->modules->count() }} modules
+                                                </p>
+                                            </div>
                                         </div>
-                                        <p class="card-text text-secondary mb-2">Créez un revenu passif à partir de...
-                                        </p>
-                                        <div class="progress bg-secondary mb-2" style="height: 5px;">
-                                            <div class="progress-bar bg-success" role="progressbar" style="width: 70%;"
-                                                aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+                                        
+                                        <div class="progress-section p-3 pt-0">
+                                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                                <small class="text-secondary">Progression</small>
+                                                <small class="text-secondary">{{ $formation->pivot->progress ?? 0 }}%</small>
+                                            </div>
+                                            <div class="progress bg-secondary" style="height: 5px;">
+                                                <div class="progress-bar bg-primary" role="progressbar"
+                                                    style="width: {{ $formation->pivot->progress ?? 0 }}%;"
+                                                    aria-valuenow="{{ $formation->pivot->progress ?? 0 }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
                                         </div>
-                                        <small class="text-secondary">3,2 heures prises / 10 heures</small>
+                                        
+                                        <div class="card-footer bg-transparent border-top-0 d-flex justify-content-end p-3">
+                                            <a href="{{ route('formation.show', ['formation' => $formation->id]) }}" class="btn btn-primary btn-sm">
+                                                <i class="fas fa-play me-1"></i> Continuer
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <div class="card bg-dark-card border-secondary text-white shadow-sm h-100 course-card">
-                                    <div class="card-body">
-                                        <div class="d-flex align-items-center mb-3">
-                                            <img src="logo.png" alt="Impact Web Logo" style="max-height: 100px;"
-                                                class="rounded-circle me-2">
-                                            <h5 class="card-title mb-0">Google</h5>
-                                        </div>
-                                        <p class="card-text text-secondary mb-2">Maîtriser Git et l'application Vercel
-                                            Devenez Pro...</p>
-                                        <div class="progress bg-secondary mb-2" style="height: 5px;">
-                                            <div class="progress-bar bg-info" role="progressbar" style="width: 40%;"
-                                                aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                        <small class="text-secondary">2,5 heures prises / 6 heures</small>
-                                    </div>
+                            @empty
+                                <div class="col-12">
+                                    <p class="text-secondary text-center">Vous n'êtes inscrit à aucune formation pour le moment.</p>
                                 </div>
-                            </div>
+                            @endforelse
                         </div>
-
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <h4 class="text-white mb-0">Tâche du jour</h4>
-                            <a href="#" class="text-decoration-none text-primary">Tout voir</a>
+                            <a href="{{ route('calendrier') }}" class="text-decoration-none text-primary">Tout voir</a>
                         </div>
                         <div class="task-list">
-                            <div class="card bg-dark-card border-secondary text-white shadow-sm mb-3 task-item">
-                                <div class="card-body d-flex align-items-center justify-content-between">
-                                    <div class="d-flex align-items-center">
-                                        <div
-                                            class="task-icon me-3 bg-secondary rounded-circle d-flex align-items-center justify-content-center">
-                                            <i class="fas fa-book-open text-white"></i>
+                            @forelse($todayTasks as $task)
+                                <div class="card bg-dark-card border-secondary text-white shadow-sm mb-3 task-item">
+                                    <div class="card-body d-flex align-items-center justify-content-between">
+                                        <div class="d-flex align-items-center">
+                                            <div
+                                                class="task-icon me-3 bg-secondary rounded-circle d-flex align-items-center justify-content-center">
+                                                <i class="fas fa-book-open text-white"></i>
+                                            </div>
+                                            <div>
+                                                <p class="mb-0 fw-bold">{{ $task->title }}</p>
+                                                <small class="text-secondary">
+                                                    {{ $task->formation->title }} 
+                                                    <i class="fas fa-circle ms-1 me-1 text-xs"></i> 
+                                                    {{ $task->start_time->format('H:i') }} - {{ $task->end_time->format('H:i') }}
+                                                </small>
+                                            </div>
                                         </div>
-                                        <div>
-                                            <p class="mb-0 fw-bold">Apprendre une nouvelle partie</p>
-                                            <small class="text-secondary">Envato Mastery <i
-                                                    class="fas fa-circle ms-1 me-1 text-xs"></i> Mr. Reynold <i
-                                                    class="fas fa-circle ms-1 me-1 text-xs"></i> Théorie</small>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" role="switch" id="task-{{ $task->id }}">
+                                            <label class="form-check-label text-secondary ms-2" for="task-{{ $task->id }}">Fait</label>
                                         </div>
-                                    </div>
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" role="switch" id="task1"
-                                            checked>
-                                        <label class="form-check-label text-success ms-2" for="task1">Fait</label>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="card bg-dark-card border-secondary text-white shadow-sm mb-3 task-item">
-                                <div class="card-body d-flex align-items-center justify-content-between">
-                                    <div class="d-flex align-items-center">
-                                        <div
-                                            class="task-icon me-3 bg-secondary rounded-circle d-flex align-items-center justify-content-center">
-                                            <i class="fas fa-book-open text-white"></i>
-                                        </div>
-                                        <div>
-                                            <p class="mb-0 fw-bold">Apprendre une nouvelle partie</p>
-                                            <small class="text-secondary">Mastering Figma <i
-                                                    class="fas fa-circle ms-1 me-1 text-xs"></i> Ms. Dyana <i
-                                                    class="fas fa-circle ms-1 me-1 text-xs"></i> Théorie</small>
-                                        </div>
-                                    </div>
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" role="switch" id="task2"
-                                            checked>
-                                        <label class="form-check-label text-success ms-2" for="task2">Fait</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card bg-dark-card border-secondary text-white shadow-sm mb-3 task-item">
-                                <div class="card-body d-flex align-items-center justify-content-between">
-                                    <div class="d-flex align-items-center">
-                                        <div
-                                            class="task-icon me-3 bg-secondary rounded-circle d-flex align-items-center justify-content-center">
-                                            <i class="fas fa-book-open text-white"></i>
-                                        </div>
-                                        <div>
-                                            <p class="mb-0 fw-bold">Apprendre une nouvelle partie</p>
-                                            <small class="text-secondary">Mastering Git & Vercel <i
-                                                    class="fas fa-circle ms-1 me-1 text-xs"></i> Ms. Gynda <i
-                                                    class="fas fa-circle ms-1 me-1 text-xs"></i> Théorie</small>
-                                        </div>
-                                    </div>
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" role="switch" id="task3">
-                                        <label class="form-check-label text-secondary ms-2" for="task3">Fait</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card bg-dark-card border-secondary text-white shadow-sm mb-3 task-item">
-                                <div class="card-body d-flex align-items-center justify-content-between">
-                                    <div class="d-flex align-items-center">
-                                        <div
-                                            class="task-icon me-3 bg-secondary rounded-circle d-flex align-items-center justify-content-center">
-                                            <i class="fas fa-book-open text-white"></i>
-                                        </div>
-                                        <div>
-                                            <p class="mb-0 fw-bold">Apprendre une nouvelle partie</p>
-                                            <small class="text-secondary">Design System Basic <i
-                                                    class="fas fa-circle ms-1 me-1 text-xs"></i> Ms. Nina <i
-                                                    class="fas fa-circle ms-1 me-1 text-xs"></i> Théorie</small>
-                                        </div>
-                                    </div>
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" role="switch" id="task4">
-                                        <label class="form-check-label text-secondary ms-2" for="task4">Fait</label>
-                                    </div>
-                                </div>
-                            </div>
+                            @empty
+                                <p class="text-secondary text-center mt-3">Pas de tâches prévues pour aujourd'hui.</p>
+                            @endforelse
                         </div>
                     </div>
 
@@ -728,69 +677,115 @@
                             <h4 class="text-white mb-0">Mon emploi du temps</h4>
                             <button
                                 class="btn btn-primary btn-sm rounded-circle d-flex align-items-center justify-content-center"
-                                style="width: 30px; height: 30px;"><i class="fas fa-plus"></i></button>
+                                style="width: 30px; height: 30px;"
+                                data-bs-toggle="modal" data-bs-target="#addEventModal">
+                                <i class="fas fa-plus"></i>
+                            </button>
                         </div>
                         <div class="schedule-list">
-                            <div class="schedule-item mb-3">
-                                <div class="schedule-time text-secondary me-3">09:00 AM</div>
-                                <div class="schedule-content flex-grow-1">
-                                    <div class="card bg-dark-card border-secondary text-white shadow-sm schedule-event">
-                                        <div class="card-body py-2 px-3">
-                                        </div>
+                            @if($todayEvents->isEmpty())
+                                <div class="card bg-dark-card border-secondary text-white shadow-sm schedule-event text-center">
+                                    <div class="card-body py-4 px-3">
+                                        <p class="mb-0 text-secondary">Aucun événement prévu pour aujourd'hui.</p>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="schedule-item mb-3">
-                                <div class="schedule-time text-secondary me-3">10:00 AM</div>
-                                <div class="schedule-content flex-grow-1">
-                                    <div class="card bg-primary text-white shadow-sm schedule-event">
-                                        <div class="card-body py-2 px-3">
-                                            <p class="mb-0 fw-bold">UI/UX Design Basic</p>
-                                            <small class="text-white-50">Terminez la tâche 12</small>
+                            @else
+                                @php
+                                    // Générer une plage horaire pour afficher tous les événements
+                                    $startHour = 8;
+                                    $endHour = 24;
+                                @endphp
+                                @for ($hour = $startHour; $hour <= $endHour; $hour++)
+                                    <div class="schedule-item mb-3">
+                                        <div class="schedule-time text-secondary me-3">{{ sprintf('%02d:00', $hour) }}</div>
+                                        <div class="schedule-content flex-grow-1">
+                                            @php
+                                                $eventForThisHour = $todayEvents->first(function ($event) use ($hour) {
+                                                    return $event->start_time->hour === $hour;
+                                                });
+                                            @endphp
+                                            @if($eventForThisHour)
+                                                <div class="card shadow-sm schedule-event" style="background-color: {{ $eventForThisHour->color }}; border-color: {{ $eventForThisHour->color }};">
+                                                    <div class="card-body py-2 px-3">
+                                                        <p class="mb-0 fw-bold">{{ $eventForThisHour->title }}</p>
+                                                        <small class="text-white-50">{{ $eventForThisHour->start_time->format('H:i') }} - {{ $eventForThisHour->end_time->format('H:i') }}</small>
+                                                    </div>
+                                                </div>
+                                            @else
+                                                <div class="card bg-dark-card border-secondary text-white shadow-sm schedule-event">
+                                                    <div class="card-body py-2 px-3">
+                                                        <small class="text-secondary">{{ sprintf('%02d:00', $hour) }} - {{ sprintf('%02d:00', $hour + 1) }}</small>
+                                                    </div>
+                                                </div>
+                                            @endif
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="schedule-item mb-3">
-                                <div class="schedule-time text-secondary me-3">11:00 AM</div>
-                                <div class="schedule-content flex-grow-1">
-                                    <div class="card bg-dark-card border-secondary text-white shadow-sm schedule-event">
-                                        <div class="card-body py-2 px-3">
-                                            <small class="text-secondary">10H00 - 12H00</small>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="schedule-item mb-3">
-                                <div class="schedule-time text-secondary me-3">12:00 PM</div>
-                                <div class="schedule-content flex-grow-1">
-                                    <div class="card bg-dark-card border-secondary text-white shadow-sm schedule-event">
-                                        <div class="card-body py-2 px-3">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="schedule-item mb-3">
-                                <div class="schedule-time text-secondary me-3">01:00 PM</div>
-                                <div class="schedule-content flex-grow-1">
-                                    <div class="card bg-dark-card border-secondary text-white shadow-sm schedule-event">
-                                        <div class="card-body py-2 px-3">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="schedule-item mb-3">
-                                <div class="schedule-time text-secondary me-3">02:00 PM</div>
-                                <div class="schedule-content flex-grow-1">
-                                    <div class="card bg-dark-card border-secondary text-white shadow-sm schedule-event">
-                                        <div class="card-body py-2 px-3">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                @endfor
+                            @endif
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="addEventModal" tabindex="-1" aria-labelledby="addEventModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-dark-card text-white">
+                <div class="modal-header border-bottom-0">
+                    <h5 class="modal-title" id="addEventModalLabel">{{ __('Ajouter un nouvel événement') }}</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="{{ route('events.store') }}" method="POST">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="eventTitle" class="form-label">{{ __('Titre de l\'événement') }}</label>
+                            <input type="text" class="form-control bg-dark text-white border-secondary" id="eventTitle" name="title" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="eventDescription" class="form-label">{{ __('Description') }}</label>
+                            <textarea class="form-control bg-dark text-white border-secondary" id="eventDescription" name="description"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="eventFormation" class="form-label">{{ __('Formation') }}</label>
+                            <select class="form-select bg-dark text-white border-secondary" id="eventFormation" name="formation_id" required>
+                                <option selected disabled>{{ __('Sélectionnez une formation') }}</option>
+                                @foreach($formations as $formation)
+                                    <option value="{{ $formation->id }}">{{ $formation->title }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="eventStartDate" class="form-label">{{ __('Date de début') }}</label>
+                                <input type="date" class="form-control bg-dark text-white border-secondary" id="eventStartDate" name="start_date" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="eventStartTime" class="form-label">{{ __('Heure de début') }}</label>
+                                <input type="time" class="form-control bg-dark text-white border-secondary" id="eventStartTime" name="start_time" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="eventEndDate" class="form-label">{{ __('Date de fin') }}</label>
+                                <input type="date" class="form-control bg-dark text-white border-secondary" id="eventEndDate" name="end_date" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="eventEndTime" class="form-label">{{ __('Heure de fin') }}</label>
+                                <input type="time" class="form-control bg-dark text-white border-secondary" id="eventEndTime" name="end_time" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="eventColor" class="form-label">{{ __('Couleur de l\'événement') }}</label>
+                            <input type="color" class="form-control form-control-color bg-dark border-secondary" id="eventColor" name="color" value="#FF0000" title="Choisissez une couleur">
+                        </div>
+                    </div>
+                    <div class="modal-footer border-top-0">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('Annuler') }}</button>
+                        <button type="submit" class="btn btn-primary animate-button">{{ __('Enregistrer') }}</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

@@ -468,7 +468,7 @@
                                 @endfor
                             </div>
                             <div class="schedule-body">
-                                @for ($hour = 8; $hour <= 17; $hour++)
+                                @for ($hour = 8; $hour <= 24; $hour++)
                                     <div class="schedule-row row gx-0">
                                         <div class="col-1 time-col text-secondary text-end pe-3">{{ sprintf('%02d:00', $hour) }}</div>
                                         @for ($i = 0; $i < 7; $i++)
@@ -497,7 +497,7 @@
 
                     <div class="col-lg-4">
                         <button class="btn btn-primary w-100 p-3 mb-4 rounded-lg shadow-sm animate-button" data-bs-toggle="modal" data-bs-target="#addEventModal">
-                            <i class="fas fa-plus-circle me-2"></i> {{ __('Ajouter un nouvel événement') }}
+                            <i class="fas fa-plus-circle me-2"></i> {{ __('Planifier une tâche') }}
                         </button>
 
                         <div class="card bg-dark-card p-3 mb-4 rounded-lg shadow-sm calendar-card">

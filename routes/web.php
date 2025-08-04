@@ -27,6 +27,7 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\MediaController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\EmploieController;
+use App\Http\Controllers\UtilisateurController;
 
 
 
@@ -163,12 +164,9 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),
     // Toutes vos routes qui nécessitent d'être traduites
     // seront préfixées par la locale (ex: /en/dashboard, /fr/dashboard)
         Route::middleware('auth')->group(function () {
-            Route::get('/dashboard', function () {
-                return view('dashboard_utilisateur.tableau de bord'); // page d'accueil
-            })->name('dashboard');
 
-
-            
+            Route::get('/dashboard', [UtilisateurController::class, 'index'])
+            ->name('dashboard');
 
             Route::get('/cours/details', function () {
                 return view('dashboard_utilisateur.details_cours');
