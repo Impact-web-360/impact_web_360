@@ -85,9 +85,10 @@
     /* Main content */
     #content {
       margin-left: 250px;
-      padding: 2rem 3rem;
+      padding: 1rem 1rem;
       transition: margin-left 0.3s ease;
       min-height: 100vh;
+      width: 77%;
     }
 
     /* Header (optional) */
@@ -258,6 +259,7 @@
               onsubmit="return confirm('Confirmer la suppression ?');" style="display:inline;">
               @csrf
               @method('DELETE')
+              <br>
               <button type="submit" class="btn btn-outline-danger btn-sm me-4">
                 <i class="fas fa-trash"></i>
               </button>
