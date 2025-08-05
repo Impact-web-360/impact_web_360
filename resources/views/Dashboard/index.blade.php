@@ -195,19 +195,21 @@
 
 <nav id="sidebar" aria-label="Sidebar Navigation">
   <h4><i class="fa fa-cogs me-2"></i>Admin Panel</h4>
-  <a href="#stats" class="nav-link active"><i class="fas fa-chart-bar"></i> Statistiques</a>
+  <a href="{{ route('admin.dashboard') }}" class="nav-link active"><i class="fas fa-chart-bar"></i> Statistiques</a>
   <a href="{{ route('evenements.index') }}" class="nav-link"><i class="fa fa-calendar-alt"></i>Événements</a>
   <a href="{{ route('sponsors.index') }}" class="nav-link"><i class="fa fa-handshake"></i>Sponsors</a>
-  <a href="{{ route('categories.index')}}" class="nav-link"><i class="fa fa-user"></i>Catégorie</a>
-  <a href="{{ route('formations.index')}}" class="nav-link"><i class="fa fa-user"></i>Formation</a>
-  <a href="{{ route('modules.index')}}" class="nav-link"><i class="fa fa-user"></i>Modules</a>
+  <a href="{{ route('categories.index')}}" class="nav-link"><i class="fas fa-layer-group"></i>Catégorie</a>
+  <a href="{{ route('formations.index')}}" class="nav-link"><i class="fas fa-graduation-cap"></i>Formation</a>
+  <a href="{{ route('modules.index')}}" class="nav-link"><i class="fas fa-puzzle-piece"></i>Modules</a>
   <a href="{{ route('articles.index')}}" class="nav-link"><i class="fa fa-shopping-basket"></i>Articles</a>
   <a href="{{ route('emploies.index')}}" class="nav-link"><i class="fa fa-briefcase"></i>Emplois</a>
   <a href="ajouter_intervenant.php" class="nav-link"><i class="fa fa-user"></i>Intervenants</a>
   <a href="{{ route('billet')}}" class="nav-link"><i class="fas fa-calendar-alt "></i> Tickets</a>
-  <a href="#logs" class="nav-link"><i class="fas fa-history"></i> Historique</a>
-  <a href="#settings" class="nav-link"><i class="fas fa-cogs"></i> Paramètres</a>
-  <a href="{{ route('logout')}}" class="nav-link"><i class="fa fa-arrow-left"></i>Deconnexion</a>
+  <form action="{{ route('logout') }}" method="POST" id="logout-form">
+    @csrf
+    <a href="{{ route('logout')}}" class="nav-link"><i class="fa fa-arrow-left"></i>Deconnexion</a>
+  </form>
+  
 </nav>
 
 <main id="content" tabindex="-1">

@@ -104,41 +104,80 @@
 
 <!-- Section Intervenants -->
 <section class="container my-5" style="padding-top: 120px;">
-  <center><h2 class="mb-2 fw-bold">Nos intervenants</h2>
-  <p class="text-light mb-4">Découvrez le profil de nos intervenants</p></center>
+  <center>
+    <h2 class="mb-2 fw-bold">Nos intervenants</h2>
+    <p class="text-light mb-4">Découvrez le profil de nos intervenants</p>
+  </center>
 
-  <!-- Aperçu limité -->
+  <!-- Aperçu limité (6 premiers) -->
   <div class="row g-4" id="intervenants-apercu">
+    @foreach($intervenants->take(6) as $intervenant)
       <div class="col-md-4 col-sm-6">
         <div class="card bg-dark text-white text-center p-3 rounded-4 border-0 h-100 shadow">
-          <img src="images/" class="rounded-3 mb-3" alt="">
-          <h5 class="mb-0"></h5>
-          <small class="text-muted d-block"></small>
-          
-            <small class="text-light fst-italic">Événement :</small>
-          <a href="" class="btn btn-danger mt-3 rounded-pill">Voir profil</a>
+          @if($intervenant->image)
+            <img src="{{ asset('storage/' . $intervenant->image) }}" class="rounded-3 mb-3" alt="{{ $intervenant->nom }}" style="height: 200px; object-fit: cover;">
+          @else
+            <div class="bg-secondary rounded-3 mb-3 d-flex align-items-center justify-content-center" style="height: 200px;">
+              <i class="fas fa-user fa-3x text-light"></i>
+            </div>
+          @endif
+          <h5 class="mb-0">{{ $intervenant->nom }}</h5>
+          <small class="text-muted d-block">{{ $intervenant->theme ?? 'Intervenant' }}</small>
+          <small class="text-light fst-italic">Poste : {{ $intervenant->poste ?? 'Non défini' }}</small>
+          @if($intervenant->evenements->count() > 0)
+            <small class="text-light fst-italic">Événement : {{ $intervenant->evenements->first()->titre }}</small>
+          @endif
+          <a href="{{ route('intervenants.show', $intervenant->id) }}" class="btn btn-danger mt-3 rounded-pill">Voir profil</a>
         </div>
       </div>
+    @endforeach
   </div>
 
-  <!-- Liste complète cachée au départ -->
+  <!-- Liste complète -->
   <div class="row g-4 d-none" id="intervenants-complet">
+    @foreach($intervenants->skip(6) as $intervenant)
+      <div class="col-md-4 col-sm-6">
         <div class="card bg-dark text-white text-center p-3 rounded-4 border-0 h-100 shadow">
-          <img src="images/" class="rounded-3 mb-3" alt="">
-          <h5 class="mb-0"></h5>
-          <small class="text-muted d-block"></small>
-          
-            <small class="text-light fst-italic">Événement : </small>
-          <a href="" class="btn btn-danger mt-3 rounded-pill">Voir profil</a>
+          @if($intervenant->image)
+            <img src="{{ asset('storage/' . $intervenant->image) }}" class="rounded-3 mb-3" alt="{{ $intervenant->nom }}" style="height: 200px; object-fit: cover;">
+          @else
+            <div class="bg-secondary rounded-3 mb-3 d-flex align-items-center justify-content-center" style="height: 200px;">
+              <i class="fas fa-user fa-3x text-light"></i>
+            </div>
+          @endif
+          <h5 class="mb-0">{{ $intervenant->nom }}</h5>
+          <small class="text-muted d-block">{{ $intervenant->theme ?? 'Intervenant' }}</small>
+          <small class="text-light fst-italic">Poste : {{ $intervenant->poste ?? 'Non défini' }}</small>
+          @if($intervenant->evenements->count() > 0)
+            <small class="text-light fst-italic">Événement : {{ $intervenant->evenements->first()->titre }}</small>
+          @endif
+          <a href="{{ route('intervenants.show', $intervenant->id) }}" class="btn btn-danger mt-3 rounded-pill">Voir profil</a>
         </div>
       </div>
-
+    @endforeach
   </div>
 
   <div class="mt-4 text-center">
-    <button id="btn-decouvrir" class="btn btn-gradient"><i class="fas fa-eye me-2"></i>Découvrir tous les intervenants</button>
-    <button id="btn-masquer" class="btn btn-outline-light d-none"><i class="fas fa-eye-slash me-2"></i>Voir moins</button>
+    @if($intervenants->count() > 6)
+      <button id="btn-decouvrir" class="btn btn-gradient">
+        <i class="fas fa-eye me-2"></i>Découvrir tous les intervenants ({{ $intervenants->count() }})
+      </button>
+      <button id="btn-masquer" class="btn btn-outline-light d-none">
+        <i class="fas fa-eye-slash me-2"></i>Voir moins
+      </button>
+    @endif
   </div>
+
+  <!-- Section Admin - visible uniquement pour les admins -->
+  @auth
+    @if(auth()->user()->type === 'admin')
+      <div class="mt-5 text-center">
+        <a href="{{ route('dashboard.intervenants.index') }}" class="btn btn-primary">
+          <i class="fas fa-cog"></i> Gérer les intervenants
+        </a>
+      </div>
+    @endif
+  @endauth
 </section>
 
   <!-- ===== FOOTER ===== -->
@@ -147,7 +186,7 @@
       <div class="row">
         <!-- Logo -->
         <div class=" col-12 col-md-4 mb-4 text-center text-md-start">
-          <img src="./Impact-Web-360-Logo.png" alt="Logo Impact Web" class="img-fluid" style="max-width: 200px;">
+          <img src="{{ asset('dossiers/image/Impact-Web-360-Logo1.png') }}" alt="Logo Impact Web " class="img-fluid" style="max-width: 200px;">
         </div>
 
         <!-- Colonne 1 -->

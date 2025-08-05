@@ -341,7 +341,7 @@
       <div class="row">
         <!-- Logo -->
         <div class=" col-12 col-md-4 mb-4 text-center text-md-start">
-          <img src="logo.png" alt="Logo Impact Web" class="img-fluid" style="max-width: 200px;">
+          <img src="{{ asset('dossiers/image/Impact-Web-360-Logo1.png') }}" alt="Logo Impact Web " class="img-fluid" style="max-width: 200px;">
         </div>
 
         <!-- Colonne 1 -->

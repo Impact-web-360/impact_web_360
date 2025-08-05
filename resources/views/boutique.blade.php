@@ -270,7 +270,6 @@
         text-align: left;
         font-size: 22px;
         margin-top: 10px;
-        font-weight: bold;
       }
 
       #navbarNav .btn {
@@ -433,9 +432,9 @@
               <hr>
 
               <label for="max_price" class="fw-bold">Prix : &nbsp;</label><span
-                id="price-value">{{ request('max_price', 150000) }} FCFA</span>
-              <input type="range" class="form-range mb-3" min="1000" max="500000" step="500" id="max_price"
-                name="max_price" value="{{ request('max_price', 50000) }}">
+                id="price-value">{{ request('max_price', 10000) }} FCFA</span>
+              <input type="range" class="form-range mb-3" min="100" max="10000" step="500" id="max_price"
+                name="max_price" value="{{ request('max_price', 10000) }}">
 
               <hr>
 
@@ -541,7 +540,7 @@
       <div class="row">
         <!-- Logo -->
         <div class=" col-12 col-md-4 mb-4 text-center text-md-start">
-          <img src="logo.png" alt="Logo Impact Web" class="img-fluid" style="max-width: 200px;">
+          <img src="{{ asset('dossiers/image/Impact-Web-360-Logo1.png') }}" alt="Logo Impact Web " class="img-fluid" style="max-width: 200px;">
         </div>
 
         <!-- Colonne 1 -->

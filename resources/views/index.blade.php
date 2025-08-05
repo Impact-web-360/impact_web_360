@@ -10,6 +10,46 @@
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
+    body { background-color: black; color: white; font-family: 'Montserrat', sans-serif; scroll-behavior: smooth; overflow-x: hidden; }
+    .navbar-custom { background-color: #000066; border-radius: 15px; margin-top: 20px; padding: 10px 20px; height: 70px; }
+    .navbar-brand img { max-height: 160px; width: auto; }
+    .btn-inscrire { background: red; color: white; border: none; border-radius: 8px; }
+    .btn-inscrire:hover { background: linear-gradient(90deg, #ff3300, #DD2476); color: #000000; transform: scale(1.05);}
+    .btn-outline-light { border-radius: 8px; }
+    .btn-light:hover { background-color: #000000; color: #f8f9fa; border: none; }
+    .footer { background-color: #000066; color: #ccccff; }
+    .footer-links a { color: #ccccff; text-decoration: none; display: block; margin-bottom: 0.5rem; transition: all 0.3s ease; }
+    .footer-links a:hover { color: #ff4500; padding-left: 4px; }
+    .social-icon { display: inline-block; background-color: red; color: white; width: 36px; height: 36px; text-align: center; line-height: 36px; border-radius: 50%; margin: 0 5px; font-size: 16px;transition: transform 0.3s ease, background-color 0.3s ease; }
+    .social-icon:hover { transform: scale(1.1); background-color: #ff2605; }
+    .btn-360 { background: red; color: white;border: none; border-radius: 20px; padding: 5px 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); transition: transform 0.3s; }
+    .btn-360:hover { transform: scale(1.05); }
+    .hero-section { height: 750px; position: relative; overflow: hidden; }
+    .hero-slider { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0;}
+    .hero-slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; opacity: 0; transition: opacity 1s ease-in-out; }
+    .hero-section .overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.6); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 2rem; animation: fadeIn 1.5s ease-in-out; z-index: 1;}
+    .hero-slide.active { opacity: 1; }
+
+    .hero-section {  background: url('{{ asset('dossiers/image/homme.png') }}') no-repeat center center/cover; height: 750px; position: relative; }
+    .hero-section .overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.6); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 2rem; animation: fadeIn 1.5s ease-in-out; }
+    .taille { font-size: 17px; } 
+    #countdown  { font-size: 1.5rem; padding: 5px 10px; font-weight: bold; background-color: rgba(85, 84, 160, 0.6); border-radius: 10px; }
+    .btn-danger { background-color: red; transform: translateY(-2px); border-radius: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); transition: transform 0.3s; }
+    .btn-danger:hover { transform: scale(1.05); background: linear-gradient(90deg, #ff3300, #DD2476); color: #000000; }
+    img.img-fluid:hover { transform: scale(1.05); transition: 0.3s ease; }
+    .titre-avec-trait { display: flex; gap: 10px; margin: 20px 0; }
+    .trait-vertical { width: 4px; height: auto; background-color: red; }
+    .titre-avec-trait-noir { display: flex; gap: 10px; margin: 20px 0; }
+    .trait-vertical-noir { width: 4px; height: auto; background-color: #31292969; }
+    .partners-section { padding: 80px 15px; text-align: center; }
+    .partners-section h2 { font-size: 2.5rem; font-weight: 700; }
+    .partners-section p { color: #ccc; max-width: 700px; margin: 20px auto; }
+    .logo-box { background-color: #1a1d29; padding: 18px; border-radius: 12px; width: 64px; height: 64px; display: flex; align-items: center; justify-content: center; transition: transform 0.3s ease; }
+    .logo-box:hover { transform: scale(1.1); }
+    .logo-box img { max-width: 100%; height: auto; }
+    .btn-cta { margin-top: 50px; background-color: #ff2605; color: #fff; padding: 12px 32px; border-radius: 30px; font-weight: 600; border: none; font-size: 1rem;}
+    .btn-cta:hover { transform: scale(1.05); background: linear-gradient(90deg, #ff3300, #DD2476); color: #000000; }
+    .card-body { background-color: #000000;}
     body {
       background-color: black;
       color: white;
@@ -752,55 +792,66 @@
       </div>
     </nav>
 
-    <!-- Hero Section -->
-    <header class="hero-section text-center" data-aos="zoom-in">
-      <div class="overlay">
-        <br><br><br>
-        <button class="btn btn-360 mb-3">Impact Web 360 ➔</button>
-        <h1 class="display-5">Nous partons de Zéro pour <br> impacter la Jeunesse <br> Africaine.</h1>
-        <p class="lead">Comment générer un revenu à 6 chiffres grâce <br> au web ?</p>
-        <a href="{{ route('step1') }}" class="btn btn-danger btn-lg mt-3 mb-5"><i class="fa fa-ticket-alt me-2 "></i>Réserver mon billet →</a>
+<!-- Hero Section -->
+<!-- Hero Section -->
+<header class="hero-section text-center" data-aos="zoom-in">
 
-        <div class="countdown-container">
-          <div class="time-box">
-            <div class="number" id="days">00</div>
-            <div class="label">Jours</div>
-          </div>
-          <div class="time-box">
-            <div class="number" id="hours">00</div>
-            <div class="label">Heures</div>
-          </div>
-          <div class="time-box">
-            <div class="number" id="minutes">00</div>
-            <div class="label">Min</div>
-          </div>
-          <div class="time-box">
-            <div class="number" id="seconds">00</div>
-            <div class="label">Sec</div>
-          </div>
-        </div>
-
-      </div>
-      </div>
-    </header>
-
-    <a href="#" id="backToTop" class="btn btn-danger shadow position-fixed"
-      style="bottom: 20px; right: 20px; display: none; z-index: 9999; border-radius: 50%;">
-      <i class="fa fa-arrow-up"></i>
-    </a>
+    <!-- Slider d'images en fond -->
+  <div class="hero-slider">
+    <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+    <div class="hero-slide active" style="background-image: url('images/homme.png');"></div>
+    <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+    <div class="hero-slide" style="background-image: url('images/homme2.png');"></div>
+    <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1497366811353-6870744d04b2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+  </div>
 
 
-  </section>
-  <!-- Bande de Partenaires -->
-  <section class="py-4 text-white text-center mb-5" style="background-color: red; " data-aos="fade-right">
-    <marquee behavior="" direction="">
-      <div class="container d-flex flex-wrap justify-content-center gap-4">
-        @foreach ($sponsors as $sponsor)
-        <div class="me-4 part"><img src="{{ asset('storage/' . $sponsor->logo) }}" alt="" width="50"> &nbsp;&nbsp;&nbsp;&nbsp;♦&nbsp;&nbsp;&nbsp;&nbsp;</div>
-        @endforeach
-      </div>
-    </marquee>
-  </section>
+  <div class="overlay">
+    <br><br><br>
+    <button class="btn btn-360 mb-3">Impact Web 360 ➔</button>
+    <h1 class="display-5">Nous partons de Zéro pour <br> impacter la Jeunesse <br> Africaine.</h1>
+    <p class="lead">Comment générer un revenu à 6 chiffres grâce <br> au web ?</p>
+    <a href="{{ route('step1') }}" class="btn btn-danger btn-lg mt-3 mb-5"><i class="fa fa-ticket-alt me-2 "></i>Réserver mon billet →</a>
+
+  <div class="countdown-container">
+    <div class="time-box">
+      <div class="number" id="days">00</div>
+      <div class="label">Jours</div>
+    </div>
+    <div class="time-box">
+      <div class="number" id="hours">00</div>
+      <div class="label">Heures</div>
+    </div>
+    <div class="time-box">
+      <div class="number" id="minutes">00</div>
+      <div class="label">Min</div>
+    </div>
+    <div class="time-box">
+      <div class="number" id="seconds">00</div>
+      <div class="label">Sec</div>
+    </div>
+  </div>
+
+    </div>
+  </div>
+</header>
+<!-- Fin Hero Section -->
+
+<a href="#" id="backToTop" class="btn btn-danger shadow position-fixed" 
+   style="bottom: 20px; right: 20px; display: none; z-index: 9999; border-radius: 50%;">
+  <i class="fa fa-arrow-up"></i>
+</a>
+
+
+</section>
+<!-- Bande de Partenaires -->
+<section class="py-4 text-white text-center mb-5" style="background-color: red; " data-aos="fade-right">
+ <marquee behavior="" direction=""> <div class="container d-flex flex-wrap justify-content-center gap-4">
+    @foreach ($sponsors as $sponsor)
+     <div class="me-4 part"><img src="{{ asset('storage/' . $sponsor->logo) }}" alt="" width="50" > &nbsp;&nbsp;&nbsp;&nbsp;♦&nbsp;&nbsp;&nbsp;&nbsp;</div>   
+    @endforeach
+  </div></marquee>
+</section>
 
   <!-- Statistiques -->
   <section class="py-5 bg-black text-center taille" data-aos="fade-up">
@@ -995,12 +1046,12 @@
           <div class="circle-container position-relative">
             <div class="rotation-wrapper">
               <!-- Utilisateurs autour -->
-              <img src="https://randomuser.me/api/portraits/women/44.jpg" class="user-img img1" alt="user1">
-              <img src="https://randomuser.me/api/portraits/men/32.jpg" class="user-img img2" alt="user2">
-              <img src="https://randomuser.me/api/portraits/men/45.jpg" class="user-img img3" alt="user3">
-              <img src="https://randomuser.me/api/portraits/men/52.jpg" class="user-img img4" alt="user4">
-              <img src="https://randomuser.me/api/portraits/men/60.jpg" class="user-img img5" alt="user5">
-              <img src="https://randomuser.me/api/portraits/women/65.jpg" class="user-img img6" alt="user6">
+              <img src="{{ asset('dossiers/image/mr.jpg') }}" class="user-img img1" alt="user1">
+              <img src="{{ asset('dossiers/image/jeune.jpg') }}" class="user-img img2" alt="user2">
+              <img src="{{ asset('dossiers/image/mr_sourire.jpg') }}" class="user-img img3" alt="user3">
+              <img src="{{ asset('dossiers/image/fondnoir.jpg') }}" class="user-img img4" alt="user4">
+              <img src="{{ asset('dossiers/image/mr_israel.jpg') }}" class="user-img img5" alt="user5">
+              <img src="{{ asset('dossiers/image/mr_beni.jpg') }}" class="user-img img6" alt="user6">
             </div>
             <!-- Logo central fixe -->
             <img src="{{ asset('dossiers/image/Impact-Web-360-Logo1.png') }}" alt="Impact Web" class="center-logo">
@@ -1041,7 +1092,7 @@
       <div class="row">
         <!-- Logo -->
         <div class=" col-12 col-md-4 mb-4 text-center text-md-start">
-          <img src="./Impact-Web-360-Logo.png" alt="Logo Impact Web" class="img-fluid" style="max-width: 200px;">
+          <img src="{{ asset('dossiers/image/Impact-Web-360-Logo1.png') }}" alt="Logo Impact Web" class="img-fluid" style="max-width: 200px;">
         </div>
 
         <!-- Colonne 1 -->
@@ -1130,6 +1181,31 @@
         hamburger.classList.toggle('active');
       });
     });
+</script>
+
+<!-- Script pour le slider -->
+<script>
+  // Slider automatique
+  document.addEventListener('DOMContentLoaded', function() {
+    const slides = document.querySelectorAll('.hero-slide');
+    let currentSlide = 0;
+    const slideInterval = 5000; // Change d'image toutes les 5 secondes
+    
+    function nextSlide() {
+      slides[currentSlide].classList.remove('active');
+      currentSlide = (currentSlide + 1) % slides.length;
+      slides[currentSlide].classList.add('active');
+    }
+    
+    // Démarrer le slider
+    let slider = setInterval(nextSlide, slideInterval);
+    
+    // Pause au survol
+
+  });
+  
+</script>
+
   </script>
 
   <script>

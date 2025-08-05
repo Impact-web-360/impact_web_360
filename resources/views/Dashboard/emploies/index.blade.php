@@ -401,28 +401,17 @@
 
             <nav id="sidebar" aria-label="Sidebar Navigation" class="col-md-3 col-lg-2 d-md-block sidebar">
                 <h4><i class="fa fa-cogs me-2 mb-3"></i>Admin Panel</h4>
-                <a href="#stats" class="nav-link"><i class="fas fa-chart-bar"></i> Statistiques</a>
+                <a href="{{ route('admin.dashboard') }}" class="nav-link"><i class="fas fa-chart-bar"></i> Statistiques</a>
                 <a href="{{ route('evenements.index') }}" class="nav-link"><i class="fa fa-calendar-alt"></i>Événements</a>
                 <a href="{{ route('sponsors.index') }}" class="nav-link"><i class="fa fa-handshake"></i>Sponsors</a>
-                <a href="{{ route('categories.index')}}" class="nav-link"><i class="fa fa-user"></i>Catégorie</a>
-                <a href="{{ route('formations.index')}}" class="nav-link"><i class="fa fa-user"></i>Formation</a>
-                <a href="{{ route('modules.index')}}" class="nav-link"><i class="fa fa-user"></i>Modules</a>
+                <a href="{{ route('categories.index')}}" class="nav-link"><i class="fas fa-layer-group"></i>Catégorie</a>
+                <a href="{{ route('formations.index')}}" class="nav-link"><i class="fas fa-graduation-cap"></i>Formation</a>
+                <a href="{{ route('modules.index')}}" class="nav-link"><i class="fas fa-puzzle-piece"></i>Modules</a>
                 <a href="{{ route('articles.index')}}" class="nav-link"><i class="fa fa-shopping-basket"></i>Articles</a>
                 <a href="{{ route('emploies.index')}}" class="nav-link active"><i class="fa fa-briefcase"></i>Emplois</a>
-                <a href="{{ route('intervenants.index') }}" class="nav-link"><i class="fa fa-user"></i>Intervenants</a>
-                <a href="#users" class="nav-link"><i class="fas fa-users"></i> Utilisateurs</a>
-                <a href="#content" class="nav-link"><i class="fas fa-folder-open"></i> Contenus</a>
-                <a href="#messages" class="nav-link"><i class="fas fa-envelope"></i> Messages</a>
-                <a href="#calendar" class="nav-link"><i class="fas fa-calendar-alt"></i> Calendrier</a>
-                <a href="#logs" class="nav-link"><i class="fas fa-history"></i> Historique</a>
-                <a href="#settings" class="nav-link"><i class="fas fa-cogs"></i> Paramètres</a>
-                <a href="{{ route('logout') }}" class="nav-link"
-                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                    <i class="fa fa-arrow-left"></i>Déconnexion
-                </a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    @csrf
-                </form>
+                <a href="ajouter_intervenant.php" class="nav-link"><i class="fa fa-user"></i>Intervenants</a>
+                <a href="{{ route('billet')}}" class="nav-link"><i class="fas fa-calendar-alt "></i> Tickets</a>
+                <a href="{{ route('logout')}}" class="nav-link"><i class="fa fa-arrow-left"></i>Deconnexion</a>
             </nav>
 
             <main class="col-md-9 ms-sm-auto col-lg-10 content">

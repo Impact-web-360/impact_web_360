@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -66,6 +65,7 @@
       text-decoration: none;
     }
 
+    /* Main content */
     /* Sidebar scroll bar */
     #sidebar::-webkit-scrollbar {
       width: 6px;
@@ -195,18 +195,17 @@
 
       <nav id="sidebar" aria-label="Sidebar Navigation" class="col-md-3 col-lg-2 d-md-block sidebar">
         <h4><i class="fa fa-cogs me-2 mb-3"></i>Admin Panel</h4>
-        <a href="#stats"><i class="fas fa-chart-bar"></i> Statistiques</a>
-        <a href="{{ route('evenements.index') }}" class="nav-link nav-link active"><i class="fa fa-calendar-alt"></i>Événements</a>
+        <a href="{{ route('admin.dashboard') }}" class="nav-link"><i class="fas fa-chart-bar"></i> Statistiques</a>
+        <a href="{{ route('evenements.index') }}" class="nav-link active"><i class="fa fa-calendar-alt"></i>Événements</a>
         <a href="{{ route('sponsors.index') }}" class="nav-link"><i class="fa fa-handshake"></i>Sponsors</a>
-        <a href="boutique.php" class="nav-link"><i class="fa fa-store"></i>Boutique</a>
+        <a href="{{ route('categories.index')}}" class="nav-link"><i class="fas fa-layer-group"></i>Catégorie</a>
+        <a href="{{ route('formations.index')}}" class="nav-link"><i class="fas fa-graduation-cap"></i>Formation</a>
+        <a href="{{ route('modules.index')}}" class="nav-link"><i class="fas fa-puzzle-piece"></i>Modules</a>
+        <a href="{{ route('articles.index')}}" class="nav-link"><i class="fa fa-shopping-basket"></i>Articles</a>
+        <a href="{{ route('emploies.index')}}" class="nav-link"><i class="fa fa-briefcase"></i>Emplois</a>
         <a href="ajouter_intervenant.php" class="nav-link"><i class="fa fa-user"></i>Intervenants</a>
-        <a href="#users" class="nav-link"><i class="fas fa-users"></i> Utilisateurs</a>
-        <a href="#content" class="nav-link"><i class="fas fa-folder-open"></i> Contenus</a>
-        <a href="#messages" class="nav-link"><i class="fas fa-envelope"></i> Messages</a>
-        <a href="#calendar" class="nav-link"><i class="fas fa-calendar-alt"></i> Calendrier</a>
-        <a href="#logs" class="nav-link"><i class="fas fa-history"></i> Historique</a>
-        <a href="#settings" class="nav-link"><i class="fas fa-cogs"></i> Paramètres</a>
-        <a href="index.php" class="nav-link"><i class="fa fa-arrow-left"></i>Deconnexion</a>
+        <a href="{{ route('billet')}}" class="nav-link"><i class="fas fa-calendar-alt "></i> Tickets</a>
+        <a href="{{ route('logout')}}" class="nav-link"><i class="fa fa-arrow-left"></i>Deconnexion</a>
       </nav>
 
 <main id="content" tabindex="-1">
