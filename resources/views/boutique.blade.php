@@ -221,7 +221,7 @@
 
     @media (max-width: 976px) {
       .navbar-brand img {
-        margin-top: -65px;
+        margin-top: -70px;
         max-height: 180px;
         margin-left: -30px;
       }

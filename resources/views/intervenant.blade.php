@@ -48,7 +48,7 @@
 
           /* ========== MEDIA QUERIES ========== */
     @media (max-width: 992px) {
-        .navbar-brand img { margin-top: -65px; max-height: 180px; margin-left: -30px;; }
+        .navbar-brand img { margin-top: -70px; max-height: 180px; margin-left: -30px;; }
         .navbar-brand { max-height: 50px; }
         .navbar-custom { margin-top: 10px; }
         .yes{margin-bottom: 10px;}

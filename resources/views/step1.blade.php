@@ -46,6 +46,7 @@
     }
 
     .ticket {
+      position: relative;
       background: #ff3300;
       color: white;
       border-radius: 1rem;
@@ -60,15 +61,20 @@
       min-width: 100px;
     }
 
-    .ticket img {
-      max-width: 100%;
-      height: auto;
+    .ticket-header-img {
+      max-height: 160px;
+      width: auto;
+      margin-top: -65px;
+      margin-bottom: -65px;
+      margin-right: -40px;
     }
+
 
     .ticket-header {
       background-color: #000066;
       display: flex;
       justify-content: space-between;
+      gap:6px;
       align-items: center;
       border-top-left-radius: 1rem;
       border-top-right-radius: 1rem;
@@ -166,7 +172,7 @@
 
     @media (max-width: 976px) {
       .navbar-brand img {
-        margin-top: -65px;
+        margin-top: -70px;
         max-height: 180px;
         margin-left: -30px;
       }
@@ -297,8 +303,13 @@
         font-size: 15px;
       }
 
+      .ticket-header-img{
+        width: 130px;
+        margin-left: -30px;
+      }
+
       .ticket-body-left h5{
-        font-size: 15px;
+        font-size: 14px;
       }
 
       .qr-code img{
@@ -312,8 +323,7 @@
 <body>
   <!-- NAVBAR -->
   <nav class="navbar navbar-expand-lg navbar-dark fixed-top navbar-custom container">
-    <a class="navbar-brand" href="index.php"><img src="{{ asset('dossiers/image/Impact-Web-360-Logo1.png') }}"
-        alt="Logo Impact Web" /></a>
+    <a class="navbar-brand" href="index.php"><img src="{{ asset('dossiers/image/Impact-Web-360-Logo1.png') }}"alt="Logo Impact Web" /></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
       <div class="hamburger" id="hamburgerBtn">
         <span></span>
@@ -338,9 +348,9 @@
   <div class="container" style="margin-top: 150px;">
     <div class="ticket text-center animate__animated animate__fadeIn">
       <div class="ticket-header p-3">
-        <img src="" alt="Logo">
+        <img src="{{ asset('dossiers/image/Impact-Web-360-Logo1.png') }}" alt="Logo" class="ticket-header-img">
         <h5>Impact Web 360 – Édition 2025</h5>
-        <div class="text-end"><strong></strong></div>
+        <div><strong>TK0001</strong></div>
       </div>
       <div class="d-flex justify-content-center align-items-center p-3">
         <div class="ticket-body-left">

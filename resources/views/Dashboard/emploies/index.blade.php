@@ -13,6 +13,7 @@
         }
 
         .sidebar {
+            position: fixed;
             height: 100vh;
             background: #212529;
             color: white;

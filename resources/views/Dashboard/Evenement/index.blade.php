@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -26,6 +27,7 @@
       margin: 0;
       background-color: var(--bg-color);
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      overflow-x: hidden;
     }
 
     /* Sidebar */
@@ -42,12 +44,14 @@
       transition: transform 0.3s ease;
       z-index: 1050;
     }
+
     #sidebar h4 {
       text-align: center;
       font-weight: 700;
       margin-bottom: 2rem;
       letter-spacing: 1px;
     }
+
     #sidebar a.nav-link {
       display: flex;
       align-items: center;
@@ -58,6 +62,7 @@
       transition: background-color 0.3s, border-left 0.3s;
       text-decoration: none;
     }
+
     #sidebar a.nav-link:hover,
     #sidebar a.nav-link.active {
       background-color: var(--sidebar-hover);
@@ -70,6 +75,7 @@
     #sidebar::-webkit-scrollbar {
       width: 6px;
     }
+
     #sidebar::-webkit-scrollbar-thumb {
       background-color: var(--main-color);
       border-radius: 10px;
@@ -91,6 +97,7 @@
       justify-content: space-between;
       align-items: center;
     }
+
     header h1 {
       color: var(--main-color);
       font-weight: 700;
@@ -100,21 +107,25 @@
     .card-custom {
       background-color: var(--card-bg);
       border-radius: 1rem;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
       transition: transform 0.3s ease;
     }
+
     .card-custom:hover {
       transform: translateY(-5px);
     }
+
     .card-icon {
       font-size: 2.5rem;
       color: var(--main-color);
     }
+
     .stat-number {
       font-size: 2rem;
       font-weight: 700;
       margin: 0;
     }
+
     .stat-label {
       font-weight: 600;
       color: #6c757d;
@@ -144,9 +155,10 @@
       padding: 0.5rem 0.75rem;
       border-radius: 5px;
       cursor: pointer;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
       transition: background-color 0.3s ease;
     }
+
     #sidebarToggle:hover {
       background-color: #a71d2a;
     }
@@ -156,19 +168,24 @@
       #sidebar {
         transform: translateX(-260px);
       }
-      header h1{
+
+      header h1 {
         margin-left: 15%;
       }
+
       #sidebar.active {
         transform: translateX(0);
       }
+
       #content {
         margin-left: 0;
         padding: 1rem 1.5rem;
       }
+
       #sidebarToggle {
         display: block;
       }
+
       body.sidebar-open {
         overflow: hidden;
       }
@@ -186,9 +203,9 @@
     .table-responsive {
       overflow-x: auto;
     }
-
   </style>
 </head>
+
 <body>
   <div class="container-fluid">
     <div class="row">
@@ -196,7 +213,8 @@
       <nav id="sidebar" aria-label="Sidebar Navigation" class="col-md-3 col-lg-2 d-md-block sidebar">
         <h4><i class="fa fa-cogs me-2 mb-3"></i>Admin Panel</h4>
         <a href="{{ route('admin.dashboard') }}" class="nav-link"><i class="fas fa-chart-bar"></i> Statistiques</a>
-        <a href="{{ route('evenements.index') }}" class="nav-link active"><i class="fa fa-calendar-alt"></i>Événements</a>
+        <a href="{{ route('evenements.index') }}" class="nav-link active"><i
+            class="fa fa-calendar-alt"></i>Événements</a>
         <a href="{{ route('sponsors.index') }}" class="nav-link"><i class="fa fa-handshake"></i>Sponsors</a>
         <a href="{{ route('categories.index')}}" class="nav-link"><i class="fas fa-layer-group"></i>Catégorie</a>
         <a href="{{ route('formations.index')}}" class="nav-link"><i class="fas fa-graduation-cap"></i>Formation</a>
@@ -208,7 +226,7 @@
         <a href="{{ route('logout')}}" class="nav-link"><i class="fa fa-arrow-left"></i>Deconnexion</a>
       </nav>
 
-<main id="content" tabindex="-1">
+      <main id="content" class="col-md-9 col-lg-10">
         <h2 id="evenements">📅 Gestion des événements</h2>
         <div class="card mb-4">
           <button class="btn btn-danger mb-3" data-bs-toggle="modal" data-bs-target="#addEvenementModal">
@@ -217,41 +235,47 @@
 
           <div class="row">
             @foreach ($evenements as $evenement)
-            <div class="col-md-6 col-lg-4 mb-4 d-flex">
-              <div class="card w-100 d-flex flex-column justify-content-between bg-light shadow">
+        <div class="col-md-6 col-lg-4 mb-4 d-flex">
+          <div class="card w-100 d-flex flex-column justify-content-between bg-light shadow">
 
-                <div class="image-wrapper">
-                  <img src="{{ asset('storage/' . $evenement->image) }}" class="card-img-top" alt="Affiche de l'évènement" style="height: 200px; object-fit: cover;">
-                </div>
+          <div class="image-wrapper">
+            <img src="{{ asset('storage/' . $evenement->image) }}" class="card-img-top"
+            alt="Affiche de l'évènement" style="height: 200px; object-fit: cover;">
+          </div>
 
-                <div class="card-body d-flex flex-column">
-                  <h5 class="card-title mb-3">{{ $evenement->nom }}</h5>
-                  <h6>{{ $evenement->promoteur }}</h6>
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title mb-3">{{ $evenement->nom }}</h5>
+            <h6>{{ $evenement->promoteur }}</h6>
 
-                  <div class="mt-auto">
-                    <div class="mb-2">
-                      <button class="btn btn-outline-primary btn-sm me-2" data-bs-toggle="modal" data-bs-target="#editEventModal{{ $evenement->id }}">
-                        <i class="fas fa-edit"></i>
-                      </button>
+            <div class="mt-auto">
+            <div class="mb-2">
+              <button class="btn btn-outline-primary btn-sm me-2" data-bs-toggle="modal"
+              data-bs-target="#editEventModal{{ $evenement->id }}">
+              <i class="fas fa-edit"></i>
+              </button>
 
-                      <form method="POST" action="{{ route('evenements.destroy', $evenement->id) }}" onsubmit="return confirm('Confirmer la suppression ?');" style="display:inline;">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-outline-danger btn-sm me-4">
-                          <i class="fas fa-trash"></i>
-                        </button>
-                      </form>
-                      <a href="#" class="btn btn-danger fw-bold" data-bs-toggle="modal" data-bs-target="#eventModal{{ $evenement->id }}">Informations</a>
-                    </div>
-
-                    <a href="{{ route('sponsors.index') }}" class="btn btn-dark text-white fs-6 fw-bold w-100 mb-2" data-bs-toggle="modal" data-bs-target="#addSponsorModal">Ajouter un sponsor</a>
-                    <a href="#" class="btn btn-dark text-white fs-6 fw-bold w-100" data-bs-toggle="modal" data-bs-target="#addIntervenantModal">Ajouter un intervenant</a>
-                  </div>
-                </div>
-
-              </div>
+              <form method="POST" action="{{ route('evenements.destroy', $evenement->id) }}"
+              onsubmit="return confirm('Confirmer la suppression ?');" style="display:inline;">
+              @csrf
+              @method('DELETE')
+              <button type="submit" class="btn btn-outline-danger btn-sm me-4">
+                <i class="fas fa-trash"></i>
+              </button>
+              </form>
+              <a href="#" class="btn btn-danger fw-bold" data-bs-toggle="modal"
+              data-bs-target="#eventModal{{ $evenement->id }}">Informations</a>
             </div>
-            @endforeach
+
+            <a href="{{ route('sponsors.index') }}" class="btn btn-dark text-white fs-6 fw-bold w-100 mb-2"
+              data-bs-toggle="modal" data-bs-target="#addSponsorModal">Ajouter un sponsor</a>
+            <a href="#" class="btn btn-dark text-white fs-6 fw-bold w-100" data-bs-toggle="modal"
+              data-bs-target="#addIntervenantModal">Ajouter un intervenant</a>
+            </div>
+          </div>
+
+          </div>
+        </div>
+      @endforeach
           </div>
 
 
@@ -259,137 +283,142 @@
 
 
 
-    <!-- Modale personnalisée -->
-    @foreach($evenements as $evenement)
+        <!-- Modale personnalisée -->
+        @foreach($evenements as $evenement)
 
-    <!-- Modal pour chaque événement -->
-    <div class="modal fade" id="eventModal{{ $evenement->id }}" tabindex="-1">
-      <div class="modal-dialog modal-lg">
+      <!-- Modal pour chaque événement -->
+      <div class="modal fade" id="eventModal{{ $evenement->id }}" tabindex="-1">
+        <div class="modal-dialog modal-lg">
         <div class="modal-content bg-dark text-white">
           <div class="modal-header">
-            <h5 class="modal-title">{{ $evenement->nom }}</h5>
-            <button type="button" class="btn-close bg-white" data-bs-dismiss="modal"></button>
+          <h5 class="modal-title">{{ $evenement->nom }}</h5>
+          <button type="button" class="btn-close bg-white" data-bs-dismiss="modal"></button>
           </div>
           <div class="modal-body">
-            <p>{{ $evenement->description }}</p>
-            <p><i class="fas fa-map-marker-alt"></i> {{ $evenement->lieu }}</p>
-            <p><i class="fas fa-calendar-alt"></i> {{ $evenement->date_debut }}</p>
+          <p>{{ $evenement->description }}</p>
+          <p><i class="fas fa-map-marker-alt"></i> {{ $evenement->lieu }}</p>
+          <p><i class="fas fa-calendar-alt"></i> {{ $evenement->date_debut }}</p>
 
-            <h6 class="mt-4">Intervenants :</h6>
-            <div class="row">
-              @if($evenement->intervenants && $evenement->intervenants->count())
-              @foreach($evenement->intervenants as $intervenant)
-              <div class="col-md-4">
-                <div class="card bg-secondary text-white mb-2">
-                  <img src="{{ asset('storage/'.$intervenant->photo) }}" class="card-img-top" alt="{{ $intervenant->nom }}">
-                  <div class="card-body">
-                    <h6>{{ $intervenant->nom }}</h6>
-                    <small>{{ $intervenant->fonction }}</small>
-                  </div>
-                </div>
-              </div>
-              @endforeach
-              @else
-              <p class="text-white-50">Aucun intervenant enregistré</p>
-              @endif
-            </div>
-
-            <h6 class="mt-4">Sponsors :</h6>
-            <div class="row">
-              @if($evenement->sponsors && $evenement->sponsors->count())
-              @foreach($evenement->sponsors as $sponsor)
-              <div class="col-md-6">
-                <div class="card bg-secondary text-white mb-2 d-flex flex-row align-items-center">
-                  <img src="{{ asset('storage/'.$sponsor->logo) }}" width="60" class="m-2">
-                  <div>
-                    <h6>{{ $sponsor->nom }}</h6>
-                    <small>{{ $sponsor->promoteur }}</small>
-                  </div>
-                </div>
-              </div>
-              @endforeach
-              @else
-              <p class="text-white-50">Aucun sponsor enregistré</p>
-              @endif
-            </div>
+          <h6 class="mt-4">Intervenants :</h6>
+          <div class="row">
+            @if($evenement->intervenants && $evenement->intervenants->count())
+          @foreach($evenement->intervenants as $intervenant)
+        <div class="col-md-4">
+        <div class="card bg-secondary text-white mb-2">
+          <img src="{{ asset('storage/' . $intervenant->photo) }}" class="card-img-top"
+          alt="{{ $intervenant->nom }}">
+          <div class="card-body">
+          <h6>{{ $intervenant->nom }}</h6>
+          <small>{{ $intervenant->fonction }}</small>
           </div>
         </div>
+        </div>
+        @endforeach
+        @else
+        <p class="text-white-50">Aucun intervenant enregistré</p>
+        @endif
+          </div>
+
+          <h6 class="mt-4">Sponsors :</h6>
+          <div class="row">
+            @if($evenement->sponsors && $evenement->sponsors->count())
+          @foreach($evenement->sponsors as $sponsor)
+        <div class="col-md-6">
+        <div class="card bg-secondary text-white mb-2 d-flex flex-row align-items-center">
+          <img src="{{ asset('storage/' . $sponsor->logo) }}" width="60" class="m-2">
+          <div>
+          <h6>{{ $sponsor->nom }}</h6>
+          <small>{{ $sponsor->promoteur }}</small>
+          </div>
+        </div>
+        </div>
+        @endforeach
+        @else
+        <p class="text-white-50">Aucun sponsor enregistré</p>
+        @endif
+          </div>
+          </div>
+        </div>
+        </div>
       </div>
-    </div>
     @endforeach
 
 
 
-    <!-- Modals de modification -->
-    @foreach ($evenements as $evenement)
-    <div class="modal fade" id="editEventModal{{ $evenement->id }}" tabindex="-1" aria-hidden="true">
-      <div class="modal-dialog modal-lg modal-dialog-scrollable">
-        <form method="POST" action="{{ route('evenements.update', $evenement->id) }}" enctype="multipart/form-data" class="modal-content">
+        <!-- Modals de modification -->
+        @foreach ($evenements as $evenement)
+      <div class="modal fade" id="editEventModal{{ $evenement->id }}" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <form method="POST" action="{{ route('evenements.update', $evenement->id) }}" enctype="multipart/form-data"
+          class="modal-content">
           @csrf
           @method('PUT')
           <input type="hidden" name="id" value="{{ $evenement->id }}">
           <div class="modal-header bg-danger text-white">
-            <h5 class="modal-title">Modifier l'événement</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          <h5 class="modal-title">Modifier l'événement</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
           </div>
           <div class="modal-body">
-            <div class="mb-3">
-              <label>Nom de l'évènement</label>
-              <input name="nom" class="form-control" value="{{ $evenement->nom }}" required>
-            </div>
-            <div class="mb-3">
-              <label>Thème</label>
-              <input name="theme" class="form-control" value="{{ $evenement->theme }}" required>
-            </div>
-            <div class="mb-3">
-              <label>Promoteur</label>
-              <input name="promoteur" class="form-control" value="{{ $evenement->promoteur }}" required>
-            </div>
-            <div class="mb-3">
-              <label>Description</label>
-              <textarea name="description" class="form-control" required>{{ $evenement->description }}</textarea>
-            </div>
-            <div class="mb-3">
-              <label>Date de début</label>
-              <input type="date" name="date_debut" class="form-control" value="{{ $evenement->date_debut }}" required>
-            </div>
-            <div class="mb-3">
-              <label>Date de fin</label>
-              <input type="date" name="date_fin" class="form-control" value="{{ $evenement->date_fin }}" required>
-            </div>
-            <div class="mb-3">
-              <label>Heure</label>
-              <input type="time" name="heure" class="form-control" value="{{ $evenement->heure }}" required>
-            </div>
-            <div class="mb-3">
-              <label>Lieu</label>
-              <input name="lieu" class="form-control" value="{{ $evenement->lieu }}" required>
-            </div>
-            <div class="mb-3">
-              <label>Nombre de places</label>
-              <input type="number" name="nb_places" class="form-control" value="{{ $evenement->nb_places }}" required>
-            </div>
-            <div class="mb-3">
-              <label>Image</label>
-              <input type="file" name="image" class="form-control">
-              @if($evenement->image)
-              <small class="text-muted mt-3">
-                Image actuelle :
-                <img src="{{ asset('storage/' . $evenement->image) }}" class="img-fluid mt-3" style="max-height: 60px;">
-              </small>
-              @endif
-            </div>
+          <div class="mb-3">
+            <label>Nom de l'évènement</label>
+            <input name="nom" class="form-control" value="{{ $evenement->nom }}" required>
+          </div>
+          <div class="mb-3">
+            <label>Thème</label>
+            <input name="theme" class="form-control" value="{{ $evenement->theme }}" required>
+          </div>
+          <div class="mb-3">
+            <label>Promoteur</label>
+            <input name="promoteur" class="form-control" value="{{ $evenement->promoteur }}" required>
+          </div>
+          <div class="mb-3">
+            <label>Description</label>
+            <textarea name="description" class="form-control" required>{{ $evenement->description }}</textarea>
+          </div>
+          <div class="mb-3">
+            <label>Date de début</label>
+            <input type="date" name="date_debut" class="form-control" value="{{ $evenement->date_debut }}"
+            required>
+          </div>
+          <div class="mb-3">
+            <label>Date de fin</label>
+            <input type="date" name="date_fin" class="form-control" value="{{ $evenement->date_fin }}" required>
+          </div>
+          <div class="mb-3">
+            <label>Heure</label>
+            <input type="time" name="heure" class="form-control" value="{{ $evenement->heure }}" required>
+          </div>
+          <div class="mb-3">
+            <label>Lieu</label>
+            <input name="lieu" class="form-control" value="{{ $evenement->lieu }}" required>
+          </div>
+          <div class="mb-3">
+            <label>Nombre de places</label>
+            <input type="number" name="nb_places" class="form-control" value="{{ $evenement->nb_places }}"
+            required>
+          </div>
+          <div class="mb-3">
+            <label>Image</label>
+            <input type="file" name="image" class="form-control">
+            @if($evenement->image)
+        <small class="text-muted mt-3">
+        Image actuelle :
+        <img src="{{ asset('storage/' . $evenement->image) }}" class="img-fluid mt-3"
+          style="max-height: 60px;">
+        </small>
+        @endif
+          </div>
           </div>
           <div class="modal-footer">
-            <button type="submit" class="btn btn-danger">Enregistrer</button>
+          <button type="submit" class="btn btn-danger">Enregistrer</button>
           </div>
         </form>
+        </div>
       </div>
-    </div>
     @endforeach
 
-    </main>
-  </div>
+      </main>
+    </div>
   </div>
 
 
@@ -480,9 +509,9 @@
         <div class="modal-body">
           <div class="mb-3">
             @foreach ($evenements as $evenement)
-            <label for="nom" class="form-label">{{ $evenement->nom }}</label>
-            <input type="hidden" class="form-control" name="evenement_id" value="{{ $evenement->id }}">
-            @endforeach
+        <label for="nom" class="form-label">{{ $evenement->nom }}</label>
+        <input type="hidden" class="form-control" name="evenement_id" value="{{ $evenement->id }}">
+      @endforeach
           </div>
 
           <div class="modal-body">
@@ -515,10 +544,11 @@
     </div>
   </div>
 
-   <!-- Modal Ajouter sponsor -->
+  <!-- Modal Ajouter sponsor -->
   <div class="modal fade" id="addIntervenantModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-scrollable">
-      <form method="POST" action="{{ route('intervenants.store') }}" enctype="multipart/form-data" class="modal-content">
+      <form method="POST" action="{{ route('intervenants.store') }}" enctype="multipart/form-data"
+        class="modal-content">
         @csrf
         <div class="modal-header bg-danger text-white">
           <h5 class="modal-title" id="addsponsorLabel">Ajouter un sponsor</h5>
@@ -529,9 +559,9 @@
 
           <div class="mb-3">
             @foreach ($evenements as $evenement)
-            <label for="nom" class="form-label">{{ $evenement->nom }}</label>
-            <input type="hidden" class="form-control" name="evenement_id" value="{{ $evenement->id }}">
-            @endforeach
+        <label for="nom" class="form-label">{{ $evenement->nom }}</label>
+        <input type="hidden" class="form-control" name="evenement_id" value="{{ $evenement->id }}">
+      @endforeach
           </div>
 
           <div class="modal-body">
@@ -569,25 +599,25 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       const openSidebarBtn = document.getElementById('openSidebar');
       const closeSidebarBtn = document.getElementById('closeSidebar');
       const sidebar = document.querySelector('.sidebar-left');
 
       if (openSidebarBtn) {
-        openSidebarBtn.addEventListener('click', function() {
+        openSidebarBtn.addEventListener('click', function () {
           sidebar.classList.add('show');
         });
       }
 
       if (closeSidebarBtn) {
-        closeSidebarBtn.addEventListener('click', function() {
+        closeSidebarBtn.addEventListener('click', function () {
           sidebar.classList.remove('show');
         });
       }
 
       // Optional: Close sidebar when clicking outside on mobile
-      document.addEventListener('click', function(event) {
+      document.addEventListener('click', function (event) {
         if (sidebar.classList.contains('show') && !sidebar.contains(event.target) && !openSidebarBtn.contains(event.target)) {
           sidebar.classList.remove('show');
         }
@@ -597,15 +627,15 @@
       const cards = document.querySelectorAll('.speaker-card, .sponsor-card, .song-item');
 
       cards.forEach(card => {
-        card.addEventListener('mouseenter', function() {
+        card.addEventListener('mouseenter', function () {
           // Can add more complex JS animations here if needed
           // e.g., gsap.to(this, { duration: 0.2, y: -5, ease: "power1.out" });
         });
-        card.addEventListener('mouseleave', function() {
+        card.addEventListener('mouseleave', function () {
           // e.g., gsap.to(this, { duration: 0.2, y: 0, ease: "power1.out" });
         });
 
-        card.addEventListener('click', function() {
+        card.addEventListener('click', function () {
           // Simulate a click effect
           this.classList.add('clicked-effect');
           setTimeout(() => {
@@ -636,21 +666,22 @@
       styleSheet.insertRule(clickedEffectRule, styleSheet.cssRules.length);
     });
 
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       const modal = document.getElementById('eventModal');
       const openModalBtn = document.getElementById('openModalBtn');
 
-      openModalBtn.addEventListener('click', function() {
+      openModalBtn.addEventListener('click', function () {
         modal.style.display = 'flex';
       });
       const closeModalBtn = document.getElementById('closeModalBtn');
-      closeModalBtn.addEventListener('click', function() {
+      closeModalBtn.addEventListener('click', function () {
         modal.style.display = 'none';
       });
     });
   </script>
-</main>
+  </main>
 
 
 </body>
+
 </html>
