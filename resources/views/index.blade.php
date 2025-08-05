@@ -445,7 +445,7 @@
 
       /* Navbar mobile */
       .navbar-brand img {
-        margin-top: -70px;
+        margin-top: -65px;
         max-height: 180px;
         margin-left: -30px;
         ;

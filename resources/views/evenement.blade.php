@@ -263,7 +263,7 @@
         <div class="card-body px-0">
           <p class="fs-6">{{ $evenement->date_debut }}</p>
           <h5>Thème : "{{ $evenement->theme }}"</h5>
-          <a href="" class=" text-decoration-none">Replay disponibles <i
+          <a href="{{ route('replays_evenement', ['id' => $evenement->id]) }}" class=" text-decoration-none">Replay disponibles <i
             class="fa-solid fa-arrow-right ms-1"></i></a>
         </div>
         </div>

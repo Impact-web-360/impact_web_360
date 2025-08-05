@@ -28,6 +28,7 @@ use App\Http\Controllers\MediaController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\EmploieController;
 use App\Http\Controllers\UtilisateurController;
+use App\Http\Controllers\ReplayController;
 
 
 
@@ -56,6 +57,10 @@ Route::get('/sponsors', [HomeController::class, 'sponsor'])->name('sponsor');
 Route::get('/intervenant', [HomeController::class, 'intervenant'])->name('intervenant');
 
 Route::get('/evenement', [HomeController::class, 'evenement'])->name('evenement');
+
+Route::get('/evenement/{id}/replays', [ReplayController::class, 'parEvenement'])
+    ->name('replays_evenement');
+
 
 //Paramètres
 Route::get('/modifier profil', function () {
@@ -360,4 +365,6 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/dashboard/emploies/{emploie}/edit', [EmploieController::class, 'edit'])->name('emploies.edit');
     Route::put('/dashboard/emploies/{emploie}', [EmploieController::class, 'update'])->name('emploies.update');
     Route::delete('/dashboard/emploies/{emploie}', [EmploieController::class, 'destroy'])->name('emploies.destroy');
+
+    Route::resource('replay', ReplayController::class);
 });
