@@ -27,7 +27,6 @@
       margin: 0;
       background-color: var(--bg-color);
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      overflow-x: hidden;
     }
 
     /* Sidebar */
@@ -44,14 +43,12 @@
       transition: transform 0.3s ease;
       z-index: 1050;
     }
-
     #sidebar h4 {
       text-align: center;
       font-weight: 700;
       margin-bottom: 2rem;
       letter-spacing: 1px;
     }
-
     #sidebar a.nav-link {
       display: flex;
       align-items: center;
@@ -62,7 +59,6 @@
       transition: background-color 0.3s, border-left 0.3s;
       text-decoration: none;
     }
-
     #sidebar a.nav-link:hover,
     #sidebar a.nav-link.active {
       background-color: var(--sidebar-hover);
@@ -70,25 +66,21 @@
       text-decoration: none;
     }
 
-    /* Main content */
     /* Sidebar scroll bar */
     #sidebar::-webkit-scrollbar {
       width: 6px;
     }
-
     #sidebar::-webkit-scrollbar-thumb {
       background-color: var(--main-color);
       border-radius: 10px;
-
     }
 
     /* Main content */
     #content {
       margin-left: 250px;
-      padding: 1rem 1rem;
+      padding: 2rem 3rem;
       transition: margin-left 0.3s ease;
       min-height: 100vh;
-      width: 77%;
     }
 
     /* Header (optional) */
@@ -98,7 +90,6 @@
       justify-content: space-between;
       align-items: center;
     }
-
     header h1 {
       color: var(--main-color);
       font-weight: 700;
@@ -108,25 +99,21 @@
     .card-custom {
       background-color: var(--card-bg);
       border-radius: 1rem;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.07);
       transition: transform 0.3s ease;
     }
-
     .card-custom:hover {
       transform: translateY(-5px);
     }
-
     .card-icon {
       font-size: 2.5rem;
       color: var(--main-color);
     }
-
     .stat-number {
       font-size: 2rem;
       font-weight: 700;
       margin: 0;
     }
-
     .stat-label {
       font-weight: 600;
       color: #6c757d;
@@ -156,10 +143,9 @@
       padding: 0.5rem 0.75rem;
       border-radius: 5px;
       cursor: pointer;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
       transition: background-color 0.3s ease;
     }
-
     #sidebarToggle:hover {
       background-color: #a71d2a;
     }
@@ -169,24 +155,19 @@
       #sidebar {
         transform: translateX(-260px);
       }
-
-      header h1 {
+      header h1{
         margin-left: 15%;
       }
-
       #sidebar.active {
         transform: translateX(0);
       }
-
       #content {
         margin-left: 0;
         padding: 1rem 1.5rem;
       }
-
       #sidebarToggle {
         display: block;
       }
-
       body.sidebar-open {
         overflow: hidden;
       }
@@ -208,13 +189,18 @@
 </head>
 
 <body>
+
+<button id="sidebarToggle" aria-label="Toggle menu">
+  <i class="fas fa-bars"></i>
+</button>
+
   <div class="container-fluid">
     <div class="row">
 
       <nav id="sidebar" aria-label="Sidebar Navigation">
-        <h4><i class="fa fa-cogs me-2"></i>Admin Panel</h4>
-        <a href="{{ route('admin.dashboard') }}" class="nav-link active"><i class="fas fa-chart-bar"></i> Statistiques</a>
-        <a href="{{ route('evenements.index') }}" class="nav-link"><i class="fa fa-calendar-alt"></i>Événements</a>
+        <h4><i class="fa fa-cogs me-2 mt-5"></i>Admin Panel</h4>
+        <a href="{{ route('admin.dashboard') }}" class="nav-link"><i class="fas fa-chart-bar"></i> Statistiques</a>
+        <a href="{{ route('evenements.index') }}" class="nav-link active"><i class="fa fa-calendar-alt"></i>Événements</a>
         <a href="{{ route('sponsors.index') }}" class="nav-link"><i class="fa fa-handshake"></i>Sponsors</a>
         <a href="{{ route('replay.index')}}" class="nav-link"><i class="fa-solid fa-play"></i> Replay
         <a href="{{ route('categories.index')}}" class="nav-link"><i class="fas fa-layer-group"></i>Catégorie</a>
@@ -231,7 +217,7 @@
         
       </nav>
 
-      <main id="content" class="col-md-9 col-lg-10">
+      <main id="content" class="col-md-9 col-lg-10 mt-2">
         <h2 id="evenements">📅 Gestion des événements</h2>
         <div class="card mb-4">
           <button class="btn btn-danger mb-3" data-bs-toggle="modal" data-bs-target="#addEvenementModal">
@@ -539,21 +525,22 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function () {
-      const openSidebarBtn = document.getElementById('openSidebar');
-      const closeSidebarBtn = document.getElementById('closeSidebar');
-      const sidebar = document.querySelector('.sidebar-left');
+      const sidebar = document.getElementById('sidebar');
+  const sidebarToggle = document.getElementById('sidebarToggle');
+  const body = document.body;
 
-      if (openSidebarBtn) {
-        openSidebarBtn.addEventListener('click', function () {
-          sidebar.classList.add('show');
-        });
-      }
+  sidebarToggle.addEventListener('click', () => {
+    sidebar.classList.toggle('active');
+    body.classList.toggle('sidebar-open');
+  });
 
-      if (closeSidebarBtn) {
-        closeSidebarBtn.addEventListener('click', function () {
-          sidebar.classList.remove('show');
-        });
-      }
+  // Fermer la sidebar si clic en dehors (mobile)
+  document.addEventListener('click', (e) => {
+    if (window.innerWidth < 992 && !sidebar.contains(e.target) && !sidebarToggle.contains(e.target)) {
+      sidebar.classList.remove('active');
+      body.classList.remove('sidebar-open');
+    }
+  });
 
       // Optional: Close sidebar when clicking outside on mobile
       document.addEventListener('click', function (event) {

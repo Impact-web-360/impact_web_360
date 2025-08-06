@@ -42,9 +42,13 @@
             font-weight: 600;
             border-left: 5px solid #28a745;
         }
+        .table-responsive { 
+            overflow-x: auto; 
+        }
     </style>
 </head>
 <body>
+    <button class="btn btn-danger mb-3 mt-3 ms-3" onclick="history.back()"><i class="fas fa-arrow-left"></i> Retour</button>
     <div class="container mt-5 p-4 bg-white rounded shadow-sm">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2>Gestion des Modules</h2>
@@ -55,43 +59,48 @@
             <div class="alert alert-success">{{ session('success') }}</div>
         @endif
 
-        <table class="table table-striped table-hover table-bordered">
-            <thead class="table-primary">
-                <tr>
-                    <th>ID</th>
-                    <th>Titre du Module</th>
-                    <th>Formation</th>
-                    <th>Durée</th>
-                    <th>Ordre</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @forelse ($modules as $module)
+        <div class="table-responsive">
+            <table class="table table-striped table-hover table-bordered">
+                <thead class="table-primary">
                     <tr>
-                        <td>{{ $module->id }}</td>
-                        <td>{{ $module->title }}</td>
-                        <td>{{ $module->formation->title ?? 'N/A' }}</td> {{-- Accéder au titre de la formation parente --}}
-                        <td>{{ $module->duration }}</td>
-                        <td>{{ $module->order }}</td>
-                        <td class="actions-btn-group">
-                            <a href="{{ route('Dashboard.modules.edit', $module->id) }}" class="btn btn-sm btn-warning">Modifier</a>
-                            <form action="{{ route('Dashboard.modules.destroy', $module->id) }}" method="POST" style="display:inline-block;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce module ?')">Supprimer</button>
-                            </form>
-                        </td>
+                        <th>ID</th>
+                        <th>Titre du Module</th>
+                        <th>Formation</th>
+                        <th>Durée</th>
+                        <th>Ordre</th>
+                        <th>Actions</th>
                     </tr>
-                @empty
-                    <tr>
-                        <td colspan="6" class="text-center fst-italic">Aucun module trouvé.</td>
-                    </tr>
-                @endforelse
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @forelse ($modules as $module)
+                        <tr>
+                            <td>{{ $module->id }}</td>
+                            <td>{{ $module->title }}</td>
+                            <td>{{ $module->formation->title ?? 'N/A' }}</td> {{-- Accéder au titre de la formation parente --}}
+                            <td>{{ $module->duration }}</td>
+                            <td>{{ $module->order }}</td>
+                            <td class="actions-btn-group">
+                                <a href="{{ route('Dashboard.modules.edit', $module->id) }}" class="btn btn-sm btn-warning">Modifier</a>
+                                <form action="{{ route('Dashboard.modules.destroy', $module->id) }}" method="POST" style="display:inline-block;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce module ?')">Supprimer</button>
+                                </form>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="6" class="text-center fst-italic">Aucun module trouvé.</td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
     </div>
 
+    <script>
+        AOS.init();
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

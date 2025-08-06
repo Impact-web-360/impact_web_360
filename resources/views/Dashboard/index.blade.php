@@ -194,7 +194,7 @@
 </button>
 
 <nav id="sidebar" aria-label="Sidebar Navigation">
-  <h4><i class="fa fa-cogs me-2"></i>Admin Panel</h4>
+  <h4><i class="fa fa-cogs me-2 mt-5"></i>Admin Panel</h4>
   <a href="{{ route('admin.dashboard') }}" class="nav-link active"><i class="fas fa-chart-bar"></i> Statistiques</a>
   <a href="{{ route('evenements.index') }}" class="nav-link"><i class="fa fa-calendar-alt"></i>Événements</a>
   <a href="{{ route('sponsors.index') }}" class="nav-link"><i class="fa fa-handshake"></i>Sponsors</a>

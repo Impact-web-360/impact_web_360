@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Gestion des Formations</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <style>
         body {
@@ -83,6 +84,7 @@
     </style>
 </head>
 <body>
+<button class="btn btn-danger mb-3 mt-3 ms-3" onclick="history.back()"><i class="fas fa-arrow-left"></i> Retour</button>
 <div class="container content-box">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2>Gestion des Formations</h2>
@@ -167,7 +169,9 @@
         </table>
     </div>
 </div>
-
+<script>
+    AOS.init();
+</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
