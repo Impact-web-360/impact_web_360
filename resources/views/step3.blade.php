@@ -543,21 +543,21 @@
 </div>
 
   <!-- ===== FOOTER ===== -->
-  <footer class="footer text-white pt-5">
+  <footer class="footer text-white pt-5 mt-5">
     <div class="container">
       <div class="row">
         <!-- Logo -->
         <div class=" col-12 col-md-4 mb-4 text-center text-md-start">
-          <img src="{{ asset('dossiers/image/Impact-Web-360-Logo1.png') }}" alt="Logo Impact Web " class="img-fluid" style="max-width: 200px;">
+          <img src="{{ asset('dossiers/image/Impact-Web-360-Logo1.png') }}" alt="Logo Impact Web" class="img-fluid" style="max-width: 200px;">
         </div>
 
         <!-- Colonne 1 -->
         <div class="col-6 col-md-4 col-sm-6 mb-4">
           <ul class="list-unstyled footer-links">
-            <li><a href="#">Accueil</a></li>
-            <li><a href="#">Événements</a></li>
-            <li><a href="#">Replays</a></li>
-            <li><a href="#">E-learning</a></li>
+            <li><a href="{{ route('home') }}">Accueil</a></li>
+            <li><a href="{{ route('evenement') }}">Événements</a></li>
+            <li><a href="{{ route('evenement') }}">Replays</a></li>
+            <li><a href="{{ route('login') }}">E-learning</a></li>
             <li><a href="#">Entreprises & Recruteurs</a></li>
             <li><a href="#">Forum</a></li>
           </ul>
@@ -566,11 +566,11 @@
         <!-- Colonne 2 -->
         <div class="col-6 col-md-4 col-sm-6 mb-4">
           <ul class="list-unstyled footer-links">
-            <li><a href="#">Intervenants</a></li>
+            <li><a href="{{ route('intervenant') }}">Intervenants</a></li>
             <li><a href="#">Partenaires & Sponsors</a></li>
             <li><a href="#">Ressources Gratuites</a></li>
-            <li><a href="#">Billetterie</a></li>
-            <li><a href="#">Boutique</a></li>
+            <li><a href="{{ route('step1') }}">Billetterie</a></li>
+            <li><a href="{{ route('boutique') }}">Boutique</a></li>
             <li><a href="#">Plan d'action + Mentorat</a></li>
           </ul>
         </div>
@@ -588,14 +588,15 @@
           <a href="#" class="text-white footer-link text-decoration-none">Mentions légales</a>
         </div>
         <div class="col-md-4 text-center yes2 text-md-end">
-          <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-          <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.facebook.com/share/193YQEPeYH/?mibextid=wwXIfr" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/impactweb360/" class="social-icon"><i class="fab fa-instagram"></i></a>
           <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
           <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
         </div>
       </div>
     </div>
   </footer>
+  
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
   <script>

@@ -78,9 +78,10 @@
     /* Main content */
     #content {
       margin-left: 250px;
-      padding: 2rem 3rem;
+      padding: 2rem 1rem;
       transition: margin-left 0.3s ease;
       min-height: 100vh;
+      width: 75%;
     }
 
     /* Header (optional) */

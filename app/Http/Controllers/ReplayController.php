@@ -93,7 +93,7 @@ class ReplayController extends Controller
             'id_evenement'       => 'required|exists:evenements,id',
             'titre'              => 'required|string|max:255',
             'description'        => 'required|string',
-            'video'              => 'nullable|mimes:mp4,mov,avi,webm|max:51200',
+            'video_path'         => 'nullable|mimes:mp4,mov,avi,webm|max:51200',
             'presentateur_nom'   => 'required|string|max:255',
             'presentateur_poste' => 'required|string|max:255',
             'presentateur_image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
