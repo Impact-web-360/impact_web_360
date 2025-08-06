@@ -76,9 +76,10 @@
         /* Main content */
         #content {
             margin-left: 250px;
-            padding: 2rem 3rem;
+            padding: 2rem 1rem;
             transition: margin-left 0.3s ease;
             min-height: 100vh;
+            width: 75%;
         }
 
         /* Responsive Sidebar toggle button */
@@ -153,18 +154,22 @@
         <div class="row">
 
             <nav id="sidebar" aria-label="Sidebar Navigation" class="col-md-3 col-lg-2 d-md-block">
-                <h4><i class="fa fa-cogs me-2 mt-5 "></i>Admin Panel</h4>
+                <h4><i class="fa fa-cogs mt-5 me-2"></i>Admin Panel</h4>
                 <a href="{{ route('admin.dashboard') }}" class="nav-link"><i class="fas fa-chart-bar"></i> Statistiques</a>
                 <a href="{{ route('evenements.index') }}" class="nav-link"><i class="fa fa-calendar-alt"></i>Événements</a>
                 <a href="{{ route('sponsors.index') }}" class="nav-link"><i class="fa fa-handshake"></i>Sponsors</a>
+                <a href="{{ route('replay.index')}}" class="nav-link"><i class="fa-solid fa-play"></i> Replay</a>
                 <a href="{{ route('categories.index')}}" class="nav-link"><i class="fas fa-layer-group"></i>Catégorie</a>
                 <a href="{{ route('formations.index')}}" class="nav-link"><i class="fas fa-graduation-cap"></i>Formation</a>
                 <a href="{{ route('modules.index')}}" class="nav-link"><i class="fas fa-puzzle-piece"></i>Modules</a>
-                <a href="{{ route('articles.index')}}" class="nav-link"><i class="fa fa-shopping-basket"></i>Articles</a>
-                <a href="{{ route('emploies.index')}}" class="nav-link active"><i class="fa fa-briefcase"></i>Emplois</a>
+                <a href="{{ route('articles.index')}}" class="nav-link active"><i class="fa fa-shopping-basket"></i>Articles</a>
+                <a href="{{ route('emploies.index')}}" class="nav-link"><i class="fa fa-briefcase"></i>Emplois</a>
                 <a href="ajouter_intervenant.php" class="nav-link"><i class="fa fa-user"></i>Intervenants</a>
                 <a href="{{ route('billet')}}" class="nav-link"><i class="fas fa-calendar-alt "></i> Tickets</a>
-                <a href="{{ route('logout')}}" class_="nav-link"><i class="fa fa-arrow-left"></i>Deconnexion</a>
+                <a href="{{ route('logout')}}" class="nav-link"><i class="fa fa-arrow-left"></i>Deconnexion</a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
             </nav>
 
             <main id="content" class="col-md-9 ms-sm-auto col-lg-10 mt-2">

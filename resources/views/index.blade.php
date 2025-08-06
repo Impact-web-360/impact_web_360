@@ -1038,7 +1038,7 @@
           <p class="forum-text mt-3">
             Rejoignez notre espace d'échange privilégié où entrepreneurs débutants et experts se connectent. Partagez vos défis, obtenez des solutions personnalisées et collaborez sur des projets concrets avec d'autres membres ambitieux de notre écosystème.
           </p>
-          <button class="btn btn-join mt-4" data-aos="fade-right">Rejoindre</button>
+          <a href="https://chat.whatsapp.com/FZx7QMMdFsq3fF0D40Px8f"><button class="btn btn-join mt-4" data-aos="fade-right">Rejoindre</button></a>
         </div>
 
         <!-- Cercle + photos -->
@@ -1072,7 +1072,7 @@
       <div class="row justify-content-center" data-aos="flip-right">
         <div class="col-md-4 mb-4">
           <div class="card bg-dark text-white h-100" style="width: 20x;">
-            <img src="./homme2.png" class="card-img-top" alt="motif">
+            <img src="{{ asset('dossiers/image/homme2.png') }}" class="card-img-top" alt="motif">
             <div class="card-body">
               <h5 class="card-title">T-shirt</h5>
               <p class="card-text">450000 FCFA</p>
@@ -1140,7 +1140,7 @@
       </div>
     </div>
   </footer>
-
+  
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
