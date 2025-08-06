@@ -217,6 +217,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),
             Route::get('/modifier-profil', function () {
                 return view('dashboard_utilisateur.modifier_profil');
             })->name('modifier_profil');
+
             //decouvrir
             Route::get('/decouvrir', [DiscoverController::class, 'index'])->name('decouvrir');
 
@@ -249,6 +250,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),
 
             // Route pour afficher la page des paramètres de langue
             Route::get('/langues', [ParametresController::class, 'showLanguageSettings'])->name('langues');
+
             // Route pour traiter la mise à jour de la langue
             Route::post('/langues', [ParametresController::class, 'updateLanguage'])->name('update.language');
 
@@ -259,6 +261,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),
 
             Route::post('/ajouter-cours/{formation}', [CoursController::class, 'ajouterFormation'])
             ->name('ajouter-cours');
+            
             //Route::get('/cours', [CoursController::class, 'index'])->name('cours');
             Route::match(['get', 'post'], '/cours', [CoursController::class, 'index'])->name('cours');
             Route::get('/cours/{formation}', [CoursController::class, 'showFormation'])->name('formation.show');
@@ -299,11 +302,15 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('/dashboard/sponsors', [SponsorController::class, 'store'])->name('sponsors.store');
     Route::put('/dashboard/sponsors/{sponsor}', [SponsorController::class, 'update'])->name('sponsors.update');
     Route::delete('/dashboard/sponsors/{sponsor}', [SponsorController::class, 'destroy'])->name('sponsors.destroy');
+    Route::get('/dashboard/sponsors/vue', [SponsorController::class, 'vue_sponsor'])->name('vue_sponsor');
 
+
+    Route::get('/dashboard/intervenants', [IntervenantController::class, 'in']);
     Route::get('/dashboard/intervenants', [IntervenantController::class, 'index'])->name('intervenants.index');
     Route::post('/dashboard/intervenants', [IntervenantController::class, 'store'])->name('intervenants.store');
     Route::put('/dashboard/intervenants/{intervenant}', [IntervenantController::class, 'update'])->name('intervenants.update');
     Route::delete('/dashboard/intervenants/{intervenant}', [IntervenantController::class, 'destroy'])->name('intervenants.destroy');
+    Route::get('/dashboard/intervenants', [IntervenantController::class, 'vue_in'])->name('vue_in');
 
     // Catégories
     Route::resource('categories', CategorieController::class);

@@ -88,7 +88,7 @@
           <li class="nav-item"><a class="nav-link" href="{{ route('evenement') }}">Événements</a></li>
           <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">E-learning</a></li>
           <li class="nav-item"><a class="nav-link active" href="{{ route('intervenant') }}">Intervenants</a></li>
-          <li class="nav-item"><a class="nav-link" href="">Billetterie</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ route('step1') }}">Billetterie</a></li>
           <li class="nav-item"><a class="nav-link" href="{{ route('boutique') }}">Boutique</a></li>
           <li class="nav-item"><a class="btn btn-light mx-2" href="{{ route('login') }}">Se connecter</a></li>
           <li class="nav-item"><a class="btn btn-inscrire" href="{{ route('register') }}">S'inscrire</a></li>
@@ -124,10 +124,12 @@
           <h5 class="mb-0">{{ $intervenant->nom }}</h5>
           <small class="text-muted d-block">{{ $intervenant->theme ?? 'Intervenant' }}</small>
           <small class="text-light fst-italic">Poste : {{ $intervenant->poste ?? 'Non défini' }}</small>
-          @if($intervenant->evenements->count() > 0)
-            <small class="text-light fst-italic">Événement : {{ $intervenant->evenements->first()->titre }}</small>
+          @if($intervenant->evenements && $intervenant->evenements->count() > 0)
+          <small class="text-light fst-italic">
+              Événement : {{ $intervenant->evenements->first()->theme }}
+          </small>
           @endif
-          <a href="{{ route('intervenants.show', $intervenant->id) }}" class="btn btn-danger mt-3 rounded-pill">Voir profil</a>
+          <a href="#" class="btn btn-danger mt-3 rounded-pill">Voir profil</a>
         </div>
       </div>
     @endforeach
@@ -172,7 +174,7 @@
   @auth
     @if(auth()->user()->type === 'admin')
       <div class="mt-5 text-center">
-        <a href="{{ route('dashboard.intervenants.index') }}" class="btn btn-primary">
+        <a href="{{ route('evenements.index') }}" class="btn btn-primary">
           <i class="fas fa-cog"></i> Gérer les intervenants
         </a>
       </div>

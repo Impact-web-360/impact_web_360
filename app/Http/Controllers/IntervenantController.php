@@ -118,4 +118,9 @@ class IntervenantController extends Controller
             return redirect()->back()->withErrors(['error' => 'Erreur lors de la suppression.']);
         }
     }
+    public function vue_in()
+    {
+        $intervenants = User::where('type', 'intervenant')->get();
+        return view('vue_in', compact('intervenants'));
+    }
 }

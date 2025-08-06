@@ -64,6 +64,7 @@
               <span class="text-muted">Non fourni</span>
             @endif
           </td>
+          <td>{{ $sponsor->evenement->nom ?? 'Non spécifié' }}</td>
         </tr>
       @empty
         <tr>

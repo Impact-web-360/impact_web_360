@@ -1,6 +1,7 @@
 <div>
-    <!-- The best way to take care of the future is to take care of the present moment. - Thich Nhat Hanh -->
+    <!-- Order your soul. Reduce your wants. - Augustine -->
 </div>
+
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -37,37 +38,38 @@
 <body>
 
 <div class="container py-5">
-  <h2 class="mb-5 text-white text-center fw-bold">Liste des Sponsors</h2>
+  <h2 class="mb-4 text-white text-center fw-bold">Liste des Intervenants</h2>
 
-  <table class="table table-dark table-bordered table-hover mb-5">
+  <table class="table table-dark table-bordered table-hover">
     <thead>
       <tr>
         <th>#</th>
         <th>Nom</th>
-        <th>Promoteur</th>
+        <th>Thème</th>
         <th>Description</th>
-        <th>Logo</th>
+        <th>Image</th>
         <th>Événement</th>
       </tr>
     </thead>
     <tbody>
-      @forelse($sponsors as $sponsor)
+      @forelse($intervenants as $intervenant)
         <tr>
           <td>{{ $loop->iteration }}</td>
-          <td>{{ $sponsor->nom }}</td>
-          <td>{{ $sponsor->promoteur }}</td>
-          <td>{{ $sponsor->description }}</td>
+          <td>{{ $intervenant->nom }}</td>
+          <td>{{ $intervenant->theme }}</td>
+          <td>{{ $intervenant->description }}</td>
           <td>
-            @if ($sponsor->logo)
-              <img src="{{ asset('storage/' . $sponsor->logo) }}" alt="Logo" width="60" height="60">
+            @if ($intervenant->image)
+              <img src="{{ asset('storage/' . $intervenant->image) }}" alt="Image" width="60" height="60">
             @else
-              <span class="text-muted">Non fourni</span>
+              <span class="text-muted">Non fournie</span>
             @endif
           </td>
+          <td>{{ $intervenant->evenement->nom ?? 'Non spécifié' }}</td>
         </tr>
       @empty
         <tr>
-          <td colspan="6" class="text-center">Aucun sponsor trouvé.</td>
+          <td colspan="6" class="text-center">Aucun intervenant trouvé.</td>
         </tr>
       @endforelse
     </tbody>

@@ -75,4 +75,10 @@ class SponsorController extends Controller
 
         return redirect()->back()->with('success', 'Sponsor supprimé avec succès !');
     }
+
+    public function vue_sponsor()
+    {
+        $sponsors = Sponsor::all();
+        return view('vue_sponsor', compact('sponsors'));
+    }
 }
