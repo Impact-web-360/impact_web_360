@@ -485,7 +485,7 @@
           @foreach($articles as $index => $article)
         <div class="col-12 col-sm-6 col-md-4 mb-4 product-item" data-index="{{ $index }}"
         data-type="{{ $article->type }}" data-size="{{ $article->taille }}" data-color="{{ $article->couleur }}">
-        <a href="#" class="product-link">
+        <a href="{{ route('boutique_plus', $article->id) }}" class="product-link">
           <div class="product-card">
           <div class="product-image-container">
           <img src="{{ asset('storage/' . $article->image) }}" class="product-image" alt="{{ $article->nom }}">

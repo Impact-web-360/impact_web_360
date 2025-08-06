@@ -29,6 +29,7 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\EmploieController;
 use App\Http\Controllers\UtilisateurController;
 use App\Http\Controllers\ReplayController;
+use App\Http\Controllers\ProduitPublicController;
 
 
 
@@ -152,6 +153,17 @@ Route::get('/boutique', function () {
     
     return view('boutique', compact('articles', 'couleurs'));
 })->name('boutique');
+
+
+//Boutique_plus
+Route::controller(ProduitPublicController::class)->group(function () {
+    Route::get('/produits/{produit}', 'show')->name('boutique_plus');
+    Route::post('/produits/{produit}/commentaires', 'ajouterCommentaire')->name('produit.commentaire');
+    Route::post('/newsletter', 'newsletter')->name('newsletter.inscription');
+});
+
+
+
 
 Route::get('auth/google', [SocialAuthController::class, 'redirectToGoogle']);
 Route::get('auth/google/callback', [SocialAuthController::class, 'handleGoogleCallback']);

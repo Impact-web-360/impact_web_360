@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Models\Reseau;
 use App\Models\user_evenement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -17,43 +16,56 @@ class IntervenantController extends Controller
         return view('Dashboard.Intervenants.index', compact('intervenants'));
     }
 
-    public function store(Request $request)
-    {
-        try {
-            $data = $request->validate([
-                'nom'          => 'required|string',
-                'theme'        => 'nullable|string',
-                'description'  => 'required|string',
-                'image'        => 'nullable|image',
-                'evenement_id' => 'required|exists:evenements,id',
-            ]);
+   public function store(Request $request)
+{
+    try {
+        Log::info('Tentative de création d\'intervenant', ['request' => $request->all()]);
 
-            // Traitement image
-            if ($request->hasFile('image')) {
-                $path = $request->file('image')->store('intervenants', 'public');
-                $data['image'] = $path;
+        $data = $request->validate([
+            'nom'          => 'required|string',
+            'theme'        => 'nullable|string',
+            'description'  => 'nullable|string',
+            'image'        => 'nullable|image',
+            'evenement_id' => 'required|exists:evenements,id',
+        ]);
+
+        Log::info('Données validées:', $data);
+
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('intervenants', 'public');
+            if (!$path) {
+                Log::error("Échec du stockage de l'image");
+                throw new \Exception("Échec du stockage de l'image");
             }
-
-            // Données obligatoires pour User
-            $data['email'] = 'dummy_' . uniqid() . '@dummy.com';
-            $data['password'] = Hash::make('password_dummy');
-            $data['type'] = 'intervenant';
-
-            $intervenant = User::create($data);
-
-            // Lier l'intervenant à un événement
-            user_evenement::create([
-                'id_intervenant' => $intervenant->id,
-                'id_evenement'   => $data['evenement_id'],
-            ]);
-
-            return redirect()->back()->with('success', 'Intervenant créé avec succès !');
-
-        } catch (\Throwable $th) {
-            Log::error("Erreur création intervenant", ['error' => $th->getMessage()]);
-            return redirect()->back()->withErrors(['error' => 'Erreur lors de la création.']);
+            $data['image'] = $path;
+            Log::info('Image stockée:', ['path' => $path]);
         }
+
+        $data['email'] = 'dummy_' . uniqid() . '@dummy.com';
+        $data['password'] = Hash::make('password_dummy');
+        $data['type'] = 'intervenant';
+
+        $intervenant = User::create($data);
+        Log::info('Intervenant créé:', $intervenant->toArray());
+
+        $relation = user_evenement::create([
+            'id_user' => $intervenant->id,
+            'id_evenement'   => $data['evenement_id'],
+        ]);
+        Log::info('Relation créée:', $relation->toArray());
+
+        return redirect()->back()->with('success', 'Intervenant créé avec succès !');
+
+    } catch (\Throwable $th) {
+        Log::error("Erreur création intervenant", [
+            'error' => $th->getMessage(),
+            'trace' => $th->getTraceAsString()
+        ]);
+        return redirect()->back()
+            ->withInput()
+            ->withErrors(['error' => 'Erreur lors de la création: ' . $th->getMessage()]);
     }
+}
 
     public function update(Request $request, $id)
     {
@@ -63,7 +75,7 @@ class IntervenantController extends Controller
             $data = $request->validate([
                 'nom'          => 'required|string',
                 'theme'        => 'nullable|string',
-                'description'  => 'required|string',
+                'description'  => 'nullable|string',
                 'image'        => 'nullable|image',
                 'evenement_id' => 'required|exists:evenements,id',
             ]);
@@ -77,7 +89,7 @@ class IntervenantController extends Controller
 
             // Mettre à jour la relation événement
             user_evenement::updateOrCreate(
-                ['id_intervenant' => $intervenant->id],
+                ['id_user' => $intervenant->id],
                 ['id_evenement' => $data['evenement_id']]
             );
 

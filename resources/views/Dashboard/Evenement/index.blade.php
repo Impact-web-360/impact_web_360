@@ -428,79 +428,63 @@
   </div>
 
 
-  <!-- Modal Ajouter Événement -->
-
-  <div class="modal fade" id="addEvenementModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-scrollable ">
-      <form method="POST" action="{{ route('evenements.store') }}" enctype="multipart/form-data" class="modal-content">
-        @csrf
-        <div class="modal-header bg-danger text-white">
-          <h5 class="modal-title" id="addEvenementLabel">Ajouter un événement</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+  <!-- Modal Ajouter intervenant -->
+<div class="modal fade" id="addIntervenantModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable">
+    <form method="POST" action="{{ route('intervenants.store') }}" enctype="multipart/form-data" class="modal-content">
+      @csrf
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title">Ajouter un intervenant</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Champ caché pour l'ID de l'événement -->
+        <input type="hidden" name="evenement_id" id="modalEventId" value="">
+        
+        <div class="mb-3">
+          <label for="nom" class="form-label">Nom</label>
+          <input type="text" class="form-control" id="nom" name="nom" required>
         </div>
-        <div class="modal-body">
-          <div class="mb-3">
-            <label for="nom" class="form-label">Nom de l'événement</label>
-            <input type="text" class="form-control" id="nom" name="nom" required>
-          </div>
 
-          <div class="mb-3">
-            <label for="promoteur" class="form-label">Promoteur</label>
-            <input type="text" class="form-control" id="promoteur" name="promoteur" required>
-          </div>
-
-          <div class="mb-3">
-            <label for="theme" class="form-label">Thème</label>
-            <input type="text" class="form-control" id="theme" name="theme" required>
-          </div>
-
-          <div class="mb-3">
-            <label for="lieu" class="form-label">Lieu</label>
-            <input type="text" class="form-control" id="lieu" name="lieu">
-          </div>
-
-          <div class="mb-3">
-            <label for="description" class="form-label">Description</label>
-            <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
-          </div>
-
-          <div class="row">
-            <div class="col-md-6 mb-3">
-              <label for="date_debut" class="form-label">Date de début</label>
-              <input type="date" class="form-control" id="date_debut" name="date_debut" required>
-            </div>
-
-            <div class="col-md-6 mb-3">
-              <label for="date_fin" class="form-label">Date de fin</label>
-              <input type="date" class="form-control" id="date_fin" name="date_fin">
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-md-6 mb-3">
-              <label for="heure" class="form-label">Heure</label>
-              <input type="time" class="form-control" id="heure" name="heure" required>
-            </div>
-
-            <div class="col-md-6 mb-3">
-              <label for="nb_places" class="form-label">Nombre de places</label>
-              <input type="number" class="form-control" id="nb_places" name="nb_places" min="0">
-            </div>
-          </div>
-
-          <div class="mb-3">
-            <label for="image" class="form-label">Image </label>
-            <input type="file" class="form-control" id="image" name="image" required>
-          </div>
-
+        <div class="mb-3">
+          <label for="fonction" class="form-label">Fonction</label>
+          <input type="text" class="form-control" id="fonction" name="fonction" placeholder="Expert en IA" required>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-          <button type="submit" class="btn btn-danger">Enregistrer</button>
+
+        <div class="mb-3">
+          <label for="biographie" class="form-label">Biographie</label>
+          <textarea class="form-control" id="biographie" name="biographie" rows="3" required></textarea>
         </div>
-      </form>
-    </div>
+
+        <div class="mb-3">
+          <label for="theme" class="form-label">Thème abordé</label>
+          <input type="text" class="form-control" id="theme" name="theme">
+        </div>
+
+        <div class="mb-3">
+          <label for="image" class="form-label">Image</label>
+          <input type="file" class="form-control" id="image" name="image" required>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Réseaux sociaux</label>
+          <div class="d-flex flex-wrap gap-2">
+            <input type="text" name="whatsapp" class="form-control" placeholder="WhatsApp">
+            <input type="text" name="facebook" class="form-control" placeholder="Facebook">
+            <input type="text" name="instagram" class="form-control" placeholder="Instagram">
+            <input type="text" name="tiktok" class="form-control" placeholder="TikTok">
+            <input type="text" name="linkedln" class="form-control" placeholder="LinkedIn">
+            <input type="text" name="snapchat" class="form-control" placeholder="Snapchat">
+            <input type="text" name="x" class="form-control" placeholder="X (Twitter)">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-danger">Enregistrer</button>
+      </div>
+    </form>
   </div>
+</div>
 
   <!-- Modal Ajouter sponsor -->
   <div class="modal fade" id="addSponsorModal" tabindex="-1" aria-hidden="true">
@@ -550,58 +534,7 @@
     </div>
   </div>
 
-  <!-- Modal Ajouter sponsor -->
-  <div class="modal fade" id="addIntervenantModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-scrollable">
-      <form method="POST" action="{{ route('intervenants.store') }}" enctype="multipart/form-data"
-        class="modal-content">
-        @csrf
-        <div class="modal-header bg-danger text-white">
-          <h5 class="modal-title" id="addsponsorLabel">Ajouter un sponsor</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
-        </div>
-
-        <div class="modal-body">
-
-          <div class="mb-3">
-            @foreach ($evenements as $evenement)
-        <label for="nom" class="form-label">{{ $evenement->nom }}</label>
-        <input type="hidden" class="form-control" name="evenement_id" value="{{ $evenement->id }}">
-      @endforeach
-          </div>
-
-          <div class="modal-body">
-            <div class="mb-3">
-              <label for="nom" class="form-label">Nom du sponsor</label>
-              <input type="text" class="form-control" id="nom" name="nom" required>
-            </div>
-
-            <div class="mb-3">
-              <label for="promoteur" class="form-label">Promoteur</label>
-              <input type="text" class="form-control" id="promoteur" name="promoteur" required>
-            </div>
-
-            <div class="mb-3">
-              <label for="description" class="form-label">Description</label>
-              <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
-            </div>
-
-            <div class="mb-3">
-              <label for="logo" class="form-label">Logo </label>
-              <input type="file" class="form-control" id="logo" name="logo" required>
-            </div>
-
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-            <button type="submit" class="btn btn-danger">Enregistrer</button>
-          </div>
-
-        </div>
-
-      </form>
-    </div>
-  </div>
+  
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script>
