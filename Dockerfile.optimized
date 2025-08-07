@@ -41,27 +41,39 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Créer le répertoire de travail
 WORKDIR /var/www/html
 
-# Copier tous les fichiers du projet
-COPY . .
+# Copier les fichiers de dépendances en premier (pour optimiser le cache Docker)
+COPY composer.json composer.lock ./
 
-# Créer le fichier .env s'il n'existe pas
-RUN if [ ! -f .env ]; then cp .env.example .env; fi
+# Copier les fichiers de configuration Laravel nécessaires pour composer
+COPY app/ app/
+COPY bootstrap/ bootstrap/
+COPY config/ config/
+COPY database/ database/
+COPY resources/ resources/
+COPY routes/ routes/
+COPY artisan ./
 
-# Créer les dossiers nécessaires avant composer install
+# Créer les dossiers nécessaires
 RUN mkdir -p storage/framework/cache/data \
     && mkdir -p storage/framework/sessions \
     && mkdir -p storage/framework/views \
     && mkdir -p storage/logs \
     && mkdir -p bootstrap/cache
 
-# Définir les permissions temporaires pour composer
+# Définir les permissions temporaires
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html \
     && chmod -R 775 storage \
     && chmod -R 775 bootstrap/cache
 
-# Installer les dépendances PHP (après avoir copié tous les fichiers)
+# Installer les dépendances PHP
 RUN composer install --no-dev --optimize-autoloader --no-interaction
+
+# Copier le reste du code source
+COPY . .
+
+# Créer le fichier .env s'il n'existe pas
+RUN if [ ! -f .env ]; then cp .env.example .env; fi
 
 # Générer la clé d'application Laravel
 RUN php artisan key:generate --no-interaction || true
@@ -98,4 +110,4 @@ COPY docker-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
 ENTRYPOINT ["docker-entrypoint.sh"]
-CMD ["apache2-foreground"]
+CMD ["apache2-foreground"] 

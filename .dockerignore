@@ -14,7 +14,7 @@ yarn-error.log
 storage/logs/*
 !storage/logs/.gitkeep
 
-# Fichiers de cache Laravel
+# Fichiers de cache Laravel (seront recréés)
 storage/framework/cache/*
 !storage/framework/cache/.gitkeep
 storage/framework/sessions/*
@@ -39,10 +39,16 @@ LICENSE
 Homestead.json
 Homestead.yaml
 
-# Fichiers Docker
-Dockerfile
+# Fichiers Docker (sauf ceux nécessaires)
+Dockerfile.optimized
 docker-compose.yml
 .dockerignore
 
 # Fichiers de déploiement
 render.yaml
+
+# Fichiers temporaires
+*.tmp
+*.log
+.DS_Store
+Thumbs.db
