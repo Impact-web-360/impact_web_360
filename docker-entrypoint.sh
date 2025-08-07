@@ -12,7 +12,7 @@ if [ ! -f .env ]; then
     cat > .env << 'EOF'
 APP_NAME="Impact Web 360"
 APP_ENV=production
-APP_KEY=base64:gM6tkop6Bgqm19PRHyFSiOVB6uOpr94xa09ykDLKRQs=
+APP_KEY=
 APP_DEBUG=false
 APP_URL=http://localhost
 LOG_CHANNEL=stack
