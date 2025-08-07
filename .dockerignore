@@ -1,4 +1,48 @@
-node_modules
-vendor
+# Dossiers de développement
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Fichiers de cache
+.git/
+.gitignore
 .env
-.git
+.env.*
+!.env.example
+
+# Fichiers de logs
+storage/logs/*
+!storage/logs/.gitkeep
+
+# Fichiers de cache Laravel
+storage/framework/cache/*
+!storage/framework/cache/.gitkeep
+storage/framework/sessions/*
+!storage/framework/sessions/.gitkeep
+storage/framework/views/*
+!storage/framework/views/.gitkeep
+bootstrap/cache/*
+!bootstrap/cache/.gitkeep
+
+# Fichiers de tests
+tests/
+phpunit.xml
+
+# Fichiers de documentation
+README.md
+CHANGELOG.md
+LICENSE
+
+# Fichiers de configuration de développement
+.editorconfig
+.phpunit.result.cache
+Homestead.json
+Homestead.yaml
+
+# Fichiers Docker
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Fichiers de déploiement
+render.yaml
