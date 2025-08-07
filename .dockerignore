@@ -8,7 +8,7 @@ yarn-error.log
 .gitignore
 .env
 .env.*
-!.env.example
+!env.example
 
 # Fichiers de logs
 storage/logs/*

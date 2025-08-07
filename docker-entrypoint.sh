@@ -8,8 +8,26 @@ log() {
 
 # Vérifier si le fichier .env existe
 if [ ! -f .env ]; then
-    log "Fichier .env non trouvé, copie depuis .env.example..."
-    cp .env.example .env
+    log "Fichier .env non trouvé, création d'un fichier .env de base..."
+    cat > .env << 'EOF'
+APP_NAME="Impact Web 360"
+APP_ENV=production
+APP_KEY=
+APP_DEBUG=false
+APP_URL=http://localhost
+LOG_CHANNEL=stack
+LOG_LEVEL=error
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=laravel
+DB_USERNAME=root
+DB_PASSWORD=
+CACHE_DRIVER=file
+SESSION_DRIVER=file
+QUEUE_CONNECTION=sync
+FILESYSTEM_DISK=local
+EOF
 fi
 
 # Générer la clé d'application si elle n'existe pas
