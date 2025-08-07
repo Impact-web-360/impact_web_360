@@ -473,7 +473,7 @@
                                     @foreach ($evenements as $evenement)
                                         <select class="form-select" id="eventSelect">
                                         <option selected>Sélectionner un événement</option>
-                                        <option value="{{$evenement->id}}">{{$evenement->nom}}</option>
+                                        <option value=""></option>
                                         <option>Atelier Marketing Digital</option>
                                         <option>Formation SEO Avancé</option>
                                         <option>Webinaire E-commerce</option>
