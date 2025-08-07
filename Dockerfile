@@ -20,7 +20,7 @@ RUN composer install --no-dev --optimize-autoloader
 
 # Donner les bons droits
 RUN chown -R www-data:www-data /var/www/html \
-    && chmod -R 755 /var/www/html/storage
+    && chmod +x /var/www/html/storage
 
 # Config Apache pour Laravel
 RUN echo '<Directory /var/www/html>\n\
