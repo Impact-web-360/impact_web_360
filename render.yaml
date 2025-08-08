@@ -12,7 +12,7 @@ services:
       - key: APP_DEBUG
         value: false
       - key: APP_KEY
-        value: base64:CVZAq3AKESMGZSuutyybpOicT8693kpiMcGfTrQGpEg=
+        value: base64:mxnlRLSDrQSkOVaQyWqy0z8wX2/fBhUsTlpD+ctY3D4=
       - key: DB_CONNECTION
         value: pgsql
       - key: DB_HOST
