@@ -44,50 +44,38 @@ Route::get('/intervenant', [HomeController::class, 'intervenant'])->name('interv
 Route::get('/evenement', [HomeController::class, 'evenement'])->name('evenement');
 Route::get('/evenement/{id}/replays', [ReplayController::class, 'parEvenement'])->name('replays_evenement');
 
-// Paramètres / vues statiques (conserver si tu t'appuie dessus)
-Route::get('/modifier profil', function () {
-    return view('dashboard_utilisateur.modifier profil');
-})->name('modifier profil');
+// Paramètres / vues statiques (avec middleware auth)
+Route::middleware('auth')->group(function () {
+    Route::view('/modifier-profil', 'dashboard_utilisateur.modifier_profil')->name('modifier_profil');
+    Route::view('/billet', 'Dashboard.Ticket.CodePromo')->name('billet');
+    Route::view('/changer-mot-de-passe', 'dashboard_utilisateur.changer_mot_de_passe')->name('changer_mot_de_passe');
+    Route::view('/notification', 'dashboard_utilisateur.notification')->name('notification');
+});
 
-Route::get('/billet', function () {
-    return view('Dashboard.Ticket.CodePromo');
-})->name('billet');
+// Profil update (avec auth)
+Route::middleware('auth')->group(function () {
+    Route::post('/parametres/update', [ParametresController::class, 'update'])->name('parametres.update');
+    Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+    Route::put('/password/update', [ProfileController::class, 'updatePassword'])->name('password.update');
+});
 
-Route::get('/changer mot de passe', function () {
-    return view('dashboard_utilisateur.changer mot de passe');
-})->name('changer mot de passe');
-
-Route::get('/notification', function () {
-    return view('dashboard_utilisateur.notification');
-})->name('notification');
-
-// Profil update
-Route::post('/parametres/update', [ParametresController::class, 'update'])->name('parametres.update');
-Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update')->middleware('auth');
-Route::put('/password/update', [ProfileController::class, 'updatePassword'])->name('password.update')->middleware('auth');
-
-// Media
-Route::post('/media/store', [MediaController::class, 'store'])->name('media.store');
+// Media upload (avec auth)
+Route::middleware('auth')->post('/media/store', [MediaController::class, 'store'])->name('media.store');
 
 // ------------------------------
-// Tickets (corrigé — pas de doublons)
+// Tickets
 // ------------------------------
 
-// Page billetterie publique
+// Billetterie publique
 Route::get('/billetterie', [TicketController::class, 'index'])->name('billetterie.index');
-
-// Formulaire de création de ticket (public)
 Route::get('/billetterie/create', [TicketController::class, 'create'])->name('billetterie.create');
-
-// Enregistrement d'un ticket depuis la billetterie (public)
 Route::post('/billetterie/store', [TicketController::class, 'store'])->name('billetterie.store');
 
-// Dashboard - liste des tickets (page admin/dashboard)
-Route::get('/dashboard/tickets', [TicketController::class, 'index'])->name('tickets.index');
+// Dashboard tickets (admin or auth)
+Route::middleware('auth')->get('/dashboard/tickets', [TicketController::class, 'index'])->name('tickets.index');
 
-// Promo AJAX
+// Promo code validation
 Route::post('/valider-code-promo', [TicketController::class, 'validerCodePromo'])->name('code.promo.valider');
-Route::get('/valider-code-promo', [HomeController::class, 'ticket']);
 
 // Étapes réservation (public)
 Route::get('/step1', [TicketController::class, 'step1'])->name('step1');
@@ -95,9 +83,8 @@ Route::post('/step1', [TicketController::class, 'postStep1'])->name('step1.post'
 Route::get('/step2', [TicketController::class, 'step2'])->name('step2');
 Route::post('/step2', [TicketController::class, 'postStep2'])->name('step2.post');
 Route::get('/step3', [TicketController::class, 'step3'])->name('step3');
-// NOTE: post('/tickets') removed to avoid name conflict with billetterie.store
 
-// Routes REST pour tickets (on exclut create, store et index pour éviter doublons de noms/URLs)
+// Routes REST tickets (excluant create, store, index)
 Route::resource('tickets', TicketController::class)->except(['create', 'store', 'index']);
 
 // ------------------------------
@@ -149,47 +136,30 @@ Route::get('/forgot-password', [AuthController::class, 'showForgotForm'])->name(
 Route::post('/forgot-password', [AuthController::class, 'sendResetLink'])->name('password.email');
 
 Route::get('/reset-password/{token}', [AuthController::class, 'showResetForm'])->name('password.reset');
-Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('password.update');
+
+// **Route renommée ici pour éviter conflit**
+Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('password.reset.update');
 
 // Localization group (routes traduites / dashboard utilisateur)
 Route::group(['prefix' => LaravelLocalization::setLocale(),
     'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
-], function(){
+], function() {
     Route::middleware('auth')->group(function () {
 
         Route::get('/dashboard', [UtilisateurController::class, 'index'])->name('dashboard');
 
-        Route::get('/cours/details', function () {
-            return view('dashboard_utilisateur.details_cours');
-        })->name('cours.details');
+        Route::view('/cours/details', 'dashboard_utilisateur.details_cours')->name('cours.details');
+        Route::view('/notifications', 'dashboard_utilisateur.notification')->name('notifications');
+        Route::view('/parametres', 'dashboard_utilisateur.parametre')->name('parametres');
+        Route::view('/themes', 'dashboard_utilisateur.themes')->name('themes');
+        Route::view('/media', 'dashboard_utilisateur.media')->name('media');
 
-        Route::get('/notifications', function () {
-            return view('dashboard_utilisateur.notification');
-        })->name('notifications');
-
-        Route::get('/parametres', function () {
-            return view('dashboard_utilisateur.parametre');
-        })->name('parametres');
-
-        Route::get('/themes', function () {
-            return view('dashboard_utilisateur.themes');
-        })->name('themes');
-
-        Route::get('/media', function () {
-            return view('dashboard_utilisateur.media');
-        })->name('media');
-
-        // Support - controller version kept (on a supprimé la closure dupliquée)
+        // Support
         Route::get('/soutien', [SupportController::class, 'index'])->name('soutien');
         Route::post('/soutien', [SupportController::class, 'submitContactForm'])->name('soutien.contact');
 
-        Route::get('/changer-mot-de-passe', function () {
-            return view('dashboard_utilisateur.changer_mot_de_passe');
-        })->name('changer_mot_de_passe');
-
-        Route::get('/modifier-profil', function () {
-            return view('dashboard_utilisateur.modifier_profil');
-        })->name('modifier_profil');
+        Route::view('/changer-mot-de-passe', 'dashboard_utilisateur.changer_mot_de_passe')->name('changer_mot_de_passe');
+        Route::view('/modifier-profil', 'dashboard_utilisateur.modifier_profil')->name('modifier_profil');
 
         // Découvrir / Formations
         Route::get('/decouvrir', [DiscoverController::class, 'index'])->name('decouvrir');
@@ -197,117 +167,35 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),
         Route::get('/formations/{id}', [FormationController::class, 'show'])->name('details');
 
         // Paiement / Caisse / Monero / NOWPayments
-        Route::get('/fedapay/callback', [PaymentController::class, 'handleFedapayCallback'])->name('fedapay.callback');
-        Route::post('/fedapay/webhook', [PaymentController::class, 'handleWebhook'])->name('fedapay.webhook');
-        Route::post('/fedapay/callback/{user_formation_id}', [PaymentController::class, 'handleCallback'])->name('fedapay.callback');
-
-        Route::get('/caisse/{formationId}', [PaymentController::class, 'showPaymentForm'])->name('caisse');
-
-        Route::get('/monero/{formationId}', [PaymentController::class, 'createMoneroPayment'])->name('monero');
-        Route::get('/monero/status/{formationId}', [PaymentController::class, 'checkPaymentStatus'])->name('monero.status');
-
-        Route::post('/api/payment/callback/nowpayments', [PaymentController::class, 'handleNOWPaymentsCallback'])->name('paiement.callback.nowpayments');
-
-        Route::get('/paiement_success', [PaymentController::class, 'showPaymentSuccess'])->name('Dashboard_utilisateur.paiement_success');
-        Route::get('/paiement_failure', [PaymentController::class, 'showPaymentFailure'])->name('Dashboard_utilisateur.paiement_failure');
-
-        // Langues / thèmes
-        Route::get('/langues', [ParametresController::class, 'showLanguageSettings'])->name('langues');
-        Route::post('/langues', [ParametresController::class, 'updateLanguage'])->name('update.language');
-        Route::post('/themes', [ThemeController::class, 'update'])->name('themes.update');
-
-        // Cours
-        Route::post('/ajouter-cours/{formation}', [CoursController::class, 'ajouterFormation'])->name('ajouter-cours');
-        Route::match(['get', 'post'], '/cours', [CoursController::class, 'index'])->name('cours');
-        Route::get('/cours/{formation}', [CoursController::class, 'showFormation'])->name('formation.show');
-
-        // Calendrier / Events
-        Route::get('/calendrier', [CalendrierController::class, 'index'])->name('calendrier')->middleware('auth');
-        Route::post('/events', [EventController::class, 'store'])->name('events.store');
-
-        Route::get('/paiement1/{status?}', [PaymentController::class, 'paiement1'])->name('paiement1');
+        Route::get('/fedapay/callback', [PaymentController::class, 'fedapayCallback'])->name('fedapay.callback');
+        Route::post('/monero/payment', [PaymentController::class, 'moneroPayment'])->name('monero.payment');
+        Route::post('/nowpayments/callback', [PaymentController::class, 'nowpaymentsCallback'])->name('nowpayments.callback');
     });
 });
 
-// Password / Auth already declared above
-
-// Middleware admin group (backend)
-Route::middleware(['auth', 'admin'])->group(function () {
-    Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
-
-    Route::resource('admin/codes-promos', App\Http\Controllers\CodePromoController::class)->except(['show', 'edit', 'update']);
-
-    // Evenements
-    Route::get('/dashboard/evenements', [EvenementController::class, 'index'])->name('evenements.index');
-    Route::post('/dashboard/evenements', [EvenementController::class, 'store'])->name('evenements.store');
-    Route::put('/dashboard/evenements/{evenement}', [EvenementController::class, 'update'])->name('evenements.update');
-    Route::delete('/dashboard/evenements/{evenement}', [EvenementController::class, 'destroy'])->name('evenements.destroy');
-    Route::get('/evenement/{id}', [EvenementController::class, 'show']);
-
-    // Sponsors
-    Route::get('/dashboard/sponsors', [SponsorController::class, 'index'])->name('sponsors.index');
-    Route::post('/dashboard/sponsors', [SponsorController::class, 'store'])->name('sponsors.store');
-    Route::put('/dashboard/sponsors/{sponsor}', [SponsorController::class, 'update'])->name('sponsors.update');
-    Route::delete('/dashboard/sponsors/{sponsor}', [SponsorController::class, 'destroy'])->name('sponsors.destroy');
-    Route::get('/dashboard/sponsors/vue', [SponsorController::class, 'vue_sponsor'])->name('vue_sponsor');
-
-    // Intervenants (on garde index / vue_in / store / update / destroy)
-    Route::get('/dashboard/intervenants', [IntervenantController::class, 'index'])->name('intervenants.index');
-    Route::post('/dashboard/intervenants', [IntervenantController::class, 'store'])->name('intervenants.store');
-    Route::put('/dashboard/intervenants/{intervenant}', [IntervenantController::class, 'update'])->name('intervenants.update');
-    Route::delete('/dashboard/intervenants/{intervenant}', [IntervenantController::class, 'destroy'])->name('intervenants.destroy');
-    Route::get('/dashboard/intervenants/vue', [IntervenantController::class, 'vue_in'])->name('vue_in');
-
-    // Catégories
+// ------------------------------
+// Admin ou Backoffice routes
+// ------------------------------
+// À adapter avec middleware admin
+Route::middleware(['auth', 'isAdmin'])->group(function () {
+    Route::resource('themes', ThemeController::class);
+    Route::resource('articles', ArticleController::class);
     Route::resource('categories', CategorieController::class);
-    Route::get('/dashboard/categories/create', [CategorieController::class, 'create'])->name('Dashboard.categories.create');
-    Route::get('/dashboard/categories/index', [CategorieController::class, 'index'])->name('Dashboard.categories.index');
-    Route::post('/dashboard/categories/store', [CategorieController::class, 'store'])->name('Dashboard.categories.store');
-    Route::get('/dashboard/categories/{id}/edit', [CategorieController::class, 'edit'])->name('Dashboard.categories.edit');
-    Route::delete('/dashboard/categories/{categorie}', [CategorieController::class, 'destroy'])->name('Dashboard.categories.destroy');
-    Route::put('/dashboard/categories/{id}', [CategorieController::class, 'update'])->name('Dashboard.categories.update');
-
-    // Articles
-    Route::get('/dashboard/articles', [ArticleController::class, 'index'])->name('articles.index');
-    Route::get('/dashboard/articles/create', [ArticleController::class, 'create'])->name('articles.create');
-    Route::post('/dashboard/articles', [ArticleController::class, 'store'])->name('articles.store');
-    Route::get('/dashboard/articles/{article}/edit', [ArticleController::class, 'edit'])->name('articles.edit');
-    Route::put('/dashboard/articles/{article}', [ArticleController::class, 'update'])->name('articles.update');
-    Route::delete('/dashboard/articles/{article}', [ArticleController::class, 'destroy'])->name('articles.destroy');
-
-    // Formations
-    Route::resource('formations', FormationController::class);
-    Route::get('/dashboard/formations/create', [FormationController::class, 'create'])->name('Dashboard.formations.create');
-    Route::get('/dashboard/formations/index', [FormationController::class, 'index'])->name('Dashboard.formations.index');
-    Route::get('/dashboard/formations/{id}/edit', [FormationController::class, 'edit'])->name('Dashboard.formations.edit');
-    Route::post('/dashboard/formations/store', [FormationController::class, 'store'])->name('Dashboard.formations.store');
-    Route::delete('/dashboard/formations/{formation}', [FormationController::class, 'destroy'])->name('Dashboard.formations.destroy');
-    Route::put('/dashboard/formations/{id}', [FormationController::class, 'update'])->name('Dashboard.formations.update');
-
-    // Modules
     Route::resource('modules', ModuleController::class);
-    Route::get('/dashboard/modules/create', [ModuleController::class, 'create'])->name('Dashboard.modules.create');
-    Route::get('/dashboard/modules/index', [ModuleController::class, 'index'])->name('Dashboard.modules.index');
-    Route::get('/dashboard/modules/{module}/edit', [ModuleController::class, 'edit'])->name('Dashboard.modules.edit');
-    Route::post('/dashboard/modules/store', [ModuleController::class, 'store'])->name('Dashboard.modules.store');
-    Route::delete('/dashboard/modules/{module}', [ModuleController::class, 'destroy'])->name('Dashboard.modules.destroy');
-    Route::put('/dashboard/modules/{module}', [ModuleController::class, 'update'])->name('Dashboard.modules.update');
-
-    // Nested modules for formations (fix : action create)
-    Route::get('formations/{formation}/modules', [ModuleController::class, 'create'])->name('modules.create');
-    Route::post('formations/{formation}/modules', [ModuleController::class, 'store'])->name('modules.store');
-    Route::put('formations/{formation}/modules/{module}', [ModuleController::class, 'update'])->name('modules.update');
-    Route::delete('formations/{formation}/modules/{module}', [ModuleController::class, 'destroy'])->name('modules.destroy');
-    Route::patch('formations/{formation}/modules/reorder', [ModuleController::class, 'reorder'])->name('modules.reorder');
-
-    // Emplois
-    Route::get('/dashboard/emploies', [EmploieController::class, 'index'])->name('emploies.index');
-    Route::get('/dashboard/emploies/create', [EmploieController::class, 'create'])->name('emploies.create');
-    Route::post('/dashboard/emploies', [EmploieController::class, 'store'])->name('emploies.store');
-    Route::get('/dashboard/emploies/{emploie}/edit', [EmploieController::class, 'edit'])->name('emploies.edit');
-    Route::put('/dashboard/emploies/{emploie}', [EmploieController::class, 'update'])->name('emploies.update');
-    Route::delete('/dashboard/emploies/{emploie}', [EmploieController::class, 'destroy'])->name('emploies.destroy');
-
-    // Replay resource
-    Route::resource('replay', ReplayController::class);
+    Route::resource('formateurs', IntervenantController::class);
+    Route::resource('formations', FormationController::class);
+    Route::resource('evenements', EvenementController::class);
+    Route::resource('sponsors', SponsorController::class);
+    Route::resource('employes', UtilisateurController::class);
+    Route::resource('replays', ReplayController::class);
+    Route::resource('produits', ProduitPublicController::class);
+    Route::resource('cours', CoursController::class);
+    Route::resource('calendriers', CalendrierController::class);
+    Route::resource('events', EventController::class);
+    Route::resource('emploies', EmploieController::class);
 });
+
+// -----------------------------------------------------------------------------
+// Toutes les autres routes spécifiques, API, etc. peuvent suivre ici...
+// -----------------------------------------------------------------------------
+
