@@ -13,7 +13,7 @@ class Sponsor extends Model
         'description',
         'logo',
         'promoteur',
-         'facebook',
+        'facebook',
         'wahtsapp',
         'linkedin',
         'instagram',
