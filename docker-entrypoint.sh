@@ -34,10 +34,10 @@ chmod -R 775 bootstrap/cache
 chmod -R 775 public
 
 # Optimisations Laravel
-log "Optimisation de Laravel pour la production..."
-php artisan config:cache --no-interaction || true
-php artisan route:cache --no-interaction || true
-php artisan view:cache --no-interaction || true
+# log "Optimisation de Laravel pour la production..."
+# php artisan config:cache --no-interaction || true
+# php artisan route:cache --no-interaction || true
+# php artisan view:cache --no-interaction || true
 
 # Vérification de la configuration Apache
 log "Vérification configuration Apache..."
