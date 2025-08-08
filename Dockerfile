@@ -79,7 +79,7 @@ RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 775 bootstrap/cache
 
 # Installer les dépendances PHP (après avoir copié tous les fichiers)
-RUN composer install --no-dev --optimize-autoloader --no-interaction
+RUN composer install --optimize-autoloader --no-interaction
 
 # Générer la clé d'application Laravel
 RUN php artisan key:generate --no-interaction || true

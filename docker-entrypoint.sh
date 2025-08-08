@@ -55,6 +55,9 @@ EOF
     a2enconf laravel
 fi
 
+# Réinitialisation des autoloads de Composer
+composer dump-autoload
+
 # Lancement d'Apache en mode foreground
 log "Démarrage d'Apache..."
 exec "$@"
