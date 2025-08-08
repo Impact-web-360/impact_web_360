@@ -6,16 +6,16 @@ log() {
 }
 
 # Copier .env si inexistant
-if [ ! -f .env ]; then
-    log "Fichier .env non trouvé, copie depuis .env.example..."
-    cp .env.example .env
-fi
+# if [ ! -f .env ]; then
+#    log "Fichier .env non trouvé, copie depuis .env.example..."
+#    cp .env.example .env
+# fi
 
 # Générer la clé d'application si manquante ou vide
-if ! grep -q "^APP_KEY=base64:" .env; then
-    log "Génération de la clé d'application Laravel..."
-    php artisan key:generate --no-interaction
-fi
+# if ! grep -q "^APP_KEY=base64:" .env; then
+#    log "Génération de la clé d'application Laravel..."
+#    php artisan key:generate --no-interaction
+# fi
 
 # Création des dossiers nécessaires
 log "Création des dossiers de cache, sessions, logs..."
