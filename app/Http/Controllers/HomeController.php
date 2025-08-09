@@ -24,6 +24,7 @@ class HomeController extends Controller
 
     public function sponsor()
     {
+        $sponsors = Sponsor::all();
         $evenements = Evenement::all();
         $intervenants = User::where('type', 'intervenant')->get();
 
