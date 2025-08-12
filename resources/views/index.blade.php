@@ -13,16 +13,16 @@
     body { background-color: black; color: white; font-family: 'Montserrat', sans-serif; scroll-behavior: smooth; overflow-x: hidden; }
     .navbar-custom { background-color: #000066; border-radius: 15px; margin-top: 20px; padding: 10px 20px; height: 70px; }
     .navbar-brand img { max-height: 160px; width: auto; }
-    .btn-inscrire { background: red; color: white; border: none; border-radius: 8px; }
+    .btn-inscrire { background: #ff4500; color: white; border: none; border-radius: 8px; }
     .btn-inscrire:hover { background: linear-gradient(90deg, #ff3300, #DD2476); color: #000000; transform: scale(1.05);}
     .btn-outline-light { border-radius: 8px; }
     .btn-light:hover { background-color: #000000; color: #f8f9fa; border: none; }
     .footer { background-color: #000066; color: #ccccff; }
     .footer-links a { color: #ccccff; text-decoration: none; display: block; margin-bottom: 0.5rem; transition: all 0.3s ease; }
     .footer-links a:hover { color: #ff4500; padding-left: 4px; }
-    .social-icon { display: inline-block; background-color: red; color: white; width: 36px; height: 36px; text-align: center; line-height: 36px; border-radius: 50%; margin: 0 5px; font-size: 16px;transition: transform 0.3s ease, background-color 0.3s ease; }
+    .social-icon { display: inline-block; background-color: #ff4500; color: white; width: 36px; height: 36px; text-align: center; line-height: 36px; border-radius: 50%; margin: 0 5px; font-size: 16px;transition: transform 0.3s ease, background-color 0.3s ease; }
     .social-icon:hover { transform: scale(1.1); background-color: #ff2605; }
-    .btn-360 { background: red; color: white;border: none; border-radius: 20px; padding: 5px 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); transition: transform 0.3s; }
+    .btn-360 { background: #ff4500; color: white;border: none; border-radius: 20px; padding: 5px 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); transition: transform 0.3s; }
     .btn-360:hover { transform: scale(1.05); }
     .hero-section { height: 750px; position: relative; overflow: hidden; }
     .hero-slider { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0;}
@@ -34,11 +34,11 @@
     .hero-section .overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.6); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 2rem; animation: fadeIn 1.5s ease-in-out; }
     .taille { font-size: 17px; } 
     #countdown  { font-size: 1.5rem; padding: 5px 10px; font-weight: bold; background-color: rgba(85, 84, 160, 0.6); border-radius: 10px; }
-    .btn-danger { background-color: red; transform: translateY(-2px); border-radius: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); transition: transform 0.3s; }
+    .btn-danger { background-color: #ff4500; transform: translateY(-2px); border-radius: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); transition: transform 0.3s; }
     .btn-danger:hover { transform: scale(1.05); background: linear-gradient(90deg, #ff3300, #DD2476); color: #000000; }
     img.img-fluid:hover { transform: scale(1.05); transition: 0.3s ease; }
     .titre-avec-trait { display: flex; gap: 10px; margin: 20px 0; }
-    .trait-vertical { width: 4px; height: auto; background-color: red; }
+    .trait-vertical { width: 4px; height: auto; background-color: #ff4500; }
     .titre-avec-trait-noir { display: flex; gap: 10px; margin: 20px 0; }
     .trait-vertical-noir { width: 4px; height: auto; background-color: #31292969; }
     .partners-section { padding: 80px 15px; text-align: center; }
@@ -72,7 +72,7 @@
     }
 
     .btn-inscrire {
-      background: red;
+      background: #ff4500;
       color: white;
       border: none;
       border-radius: 8px;
@@ -114,7 +114,7 @@
 
     .social-icon {
       display: inline-block;
-      background-color: red;
+      background-color: #ff4500;
       color: white;
       width: 36px;
       height: 36px;
@@ -132,7 +132,7 @@
     }
 
     .btn-360 {
-      background: red;
+      background: #ff4500;
       color: white;
       border: none;
       border-radius: 20px;
@@ -180,7 +180,7 @@
     }
 
     .btn-danger {
-      background-color: red;
+      background-color: #ff4500;
       transform: translateY(-2px);
       border-radius: 30px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
@@ -207,7 +207,7 @@
     .trait-vertical {
       width: 4px;
       height: auto;
-      background-color: red;
+      background-color: #ff4500;
     }
 
     .titre-avec-trait-noir {
@@ -325,7 +325,7 @@
     }
 
     .btn-join {
-      background-color: red;
+      background-color: #ff4500;
       color: #fff;
       padding: 12px 28px;
       border-radius: 30px;
@@ -845,7 +845,7 @@
 
 </section>
 <!-- Bande de Partenaires -->
-<section class="py-4 text-white text-center mb-5" style="background-color: red; " data-aos="fade-right">
+<section class="py-4 text-white text-center mb-5" style="background-color: #ff4500; " data-aos="fade-right">
  <marquee behavior="" direction=""> <div class="container d-flex flex-wrap justify-content-center gap-4">
     @foreach ($sponsors as $sponsor)
      <div class="me-4 part"><img src="{{ asset('storage/' . $sponsor->logo) }}" alt="" width="50" > &nbsp;&nbsp;&nbsp;&nbsp;♦&nbsp;&nbsp;&nbsp;&nbsp;</div>   
@@ -893,18 +893,19 @@
             <div class="trait-vertical"></div>
             <h5 class="fw-bold">📁 Projet</h5>
           </div>
+          <p>Créer une communauté innovante</p>
           <br>
 
           <div class="titre-avec-trait-noir" data-aos="fade-up" data-aos-delay="200">
             <div class="trait-vertical-noir"></div>
             <h5 class="fw-bold mt-4">📅 Date et Heure</h5>
           </div>
+          <p>Samedi 29 Novembre 2025</p>
           <br>
 
           <div data-aos="fade-up" data-aos-delay="200">
-            <p><strong>A</strong></p>
             <h5 class="fw-bold mt-4">📍 Lieu</h5>
-            <p>Indication du lieu</p>
+            <p>Palais des congrès de Cotonou</p>
           </div>
 
         </div>
@@ -967,7 +968,7 @@
 
       <div class="d-flex flex-wrap justify-content-center gap-3 mt-3" data-aos="fade-up" data-aos-delay="200">
         <div class="logo-box" data-aos="zoom-in" data-aos-delay="300">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/Microsoft_Excel_2013-2019_logo.svg" alt="Excel">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/3/34/Microsoft_Office_Excel_%282019%E2%80%93present%29.svg" alt="Excel">
         </div>
 
         <div class="logo-box">
@@ -987,7 +988,7 @@
         </div>
 
         <div class="logo-box">
-          <img src="https://seeklogo.com/images/S/stripe-logo-9A02E77FC3-seeklogo.com.png" alt="Stripe">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/b/ba/Stripe_Logo%2C_revised_2016.svg" alt="Stripe">
         </div>
 
         <div class="logo-box">
@@ -1066,7 +1067,7 @@
   <section class="py-5 bg-black text-white">
     <div class="container" data-aos="zoom-in">
       <h2 class="mb-4 fw-bold text-center">Découvrez la boutique officielle <br>
-        <span class="fw-bold" style="color: red; font-size: 40px;"> Impact Web 360</span>
+        <span class="fw-bold" style="color: #ff4500; font-size: 40px;"> Impact Web 360</span>
       </h2>
       <p class="mb-4 text-center">Affiche ton appartenance à la communauté des acteurs du digital avec nos produits exclusifs ! 👕 T-shirts Officiels, </p>
       <div class="row justify-content-center" data-aos="flip-right">
@@ -1081,7 +1082,7 @@
         </div>
       </div>
       <center>
-        <a href="#" class="btn btn-danger mt-3">Voir plus</a>
+        <a href="{{ route('boutique') }}" class="btn btn-danger mt-3">Voir plus</a>
       </center>
     </div>
   </section>
