@@ -77,7 +77,7 @@
     .product-image-container {
       border-radius: 10px 10px 0 0;
       width: 100%;
-      height: 200px;
+      height: auto;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -96,7 +96,7 @@
     .product-image {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: cove;
     }
 
     .product-info {
@@ -348,7 +348,7 @@
     @media (max-width: 768px) {
 
       .product-image-container {
-        height: 200px;
+        height: auto;
       }
 
       .product-info {
@@ -357,6 +357,11 @@
 
       .product-info h5 {
         margin-bottom: -30px;
+        font-size: 10px;
+      }
+
+      .product-info p {
+        font-size: 10px;
       }
 
       .center-button {
@@ -366,7 +371,15 @@
 
     @media (max-width: 576px) {
       .product-image-container {
-        height: 200px;
+        height: auto;
+      }
+
+      .product-info h5 {
+        font-size: 20px;
+      }
+
+      .product-info p {
+        font-size: 20px;
       }
 
       .product-card {
@@ -432,9 +445,9 @@
               <hr>
 
               <label for="max_price" class="fw-bold">Prix : &nbsp;</label><span
-                id="price-value">{{ request('max_price', 10000) }} FCFA</span>
-              <input type="range" class="form-range mb-3" min="100" max="10000" step="500" id="max_price"
-                name="max_price" value="{{ request('max_price', 10000) }}">
+                id="price-value">{{ request('max_price', 20000) }} FCFA</span>
+              <input type="range" class="form-range mb-3" min="100" max="20000" step="500" id="max_price"
+                name="max_price" value="{{ request('max_price', 20000) }}">
 
               <hr>
 

@@ -396,9 +396,9 @@
 
         <div class="d-flex align-items-center">
           <div class="bg-dark rounded-5 py-1" style="color: #ff4500">
-            <button class="btn bg-transparent btn-sm text-light rounded-5"><i class="fas fa-plus" style="color: #ff4500"></i></button>
-            <span class="mx-2">1</span>
-            <button class="btn bg-transparent text-light btn-sm rounded-5"><i class="fas fa-minus"style="color: #ff4500"></i></button>
+            <button class="btn bg-transparent btn-sm text-light rounded-5" id="plusButton"><i class="fas fa-plus" style="color: #ff4500"></i></button>
+            <span class="mx-2" id="quantityDisplay">1</span>
+            <button class="btn bg-transparent text-light btn-sm rounded-5" id="minusButton"><i class="fas fa-minus"style="color: #ff4500"></i></button>
           </div>
           <button class="btn btn-inscrire ms-3 py-2 px-5 btn-sm rounded-5">Ajouter au panier</button>
         </div>
@@ -599,6 +599,26 @@
         form.scrollIntoView({ behavior: 'smooth' });
       }
     }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const plusButton = document.getElementById('plusButton');
+      const minusButton = document.getElementById('minusButton');
+      const quantityDisplay = document.getElementById('quantityDisplay');
+
+      let quantity = 1;
+
+      plusButton.addEventListener('click', () => {
+        quantity++;
+        quantityDisplay.textContent = quantity;
+      });
+
+      minusButton.addEventListener('click', () => {
+        if (quantity > 1) {
+          quantity--;
+          quantityDisplay.textContent = quantity;
+        }
+      });
+    });
   </script>
 
 </body>

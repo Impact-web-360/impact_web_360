@@ -75,7 +75,6 @@
 
         /* Main content */
         #content {
-            margin-left: 250px;
             padding: 2rem 1rem;
             transition: margin-left 0.3s ease;
             min-height: 100vh;
@@ -172,7 +171,7 @@
                 </form>
             </nav>
 
-            <main id="content" class="col-md-9 ms-sm-auto col-lg-10 mt-2">
+            <main id="content" class="col-md-9 ms-sm-auto col-lg-10">
                 <h2 id="articles">🛍️ Gestion des articles</h2>
 
                 @if(session('success'))

@@ -68,7 +68,6 @@
         }
         
         .card:hover {
-            transform: translateY(-5px);
             box-shadow: 0 8px 25px rgba(0,0,0,0.1);
         }
         
@@ -213,48 +212,23 @@
         <div class="row">
             <!-- Sidebar -->
             <nav class="col-md-2 d-none d-md-block sidebar">
-                <div class="position-sticky pt-3">
+                <div class="sticky-top pt-3">
                     <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <i class="fas fa-tachometer-alt"></i> Tableau de bord
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#">
-                                <i class="fas fa-ticket-alt"></i> Tickets
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <i class="fas fa-calendar-alt"></i> Événements
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <i class="fas fa-tags"></i> Catégories
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <i class="fas fa-percentage"></i> Codes Promo
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <i class="fas fa-chart-bar"></i> Statistiques
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <i class="fas fa-users"></i> Participants
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <i class="fas fa-cog"></i> Paramètres
-                            </a>
-                        </li>
+                        <a href="{{ route('admin.dashboard') }}" class="nav-link"><i class="fas fa-chart-bar"></i> Statistiques</a>
+                        <a href="{{ route('evenements.index') }}" class="nav-link"><i class="fa fa-calendar-alt"></i>Événements</a>
+                        <a href="{{ route('sponsors.index') }}" class="nav-link"><i class="fa fa-handshake"></i>Sponsors</a>
+                        <a href="{{ route('replay.index')}}" class="nav-link"><i class="fa-solid fa-play"></i> Replay
+                        <a href="{{ route('categories.index')}}" class="nav-link"><i class="fas fa-layer-group"></i>Catégorie</a>
+                        <a href="{{ route('formations.index')}}" class="nav-link"><i class="fas fa-graduation-cap"></i>Formation</a>
+                        <a href="{{ route('modules.index')}}" class="nav-link"><i class="fas fa-puzzle-piece"></i>Modules</a>
+                        <a href="{{ route('articles.index')}}" class="nav-link"><i class="fa fa-shopping-basket"></i>Articles</a>
+                        <a href="{{ route('emploies.index')}}" class="nav-link"><i class="fa fa-briefcase"></i>Emplois</a>
+                        <a href="#" class="nav-link"><i class="fa fa-user"></i>Intervenants</a>
+                        <a href="{{ route('billet')}}" class="nav-link active"><i class="fas fa-calendar-alt "></i> Tickets</a>
+                        <form action="{{ route('logout') }}" method="POST" id="logout-form">
+                            @csrf
+                            <a href="{{ route('logout')}}" class="nav-link"><i class="fa fa-arrow-left"></i>Deconnexion</a>
+                        </form>
                     </ul>
                 </div>
             </nav>
@@ -470,7 +444,7 @@
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="eventSelect" class="form-label">Événement</label>
-                                    @foreach ($evenements as $evenement)
+                                    
                                         <select class="form-select" id="eventSelect">
                                         <option selected>Sélectionner un événement</option>
                                         <option value=""></option>
@@ -478,7 +452,7 @@
                                         <option>Formation SEO Avancé</option>
                                         <option>Webinaire E-commerce</option>
                                         </select>
-                                    @endforeach
+                                    
                                 </div>
                                 
                                 <div class="mb-3">

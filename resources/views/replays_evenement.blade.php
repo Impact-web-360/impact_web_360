@@ -12,14 +12,14 @@
     body { background-color: black; color: white; font-family: 'Segoe UI', sans-serif; scroll-behavior: smooth; overflow-x: hidden; }
     .navbar-custom { background-color: #000066; border-radius: 15px; margin-top: 20px; padding: 10px 20px; height: 70px; }
     .navbar-brand img { max-height: 160px; width: auto; }
-    .btn-inscrire { background: red; color: white; border: none; border-radius: 8px; }
+    .btn-inscrire { background: #ff4500; color: white; border: none; border-radius: 8px; }
     .btn-inscrire:hover { background: linear-gradient(90deg, #ff3300, #DD2476); color: #000000; transform: scale(1.05);}
     .btn-outline-light { border-radius: 8px; }
     .btn-light:hover { background-color: #000000; color: #f8f9fa; border: none; }
     .footer { background-color: #000066; color: #ccccff; }
     .footer-links a { color: #ccccff; text-decoration: none; display: block; margin-bottom: 0.5rem; transition: all 0.3s ease; }
     .footer-links a:hover { color: #ff4500; padding-left: 4px; }
-    .social-icon { display: inline-block; background-color: red; color: white; width: 36px; height: 36px; text-align: center; line-height: 36px; border-radius: 50%; margin: 0 5px; font-size: 16px;transition: transform 0.3s ease, background-color 0.3s ease; }
+    .social-icon { display: inline-block; background-color: #ff4500; color: white; width: 36px; height: 36px; text-align: center; line-height: 36px; border-radius: 50%; margin: 0 5px; font-size: 16px;transition: transform 0.3s ease, background-color 0.3s ease; }
     .social-icon:hover { transform: scale(1.1); background-color: #ff2605; }
 
     h2 span {
@@ -286,8 +286,8 @@
       </div>
     </nav>
 
-    <a href="#" id="backToTop" class="btn btn-danger shadow position-fixed" 
-      style="bottom: 20px; right: 20px; display: none; z-index: 9999; border-radius: 50%;">
+    <a href="#" id="backToTop" class="btn shadow position-fixed text-white" 
+      style="bottom: 20px; right: 20px; display: none; z-index: 9999; border-radius: 50%; background-color: #ff4500;">
       <i class="fa fa-arrow-up"></i>
     </a>
 

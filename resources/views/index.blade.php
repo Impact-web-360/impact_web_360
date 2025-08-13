@@ -877,41 +877,43 @@
     </div>
   </section>
 
+  
+
   <!-- Événement dynamique -->
   <section class="py-5 text-white text-center" data-aos="zoom-in">
     <div class="container">
 
       <div>
         <h1 class="mb-3 fw-bold">Impact Web 360 - Edition 2025</h1>
-        <p class="mb-4 taille" style="color: #ccc;">Oser sans permissions, c'est maintenant tout commmence ! </p>
+        <p class="mb-4 taille" style="color: #ccc;">Oser sans permissions, c'est maintenant que tout commmence ! </p>
       </div>
       <h2 class="mb-3"> </h2>
       <p class="lead"> </p>
       <div class="row mt-2 align-items-center mb-5" data-aos="fade-up" data-aos-delay="200">
+         <div class="col-md-6">
+          <img src="{{ asset('dossiers/image/logo-tounée.jpg') }}" alt="Image événement" class="img-fluid rounded" style="width: 400px; height: auto;">
+        </div>
         <div class="col-md-6 text-start mb-4 mb-md-0">
           <div class="titre-avec-trait">
             <div class="trait-vertical"></div>
-            <h5 class="fw-bold">📁 Projet</h5>
+            <h5 class="fw-bold">📁 Projet</h5><br>
           </div>
-          <p>Créer une communauté innovante</p>
+          <p>Impact Web 360 est un événement phare qui rassemble les esprits les plus brillants du digital pour inspirer, former et connecter la jeunesse africaine.</p>
           <br>
 
           <div class="titre-avec-trait-noir" data-aos="fade-up" data-aos-delay="200">
             <div class="trait-vertical-noir"></div>
-            <h5 class="fw-bold mt-4">📅 Date et Heure</h5>
+            <h5 class="fw-bold mt-4">📅 Date et Heure</h5><br>
           </div>
-          <p>Samedi 29 Novembre 2025</p>
+          <p>29 Novembre 2025 à 9h00</p>
           <br>
 
           <div data-aos="fade-up" data-aos-delay="200">
+            <p><strong>A</strong></p>
             <h5 class="fw-bold mt-4">📍 Lieu</h5>
-            <p>Palais des congrès de Cotonou</p>
+            <p>Cotonou, dans la grande salle rouge du palais des congrès.</p>
           </div>
 
-        </div>
-
-        <div class="col-md-6">
-          <img src="{{ asset('dossiers/image/logo-tounée.jpg') }}" alt="Image événement" class="img-fluid rounded" style="width: 400px; height: auto;">
         </div>
       </div>
       <div class="mt-4">
@@ -1073,10 +1075,10 @@
       <div class="row justify-content-center" data-aos="flip-right">
         <div class="col-md-4 mb-4">
           <div class="card bg-dark text-white h-100" style="width: 20x;">
-            <img src="{{ asset('dossiers/image/homme2.png') }}" class="card-img-top" alt="motif">
+            <img src="{{ asset('dossiers/image/t-shirt_noir.jpg') }}" class="card-img-top" alt="motif">
             <div class="card-body">
               <h5 class="card-title">T-shirt</h5>
-              <p class="card-text">450000 FCFA</p>
+              <p class="card-text">6000 FCFA</p>
             </div>
           </div>
         </div>

@@ -441,7 +441,7 @@
                 <select name="indicatif" class="form-control rounded-4 w-25" required>
                   <option value="">Indicatif</option>
                   @foreach($dialCodes as $code => $dial)
-              <option value="{{ $dial }}">{{ $name }} ({{ $dial }})</option>
+              <option value="{{ $dial }}">{{ $dial }}</option>
             @endforeach
                 </select>
                 <input type="text" name="telephone" class="form-control rounded-4" placeholder="Numéro" required>
