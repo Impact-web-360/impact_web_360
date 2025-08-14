@@ -19,7 +19,7 @@ class Article extends Model
     ];
     public function client()
     {
-        return $this->belongsToMany(client::class, 'achat', 'id_article', 'id_client')
+        return $this->belongsToMany(Client::class, 'achat', 'id_article', 'id_client')
             ->withPivot('montant')
             ->withTimestamps();
     }

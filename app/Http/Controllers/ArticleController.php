@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\article;
+use App\Models\Article;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -10,7 +10,7 @@ class ArticleController extends Controller
 {
     public function index()
     {
-        $articles = article::all();
+        $articles = Article::all();
         return view('Dashboard.articles.index', compact('articles'));
     }
 
@@ -38,7 +38,7 @@ class ArticleController extends Controller
                 $data['image'] = $path;
             }
 
-            $article = new article();
+            $article = new Article();
             $article->nom         = $data['nom'];
             $article->description = $data['description'];
             $article->image       = $data['image'];
@@ -57,13 +57,13 @@ class ArticleController extends Controller
 
     public function edit($id)
     {
-        $article = article::findOrFail($id);
+        $article = Article::findOrFail($id);
         return view('Dashboard.articles.edit', compact('article'));
     }
 
     public function update(Request $request, $id)
     {
-        $article = article::findOrFail($id);
+        $article = Article::findOrFail($id);
 
         $data = $request->validate([
             'nom'         => 'required|string',

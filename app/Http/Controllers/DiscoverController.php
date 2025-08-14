@@ -12,7 +12,7 @@ class DiscoverController extends Controller
     public function index(Request $request)
     {
         // 1. Récupérer toutes les catégories pour le menu de filtrage
-        $categories = categorie::all();
+        $categories = Categorie::all();
 
         // 2. Construire la requête pour les formations
         // Charge la relation 'categorie' pour chaque formation afin d'éviter les requêtes N+1

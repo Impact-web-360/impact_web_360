@@ -5,21 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class User_evenement extends Model
+class SponsorEvenement extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'id_user',
+        'id_sponsor',
         'id_evenement',
     ];
 
-    public function user()
+    public function sponsor()
     {
-        return $this->belongsTo(User::class, 'id_user');
+        return $this->belongsTo(Sponsor::class, 'id_sponsor');
     }
 
     public function evenement()
     {
-        return $this->belongsTo(evenement::class, 'id_evenement');
+        return $this->belongsTo(Evenement::class, 'id_evenement');
     }
 }

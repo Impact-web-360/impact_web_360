@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Sponsor;
-use App\Models\sponsor_evenement;
+use App\Models\SponsorEvenement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -33,7 +33,7 @@ class SponsorController extends Controller
 
           $sponsor=Sponsor::create($data);
 
-            sponsor_evenement::create([
+            SponsorEvenement::create([
                 'id_sponsor' => $sponsor->id,
                 'id_evenement' => $data['evenement_id'],
             ]);

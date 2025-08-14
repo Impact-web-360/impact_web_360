@@ -16,12 +16,12 @@ class Achat extends Model
 
     public function article()
     {
-        return $this->belongsTo(client::class, 'id_article');
+        return $this->belongsTo(Client::class, 'id_article');
     }
 
     public function client()
     {
-        return $this->belongsTo(article::class, 'id_client');
+        return $this->belongsTo(Article::class, 'id_client');
     }
 }
 

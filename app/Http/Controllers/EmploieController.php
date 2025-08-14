@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\emploie;
+use App\Models\Emploie;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -10,7 +10,7 @@ class EmploieController extends Controller
 {
     public function index()
     {
-        $emploies = emploie::all();
+        $emploies = Emploie::all();
         return view('Dashboard.emploies.index', compact('emploies'));
     }
 
@@ -37,7 +37,7 @@ class EmploieController extends Controller
                 $data['logo'] = $path;
             }
 
-            emploie::create($data);
+            Emploie::create($data);
 
             return redirect()->route('emploies.index')->with('success', 'Emploi créé avec succès !');
         } catch (\Exception $e) {
@@ -47,13 +47,13 @@ class EmploieController extends Controller
 
     public function edit($id)
     {
-        $emploie = emploie::findOrFail($id);
+        $emploie = Emploie::findOrFail($id);
         return view('Dashboard.emploies.edit', compact('emploie'));
     }
 
     public function update(Request $request, $id)
     {
-        $emploie = emploie::findOrFail($id);
+        $emploie = Emploie::findOrFail($id);
 
         try {
             $data = $request->validate([
@@ -86,7 +86,7 @@ class EmploieController extends Controller
 
     public function destroy($id)
     {
-        $emploie = emploie::findOrFail($id);
+        $emploie = Emploie::findOrFail($id);
         
         try {
             // Delete logo if exists

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Sponsor;
 use App\Models\Evenement;
 use App\Models\User;
-use App\Models\article;
+use App\Models\Article;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -58,7 +58,7 @@ class HomeController extends Controller
 
     public function boutique()
     {
-        $articles = article::all();
+        $articles = Article::all();
         return view('boutique', compact('articles'));
     }
 

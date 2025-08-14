@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Models\user_evenement;
+use App\Models\UserEvenement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Hash;
@@ -48,7 +48,7 @@ class IntervenantController extends Controller
         $intervenant = User::create($data);
         Log::info('Intervenant créé:', $intervenant->toArray());
 
-        $relation = user_evenement::create([
+        $relation = UserEvenement::create([
             'id_user' => $intervenant->id,
             'id_evenement'   => $data['evenement_id'],
         ]);
@@ -88,7 +88,7 @@ class IntervenantController extends Controller
             $intervenant->update($data);
 
             // Mettre à jour la relation événement
-            user_evenement::updateOrCreate(
+            UserEvenement::updateOrCreate(
                 ['id_user' => $intervenant->id],
                 ['id_evenement' => $data['evenement_id']]
             );
@@ -107,7 +107,7 @@ class IntervenantController extends Controller
             $intervenant = User::findOrFail($id);
 
             // Supprimer la liaison avec événement
-            user_evenement::where('id_intervenant', $id)->delete();
+            UserEvenement::where('id_intervenant', $id)->delete();
 
             $intervenant->delete();
 

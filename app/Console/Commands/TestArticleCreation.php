@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use App\Models\article;
+use App\Models\Article;
 
 class TestArticleCreation extends Command
 {
@@ -29,7 +29,7 @@ class TestArticleCreation extends Command
     public function handle()
     {
         try {
-            $article = new article();
+            $article = new Article();
             $article->nom = 'T-shirt de test';
             $article->description = 'T-shirt de test pour vérifier le fonctionnement';
             $article->image = 'test.jpg';

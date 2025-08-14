@@ -119,7 +119,7 @@ Route::post('/tickets', [TicketController::class, 'store'])->name('tickets.store
 Route::resource('tickets', TicketController::class)->except(['create', 'store']);
 
 Route::get('/boutique', function () {
-    $query = \App\Models\article::query();
+    $query = \App\Models\Article::query();
     
     // Appliquer le filtrage seulement si des paramètres de filtre sont présents dans la requête
     // Cela se produit lorsque l'utilisateur clique sur le bouton "Appliquer"
@@ -149,7 +149,7 @@ Route::get('/boutique', function () {
     $articles = $query->get();
     
     // Récupérer les couleurs uniques des articles existants
-    $couleurs = \App\Models\article::whereNotNull('couleur')->where('couleur', '!=', '')->distinct('couleur')->pluck('couleur');
+    $couleurs = \App\Models\Article::whereNotNull('couleur')->where('couleur', '!=', '')->distinct('couleur')->pluck('couleur');
     
     return view('boutique', compact('articles', 'couleurs'));
 })->name('boutique');
