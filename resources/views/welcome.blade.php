@@ -1350,7 +1350,7 @@
                         <img src="./homme2.png" class="card-img-top" alt="motif">
                         <div class="card-body">
                             <h5 class="card-title">T-shirt</h5>
-                            <p class="card-text">5000 FCFA</p>
+                            <p class="card-text">6000 FCFA</p>
                         </div>
                     </div>
                 </div>
