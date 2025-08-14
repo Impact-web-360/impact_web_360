@@ -49,16 +49,18 @@ COPY . .
 RUN mkdir -p storage/framework/{cache/data,sessions,views} storage/logs bootstrap/cache
 
 # Met à jour les permissions temporaires
-# Ces permissions sont suffisantes pour l'étape de build
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 775 storage bootstrap/cache
 
 # Installe les dépendances de production
-# L'option --no-dev est cruciale pour un déploiement en production
 RUN composer install --optimize-autoloader --no-dev --no-interaction
 
+# --- AJOUTEZ CETTE LIGNE ---
+# Crée le lien symbolique pour le stockage
+RUN php artisan storage:link
+# -------------------------
+
 # Videz et mettez en cache la configuration
-# L'ordre est important : vider le cache avant de le reconstruire
 RUN php artisan config:clear --no-interaction || true \
     && php artisan route:clear --no-interaction || true \
     && php artisan view:clear --no-interaction || true \
