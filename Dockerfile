@@ -1,10 +1,11 @@
+# Utilise une image PHP-Apache officielle
 FROM php:8.2-apache
 
 # Variables d'environnement
 ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
 ENV COMPOSER_ALLOW_SUPERUSER=1
 
-# Installer les dépendances système
+# Installe les dépendances système nécessaires
 RUN apt-get update && apt-get install -y \
     libzip-dev \
     unzip \
@@ -20,7 +21,7 @@ RUN apt-get update && apt-get install -y \
     libgd-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# Installer les extensions PHP nécessaires
+# Installe et configure les extensions PHP
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) \
         pdo_mysql \
@@ -32,76 +33,50 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
         gd \
         intl
 
-# Activer les modules Apache nécessaires
+# Active les modules Apache nécessaires
 RUN a2enmod rewrite headers
 
-# Installer Composer
+# Installe Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Créer le répertoire de travail
+# Définit le répertoire de travail
 WORKDIR /var/www/html
 
-# Copier tous les fichiers du projet
+# Copie le code de votre application
 COPY . .
 
-# Créer le fichier .env s'il n'existe pas
-#RUN if [ ! -f .env ]; then \
-#    echo 'APP_NAME="Impact Web 360"' > .env && \
-#    echo 'APP_ENV=production' >> .env && \
-#    echo 'APP_KEY=' >> .env && \
-#    echo 'APP_DEBUG=false' >> .env && \
-#    echo 'APP_URL=http://localhost' >> .env && \
-#    echo 'LOG_CHANNEL=stack' >> .env && \
-#    echo 'LOG_LEVEL=error' >> .env && \
-#    echo 'DB_CONNECTION=mysql' >> .env && \
-#    echo 'DB_HOST=127.0.0.1' >> .env && \
-#    echo 'DB_PORT=3306' >> .env && \
-#    echo 'DB_DATABASE=laravel' >> .env && \
-#    echo 'DB_USERNAME=root' >> .env && \
-#    echo 'DB_PASSWORD=' >> .env && \
-#    echo 'CACHE_DRIVER=file' >> .env && \
-#    echo 'SESSION_DRIVER=file' >> .env && \
-#    echo 'QUEUE_CONNECTION=sync' >> .env && \
-#    echo 'FILESYSTEM_DISK=local' >> .env; \
-#    fi
+# Crée les dossiers de cache et de logs
+RUN mkdir -p storage/framework/{cache/data,sessions,views} storage/logs bootstrap/cache
 
-# Créer les dossiers nécessaires avant composer install
-RUN mkdir -p storage/framework/cache/data \
-    && mkdir -p storage/framework/sessions \
-    && mkdir -p storage/framework/views \
-    && mkdir -p storage/logs \
-    && mkdir -p bootstrap/cache
-
-# Définir les permissions temporaires pour composer
+# Met à jour les permissions temporaires
+# Ces permissions sont suffisantes pour l'étape de build
 RUN chown -R www-data:www-data /var/www/html \
-    && chmod -R 755 /var/www/html \
-    && chmod -R 775 storage \
-    && chmod -R 775 bootstrap/cache
+    && chmod -R 775 storage bootstrap/cache
 
-# Installer les dépendances PHP (après avoir copié tous les fichiers)
-RUN composer install --optimize-autoloader --no-interaction
+# Installe les dépendances de production
+# L'option --no-dev est cruciale pour un déploiement en production
+RUN composer install --optimize-autoloader --no-dev --no-interaction
 
-# Générer la clé d'application Laravel
-RUN php artisan key:generate --no-interaction || true
-
-# Optimiser Laravel pour la production
-RUN php artisan config:cache --no-interaction || true \
+# Videz et mettez en cache la configuration
+# L'ordre est important : vider le cache avant de le reconstruire
+RUN php artisan config:clear --no-interaction || true \
+    && php artisan route:clear --no-interaction || true \
+    && php artisan view:clear --no-interaction || true \
+    && php artisan config:cache --no-interaction || true \
     && php artisan route:cache --no-interaction || true \
     && php artisan view:cache --no-interaction || true
 
-# Définir les permissions finales
+# Définit les permissions finales
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html \
     && chmod -R 775 storage \
     && chmod -R 775 bootstrap/cache \
-    && chmod -R 775 public
+    && chmod -R 755 public
 
-# Configurer Apache pour servir le dossier public
+# Configuration d'Apache pour Laravel
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf \
-    && sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
-
-# Créer la configuration Apache personnalisée pour Laravel
-RUN echo '<Directory ${APACHE_DOCUMENT_ROOT}>\n\
+    && sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf \
+    && echo '<Directory ${APACHE_DOCUMENT_ROOT}>\n\
     Options Indexes FollowSymLinks\n\
     AllowOverride All\n\
     Require all granted\n\
@@ -109,12 +84,11 @@ RUN echo '<Directory ${APACHE_DOCUMENT_ROOT}>\n\
     </Directory>' > /etc/apache2/conf-available/laravel.conf \
     && a2enconf laravel
 
-# Exposer le port 80
+# Expose le port 80
 EXPOSE 80
 
-# Script de démarrage
+# Configure le point d'entrée et la commande par défaut
 COPY docker-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
-
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["apache2-foreground"]

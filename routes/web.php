@@ -96,27 +96,29 @@ Route::post('/logout', function () {
     return redirect('/login')->with('success', 'Déconnecté avec succès.');
 })->name('logout')->middleware('auth');
 
-// Enregistrement ticket
+# --- Section de routes pour les tickets ---
+
+// Route pour l'enregistrement d'un nouveau ticket
+// C'est la seule route 'store' que vous devriez avoir.
 Route::post('/billetterie/store', [TicketController::class, 'store'])->name('tickets.store');
 
-// Liste des tickets (dashboard)
-Route::get('/dashboard/tickets', [TicketController::class, 'index'])->name('tickets.index');
+// Routes pour le CRUD (Create, Read, Update, Delete)
+// Cette ligne gère l'affichage, la mise à jour, et la suppression des tickets.
+// Elle exclut explicitement 'create' et 'store' pour éviter les doublons avec la ligne ci-dessus.
+Route::resource('tickets', TicketController::class)->except(['create', 'store']);
 
-// Promo AJAX
+// Route pour la validation d'un code promo (via AJAX)
 Route::post('/valider-code-promo', [TicketController::class, 'validerCodePromo'])->name('code.promo.valider');
 Route::get('/valider-code-promo', [HomeController::class, 'ticket']);
 
-
-// Étapes réservation
+// Routes pour les étapes de réservation
 Route::get('/step1', [TicketController::class, 'step1'])->name('step1');
 Route::post('/step1', [TicketController::class, 'postStep1'])->name('step1.post');
 Route::get('/step2', [TicketController::class, 'step2'])->name('step2');
 Route::post('/step2', [TicketController::class, 'postStep2'])->name('step2.post');
 Route::get('/step3', [TicketController::class, 'step3'])->name('step3');
-Route::post('/tickets', [TicketController::class, 'store'])->name('tickets.store');
 
-// CRUD
-Route::resource('tickets', TicketController::class)->except(['create', 'store']);
+# --- Fin de la section de routes pour les tickets ---
 
 Route::get('/boutique', function () {
     $query = \App\Models\Article::query();
