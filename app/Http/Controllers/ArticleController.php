@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary; // <-- LIGNE AJOUTÉE
 
 class ArticleController extends Controller
 {
@@ -33,9 +34,10 @@ class ArticleController extends Controller
             ]);
 
             if ($request->hasFile('image')) {
-                $path = $request->file('image')->store('articles', 'public');
-                // stocke "articles/xyz.jpg" en DB
-                $data['image'] = $path;
+                // Remplacement de la logique de stockage local
+                // L'image est uploadée sur Cloudinary et son URL est récupérée
+                $uploadedFileUrl = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
+                $data['image'] = $uploadedFileUrl;
             }
 
             $article = new Article();
@@ -76,8 +78,10 @@ class ArticleController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('articles', 'public');
-            $data['image'] = $path;
+            // Remplacement de la logique de stockage local
+            // L'image est uploadée sur Cloudinary et son URL est récupérée
+            $uploadedFileUrl = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
+            $data['image'] = $uploadedFileUrl;
         }
 
         $article->update($data);
@@ -87,7 +91,7 @@ class ArticleController extends Controller
 
     public function destroy($id)
     {
-        $article = article::findOrFail($id);
+        $article = Article::findOrFail($id);
         $article->delete();
         return redirect()->route('articles.index')->with('success', 'Article supprimé avec succès !');
     }

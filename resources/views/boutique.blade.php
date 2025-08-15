@@ -501,7 +501,7 @@
         <a href="{{ route('boutique_plus', $article->id) }}" class="product-link">
           <div class="product-card">
           <div class="product-image-container">
-          <img src="{{ asset('storage/' . $article->image) }}" class="product-image" alt="{{ $article->nom }}">
+          <img src="{{ $article->image }}" class="product-image" alt="{{ $article->nom }}">
           </div>
           <div class="product-info">
           <h5 class="product-title">{{ $article->nom }}</h5>
