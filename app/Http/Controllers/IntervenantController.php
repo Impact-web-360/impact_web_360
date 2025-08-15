@@ -79,7 +79,7 @@ public function store(Request $request)
     public function add()
     {
         $intervenants = Intervenant::with('evenement')->get();
-        return view('Dashboard.intervenants.index', compact('intervenants'));
+        return view('Dashboard.Intervenants.index', compact('intervenants'));
     }
 
     /**
@@ -88,7 +88,7 @@ public function store(Request $request)
     public function edit(Intervenant $intervenant)
     {
         $evenements = Evenement::all();
-        return view('Dashboard.intervenants.edit', compact('intervenant', 'evenements'));
+        return view('Dashboard.Intervenants.edit', compact('intervenant', 'evenements'));
     }
 
     /**
@@ -124,7 +124,7 @@ public function store(Request $request)
 
         $intervenant->update($data);
 
-        return redirect()->route('intervenants.index')->with('success', 'Intervenant mis à jour avec succès.');
+        return redirect()->route('Intervenants.index')->with('success', 'Intervenant mis à jour avec succès.');
     }
 
     /**
@@ -138,7 +138,7 @@ public function store(Request $request)
 
         $intervenant->delete();
 
-        return redirect()->route('intervenants.index')->with('success', 'Intervenant supprimé avec succès.');
+        return redirect()->route('Intervenants.index')->with('success', 'Intervenant supprimé avec succès.');
     }
 
     public function show($id)
