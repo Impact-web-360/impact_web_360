@@ -213,8 +213,8 @@
 
       <nav id="sidebar" aria-label="Sidebar Navigation">
         <h4><i class="fa fa-cogs me-2"></i>Admin Panel</h4>
-        <a href="{{ route('admin.dashboard') }}" class="nav-link active"><i class="fas fa-chart-bar"></i> Statistiques</a>
-        <a href="{{ route('evenements.index') }}" class="nav-link"><i class="fa fa-calendar-alt"></i>Événements</a>
+        <a href="{{ route('admin.dashboard') }}" class="nav-link "><i class="fas fa-chart-bar"></i> Statistiques</a>
+        <a href="{{ route('evenements.index') }}" class="nav-link active"><i class="fa fa-calendar-alt"></i>Événements</a>
         <a href="{{ route('sponsors.index') }}" class="nav-link"><i class="fa fa-handshake"></i>Sponsors</a>
         <a href="{{ route('replay.index')}}" class="nav-link"><i class="fa-solid fa-play"></i> Replay
         <a href="{{ route('categories.index')}}" class="nav-link"><i class="fas fa-layer-group"></i>Catégorie</a>
@@ -222,7 +222,7 @@
         <a href="{{ route('modules.index')}}" class="nav-link"><i class="fas fa-puzzle-piece"></i>Modules</a>
         <a href="{{ route('articles.index')}}" class="nav-link"><i class="fa fa-shopping-basket"></i>Articles</a>
         <a href="{{ route('emploies.index')}}" class="nav-link"><i class="fa fa-briefcase"></i>Emplois</a>
-        <a href="ajouter_intervenant.php" class="nav-link"><i class="fa fa-user"></i>Intervenants</a>
+        <a href="{{ route('intervenants.index')}}" class="nav-link"><i class="fa fa-user"></i>Intervenants</a>
         <a href="{{ route('billet')}}" class="nav-link"><i class="fas fa-calendar-alt "></i> Tickets</a>
         <form action="{{ route('logout') }}" method="POST" id="logout-form">
           @csrf
@@ -929,9 +929,12 @@
 
             <a href="{{ route('sponsors.index') }}" class="btn btn-dark text-white fs-6 fw-bold w-100 mb-2"
               data-bs-toggle="modal" data-bs-target="#addSponsorModal">Ajouter un sponsor</a>
-            <a href="#" class="btn btn-dark text-white fs-6 fw-bold w-100" data-bs-toggle="modal"
-              data-bs-target="#addIntervenantModal">Ajouter un intervenant</a>
-            </div>
+            <button type="button" class="btn btn-dark text-white fs-6 fw-bold w-100 open-intervenant-modal" 
+                    data-bs-toggle="modal" 
+                    data-bs-target="#addIntervenantModal"
+                    data-event-id="{{ $evenement->id }}">
+                Ajouter un intervenant
+            </button>
           </div>
 
           </div>
@@ -1121,10 +1124,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
       </div>
       <div class="modal-body">
-        <!-- Champ caché pour l'ID de l'événement -->
-        @foreach ($evenements as $evenement)
-        <input type="hidden" name="evenement_id" id="modalEventId" value="{{ $evenement->id }}">
-        @endforeach
+        <input type="hidden" name="evenement_id" id="evenement_id_intervenant">
         
         <div class="mb-3">
           <label for="nom" class="form-label">Nom</label>
@@ -1224,85 +1224,30 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function () {
-      const openSidebarBtn = document.getElementById('openSidebar');
-      const closeSidebarBtn = document.getElementById('closeSidebar');
-      const sidebar = document.querySelector('.sidebar-left');
+        // Sélectionne tous les boutons qui ouvrent le modal d'ajout d'intervenant
+        const openModalButtons = document.querySelectorAll('.open-intervenant-modal');
+        const hiddenInput = document.getElementById('evenement_id_intervenant');
 
-      if (openSidebarBtn) {
-        openSidebarBtn.addEventListener('click', function () {
-          sidebar.classList.add('show');
-        });
-      }
+        // Boucle sur chaque bouton et ajoute un écouteur d'événement
+        openModalButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                // Récupère l'ID de l'événement depuis l'attribut data-event-id
+                const eventId = this.getAttribute('data-event-id');
 
-      if (closeSidebarBtn) {
-        closeSidebarBtn.addEventListener('click', function () {
-          sidebar.classList.remove('show');
-        });
-      }
-
-      // Optional: Close sidebar when clicking outside on mobile
-      document.addEventListener('click', function (event) {
-        if (sidebar.classList.contains('show') && !sidebar.contains(event.target) && !openSidebarBtn.contains(event.target)) {
-          sidebar.classList.remove('show');
-        }
-      });
-
-      // Add simple hover effects (handled mostly by CSS, but can extend with JS for complex animations)
-      const cards = document.querySelectorAll('.speaker-card, .sponsor-card, .song-item');
-
-      cards.forEach(card => {
-        card.addEventListener('mouseenter', function () {
-          // Can add more complex JS animations here if needed
-          // e.g., gsap.to(this, { duration: 0.2, y: -5, ease: "power1.out" });
-        });
-        card.addEventListener('mouseleave', function () {
-          // e.g., gsap.to(this, { duration: 0.2, y: 0, ease: "power1.out" });
-        });
-
-        card.addEventListener('click', function () {
-          // Simulate a click effect
-          this.classList.add('clicked-effect');
-          setTimeout(() => {
-            this.classList.remove('clicked-effect');
-          }, 200);
-
-          // In a real app, you'd navigate or open a modal
-          console.log('Item clicked:', this);
-        });
-      });
-
-      // Add CSS class for click animation (define this in style.css)
-      const styleSheet = document.styleSheets[0];
-      const clickKeyframes = `
-                @keyframes clickedEffect {
-                    0% { transform: scale(1); }
-                    50% { transform: scale(0.98); }
-                    100% { transform: scale(1); }
+                // Met à jour la valeur du champ caché du modal
+                if (hiddenInput) {
+                    hiddenInput.value = eventId;
                 }
-            `;
-      styleSheet.insertRule(clickKeyframes, styleSheet.cssRules.length);
+            });
+        });
 
-      const clickedEffectRule = `
-                .clicked-effect {
-                    animation: clickedEffect 0.2s ease-out;
-                }
-            `;
-      styleSheet.insertRule(clickedEffectRule, styleSheet.cssRules.length);
+        // Gérer le logout
+        document.querySelector('.nav-link[href="{{ route('logout')}}"]').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('logout-form').submit();
+        });
     });
-
-    document.addEventListener('DOMContentLoaded', function () {
-      const modal = document.getElementById('eventModal');
-      const openModalBtn = document.getElementById('openModalBtn');
-
-      openModalBtn.addEventListener('click', function () {
-        modal.style.display = 'flex';
-      });
-      const closeModalBtn = document.getElementById('closeModalBtn');
-      closeModalBtn.addEventListener('click', function () {
-        modal.style.display = 'none';
-      });
-    });
-  </script>
+</script>
   </main>
 
 

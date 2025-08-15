@@ -30,5 +30,10 @@ class Evenement extends Model
         return $this->belongsToMany(User::class, 'user_evenement', 'id_evenement', 'id_user')
             ->withTimestamps();
     }
-}
 
+    public function intervenants()
+    {
+        return $this->hasMany(Intervenant::class);
+    }
+
+}

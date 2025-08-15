@@ -55,7 +55,9 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/sponsors', [HomeController::class, 'sponsor'])->name('sponsor');
 
-Route::get('/intervenant', [HomeController::class, 'intervenant'])->name('intervenant');
+//Route::get('/intervenant', [HomeController::class, 'intervenant'])->name('intervenant');
+Route::get('/intervenant', [IntervenantController::class, 'index'])->name('intervenant');
+Route::get('/intervenant/{intervenant}', [IntervenantController::class, 'show'])->name('biographie');
 
 Route::get('/evenement', [HomeController::class, 'evenement'])->name('evenement');
 
@@ -307,13 +309,6 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/dashboard/sponsors/vue', [SponsorController::class, 'vue_sponsor'])->name('vue_sponsor');
 
 
-    Route::get('/dashboard/intervenants', [IntervenantController::class, 'in']);
-    Route::get('/dashboard/intervenants', [IntervenantController::class, 'index'])->name('intervenants.index');
-    Route::post('/dashboard/intervenants', [IntervenantController::class, 'store'])->name('intervenants.store');
-    Route::put('/dashboard/intervenants/{intervenant}', [IntervenantController::class, 'update'])->name('intervenants.update');
-    Route::delete('/dashboard/intervenants/{intervenant}', [IntervenantController::class, 'destroy'])->name('intervenants.destroy');
-    Route::get('/dashboard/intervenants', [IntervenantController::class, 'vue_in'])->name('vue_in');
-
     // Catégories
     Route::resource('categories', CategorieController::class);
     Route::get('/dashboard/categories/create', [CategorieController::class, 'create'])
@@ -388,4 +383,12 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::delete('/dashboard/emploies/{emploie}', [EmploieController::class, 'destroy'])->name('emploies.destroy');
 
     Route::resource('replay', ReplayController::class);
+
+     // Routes pour la gestion des intervenants
+    Route::get('/dashboard/intervenants', [IntervenantController::class, 'add'])->name('intervenants.index');
+    Route::get('/dashboard/intervenants/{intervenant}/edit', [IntervenantController::class, 'edit'])->name('intervenants.edit');
+    Route::put('/dashboard/intervenants/{intervenant}', [IntervenantController::class, 'update'])->name('intervenants.update');
+    Route::delete('/dashboard/intervenants/{intervenant}', [IntervenantController::class, 'destroy'])->name('intervenants.destroy');
+     Route::post('/dashboard/intervenants', [IntervenantController::class, 'store'])->name('intervenants.store');
+
 });

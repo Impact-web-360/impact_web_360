@@ -45,6 +45,88 @@
     .btn-danger:hover {
       background: linear-gradient(90deg, #ff3300, #DD2476); color: #000000; transform: scale(1.05);
     }
+    .btn-inscrire {
+      background: linear-gradient(90deg, #ff4d00, #ff3300);
+      color: white;
+      border: none;
+      border-radius: 8px;
+    }
+
+    .btn-inscrire:hover {
+      background: linear-gradient(90deg, #e63c00, #cc2900);
+    }
+
+    .btn-outline-light {
+      border-radius: 8px;
+    }
+
+    .card-intervenant {
+      background-color: #1C1F26;
+      padding: 1.5rem;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    
+    .social-icon {
+      display: inline-block;
+      background-color: #ff4500;
+      color: white;
+      width: 36px;
+      height: 36px;
+      text-align: center;
+      line-height: 36px;
+      border-radius: 50%;
+      margin: 0 5px;
+      font-size: 16px;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+
+    .social-icon:hover {
+      transform: scale(1.1);
+      background-color: #cc3700;
+    }
+
+    .suivre-btn, .voir-event-btn {
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    .suivre-btn {
+      background-color: #1C1F26;
+      color: #fff;
+    }
+
+    .voir-event-btn {
+      background-color: red;
+      color: white;
+    }
+
+    .voir-event-btn:hover {
+      background-color: #cc3700;
+    }
+
+    @media (max-width: 976px) {
+      .navbar-brand img {
+        margin-top: -20px;
+        max-height: 90px;
+      }
+
+      .navbar-custom {
+        margin-top: 10px;
+      }
+      .navbar-brand {
+          max-height: 50px;
+        }
+
+      .biographie-section {
+        text-align: center;
+      }
+    }
+
+    
 
           /* ========== MEDIA QUERIES ========== */
     @media (max-width: 992px) {
@@ -101,68 +183,66 @@
       <i class="fa fa-arrow-up"></i>
     </a>
 
+    <section class="pt-5 mt-5">
+  <div class="container py-5">
+    <div class="row align-items-start">
+      <div class="col-lg-8">
+        <h2 class="mb-3">Biographie de {{ $intervenant->nom }}</h2>
+        <p>{{ $intervenant->biographie }}</p>
 
-<section class="container my-5" style="padding-top: 120px;">
-  <center>
-    <h2 class="mb-2 fw-bold">Nos intervenants</h2>
-    <p class="text-light mb-4">Découvrez le profil de nos intervenants</p>
-  </center>
+        <h5 class="mt-4"><i class="fas fa-circle me-2"></i> Thème de l'intervention</h5>
+        <p>{{ $intervenant->theme ?? 'Non spécifié' }}</p>
 
-  <div class="row g-4" id="intervenants-apercu">
-    @foreach($intervenants->take(6) as $intervenant)
-      <div class="col-md-4 col-sm-6">
-        <div class="card bg-dark text-white text-center p-3 rounded-4 border-0 h-100 shadow">
-          @if($intervenant->image)
-            <img src="{{ $intervenant->image }}" class="rounded-3 mb-3" alt="{{ $intervenant->nom }}" style="height: 200px; object-fit: cover;">
-          @else
-            <div class="bg-secondary rounded-3 mb-3 d-flex align-items-center justify-content-center" style="height: 200px;">
-              <i class="fas fa-user fa-3x text-light"></i>
-            </div>
-          @endif
-          <h5 class="mb-0">{{ $intervenant->nom }}</h5>
-          <small class="text-muted d-block">{{ $intervenant->fonction ?? 'Intervenant' }}</small>
-          @if($intervenant->evenement)
-            <small class="text-light fst-italic">Événement : {{ $intervenant->evenement->nom }}</small>
-          @endif
-          <a href="{{ route('biographie', $intervenant->id) }}" class="btn btn-danger mt-3 rounded-pill">Voir profil</a>
+        <h5 class="mt-4"><i class="fas fa-calendar-alt me-2"></i> Événement associé</h5>
+        @if($intervenant->evenement)
+            <p><strong>{{ $intervenant->evenement->nom }}</strong> — {{ \Carbon\Carbon::parse($intervenant->evenement->date_debut)->translatedFormat('d F Y') }}</p>
+        @else
+            <p>Aucun événement rattaché pour le moment.</p>
+        @endif
+
+        <div class="d-flex flex-wrap gap-3 mt-4">
+          <a href="{{ route('evenement') }}" class="voir-event-btn text-decoration-none">Voir les événements</a>
         </div>
       </div>
-    @endforeach
-  </div>
 
-  <div class="row g-4 d-none" id="intervenants-complet">
-    @foreach($intervenants->skip(6) as $intervenant)
-      <div class="col-md-4 col-sm-6">
-        <div class="card bg-dark text-white text-center p-3 rounded-4 border-0 h-100 shadow">
+      <div class="col-lg-4 mt-5 mt-lg-0">
+        <div class="card-intervenant">
           @if($intervenant->image)
-            <img src="{{ $intervenant->image }}" class="rounded-3 mb-3" alt="{{ $intervenant->nom }}" style="height: 200px; object-fit: cover;">
+            <img src="{{ asset('storage/' . $intervenant->image) }}" class="img-fluid rounded mb-3" alt="{{ $intervenant->nom }}" style="max-height: 300px; object-fit: cover;">
           @else
-            <div class="bg-secondary rounded-3 mb-3 d-flex align-items-center justify-content-center" style="height: 200px;">
-              <i class="fas fa-user fa-3x text-light"></i>
+            <div class="bg-secondary d-flex align-items-center justify-content-center rounded mb-3" style="height: 300px;">
+              <i class="fas fa-user fa-5x text-light"></i>
             </div>
           @endif
-          <h5 class="mb-0">{{ $intervenant->nom }}</h5>
-          <small class="text-muted d-block">{{ $intervenant->fonction ?? 'Intervenant' }}</small>
-          @if($intervenant->evenement)
-            <small class="text-light fst-italic">Événement : {{ $intervenant->evenement->nom }}</small>
-          @endif
-          <a href="{{ route('biographie', $intervenant->id) }}" class="btn btn-danger mt-3 rounded-pill">Voir profil</a>
+          <h5>{{ $intervenant->nom }}</h5>
+          <p>{{ $intervenant->fonction ?? 'Intervenant' }}</p>
+          <div class="d-flex justify-content-center mt-3">
+              @if($intervenant->whatsapp)
+                  <a href="{{ $intervenant->whatsapp }}" target="_blank" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+              @endif
+              @if($intervenant->facebook)
+                  <a href="{{ $intervenant->facebook }}" target="_blank" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+              @endif
+              @if($intervenant->instagram)
+                  <a href="{{ $intervenant->instagram }}" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
+              @endif
+              @if($intervenant->tiktok)
+                  <a href="{{ $intervenant->tiktok }}" target="_blank" class="social-icon"><i class="fab fa-tiktok"></i></a>
+              @endif
+              @if($intervenant->linkedln)
+                  <a href="{{ $intervenant->linkedln }}" target="_blank" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+              @endif
+              @if($intervenant->snapchat)
+                  <a href="{{ $intervenant->snapchat }}" target="_blank" class="social-icon"><i class="fab fa-snapchat"></i></a>
+              @endif
+              @if($intervenant->x)
+                  <a href="{{ $intervenant->x }}" target="_blank" class="social-icon"><i class="fab fa-x-twitter"></i></a>
+              @endif
+          </div>
         </div>
       </div>
-    @endforeach
+    </div>
   </div>
-
-  <div class="mt-4 text-center">
-    @if($intervenants->count() > 6)
-      <button id="btn-decouvrir" class="btn btn-gradient">
-        <i class="fas fa-eye me-2"></i>Découvrir tous les intervenants ({{ $intervenants->count() }})
-      </button>
-      <button id="btn-masquer" class="btn btn-outline-light d-none">
-        <i class="fas fa-eye-slash me-2"></i>Voir moins
-      </button>
-    @endif
-  </div>
-
 </section>
   <!-- ===== FOOTER ===== -->
   <footer class="footer text-white pt-5 mt-5">
@@ -222,61 +302,29 @@
 <!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const btnDecouvrir = document.getElementById('btn-decouvrir');
-        const btnMasquer = document.getElementById('btn-masquer');
-        const intervenantsComplet = document.getElementById('intervenants-complet');
 
-        if (btnDecouvrir) {
-            btnDecouvrir.addEventListener('click', function() {
-                // Montre la liste complète et masque le bouton "Découvrir"
-                intervenantsComplet.classList.remove('d-none');
-                this.classList.add('d-none');
-                // Montre le bouton "Voir moins"
-                btnMasquer.classList.remove('d-none');
-            });
-        }
+<script>
+    const backToTopBtn = document.getElementById("backToTop");
 
-        if (btnMasquer) {
-            btnMasquer.addEventListener('click', function() {
-                // Masque la liste complète et montre le bouton "Découvrir"
-                intervenantsComplet.classList.add('d-none');
-                btnDecouvrir.classList.remove('d-none');
-                // Masque le bouton "Voir moins"
-                this.classList.add('d-none');
-            });
-        }
+    // Afficher le bouton quand on descend de 200px
+    window.onscroll = function() {
+      if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+        backToTopBtn.style.display = "block";
+      } else {
+        backToTopBtn.style.display = "none";
+      }
+    };
 
-        // Ajoutez ici les autres scripts que vous aviez (hamburger, backToTop, etc.)
-        const toggler = document.querySelector('.navbar-toggler');
-        const hamburger = document.getElementById('hamburgerBtn');
-
-        if (toggler && hamburger) {
-            toggler.addEventListener('click', () => {
-                hamburger.classList.toggle('active');
-            });
-        }
-
-        const backToTopBtn = document.getElementById("backToTop");
-        if (backToTopBtn) {
-            window.onscroll = function () {
-                if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
-                    backToTopBtn.style.display = "block";
-                } else {
-                    backToTopBtn.style.display = "none";
-                }
-            };
-
-            backToTopBtn.addEventListener("click", function (e) {
-                e.preventDefault();
-                window.scrollTo({
-                    top: 0,
-                    behavior: "smooth"
-                });
-            });
-        }
+    // Animation douce de retour en haut
+    backToTopBtn.addEventListener("click", function(e) {
+      e.preventDefault();
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
     });
-</script>
+  </script>
+</body>
+
 </body>
 </html>
