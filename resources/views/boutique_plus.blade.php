@@ -371,11 +371,11 @@
     <div class="row">
       <div class="col-md-2">
         <div class="product-thumb mb-3">
-          <img src="{{ asset('storage/' . $produit->image) }}" alt="thumb" class="img-fluid rounded">
+          <img src="{{ $produit->image }}" alt="thumb" class="img-fluid rounded">
         </div>
       </div>
       <div class="col-md-5 product-image">
-        <img src="{{ asset('storage/' . $produit->image) }}" alt="{{ $produit->nom }}" class="img-fluid rounded">
+        <img src="{{ $produit->image }}" alt="{{ $produit->nom }}" class="img-fluid rounded">
       </div>
       <div class="col-md-5">
         <h2>{{ $produit->nom }}</h2>

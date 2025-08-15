@@ -7,6 +7,7 @@ use App\Models\UserEvenement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Hash;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary; // <-- AJOUTEZ CETTE LIGNE
 
 class IntervenantController extends Controller
 {
@@ -16,56 +17,53 @@ class IntervenantController extends Controller
         return view('Dashboard.Intervenants.index', compact('intervenants'));
     }
 
-   public function store(Request $request)
-{
-    try {
-        Log::info('Tentative de création d\'intervenant', ['request' => $request->all()]);
+    public function store(Request $request)
+    {
+        try {
+            Log::info('Tentative de création d\'intervenant', ['request' => $request->all()]);
 
-        $data = $request->validate([
-            'nom'          => 'required|string',
-            'theme'        => 'nullable|string',
-            'description'  => 'nullable|string',
-            'image'        => 'nullable|image',
-            'evenement_id' => 'required|exists:evenements,id',
-        ]);
+            $data = $request->validate([
+                'nom'          => 'required|string',
+                'theme'        => 'nullable|string',
+                'description'  => 'nullable|string',
+                'image'        => 'nullable|image',
+                'evenement_id' => 'required|exists:evenements,id',
+            ]);
 
-        Log::info('Données validées:', $data);
+            Log::info('Données validées:', $data);
 
-        if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('intervenants', 'public');
-            if (!$path) {
-                Log::error("Échec du stockage de l'image");
-                throw new \Exception("Échec du stockage de l'image");
+            if ($request->hasFile('image')) {
+                // Remplacement du stockage local par Cloudinary
+                $uploadedFileUrl = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
+                $data['image'] = $uploadedFileUrl;
+                Log::info('Image stockée:', ['path' => $uploadedFileUrl]);
             }
-            $data['image'] = $path;
-            Log::info('Image stockée:', ['path' => $path]);
+
+            $data['email'] = 'dummy_' . uniqid() . '@dummy.com';
+            $data['password'] = Hash::make('password_dummy');
+            $data['type'] = 'intervenant';
+
+            $intervenant = User::create($data);
+            Log::info('Intervenant créé:', $intervenant->toArray());
+
+            $relation = UserEvenement::create([
+                'id_user' => $intervenant->id,
+                'id_evenement'   => $data['evenement_id'],
+            ]);
+            Log::info('Relation créée:', $relation->toArray());
+
+            return redirect()->back()->with('success', 'Intervenant créé avec succès !');
+
+        } catch (\Throwable $th) {
+            Log::error("Erreur création intervenant", [
+                'error' => $th->getMessage(),
+                'trace' => $th->getTraceAsString()
+            ]);
+            return redirect()->back()
+                ->withInput()
+                ->withErrors(['error' => 'Erreur lors de la création: ' . $th->getMessage()]);
         }
-
-        $data['email'] = 'dummy_' . uniqid() . '@dummy.com';
-        $data['password'] = Hash::make('password_dummy');
-        $data['type'] = 'intervenant';
-
-        $intervenant = User::create($data);
-        Log::info('Intervenant créé:', $intervenant->toArray());
-
-        $relation = UserEvenement::create([
-            'id_user' => $intervenant->id,
-            'id_evenement'   => $data['evenement_id'],
-        ]);
-        Log::info('Relation créée:', $relation->toArray());
-
-        return redirect()->back()->with('success', 'Intervenant créé avec succès !');
-
-    } catch (\Throwable $th) {
-        Log::error("Erreur création intervenant", [
-            'error' => $th->getMessage(),
-            'trace' => $th->getTraceAsString()
-        ]);
-        return redirect()->back()
-            ->withInput()
-            ->withErrors(['error' => 'Erreur lors de la création: ' . $th->getMessage()]);
     }
-}
 
     public function update(Request $request, $id)
     {
@@ -81,8 +79,9 @@ class IntervenantController extends Controller
             ]);
 
             if ($request->hasFile('image')) {
-                $path = $request->file('image')->store('intervenants', 'public');
-                $data['image'] = $path;
+                // Remplacement du stockage local par Cloudinary
+                $uploadedFileUrl = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
+                $data['image'] = $uploadedFileUrl;
             }
 
             $intervenant->update($data);
@@ -107,7 +106,8 @@ class IntervenantController extends Controller
             $intervenant = User::findOrFail($id);
 
             // Supprimer la liaison avec événement
-            UserEvenement::where('id_intervenant', $id)->delete();
+            // NOTE : La colonne est 'id_user', pas 'id_intervenant' d'après le modèle.
+            UserEvenement::where('id_user', $id)->delete();
 
             $intervenant->delete();
 
@@ -118,6 +118,7 @@ class IntervenantController extends Controller
             return redirect()->back()->withErrors(['error' => 'Erreur lors de la suppression.']);
         }
     }
+
     public function vue_in()
     {
         $intervenants = User::where('type', 'intervenant')->get();

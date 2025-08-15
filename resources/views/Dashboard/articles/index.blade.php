@@ -201,7 +201,7 @@
                                 <div class="card w-100 d-flex flex-column justify-content-between bg-light shadow">
                                     <div class="image-wrapper">
                                         @if ($article->image)
-                                            <img src="{{ asset('storage/' . $article->image) }}" class="card-img-top"
+                                            <img src="{{ $article->image }}" class="card-img-top"
                                                 alt="Image de l'article" style="height: 200px; object-fit: cover;">
                                         @else
                                             <img src="{{ asset('dossiers/image/default.png') }}" class="card-img-top"

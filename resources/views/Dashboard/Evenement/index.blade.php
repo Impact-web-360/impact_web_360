@@ -244,7 +244,7 @@
           <div class="card w-100 d-flex flex-column justify-content-between bg-light shadow">
 
           <div class="image-wrapper">
-            <img src="{{ asset('storage/' . $evenement->image) }}" class="card-img-top"
+            <img src="{{ $evenement->image }}" class="card-img-top"
             alt="Affiche de l'évènement" style="height: 200px; object-fit: cover;">
           </div>
 
@@ -437,7 +437,7 @@
             @if($evenement->image)
         <small class="text-muted mt-3">
         Image actuelle :
-        <img src="{{ asset('storage/' . $evenement->image) }}" class="img-fluid mt-3"
+        <img src="{{ $evenement->image }}" class="img-fluid mt-3"
           style="max-height: 60px;">
         </small>
         @endif
@@ -899,7 +899,7 @@
           <div class="card w-100 d-flex flex-column justify-content-between bg-light shadow">
 
           <div class="image-wrapper">
-            <img src="{{ asset('storage/' . $evenement->image) }}" class="card-img-top"
+            <img src="{{ $evenement->image }}" class="card-img-top"
             alt="Affiche de l'évènement" style="height: 200px; object-fit: cover;">
           </div>
 
@@ -1092,7 +1092,7 @@
             @if($evenement->image)
         <small class="text-muted mt-3">
         Image actuelle :
-        <img src="{{ asset('storage/' . $evenement->image) }}" class="img-fluid mt-3"
+        <img src="{{ $evenement->image }}" class="img-fluid mt-3"
           style="max-height: 60px;">
         </small>
         @endif

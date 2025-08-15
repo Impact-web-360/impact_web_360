@@ -34,7 +34,7 @@
                         <tr>
                             <td>
                                 @if($intervenant->image)
-                                    <img src="{{ asset('storage/' . $intervenant->image) }}" alt="{{ $intervenant->nom }}" class="img-thumbnail" style="width: 50px; height: 50px; object-fit: cover;">
+                                    <img src="{{ $intervenant->image }}" alt="{{ $intervenant->nom }}" class="img-thumbnail" style="width: 50px; height: 50px; object-fit: cover;">
                                 @else
                                     <div class="bg-secondary rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
                                         <i class="fas fa-user"></i>

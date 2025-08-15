@@ -258,7 +258,7 @@
         @foreach ($evenements as $evenement)
       <div class="col-md-6 evenement-item">
         <div class="card bg-transparent border-3 text-white">
-        <img src="{{ asset('storage/' . $evenement->image) }}" class="card-img-top w-100 rounded"
+        <img src="{{ $evenement->image }}" class="card-img-top w-100 rounded"
           style="max-height: 300px; object-fit: cover;" alt="">
         <div class="card-body px-0">
           <p class="fs-6">{{ $evenement->date_debut }}</p>
@@ -298,7 +298,7 @@
         @foreach($evenements as $index => $evenement)
       <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
       <div class="event-card rounded-4 text-center">
-        <img src="{{ asset('storage/' . $evenement->image) }}" class="img-fluid p-4 rounded w-25 mx-auto"
+        <img src="{{ $evenement->image }}" class="img-fluid p-4 rounded w-25 mx-auto"
         alt="Image événement">
         <div class="event-card-body bg-dark p-4">
         <h4>{{ $evenement->nom }}</h4>

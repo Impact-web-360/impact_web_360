@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Evenement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary; // <-- AJOUTEZ CETTE LIGNE
 
 class EvenementController extends Controller
 {
@@ -16,7 +17,7 @@ class EvenementController extends Controller
 
     public function show($id)
     {
-        $evenements = Evenement::with(['sponsors','intervenants'])->findOrFail($id);
+        $evenements = Evenement::with(['sponsors', 'intervenants'])->findOrFail($id);
         return response()->json($evenements);
     }
 
@@ -37,12 +38,11 @@ class EvenementController extends Controller
             ]);
 
             if ($request->hasFile('image')) {
-                    $path = $request->file('image')->store('events', 'public');
-                    // stocke "events/xyz.jpg" en DB
-                    $data['image'] = $path;
-                }
+                // Remplacement du stockage local par Cloudinary
+                $uploadedFileUrl = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
+                $data['image'] = $uploadedFileUrl;
+            }
             
-
             $evenement = new Evenement();
             $evenement->nom         = $data['nom'];
             $evenement->promoteur   = $data['promoteur'];
@@ -81,11 +81,10 @@ class EvenementController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-                $path = $request->file('image')->store('events', 'public');
-                // stocke "events/xyz.jpg" en DB
-                $data['image'] = $path;
-            }
-
+            // Remplacement du stockage local par Cloudinary
+            $uploadedFileUrl = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
+            $data['image'] = $uploadedFileUrl;
+        }
 
         $evenement->update($data);
 
