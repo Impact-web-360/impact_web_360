@@ -30,6 +30,9 @@ use App\Http\Controllers\EmploieController;
 use App\Http\Controllers\UtilisateurController;
 use App\Http\Controllers\ReplayController;
 use App\Http\Controllers\ProduitPublicController;
+use App\Http\Controllers\CartController;
+
+
 
 
 
@@ -165,6 +168,12 @@ Route::controller(ProduitPublicController::class)->group(function () {
     Route::post('/produits/{produit}/commentaires', 'ajouterCommentaire')->name('produit.commentaire');
     Route::post('/newsletter', 'newsletter')->name('newsletter.inscription');
 });
+
+// Route pour le panier
+Route::get('/panier', [CartController::class, 'index'])->name('panier');
+Route::post('/panier/ajouter', [CartController::class, 'addToCart'])->name('panier.add');
+Route::post('/panier/maj', [CartController::class, 'update'])->name('panier.update');
+Route::post('/panier/supprimer', [CartController::class, 'remove'])->name('panier.remove');
 
 
 
