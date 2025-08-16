@@ -190,6 +190,12 @@
                 width: 100%;
             }
 
+            #navbarNav .btn-inscrire {
+            text-align: left;
+            margin: 8px;
+            text-align: center;
+            }
+
             .hamburger {
                 width: 30px;
                 height: 22px;

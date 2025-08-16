@@ -148,7 +148,6 @@
         text-align: left;
         font-size: 22px;
         margin-top: 10px;
-        font-weight: bod;
       }
 
       #navbarNav .btn {
@@ -259,7 +258,7 @@
       <div class="col-md-6 evenement-item">
         <div class="card bg-transparent border-3 text-white">
         <img src="{{ $evenement->image }}" class="card-img-top w-100 rounded"
-          style="max-height: 300px; object-fit: cover;" alt="">
+          style="max-height: 400px; object-fit: cover;" alt="">
         <div class="card-body px-0">
           <p class="fs-6">{{ $evenement->date_debut }}</p>
           <h5>Thème : "{{ $evenement->theme }}"</h5>
@@ -272,12 +271,12 @@
       </div>
     </div>
 
+    @if(count($evenements) > 2)
     <div class="mt-4 text-center">
       <button id="btn-decouvrir" class="btn btn-danger"><i class="fas fa-eye me-2"></i>Découvrir tous les
         événements</button>
-      <button id="btn-masquer" class="btn btn-outline-light d-none"><i class="fas fa-eye-slash me-2"></i>Voir
-        moins</button>
     </div>
+    @endif
 
 
     </div>
@@ -298,7 +297,7 @@
         @foreach($evenements as $index => $evenement)
       <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
       <div class="event-card rounded-4 text-center">
-        <img src="{{ $evenement->image }}" class="img-fluid p-4 rounded w-25 mx-auto"
+        <img src="{{ $evenement->image }}" class="img-fluid p-4 rounded w-50 mx-auto"
         alt="Image événement">
         <div class="event-card-body bg-dark p-4">
         <h4>{{ $evenement->nom }}</h4>
@@ -308,7 +307,7 @@
         <p class="mb-1"><strong>Lieu : </strong>{{ $evenement->lieu }}</p>
         <p class="mb-1"><strong>Thème : </strong>{{ $evenement->theme }}</p>
         <p class="mb-1"><strong>Description : </strong>{{ $evenement->description }}</p>
-        <a href="#" class="btn btn-danger btn-lg mt-3">Réserver mon billet <i
+        <a href="{{ route('step1') }}" class="btn btn-danger btn-lg mt-3">Réserver mon billet <i
         class="fa-solid fa-arrow-right ms-1"></i></a>
         </div>
       </div>

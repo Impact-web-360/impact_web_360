@@ -173,7 +173,7 @@
             <li><a href="{{ route('evenement') }}">Replays</a></li>
             <li><a href="{{ route('login') }}">E-learning</a></li>
             <li><a href="#">Entreprises & Recruteurs</a></li>
-            <li><a href="#">Forum</a></li>
+            <li><a href="https://chat.whatsapp.com/FZx7QMMdFsq3fF0D40Px8f" target="_blank">Forum</a></li>
           </ul>
         </div>
 

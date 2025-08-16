@@ -490,7 +490,7 @@
     <div class="d-md-none overflow-auto" style="white-space: nowrap;">
       <div class="d-flex flex-nowrap">
         @foreach ($suggestions as $sugg)
-      <a href="{{ route('boutique', $sugg->id) }}" class="text-decoration-none text-white me-3"
+      <a href="{{ route('boutique_plus', $sugg->id) }}" class="text-decoration-none text-white me-3"
         style="flex: 0 0 auto; width: 75%;">
         <div class="product-card bg-transparent p-3" style="border-radius:10px;">
         <img src="{{ $sugg->image }}" class="img-fluid rounded mb-3" alt="{{ $sugg->nom }}"
