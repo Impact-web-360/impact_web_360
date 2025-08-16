@@ -49,14 +49,23 @@
     @media (max-width: 976px) {
       .navbar-brand img { margin-top: -70px; max-height: 180px; margin-left: -30px; }
       #navbarNav { background-color: rgb(0, 0, 102); width: 100%; padding: 40px; position: absolute; top: 59px; left: 0; z-index: 999; text-align: left; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px; }
-      #navbarNav .nav-link { text-align: left; font-size: 22px; margin-top: 10px; font-weight: bod; }
+      #navbarNav .nav-link { text-align: left; font-size: 22px; margin-top: 10px; }
       #navbarNav .btn { margin-top: 50px; width: 100%; }
-      .hamburger { width: 30px; height: 22px; display: flex; flex-direction: column; justify-content: space-between; cursor: pointer; z-index: 1001; border: none; }
+      #navbarNav .btn-inscrire { text-align: left; margin: 8px; text-align: center; }
+      .hamburger { width: 30px; height: 22px; display: flex; flex-direction: column; justify-content: space-between; cursor: pointer; z-index: 1001; border: none; margin-top: -50px;}
       .hamburger span { height: 3px; background-color: white; border-radius: 2px; transition: all 0.4s ease; border: none; }
       .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
       .hamburger.active span:nth-child(2) { opacity: 0; }
+      .navbar-toggler {
+        border: none !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        outline: none !important;
+      }
       .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(8px, -9px); }
       .hero-section { height: 300px; }
+      .yes {margin-bottom: 10px;}
+      .yes2 {margin-top: 10px;}
     }
   </style>
 </head>
@@ -117,7 +126,7 @@
           @foreach ($formations as $formation)
             <div class="col training-card" data-category="{{ $formation->categorie->slug ?? 'uncategorized' }}" data-aos="zoom-in" data-aos-delay="100">
               <div class="card h-100 border-0 shadow">
-                <img src="{{ asset('storage/' . $formation->image) }}" class="card-img-top" alt="{{ $formation->title }}">
+                <img src="{{ $formation->image }}" class="card-img-top" alt="{{ $formation->title }}">
                 <div class="card-body">
                   <span class="badge bg-danger mb-2">{{ $formation->categorie->name ?? 'Non classé' }}</span>
                   <h5 class="card-title fw-bold text-white">{{ $formation->title }}</h5>
