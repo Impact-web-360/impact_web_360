@@ -223,7 +223,7 @@
         <a href="{{ route('modules.index')}}" class="nav-link"><i class="fas fa-puzzle-piece"></i>Modules</a>
         <a href="{{ route('articles.index')}}" class="nav-link"><i class="fa fa-shopping-basket"></i>Articles</a>
         <a href="{{ route('emploies.index')}}" class="nav-link"><i class="fa fa-briefcase"></i>Emplois</a>
-        <a href="ajouter_intervenant.php" class="nav-link"><i class="fa fa-user"></i>Intervenants</a>
+        <a href="{{ route('intervenants.index')}}" class="nav-link"><i class="fa fa-user"></i>Intervenants</a>
         <a href="{{ route('billet')}}" class="nav-link"><i class="fas fa-calendar-alt "></i> Tickets</a>
         <form action="{{ route('logout') }}" method="POST" id="logout-form">
         @csrf
@@ -474,7 +474,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
       </div>
       <div class="modal-body">
-        <input type="hidden" name="evenement_id" id="evenement_id_intervenant">
+       <input type="hidden" name="evenement_id" id="evenement_id_intervenant">
         
         <div class="mb-3">
           <label for="nom" class="form-label">Nom</label>
@@ -609,3 +609,6 @@
 </body>
 
 </html>
+
+
+

@@ -12,8 +12,7 @@ use Illuminate\Support\Facades\Storage;
 class IntervenantController extends Controller
 {
 public function store(Request $request)
-{
-    try {
+    {
         $data = $request->validate([
             'evenement_id' => 'required|exists:evenements,id',
             'nom'          => 'required|string|max:255',
@@ -30,43 +29,21 @@ public function store(Request $request)
             'x'            => 'nullable|url',
         ]);
 
-        Log::info('Données validées:', $data);
-
-        if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('intervenants', 'public');
-            if (!$path) {
-                Log::error("Échec du stockage de l'image");
-                throw new \Exception("Échec du stockage de l'image");
+        try {
+            if ($request->hasFile('image')) {
+                $path = $request->file('image')->store('intervenants', 'public');
+                $data['image'] = $path;
             }
-            $data['image'] = $path;
-            Log::info('Image stockée:', ['path' => $path]);
+
+            Intervenant::create($data);
+
+            return redirect()->route('intervenants.index')->with('success', 'Intervenant ajouté avec succès !');
+        } catch (\Throwable $th) {
+            Log::error("Erreur lors de l'ajout d'un intervenant", ['message' => $th->getMessage()]);
+            return redirect()->back()->withErrors('Une erreur est survenue.');
         }
-
-        $data['email'] = 'dummy_' . uniqid() . '@dummy.com';
-        $data['password'] = Hash::make('password_dummy');
-        $data['type'] = 'intervenant';
-
-        $intervenant = User::create($data);
-        Log::info('Intervenant créé:', $intervenant->toArray());
-
-        $relation = UserEvenement::create([
-            'id_user' => $intervenant->id,
-            'id_evenement'   => $data['evenement_id'],
-        ]);
-        Log::info('Relation créée:', $relation->toArray());
-
-        return redirect()->back()->with('success', 'Intervenant créé avec succès !');
-
-    } catch (\Throwable $th) {
-        Log::error("Erreur création intervenant", [
-            'error' => $th->getMessage(),
-            'trace' => $th->getTraceAsString()
-        ]);
-        return redirect()->back()
-            ->withInput()
-            ->withErrors(['error' => 'Erreur lors de la création: ' . $th->getMessage()]);
     }
-}
+
 
     public function index()
     {
@@ -124,7 +101,7 @@ public function store(Request $request)
 
         $intervenant->update($data);
 
-        return redirect()->route('Intervenants.index')->with('success', 'Intervenant mis à jour avec succès.');
+        return redirect()->route('intervenants.index')->with('success', 'Intervenant mis à jour avec succès.');
     }
 
     /**
@@ -138,7 +115,7 @@ public function store(Request $request)
 
         $intervenant->delete();
 
-        return redirect()->route('Intervenants.index')->with('success', 'Intervenant supprimé avec succès.');
+        return redirect()->route('intervenants.index')->with('success', 'Intervenant supprimé avec succès.');
     }
 
     public function show($id)
@@ -148,3 +125,4 @@ public function store(Request $request)
 }
 
 }
+
