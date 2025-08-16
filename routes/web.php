@@ -206,36 +206,36 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),
             ->name('dashboard');
 
             Route::get('/cours/details', function () {
-                return view('dashboard_utilisateur.details_cours');
+                return view('Dashboard_utilisateur.details_cours');
             })->name('cours.details');
 
             Route::get('/notifications', function () {
-                return view('dashboard_utilisateur.notification');
+                return view('Dashboard_utilisateur.notification');
             })->name('notifications');
 
             Route::get('/parametres', function () {
-                return view('dashboard_utilisateur.parametre');
+                return view('Dashboard_utilisateur.parametre');
             })->name('parametres');
 
 
             Route::get('/themes', function () {
-                return view('dashboard_utilisateur.themes');
+                return view('Dashboard_utilisateur.themes');
             })->name('themes');
 
             Route::get('/media', function () {
-                return view('dashboard_utilisateur.media');
+                return view('Dashboard_utilisateur.media');
             })->name('media');
 
             Route::get('/soutien', function () {
-                return view('dashboard_utilisateur.soutien');
+                return view('Dashboard_utilisateur.soutien');
             })->name('soutien');
 
             Route::get('/changer-mot-de-passe', function () {
-                return view('dashboard_utilisateur.changer_mot_de_passe');
+                return view('Dashboard_utilisateur.changer_mot_de_passe');
             })->name('changer_mot_de_passe');
 
             Route::get('/modifier-profil', function () {
-                return view('dashboard_utilisateur.modifier_profil');
+                return view('Dashboard_utilisateur.modifier_profil');
             })->name('modifier_profil');
 
             //decouvrir
