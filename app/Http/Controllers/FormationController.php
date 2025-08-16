@@ -7,6 +7,7 @@ use App\Models\Categorie;
 use App\Models\Module;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class FormationController extends Controller
 {
@@ -18,21 +19,21 @@ class FormationController extends Controller
 
     public function create()
     {
-        $categories = Categorie::all(); // Changé de Category à Categorie
+        $categories = Categorie::all();
         return view('Dashboard.formations.create', compact('categories'));
     }
 
     public function store(Request $request)
     {
-        $validatedData = $request->validate([ // Capturez les données validées
+        $validatedData = $request->validate([
             'category_id' => 'required|exists:categories,id',
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'objectives' => 'nullable|array',
-            'objectives.*' => 'nullable|string', // Pour valider chaque élément du tableau
+            'objectives.*' => 'nullable|string',
             'tools' => 'nullable|array',
-            'tools.*' => 'nullable|string', // Pour valider chaque élément du tableau
+            'tools.*' => 'nullable|string',
             'price' => 'required|numeric|min:0',
             'mentor' => 'nullable|string|max:255',
             'mentor_title' => 'nullable|string|max:255',
@@ -41,39 +42,39 @@ class FormationController extends Controller
             'mentor_bio' => 'nullable|string',
         ]);
 
-        // Gérer l'upload de l'image principale
+        // Gérer l'upload de l'image principale sur Cloudinary
         if ($request->hasFile('image')) {
-            $validatedData['image'] = $request->file('image')->store('formations', 'public');
+            $uploadedImageUrl = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
+            $validatedData['image'] = $uploadedImageUrl;
         } else {
-            $validatedData['image'] = null; // Assurez-vous que le champ est null si pas d'image
+            $validatedData['image'] = null;
         }
 
-        // Gérer l'upload de l'avatar du mentor
+        // Gérer l'upload de l'avatar du mentor sur Cloudinary
         if ($request->hasFile('mentor_avatar')) {
-            $validatedData['mentor_avatar'] = $request->file('mentor_avatar')->store('mentors/avatars', 'public');
+            $uploadedAvatarUrl = Cloudinary::upload($request->file('mentor_avatar')->getRealPath())->getSecurePath();
+            $validatedData['mentor_avatar'] = $uploadedAvatarUrl;
         } else {
-            $validatedData['mentor_avatar'] = null; // Assurez-vous que le champ est null si pas d'avatar
+            $validatedData['mentor_avatar'] = null;
         }
 
-        // Les champs 'objectives' et 'tools' seront déjà des tableaux grâce à $validatedData
-        // S'assurer que les valeurs par défaut sont appliquées si non fournies
         $validatedData['mentor_reviews_count'] = $validatedData['mentor_reviews_count'] ?? 0;
 
-        Formation::create($validatedData); // Crée la formation avec toutes les données validées
+        Formation::create($validatedData);
 
         return redirect()->route('Dashboard.formations.index')->with('success', 'Formation ajoutée avec succès!');
     }
-        public function edit($id)
-        {
-            $formation = Formation::findOrFail($id);
-            $categories = Categorie::all();
-            return view('Dashboard.formations.edit', compact('formation', 'categories'));
-        }
 
+    public function edit($id)
+    {
+        $formation = Formation::findOrFail($id);
+        $categories = Categorie::all();
+        return view('Dashboard.formations.edit', compact('formation', 'categories'));
+    }
 
     public function update(Request $request, $id)
     {
-        $formation = Formation::findOrFail($id); // Récupérez la formation en premier !
+        $formation = Formation::findOrFail($id);
 
         $validatedData = $request->validate([
             'category_id' => 'required|exists:categories,id',
@@ -81,9 +82,9 @@ class FormationController extends Controller
             'description' => 'nullable|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'objectives' => 'nullable|array',
-            'objectives.*' => 'nullable|string', // Pour valider chaque élément du tableau
+            'objectives.*' => 'nullable|string',
             'tools' => 'nullable|array',
-            'tools.*' => 'nullable|string', // Pour valider chaque élément du tableau
+            'tools.*' => 'nullable|string',
             'price' => 'required|numeric|min:0',
             'mentor' => 'nullable|string|max:255',
             'mentor_title' => 'nullable|string|max:255',
@@ -94,35 +95,28 @@ class FormationController extends Controller
 
         // Gestion de l'image principale
         if ($request->hasFile('image')) {
-            if ($formation->image && Storage::disk('public')->exists($formation->image)) {
-                Storage::disk('public')->delete($formation->image);
+            if ($formation->image) {
+                $publicId = basename($formation->image, '.' . pathinfo($formation->image, PATHINFO_EXTENSION));
+                Cloudinary::destroy($publicId);
             }
-            $validatedData['image'] = $request->file('image')->store('formations', 'public');
-        } elseif (isset($validatedData['clear_image']) && $validatedData['clear_image']) {
-            if ($formation->image && Storage::disk('public')->exists($formation->image)) {
-                Storage::disk('public')->delete($formation->image);
-            }
-            $validatedData['image'] = null;
+            $uploadedImageUrl = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
+            $validatedData['image'] = $uploadedImageUrl;
         } else {
-            $validatedData['image'] = $formation->image; // Conserver l'ancienne image si rien de nouveau
+            $validatedData['image'] = $formation->image;
         }
 
         // Gestion de l'avatar du mentor
         if ($request->hasFile('mentor_avatar')) {
-            if ($formation->mentor_avatar && Storage::disk('public')->exists($formation->mentor_avatar)) {
-                Storage::disk('public')->delete($formation->mentor_avatar);
+            if ($formation->mentor_avatar) {
+                $publicId = basename($formation->mentor_avatar, '.' . pathinfo($formation->mentor_avatar, PATHINFO_EXTENSION));
+                Cloudinary::destroy($publicId);
             }
-            $validatedData['mentor_avatar'] = $request->file('mentor_avatar')->store('mentors/avatars', 'public');
-        } elseif (isset($validatedData['clear_mentor_avatar']) && $validatedData['clear_mentor_avatar']) {
-            if ($formation->mentor_avatar && Storage::disk('public')->exists($formation->mentor_avatar)) {
-                Storage::disk('public')->delete($formation->mentor_avatar);
-            }
-            $validatedData['mentor_avatar'] = null;
+            $uploadedAvatarUrl = Cloudinary::upload($request->file('mentor_avatar')->getRealPath())->getSecurePath();
+            $validatedData['mentor_avatar'] = $uploadedAvatarUrl;
         } else {
-            $validatedData['mentor_avatar'] = $formation->mentor_avatar; // Conserver l'ancien avatar
+            $validatedData['mentor_avatar'] = $formation->mentor_avatar;
         }
 
-        // Mettre à jour la formation avec toutes les données validées
         $formation->update($validatedData);
 
         return redirect()->route('Dashboard.formations.index')->with('success', 'Formation mise à jour avec succès!');
@@ -130,11 +124,13 @@ class FormationController extends Controller
 
     public function destroy(Formation $formation)
     {
-        if ($formation->image && Storage::disk('public')->exists($formation->image)) {
-            Storage::disk('public')->delete($formation->image);
+        if ($formation->image) {
+            $publicId = basename($formation->image, '.' . pathinfo($formation->image, PATHINFO_EXTENSION));
+            Cloudinary::destroy($publicId);
         }
-        if ($formation->mentor_avatar && Storage::disk('public')->exists($formation->mentor_avatar)) {
-            Storage::disk('public')->delete($formation->mentor_avatar);
+        if ($formation->mentor_avatar) {
+            $publicId = basename($formation->mentor_avatar, '.' . pathinfo($formation->mentor_avatar, PATHINFO_EXTENSION));
+            Cloudinary::destroy($publicId);
         }
 
         $formation->delete();
@@ -150,15 +146,12 @@ class FormationController extends Controller
 
         return view('Dashboard_utilisateur.details', compact('formation'));
     }
+
     public function showContenu($formationId)
     {
-        
         $formation = Formation::findOrFail($formationId);
         $formation->load(['modules', 'categorie']);
 
         return view('Dashboard_utilisateur.formation_gratuite', compact('formation'));
     }
-    
-
-    
-};
+}

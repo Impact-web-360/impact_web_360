@@ -104,7 +104,7 @@
             <label for="image" class="form-label">Image de la Formation</label>
             @if ($formation->image)
                 <div class="mb-2">
-                    <img src="{{ asset('storage/' . $formation->image) }}" alt="Image actuelle" class="current-image" style="max-width: 200px; height: auto;">
+                    <img src="{{ $formation->image) }}" alt="Image actuelle" class="current-image" style="max-width: 200px; height: auto;">
                     <div class="form-check mt-2">
                         <input class="form-check-input" type="checkbox" name="clear_image" id="clear_image">
                         <label class="form-check-label text-secondary" for="clear_image">Supprimer l'image actuelle</label>
@@ -138,7 +138,7 @@
             <label for="mentor_avatar" class="form-label">Avatar du Mentor</label>
             @if ($formation->mentor_avatar)
                 <div class="mb-2">
-                    <img src="{{ asset('storage/' . $formation->mentor_avatar) }}" alt="Avatar actuel" class="current-avatar" style="width: 80px; height: 80px;">
+                    <img src="{{ $formation->mentor_avatar }}" alt="Avatar actuel" class="current-avatar" style="width: 80px; height: 80px;">
                     <div class="form-check mt-2">
                         <input class="form-check-input" type="checkbox" name="clear_mentor_avatar" id="clear_mentor_avatar">
                         <label class="form-check-label text-secondary" for="clear_mentor_avatar">Supprimer l'avatar actuel</label>

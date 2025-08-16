@@ -31,7 +31,7 @@
     .social-icon:hover { transform: scale(1.1); background-color: #ff2605; }
     .btn-360 { background: #ff4500; color: white;border: none; border-radius: 20px; padding: 5px 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); transition: transform 0.3s; }
     .btn-360:hover { transform: scale(1.05); }
-    .hero-section { background: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center/cover; height: 400px; position: relative; }
+    .hero-section { background: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center/cover; height: 600px; position: relative; }
     .hero-section .overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.7); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 2rem; animation: fadeIn 1.5s ease-in-out; }
     .titre-avec-trait { display: flex; gap: 10px; margin: 20px 0; }
     .trait-vertical { width: 4px; height: auto; background-color: #ff4500; }
@@ -47,25 +47,143 @@
     
     /* Styles responsives de la page d'accueil */
     @media (max-width: 976px) {
-      .navbar-brand img { margin-top: -70px; max-height: 180px; margin-left: -30px; }
-      #navbarNav { background-color: rgb(0, 0, 102); width: 100%; padding: 40px; position: absolute; top: 59px; left: 0; z-index: 999; text-align: left; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px; }
-      #navbarNav .nav-link { text-align: left; font-size: 22px; margin-top: 10px; }
-      #navbarNav .btn { margin-top: 50px; width: 100%; }
-      #navbarNav .btn-inscrire { text-align: left; margin: 8px; text-align: center; }
-      .hamburger { width: 30px; height: 22px; display: flex; flex-direction: column; justify-content: space-between; cursor: pointer; z-index: 1001; border: none; margin-top: -50px;}
-      .hamburger span { height: 3px; background-color: white; border-radius: 2px; transition: all 0.4s ease; border: none; }
-      .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
-      .hamburger.active span:nth-child(2) { opacity: 0; }
+      .hero-section { height: 300px; }
+      .yes {margin-bottom: 10px;}
+      .yes2 {margin-top: 10px;}
+
+      .btn-danger {
+        background-color: #ff3300;
+        border-radius: 50px;
+        padding: 10px 20px;
+        border: none;
+      }
+      .btn-danger:hover {
+        background-color: #cc2900;
+      }
+      .btn-inscrire {
+        background: linear-gradient(90deg, #ff4d00, #ff3300);
+        color: white;
+        border: none;
+        border-radius: 8px;
+      }
+      .filters {
+        background-color: rgba(28, 31, 38, 0);
+        padding: 20px;
+        border: solid 0.5px #1C1F26;
+        border-radius: 10px;
+        color: white;
+      }
+
+      .navbar-brand img {
+        margin-top: -70px;
+        max-height: 180px;
+        margin-left: -30px;
+      }
+      .navbar-brand {
+        max-height: 50px;
+      }
+      .navbar-custom {
+        margin-top: 10px;
+        border-radius: 15px;
+        width: 100vw;
+      }
+      #navbarNav {
+        background-color: rgb(0, 0, 102);
+        width: 100%;
+        padding: 40px;
+        position: absolute;
+        top: 59px;
+        left: 0;
+        z-index: 999;
+        text-align: left;
+        border-bottom-left-radius: 15px;
+        border-bottom-right-radius: 15px;
+      }
+      #navbarNav .nav-link {
+        text-align: left;
+        font-size: 22px;
+        margin-top: 10px;
+      }
+      #navbarNav .btn {
+        margin-top: 50px;
+        width: 100%;
+      }
+      #navbarNav .btn-inscrire {
+        text-align: left;
+        margin: 8px;
+        text-align: center;
+      }
+      .hamburger {
+        width: 30px;
+        height: 22px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        cursor: pointer;
+        z-index: 1001;
+        border: none;
+      }
+      .hamburger span {
+        height: 3px;
+        background-color: white;
+        border-radius: 2px;
+        transition: all 0.4s ease;
+        border: none;
+      }
       .navbar-toggler {
         border: none !important;
         background: transparent !important;
         box-shadow: none !important;
         outline: none !important;
       }
-      .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(8px, -9px); }
-      .hero-section { height: 300px; }
-      .yes {margin-bottom: 10px;}
-      .yes2 {margin-top: 10px;}
+      .hamburger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+      .hamburger.active span:nth-child(2) {
+        opacity: 0;
+      }
+      .hamburger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(8px, -9px);
+      }
+      .navbar-toggler-icon {
+        background-image: none !important;
+      }
+      .container-fluid.py-5.px-5 {
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+      }
+    }
+    @media (max-width: 768px) {
+      .product-image-container {
+        height: auto;
+      }
+      .product-info {
+        padding: 15px;
+      }
+      .product-info h5 {
+        margin-bottom: -30px;
+        font-size: 10px;
+      }
+      .product-info p {
+        font-size: 10px;
+      }
+      .center-button {
+        margin-top: 50px;
+      }
+    }
+    @media (max-width: 576px) {
+      .product-image-container {
+        height: auto;
+      }
+      .product-info h5 {
+        font-size: 20px;
+      }
+      .product-info p {
+        font-size: 20px;
+      }
+      .product-card {
+        margin-bottom: 20px;
+      }
     }
   </style>
 </head>
@@ -73,7 +191,8 @@
 <body>
 
   <nav class="navbar navbar-expand-lg navbar-dark fixed-top navbar-custom container">
-    <a class="navbar-brand" href="index.php"><img src="{{ asset('dossiers/image/Impact-Web-360-Logo1.png') }}" alt="Logo Impact Web" /></a>
+    <a class="navbar-brand" href="index.php"><img src="{{ asset('dossiers/image/Impact-Web-360-Logo1.png') }}"
+        alt="Logo Impact Web" /></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
       <div class="hamburger" id="hamburgerBtn">
         <span></span>
@@ -83,7 +202,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link" href="{{ route('home') }}">Acceuil</a></li>
+        <li class="nav-item"><a class="nav-link " href="{{ route('home') }}">Acceuil</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ route('evenement') }}">Événements</a></li>
         <li class="nav-item"><a class="nav-link active" href="{{ route('elearning') }}">E-learning</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ route('intervenant') }}">Intervenants</a></li>

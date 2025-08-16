@@ -122,7 +122,7 @@
                         <td>{{ $formation->mentor_title ?? 'N/A' }}</td>
                         <td>
                             @if ($formation->mentor_avatar)
-                                <img src="{{ asset('storage/' . $formation->mentor_avatar) }}" alt="Avatar" class="table-avatar">
+                                <img src="{{ $formation->mentor_avatar }}" alt="Avatar" class="table-avatar">
                             @else
                                 <span class="text-muted">N/A</span>
                             @endif
