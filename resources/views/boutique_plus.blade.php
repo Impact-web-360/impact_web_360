@@ -395,7 +395,7 @@
         </div>
 
         <div class="d-flex align-items-center">
-          <div class="bg-dark rounded-5 py-1" style="color: #ff4500">
+          <div class="bg-dark rounded-5 py-1 me-1" style="color: #ff4500">
             <button class="btn bg-transparent btn-sm text-light rounded-5" id="plusButton"><i class="fas fa-plus" style="color: #ff4500"></i></button>
             <span class="mx-2" id="quantityDisplay">1</span>
             <button class="btn bg-transparent text-light btn-sm rounded-5" id="minusButton"><i class="fas fa-minus"style="color: #ff4500"></i></button>
