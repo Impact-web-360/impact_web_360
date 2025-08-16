@@ -31,6 +31,7 @@ use App\Http\Controllers\UtilisateurController;
 use App\Http\Controllers\ReplayController;
 use App\Http\Controllers\ProduitPublicController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\ElearningController;
 
 
 
@@ -69,6 +70,9 @@ Route::get('/evenement/{id}/replays', [ReplayController::class, 'parEvenement'])
     ->name('replays_evenement');
 
 Route::get('/get-cart-count', [CartController::class, 'getCartCount'])->name('cart.count');
+
+Route::get('/elearning', [ElearningController::class, 'index'])->name('elearning');
+
 
 
 //Paramètres
