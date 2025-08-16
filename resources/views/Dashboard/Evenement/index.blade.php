@@ -273,8 +273,12 @@
               data-bs-target="#">Informations</a>
             </div>
 
-            <a href="{{ route('sponsors.index') }}" class="btn btn-dark text-white fs-6 fw-bold w-100 mb-2"
-              data-bs-toggle="modal" data-bs-target="#addSponsorModal">Ajouter un sponsor</a>
+            <button type="button" class="btn btn-dark text-white fs-6 fw-bold w-100 mb-2 open-sponsor-modal" 
+                    data-bs-toggle="modal" 
+                    data-bs-target="#addSponsorModal"
+                    data-event-id="{{ $evenement->id }}">
+                Ajouter un sponsor
+            </button>
             <button type="button" class="btn btn-dark text-white fs-6 fw-bold w-100 open-intervenant-modal" 
                     data-bs-toggle="modal" 
                     data-bs-target="#addIntervenantModal"
@@ -470,7 +474,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
       </div>
       <div class="modal-body">
-        <input type="hidden" name="evenement_id" id="evenement_id_intervenant">
+       <input type="hidden" name="evenement_id" id="evenement_id_intervenant">
         
         <div class="mb-3">
           <label for="nom" class="form-label">Nom</label>
@@ -517,54 +521,46 @@
   </div>
 </div>
 
-  <!-- Modal Ajouter sponsor -->
   <div class="modal fade" id="addSponsorModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-scrollable ">
-      <form method="POST" action="{{ route('sponsors.store') }}" enctype="multipart/form-data" class="modal-content">
-        @csrf
-        <div class="modal-header bg-danger text-white">
-          <h5 class="modal-title" id="addsponsorLabel">Ajouter un sponsor</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+  <div class="modal-dialog modal-lg modal-dialog-scrollable ">
+    <form method="POST" action="{{ route('sponsors.store') }}" enctype="multipart/form-data" class="modal-content">
+      @csrf
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title" id="addsponsorLabel">Ajouter un sponsor</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+      </div>
+
+      <div class="modal-body">
+        <input type="hidden" name="evenement_id" id="evenement_id_sponsor">
+
+        <div class="mb-3">
+          <label for="nom" class="form-label">Nom du sponsor</label>
+          <input type="text" class="form-control" id="nom" name="nom" required>
         </div>
 
-        <div class="modal-body">
-          <div class="mb-3">
-            @foreach ($evenements as $evenement)
-        <label for="nom" class="form-label">{{ $evenement->nom }}</label>
-        <input type="hidden" class="form-control" name="evenement_id" value="{{ $evenement->id }}">
-      @endforeach
-          </div>
+        <div class="mb-3">
+          <label for="promoteur" class="form-label">Promoteur</label>
+          <input type="text" class="form-control" id="promoteur" name="promoteur" required>
+        </div>
 
-          <div class="modal-body">
-            <div class="mb-3">
-              <label for="nom" class="form-label">Nom du sponsor</label>
-              <input type="text" class="form-control" id="nom" name="nom" required>
-            </div>
+        <div class="mb-3">
+          <label for="description" class="form-label">Description</label>
+          <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
+        </div>
 
-            <div class="mb-3">
-              <label for="promoteur" class="form-label">Promoteur</label>
-              <input type="text" class="form-control" id="promoteur" name="promoteur" required>
-            </div>
+        <div class="mb-3">
+          <label for="logo" class="form-label">Logo</label>
+          <input type="file" class="form-control" id="logo" name="logo" required>
+        </div>
 
-            <div class="mb-3">
-              <label for="description" class="form-label">Description</label>
-              <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
-            </div>
-
-            <div class="mb-3">
-              <label for="logo" class="form-label">Logo </label>
-              <input type="file" class="form-control" id="logo" name="logo" required>
-            </div>
-
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-            <button type="submit" class="btn btn-danger">Enregistrer</button>
-          </div>
-      </form>
-    </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+        <button type="submit" class="btn btn-danger">Enregistrer</button>
+      </div>
+    </form>
   </div>
-
+</div>
   
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -587,6 +583,19 @@
             });
         });
 
+        // Logic for Sponsor modal
+        const openSponsorButtons = document.querySelectorAll('.open-sponsor-modal');
+        const hiddenSponsorInput = document.getElementById('evenement_id_sponsor');
+
+        openSponsorButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const eventId = this.getAttribute('data-event-id');
+                if (hiddenSponsorInput) {
+                    hiddenSponsorInput.value = eventId;
+                }
+            });
+        });
+
         // Gérer le logout
         document.querySelector('.nav-link[href="{{ route('logout')}}"]').addEventListener('click', function(e) {
             e.preventDefault();
@@ -594,29 +603,12 @@
         });
     });
 </script>
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-      const sidebar = document.getElementById('sidebar');
-      const sidebarToggle = document.getElementById('sidebarToggle');
-      const body = document.body;
-
-      sidebarToggle.addEventListener('click', () => {
-          sidebar.classList.toggle('active');
-          body.classList.toggle('sidebar-open');
-      });
-
-      // Fermer la sidebar si clic en dehors (mobile)
-      document.addEventListener('click', (e) => {
-          if (window.innerWidth < 992 && !sidebar.contains(e.target) && !sidebarToggle.contains(e.target)) {
-              sidebar.classList.remove('active');
-              body.classList.remove('sidebar-open');
-          }
-      });
-  });
-</script>
 </main>
 
 
 </body>
 
 </html>
+
+
+

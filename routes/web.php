@@ -57,6 +57,7 @@ Route::get('/', function () {
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/sponsors', [HomeController::class, 'sponsor'])->name('sponsor');
+Route::get('/sponsors', [SponsorController::class, 'showPublic'])->name('sponsors.show');
 
 //Route::get('/intervenant', [HomeController::class, 'intervenant'])->name('intervenant');
 Route::get('/intervenant', [IntervenantController::class, 'index'])->name('intervenant');
@@ -315,7 +316,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('/dashboard/sponsors', [SponsorController::class, 'store'])->name('sponsors.store');
     Route::put('/dashboard/sponsors/{sponsor}', [SponsorController::class, 'update'])->name('sponsors.update');
     Route::delete('/dashboard/sponsors/{sponsor}', [SponsorController::class, 'destroy'])->name('sponsors.destroy');
-    Route::get('/dashboard/sponsors/vue', [SponsorController::class, 'vue_sponsor'])->name('vue_sponsor');
+    Route::get('/dashboard/sponsors/{sponsor}/edit', [SponsorController::class, 'edit'])->name('sponsors.edit');
 
 
     // Catégories
