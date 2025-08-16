@@ -9,6 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
     <style>
         :root {
+            --main-color: #f8f9fa;
             --primary: #0e0e12;
             --secondary: #000066;
             --accent: #ff3300;
@@ -28,12 +29,42 @@
             padding: 1.5rem 0;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
+
+        /* Responsive Sidebar toggle button */
+        #sidebarToggle {
+            display: none;
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            z-index: 1200;
+            background-color: var(--main-color);
+            border: none;
+            color: #000066;
+            padding: 0.5rem 0.75rem;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s ease;
+        }
+
+        #sidebarToggle:hover {
+            background-color: rgba(0, 0, 102, 0.1);
+        }
         
         .sidebar {
+            overflow-y: auto;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            height: 100vh;
             background-color: white;
+            padding-top: 5rem;
             min-height: calc(100vh - 72px);
             box-shadow: 3px 0 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
             padding: 0;
+            z-index: 1050;
         }
         
         .sidebar .nav-link {
@@ -54,9 +85,20 @@
             text-align: center;
             margin-right: 10px;
         }
+
+         /* Sidebar scroll bar */
+        #sidebar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        #sidebar::-webkit-scrollbar-thumb {
+            background-color: var(--main-color);
+            border-radius: 10px;
+        }
         
         .main-content {
             padding: 2rem;
+            margin-left: 250px;
         }
         
         .card {
@@ -114,7 +156,12 @@
             border-radius: 8px;
             padding: 0.5rem 1.5rem;
         }
-        
+
+        .nav h4 {
+            padding: 1rem 1.5rem;
+            font-weight: 600;
+        }
+
         .btn-success {
             background: linear-gradient(135deg, #28a745, #1e7e34);
             border: none;
@@ -180,27 +227,41 @@
         .ticket-card:hover {
             border-left: 8px solid var(--secondary);
         }
+
+        @media (max-width: 991.98px) {
+            #sidebar {
+                transform: translateX(-260px);
+            }
+
+            #sidebar.active {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 1rem;
+                margin-top: 50px;
+            }
+
+            #sidebarToggle {
+                display: block;
+            }
+
+            body.sidebar-open {
+                overflow: hidden;
+            }
+        }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="dashboard-header">
-        <div class="container-fluid">
-            <div class="row align-items-center">
-                <div class="col-md-6">
-                    <h1><i class="fas fa-ticket-alt"></i> Gestion des Tickets</h1>
-                    <p class="mb-0">Administrez les tickets pour vos événements</p>
-                </div>
-            </div>
-        </div>
-    </header>
-
+    <button id="sidebarToggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
     <div class="container-fluid">
         <div class="row">
             <!-- Sidebar -->
-            <nav class="col-md-2 d-none d-md-block sidebar">
+            <nav id="sidebar" aria-label="Sidebar Navigation" class="sidebar custom-sidebar">
                 <div class="sticky-top pt-3">
                     <ul class="nav flex-column">
+                        <h4><i class="fa fa-cogs mt-5 me-2"></i>Admin Panel</h4>
                         <a href="{{ route('admin.dashboard') }}" class="nav-link"><i class="fas fa-chart-bar"></i> Statistiques</a>
                         <a href="{{ route('evenements.index') }}" class="nav-link"><i class="fa fa-calendar-alt"></i>Événements</a>
                         <a href="{{ route('sponsors.index') }}" class="nav-link"><i class="fa fa-handshake"></i>Sponsors</a>
@@ -214,14 +275,14 @@
                         <a href="{{ route('billet')}}" class="nav-link active"><i class="fas fa-calendar-alt "></i> Tickets</a>
                         <form action="{{ route('logout') }}" method="POST" id="logout-form">
                         @csrf
-                        <a href="{{ route('logout')}}" class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-arrow-left"></i>Deconnexion</a>
+                            <a href="{{ route('logout')}}" class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-arrow-left"></i>Deconnexion</a>
                         </form>
                     </ul>
                 </div>
             </nav>
 
             <!-- Main Content -->
-            <main class="col-md-10 main-content">
+            <main class="col-md-12 ms-sm-auto col-lg-9 main-content">
                 <!-- Stats Row -->
                 <div class="row mb-4">
                     <div class="col-md-3">
@@ -715,9 +776,31 @@
             });
             
             // Basculer entre la vue tableau et la vue cartes
-            document.getElementById('viewToggle').addEventListener('change', function() {
+            /* document.getElementById('viewToggle').addEventListener('change', function() {
                 document.querySelector('.table-responsive').classList.toggle('d-none');
                 document.querySelector('.row.mt-4').classList.toggle('d-none');
+            }); */
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const sidebar = document.getElementById('sidebar');
+            const sidebarToggle = document.getElementById('sidebarToggle');
+            const body = document.body;
+
+            if (sidebarToggle) {
+                sidebarToggle.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    sidebar.classList.toggle('active');
+                    body.classList.toggle('sidebar-open');
+                });
+            }
+
+            document.addEventListener('click', function (e) {
+                if (window.innerWidth < 992 && !sidebar.contains(e.target) && !sidebarToggle.contains(e.target)) {
+                    sidebar.classList.remove('active');
+                    body.classList.remove('sidebar-open');
+                }
             });
         });
     </script>

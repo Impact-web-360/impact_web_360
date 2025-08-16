@@ -21,7 +21,7 @@ class ReplayController extends Controller
             $replays = Replay::with('evenement')->latest()->get();
         }
 
-        return view('dashboard.replay.index', compact('replays'));
+        return view('Dashboard.replay.index', compact('replays'));
     }
 
     /**
@@ -30,7 +30,7 @@ class ReplayController extends Controller
     public function create()
     {
         $evenements = Evenement::all(); // On récupère tous les événements
-        return view('dashboard.replay.create', compact('evenements'));
+        return view('Dashboard.replay.create', compact('evenements'));
     }
     /**
      * Store a newly created resource in storage.
@@ -74,7 +74,7 @@ class ReplayController extends Controller
      */
     public function show(Replay $replay)
     {
-        return view('dashboard.replay.show', compact('replay'));
+        return view('Dashboard.replay.show', compact('replay'));
         }
     /**
      * Show the form for editing the specified resource.
@@ -82,7 +82,7 @@ class ReplayController extends Controller
     public function edit(Replay $replay)
     {
         $evenements = Evenement::all();
-        return view('dashboard.replay.edit', compact('replay', 'evenements'));
+        return view('Dashboard.replay.edit', compact('replay', 'evenements'));
         }
     /**
      * Update the specified resource in storage.
@@ -136,7 +136,7 @@ class ReplayController extends Controller
     {
         $evenement = Evenement::findOrFail($evenementId);
         $replays = Replay::where('id_evenement', $evenementId)->with('evenement')->latest()->get();
-        return view('dashboard.replay.event_replays', compact('evenement', 'replays'));
+        return view('Dashboard.replay.event_replays', compact('evenement', 'replays'));
         }
     /**
      * Display the replays for a specific event in the frontend.
