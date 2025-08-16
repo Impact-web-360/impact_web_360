@@ -34,7 +34,7 @@
       height: 100vh;
       background-color: var(--sidebar-bg);
       color: var(--text-light);
-      padding-top: 2rem;
+      padding-top: 5rem;
       overflow-y: auto;
       transition: transform 0.3s ease;
       z-index: 1050;
@@ -62,7 +62,7 @@
       text-decoration: none;
     }
 
-    /* Sidebar scroll bar */
+    /* Sidebar scrollbar */
     #sidebar::-webkit-scrollbar {
       width: 6px;
     }
@@ -73,13 +73,13 @@
 
     /* Main content */
     #content {
+      padding: 2rem;
       margin-left: 250px;
-      padding: 2rem 3rem;
       transition: margin-left 0.3s ease;
       min-height: 100vh;
     }
 
-    /* Header (optional) */
+    /* Header */
     header {
       margin-bottom: 2rem;
       display: flex;
@@ -126,7 +126,7 @@
       gap: 0.5rem;
     }
 
-    /* Responsive Sidebar toggle button */
+    /* Sidebar toggle */
     #sidebarToggle {
       display: none;
       position: fixed;
@@ -146,20 +146,17 @@
       background-color: #a71d2a;
     }
 
-    /* Mobile & tablet */
+    /* Responsive */
     @media (max-width: 991.98px) {
       #sidebar {
         transform: translateX(-260px);
-      }
-      header h1{
-        margin-left: 15%;
       }
       #sidebar.active {
         transform: translateX(0);
       }
       #content {
         margin-left: 0;
-        padding: 1rem 1.5rem;
+        margin-top: 50px;
       }
       #sidebarToggle {
         display: block;
@@ -181,144 +178,152 @@
     .table-responsive {
       overflow-x: auto;
     }
-
   </style>
 </head>
 <body>
 
+<!-- Sidebar Toggle Button -->
 <button id="sidebarToggle" aria-label="Toggle menu">
   <i class="fas fa-bars"></i>
 </button>
 
+<!-- Sidebar Navigation -->
 <nav id="sidebar" aria-label="Sidebar Navigation">
   <h4><i class="fa fa-cogs me-2"></i>Admin Panel</h4>
-  <a href="{{ route('admin.dashboard') }}" class="nav-link active"><i class="fas fa-chart-bar"></i> Statistiques</a>
-  <a href="{{ route('evenements.index') }}" class="nav-link"><i class="fa fa-calendar-alt"></i>Événements</a>
-  <a href="{{ route('sponsors.index') }}" class="nav-link"><i class="fa fa-handshake"></i>Sponsors</a>
-  <a href="{{ route('replay.index')}}" class="nav-link"><i class="fa-solid fa-play"></i> Replay
-  <a href="{{ route('categories.index')}}" class="nav-link"><i class="fas fa-layer-group"></i>Catégorie</a>
-  <a href="{{ route('formations.index')}}" class="nav-link"><i class="fas fa-graduation-cap"></i>Formation</a>
-  <a href="{{ route('modules.index')}}" class="nav-link"><i class="fas fa-puzzle-piece"></i>Modules</a>
-  <a href="{{ route('articles.index')}}" class="nav-link"><i class="fa fa-shopping-basket"></i>Articles</a>
-  <a href="{{ route('emploies.index')}}" class="nav-link"><i class="fa fa-briefcase"></i>Emplois</a>
-  <a href="{{ route('intervenants.index')}}" class="nav-link"><i class="fa fa-user"></i>Intervenants</a>
-  <a href="{{ route('billet')}}" class="nav-link"><i class="fas fa-calendar-alt "></i> Tickets</a>
+  <a href="{{ route('admin.dashboard') }}" class="nav-link"><i class="fas fa-chart-bar"></i> Statistiques</a>
+  <a href="{{ route('evenements.index') }}" class="nav-link"><i class="fa fa-calendar-alt"></i> Événements</a>
+  <a href="{{ route('sponsors.index') }}" class="nav-link"><i class="fa fa-handshake"></i> Sponsors</a>
+  <a href="{{ route('replay.index')}}" class="nav-link"><i class="fa-solid fa-play"></i> Replay</a>
+  <a href="{{ route('categories.index')}}" class="nav-link"><i class="fas fa-layer-group"></i> Catégorie</a>
+  <a href="{{ route('formations.index')}}" class="nav-link active"><i class="fas fa-graduation-cap"></i> Formation</a>
+  <a href="{{ route('modules.index')}}" class="nav-link"><i class="fas fa-puzzle-piece"></i> Modules</a>
+  <a href="{{ route('articles.index')}}" class="nav-link"><i class="fa fa-shopping-basket"></i> Articles</a>
+  <a href="{{ route('emploies.index')}}" class="nav-link"><i class="fa fa-briefcase"></i> Emplois</a>
+  <a href="{{ route('intervenants.index')}}" class="nav-link"><i class="fa fa-user"></i> Intervenants</a>
+  <a href="{{ route('billet')}}" class="nav-link"><i class="fas fa-ticket-alt"></i> Tickets</a>
   <form action="{{ route('logout') }}" method="POST" id="logout-form">
-    @csrf
-    <a href="{{ route('logout')}}" class="nav-link"><i class="fa fa-arrow-left"></i>Deconnexion</a>
+  @csrf
+    <a href="{{ route('logout')}}" class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-arrow-left"></i>Deconnexion</a>
   </form>
-  
 </nav>
 
-<main id="content" tabindex="-1">
-
-
-  <section id="add-formation" class="mb-5">
+<!-- Main Content -->
+<main id="content" class="mb-5">
+  <section id="add-formation">
     <h2 class="section-title"><i class="fas fa-plus-circle"></i> Ajouter une Nouvelle Formation</h2>
+
     <div class="container mt-4">
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+      @if ($errors->any())
+        <div class="alert alert-danger">
+          <ul>
+            @foreach ($errors->all() as $error)
+              <li>{{ $error }}</li>
+            @endforeach
+          </ul>
+        </div>
+      @endif
 
-        <form action="{{ route('Dashboard.formations.store') }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            <div class="mb-3">
-                <label for="title" class="form-label text-dark">Titre de la Formation</label>
-                <input type="text" class="form-control" id="title" name="title" value="{{ old('title') }}" required>
-            </div>
-            <div class="mb-3">
-                <label for="category_id" class="form-label text-dark">Catégorie</label>
-                <select class="form-select" id="category_id" name="category_id" required>
-                    <option value="">Sélectionner une catégorie</option>
-                    @foreach($categories as $categorie)
-                        <option value="{{ $categorie->id }}" {{ old('category_id') == $categorie->id ? 'selected' : '' }}>{{ $categorie->name }}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="mb-3">
-                <label for="description" class="form-label text-dark">Description</label>
-                <textarea class="form-control" id="description" name="description" rows="5">{{ old('description') }}</textarea>
-            </div>
-            <div class="mb-3">
-                <label for="image" class="form-label text-dark">Image de la Formation</label>
-                <input type="file" class="form-control" id="image" name="image" accept="image/*">
-                <div class="form-text text-secondary">Taille max : 2MB. Formats : JPG, PNG, GIF, SVG.</div>
-            </div>
-            <div class="mb-3">
-                <label for="price" class="form-label text-dark">Prix (FCFA)</label>
-                <input type="number" step="0.01" class="form-control" id="price" name="price" value="{{ old('price') }}" required>
-            </div>
+      <form action="{{ route('Dashboard.formations.store') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        <!-- Formation Details -->
+        <div class="mb-3">
+          <label for="title" class="form-label text-dark">Titre de la Formation</label>
+          <input type="text" class="form-control" id="title" name="title" value="{{ old('title') }}" required>
+        </div>
+        <div class="mb-3">
+          <label for="category_id" class="form-label text-dark">Catégorie</label>
+          <select class="form-select" id="category_id" name="category_id" required>
+            <option value="">Sélectionner une catégorie</option>
+            @foreach($categories as $categorie)
+              <option value="{{ $categorie->id }}" {{ old('category_id') == $categorie->id ? 'selected' : '' }}>
+                {{ $categorie->name }}
+              </option>
+            @endforeach
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="description" class="form-label text-dark">Description</label>
+          <textarea class="form-control" id="description" name="description" rows="5">{{ old('description') }}</textarea>
+        </div>
+        <div class="mb-3">
+          <label for="image" class="form-label text-dark">Image de la Formation</label>
+          <input type="file" class="form-control" id="image" name="image" accept="image/*">
+          <div class="form-text text-secondary">Taille max : 2MB. Formats : JPG, PNG, GIF, SVG.</div>
+        </div>
+        <div class="mb-3">
+          <label for="price" class="form-label text-dark">Prix (FCFA)</label>
+          <input type="number" step="0.01" class="form-control" id="price" name="price" value="{{ old('price') }}" required>
+        </div>
 
-            <hr class="my-4">
-            <h4 class="mb-3 text-dark">Informations sur le Mentor</h4>
+        <!-- Mentor Info -->
+        <hr class="my-4">
+        <h4 class="mb-3 text-dark">Informations sur le Mentor</h4>
+        <div class="mb-3">
+          <label for="mentor" class="form-label text-dark">Nom du Mentor</label>
+          <input type="text" class="form-control" id="mentor" name="mentor" value="{{ old('mentor') }}" required>
+        </div>
+        <div class="mb-3">
+          <label for="mentor_title" class="form-label text-dark">Titre du Mentor</label>
+          <input type="text" class="form-control" id="mentor_title" name="mentor_title" value="{{ old('mentor_title') }}">
+        </div>
+        <div class="mb-3">
+          <label for="mentor_avatar" class="form-label text-dark">Avatar du Mentor</label>
+          <input type="file" class="form-control" id="mentor_avatar" name="mentor_avatar" accept="image/*">
+          <div class="form-text text-secondary">Taille max : 2MB. Formats : JPG, PNG, GIF, SVG.</div>
+        </div>
+        <div class="mb-3">
+          <label for="mentor_bio" class="form-label text-dark">Biographie du Mentor</label>
+          <textarea class="form-control" id="mentor_bio" name="mentor_bio" rows="3">{{ old('mentor_bio') }}</textarea>
+        </div>
 
-            <div class="mb-3">
-                <label for="mentor" class="form-label text-dark">Nom du Mentor</label>
-                <input type="text" class="form-control" id="mentor" name="mentor" value="{{ old('mentor') }}" required>
+        <!-- Objectives -->
+        <hr class="my-4">
+        <h4 class="mb-3 text-dark">Objectifs de la Formation</h4>
+        <div id="objectives-container">
+          @if(old('objectives'))
+            @foreach(old('objectives') as $objective)
+              <div class="input-group mb-2">
+                <input type="text" name="objectives[]" class="form-control" value="{{ $objective }}" placeholder="Ajouter un objectif">
+                <button type="button" class="btn btn-outline-danger remove-objective-field"><i class="fas fa-minus"></i></button>
+              </div>
+            @endforeach
+          @else
+            <div class="input-group mb-2">
+              <input type="text" name="objectives[]" class="form-control" placeholder="Ajouter un objectif">
+              <button type="button" class="btn btn-outline-danger remove-objective-field"><i class="fas fa-minus"></i></button>
             </div>
-            <div class="mb-3">
-                <label for="mentor_title" class="form-label text-dark">Titre du Mentor</label>
-                <input type="text" class="form-control" id="mentor_title" name="mentor_title" value="{{ old('mentor_title') }}">
-            </div>
-            <div class="mb-3">
-                <label for="mentor_avatar" class="form-label text-dark">Avatar du Mentor</label>
-                <input type="file" class="form-control" id="mentor_avatar" name="mentor_avatar" accept="image/*">
-                <div class="form-text text-secondary">Taille max : 2MB. Formats : JPG, PNG, GIF, SVG.</div>
-            </div>
-            <div class="mb-3">
-                <label for="mentor_bio" class="form-label text-dark">Biographie du Mentor</label>
-                <textarea class="form-control" id="mentor_bio" name="mentor_bio" rows="3">{{ old('mentor_bio') }}</textarea>
-            </div>
+          @endif
+        </div>
+        <button type="button" class="btn btn-info btn-sm mb-3" id="add-objective-field"><i class="fas fa-plus"></i> Ajouter un objectif</button>
 
-            <hr class="my-4">
-            <h4 class="mb-3 text-dark">Objectifs de la Formation</h4>
-            <div id="objectives-container">
-                @if(old('objectives'))
-                    @foreach(old('objectives') as $objective)
-                        <div class="input-group mb-2">
-                            <input type="text" name="objectives[]" class="form-control" value="{{ $objective }}" placeholder="Ajouter un objectif">
-                            <button type="button" class="btn btn-outline-danger remove-objective-field"><i class="fas fa-minus"></i></button>
-                        </div>
-                    @endforeach
-                @else
-                    <div class="input-group mb-2">
-                        <input type="text" name="objectives[]" class="form-control" placeholder="Ajouter un objectif">
-                        <button type="button" class="btn btn-outline-danger remove-objective-field"><i class="fas fa-minus"></i></button>
-                    </div>
-                @endif
+        <!-- Tools -->
+        <hr class="my-4">
+        <h4 class="mb-3 text-dark">Outils Utilisés</h4>
+        <div id="tools-container">
+          @if(old('tools'))
+            @foreach(old('tools') as $tool)
+              <div class="input-group mb-2">
+                <input type="text" name="tools[]" class="form-control" value="{{ $tool }}" placeholder="Ajouter un outil">
+                <button type="button" class="btn btn-outline-danger remove-tool-field"><i class="fas fa-minus"></i></button>
+              </div>
+            @endforeach
+          @else
+            <div class="input-group mb-2">
+              <input type="text" name="tools[]" class="form-control" placeholder="Ajouter un outil">
+              <button type="button" class="btn btn-outline-danger remove-tool-field"><i class="fas fa-minus"></i></button>
             </div>
-            <button type="button" class="btn btn-info btn-sm mb-3" id="add-objective-field"><i class="fas fa-plus"></i> Ajouter un objectif</button>
+          @endif
+        </div>
+        <button type="button" class="btn btn-info btn-sm mb-3" id="add-tool-field"><i class="fas fa-plus"></i> Ajouter un outil</button>
 
-            <hr class="my-4">
-            <h4 class="mb-3 text-dark">Outils Utilisés</h4>
-            <div id="tools-container">
-                @if(old('tools'))
-                    @foreach(old('tools') as $tool)
-                        <div class="input-group mb-2">
-                            <input type="text" name="tools[]" class="form-control" value="{{ $tool }}" placeholder="Ajouter un outil">
-                            <button type="button" class="btn btn-outline-danger remove-tool-field"><i class="fas fa-minus"></i></button>
-                        </div>
-                    @endforeach
-                @else
-                    <div class="input-group mb-2">
-                        <input type="text" name="tools[]" class="form-control" placeholder="Ajouter un outil">
-                        <button type="button" class="btn btn-outline-danger remove-tool-field"><i class="fas fa-minus"></i></button>
-                    </div>
-                @endif
-            </div>
-            <button type="button" class="btn btn-info btn-sm mb-3" id="add-tool-field"><i class="fas fa-plus"></i> Ajouter un outil</button>
-            <br>
-            <button type="submit" class="btn btn-danger mt-4">Ajouter la Formation</button>
-        </form>
+        <br>
+        <div class="d-flex justify-content-between">
+          <a href="{{ route('formations.index') }}" class="btn btn-secondary">Retour à la liste</a>
+          <button type="submit" class="btn btn-danger">Ajouter</button>
+        </div>
+      </form>
     </div>
   </section>
-
 </main>
 
 <script>
@@ -354,11 +359,9 @@
   document.getElementById('objectives-container').addEventListener('click', function(e) {
     if (e.target.classList.contains('remove-objective-field') || e.target.closest('.remove-objective-field')) {
       const button = e.target.closest('.remove-objective-field');
-      // Ensure at least one field remains
       if (this.querySelectorAll('.input-group').length > 1) {
         button.closest('.input-group').remove();
       } else {
-        // Optionnel: vider le champ au lieu de le supprimer si c'est le dernier
         button.closest('.input-group').querySelector('input').value = '';
       }
     }
@@ -379,7 +382,6 @@
   document.getElementById('tools-container').addEventListener('click', function(e) {
     if (e.target.classList.contains('remove-tool-field') || e.target.closest('.remove-tool-field')) {
       const button = e.target.closest('.remove-tool-field');
-      // Ensure at least one field remains
       if (this.querySelectorAll('.input-group').length > 1) {
         button.closest('.input-group').remove();
       } else {

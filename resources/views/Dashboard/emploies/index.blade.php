@@ -75,11 +75,9 @@
 
         /* Main content */
         #content {
-            margin-left: 250px;
-            padding: 2rem 1rem;
+            padding: 2rem;
             transition: margin-left 0.3s ease;
             min-height: 100vh;
-            width: 75%;
         }
 
         /* Responsive Sidebar toggle button */
@@ -114,8 +112,8 @@
             }
 
             #content {
-                margin-left: 0;
-                padding: 1rem 1.5rem;
+                margin-top: 50px;
+                padding: 1rem;
             }
 
             #sidebarToggle {
@@ -153,7 +151,7 @@
     <div class="container-fluid">
         <div class="row">
 
-            <nav id="sidebar" aria-label="Sidebar Navigation" class="col-md-3 col-lg-2 d-md-block">
+            <nav id="sidebar" aria-label="Sidebar Navigation" class="col-md-3 d-md-block">
                 <h4><i class="fa fa-cogs mt-5 me-2"></i>Admin Panel</h4>
                 <a href="{{ route('admin.dashboard') }}" class="nav-link"><i class="fas fa-chart-bar"></i> Statistiques</a>
                 <a href="{{ route('evenements.index') }}" class="nav-link"><i class="fa fa-calendar-alt"></i>Événements</a>
@@ -167,12 +165,13 @@
                 <a href="{{ route('intervenants.index')}}" class="nav-link"><i class="fa fa-user"></i>Intervenants</a>
                 <a href="{{ route('billet')}}" class="nav-link"><i class="fas fa-calendar-alt "></i> Tickets</a>
                 <a href="{{ route('logout')}}" class="nav-link"><i class="fa fa-arrow-left"></i>Deconnexion</a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    @csrf
+                <form action="{{ route('logout') }}" method="POST" id="logout-form">
+                @csrf
+                    <a href="{{ route('logout')}}" class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-arrow-left"></i>Deconnexion</a>
                 </form>
             </nav>
 
-            <main id="content" class="col-md-9 ms-sm-auto col-lg-10 mt-2">
+            <main id="content" class="col-md-12 ms-sm-auto col-lg-9">
                 <h2 id="emploies">💼 Gestion des emplois</h2>
 
                 @if(session('success'))
@@ -343,8 +342,7 @@
                     body.classList.remove('sidebar-open');
                 }
             });
-});
-
+        });
     </script>
 </body>
 

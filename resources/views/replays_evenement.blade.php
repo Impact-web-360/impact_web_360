@@ -224,7 +224,7 @@
         grid-template-columns: repeat(2, 1fr);
       }
 
-      .navbar-brand img { margin-top: -65px; max-height: 180px; margin-left: -30px;; }
+      .navbar-brand img { margin-top: -70px; max-height: 180px; margin-left: -30px;; }
       .navbar-brand { max-height: 50px; }
       .navbar-custom { margin-top: 10px; }
       .yes{margin-bottom: 10px;}
@@ -275,7 +275,7 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item"><a class="nav-link" href="{{ route('home') }}">Acceuil</a></li>
-          <li class="nav-item"><a class="nav-link" href="{{ route('evenement') }}">Événements</a></li>
+          <li class="nav-item"><a class="nav-link active" href="{{ route('evenement') }}">Événements</a></li>
           <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">E-learning</a></li>
           <li class="nav-item"><a class="nav-link" href="{{ route('intervenant') }}">Intervenants</a></li>
           <li class="nav-item"><a class="nav-link" href="{{ route('step1') }}">Billetterie</a></li>

@@ -191,19 +191,6 @@
                     <h1><i class="fas fa-ticket-alt"></i> Gestion des Tickets</h1>
                     <p class="mb-0">Administrez les tickets pour vos événements</p>
                 </div>
-                <div class="col-md-6 text-end">
-                    <div class="dropdown">
-                        <button class="btn btn-light dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-user-circle me-2"></i>Admin
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                            <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i>Profil</a></li>
-                            <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>Paramètres</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt me-2"></i>Déconnexion</a></li>
-                        </ul>
-                    </div>
-                </div>
             </div>
         </div>
     </header>
@@ -226,8 +213,8 @@
                         <a href="#" class="nav-link"><i class="fa fa-user"></i>Intervenants</a>
                         <a href="{{ route('billet')}}" class="nav-link active"><i class="fas fa-calendar-alt "></i> Tickets</a>
                         <form action="{{ route('logout') }}" method="POST" id="logout-form">
-                            @csrf
-                            <a href="{{ route('logout')}}" class="nav-link"><i class="fa fa-arrow-left"></i>Deconnexion</a>
+                        @csrf
+                        <a href="{{ route('logout')}}" class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-arrow-left"></i>Deconnexion</a>
                         </form>
                     </ul>
                 </div>

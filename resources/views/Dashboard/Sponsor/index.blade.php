@@ -1,7 +1,3 @@
-<div>
-    <!-- The best way to take care of the future is to take care of the present moment. - Thich Nhat Hanh -->
-</div>
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -31,47 +27,67 @@
     img {
       object-fit: cover;
       border-radius: 8px;
+      max-width: 100%;
+      height: auto;
+    }
+    @media (max-width: 768px) {
+      h2 {
+        font-size: 1.5rem;
+      }
+      .btn {
+        font-size: 0.9rem;
+      }
+      td, th {
+        font-size: 0.85rem;
+      }
     }
   </style>
 </head>
 <body>
 
+<button class="btn btn-danger mb-3 mt-3 ms-3" onclick="history.back()">
+  <i class="fas fa-arrow-left"></i> Retour
+</button>
+
 <div class="container py-5">
   <h2 class="mb-5 text-white text-center fw-bold">Liste des Sponsors</h2>
 
-  <table class="table table-dark table-bordered table-hover mb-5">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>Nom</th>
-        <th>Promoteur</th>
-        <th>Description</th>
-        <th>Logo</th>
-        <th>Événement</th>
-      </tr>
-    </thead>
-    <tbody>
-      @forelse($sponsors as $sponsor)
+  <div class="table-responsive">
+    <table class="table table-dark table-bordered table-hover mb-5">
+      <thead>
         <tr>
-          <td>{{ $loop->iteration }}</td>
-          <td>{{ $sponsor->nom }}</td>
-          <td>{{ $sponsor->promoteur }}</td>
-          <td>{{ $sponsor->description }}</td>
-          <td>
-            @if ($sponsor->logo)
-              <img src="{{ asset('storage/' . $sponsor->logo) }}" alt="Logo" width="60" height="60">
-            @else
-              <span class="text-muted">Non fourni</span>
-            @endif
-          </td>
+          <th>#</th>
+          <th>Nom</th>
+          <th>Promoteur</th>
+          <th>Description</th>
+          <th>Logo</th>
+          <th>Événement</th>
         </tr>
-      @empty
-        <tr>
-          <td colspan="6" class="text-center">Aucun sponsor trouvé.</td>
-        </tr>
-      @endforelse
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        @forelse($sponsors as $sponsor)
+          <tr>
+            <td>{{ $loop->iteration }}</td>
+            <td>{{ $sponsor->nom }}</td>
+            <td>{{ $sponsor->promoteur }}</td>
+            <td>{{ $sponsor->description }}</td>
+            <td>
+              @if ($sponsor->logo)
+                <img src="{{ asset('storage/' . $sponsor->logo) }}" alt="Logo" width="60">
+              @else
+                <span class="text-muted">Non fourni</span>
+              @endif
+            </td>
+            <td>{{ $sponsor->evenement ?? '—' }}</td>
+          </tr>
+        @empty
+          <tr>
+            <td colspan="6" class="text-center">Aucun sponsor trouvé.</td>
+          </tr>
+        @endforelse
+      </tbody>
+    </table>
+  </div>
 </div>
 
 </body>
