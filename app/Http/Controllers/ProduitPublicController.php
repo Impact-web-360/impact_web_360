@@ -11,13 +11,21 @@ use Illuminate\Support\Facades\Mail;
 class ProduitPublicController extends Controller
 {
     public function show($id)
-    {
-        $produit = Article::findOrFail($id);
-        $comments = Commentaire::where('produit_id', $id)->latest('date_publication')->get();
-        $suggestions = Article::where('id', '!=', $id)->inRandomOrder()->limit(3)->get();
+{
+    $produit = Article::findOrFail($id);
+    $comments = Commentaire::where('produit_id', $id)->latest('date_publication')->get();
+    $suggestions = Article::where('id', '!=', $id)->inRandomOrder()->limit(3)->get();
 
-        return view('boutique_plus', compact('produit', 'comments', 'suggestions'));
+    // Ajout du code pour calculer le nombre d'articles dans le panier
+    $total_items = 0;
+    $panier = session('panier', []);
+    foreach ($panier as $item) {
+        $total_items += $item['quantite'];
     }
+
+    // Passage de la variable $total_items à la vue
+    return view('boutique_plus', compact('produit', 'comments', 'suggestions', 'total_items'));
+}
 
     public function ajouterCommentaire(Request $request, $id)
     {
