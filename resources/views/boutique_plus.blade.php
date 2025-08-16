@@ -565,7 +565,7 @@
         <div class="col-6 col-md-4 col-sm-6 mb-4">
           <ul class="list-unstyled footer-links">
             <li><a href="{{ route('intervenant') }}">Intervenants</a></li>
-            <li><a href="#">Partenaires & Sponsors</a></li>
+            <li><a href="{{ route('sponsors.show') }}">Partenaires & Sponsors</a></li>
             <li><a href="#">Ressources Gratuites</a></li>
             <li><a href="{{ route('step1') }}">Billetterie</a></li>
             <li><a href="{{ route('boutique') }}">Boutique</a></li>

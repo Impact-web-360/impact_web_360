@@ -113,7 +113,7 @@
       <div class="col-md-4 col-sm-6">
         <div class="card bg-dark text-white text-center p-3 rounded-4 border-0 h-100 shadow">
           @if($intervenant->image)
-            <img src="{{ $intervenant->image }}" class="rounded-3 mb-3" alt="{{ $intervenant->nom }}" style="height: 200px; object-fit: cover;">
+            <img src="{{ $intervenant->image }}" class="rounded-3 mb-3" alt="{{ $intervenant->nom }}" style="height: 300px; object-fit: cover;">
           @else
             <div class="bg-secondary rounded-3 mb-3 d-flex align-items-center justify-content-center" style="height: 200px;">
               <i class="fas fa-user fa-3x text-light"></i>
@@ -135,7 +135,7 @@
       <div class="col-md-4 col-sm-6">
         <div class="card bg-dark text-white text-center p-3 rounded-4 border-0 h-100 shadow">
           @if($intervenant->image)
-            <img src="{{ $intervenant->image }}" class="rounded-3 mb-3" alt="{{ $intervenant->nom }}" style="height: 200px; object-fit: cover;">
+            <img src="{{ $intervenant->image }}" class="rounded-3 mb-3" alt="{{ $intervenant->nom }}" style="height: 300px; object-fit: cover;">
           @else
             <div class="bg-secondary rounded-3 mb-3 d-flex align-items-center justify-content-center" style="height: 200px;">
               <i class="fas fa-user fa-3x text-light"></i>
@@ -189,7 +189,7 @@
         <div class="col-6 col-md-4 col-sm-6 mb-4">
           <ul class="list-unstyled footer-links">
             <li><a href="{{ route('intervenant') }}">Intervenants</a></li>
-            <li><a href="#">Partenaires & Sponsors</a></li>
+            <li><a href="{{ route('sponsors.show') }}">Partenaires & Sponsors</a></li>
             <li><a href="#">Ressources Gratuites</a></li>
             <li><a href="{{ route('step1') }}">Billetterie</a></li>
             <li><a href="{{ route('boutique') }}">Boutique</a></li>

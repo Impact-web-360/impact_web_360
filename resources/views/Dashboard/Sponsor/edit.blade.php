@@ -34,7 +34,7 @@
                     <div class="mb-3">
                         <label for="logo" class="form-label">Logo</label>
                         @if($sponsor->logo)
-                            <img src="{{ asset('storage/' . $sponsor->logo) }}" alt="Logo actuel" class="img-thumbnail d-block mb-2" style="width: 80px;">
+                            <img src="{{ $sponsor->logo }}" alt="Logo actuel" class="img-thumbnail d-block mb-2" style="width: 80px;">
                         @endif
                         <input type="file" class="form-control" id="logo" name="logo">
                     </div>

@@ -47,7 +47,7 @@
             <td>
               @if ($replay->video_path)
                 <video width="160" height="90" controls>
-                  <source src="{{ asset('storage/' . $replay->video_path) }}" type="video/mp4">
+                  <source src="{{ $replay->video_path }}" type="video/mp4">
                   Votre navigateur ne supporte pas la vidéo.
                 </video>
               @else
@@ -59,7 +59,7 @@
 
             <td>
               @if ($replay->presentateur_image)
-                <img src="{{ asset('storage/' . $replay->presentateur_image) }}" alt="Présentateur" width="60" height="60" style="border-radius: 50%; object-fit: cover;">
+                <img src="{{ $replay->presentateur_image }}" alt="Présentateur" width="60" height="60" style="border-radius: 50%; object-fit: cover;">
               @else
                 <span class="text-muted">Non fournie</span>
               @endif

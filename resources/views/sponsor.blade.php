@@ -12,14 +12,14 @@
     body { background-color: black; color: white; font-family: 'Segoe UI', sans-serif;; scroll-behavior: smooth; overflow-x: hidden; }
     .navbar-custom { background-color: #000066; border-radius: 15px; margin-top: 20px; padding: 10px 20px; height: 70px; }
     .navbar-brand img { max-height: 160px; width: auto; }
-    .btn-inscrire { background: red; color: white; border: none; border-radius: 8px; }
+    .btn-inscrire { background: #ff4500; color: white; border: none; border-radius: 8px; }
     .btn-inscrire:hover { background: linear-gradient(90deg, #ff3300, #DD2476); color: #000000; transform: scale(1.05);}
     .btn-outline-light { border-radius: 8px; }
     .btn-light:hover { background-color: #000000; color: #f8f9fa; border: none; }
     .footer { background-color: #000066; color: #ccccff; }
     .footer-links a { color: #ccccff; text-decoration: none; display: block; margin-bottom: 0.5rem; transition: all 0.3s ease; }
     .footer-links a:hover { color: #ff4500; padding-left: 4px; }
-    .social-icon { display: inline-block; background-color: red; color: white; width: 36px; height: 36px; text-align: center; line-height: 36px; border-radius: 50%; margin: 0 5px; font-size: 16px;transition: transform 0.3s ease, background-color 0.3s ease; }
+    .social-icon { display: inline-block; background-color: #ff4500; color: white; width: 36px; height: 36px; text-align: center; line-height: 36px; border-radius: 50%; margin: 0 5px; font-size: 16px;transition: transform 0.3s ease, background-color 0.3s ease; }
     .social-icon:hover { transform: scale(1.1); background-color: #ff2605; }
 
     .btn-outline-light {
@@ -129,7 +129,7 @@
         @foreach ($sponsors as $sponsor)
             <div class="col-md-6 col-lg-3 sponsor-card">
                 <div class="card p-3 h-100 text-center">
-                    <img src="{{ asset('storage/' . $sponsor->logo) }}" alt="Logo {{ $sponsor->nom }}" class="mx-auto d-block" style="max-height: 120px; object-fit: contain;" />
+                    <img src="{{ $sponsor->logo }}" alt="Logo {{ $sponsor->nom }}" class="mx-auto d-block" style="max-height: 120px; object-fit: contain;" />
                     <div class="card-body">
                         <h5 class="mt-3">{{ $sponsor->nom }}</h5>
                         <p>{{ $sponsor->description }}</p> 
@@ -172,7 +172,7 @@
         <div class="col-6 col-md-4 col-sm-6 mb-4">
           <ul class="list-unstyled footer-links">
             <li><a href="{{ route('intervenant') }}">Intervenants</a></li>
-            <li><a href="#">Partenaires & Sponsors</a></li>
+            <li><a href="{{ route('sponsors.show') }}">Partenaires & Sponsors</a></li>
             <li><a href="#">Ressources Gratuites</a></li>
             <li><a href="{{ route('step1') }}">Billetterie</a></li>
             <li><a href="{{ route('boutique') }}">Boutique</a></li>

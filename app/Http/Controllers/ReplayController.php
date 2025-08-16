@@ -5,13 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\Replay;
 use App\Models\Evenement;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class ReplayController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-        public function index(int $evenementId = null)
+    public function index(int $evenementId = null)
     {
         // Si un ID d'événement est fourni, filtrer les replays par cet événement
         if ($evenementId) {
@@ -32,50 +34,51 @@ class ReplayController extends Controller
         $evenements = Evenement::all(); // On récupère tous les événements
         return view('Dashboard.replay.create', compact('evenements'));
     }
+
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
         $request->validate([
-            'id_evenement'       => 'required|exists:evenements,id',
-            'titre'              => 'required|string|max:255',
-            'description'        => 'required|string', 
-            'video'              => 'required|mimes:mp4,mov,avi,webm|max:51200',
-            'presentateur_nom'   => 'required|string|max:255',
+            'id_evenement' => 'required|exists:evenements,id',
+            'titre' => 'required|string|max:255',
+            'description' => 'required|string',
+            'video' => 'required|mimes:mp4,mov,avi,webm|max:51200',
+            'presentateur_nom' => 'required|string|max:255',
             'presentateur_poste' => 'required|string|max:255',
-            'presentateur_image'   => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-        ]); 
+            'presentateur_image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+        ]);
 
-        // Upload vidéo
-        $videoPath = $request->file('video')->store('replays/videos', 'public');
+        // Upload de la vidéo sur Cloudinary
+        $videoUrl = Cloudinary::uploadVideo($request->file('video')->getRealPath())->getSecurePath();
 
-        // Upload image (si fournie)
-        $imagePath = null;
+        // Upload de l'image (si fournie)
+        $imageUrl = null;
         if ($request->hasFile('presentateur_image')) {
-            $imagePath = $request->file('presentateur_image')->store('replays/images', 'public');
+            $imageUrl = Cloudinary::upload($request->file('presentateur_image')->getRealPath())->getSecurePath();
         }
 
-            Replay::create([
-                'id_evenement'         => $request->id_evenement,
-                'titre'                => $request->titre,
-                'description'          => $request->description,
-                'video_path'           => $videoPath,
-                'presentateur_nom'     => $request->presentateur_nom,
-                'presentateur_poste'   => $request->presentateur_poste,
-                'presentateur_image'   => $imagePath,
-            ]);
+        Replay::create([
+            'id_evenement' => $request->id_evenement,
+            'titre' => $request->titre,
+            'description' => $request->description,
+            'video_path' => $videoUrl,
+            'presentateur_nom' => $request->presentateur_nom,
+            'presentateur_poste' => $request->presentateur_poste,
+            'presentateur_image' => $imageUrl,
+        ]);
 
-            return redirect()->route('replay.index')->with('success', 'Replay ajouté avec succès.');    
-        }
-
+        return redirect()->route('replay.index')->with('success', 'Replay ajouté avec succès.');
+    }
 
     /* Display the specified resource.
      */
     public function show(Replay $replay)
     {
         return view('Dashboard.replay.show', compact('replay'));
-        }
+    }
+
     /**
      * Show the form for editing the specified resource.
      */
@@ -83,52 +86,77 @@ class ReplayController extends Controller
     {
         $evenements = Evenement::all();
         return view('Dashboard.replay.edit', compact('replay', 'evenements'));
-        }
+    }
+
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, Replay $replay)
     {
         $request->validate([
-            'id_evenement'       => 'required|exists:evenements,id',
-            'titre'              => 'required|string|max:255',
-            'description'        => 'required|string',
-            'video_path'         => 'nullable|mimes:mp4,mov,avi,webm|max:51200',
-            'presentateur_nom'   => 'required|string|max:255',
+            'id_evenement' => 'required|exists:evenements,id',
+            'titre' => 'required|string|max:255',
+            'description' => 'required|string',
+            'video' => 'nullable|mimes:mp4,mov,avi,webm|max:51200',
+            'presentateur_nom' => 'required|string|max:255',
             'presentateur_poste' => 'required|string|max:255',
             'presentateur_image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
         
-    if ($request->hasFile('video')) {
-        $videoPath = $request->file('video')->store('replays/videos', 'public');
-        $replay->video_path = $videoPath;
+        if ($request->hasFile('video')) {
+            // Suppression de l'ancienne vidéo sur Cloudinary
+            if ($replay->video_path) {
+                $publicId = basename($replay->video_path, '.' . pathinfo($replay->video_path, PATHINFO_EXTENSION));
+                Cloudinary::destroy($publicId, ['resource_type' => 'video']);
+            }
+            // Upload de la nouvelle vidéo
+            $videoUrl = Cloudinary::uploadVideo($request->file('video')->getRealPath())->getSecurePath();
+            $replay->video_path = $videoUrl;
+        }
+
+        if ($request->hasFile('presentateur_image')) {
+            // Suppression de l'ancienne image
+            if ($replay->presentateur_image) {
+                $publicId = basename($replay->presentateur_image, '.' . pathinfo($replay->presentateur_image, PATHINFO_EXTENSION));
+                Cloudinary::destroy($publicId);
+            }
+            // Upload de la nouvelle image
+            $imageUrl = Cloudinary::upload($request->file('presentateur_image')->getRealPath())->getSecurePath();
+            $replay->presentateur_image = $imageUrl;
+        }
+
+        $replay->titre = $request->titre;
+        $replay->description = $request->description;
+        $replay->id_evenement = $request->id_evenement;
+        $replay->presentateur_nom = $request->presentateur_nom;
+        $replay->presentateur_poste = $request->presentateur_poste;
+        $replay->save();
+
+        return redirect()->route('replay.index')->with('success', 'Replay mis à jour avec succès');
     }
-
-    if ($request->hasFile('presentateur_image')) {
-        $imagePath = $request->file('presentateur_image')->store('replays/images', 'public');
-        $replay->presentateur_image = $imagePath;
-    }
-
-    $replay->titre = $request->titre;
-    $replay->description = $request->description;
-    $replay->id_evenement = $request->id_evenement;
-    $replay->presentateur_nom = $request->presentateur_nom;
-    $replay->presentateur_poste = $request->presentateur_poste;
-    $replay->support_url = $request->support_url;
-
-    $replay->save();
-
-    return redirect()->route('replay.index')->with('success', 'Replay mis à jour avec succès');
-}
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Replay $replay)
     {
-        $replay->delete();
-        return redirect()->route('replay.index')->with('success', 'Replay supprimé avec succès.');      
+        // Suppression de la vidéo sur Cloudinary
+        if ($replay->video_path) {
+            $publicId = basename($replay->video_path, '.' . pathinfo($replay->video_path, PATHINFO_EXTENSION));
+            Cloudinary::destroy($publicId, ['resource_type' => 'video']);
         }
+
+        // Suppression de l'image du présentateur sur Cloudinary
+        if ($replay->presentateur_image) {
+            $publicId = basename($replay->presentateur_image, '.' . pathinfo($replay->presentateur_image, PATHINFO_EXTENSION));
+            Cloudinary::destroy($publicId);
+        }
+
+        $replay->delete();
+
+        return redirect()->route('replay.index')->with('success', 'Replay supprimé avec succès.');
+    }
+
     /**
      * Display the replays for a specific event.
      */
@@ -137,7 +165,8 @@ class ReplayController extends Controller
         $evenement = Evenement::findOrFail($evenementId);
         $replays = Replay::where('id_evenement', $evenementId)->with('evenement')->latest()->get();
         return view('Dashboard.replay.event_replays', compact('evenement', 'replays'));
-        }
+    }
+
     /**
      * Display the replays for a specific event in the frontend.
      */
@@ -146,15 +175,13 @@ class ReplayController extends Controller
         $evenement = Evenement::findOrFail($evenementId);
         $replays = Replay::where('id_evenement', $evenementId)->with('evenement')->latest()->get();
         return view('replays.event_replays', compact('evenement', 'replays'));
-
     }
 
     public function parEvenement($id)
-{
-    $evenement = Evenement::findOrFail($id);
-    $replays = Replay::where('id_evenement', $id)->get();
+    {
+        $evenement = Evenement::findOrFail($id);
+        $replays = Replay::where('id_evenement', $id)->get();
 
-    return view('replays_evenement', compact('evenement', 'replays'));
-}
-
+        return view('replays_evenement', compact('evenement', 'replays'));
+    }
 }

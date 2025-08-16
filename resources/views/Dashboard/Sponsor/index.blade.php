@@ -89,7 +89,7 @@
             <tbody>
                 @foreach($sponsors as $sponsor)
                 <tr>
-                    <td><img src="{{ asset('storage/' . $sponsor->logo) }}" alt="Logo du sponsor" style="width: 50px;"></td>
+                    <td><img src="{{ $sponsor->logo }}" alt="Logo du sponsor" style="width: 50px;"></td>
                     <td>{{ $sponsor->nom }}</td>
                     <td>{{ $sponsor->evenement->nom ?? 'Aucun' }}</td>
                     <td>{{ $sponsor->promoteur }}</td>

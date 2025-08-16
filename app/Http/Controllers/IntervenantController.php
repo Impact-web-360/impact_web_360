@@ -8,10 +8,11 @@ use Illuminate\Support\Facades\Log;
 use App\Models\Evenement;
 use App\Models\Intervenant;
 use Illuminate\Support\Facades\Storage;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class IntervenantController extends Controller
 {
-public function store(Request $request)
+    public function store(Request $request)
     {
         $data = $request->validate([
             'evenement_id' => 'required|exists:evenements,id',
@@ -31,8 +32,9 @@ public function store(Request $request)
 
         try {
             if ($request->hasFile('image')) {
-                $path = $request->file('image')->store('intervenants', 'public');
-                $data['image'] = $path;
+                // Upload de l'image sur Cloudinary
+                $uploadedFileUrl = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
+                $data['image'] = $uploadedFileUrl;
             }
 
             Intervenant::create($data);
@@ -44,12 +46,12 @@ public function store(Request $request)
         }
     }
 
-
     public function index()
     {
         $intervenants = Intervenant::with('evenement')->get();
         return view('intervenant', compact('intervenants'));
     }
+    
     /**
      * Affiche la liste des intervenants pour l'administration.
      */
@@ -90,13 +92,15 @@ public function store(Request $request)
         ]);
 
         if ($request->hasFile('image')) {
-            // Suppression de l'ancienne image
+            // Suppression de l'ancienne image sur Cloudinary
             if ($intervenant->image) {
-                Storage::disk('public')->delete($intervenant->image);
+                $publicId = basename($intervenant->image, '.' . pathinfo($intervenant->image, PATHINFO_EXTENSION));
+                Cloudinary::destroy($publicId);
             }
-            // Enregistrement de la nouvelle image
-            $path = $request->file('image')->store('intervenants', 'public');
-            $data['image'] = $path;
+
+            // Upload de la nouvelle image sur Cloudinary
+            $uploadedFileUrl = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
+            $data['image'] = $uploadedFileUrl;
         }
 
         $intervenant->update($data);
@@ -110,7 +114,9 @@ public function store(Request $request)
     public function destroy(Intervenant $intervenant)
     {
         if ($intervenant->image) {
-            Storage::disk('public')->delete($intervenant->image);
+            // Suppression de l'image sur Cloudinary
+            $publicId = basename($intervenant->image, '.' . pathinfo($intervenant->image, PATHINFO_EXTENSION));
+            Cloudinary::destroy($publicId);
         }
 
         $intervenant->delete();
@@ -119,10 +125,8 @@ public function store(Request $request)
     }
 
     public function show($id)
-{
-    $intervenant = Intervenant::with('evenement')->findOrFail($id);
-    return view('biographie', compact('intervenant'));
+    {
+        $intervenant = Intervenant::with('evenement')->findOrFail($id);
+        return view('biographie', compact('intervenant'));
+    }
 }
-
-}
-

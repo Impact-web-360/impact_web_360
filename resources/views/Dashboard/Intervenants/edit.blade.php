@@ -92,7 +92,7 @@
         <div class="mb-3">
             <label for="image" class="form-label">Image actuelle</label><br>
             @if($intervenant->image)
-                <img src="{{ asset('storage/' . $intervenant->image) }}" alt="Image actuelle" class="img-thumbnail" style="width: 150px;">
+                <img src="{{ $intervenant->image }}" alt="Image actuelle" class="img-thumbnail" style="width: 150px;">
             @else
                 <p>Aucune image</p>
             @endif
@@ -128,7 +128,10 @@
             <input type="url" class="form-control" id="x" name="x" value="{{ old('x', $intervenant->x) }}">
         </div>
 
-        <button type="submit" class="btn btn-primary">Mettre à jour</button>
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <a href="{{ route('intervenants.index') }}" class="btn btn-secondary">Annuler</a>
+            <button type="submit" class="btn btn-primary">Mettre à jour</button>
+        </div>
     </form>
 </div>
 

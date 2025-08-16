@@ -62,7 +62,7 @@
 
     .card-intervenant {
       background-color: #1C1F26;
-      padding: 1.5rem;
+      padding: 1rem;
       border-radius: 10px;
       text-align: center;
     }
@@ -100,7 +100,7 @@
     }
 
     .voir-event-btn {
-      background-color: red;
+      background-color: #ff4500;
       color: white;
     }
 
@@ -178,8 +178,8 @@
       </div>
     </nav>
 
-    <a href="#" id="backToTop" class="btn btn-danger shadow position-fixed" 
-      style="bottom: 20px; right: 20px; display: none; z-index: 9999; border-radius: 50%;">
+    <a href="#" id="backToTop" class="btn text-light shadow position-fixed" 
+      style="bottom: 20px; right: 20px; display: none; z-index: 9999; border-radius: 50%; background-color: #ff4500;">
       <i class="fa fa-arrow-up"></i>
     </a>
 
@@ -208,7 +208,7 @@
       <div class="col-lg-4 mt-5 mt-lg-0">
         <div class="card-intervenant">
           @if($intervenant->image)
-            <img src="{{ asset('storage/' . $intervenant->image) }}" class="img-fluid rounded mb-3" alt="{{ $intervenant->nom }}" style="max-height: 300px; object-fit: cover;">
+            <img src="{{ $intervenant->image }}" class="img-fluid rounded mb-3" alt="{{ $intervenant->nom }}" style="max-height: 100%; object-fit: cover;">
           @else
             <div class="bg-secondary d-flex align-items-center justify-content-center rounded mb-3" style="height: 300px;">
               <i class="fas fa-user fa-5x text-light"></i>
@@ -269,7 +269,7 @@
         <div class="col-6 col-md-4 col-sm-6 mb-4">
           <ul class="list-unstyled footer-links">
             <li><a href="{{ route('intervenant') }}">Intervenants</a></li>
-            <li><a href="#">Partenaires & Sponsors</a></li>
+            <li><a href="{{ route('sponsors.show') }}">Partenaires & Sponsors</a></li>
             <li><a href="#">Ressources Gratuites</a></li>
             <li><a href="{{ route('step1') }}">Billetterie</a></li>
             <li><a href="{{ route('boutique') }}">Boutique</a></li>

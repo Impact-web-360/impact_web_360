@@ -6,6 +6,7 @@ use App\Models\Sponsor;
 use App\Models\Evenement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class SponsorController extends Controller
 {
@@ -32,14 +33,15 @@ class SponsorController extends Controller
             'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $path = $request->file('logo')->store('sponsors', 'public');
+        // Upload du logo sur Cloudinary
+        $uploadedFileUrl = Cloudinary::upload($request->file('logo')->getRealPath())->getSecurePath();
 
         Sponsor::create([
             'evenement_id' => $request->evenement_id,
             'nom' => $request->nom,
             'promoteur' => $request->promoteur,
             'description' => $request->description,
-            'logo' => $path,
+            'logo' => $uploadedFileUrl,
         ]);
 
         return redirect()->route('sponsors.index')->with('success', 'Sponsor ajouté avec succès.');
@@ -68,11 +70,14 @@ class SponsorController extends Controller
         ]);
 
         if ($request->hasFile('logo')) {
+            // Suppression de l'ancien logo sur Cloudinary si une nouvelle image est téléchargée
             if ($sponsor->logo) {
-                Storage::disk('public')->delete($sponsor->logo);
+                $publicId = basename($sponsor->logo, '.' . pathinfo($sponsor->logo, PATHINFO_EXTENSION));
+                Cloudinary::destroy($publicId);
             }
-            $path = $request->file('logo')->store('sponsors', 'public');
-            $sponsor->logo = $path;
+            // Upload du nouveau logo sur Cloudinary
+            $uploadedFileUrl = Cloudinary::upload($request->file('logo')->getRealPath())->getSecurePath();
+            $sponsor->logo = $uploadedFileUrl;
         }
 
         $sponsor->evenement_id = $request->evenement_id;
@@ -89,9 +94,12 @@ class SponsorController extends Controller
      */
     public function destroy(Sponsor $sponsor)
     {
+        // Suppression du logo sur Cloudinary
         if ($sponsor->logo) {
-            Storage::disk('public')->delete($sponsor->logo);
+            $publicId = basename($sponsor->logo, '.' . pathinfo($sponsor->logo, PATHINFO_EXTENSION));
+            Cloudinary::destroy($publicId);
         }
+        
         $sponsor->delete();
 
         return redirect()->route('sponsors.index')->with('success', 'Sponsor supprimé avec succès.');
