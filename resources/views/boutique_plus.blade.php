@@ -395,7 +395,7 @@
         </div>
 
         <div class="d-flex align-items-center">
-          <div class="bg-dark rounded-5 py-1 me-1" style="color: #ff4500">
+          <div class="bg-dark rounded-5 py-1 me-3" style="color: #ff4500">
             <button class="btn bg-transparent btn-sm text-light rounded-5" id="plusButton"><i class="fas fa-plus" style="color: #ff4500"></i></button>
             <span class="mx-2" id="quantityDisplay">1</span>
             <button class="btn bg-transparent text-light btn-sm rounded-5" id="minusButton"><i class="fas fa-minus"style="color: #ff4500"></i></button>
@@ -406,8 +406,6 @@
               <input type="hidden" name="quantite" id="quantiteInput" value="1"> 
               <button type="submit" class="btn btn-inscrire py-2 px-5 btn-sm rounded-5">Ajouter au panier</button>
           </form>
-
-
         </div>
       </div>
     </div>
@@ -495,7 +493,7 @@
       <a href="{{ route('boutique', $sugg->id) }}" class="text-decoration-none text-white me-3"
         style="flex: 0 0 auto; width: 75%;">
         <div class="product-card bg-transparent p-3" style="border-radius:10px;">
-        <img src="{{ asset('storage/' . $sugg->image) }}" class="img-fluid rounded mb-3" alt="{{ $sugg->nom }}"
+        <img src="{{ $sugg->image }}" class="img-fluid rounded mb-3" alt="{{ $sugg->nom }}"
           style="height: 300px; width: 100%; object-fit: cover;">
         <h5>{{ $sugg->nom }}</h5>
         <p>{{ number_format($sugg->prix, 0, '', ' ') }} FCFA</p>
@@ -511,7 +509,7 @@
       <div class="col-md-4">
       <a href="{{ route('boutique_plus', $sugg->id) }}" class="text-decoration-none text-white">
         <div class="product-card bg-transparent p-3" style="border-radius:10px;">
-        <img src="{{ asset('storage/' . $sugg->image) }}" class="img-fluid rounded mb-3" alt="{{ $sugg->nom }}"
+        <img src="{{ $sugg->image }}" class="img-fluid rounded mb-3" alt="{{ $sugg->nom }}"
           style="height: 300px; width: 100%; object-fit: cover;">
         <h5>{{ $sugg->nom }}</h5>
         <p>{{ number_format($sugg->prix, 0, '', ' ') }} FCFA</p>
