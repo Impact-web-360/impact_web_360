@@ -68,6 +68,8 @@ Route::get('/evenement', [HomeController::class, 'evenement'])->name('evenement'
 Route::get('/evenement/{id}/replays', [ReplayController::class, 'parEvenement'])
     ->name('replays_evenement');
 
+Route::get('/get-cart-count', [CartController::class, 'getCartCount'])->name('cart.count');
+
 
 //Paramètres
 Route::get('/modifier profil', function () {

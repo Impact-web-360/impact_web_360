@@ -19,13 +19,13 @@ class CartController extends Controller
     $panier = session()->get('panier', []);
 
     $sous_total = 0;
-    $taxes = 0; // si tu calcules des taxes
-    $frais_de_port = 1000; // Exemple : fixe ou calculé dynamiquement
-
+    $total_items = 0; // Ajout de cette variable
     foreach ($panier as $item) {
         $sous_total += $item['prix'] * $item['quantite'];
+        $total_items += $item['quantite']; // Comptabilise le nombre total d'articles
     }
-
+    $frais_de_port = 1000; 
+    $taxes = $sous_total * 0.0; // 10% de taxes
     $total = $sous_total + $frais_de_port + $taxes;
 
     $message_whatsapp = "Bonjour, je souhaite passer une commande pour les articles suivants :\n\n";
@@ -41,7 +41,8 @@ class CartController extends Controller
 
     $whatsapp_url = 'https://wa.me/22969647090?text=' . urlencode($message_whatsapp);
 
-    return view('panier', compact('panier', 'sous_total', 'frais_de_port', 'taxes', 'total', 'whatsapp_url'));
+    return view('panier', compact('panier', 'sous_total', 'frais_de_port', 'taxes', 'total','total_items', 'whatsapp_url'));
+    
 }
 
 
@@ -75,7 +76,19 @@ class CartController extends Controller
 
         session()->put('panier', $panier);
 
-        return redirect()->route('panier')->with('success', 'Article ajouté au panier !');
+         $total_items = count(session()->get('panier', []));
+
+        // Si la requête est une requête AJAX
+        if ($request->ajax()) {
+            return response()->json([
+                'message' => 'Article ajouté au panier avec succès !',
+                'cart_count' => $total_items,
+            ]);
+        }
+
+        // Sinon, redirection classique
+        return redirect()->back()->with('success', 'Article ajouté au panier avec succès !');
+
     }
 
     /**

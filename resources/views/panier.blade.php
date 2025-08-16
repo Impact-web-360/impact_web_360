@@ -8,12 +8,22 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
     <style>
+        :root {
+            --color-primary: #000066;
+            --color-secondary: #ff4500;
+            --color-dark: #000;
+            --color-text-light: #ccccff;
+            --color-card-bg: #1c1f26;
+            --color-white: #fff;
+        }
+
         body {
-            background-color: #000;
-            color: #fff;
+            background-color: var(--color-dark);
+            color: var(--color-white);
             font-family: 'Segoe UI', sans-serif;
         }
 
+        /* Styles de la navbar conservés */
         .navbar-custom {
             background-color: #000066;
             border-radius: 15px;
@@ -45,17 +55,134 @@
             border-radius: 8px;
         }
 
+        
+        /* --- NOUVEAUX STYLES POUR LE PANIER --- */
         .cart-item {
-            background-color: #1c1f26;
+            background-color: var(--color-card-bg);
             border: 1px solid #333;
             border-radius: 10px;
             margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            padding: 15px;
         }
         
+        .cart-item img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+            flex-shrink: 0; /* Empêche l'image de rétrécir */
+        }
+        
+        .cart-item-details {
+            flex-grow: 1;
+            margin: 0 15px;
+        }
+        
+        .cart-item-details h5 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        
+        .cart-item-details p {
+            margin-bottom: 5px;
+        }
+        
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+        }
+        
+        .quantity-control .btn {
+            background-color: #33394a;
+            border: none;
+            color: var(--color-white);
+            padding: 5px 12px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .quantity-control .btn:hover {
+            background-color: #555f7f;
+        }
+        
+        .quantity-control .btn-danger {
+            background-color: #dc3545;
+            margin-left: 10px;
+        }
+        
+        .quantity-control .btn-danger:hover {
+            background-color: #c82333;
+        }
+        
+        .quantity-control .quantity-display {
+            width: 40px;
+            text-align: center;
+            color: var(--color-white);
+            font-weight: bold;
+        }
+
         .cart-summary {
-            background-color: #1c1f26;
+            background-color: var(--color-card-bg);
             border-radius: 10px;
-            padding: 20px;
+            padding: 30px;
+        }
+
+        .cart-summary ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .cart-summary li {
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #333;
+            margin-bottom: 10px;
+        }
+
+        .cart-summary li:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+
+        .cart-summary hr {
+            border-color: #555f7f;
+            margin: 1rem 0;
+        }
+        
+        .btn-inscrire.w-100 {
+            width: 100%;
+        }
+
+        /* --- Newsletter & Footer --- */
+        .newsletter-section {
+            background-color: #ff4500;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .newsletter-section input[type="email"] {
+            border-radius: 50px;
+            padding: 10px;
+            border: none;
+            width: 53%;
+        }
+
+        .newsletter-section button {
+            border-radius: 50px;
+            padding: 10px;
+            border: none;
+            background-color: white;
+            color: black;
+            font-weight: bold;
+            cursor: pointer;
+            width: 53%;
+            font-size: 100%;
         }
 
         .footer {
@@ -96,47 +223,9 @@
             transform: scale(1.1);
             background-color: #cc3700;
         }
-
-        .quantity-control button {
-            background-color: #33394a;
-            border: none;
-            color: #fff;
-            padding: 5px 10px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .quantity-control button:hover {
-            background-color: #555f7f;
-        }
-
-        .newsletter-section {
-            background-color: #ff4500;
-            color: white;
-            padding: 40px 0;
-            text-align: center;
-        }
-
-        .newsletter-section input[type="email"] {
-            border-radius: 50px;
-            padding: 10px;
-            border: none;
-            width: 53%;
-        }
-
-        .newsletter-section button {
-            border-radius: 50px;
-            padding: 10px;
-            border: none;
-            background-color: white;
-            color: black;
-            font-weight: bold;
-            cursor: pointer;
-            width: 53%;
-            font-size: 100%;
-        }
-
-        @media (max-width: 976px) {
+        
+        /* --- Media Queries (Conservées et ajustées) --- */
+        @media (max-width: 991.98px) {
             .navbar-brand img {
                 margin-top: -70px;
                 max-height: 180px;
@@ -238,16 +327,7 @@
             .navbar-toggler-icon {
                 background-image: none !important;
             }
-
-            .cart-item img {
-                width: 80px;
-                height: 80px;
-                object-fit: cover;
-            }
-        }
-    
-        /* Styles pour les petits écrans (tablettes et mobiles) */
-        @media (max-width: 768px) {
+        
             .cart-item {
                 flex-direction: column;
                 text-align: center;
@@ -255,46 +335,16 @@
             }
         
             .cart-item img {
-                margin: 0 auto 1rem;
+                margin-bottom: 1rem;
             }
         
-            .cart-item .flex-grow-1 {
+            .cart-item-details {
+                margin: 0;
                 margin-bottom: 1rem;
             }
             
             .quantity-control {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .quantity-control form.d-flex {
-                margin-bottom: 10px;
-            }
-            
-            .cart-summary h4 {
-                font-size: 1.2rem;
-            }
-        
-            .cart-summary li span {
-                font-size: 0.9rem;
-            }
-        
-            .cart-summary li.fw-bold {
-                font-size: 1.1rem !important;
-            }
-        }
-    
-        @media (max-width: 576px) {
-            h1 {
-                font-size: 2rem;
-            }
-        
-            .container {
-                padding: 10px;
-            }
-        
-            .cart-summary {
-                padding: 15px;
+                justify-content: center;
             }
         }
     </style>
@@ -332,22 +382,22 @@
             <div class="col-lg-8">
                 @if (isset($panier) && count($panier) > 0)
                     @foreach ($panier as $item)
-                        <div class="d-flex align-items-center cart-item p-3">
-                            <img src="{{ $item['image'] }}" alt="{{ $item['nom'] }}" class="rounded me-4" style="width: 100px; height: 100px; object-fit: cover;">
-                            <div class="flex-grow-1">
+                        <div class="cart-item">
+                            <img src="{{ $item['image'] }}" alt="{{ $item['nom'] }}" class="rounded">
+                            <div class="cart-item-details">
                                 <h5>{{ $item['nom'] }}</h5>
                                 <p class="mb-1 text-muted">{{ $item['taille'] }} - {{ $item['couleur'] }}</p>
                                 <p class="fw-bold">{{ number_format($item['prix'], 0, '', ' ') }} FCFA</p>
                             </div>
-                            <div class="d-flex align-items-center quantity-control">
-                                <form action="{{ route('panier.update') }}" method="POST" class="d-flex">
+                            <div class="quantity-control">
+                                <form action="{{ route('panier.update') }}" method="POST" class="d-flex align-items-center me-2">
                                     @csrf
                                     <input type="hidden" name="id" value="{{ $item['id'] }}">
                                     <button type="submit" name="action" value="decrease" class="btn btn-sm"><i class="fas fa-minus"></i></button>
-                                    <span class="mx-2">{{ $item['quantite'] }}</span>
+                                    <span class="quantity-display mx-2">{{ $item['quantite'] }}</span>
                                     <button type="submit" name="action" value="increase" class="btn btn-sm"><i class="fas fa-plus"></i></button>
                                 </form>
-                                <form action="{{ route('panier.remove') }}" method="POST" class="ms-3">
+                                <form action="{{ route('panier.remove') }}" method="POST">
                                     @csrf
                                     <input type="hidden" name="id" value="{{ $item['id'] }}">
                                     <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></button>
@@ -367,20 +417,19 @@
                 <div class="cart-summary">
                     <h4 class="mb-4">Récapitulatif</h4>
                     <ul class="list-unstyled">
-                        <li class="d-flex justify-content-between mb-2">
+                        <li class="d-flex justify-content-between">
                             <span>Sous-total :</span>
                             <span>{{ number_format($sous_total, 0, '', ' ') }} FCFA</span>
                         </li>
-                        <li class="d-flex justify-content-between mb-2">
+                        <li class="d-flex justify-content-between">
                             <span>Frais de port :</span>
                             <span>{{ number_format($frais_de_port, 0, '', ' ') }} FCFA</span>
                         </li>
-                        <li class="d-flex justify-content-between mb-2">
+                        <li class="d-flex justify-content-between">
                             <span>Taxes :</span>
                             <span>{{ number_format($taxes, 0, '', ' ') }} FCFA</span>
                         </li>
-                        <hr class="my-3">
-                        <li class="d-flex justify-content-between fw-bold fs-5">
+                        <li class="d-flex justify-content-between">
                             <span>Total :</span>
                             <span>{{ number_format($total, 0, '', ' ') }} FCFA</span>
                         </li>
@@ -460,6 +509,7 @@
         document.getElementById('hamburgerBtn').addEventListener('click', function() {
             this.classList.toggle('active');
         });
+    
     </script>
 </body>
 

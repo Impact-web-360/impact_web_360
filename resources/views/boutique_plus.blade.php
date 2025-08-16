@@ -14,6 +14,44 @@
       font-family: 'Segoe UI', sans-serif;
     }
 
+    /* Styles du panier flottant */
+        .cart-floating {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #ff4500;
+            color: white;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            font-size: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+
+        .cart-floating:hover {
+            transform: scale(1.1);
+        }
+
+        .cart-floating .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #000066;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 50%;
+            padding: 2px 7px;
+            border: 2px solid white;
+        }
+
+
     .product-image img {
       width: 100%;
       border-radius: 10px;
@@ -595,37 +633,71 @@
     </div>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    function showCommentForm() {
-      const form = document.getElementById('comment-form');
-      if (form.classList.contains('d-none')) {
-        form.classList.remove('d-none');
-        form.scrollIntoView({ behavior: 'smooth' });
-      }
-    }
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const plusButton = document.getElementById('plusButton');
+            const minusButton = document.getElementById('minusButton');
+            const quantityDisplay = document.getElementById('quantityDisplay');
+            const quantiteInput = document.getElementById('quantiteInput');
+            const addToCartForm = document.getElementById('add-to-cart-form');
+            const cartCount = document.querySelector('.cart-count');
 
-    document.addEventListener('DOMContentLoaded', () => {
-      const plusButton = document.getElementById('plusButton');
-      const minusButton = document.getElementById('minusButton');
-      const quantityDisplay = document.getElementById('quantityDisplay');
+            // Ligne ajoutée pour initialiser le compteur
+            const initialCount = parseInt("{{ $total_items }}");
+            if (!isNaN(initialCount)) {
+                cartCount.textContent = initialCount;
+            }
 
-      let quantity = 1;
+            let quantity = parseInt(quantiteInput.value);
 
-      plusButton.addEventListener('click', () => {
-        quantity++;
-        quantityDisplay.textContent = quantity;
-      });
+            // Met à jour la quantité et le champ caché du formulaire
+            function updateQuantity(delta) {
+                quantity = Math.max(1, quantity + delta);
+                quantityDisplay.textContent = quantity;
+                quantiteInput.value = quantity;
+            }
 
-      minusButton.addEventListener('click', () => {
-        if (quantity > 1) {
-          quantity--;
-          quantityDisplay.textContent = quantity;
-        }
-      });
-    });
-  </script>
+            plusButton.addEventListener('click', () => updateQuantity(1));
+            minusButton.addEventListener('click', () => updateQuantity(-1));
 
+            // Envoi du formulaire en AJAX
+            addToCartForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                const formData = new FormData(this);
+
+                fetch(this.action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest',
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.cart_count !== undefined) {
+                            cartCount.textContent = data.cart_count;
+                        }
+                        alert(data.message);
+                    })
+                    .catch(error => console.error('Erreur:', error));
+            });
+
+            // Fonction pour afficher/masquer le formulaire de commentaire
+            window.showCommentForm = function() {
+                const form = document.getElementById('comment-form');
+                if (form.classList.contains('d-none')) {
+                    form.classList.remove('d-none');
+                    form.scrollIntoView({ behavior: 'smooth' });
+                }
+            };
+        });
+    </script>
+    <a href="{{ route('panier') }}" class="cart-floating">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-count">0</span>
+    </a>
 </body>
 
 </html>
