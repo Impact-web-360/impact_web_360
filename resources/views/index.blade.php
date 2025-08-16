@@ -900,21 +900,20 @@
         <div class="col-md-6 text-start mb-4 mb-md-0">
           <div class="titre-avec-trait">
             <div class="trait-vertical"></div>
-            <h5 class="fw-bold">📁 Projet</h5><br>
+            <h5 class="fw-bold"><i class="fa fa-folder"></i> Projet</h5><br>
           </div>
           <p>Impact Web 360 est un événement phare qui rassemble les esprits les plus brillants du digital pour inspirer, former et connecter la jeunesse africaine.</p>
           <br>
 
           <div class="titre-avec-trait-noir" data-aos="fade-up" data-aos-delay="200">
             <div class="trait-vertical-noir"></div>
-            <h5 class="fw-bold mt-4">📅 Date et Heure</h5><br>
+            <h5 class="fw-bold mt-4"><i class="fa fa-calendar"></i> Date et Heure</h5><br>
           </div>
           <p>29 Novembre 2025 à 9h00</p>
           <br>
 
           <div data-aos="fade-up" data-aos-delay="200">
-            <p><strong>A</strong></p>
-            <h5 class="fw-bold mt-4">📍 Lieu</h5>
+            <h5 class="fw-bold mt-4"><i class="fa fa-map-marker"></i> Lieu</h5>
             <p>Cotonou, dans la grande salle rouge du palais des congrès.</p>
           </div>
 
