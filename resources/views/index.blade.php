@@ -846,13 +846,16 @@
 
 </section>
 <!-- Bande de Partenaires -->
-<section class="py-4 text-white text-center mb-5" style="background-color: #ff4500; " data-aos="fade-right">
- <marquee behavior="" direction=""> <div class="container d-flex flex-wrap justify-content-center gap-4">
-    @foreach ($sponsors as $sponsor)
-     <div class="me-4 part"><img src="{{ asset('storage/' . $sponsor->logo) }}" alt="" width="50" > &nbsp;&nbsp;&nbsp;&nbsp;♦&nbsp;&nbsp;&nbsp;&nbsp;</div>   
-    @endforeach
-  </div></marquee>
-</section>
+<a href="{{ route('sponsors.show') }}">
+  <section class="py-4 text-white text-center mb-5" style="background-color: #ff4500; " data-aos="fade-right">
+  <marquee behavior="" direction=""> <div class="container d-flex flex-wrap justify-content-center gap-4">
+      @foreach ($sponsors as $sponsor)
+      <div class="me-4 part"><img src="{{ asset('storage/' . $sponsor->logo) }}" alt="" width="50" > &nbsp;&nbsp;&nbsp;&nbsp;♦&nbsp;&nbsp;&nbsp;&nbsp;</div>   
+      @endforeach
+    </div></marquee>
+  </section>  
+</a>
+
 
   <!-- Statistiques -->
   <section class="py-5 bg-black text-center taille" data-aos="fade-up">
@@ -1028,7 +1031,7 @@
 
       </div>
 
-      <a href="sponsor.php" class="btn btn-cta mt-5">En savoir plus</a>
+      <a href="{{ route('sponsors.show') }}" class="btn btn-cta mt-5">En savoir plus</a>
     </div>
   </section>
 

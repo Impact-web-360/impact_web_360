@@ -122,38 +122,29 @@
 
 <!-- CONTENU -->
 <div class="container text-center pt-5 mt-5">
-  <h1>Nos sponsors et partenaires</h1>
-  <p class="text-light-emphasis">Nous remercions nos partenaires pour leur soutien précieux dans la réalisation de notre mission.</p>
+    <h1>Nos sponsors et partenaires</h1>
+    <p class="text-light-emphasis">Nous remercions nos partenaires pour leur soutien précieux dans la réalisation de notre mission.</p>
 
-  <!-- Aperçu limité (4 partenaires) -->
-  <div class="row g-4 mt-4" id="partenaires-apercu">
-      <div class="col-md-6 col-lg-3">
-        <div class="card p-3 h-100 text-center">
-          <img src="images/<?= htmlspecialchars($partenaire['logo']) ?>" alt="Logo <?= htmlspecialchars($partenaire['nom']) ?>" class="mx-auto d-block" />
-          <h5 class="mt-3"><?= htmlspecialchars($partenaire['nom']) ?></h5>
-          <p>Partenaire de confiance.</p>
-          <a href="#" class="text-danger">->En savoir plus</a>
-        </div>
-      </div>
-  </div>
+    <div class="row g-4 mt-4" id="sponsors-container">
+        @foreach ($sponsors as $sponsor)
+            <div class="col-md-6 col-lg-3 sponsor-card">
+                <div class="card p-3 h-100 text-center">
+                    <img src="{{ asset('storage/' . $sponsor->logo) }}" alt="Logo {{ $sponsor->nom }}" class="mx-auto d-block" style="max-height: 120px; object-fit: contain;" />
+                    <div class="card-body">
+                        <h5 class="mt-3">{{ $sponsor->nom }}</h5>
+                        <p>{{ $sponsor->description }}</p> 
+                    </div>
+                    <h6 class="text-light-emphasis">Evenement associé :</h6>
+                    <p class="text-light-emphasis">{{ $sponsor->evenement->nom ?? 'Aucun' }}</p>
+                </div>
+            </div>
+        @endforeach
+    </div>
 
-  <!-- Liste complète avec tous les partenaires, cachée au départ -->
-  <div class="row g-4 mt-4 d-none" id="partenaires-complet">
-
-      <div class="col-md-6 col-lg-3">
-        <div class="card p-3 h-100 text-center">
-          <img src="images/<?= htmlspecialchars($partenaire['logo']) ?>" alt="Logo <?= htmlspecialchars($partenaire['nom']) ?>" class="mx-auto d-block" />
-          <h5 class="mt-3"><?= htmlspecialchars($partenaire['nom']) ?></h5>
-          <p>Partenaire de confiance.</p>
-          <a href="#" class="text-danger">En savoir plus</a>
-        </div>
-      </div>
-  </div>
-
-  <div class="mt-5">
-    <button id="btn-decouvrir" class="btn btn-gradient mt-2"><i class="fas fa-eye me-2"></i>Découvrir tous les partenaires</button>
-    <button id="btn-masquer" class="btn btn-light mt-2 d-none"><i class="fas fa-eye-slash me-2"></i>Voir moins</button>
-  </div>
+    <div class="mt-5">
+        <button id="btn-voir-plus" class="btn btn-gradient mt-2 d-none"><i class="fas fa-eye me-2"></i>Voir plus</button>
+        <button id="btn-voir-moins" class="btn btn-light mt-2 d-none"><i class="fas fa-eye-slash me-2"></i>Voir moins</button>
+    </div>
 </div>
 
   <!-- ===== FOOTER ===== -->
@@ -214,37 +205,72 @@
 <!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        const toggler = document.querySelector('.navbar-toggler');
-        const hamburger = document.getElementById('hamburgerBtn');
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const sponsorCards = document.querySelectorAll('.sponsor-card');
+        const btnVoirPlus = document.getElementById('btn-voir-plus');
+        const btnVoirMoins = document.getElementById('btn-voir-moins');
+        const initialLimit = 6;
+        let visibleCount = initialLimit;
 
-        toggler.addEventListener('click', () => {
-          hamburger.classList.toggle('active');
+        // Fonction pour afficher les sponsors
+        function showSponsors() {
+            // Affiche les 'visibleCount' premiers sponsors
+            sponsorCards.forEach((card, index) => {
+                if (index < visibleCount) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            // Gère l'affichage des boutons
+            if (visibleCount < sponsorCards.length) {
+                btnVoirPlus.classList.remove('d-none');
+            } else {
+                btnVoirPlus.classList.add('d-none');
+            }
+
+            if (visibleCount > initialLimit) {
+                btnVoirMoins.classList.remove('d-none');
+            } else {
+                btnVoirMoins.classList.add('d-none');
+            }
+        }
+
+        // Événement pour le bouton "Voir plus"
+        btnVoirPlus.addEventListener('click', function() {
+            visibleCount += 6; // Ajoute 6 sponsors à chaque clic
+            showSponsors();
         });
-      });
-    </script>
 
-    <script>
-  const backToTopBtn = document.getElementById("backToTop");
+        // Événement pour le bouton "Voir moins"
+        btnVoirMoins.addEventListener('click', function() {
+            visibleCount = initialLimit; // Revient à la limite initiale
+            showSponsors();
+        });
 
-  // Afficher le bouton quand on descend de 200px
-  window.onscroll = function () {
-    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
-      backToTopBtn.style.display = "block";
-    } else {
-      backToTopBtn.style.display = "none";
-    }
-  };
-
-  // Animation douce de retour en haut
-  backToTopBtn.addEventListener("click", function (e) {
-    e.preventDefault();
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
+        // Affiche les 6 premiers sponsors au chargement de la page
+        showSponsors();
     });
-  });
+
+    // Afficher le bouton quand on descend de 200px
+    window.onscroll = function () {
+      if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+        backToTopBtn.style.display = "block";
+      } else {
+        backToTopBtn.style.display = "none";
+      }
+    };
+
+    // Animation douce de retour en haut
+    backToTopBtn.addEventListener("click", function (e) {
+      e.preventDefault();
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    });
 </script>
 
 </body>

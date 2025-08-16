@@ -9,20 +9,26 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
+    // ...
     public function up(): void
     {
-        Schema::create('sponsor_evenements', function (Blueprint $table) {
-            $table->foreignId('id_sponsor')->constrained('sponsors');
-            $table->foreignId('id_evenement')->constrained('evenements');
+        Schema::create('sponsors', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('evenement_id')->constrained()->onDelete('cascade');
+            $table->string('nom');
+            $table->string('promoteur');
+            $table->text('description');
+            $table->string('logo');
             $table->timestamps();
         });
     }
+    // ...
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('sponsor_evenements');
+        Schema::dropIfExists('sponsors');
     }
 };

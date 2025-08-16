@@ -8,22 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class Sponsor extends Model
 {
     use HasFactory;
+
     protected $fillable = [
+        'evenement_id',
         'nom',
+        'promoteur',
         'description',
         'logo',
-        'promoteur',
-        'facebook',
-        'wahtsapp',
-        'linkedin',
-        'instagram',
-        'tiktok',
-        'youtube',
-
     ];
+
+    // Relation avec Evenement
     public function evenement()
     {
-        return $this->belongsToMany(Evenement::class, 'sponsor_evenement', 'id_sponsor', 'id_evenement')
-            ->withTimestamps();
+        return $this->belongsTo(Evenement::class);
     }
 }
