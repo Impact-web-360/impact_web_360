@@ -730,7 +730,7 @@
                                         {{-- Wrap the card content in an anchor tag --}}
                                         <a href="{{ route('details', $formation->id) }}" class="card course-card bg-dark-card border-secondary h-100">
                                             @if ($formation->image)
-                                                <img src="{{ asset('storage/' . $formation->image) }}" class="card-img-top rounded-top-2" alt="{{ $formation->title }}">
+                                                <img src="{{ $formation->image }}" class="card-img-top rounded-top-2" alt="{{ $formation->title }}">
                                             @else
                                                 <img src="{{ asset('images/default-course.png') }}" class="card-img-top rounded-top-2" alt="Image par défaut">
                                             @endif

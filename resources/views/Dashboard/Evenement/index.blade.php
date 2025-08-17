@@ -254,8 +254,8 @@
             <h6>{{ $evenement->promoteur }}</h6>
 
             <div class="mt-auto">
-            <div class="mb-2">
-              <button class="btn btn-outline-primary btn-sm me-2" data-bs-toggle="modal"
+            <div class="mb-2 d-flex">
+              <button class="btn btn-outline-primary me-2" data-bs-toggle="modal"
               data-bs-target="#editEventModal{{ $evenement->id }}">
               <i class="fas fa-edit"></i>
               </button>
@@ -269,8 +269,6 @@
                 <i class="fas fa-trash"></i>
               </button>
               </form>
-              <a href="#" class="btn btn-danger fw-bold" data-bs-toggle="modal"
-              data-bs-target="#">Informations</a>
             </div>
 
             <button type="button" class="btn btn-dark text-white fs-6 fw-bold w-100 mb-2 open-sponsor-modal" 

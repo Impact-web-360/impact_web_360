@@ -511,7 +511,7 @@
                                     <a href="{{ route('formation.show', ['formation' => $formation->id]) }}" class="course-card-link">
                                         <div class="course-card">
                                             <div class="position-relative">
-                                                <img src="{{ asset('storage/' . $formation->image) }}" alt="{{ $formation->title }}" class="img-fluid rounded-top-3 card-img">
+                                                <img src="{{ $formation->image }}" alt="{{ $formation->title }}" class="img-fluid rounded-top-3 card-img">
                                             </div>
                                             <div class="card-body">
                                                 <h5 class="card-title">{{ Str::limit($formation->title, 50) }}</h5>

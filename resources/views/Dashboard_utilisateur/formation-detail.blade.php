@@ -470,7 +470,7 @@
                                             </a>
                                         @endif
                                         @if(!empty($module->file_path))
-                                            <a href="{{ asset('storage/' . $module->file_path) }}" target="_blank" class="btn btn-sm btn-download">
+                                            <a href="{{ $module->file_path }}" target="_blank" class="btn btn-sm btn-download">
                                                 <i class="fas fa-download me-1"></i> Télécharger le fichier
                                             </a>
                                         @endif
@@ -481,7 +481,7 @@
                                     <div class="collapse" id="video-{{ $module->id }}">
                                         <div class="module-video-container mt-2">
                                             <video width="100%" controls>
-                                                <source src="{{ asset('storage/' . $module->video_path) }}" type="video/mp4">
+                                                <source src="{{ $module->video_path }}" type="video/mp4">
                                                 Votre navigateur ne supporte pas la lecture de cette vidéo.
                                             </video>
                                         </div>

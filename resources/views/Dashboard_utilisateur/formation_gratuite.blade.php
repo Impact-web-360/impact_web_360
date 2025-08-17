@@ -728,7 +728,7 @@
                                                             @if(!empty($module->video_path))
                                                                 <div class="module-video-container mb-3">
                                                                     <video width="100%" controls>
-                                                                        <source src="{{ asset('storage/' . $module->video_path) }}" type="video/mp4">
+                                                                        <source src="{{ $module->video_path }}" type="video/mp4">
                                                                         Votre navigateur ne supporte pas la lecture de cette vidéo.
                                                                     </video>
                                                                 </div>
@@ -736,7 +736,7 @@
 
                                                             <div class="d-flex justify-content-between align-items-center mt-auto">
                                                                 @if(!empty($module->file_path))
-                                                                    <a href="{{ asset('storage/' . $module->file_path) }}" target="_blank" class="btn btn-sm btn-download">
+                                                                    <a href="{{ $module->file_path }}" target="_blank" class="btn btn-sm btn-download">
                                                                         <i class="fas fa-download me-1"></i> Télécharger le fichier
                                                                     </a>
                                                                 @else

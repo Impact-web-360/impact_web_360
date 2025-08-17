@@ -657,7 +657,7 @@
                         <div class="course-detail-section">
                             <div class="course-detail-header">
                                 @if ($formation->image)
-                                    <img src="{{ asset('storage/' . $formation->image) }}" class="img-fluid" alt="Image de {{ $formation->title }}">
+                                    <img src="{{ $formation->image }}" class="img-fluid" alt="Image de {{ $formation->title }}">
                                 @else
                                     <img src="{{ asset('images/default-course.png') }}" class="img-fluid" alt="Image par défaut">
                                 @endif
@@ -785,7 +785,7 @@
                             <div class="d-flex align-items-center mb-3">
                                 {{-- Placeholder pour l'avatar du mentor --}}
                                 @if($formation->mentor_avatar)
-                                    <img src="{{ asset('storage/' . $formation->mentor_avatar) }}" alt="Mentor Avatar" class="mentor-avatar me-3">
+                                    <img src="{{ $formation->mentor_avatar}}" alt="Mentor Avatar" class="mentor-avatar me-3">
                                 @else
                                     <img src="{{ asset('images/default-avatar.png') }}" alt="Mentor Avatar" class="mentor-avatar me-3">
                                 @endif
