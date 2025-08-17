@@ -938,7 +938,7 @@
     <button class="btn btn-360 mb-3">Impact Web 360 ➔</button>
     <h1 class="display-5 fw-bold">Nous partons de Zéro pour <br> impacter la Jeunesse <br> Africaine.</h1>
     <p class="lead">Comment générer un revenu à 6 chiffres grâce <br> au web ?</p>
-    <a href="{{ route('step1') }}" class="btn btn-danger btn-lg mt-3 mb-5"><i class="fa fa-ticket-alt me-2 "></i>Réserver mon billet →</a>
+    <a href="{{ route('evenement') }}" class="btn btn-danger btn-lg mt-3 mb-5"><i class="fa fa-ticket-alt me-2 "></i>Réserver mon billet →</a>
 
   <div class="countdown-container">
     <div class="time-box">
@@ -1072,8 +1072,7 @@
         </div>
       </div>
       <div class="mt-4">
-        <a href="{{route('step1')}}" class="btn btn-danger me-3 taille">Réserver Mon Billet</a>
-        <a href="#" class="text-decoration-underline taille" style="color: #ccc;">En savoir plus</a>
+        <a href="{{route('evenement')}}" class="btn btn-danger px-4 p-2 border-0 taille">Réserver Mon Billet</a>
       </div>
     </div>
   </section>
@@ -1090,54 +1089,36 @@
         <div class="col-md-4 col-6 mb-4">
           <div class="gallery-item" >
             <img src="{{ asset('dossiers/image2/galerie1.jpg') }}" alt="Galerie 1">
-            <div class="gallery-overlay">
-              <i class="fas fa-search-plus fa-3x"></i>
-            </div>
           </div>
         </div>
         
         <div class="col-md-4 col-6 mb-4">
           <div class="gallery-item" >
             <img src="{{ asset('dossiers/image2/galerie2.jpg') }}" alt="Galerie 2">
-            <div class="gallery-overlay">
-              <i class="fas fa-search-plus fa-3x"></i>
-            </div>
           </div>
         </div>
         
         <div class="col-md-4 col-6 mb-4">
           <div class="gallery-item" data-src="{{ asset('dossiers/image2/galerie8.jpg') }}">
             <img src="{{ asset('dossiers/image2/galerie8.jpg') }}" alt="Galerie 3">
-            <div class="gallery-overlay">
-              <i class="fas fa-search-plus fa-3x"></i>
-            </div>
           </div>
         </div>
         
         <div class="col-md-4 col-6 mb-4">
           <div class="gallery-item" data-src="{{ asset('dossiers/image2/galerie4.jpg') }}">
             <img src="{{ asset('dossiers/image2/galerie4.jpg') }}" alt="Galerie 4">
-            <div class="gallery-overlay">
-              <i class="fas fa-search-plus fa-3x"></i>
-            </div>
           </div>
         </div>
         
         <div class="col-md-4 col-6 mb-4">
           <div class="gallery-item" data-src="{{ asset('dossiers/image2/galerie5.jpg') }}">
             <img src="{{ asset('dossiers/image2/galerie5.jpg') }}" alt="Galerie 5">
-            <div class="gallery-overlay">
-              <i class="fas fa-search-plus fa-3x"></i>
-            </div>
           </div>
         </div>
         
         <div class="col-md-4 col-6 mb-4">
           <div class="gallery-item" data-src="{{ asset('dossiers/image2/galerie6.jpg') }}">
             <img src="{{ asset('dossiers/image2/galerie6.jpg') }}" alt="Galerie 6">
-            <div class="gallery-overlay">
-              <i class="fas fa-search-plus fa-3x"></i>
-            </div>
           </div>
         </div>
       </div>
@@ -1288,30 +1269,6 @@
   </section>
 
 
-  <!-- Section Boutique -->
-  <section class="py-5 bg-black text-white">
-    <div class="container" data-aos="zoom-in">
-      <h2 class="mb-4 fw-bold text-center">Découvrez la boutique officielle <br>
-        <span class="fw-bold" style="color: #ff4500; font-size: 40px;"> Impact Web 360</span>
-      </h2>
-      <p class="mb-4 text-center">Affiche ton appartenance à la communauté des acteurs du digital avec nos produits exclusifs ! 👕 T-shirts Officiels, </p>
-      <div class="row justify-content-center" data-aos="flip-right">
-        <div class="col-md-4 mb-4">
-          <div class="card bg-dark text-white h-100" style="width: 20x;">
-            <img src="{{ asset('dossiers/image/t-shirt_noir.jpg') }}" class="card-img-top" alt="motif">
-            <div class="card-body">
-              <h5 class="card-title">T-shirt</h5>
-              <p class="card-text">6000 FCFA</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <center>
-        <a href="{{ route('boutique') }}" class="btn btn-danger mt-3">Voir plus</a>
-      </center>
-    </div>
-  </section>
-
   <!-- ===== FOOTER ===== -->
   <footer class="footer text-white pt-5 mt-5">
     <div class="container">
@@ -1371,7 +1328,6 @@
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.2/lightgallery.min.js"></script>
   <script>
     AOS.init();
     const eventDate = new Date("2025-11-29T09:00:00").getTime();
