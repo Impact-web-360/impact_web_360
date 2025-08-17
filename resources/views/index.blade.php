@@ -789,7 +789,7 @@
         <ul class="navbar-nav ms-auto">
           <li class="nav-item"><a class="nav-link active" href="{{ route('home') }}">Acceuil</a></li>
           <li class="nav-item"><a class="nav-link" href="{{ route('evenement') }}">Événements</a></li>
-          <li class="nav-item"><a class="nav-link" href="{{ route('elearning') }}">E-learning</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">E-learning</a></li>
           <li class="nav-item"><a class="nav-link" href="{{ route('intervenant') }}">Intervenants</a></li>
           <li class="nav-item"><a class="nav-link" href="{{ route('step1') }}">Billetterie</a></li>
           <li class="nav-item"><a class="nav-link" href="{{ route('boutique') }}">Boutique</a></li>
@@ -856,7 +856,7 @@
   <section class="py-4 text-white text-center mb-5" style="background-color: #ff4500; " data-aos="fade-right">
   <marquee behavior="" direction=""> <div class="container d-flex flex-wrap justify-content-center gap-4">
       @foreach ($sponsors as $sponsor)
-      <div class="me-4 part"><img src="{{ $sponsor->logo }}" alt="" width="50" > &nbsp;&nbsp;&nbsp;&nbsp;♦&nbsp;&nbsp;&nbsp;&nbsp;</div>   
+      <div class="me-4 part"><img src="{{ asset('storage/' . $sponsor->logo) }}" alt="" width="50" > &nbsp;&nbsp;&nbsp;&nbsp;♦&nbsp;&nbsp;&nbsp;&nbsp;</div>   
       @endforeach
     </div></marquee>
   </section>  
@@ -1113,7 +1113,7 @@
             <li><a href="{{ route('home') }}">Accueil</a></li>
             <li><a href="{{ route('evenement') }}">Événements</a></li>
             <li><a href="{{ route('evenement') }}">Replays</a></li>
-            <li><a href="{{ route('elearning') }}">E-learning</a></li>
+            <li><a href="{{ route('login') }}">E-learning</a></li>
             <li><a href="#">Entreprises & Recruteurs</a></li>
             <li><a href="https://chat.whatsapp.com/FZx7QMMdFsq3fF0D40Px8f" target="_blank">Forum</a></li>
           </ul>
@@ -1123,7 +1123,7 @@
         <div class="col-6 col-md-4 col-sm-6 mb-4">
           <ul class="list-unstyled footer-links">
             <li><a href="{{ route('intervenant') }}">Intervenants</a></li>
-            <li><a href="{{ route('sponsors.show') }}">Partenaires & Sponsors</a></li>
+            <li><a href="#">Partenaires & Sponsors</a></li>
             <li><a href="#">Ressources Gratuites</a></li>
             <li><a href="{{ route('step1') }}">Billetterie</a></li>
             <li><a href="{{ route('boutique') }}">Boutique</a></li>

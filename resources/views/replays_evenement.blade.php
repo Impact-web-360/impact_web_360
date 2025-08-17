@@ -232,7 +232,6 @@
       #navbarNav { background-color:rgb(0, 0, 102); width: 100%; padding: 40px; position: absolute; top: 59px; left: 0; z-index: 999; text-align: left; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px; }
       #navbarNav .nav-link { text-align: left; font-size: 22px; margin-top: 10px; font-weight: bod; }
       #navbarNav .btn{ margin-top: 50px; width: 100%; }
-      #navbarNav .btn-inscrire { text-align: left; margin: 8px; text-align: center; }
       .hamburger { width: 30px; height: 22px; display: flex; flex-direction: column; justify-content: space-between; cursor: pointer; z-index: 1001; border: none; }
       .hamburger span { height: 3px; background-color: white; border-radius: 2px; transition: all 0.4s ease; border: none; }
       .navbar-toggler { border: none !important; background: transparent !important; box-shadow: none !important; outline: none !important; }
@@ -262,7 +261,6 @@
 </head>
 <body>
 
-    <!-- NAVBAR -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top navbar-custom container">
       <a class="navbar-brand" href="index.php"><img src="{{ asset('dossiers/image/Impact-Web-360-Logo1.png')}}" alt="Logo Impact Web" /></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -302,12 +300,11 @@
       les entrepreneurs et les curieux du web.
     </p>
 
-    <!-- Vue détaillée (cachée par défaut) -->
     <div id="videoDetailContainer" class="video-detail-container">
       <div class="row">
         <div class="col-lg-8">
           <div class="ratio ratio-16x9 video-detail">
-            <video controls class="video-player" id="mainVideoPlayer">
+            <video controls autoplay class="video-player" id="mainVideoPlayer">
               <source src="" type="video/mp4">
               Votre navigateur ne supporte pas la lecture de vidéos.
             </video>
@@ -338,8 +335,7 @@
           <div class="video-list-container">
             <h5 class="mb-3">Autres replays disponibles</h5>
             <div id="videoList">
-              <!-- Les vidéos seront ajoutées dynamiquement ici -->
-            </div>
+              </div>
           </div>
         </div>
       </div>
@@ -349,12 +345,11 @@
       </div>
     </div>
 
-    <!-- Grille de vidéos (affichée par défaut) -->
     <div id="videoGridContainer" class="video-grid">
       @foreach($replays as $replay)
       <div class="video-grid-item" onclick="showVideoDetail('{{ $replay->id }}')">
         <div class="video-grid-thumbnail">
-          <video>
+          <video autoplay loop muted>
             <source src="{{ $replay->video_path }}" type="video/mp4">
           </video>
         </div>
@@ -372,16 +367,13 @@
     </div>
   </div>
 
-  <!-- ===== FOOTER ===== -->
   <footer class="footer text-white pt-5 mt-5">
     <div class="container">
       <div class="row">
-        <!-- Logo -->
         <div class=" col-12 col-md-4 mb-4 text-center text-md-start">
           <img src="{{ asset('dossiers/image/Impact-Web-360-Logo1.png') }}" alt="Logo Impact Web" class="img-fluid" style="max-width: 200px;">
         </div>
 
-        <!-- Colonne 1 -->
         <div class="col-6 col-md-4 col-sm-6 mb-4">
           <ul class="list-unstyled footer-links">
             <li><a href="{{ route('home') }}">Accueil</a></li>
@@ -393,7 +385,6 @@
           </ul>
         </div>
 
-        <!-- Colonne 2 -->
         <div class="col-6 col-md-4 col-sm-6 mb-4">
           <ul class="list-unstyled footer-links">
             <li><a href="{{ route('intervenant') }}">Intervenants</a></li>
@@ -406,10 +397,8 @@
         </div>
       </div>
 
-      <!-- Ligne rouge -->
       <hr class="footer-line">
 
-      <!-- Mentions + réseaux -->
       <div class="footer-mentions row align-items-center pt-3 pb-4">
         <div class="col-md-4 text-center yes text-md-start">
           <small>2025 @ Impact Web 360</small>
@@ -427,7 +416,6 @@
     </div>
   </footer>
   
-<!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
@@ -436,10 +424,10 @@
     @foreach($replays as $replay)
     '{{ $replay->id }}': {
       id: '{{ $replay->id }}',
-      videoUrl: '{{ asset('storage/' . $replay->video_path) }}',
+      videoUrl: '{{ $replay->video_path }}',
       title: '{{ $replay->titre }}',
-      description: {{ $replay->description }},
-      presentateurImg: '{{ $replay->presentateur_image ? asset('storage/' . $replay->presentateur_image) : '' }}',
+      description: {{ $replay->description }}, // Correction: Utilisation de ` pour les chaînes multilignes
+      presentateurImg: '{{ $replay->presentateur_image ? $replay->presentateur_image : '' }}',
       presentateurNom: '{{ $replay->presentateur_nom }}',
       presentateurPoste: '{{ $replay->presentateur_poste }}',
       supportUrl: '{{ $replay->support_url }}'
@@ -458,6 +446,11 @@
     source.src = video.videoUrl;
     videoPlayer.load();
     
+    // Lancer la lecture de la vidéo après l'avoir chargée
+    videoPlayer.play().catch(error => {
+        console.error("La lecture automatique a été bloquée : ", error);
+    });
+
     // Mettre à jour les autres informations
     document.getElementById('videoDetailTitle').textContent = video.title;
     document.getElementById('videoDetailDescription').textContent = video.description;
@@ -466,6 +459,9 @@
     if (video.presentateurImg) {
       presentateurImg.src = video.presentateurImg;
       presentateurImg.alt = video.presentateurNom;
+    } else {
+      presentateurImg.src = ''; // Réinitialise l'image si elle n'existe pas
+      presentateurImg.alt = '';
     }
     
     document.getElementById('videoDetailPresentateurNom').textContent = video.presentateurNom;
@@ -493,7 +489,7 @@
         videoItem.onclick = () => showVideoDetail(v.id);
         videoItem.innerHTML = `
           <div class="video-list-thumbnail">
-            <video>
+            <video autoplay loop muted>
               <source src="${v.videoUrl}" type="video/mp4">
             </video>
           </div>
@@ -537,6 +533,12 @@
 
     toggler.addEventListener('click', () => {
       hamburger.classList.toggle('active');
+    });
+
+    // Charger l'image de poster pour les miniatures
+    const videosInGrid = document.querySelectorAll('.video-grid-thumbnail video');
+    videosInGrid.forEach(video => {
+        video.load();
     });
   });
 </script>
