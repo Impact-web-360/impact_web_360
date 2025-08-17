@@ -267,11 +267,9 @@
         <div class="card-body px-0">
           <p class="fs-6">{{ $evenement->date_debut }}</p>
           <h5>Thème : "{{ $evenement->theme }}"</h5>
-          <a href="{{ route('step1', ['evenementId' => $evenement->id]) }}" class="btn btn-danger btn-lg mt-3">Réserver mon billet <i class="fa-solid fa-arrow-right ms-1"></i></a>
-          <a href="{{ route('replays_evenement', ['id' => $evenement->id]) }}" class=" text-decoration-none btn btn-danger btn-lg mt-3">Replay disponibles <i
-            class="fa-solid fa-arrow-right ms-1"></i></a>
+          <a href="{{ route('replays_evenement', ['id' => $evenement->id]) }}" class=" text-decoration-none mt-3">Replay disponibles <i class="fa-solid fa-arrow-right ms-1"></i></a>
         </div>
-        </div>
+        <a href="{{ route('step1', ['evenementId' => $evenement->id]) }}" class="btn btn-danger btn-lg mt-1">Réserver mon billet <i class="fa-solid fa-arrow-right ms-1"></i></a>
       </div>
     @endforeach
       </div>

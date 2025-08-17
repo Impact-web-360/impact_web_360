@@ -123,7 +123,7 @@
       color: white;
       border: none;
       border-radius: 20px;
-      padding: 5px 15px;
+      padding: 5px 20px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
       transition: transform 0.3s;
     }
@@ -935,7 +935,7 @@
 
   <div class="overlay">
     <br><br><br>
-    <button class="btn btn-360 mb-3">Impact Web 360 ➔</button>
+    <button class="btn btn-360 mb-3">Impact Web 360</button>
     <h1 class="display-5 fw-bold">Nous partons de Zéro pour <br> impacter la Jeunesse <br> Africaine.</h1>
     <p class="lead">Comment générer un revenu à 6 chiffres grâce <br> au web ?</p>
     <a href="{{ route('evenement') }}" class="btn btn-danger btn-lg mt-3 mb-5"><i class="fa fa-ticket-alt me-2 "></i>Réserver mon billet →</a>
