@@ -415,7 +415,7 @@
           <div class="step-container d-flex justify-content-center align-items-center flex-wrap gap-2">
 
             <span>
-              <a href="" class="text-decoration-none">
+              <a href="{{ route('step1', ['evenementId' => $evenementId]) }}" class="text-decoration-none">
                 <span class="d-none d-md-inline text-dark">Informations</span>
                 <span class="d-inline d-md-none step-icon"><i class="fa-regular fa-user text-dark"></i></span>
               </a>
@@ -424,7 +424,7 @@
             <span class="mx-2 text-muted">></span>
 
             <span>
-              <a href="" class="text-decoration-none">
+              <a href="{{ route('step2', ['evenementId' => $evenementId]) }}" class="text-decoration-none">
                 <span class="d-none d-md-inline fw-bold text-primary">Réservation de siège</span>
                 <span class="d-inline d-md-none step-icon"><i class="fa-solid fa-couch"></i></span>
               </a>
@@ -433,7 +433,7 @@
             <span class="mx-2 text-muted">></span>
 
             <span>
-              <a href="" class="text-decoration-none">
+              <a href="{{ route('step3', ['evenementId' => $evenementId]) }}" class="text-decoration-none">
                 <span class="d-none d-md-inline text-dark">Confirmation</span>
                 <span class="d-inline d-md-none step-icon text-reset"><i class="fa-regular fa-circle-check text-dark"></i></i></span>
               </a>

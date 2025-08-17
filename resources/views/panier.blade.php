@@ -367,7 +367,7 @@
                 <li class="nav-item"><a class="nav-link" href="{{ route('evenement') }}">Événements</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('elearning') }}">E-learning</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('intervenant') }}">Intervenants</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ route('step1') }}">Billetterie</a></li>
+                <li class="nav-item"><a class="nav-link" href="">Billetterie</a></li>
                 <li class="nav-item"><a class="nav-link active" href="{{ route('boutique') }}">Boutique</a></li>
                 <li class="nav-item"><a class="btn btn-light mx-2" href="{{ route('login') }}">Se connecter</a></li>
                 <li class="nav-item"><a class="btn btn-inscrire" href="{{ route('register') }}">S'inscrire</a></li>
@@ -480,7 +480,7 @@
                         <li><a href="{{ route('intervenant') }}">Intervenants</a></li>
                         <li><a href="{{ route('sponsors.show') }}">Partenaires & Sponsors</a></li>
                         <li><a href="#">Ressources Gratuites</a></li>
-                        <li><a href="{{ route('step1') }}">Billetterie</a></li>
+                        <li><a href="">Billetterie</a></li>
                         <li><a href="{{ route('boutique') }}">Boutique</a></li>
                         <li><a href="#">Plan d'action + Mentorat</a></li>
                     </ul>
