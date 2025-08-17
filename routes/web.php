@@ -32,6 +32,7 @@ use App\Http\Controllers\ReplayController;
 use App\Http\Controllers\ProduitPublicController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ElearningController;
+use App\Http\Controllers\KkiapayController;
 
 
 
@@ -73,6 +74,13 @@ Route::get('/get-cart-count', [CartController::class, 'getCartCount'])->name('ca
 
 Route::get('/elearning', [ElearningController::class, 'index'])->name('elearning');
 
+
+// Kkiapay callback route
+Route::get('/kkiapay/callback', [KkiapayController::class, 'callback'])->name('kkiapay.callback');
+
+Route::get('/kkiapay/test', function () {
+    return view('kkiapay_test');
+})->name('kkiapay.test');
 
 
 //Paramètres

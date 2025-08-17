@@ -11,6 +11,7 @@
         "fedapay/fedapay-php": "^0.4.7",
         "flutterwavedev/flutterwave-v3": "^1.1",
         "guzzlehttp/guzzle": "^7.2",
+        "kkiapay/kkiapay-php": "dev-master",
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.3",
         "laravel/socialite": "^5.21",

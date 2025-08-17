@@ -50,4 +50,12 @@ return [
         'environment' => env('FEDAPAY_ENV', 'live'),
 ],
 
+'kkiapay' => [
+    'public' => env('KKIAPAY_PUBLIC_KEY'),
+    'private' => env('KKIAPAY_PRIVATE_KEY'),
+    'secret' => env('KKIAPAY_SECRET_KEY'),
+    'mode' => env('KKIAPAY_MODE', 'sandbox'),
+],
+
+
 ];
