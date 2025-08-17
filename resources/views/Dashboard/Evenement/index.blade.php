@@ -563,6 +563,23 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script>
+
+    const sidebar = document.getElementById('sidebar');
+    const sidebarToggle = document.getElementById('sidebarToggle');
+    const body = document.body;
+
+    sidebarToggle.addEventListener('click', () => {
+      sidebar.classList.toggle('active');
+      body.classList.toggle('sidebar-open');
+    });
+
+    // Fermer la sidebar si clic en dehors (mobile)
+    document.addEventListener('click', (e) => {
+      if (window.innerWidth < 992 && !sidebar.contains(e.target) && !sidebarToggle.contains(e.target)) {
+        sidebar.classList.remove('active');
+        body.classList.remove('sidebar-open');
+      }
+    });
     document.addEventListener('DOMContentLoaded', function () {
         // Sélectionne tous les boutons qui ouvrent le modal d'ajout d'intervenant
         const openModalButtons = document.querySelectorAll('.open-intervenant-modal');
