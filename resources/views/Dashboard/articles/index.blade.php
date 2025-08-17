@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <meta charset="UTF-8">
     <title>Admin - Gestion des Articles</title>
@@ -16,14 +15,12 @@
             --card-bg: #fff;
             --bg-color: #f4f6f9;
         }
-
         body {
             margin: 0;
             background-color: var(--bg-color);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
         }
-
-        /* Sidebar */
         #sidebar {
             position: fixed;
             top: 0;
@@ -37,14 +34,12 @@
             transition: transform 0.3s ease;
             z-index: 1050;
         }
-
         #sidebar h4 {
             text-align: center;
             font-weight: 700;
             margin-bottom: 2rem;
             letter-spacing: 1px;
         }
-
         #sidebar a.nav-link {
             display: flex;
             align-items: center;
@@ -55,32 +50,28 @@
             transition: background-color 0.3s, border-left 0.3s;
             text-decoration: none;
         }
-
         #sidebar a.nav-link:hover,
         #sidebar a.nav-link.active {
             background-color: var(--sidebar-hover);
             border-left: 4px solid var(--main-color);
             text-decoration: none;
         }
-
-        /* Sidebar scroll bar */
         #sidebar::-webkit-scrollbar {
             width: 6px;
         }
-
         #sidebar::-webkit-scrollbar-thumb {
             background-color: var(--main-color);
             border-radius: 10px;
         }
-
-        /* Main content */
-        #content {
-            padding: 1rem;
-            transition: margin-left 0.3s ease;
-            min-height: 100vh;
+        .content-wrapper {
+            display: flex;
+            width: 100%;
         }
-
-        /* Responsive Sidebar toggle button */
+        #content {
+            padding: 1.5rem;
+            min-height: 100vh;
+            width: 100%;
+        }
         #sidebarToggle {
             display: none;
             position: fixed;
@@ -96,50 +87,60 @@
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
             transition: background-color 0.3s ease;
         }
-
         #sidebarToggle:hover {
             background-color: #a71d2a;
         }
-
-        /* Mobile & tablet */
+        @media (min-width: 992px) {
+            .content-wrapper {
+                margin-left: 250px;
+            }
+        }
         @media (max-width: 991.98px) {
             #sidebar {
                 transform: translateX(-260px);
             }
-
             #sidebar.active {
                 transform: translateX(0);
             }
-
             #content {
-                margin-top: 50px;
-                padding: 1rem;
+                width: 100%;
             }
-
             #sidebarToggle {
                 display: block;
             }
-
             body.sidebar-open {
                 overflow: hidden;
             }
         }
-
+        .card-custom {
+            background-color: var(--card-bg);
+            border-radius: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+            transition: transform 0.3s ease;
+        }
+        .card-custom:hover {
+            transform: translateY(-5px);
+        }
         .image-wrapper {
             height: 200px;
             overflow: hidden;
         }
-
         .image-wrapper img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-
         .card {
             display: flex;
             flex-direction: column;
             height: 100%;
+        }
+        .card-body.d-flex {
+            display: flex;
+            flex-direction: column;
+        }
+        .card-body .mt-auto {
+            margin-top: auto;
         }
     </style>
 </head>
@@ -148,138 +149,115 @@
 
     <button id="sidebarToggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
 
-    <div class="container-fluid">
-        <div class="row">
-
-            <nav id="sidebar" aria-label="Sidebar Navigation">
-                <h4><i class="fa fa-cogs me-2"></i>Admin Panel</h4>
-                <a href="{{ route('admin.dashboard') }}" class="nav-link"><i class="fas fa-chart-bar"></i> Statistiques</a>
-                <a href="{{ route('evenements.index') }}" class="nav-link"><i class="fa fa-calendar-alt"></i>Événements</a>
-                <a href="{{ route('sponsors.index') }}" class="nav-link"><i class="fa fa-handshake"></i>Sponsors</a>
-                <a href="{{ route('replay.index')}}" class="nav-link"><i class="fa-solid fa-play"></i> Replay
-                <a href="{{ route('categories.index')}}" class="nav-link"><i class="fas fa-layer-group"></i>Catégorie</a>
-                <a href="{{ route('formations.index')}}" class="nav-link"><i class="fas fa-graduation-cap"></i>Formation</a>
-                <a href="{{ route('modules.index')}}" class="nav-link"><i class="fas fa-puzzle-piece"></i>Modules</a>
-                <a href="{{ route('articles.index')}}" class="nav-link active"><i class="fa fa-shopping-basket"></i>Articles</a>
-                <a href="{{ route('emploies.index')}}" class="nav-link"><i class="fa fa-briefcase"></i>Emplois</a>
-                <a href="{{ route('intervenants.index')}}" class="nav-link"><i class="fa fa-user"></i>Intervenants</a>
-                <a href="{{ route('billet')}}" class="nav-link"><i class="fas fa-calendar-alt "></i> Tickets</a>
-                <form action="{{ route('logout') }}" method="POST" id="logout-form">
+    <div class="content-wrapper">
+        <nav id="sidebar" aria-label="Sidebar Navigation">
+            <h4><i class="fa fa-cogs me-2"></i>Admin Panel</h4>
+            <a href="{{ route('admin.dashboard') }}" class="nav-link"><i class="fas fa-chart-bar"></i> Statistiques</a>
+            <a href="{{ route('evenements.index') }}" class="nav-link"><i class="fa fa-calendar-alt"></i>Événements</a>
+            <a href="{{ route('sponsors.index') }}" class="nav-link"><i class="fa fa-handshake"></i>Sponsors</a>
+            <a href="{{ route('replay.index')}}" class="nav-link"><i class="fa-solid fa-play"></i> Replay</a>
+            <a href="{{ route('categories.index')}}" class="nav-link"><i class="fas fa-layer-group"></i>Catégorie</a>
+            <a href="{{ route('formations.index')}}" class="nav-link"><i class="fas fa-graduation-cap"></i>Formation</a>
+            <a href="{{ route('modules.index')}}" class="nav-link"><i class="fas fa-puzzle-piece"></i>Modules</a>
+            <a href="{{ route('articles.index')}}" class="nav-link active"><i class="fa fa-shopping-basket"></i>Articles</a>
+            <a href="{{ route('emploies.index')}}" class="nav-link"><i class="fa fa-briefcase"></i>Emplois</a>
+            <a href="{{ route('intervenants.index')}}" class="nav-link"><i class="fa fa-user"></i>Intervenants</a>
+            <a href="{{ route('billet')}}" class="nav-link"><i class="fas fa-calendar-alt "></i> Tickets</a>
+            <form action="{{ route('logout') }}" method="POST" id="logout-form">
                 @csrf
-                    <a href="{{ route('logout')}}" class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-arrow-left"></i>Deconnexion</a>
-                </form>
-            </nav>
+                <a href="{{ route('logout')}}" class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-arrow-left"></i>Déconnexion</a>
+            </form>
+        </nav>
 
-
-            <main id="content" class="col-md-12 ms-lg-auto col-lg-9">
-                <h2 id="articles">🛍️ Gestion des articles</h2>
-
-                @if(session('success'))
-                    <div class="alert alert-success">
-                        {{ session('success') }}
-                    </div>
-                @endif
-
-                @if($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-
-                <div class="card mb-4">
-                    <button class="btn btn-danger mb-3" data-bs-toggle="modal" data-bs-target="#addArticleModal">
-                    <i class="fa fa-plus"></i> Ajouter un article
-                    </button>
-
-                    <div class="row">
-                        @forelse ($articles as $article)
-                            <div class="col-md-6 col-lg-4 mb-4 d-flex">
-                                <div class="card w-100 d-flex flex-column justify-content-between bg-light shadow">
-                                    <div class="image-wrapper">
-                                        @if ($article->image)
-                                            <img src="{{ $article->image }}" class="card-img-top"
-                                                alt="Image de l'article" style="height: 200px; object-fit: cover;">
-                                        @else
-                                            <img src="{{ asset('dossiers/image/default.png') }}" class="card-img-top"
-                                                alt="Image par défaut" style="height: 200px; object-fit: cover;">
-                                            @endif
-                                    </div>
-
-                                    <div class="card-body d-flex flex-column">
-                                        <h5 class="card-title mb-3">{{ $article->nom }}</h5>
-                                        <p class="card-text">{{ $article->description }}</p>
-                                        <p class="card-text"><strong>{{ number_format($article->prix, 0, ',', ' ') }}
-                                                FCFA</strong></p>
-                                        <p class="card-text"><strong>Type:</strong> {{ $article->type }}</p>
-                                        <p class="card-text"><strong>Taille:</strong> {{ $article->taille }}</p>
-                                        @if ($article->couleur)
-                                        <p class="card-text">
-                                            <strong>Couleur:</strong>
-                                            <span style="display:inline-block;width:15px;height:15px;background-color:{{ $article->couleur }};border-radius:50%;border:1px solid #000;"></span>
-                                        </p>
-                                            @endif
-
-                                        <div class="mt-auto">
-                                            <div class="mb-2">
-                                                <a href="{{ route('articles.edit', $article->id) }}"
-                                                    class="btn btn-outline-primary btn-sm me-2">
-                                                    <i class="fas fa-edit"></i> Modifier
-                                                </a>
-
-                                                <form method="POST" action="{{ route('articles.destroy', $article->id) }}"
-                                                    onsubmit="return confirm('Confirmer la suppression ?');"
-                                                    style="display:inline;">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-outline-danger btn-sm">
-                                                        <i class="fas fa-trash"></i> Supprimer
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </div>
+        <main id="content">
+            <h2 id="articles">🛍 Gestion des articles</h2>
+            @if(session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
+            @if($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+            <button class="btn btn-danger mb-3" data-bs-toggle="modal" data-bs-target="#addArticleModal">
+                <i class="fa fa-plus"></i> Ajouter un article
+            </button>
+            <div class="row">
+                @forelse ($articles as $article)
+                    <div class="col-md-6 col-lg-3 mb-4 d-flex">
+                        <div class="card card-custom w-100 d-flex flex-column justify-content-between">
+                            <div class="image-wrapper">
+                                @if ($article->image)
+                                    <img src="{{ $article->image }}" class="card-img-top" alt="Image de l'article">
+                                @else
+                                    <img src="{{ asset('dossiers/image/default.png') }}" class="card-img-top" alt="Image par défaut">
+                                @endif
+                            </div>
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title mb-3">{{ $article->nom }}</h5>
+                                <p class="card-text">{{ $article->description }}</p>
+                                <p class="card-text"><strong>{{ number_format($article->prix, 0, ',', ' ') }} FCFA</strong></p>
+                                <p class="card-text"><strong>Type:</strong> {{ $article->type }}</p>
+                                <p class="card-text"><strong>Taille:</strong> {{ $article->taille }}</p>
+                                @if ($article->couleur)
+                                <p class="card-text">
+                                    <strong>Couleur:</strong>
+                                    <span style="display:inline-block;width:15px;height:15px;background-color:{{ $article->couleur }};border-radius:50%;border:1px solid #000;"></span>
+                                </p>
+                                @endif
+                                <div class="mt-auto">
+                                    <div class="mb-2">
+                                        <a href="{{ route('articles.edit', $article->id) }}" class="btn btn-outline-primary me-2">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <form method="POST" action="{{ route('articles.destroy', $article->id) }}" onsubmit="return confirm('Confirmer la suppression ?');" style="display:inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-outline-danger">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
-                        @empty
-                            <div class="col-12">
-                                <p class="text-center">Aucun article disponible pour le moment.</p>
-                            </div>
-                        @endforelse
+                        </div>
                     </div>
-                </div>
-            </main>
-        </div>
+                @empty
+                    <div class="col-12">
+                        <p class="text-center">Aucun article disponible pour le moment.</p>
+                    </div>
+                @endforelse
+            </div>
+        </main>
     </div>
 
-    <!-- Modal Ajouter Article -->
     <div class="modal fade" id="addArticleModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-scrollable">
-            <form method="POST" action="{{ route('articles.store') }}" enctype="multipart/form-data"
-                class="modal-content"> @csrf
-                <div class="modal-header bg-danger text-white">
+            <form method="POST" action="{{ route('articles.store') }}" enctype="multipart/form-data" class="modal-content border-0 shadow rounded-4">
+                @csrf
+                <div class="modal-header bg-dark text-white rounded-top-4">
                     <h5 class="modal-title" id="addArticleLabel">Ajouter un article</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fermer"></button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body p-4">
                     <div class="mb-3">
                         <label for="nom" class="form-label">Nom de l'article</label>
                         <input type="text" class="form-control" id="nom" name="nom" required>
                     </div>
-
                     <div class="mb-3">
                         <label for="description" class="form-label">Description</label>
                         <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
                     </div>
-
                     <div class="mb-3">
                         <label for="prix" class="form-label">Prix (FCFA)</label>
                         <input type="number" class="form-control" id="prix" name="prix" min="0" step="1" required>
                     </div>
-
                     <div class="mb-3">
                         <label for="type-modal" class="form-label">Type</label>
                         <select class="form-control" id="type-modal" name="type" required>
@@ -293,12 +271,10 @@
                             <option value="Autre">Autre</option>
                         </select>
                     </div>
-
                     <div class="mb-3">
                         <label for="couleur-modal" class="form-label">Couleur</label>
                         <input type="color" class="form-control form-control-color" id="couleur-modal" name="couleur">
                     </div>
-
                     <div class="mb-3">
                         <label for="taille-modal" class="form-label">Taille</label>
                         <select class="form-control" id="taille-modal" name="taille">
@@ -313,13 +289,12 @@
                             <option value="4XL">4XL</option>
                         </select>
                     </div>
-
                     <div class="mb-3">
                         <label for="image" class="form-label">Image</label>
                         <input type="file" class="form-control" id="image" name="image" required>
                     </div>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer bg-light rounded-bottom-4">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
                     <button type="submit" class="btn btn-danger">Enregistrer</button>
                 </div>
@@ -327,30 +302,23 @@
         </div>
     </div>
 
-
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const sidebar = document.getElementById('sidebar');
             const sidebarToggle = document.getElementById('sidebarToggle');
             const body = document.body;
-
             sidebarToggle.addEventListener('click', () => {
                 sidebar.classList.toggle('active');
                 body.classList.toggle('sidebar-open');
             });
-
-            // Fermer la sidebar si clic en dehors (mobile)
             document.addEventListener('click', (e) => {
                 if (window.innerWidth < 992 && !sidebar.contains(e.target) && !sidebarToggle.contains(e.target)) {
                     sidebar.classList.remove('active');
                     body.classList.remove('sidebar-open');
                 }
             });
-});
-
+        });
     </script>
 </body>
-
 </html>

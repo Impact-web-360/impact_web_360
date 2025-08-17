@@ -18,6 +18,9 @@ return new class extends Migration
             $table->string('image');
             $table->string('lieu')->nullable();
             $table->integer('nb_places')->nullable();
+            $table->decimal('prix_standard', 10, 2)->nullable();
+            $table->decimal('prix_vip', 10, 2)->nullable();
+            $table->decimal('prix_premium', 10, 2)->nullable();
             $table->time('heure');
             $table->string('theme');
             $table->date('date_debut');

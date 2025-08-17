@@ -306,6 +306,20 @@
                     <input type="number" name="nb_places" class="form-control">
                   </div>
                 </div>
+                <div class="row mb-3">
+                  <div class="col-md-4">
+                    <label for="prix_standard" class="form-label">Prix Standard (FCFA)</label>
+                    <input type="number" name="prix_standard" class="form-control" min="0">
+                  </div>
+                  <div class="col-md-4">
+                    <label for="prix_vip" class="form-label">Prix VIP (FCFA)</label>
+                    <input type="number" name="prix_vip" class="form-control" min="0">
+                  </div>
+                  <div class="col-md-4">
+                    <label for="prix_premium" class="form-label">Prix Premium (FCFA)</label>
+                    <input type="number" name="prix_premium" class="form-control" min="0">
+                  </div>
+                </div>
                 <div class="mb-3">
                   <label for="image" class="form-label">Image</label>
                   <input type="file" name="image" class="form-control" accept="image/*">
@@ -385,6 +399,20 @@
                 <div class="mb-3">
                   <label>Nombre de places</label>
                   <input type="number" name="nb_places" class="form-control" value="{{ $evenement->nb_places }}" required>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-md-4">
+                    <label for="prix_standard" class="form-label">Prix Standard (FCFA)</label>
+                    <input type="number" name="prix_standard" class="form-control" min="0" value="{{ $evenement->prix_standard }}">
+                  </div>
+                  <div class="col-md-4">
+                    <label for="prix_vip" class="form-label">Prix VIP (FCFA)</label>
+                    <input type="number" name="prix_vip" class="form-control" min="0" value="{{ $evenement->prix_vip }}">
+                  </div>
+                  <div class="col-md-4">
+                    <label for="prix_premium" class="form-label">Prix Premium (FCFA)</label>
+                    <input type="number" name="prix_premium" class="form-control" min="0" value="{{ $evenement->prix_premium }}">
+                  </div>
                 </div>
                 <div class="mb-3">
                   <label>Image</label>
