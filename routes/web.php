@@ -85,7 +85,7 @@ Route::get('/kkiapay/test', function () {
 
 //Paramètres
 Route::get('/modifier profil', function () {
-    return view('dashboard_utilisateur.modifier profil');
+    return view('Dashboard_utilisateur.modifier profil');
 })->name('modifier profil');
 
 Route::get('/billet', function () {
@@ -94,12 +94,12 @@ Route::get('/billet', function () {
 
 //Changer de mot de passe
 Route::get('/changer mot de passe', function () {
-    return view('dashboard_utilisateur.changer mot de passe');
+    return view('Dashboard_utilisateur.changer mot de passe');
 })->name('changer mot de passe');
 
 //Notification
 Route::get('/notification', function () {
-    return view('dashboard_utilisateur.notification');
+    return view('Dashboard_utilisateur.notification');
 })->name('notification');
 
 //Profil update
