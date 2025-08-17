@@ -662,8 +662,20 @@
         toggleBtn.style.display = 'block'; // Afficher le bouton si plus de 6
       }
     });
-  </script>
+    const backToTopBtn = document.getElementById("backToTop");
+    window.onscroll = function() {
+      if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+        backToTopBtn.style.display = "block";
+      } else {
+        backToTopBtn.style.display = "none";
+      }
+    };
 
+    backToTopBtn.addEventListener("click", function(e) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  </script>
 </body>
 
 </html>

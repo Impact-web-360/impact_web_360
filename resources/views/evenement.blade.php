@@ -242,6 +242,11 @@
     </div>
   </nav>
 
+  <a href="#" id="backToTop" class="btn btn-danger text-light shadow position-fixed" 
+   style="bottom: 20px; right: 20px; display: none; z-index: 9999; border-radius: 50%; background: #ff4500;">
+    <i class="fa fa-arrow-up"></i>
+  </a>
+
 
   <!-- SECTION : Tous les événements -->
   <section class="text-white py-5" style="margin-top: 100px;">
@@ -432,6 +437,20 @@
 
       toggler.addEventListener('click', () => {
         hamburger.classList.toggle('active');
+      });
+
+      const backToTopBtn = document.getElementById("backToTop");
+      window.onscroll = function() {
+        if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+          backToTopBtn.style.display = "block";
+        } else {
+          backToTopBtn.style.display = "none";
+        }
+      };
+
+      backToTopBtn.addEventListener("click", function(e) {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: "smooth" });
       });
     });
   </script>

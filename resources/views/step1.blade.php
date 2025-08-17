@@ -345,6 +345,11 @@
     </div>
   </nav>
 
+  <a href="#" id="backToTop" class="btn btn-danger text-light shadow position-fixed" 
+   style="bottom: 20px; right: 20px; display: none; z-index: 9999; border-radius: 50%; background: #ff4500;">
+    <i class="fa fa-arrow-up"></i>
+  </a>
+
   <div class="container" style="margin-top: 150px;">
     <div class="ticket text-center animate__animated animate__fadeIn">
       <div class="ticket-header p-3">
@@ -524,6 +529,21 @@
         hamburger.classList.toggle('active');
       });
     });
+
+    const backToTopBtn = document.getElementById("backToTop");
+    window.onscroll = function() {
+      if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+        backToTopBtn.style.display = "block";
+      } else {
+        backToTopBtn.style.display = "none";
+      }
+    };
+
+    backToTopBtn.addEventListener("click", function(e) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+    
   </script>
 </body>
 
