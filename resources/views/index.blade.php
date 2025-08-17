@@ -4,7 +4,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta name="description" content="Impact Web 360 - Événement pour impacter la jeunesse africaine grâce au web. Rejoignez-nous pour apprendre, partager et grandir ensemble.">
   <title>Impact Web 360</title>
   <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
   <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-512x512.png">
@@ -17,6 +16,16 @@
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
+        :root {
+      --primary-color: #000066;
+      --accent-color: #ff4500;
+      --accent-gradient: linear-gradient(90deg, #ff3300, #DD2476);
+      --text-light: #ffffff;
+      --text-muted: #cccccc;
+      --bg-dark: #000000;
+      --bg-card: #1a1d29;
+      --success-color: #28a745;
+    }
     body { background-color: black; color: white; font-family: 'Montserrat', sans-serif; scroll-behavior: smooth; overflow-x: hidden; }
     .navbar-custom { background-color: #000066; border-radius: 15px; margin-top: 20px; padding: 10px 20px; height: 70px; }
     .navbar-brand img { max-height: 160px; width: auto; }
@@ -76,6 +85,27 @@
     .navbar-brand img {
       max-height: 160px;
       width: auto;
+    }
+
+        .nav-link {
+      position: relative;
+      padding: 5px 10px;
+      
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: var(--accent-color);
+      transition: width 0.3s ease;
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
     }
 
     .btn-inscrire {
@@ -174,6 +204,81 @@
       animation: fadeIn 1.5s ease-in-out;
     }
 
+
+        /* Section Titles */
+    .section-title {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 2.5rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      font-size: 2.5rem;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 50%;
+      height: 4px;
+      background: var(--accent-gradient);
+      border-radius: 2px;
+    }
+
+    .section-subtitle {
+      color: var(--text-muted);
+      margin-bottom: 3rem;
+      font-size: 1.2rem;
+    }
+
+    /* About Section */
+    .about-section {
+      padding: 100px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+      opacity: 0.1;
+      z-index: 0;
+    }
+
+    .about-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .stat-box {
+      background: rgba(255,255,255,0.05);
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 20px;
+      transition: all 0.3s ease;
+      border-left: 3px solid var(--accent-color);
+    }
+
+    .stat-box:hover {
+      transform: translateY(-5px);
+      background: rgba(255,255,255,0.1);
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+    }
+
+
     .taille {
       font-size: 17px;
     }
@@ -184,6 +289,10 @@
       font-weight: bold;
       background-color: rgba(85, 84, 160, 0.6);
       border-radius: 10px;
+    }
+
+    .display-5 {
+      font-size: calc(1.425rem + 2.1vw);
     }
 
     .btn-danger {
@@ -287,6 +396,63 @@
       background-color: #000000;
     }
 
+    /*Galerie Section*/
+        /* Location Section */
+    .location-section {
+      padding: 100px 0;
+      background-color: #0a0a1a;
+    }
+
+    .map-container {
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      height: 400px;
+    }
+
+    /* Gallery Section */
+    .gallery-section {
+      padding: 100px 0;
+    }
+
+    .gallery-item {
+      margin-bottom: 30px;
+      overflow: hidden;
+      border-radius: 10px;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      transition: all 0.5s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.1);
+    }
+
+    .gallery-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255,69,0,0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+
+    .gallery-item:hover .gallery-overlay {
+      opacity: 1;
+    }
+
+
     /* ----- Partie Événement ----- */
     .countdown-container {
       background-color: rgba(255, 255, 255, 0.05);
@@ -306,12 +472,17 @@
     .time-box .number {
       font-size: 2.8rem;
       font-weight: bold;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1;
     }
 
     .time-box .label {
       font-size: 0.9rem;
       color: #c0c0c0;
       margin-top: 5px;
+      color: var(--text-muted);
     }
 
 
@@ -452,7 +623,7 @@
 
       /* Navbar mobile */
       .navbar-brand img {
-        margin-top: -70px;
+        margin-top: -65px;
         max-height: 180px;
         margin-left: -30px;
         ;
@@ -806,7 +977,7 @@
     <!-- Slider d'images en fond -->
   <div class="hero-slider">
     <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
-    <div class="hero-slide active" style="background-image: url('images/homme.png');"></div>
+    <div class="hero-slide active" style="background-image: url('https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')"></div>
     <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
     <div class="hero-slide" style="background-image: url('images/homme2.png');"></div>
     <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1497366811353-6870744d04b2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
@@ -816,7 +987,7 @@
   <div class="overlay">
     <br><br><br>
     <button class="btn btn-360 mb-3">Impact Web 360 ➔</button>
-    <h1 class="display-5">Nous partons de Zéro pour <br> impacter la Jeunesse <br> Africaine.</h1>
+    <h1 class="display-5 fw-bold">Nous partons de Zéro pour <br> impacter la Jeunesse <br> Africaine.</h1>
     <p class="lead">Comment générer un revenu à 6 chiffres grâce <br> au web ?</p>
     <a href="{{ route('step1') }}" class="btn btn-danger btn-lg mt-3 mb-5"><i class="fa fa-ticket-alt me-2 "></i>Réserver mon billet →</a>
 
@@ -863,30 +1034,57 @@
 </a>
 
 
-  <!-- Statistiques -->
-  <section class="py-5 bg-black text-center taille" data-aos="fade-up">
-    <div class="container">
-      <p class="mb-5" style="color: #ccc;"><strong style="color: white; font-size: 20px;">Impact Web 360</strong> est bien plus qu'un simple événement, c'est un mouvement qui transforme la jeunesse africaine.
+  <!-- À propos -->
+  <section class="about-section mt-0" id="about">
+    <div class="about-bg"></div>
+    <div class="container about-content">
+      <div class="row align-items-center">
+        <div class="col-lg-6 mb-5 mb-lg-0" data-aos="fade-right">
+          <h2 class="section-title">À PROPOS</h2>
+          <p class="lead">Le plus grand hackathon digital d'Afrique de l'Ouest</p>
+      <p class="mb-5" style="color: #ccc;"><strong style="color: red; font-size: 20px;">Impact Web 360</strong> est bien plus qu'un simple événement, c'est un mouvement qui transforme la jeunesse africaine.
         Depuis notre création, nous avons formé et inspiré des centaines de jeunes entrepreneurs à travers des ateliers pratiques, des conférences stimulantes et un réseau solidaire.
         Notre communauté grandissante témoigne de l'impact réel de nos actions sur le développement des compétences digitales en Afrique.
       </p>
-      <div class="row" data-aos="fade-up" data-aos-delay="100">
-        <div class="col-md-4 mb-4" data-aos="flip-right">
-          <h3 class="text-danger">+500</h3>
-          <p>participants en 2024</p>
+      <p>
+        Ce projet a été initié par <span style="color: red;" class="fw-bold">Kodjo Vincent GBENOLO</span>, entrepreneur digital béninois qui a imaginé cet événement pour impacter la jeunesse africaine.
+      </p>
         </div>
-        <div class="col-md-4 mb-4">
-          <h3 class="text-danger">+15</h3>
-          <p>experts et intervenants</p>
-        </div>
-        <div class="col-md-4 mb-4">
-          <h3 class="text-danger">+1000</h3>
-          <p>connexions professionnelles</p>
+        <div class="col-lg-6" data-aos="fade-left">
+          <div class="row">
+            <div class="col-md-6 mb-4">
+              <div class="stat-box">
+                <div class="stat-number">500+</div>
+                <h5>Participants</h5>
+                <p class="small">Développeurs, designers, entrepreneurs et autres attendus</p>
+              </div>
+            </div>
+            <div class="col-md-6 mb-4">
+              <div class="stat-box">
+                <div class="stat-number"><i class="fas fa-microphone fa-2x" style="width: 20px;"></i></div>
+                <h5>Non-stop</h5>
+                <p class="small">De création et de développement</p>
+              </div>
+            </div>
+            <div class="col-md-6 mb-4">
+              <div class="stat-box">
+                <div class="stat-number">15+</div>
+                <h5>Experts</h5>
+                <p class="small">Intervenants et mentors</p>
+              </div>
+            </div>
+            <div class="col-md-6 mb-4">
+              <div class="stat-box">
+                <div class="stat-number">3</div>
+                <h5>Thématiques</h5>
+                <p class="small">Pour un impact maximal</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
-
   
 
   <!-- Événement dynamique -->
@@ -931,6 +1129,74 @@
       </div>
     </div>
   </section>
+
+
+
+    <!-- Galerie -->
+  <section class="gallery-section bg-black">
+    <div class="container">
+      <h2 class="section-title">GALERIE PHOTO</h2>
+      <p class="text-center mb-5">Quelques souvenirs de l'édition précédente</p>
+      
+      <div class="row" id="lightgallery">
+        <div class="col-md-4 col-6 mb-4">
+          <div class="gallery-item" data-src="https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80">
+            <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Galerie 1">
+            <div class="gallery-overlay">
+              <i class="fas fa-search-plus fa-3x"></i>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-4 col-6 mb-4">
+          <div class="gallery-item" data-src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80">
+            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Galerie 2">
+            <div class="gallery-overlay">
+              <i class="fas fa-search-plus fa-3x"></i>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-4 col-6 mb-4">
+          <div class="gallery-item" data-src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80">
+            <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Galerie 3">
+            <div class="gallery-overlay">
+              <i class="fas fa-search-plus fa-3x"></i>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-4 col-6 mb-4">
+          <div class="gallery-item" data-src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80">
+            <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Galerie 4">
+            <div class="gallery-overlay">
+              <i class="fas fa-search-plus fa-3x"></i>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-4 col-6 mb-4">
+          <div class="gallery-item" data-src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80">
+            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Galerie 5">
+            <div class="gallery-overlay">
+              <i class="fas fa-search-plus fa-3x"></i>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-4 col-6 mb-4">
+          <div class="gallery-item" data-src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80">
+            <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Galerie 6">
+            <div class="gallery-overlay">
+              <i class="fas fa-search-plus fa-3x"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
 
   <!-- Partenaires dynamiques -->
   <section class="partners-section" data-aos="fade-up">
@@ -1153,9 +1419,11 @@
     </div>
   </footer>
   
+
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.2/lightgallery.min.js"></script>
   <script>
     AOS.init();
     const eventDate = new Date("2025-11-29T09:00:00").getTime();
@@ -1197,6 +1465,15 @@
 
 <!-- Script pour le slider -->
 <script>
+
+  // Galerie Lightbox
+      // LightGallery
+    lightGallery(document.getElementById('lightgallery'), {
+      selector: '.gallery-item',
+      download: false,
+      counter: false
+    });
+
   // Slider automatique
   document.addEventListener('DOMContentLoaded', function() {
     const slides = document.querySelectorAll('.hero-slide');
@@ -1218,29 +1495,6 @@
   
 </script>
 
-  </script>
-
-  <script>
-    const backToTopBtn = document.getElementById("backToTop");
-
-    // Afficher le bouton quand on descend de 200px
-    window.onscroll = function() {
-      if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
-        backToTopBtn.style.display = "block";
-      } else {
-        backToTopBtn.style.display = "none";
-      }
-    };
-
-    // Animation douce de retour en haut
-    backToTopBtn.addEventListener("click", function(e) {
-      e.preventDefault();
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
-    });
-  </script>
 </body>
 
 </html>
