@@ -156,6 +156,7 @@
       }
       #content {
         width: 100%;
+        margin-top: 50px;
       }
       #sidebarToggle {
         display: block;
