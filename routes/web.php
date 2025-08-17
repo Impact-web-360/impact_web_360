@@ -132,11 +132,16 @@ Route::post('/valider-code-promo', [TicketController::class, 'validerCodePromo']
 Route::get('/valider-code-promo', [HomeController::class, 'ticket']);
 
 // Routes pour les étapes de réservation
-Route::get('/step1', [TicketController::class, 'step1'])->name('step1');
-Route::post('/step1', [TicketController::class, 'postStep1'])->name('step1.post');
-Route::get('/step2', [TicketController::class, 'step2'])->name('step2');
-Route::post('/step2', [TicketController::class, 'postStep2'])->name('step2.post');
-Route::get('/step3', [TicketController::class, 'step3'])->name('step3');
+// Route pour afficher la page d'informations
+Route::get('/billetterie/etape1/{evenementId}', [TicketController::class, 'step1'])->name('step1');
+
+// Route pour soumettre le formulaire
+Route::post('/billetterie/etape1/{evenementId}', [TicketController::class, 'postStep1'])->name('step1.post');
+
+Route::get('/step2/{evenementId}', [TicketController::class, 'step2'])->name('step2');
+Route::post('/step2/{evenementId}', [TicketController::class, 'postStep2'])->name('step2.post');
+Route::get('/step3/{evenementId}', [TicketController::class, 'step3'])->name('step3');
+Route::post('/step3/{evenementId}', [TicketController::class, 'postStep3'])->name('step3.post');
 
 # --- Fin de la section de routes pour les tickets ---
 
