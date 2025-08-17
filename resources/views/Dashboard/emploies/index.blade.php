@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <meta charset="UTF-8">
     <title>Admin - Gestion des Emplois</title>
@@ -16,14 +15,12 @@
             --card-bg: #fff;
             --bg-color: #f4f6f9;
         }
-
         body {
             margin: 0;
             background-color: var(--bg-color);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
         }
-
-        /* Sidebar */
         #sidebar {
             position: fixed;
             top: 0;
@@ -37,14 +34,12 @@
             transition: transform 0.3s ease;
             z-index: 1050;
         }
-
         #sidebar h4 {
             text-align: center;
             font-weight: 700;
             margin-bottom: 2rem;
             letter-spacing: 1px;
         }
-
         #sidebar a.nav-link {
             display: flex;
             align-items: center;
@@ -55,32 +50,28 @@
             transition: background-color 0.3s, border-left 0.3s;
             text-decoration: none;
         }
-
         #sidebar a.nav-link:hover,
         #sidebar a.nav-link.active {
             background-color: var(--sidebar-hover);
             border-left: 4px solid var(--main-color);
             text-decoration: none;
         }
-
-        /* Sidebar scroll bar */
         #sidebar::-webkit-scrollbar {
             width: 6px;
         }
-
         #sidebar::-webkit-scrollbar-thumb {
             background-color: var(--main-color);
             border-radius: 10px;
         }
-
-        /* Main content */
+        .content-wrapper {
+            display: flex;
+            width: 100%;
+        }
         #content {
             padding: 2rem;
-            transition: margin-left 0.3s ease;
             min-height: 100vh;
+            width: 100%;
         }
-
-        /* Responsive Sidebar toggle button */
         #sidebarToggle {
             display: none;
             position: fixed;
@@ -96,50 +87,62 @@
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
             transition: background-color 0.3s ease;
         }
-
         #sidebarToggle:hover {
             background-color: #a71d2a;
         }
+        @media (min-width: 992px) {
+            .content-wrapper {
+                margin-left: 250px;
 
-        /* Mobile & tablet */
+            }
+        }
         @media (max-width: 991.98px) {
             #sidebar {
                 transform: translateX(-260px);
             }
-
             #sidebar.active {
                 transform: translateX(0);
             }
-
             #content {
-                margin-top: 50px;
-                padding: 1rem;
+                width: 100%;
+                margin-top: 40px;
             }
-
             #sidebarToggle {
                 display: block;
             }
-
             body.sidebar-open {
                 overflow: hidden;
             }
         }
-
+        .card-custom {
+            background-color: var(--card-bg);
+            border-radius: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+            transition: transform 0.3s ease;
+        }
+        .card-custom:hover {
+            transform: translateY(-5px);
+        }
         .image-wrapper {
             height: 200px;
             overflow: hidden;
         }
-
         .image-wrapper img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-
         .card {
             display: flex;
             flex-direction: column;
             height: 100%;
+        }
+        .card-body.d-flex {
+            display: flex;
+            flex-direction: column;
+        }
+        .card-body .mt-auto {
+            margin-top: auto;
         }
     </style>
 </head>
@@ -148,139 +151,127 @@
 
     <button id="sidebarToggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
 
-    <div class="container-fluid">
-        <div class="row">
-
-            <nav id="sidebar" aria-label="Sidebar Navigation" class="col-md-3 d-md-block">
-                <h4><i class="fa fa-cogs mt-5 me-2"></i>Admin Panel</h4>
-                <a href="{{ route('admin.dashboard') }}" class="nav-link"><i class="fas fa-chart-bar"></i> Statistiques</a>
-                <a href="{{ route('evenements.index') }}" class="nav-link"><i class="fa fa-calendar-alt"></i>Événements</a>
-                <a href="{{ route('sponsors.index') }}" class="nav-link"><i class="fa fa-handshake"></i>Sponsors</a>
-                <a href="{{ route('replay.index')}}" class="nav-link"><i class="fa-solid fa-play"></i> Replay</a>
-                <a href="{{ route('categories.index')}}" class="nav-link"><i class="fas fa-layer-group"></i>Catégorie</a>
-                <a href="{{ route('formations.index')}}" class="nav-link"><i class="fas fa-graduation-cap"></i>Formation</a>
-                <a href="{{ route('modules.index')}}" class="nav-link"><i class="fas fa-puzzle-piece"></i>Modules</a>
-                <a href="{{ route('articles.index')}}" class="nav-link"><i class="fa fa-shopping-basket"></i>Articles</a>
-                <a href="{{ route('emploies.index')}}" class="nav-link active"><i class="fa fa-briefcase"></i>Emplois</a>
-                <a href="{{ route('intervenants.index')}}" class="nav-link"><i class="fa fa-user"></i>Intervenants</a>
-                <a href="{{ route('billet')}}" class="nav-link"><i class="fas fa-calendar-alt "></i> Tickets</a>
-                <form action="{{ route('logout') }}" method="POST" id="logout-form">
+    <div class="content-wrapper">
+        <nav id="sidebar" aria-label="Sidebar Navigation">
+            <h4><i class="fa fa-cogs me-2"></i>Admin Panel</h4>
+            <a href="{{ route('admin.dashboard') }}" class="nav-link"><i class="fas fa-chart-bar"></i> Statistiques</a>
+            <a href="{{ route('evenements.index') }}" class="nav-link"><i class="fa fa-calendar-alt"></i>Événements</a>
+            <a href="{{ route('sponsors.index') }}" class="nav-link"><i class="fa fa-handshake"></i>Sponsors</a>
+            <a href="{{ route('replay.index')}}" class="nav-link"><i class="fa-solid fa-play"></i> Replay</a>
+            <a href="{{ route('categories.index')}}" class="nav-link"><i class="fas fa-layer-group"></i>Catégorie</a>
+            <a href="{{ route('formations.index')}}" class="nav-link"><i class="fas fa-graduation-cap"></i>Formation</a>
+            <a href="{{ route('modules.index')}}" class="nav-link"><i class="fas fa-puzzle-piece"></i>Modules</a>
+            <a href="{{ route('articles.index')}}" class="nav-link"><i class="fa fa-shopping-basket"></i>Articles</a>
+            <a href="{{ route('emploies.index')}}" class="nav-link active"><i class="fa fa-briefcase"></i>Emplois</a>
+            <a href="{{ route('intervenants.index')}}" class="nav-link"><i class="fa fa-user"></i>Intervenants</a>
+            <a href="{{ route('billet')}}" class="nav-link"><i class="fas fa-calendar-alt "></i> Tickets</a>
+            <form action="{{ route('logout') }}" method="POST" id="logout-form">
                 @csrf
-                    <a href="{{ route('logout')}}" class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-arrow-left"></i>Deconnexion</a>
-                </form>
-            </nav>
+                <a href="{{ route('logout')}}" class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-arrow-left"></i>Déconnexion</a>
+            </form>
+        </nav>
 
-            <main id="content" class="col-md-12 ms-sm-auto col-lg-9">
-                <h2 id="emploies">💼 Gestion des emplois</h2>
+        <main id="content">
+            <h2 id="emploies">💼 Gestion des emplois</h2>
 
-                @if(session('success'))
-                    <div class="alert alert-success">
-                        {{ session('success') }}
-                    </div>
-                @endif
+            @if(session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
 
-                @if($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
+            @if($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 
-                <div class="card mb-4">
-                    <button class="btn btn-danger mb-3" data-bs-toggle="modal" data-bs-target="#addEmploieModal">
-                        <i class="fa fa-plus"></i> Ajouter un emploi
-                    </button>
+            <button class="btn btn-danger mb-3" data-bs-toggle="modal" data-bs-target="#addEmploieModal">
+                <i class="fa fa-plus"></i> Ajouter un emploi
+            </button>
 
-                    <div class="row">
-                        @forelse ($emploies as $emploie)
-                            <div class="col-md-6 col-lg-4 mb-4 d-flex">
-                                <div class="card w-100 d-flex flex-column justify-content-between bg-light shadow">
-                                    <div class="image-wrapper">
-                                        @if($emploie->logo)
-                                            <img src="{{ asset('storage/' . $emploie->logo) }}" class="card-img-top"
-                                                alt="Logo de l'emploi" style="height: 200px; object-fit: cover;">
-                                        @else
-                                            <img src="{{ asset('dossiers/image/default.png') }}" class="card-img-top"
-                                                alt="Image par défaut" style="height: 200px; object-fit: cover;">
-                                        @endif
-                                    </div>
-
-                                    <div class="card-body d-flex flex-column">
-                                        <h5 class="card-title mb-3">{{ $emploie->nom }}</h5>
-                                        <p class="card-text"><strong>Promoteur:</strong> {{ $emploie->promoteur }}</p>
-                                        <p class="card-text"><strong>Localisation:</strong> {{ $emploie->localisation ?? 'Non spécifiée' }}</p>
-                                        <p class="card-text"><strong>Type:</strong> {{ $emploie->type }}</p>
-                                        <p class="card-text"><strong>Catégorie:</strong> {{ $emploie->categorie }}</p>
-                                        
-                                        <div class="mt-auto">
-                                            <div class="mb-2">
-                                                <a href="{{ $emploie->lien }}" target="_blank" class="btn btn-outline-info btn-sm me-2">
-                                                    <i class="fas fa-link"></i> Voir l'offre
-                                                </a>
-                                                <a href="{{ route('emploies.edit', $emploie->id) }}"
-                                                    class="btn btn-outline-primary btn-sm me-2">
-                                                    <i class="fas fa-edit"></i> Modifier
-                                                </a>
-
-                                                <form method="POST" action="{{ route('emploies.destroy', $emploie->id) }}"
-                                                    onsubmit="return confirm('Confirmer la suppression ?');"
-                                                    style="display:inline;">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-outline-danger btn-sm">
-                                                        <i class="fas fa-trash"></i> Supprimer
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </div>
+            <div class="row">
+                @forelse ($emploies as $emploie)
+                    <div class="col-md-6 col-lg-3 mb-4 d-flex">
+                        <div class="card card-custom w-100 d-flex flex-column justify-content-between">
+                            <div class="image-wrapper">
+                                @if($emploie->logo)
+                                    <img src="{{ asset('storage/' . $emploie->logo) }}" class="card-img-top"
+                                        alt="Logo de l'emploi">
+                                @else
+                                    <img src="{{ asset('dossiers/image/default.png') }}" class="card-img-top"
+                                        alt="Image par défaut">
+                                @endif
+                            </div>
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title mb-3">{{ $emploie->nom }}</h5>
+                                <p class="card-text"><strong>Promoteur:</strong> {{ $emploie->promoteur }}</p>
+                                <p class="card-text"><strong>Localisation:</strong> {{ $emploie->localisation ?? 'Non spécifiée' }}</p>
+                                <p class="card-text"><strong>Type:</strong> {{ $emploie->type }}</p>
+                                <p class="card-text"><strong>Catégorie:</strong> {{ $emploie->categorie }}</p>
+                                
+                                <div class="mt-auto">
+                                    <div class="mb-2">
+                                        <a href="{{ $emploie->lien }}" target="_blank" class="btn btn-outline-info me-2">
+                                            <i class="fas fa-link"></i> 
+                                        </a>
+                                        <a href="{{ route('emploies.edit', $emploie->id) }}"
+                                            class="btn btn-outline-primary me-2">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <form method="POST" action="{{ route('emploies.destroy', $emploie->id) }}"
+                                            onsubmit="return confirm('Confirmer la suppression ?');"
+                                            style="display:inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-outline-danger">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
-                        @empty
-                            <div class="col-12">
-                                <p class="text-center">Aucun emploi disponible pour le moment.</p>
-                            </div>
-                        @endforelse
+                        </div>
                     </div>
-                </div>
-            </main>
-        </div>
+                @empty
+                    <div class="col-12">
+                        <p class="text-center">Aucun emploi disponible pour le moment.</p>
+                    </div>
+                @endforelse
+            </div>
+        </main>
     </div>
 
-    <!-- Modal Ajouter Emploi -->
     <div class="modal fade" id="addEmploieModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-scrollable">
             <form method="POST" action="{{ route('emploies.store') }}" enctype="multipart/form-data"
-                class="modal-content">
+                class="modal-content border-0 shadow rounded-4">
                 @csrf
-                <div class="modal-header bg-danger text-white">
+                <div class="modal-header bg-dark text-white rounded-top-4">
                     <h5 class="modal-title" id="addEmploieLabel">Ajouter un emploi</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fermer"></button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body p-4">
                     <div class="mb-3">
                         <label for="nom" class="form-label">Nom de l'emploi</label>
                         <input type="text" class="form-control" id="nom" name="nom" required>
                     </div>
-
                     <div class="mb-3">
                         <label for="promoteur" class="form-label">Promoteur</label>
                         <input type="text" class="form-control" id="promoteur" name="promoteur" required>
                     </div>
-
                     <div class="mb-3">
                         <label for="localisation" class="form-label">Localisation</label>
                         <input type="text" class="form-control" id="localisation" name="localisation">
                     </div>
-
                     <div class="mb-3">
                         <label for="lien" class="form-label">Lien vers l'offre</label>
                         <input type="url" class="form-control" id="lien" name="lien" required>
                     </div>
-
                     <div class="mb-3">
                         <label for="type-modal" class="form-label">Type</label>
                         <select class="form-control" id="type-modal" name="type" required>
@@ -293,7 +284,6 @@
                             <option value="autre">Autre</option>
                         </select>
                     </div>
-
                     <div class="mb-3">
                         <label for="categorie-modal" class="form-label">Catégorie</label>
                         <select class="form-control" id="categorie-modal" name="categorie" required>
@@ -308,13 +298,12 @@
                             <option value="autre">Autre</option>
                         </select>
                     </div>
-
                     <div class="mb-3">
                         <label for="logo" class="form-label">Logo</label>
                         <input type="file" class="form-control" id="logo" name="logo">
                     </div>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer bg-light rounded-bottom-4">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
                     <button type="submit" class="btn btn-danger">Enregistrer</button>
                 </div>
@@ -328,13 +317,10 @@
             const sidebar = document.getElementById('sidebar');
             const sidebarToggle = document.getElementById('sidebarToggle');
             const body = document.body;
-
             sidebarToggle.addEventListener('click', () => {
                 sidebar.classList.toggle('active');
                 body.classList.toggle('sidebar-open');
             });
-
-            // Fermer la sidebar si clic en dehors (mobile)
             document.addEventListener('click', (e) => {
                 if (window.innerWidth < 992 && !sidebar.contains(e.target) && !sidebarToggle.contains(e.target)) {
                     sidebar.classList.remove('active');
@@ -344,5 +330,4 @@
         });
     </script>
 </body>
-
 </html>
