@@ -387,23 +387,21 @@
     <div class="ticket text-center animate_animated animate_fadeIn">
       <div class="ticket-header p-3">
         <img src="{{ asset('dossiers/image/Impact-Web-360-Logo1.png') }}" alt="Logo" class="ticket-header-img">
-        <h5>Impact Web 360 – Édition 2025</h5>
+        <h5>{{ $evenement->nom }}</h5>
         <div><strong>TK0001</strong></div>
       </div>
       <div class="d-flex justify-content-center align-items-center p-3">
         <div class="ticket-body-left">
           <h5>Date et heure</h5>
-          <h6></h6>
-          <p></p>
+          <h6>{{ \Carbon\Carbon::parse($evenement->date_debut)->format('d F Y') }}</h6>
+          <p>{{ \Carbon\Carbon::parse($evenement->heure)->format('H:i') }}</p>
         </div>
         <div class="align-self-center qr-code">
-          <img
-            src="https://api.qrserver.com/v1/create-qr-code/?data=ImpactWeb360-2025&size=100x100&bgcolor=255-51-0&color=255-255-255"
-            alt="QR Code">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?data=ImpactWeb360-2025&size=100x100&bgcolor=255-51-0&color=255-255-255" alt="QR Code">
         </div>
         <div>
           <h5>Lieu</h5>
-          <h5></h5>
+          <h5>{{ $evenement->lieu }}</h5>
           <p></p>
         </div>
       </div>
@@ -415,7 +413,7 @@
           <div class="step-container d-flex justify-content-center align-items-center flex-wrap gap-2">
 
             <span>
-              <a href="{{ route('step1', ['evenementId' => $evenementId]) }}" class="text-decoration-none">
+              <a href="" class="text-decoration-none">
                 <span class="d-none d-md-inline text-dark">Informations</span>
                 <span class="d-inline d-md-none step-icon"><i class="fa-regular fa-user text-dark"></i></span>
               </a>
@@ -424,7 +422,7 @@
             <span class="mx-2 text-muted">></span>
 
             <span>
-              <a href="{{ route('step2', ['evenementId' => $evenementId]) }}" class="text-decoration-none">
+              <a href="" class="text-decoration-none">
                 <span class="d-none d-md-inline fw-bold text-primary">Réservation de siège</span>
                 <span class="d-inline d-md-none step-icon"><i class="fa-solid fa-couch"></i></span>
               </a>
@@ -433,7 +431,7 @@
             <span class="mx-2 text-muted">></span>
 
             <span>
-              <a href="{{ route('step3', ['evenementId' => $evenementId]) }}" class="text-decoration-none">
+              <a href="" class="text-decoration-none">
                 <span class="d-none d-md-inline text-dark">Confirmation</span>
                 <span class="d-inline d-md-none step-icon text-reset"><i class="fa-regular fa-circle-check text-dark"></i></i></span>
               </a>
@@ -453,58 +451,60 @@
 
         <form action="{{ route('step2.post', ['evenementId' => $evenement->id]) }}" method="POST" class="mt-4">
           @csrf
-          <div class="seat-map shadow">
-            <h4>Choisissez votre catégorie</h4>
-            <div class=" mt-3" id="grid">
-              <p> -----------------------------------------</p>
-              <p> □□□□□ Scène □□□□□ </p>
-              <p> -----------------------------------------</p>
-              <p> 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨</p>
-              <p> 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 ← VIP x Premium</p>
-              <p> -----------------------------------------</p>
-              <p> 🟩 🟩 🟩 🟩 🟩 🟩 ← Standard</p>
-              <p> 🟩 🟩 🟩 🟩 🟩 🟩 🟩 🟩 🟩 </p>
-              <p> ----------------------------------------- </p>
-              <p> 🟦 🟦 🟦 🟩 🟩 </p>
-              <p> 🟦 🟦 🟦 🟩 🟩 </p>
-              <p> 🟦 🟦 🟦 🟩 🟩 </p>
-              <p> 🟦 🟦 🟦 🟩 🟩 </p>
-              <p> 🟦 🟦 🟦 🟩 🟩 </p>
-              <p> 🟦 🟦 🟦 🟩 🟩 </p>
-              <p> ----------------------------------------- </p>
-              <center>
-                <h4>Légende</h4>
-              </center>
+          <div class="div-form">
+            <div class="seat-map shadow">
+              <h4>Choisissez votre catégorie</h4>
+              <div class=" mt-3" id="grid">
+                <p> -----------------------------------------</p>
+                <p> □□□□□ Scène □□□□□ </p>
+                <p> -----------------------------------------</p>
+                <p> 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨</p>
+                <p> 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 ← VIP x Premium</p>
+                <p> -----------------------------------------</p>
+                <p> 🟩 🟩 🟩 🟩 🟩 🟩 ← Standard</p>
+                <p> 🟩 🟩 🟩 🟩 🟩 🟩 🟩 🟩 🟩 </p>
+                <p> ----------------------------------------- </p>
+                <p> 🟦 🟦 🟦 🟩 🟩 </p>
+                <p> 🟦 🟦 🟦 🟩 🟩 </p>
+                <p> 🟦 🟦 🟦 🟩 🟩 </p>
+                <p> 🟦 🟦 🟦 🟩 🟩 </p>
+                <p> 🟦 🟦 🟦 🟩 🟩 </p>
+                <p> 🟦 🟦 🟦 🟩 🟩 </p>
+                <p> ----------------------------------------- </p>
+                <center>
+                  <h4>Légende</h4>
+                </center>
 
-            <div class="d-flex justify-content-center flex-wrap gap-4">
-              @if ($evenement->prix_standard)
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="categorie" id="radioStandard" value="Standard" data-prix="{{ $evenement->prix_standard }}" required>
-                  <label class="form-check-label fw-bold" for="radioStandard">
-                    Standard 🟩🟦<br> ({{ $evenement->prix_standard }} FCFA)
-                  </label>
-                </div>
-              @endif
-              @if ($evenement->prix_vip)
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="categorie" id="radioVIP" value="VIP" data-prix="{{ $evenement->prix_vip }}">
-                  <label class="form-check-label fw-bold" for="radioVIP">
-                    VIP 🟨 <br> ({{ $evenement->prix_vip }} FCFA)
-                  </label>
-                </div>
-              @endif
-              @if ($evenement->prix_premium)
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="categorie" id="radioPremium" value="Premium" data-prix="{{ $evenement->prix_premium }}">
-                  <label class="form-check-label fw-bold" for="radioPremium">
-                    Premium 🟨<br> ({{ $evenement->prix_premium }} FCFA)
-                  </label>
-                </div>
-              @endif
+              <div class="d-flex justify-content-center flex-wrap gap-4">
+                @if ($evenement->prix_standard)
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="categorie" id="radioStandard" value="Standard" data-prix="{{ $evenement->prix_standard }}" required>
+                    <label class="form-check-label fw-bold" for="radioStandard">
+                      Standard 🟩🟦<br> ({{ $evenement->prix_standard }} FCFA)
+                    </label>
+                  </div>
+                @endif
+                @if ($evenement->prix_vip)
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="categorie" id="radioVIP" value="VIP" data-prix="{{ $evenement->prix_vip }}">
+                    <label class="form-check-label fw-bold" for="radioVIP">
+                      VIP 🟨 <br> ({{ $evenement->prix_vip }} FCFA)
+                    </label>
+                  </div>
+                @endif
+                @if ($evenement->prix_premium)
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="categorie" id="radioPremium" value="Premium" data-prix="{{ $evenement->prix_premium }}">
+                    <label class="form-check-label fw-bold" for="radioPremium">
+                      Premium 🟨<br> ({{ $evenement->prix_premium }} FCFA)
+                    </label>
+                  </div>
+                @endif
+              </div>
+
+              <h5 class="mt-4">Prix total : <span id="prixTotal">0</span> FCFA</h5>
+
             </div>
-
-            <h5 class="mt-4">Prix total : <span id="prixTotal">0</span> FCFA</h5>
-
           </div>
           <div class="text-center">
             <button type="submit" class="btn btn-suivant">Suivant</button>
@@ -513,6 +513,7 @@
       </div>
     </div>
   </div>
+</div> 
 
 
   <footer class="footer text-white pt-5 mt-5">
