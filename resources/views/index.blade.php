@@ -26,46 +26,11 @@
       --bg-card: #1a1d29;
       --success-color: #28a745;
     }
-    body { background-color: black; color: white; font-family: 'Montserrat', sans-serif; scroll-behavior: smooth; overflow-x: hidden; }
-    .navbar-custom { background-color: #000066; border-radius: 15px; margin-top: 20px; padding: 10px 20px; height: 70px; }
-    .navbar-brand img { max-height: 160px; width: auto; }
-    .btn-inscrire { background: #ff4500; color: white; border: none; border-radius: 8px; }
-    .btn-inscrire:hover { background: linear-gradient(90deg, #ff3300, #DD2476); color: #000000; transform: scale(1.05);}
-    .btn-outline-light { border-radius: 8px; }
-    .btn-light:hover { background-color: #000000; color: #f8f9fa; border: none; }
-    .footer { background-color: #000066; color: #ccccff; }
-    .footer-links a { color: #ccccff; text-decoration: none; display: block; margin-bottom: 0.5rem; transition: all 0.3s ease; }
-    .footer-links a:hover { color: #ff4500; padding-left: 4px; }
-    .social-icon { display: inline-block; background-color: #ff4500; color: white; width: 36px; height: 36px; text-align: center; line-height: 36px; border-radius: 50%; margin: 0 5px; font-size: 16px;transition: transform 0.3s ease, background-color 0.3s ease; }
-    .social-icon:hover { transform: scale(1.1); background-color: #ff2605; }
-    .btn-360 { background: #ff4500; color: white;border: none; border-radius: 20px; padding: 5px 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); transition: transform 0.3s; }
-    .btn-360:hover { transform: scale(1.05); }
     .hero-section { height: 750px; position: relative; overflow: hidden; }
     .hero-slider { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0;}
     .hero-slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; opacity: 0; transition: opacity 1s ease-in-out; }
     .hero-section .overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.6); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 2rem; animation: fadeIn 1.5s ease-in-out; z-index: 1;}
     .hero-slide.active { opacity: 1; }
-
-    .hero-section {  background: url('{{ asset('dossiers/image/homme.png') }}') no-repeat center center/cover; height: 750px; position: relative; }
-    .hero-section .overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.6); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 2rem; animation: fadeIn 1.5s ease-in-out; }
-    .taille { font-size: 17px; } 
-    #countdown  { font-size: 1.5rem; padding: 5px 10px; font-weight: bold; background-color: rgba(85, 84, 160, 0.6); border-radius: 10px; }
-    .btn-danger { background-color: #ff4500; transform: translateY(-2px); border-radius: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); transition: transform 0.3s; }
-    .btn-danger:hover { transform: scale(1.05); background: linear-gradient(90deg, #ff3300, #DD2476); color: #000000; }
-    img.img-fluid:hover { transform: scale(1.05); transition: 0.3s ease; }
-    .titre-avec-trait { display: flex; gap: 10px; margin: 20px 0; }
-    .trait-vertical { width: 4px; height: auto; background-color: #ff4500; }
-    .titre-avec-trait-noir { display: flex; gap: 10px; margin: 20px 0; }
-    .trait-vertical-noir { width: 4px; height: auto; background-color: #31292969; }
-    .partners-section { padding: 80px 15px; text-align: center; }
-    .partners-section h2 { font-size: 2.5rem; font-weight: 700; }
-    .partners-section p { color: #ccc; max-width: 700px; margin: 20px auto; }
-    .logo-box { background-color: #1a1d29; padding: 18px; border-radius: 12px; width: 64px; height: 64px; display: flex; align-items: center; justify-content: center; transition: transform 0.3s ease; }
-    .logo-box:hover { transform: scale(1.1); }
-    .logo-box img { max-width: 100%; height: auto; }
-    .btn-cta { margin-top: 50px; background-color: #ff2605; color: #fff; padding: 12px 32px; border-radius: 30px; font-weight: 600; border: none; font-size: 1rem;}
-    .btn-cta:hover { transform: scale(1.05); background: linear-gradient(90deg, #ff3300, #DD2476); color: #000000; }
-    .card-body { background-color: #000000;}
     body {
       background-color: black;
       color: white;
@@ -91,21 +56,6 @@
       position: relative;
       padding: 5px 10px;
       
-    }
-
-    .nav-link::after {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 2px;
-      bottom: 0;
-      left: 0;
-      background-color: var(--accent-color);
-      transition: width 0.3s ease;
-    }
-
-    .nav-link:hover::after {
-      width: 100%;
     }
 
     .btn-inscrire {
@@ -183,7 +133,6 @@
     }
 
     .hero-section {
-      background: url('./dossiers/image/homme.png') no-repeat center center/cover;
       height: 750px;
       position: relative;
     }
@@ -245,8 +194,8 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: url('https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
-      opacity: 0.1;
+      background: url('{{ asset('dossiers/image2/apropos4.jpg') }}') no-repeat center center/cover;
+      opacity: 0.3;
       z-index: 0;
     }
 
@@ -623,7 +572,7 @@
 
       /* Navbar mobile */
       .navbar-brand img {
-        margin-top: -65px;
+        margin-top: -70px;
         max-height: 180px;
         margin-left: -30px;
         ;
@@ -976,11 +925,11 @@
 
     <!-- Slider d'images en fond -->
   <div class="hero-slider">
-    <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
-    <div class="hero-slide active" style="background-image: url('https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')"></div>
-    <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
-    <div class="hero-slide" style="background-image: url('images/homme2.png');"></div>
-    <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1497366811353-6870744d04b2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+    <div class="hero-slide" style="background-image: url('{{ asset('dossiers/image/mr.jpg') }}');"></div>
+    <div class="hero-slide active" style="background-image: url('{{ asset('dossiers/image2/apropos1.jpg') }}');"></div>
+    <div class="hero-slide" style="background-image: url('{{ asset('dossiers/image2/mr_beni.jpg') }}');"></div>
+    <div class="hero-slide" style="background-image: url('{{ asset('dossiers/image2/mr_main.jpg') }}');"></div>
+    <div class="hero-slide" style="background-image: url('{{ asset('dossiers/image2/apropos2.jpg') }}');"></div>
   </div>
 
 
@@ -1024,7 +973,7 @@
 </section>
 <!-- Bande de Partenaires -->
 <a href="{{ route('sponsors.show') }}">
-  <section class="py-4 text-white text-center mb-5" style="background-color: #ff4500; " data-aos="fade-right">
+  <section class="py-4 text-white text-center" style="background-color: #ff4500; " data-aos="fade-right">
   <marquee behavior="" direction=""> <div class="container d-flex flex-wrap justify-content-center gap-4">
       @foreach ($sponsors as $sponsor)
       <div class="me-4 part"><img src="{{ asset('storage/' . $sponsor->logo) }}" alt="" width="50" > &nbsp;&nbsp;&nbsp;&nbsp;♦&nbsp;&nbsp;&nbsp;&nbsp;</div>   
@@ -1035,13 +984,12 @@
 
 
   <!-- À propos -->
-  <section class="about-section mt-0" id="about">
+  <section class="about-section" id="about">
     <div class="about-bg"></div>
     <div class="container about-content">
       <div class="row align-items-center">
         <div class="col-lg-6 mb-5 mb-lg-0" data-aos="fade-right">
           <h2 class="section-title">À PROPOS</h2>
-          <p class="lead">Le plus grand hackathon digital d'Afrique de l'Ouest</p>
       <p class="mb-5" style="color: #ccc;"><strong style="color: red; font-size: 20px;">Impact Web 360</strong> est bien plus qu'un simple événement, c'est un mouvement qui transforme la jeunesse africaine.
         Depuis notre création, nous avons formé et inspiré des centaines de jeunes entrepreneurs à travers des ateliers pratiques, des conférences stimulantes et un réseau solidaire.
         Notre communauté grandissante témoigne de l'impact réel de nos actions sur le développement des compétences digitales en Afrique.
@@ -1140,8 +1088,8 @@
       
       <div class="row" id="lightgallery">
         <div class="col-md-4 col-6 mb-4">
-          <div class="gallery-item" data-src="https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80">
-            <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Galerie 1">
+          <div class="gallery-item" >
+            <img src="{{ asset('dossiers/image2/galerie1.jpg') }}" alt="Galerie 1">
             <div class="gallery-overlay">
               <i class="fas fa-search-plus fa-3x"></i>
             </div>
@@ -1149,8 +1097,8 @@
         </div>
         
         <div class="col-md-4 col-6 mb-4">
-          <div class="gallery-item" data-src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80">
-            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Galerie 2">
+          <div class="gallery-item" >
+            <img src="{{ asset('dossiers/image2/galerie2.jpg') }}" alt="Galerie 2">
             <div class="gallery-overlay">
               <i class="fas fa-search-plus fa-3x"></i>
             </div>
@@ -1158,8 +1106,8 @@
         </div>
         
         <div class="col-md-4 col-6 mb-4">
-          <div class="gallery-item" data-src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80">
-            <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Galerie 3">
+          <div class="gallery-item" data-src="{{ asset('dossiers/image2/galerie8.jpg') }}">
+            <img src="{{ asset('dossiers/image2/galerie8.jpg') }}" alt="Galerie 3">
             <div class="gallery-overlay">
               <i class="fas fa-search-plus fa-3x"></i>
             </div>
@@ -1167,8 +1115,8 @@
         </div>
         
         <div class="col-md-4 col-6 mb-4">
-          <div class="gallery-item" data-src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80">
-            <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Galerie 4">
+          <div class="gallery-item" data-src="{{ asset('dossiers/image2/galerie4.jpg') }}">
+            <img src="{{ asset('dossiers/image2/galerie4.jpg') }}" alt="Galerie 4">
             <div class="gallery-overlay">
               <i class="fas fa-search-plus fa-3x"></i>
             </div>
@@ -1176,8 +1124,8 @@
         </div>
         
         <div class="col-md-4 col-6 mb-4">
-          <div class="gallery-item" data-src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80">
-            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Galerie 5">
+          <div class="gallery-item" data-src="{{ asset('dossiers/image2/galerie5.jpg') }}">
+            <img src="{{ asset('dossiers/image2/galerie5.jpg') }}" alt="Galerie 5">
             <div class="gallery-overlay">
               <i class="fas fa-search-plus fa-3x"></i>
             </div>
@@ -1185,8 +1133,8 @@
         </div>
         
         <div class="col-md-4 col-6 mb-4">
-          <div class="gallery-item" data-src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80">
-            <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Galerie 6">
+          <div class="gallery-item" data-src="{{ asset('dossiers/image2/galerie6.jpg') }}">
+            <img src="{{ asset('dossiers/image2/galerie6.jpg') }}" alt="Galerie 6">
             <div class="gallery-overlay">
               <i class="fas fa-search-plus fa-3x"></i>
             </div>
@@ -1459,6 +1407,26 @@
 
       toggler.addEventListener('click', () => {
         hamburger.classList.toggle('active');
+      });
+    });
+
+    const backToTopBtn = document.getElementById("backToTop");
+
+    // Afficher le bouton quand on descend de 200px
+    window.onscroll = function() {
+      if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+        backToTopBtn.style.display = "block";
+      } else {
+        backToTopBtn.style.display = "none";
+      }
+    };
+
+    // Animation douce de retour en haut
+    backToTopBtn.addEventListener("click", function(e) {
+      e.preventDefault();
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
       });
     });
 </script>
