@@ -18,7 +18,7 @@ class DashboardController extends Controller
     {
         // Statistiques Générales
         $totalUsers = User::count();
-        $totalEvenements = Evenement::where('date_debut', '>=', Carbon::now())->count();
+        $totalEvenements = Evenement::count();
         $totalArticles = Article::whereBetween('created_at', [Carbon::now()->startOfMonth(), Carbon::now()->endOfMonth()])->count();
         $totalSponsors = Sponsor::whereBetween('created_at', [Carbon::now()->startOfMonth(), Carbon::now()->endOfMonth()])->count();
         $totalIntervenants = Intervenant::whereBetween('created_at', [Carbon::now()->startOfMonth(), Carbon::now()->endOfMonth()])->count();
