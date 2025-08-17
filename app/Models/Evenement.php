@@ -23,6 +23,10 @@ class Evenement extends Model
         'whatsapp',
         'instagram',
         'tiktok',
+        'prix_standard',
+        'prix_vip',
+        'prix_premium',
+
     ];
 
     public function user()

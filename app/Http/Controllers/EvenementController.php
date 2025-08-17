@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Evenement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary; // <-- AJOUTEZ CETTE LIGNE
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary; 
 
 class EvenementController extends Controller
 {
@@ -24,6 +24,7 @@ class EvenementController extends Controller
     public function store(Request $request)
     {
         try {
+            // Mettez à jour les règles de validation pour inclure les nouveaux champs
             $data = $request->validate([
                 'nom'         => 'required|string',
                 'promoteur'   => 'required|string',
@@ -35,10 +36,12 @@ class EvenementController extends Controller
                 'nb_places'   => 'nullable|integer',
                 'date_debut'  => 'required|date',
                 'date_fin'    => 'nullable|date|after_or_equal:date_debut',
+                'prix_standard' => 'nullable|integer|min:0', // Nouveau champ
+                'prix_vip'      => 'nullable|integer|min:0', // Nouveau champ
+                'prix_premium'  => 'nullable|integer|min:0', // Nouveau champ
             ]);
 
             if ($request->hasFile('image')) {
-                // Remplacement du stockage local par Cloudinary
                 $uploadedFileUrl = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
                 $data['image'] = $uploadedFileUrl;
             }
@@ -54,6 +57,11 @@ class EvenementController extends Controller
             $evenement->date_debut  = $data['date_debut'];
             $evenement->date_fin    = $data['date_fin'];
             $evenement->image       = $data['image'];
+            // Affectez les valeurs des nouveaux champs
+            $evenement->prix_standard = $data['prix_standard'] ?? null;
+            $evenement->prix_vip      = $data['prix_vip'] ?? null;
+            $evenement->prix_premium  = $data['prix_premium'] ?? null;
+
             $evenement->save();
 
             return redirect()->back()->with('success', 'Événement créé !');
@@ -67,6 +75,7 @@ class EvenementController extends Controller
     {
         $evenement = Evenement::findOrFail($id);
 
+        // Mettez à jour les règles de validation pour inclure les nouveaux champs
         $data = $request->validate([
             'nom'         => 'required|string',
             'promoteur'   => 'required|string',
@@ -78,15 +87,32 @@ class EvenementController extends Controller
             'nb_places'   => 'nullable|integer',
             'date_debut'  => 'required|date',
             'date_fin'    => 'nullable|date|after_or_equal:date_debut',
+            'prix_standard' => 'nullable|integer|min:0', // Nouveau champ
+            'prix_vip'      => 'nullable|integer|min:0', // Nouveau champ
+            'prix_premium'  => 'nullable|integer|min:0', // Nouveau champ
         ]);
 
         if ($request->hasFile('image')) {
-            // Remplacement du stockage local par Cloudinary
             $uploadedFileUrl = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
             $data['image'] = $uploadedFileUrl;
         }
 
-        $evenement->update($data);
+        // Mettez à jour les valeurs des nouveaux champs
+        $evenement->update([
+            'nom'           => $data['nom'],
+            'promoteur'     => $data['promoteur'],
+            'description'   => $data['description'],
+            'lieu'          => $data['lieu'],
+            'theme'         => $data['theme'],
+            'heure'         => $data['heure'],
+            'nb_places'     => $data['nb_places'],
+            'date_debut'    => $data['date_debut'],
+            'date_fin'      => $data['date_fin'],
+            'image'         => $data['image'] ?? $evenement->image, // Garde l'ancienne image si aucune nouvelle n'est téléchargée
+            'prix_standard' => $data['prix_standard'] ?? null,
+            'prix_vip'      => $data['prix_vip'] ?? null,
+            'prix_premium'  => $data['prix_premium'] ?? null,
+        ]);
 
         return redirect()->back()->with('success', 'Événement modifié avec succès !');
     }
