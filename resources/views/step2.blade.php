@@ -354,7 +354,6 @@
 
 <body>
 
-  <!-- NAVBAR -->
   <nav class="navbar navbar-expand-lg navbar-dark fixed-top navbar-custom container">
     <a class="navbar-brand" href="index.php"><img src="{{ asset('dossiers/image/Impact-Web-360-Logo1.png') }}"
         alt="Logo Impact Web" /></a>
@@ -371,7 +370,7 @@
         <li class="nav-item"><a class="nav-link" href="{{ route('evenement') }}">Événements</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ route('elearning') }}">E-learning</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ route('intervenant') }}">Intervenants</a></li>
-        <li class="nav-item"><a class="nav-link active" href="{{ route('step1') }}">Billetterie</a></li>
+        <li class="nav-item"><a class="nav-link active" href="">Billetterie</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ route('boutique') }}">Boutique</a></li>
         <li class="nav-item"><a class="btn btn-light mx-2" href="{{ route('login') }}">Se connecter</a></li>
         <li class="nav-item"><a class="btn btn-inscrire" href="{{ route('register') }}">S'inscrire</a></li>
@@ -385,7 +384,7 @@
   </a>
 
   <div class="container" style="margin-top: 150px;">
-    <div class="ticket text-center animate__animated animate__fadeIn">
+    <div class="ticket text-center animate_animated animate_fadeIn">
       <div class="ticket-header p-3">
         <img src="{{ asset('dossiers/image/Impact-Web-360-Logo1.png') }}" alt="Logo" class="ticket-header-img">
         <h5>Impact Web 360 – Édition 2025</h5>
@@ -415,9 +414,8 @@
         <div class="step-nav mt-5 text-dark text-center">
           <div class="step-container d-flex justify-content-center align-items-center flex-wrap gap-2">
 
-            <!-- Étape 1 -->
             <span>
-              <a href="{{ route('step1') }}" class="text-decoration-none">
+              <a href="" class="text-decoration-none">
                 <span class="d-none d-md-inline text-dark">Informations</span>
                 <span class="d-inline d-md-none step-icon"><i class="fa-regular fa-user text-dark"></i></span>
               </a>
@@ -425,9 +423,8 @@
 
             <span class="mx-2 text-muted">></span>
 
-            <!-- Étape 2 -->
             <span>
-              <a href="{{ route('step2') }}" class="text-decoration-none">
+              <a href="" class="text-decoration-none">
                 <span class="d-none d-md-inline fw-bold text-primary">Réservation de siège</span>
                 <span class="d-inline d-md-none step-icon"><i class="fa-solid fa-couch"></i></span>
               </a>
@@ -435,9 +432,8 @@
 
             <span class="mx-2 text-muted">></span>
 
-            <!-- Étape 3 -->
             <span>
-              <a href="{{ route('step3') }}" class="text-decoration-none">
+              <a href="" class="text-decoration-none">
                 <span class="d-none d-md-inline text-dark">Confirmation</span>
                 <span class="d-inline d-md-none step-icon text-reset"><i class="fa-regular fa-circle-check text-dark"></i></i></span>
               </a>
@@ -445,7 +441,6 @@
 
             <span class="mx-2 text-muted">></span>
 
-            <!-- Étape 4 (non cliquable) -->
             <span>
               <span>
                 <span class="d-none d-md-inline text-dark">Paiement</span>
@@ -456,7 +451,7 @@
           </div>
         </div>
 
-        <form action="{{ route('step2.post') }}" method="POST" onsubmit="" class="mt-4">
+        <form action="{{ route('step2.post', ['evenementId' => $evenement->id]) }}" method="POST" class="mt-4">
           @csrf
           <div class="seat-map shadow">
             <h4>Choisissez votre catégorie</h4>
@@ -465,9 +460,9 @@
               <p> □□□□□ Scène □□□□□ </p>
               <p> -----------------------------------------</p>
               <p> 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨</p>
-              <p> 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 ← VIP</p>
+              <p> 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 ← VIP x Premium</p>
               <p> -----------------------------------------</p>
-              <p> 🟩 🟩 🟩 🟩 🟩 🟩 ← Étudiants</p>
+              <p> 🟩 🟩 🟩 🟩 🟩 🟩 ← Standard</p>
               <p> 🟩 🟩 🟩 🟩 🟩 🟩 🟩 🟩 🟩 </p>
               <p> ----------------------------------------- </p>
               <p> 🟦 🟦 🟦 🟩 🟩 </p>
@@ -480,23 +475,36 @@
               <center>
                 <h4>Légende</h4>
               </center>
-              <center>
-                <div class="d-flex mt-3 justify-content-center legend">
-                  <div class="me-2">
-                    <label for="" class="fw-bold fs-7">🟨 VIP</label>
-                    <input type="radio" name="categorie" value="VIP">
-                  </div>
-                  <div class="me-2">
-                    <label for="" class="fw-bold fs-7">🟩 Étudiants</label>
-                    <input type="radio" name="categorie" value="Etudiant">
-                  </div>
-                  <div class="me-2">
-                    <label for="" class="fw-bold fs-7">🟦 Participants</label>
-                    <input type="radio" name="categorie" value="Participant">
-                  </div>
+
+            <div class="d-flex justify-content-center flex-wrap gap-4">
+              @if ($evenement->prix_standard)
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="categorie" id="radioStandard" value="Standard" data-prix="{{ $evenement->prix_standard }}" required>
+                  <label class="form-check-label fw-bold" for="radioStandard">
+                    Standard 🟩🟦<br> ({{ $evenement->prix_standard }} FCFA)
+                  </label>
                 </div>
-              </center>
+              @endif
+              @if ($evenement->prix_vip)
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="categorie" id="radioVIP" value="VIP" data-prix="{{ $evenement->prix_vip }}">
+                  <label class="form-check-label fw-bold" for="radioVIP">
+                    VIP 🟨 <br> ({{ $evenement->prix_vip }} FCFA)
+                  </label>
+                </div>
+              @endif
+              @if ($evenement->prix_premium)
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="categorie" id="radioPremium" value="Premium" data-prix="{{ $evenement->prix_premium }}">
+                  <label class="form-check-label fw-bold" for="radioPremium">
+                    Premium 🟨<br> ({{ $evenement->prix_premium }} FCFA)
+                  </label>
+                </div>
+              @endif
             </div>
+
+            <h5 class="mt-4">Prix total : <span id="prixTotal">0</span> FCFA</h5>
+
           </div>
           <div class="text-center">
             <button type="submit" class="btn btn-suivant">Suivant</button>
@@ -507,16 +515,13 @@
   </div>
 
 
-  <!-- ===== FOOTER ===== -->
   <footer class="footer text-white pt-5 mt-5">
     <div class="container">
       <div class="row">
-        <!-- Logo -->
         <div class=" col-12 col-md-4 mb-4 text-center text-md-start">
           <img src="{{ asset('dossiers/image/Impact-Web-360-Logo1.png') }}" alt="Logo Impact Web" class="img-fluid" style="max-width: 200px;">
         </div>
 
-        <!-- Colonne 1 -->
         <div class="col-6 col-md-4 col-sm-6 mb-4">
           <ul class="list-unstyled footer-links">
             <li><a href="{{ route('home') }}">Accueil</a></li>
@@ -528,23 +533,20 @@
           </ul>
         </div>
 
-        <!-- Colonne 2 -->
         <div class="col-6 col-md-4 col-sm-6 mb-4">
           <ul class="list-unstyled footer-links">
             <li><a href="{{ route('intervenant') }}">Intervenants</a></li>
             <li><a href="{{ route('sponsors.show') }}">Partenaires & Sponsors</a></li>
             <li><a href="#">Ressources Gratuites</a></li>
-            <li><a href="{{ route('step1') }}">Billetterie</a></li>
+            <li><a href="">Billetterie</a></li>
             <li><a href="{{ route('boutique') }}">Boutique</a></li>
             <li><a href="#">Plan d'action + Mentorat</a></li>
           </ul>
         </div>
       </div>
 
-      <!-- Ligne rouge -->
       <hr class="footer-line">
 
-      <!-- Mentions + réseaux -->
       <div class="footer-mentions row align-items-center pt-3 pb-4">
         <div class="col-md-4 text-center yes text-md-start">
           <small>2025 @ Impact Web 360</small>
@@ -564,37 +566,16 @@
   
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    const seats = document.querySelectorAll('.seat:not(.reserved)');
-    let selected = null;
-
-    seats.forEach(seat => {
-      seat.addEventListener('click', () => {
-        if (selected) selected.classList.remove('selected');
-        seat.classList.add('selected');
-        selected = seat;
-        document.getElementById('siege_choisi').value = seat.dataset.siege;
-      });
-    });
-
-    function validerSiege() {
-      if (!document.getElementById('siege_choisi').value) {
-        alert('Veuillez sélectionner un siège.');
-        return false;
-      }
-      return true;
-    }
-  </script>
-  <script>
     document.addEventListener('DOMContentLoaded', () => {
+      // Logique pour le menu hamburger
       const toggler = document.querySelector('.navbar-toggler');
       const hamburger = document.getElementById('hamburgerBtn');
-
       toggler.addEventListener('click', () => {
         hamburger.classList.toggle('active');
       });
-    });
 
-    const backToTopBtn = document.getElementById("backToTop");
+      // Bouton "Retour en haut"
+      const backToTopBtn = document.getElementById("backToTop");
       window.onscroll = function() {
         if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
           backToTopBtn.style.display = "block";
@@ -602,11 +583,27 @@
           backToTopBtn.style.display = "none";
         }
       };
-
       backToTopBtn.addEventListener("click", function(e) {
         e.preventDefault();
         window.scrollTo({ top: 0, behavior: "smooth" });
       });
+
+      // LOGIQUE POUR LE CHOIX DE LA CATÉGORIE ET LE PRIX
+      const radios = document.querySelectorAll('input[name="categorie"]');
+      const prixTotalSpan = document.getElementById('prixTotal');
+      const hiddenPrixInput = document.createElement('input');
+      hiddenPrixInput.type = 'hidden';
+      hiddenPrixInput.name = 'prix_selectionne';
+      document.querySelector('form').appendChild(hiddenPrixInput);
+
+      radios.forEach(radio => {
+        radio.addEventListener('change', () => {
+          const prix = radio.dataset.prix;
+          prixTotalSpan.textContent = prix;
+          hiddenPrixInput.value = prix;
+        });
+      });
+    });
   </script>
 </body>
 

@@ -321,7 +321,6 @@
 </head>
 
 <body>
-  <!-- NAVBAR -->
   <nav class="navbar navbar-expand-lg navbar-dark fixed-top navbar-custom container">
     <a class="navbar-brand" href="index.php"><img src="{{ asset('dossiers/image/Impact-Web-360-Logo1.png') }}"alt="Logo Impact Web" /></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -337,7 +336,7 @@
         <li class="nav-item"><a class="nav-link" href="{{ route('evenement') }}">Événements</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ route('elearning') }}">E-learning</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ route('intervenant') }}">Intervenants</a></li>
-        <li class="nav-item"><a class="nav-link active" href="{{ route('step1') }}">Billetterie</a></li>
+        <li class="nav-item"><a class="nav-link active" href="{{ route('step1', ['evenementId' => $evenementId]) }}">Billetterie</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ route('boutique') }}">Boutique</a></li>
         <li class="nav-item"><a class="btn btn-light mx-2" href="{{ route('login') }}">Se connecter</a></li>
         <li class="nav-item"><a class="btn btn-inscrire" href="{{ route('register') }}">S'inscrire</a></li>
@@ -351,7 +350,7 @@
   </a>
 
   <div class="container" style="margin-top: 150px;">
-    <div class="ticket text-center animate__animated animate__fadeIn">
+    <div class="ticket text-center animate_animated animate_fadeIn">
       <div class="ticket-header p-3">
         <img src="{{ asset('dossiers/image/Impact-Web-360-Logo1.png') }}" alt="Logo" class="ticket-header-img">
         <h5>Impact Web 360 – Édition 2025</h5>
@@ -381,9 +380,8 @@
         <div class="step-nav mt-5 text-dark text-center">
           <div class="step-container d-flex justify-content-center align-items-center flex-wrap gap-2">
 
-            <!-- Étape 1 -->
             <span>
-              <a href="{{ route('step1') }}" class="text-decoration-none">
+              <a href="{{ route('step1', ['evenementId' => $evenementId]) }}" class="text-decoration-none">
                 <span class="d-none d-md-inline fw-bold text-primary">Informations</span>
                 <span class="d-inline d-md-none step-icon"><i class="fa-regular fa-user"></i></span>
               </a>
@@ -391,9 +389,8 @@
 
             <span class="mx-2 text-muted">></span>
 
-            <!-- Étape 2 -->
             <span>
-              <a href="{{ route('step2') }}" class="text-decoration-none">
+              <a href="{{ route('step2', ['evenementId' => $evenementId]) }}" class="text-decoration-none">
                 <span class="d-none d-md-inline text-dark">Réservation de siège</span>
                 <span class="d-inline d-md-none step-icon"><i class="fa-solid fa-couch text-dark"></i></span>
               </a>
@@ -401,9 +398,8 @@
 
             <span class="mx-2 text-muted">></span>
 
-            <!-- Étape 3 -->
             <span>
-              <a href="{{ route('step3') }}" class="text-decoration-none">
+              <a href="{{ route('step3', ['evenementId' => $evenementId]) }}" class="text-decoration-none">
                 <span class="d-none d-md-inline text-dark">Confirmation</span>
                 <span class="d-inline d-md-none step-icon text-reset"><i class="fa-regular fa-circle-check text-dark"></i></i></span>
               </a>
@@ -411,7 +407,6 @@
 
             <span class="mx-2 text-muted">></span>
 
-            <!-- Étape 4 (non cliquable) -->
             <span>
               <span>
                 <span class="d-none d-md-inline text-dark">Paiement</span>
@@ -422,11 +417,11 @@
           </div>
         </div>
 
-        <form class="form-section animate__animated animate__fadeInUp" method="POST" action="{{ route('step1.post') }}">
+        <form class="form-section animate_animated animate_fadeInUp" method="POST" action="{{ route('step1.post', ['evenementId' => $evenementId]) }}">
           @csrf
 
           <div class="div-form mt-4">
-            <input type="hidden" name="id_evenement" value="">
+            <input type="hidden" name="id_evenement" value="{{ $evenementId }}">
             <div class="row g-3">
               <div class="col-md-6"><input type="text" class="form-control p-3 rounded-4" name="prenom" placeholder="Prénom"
                   required></div>
@@ -464,16 +459,13 @@
     </div>
   </div>
 
-  <!-- ===== FOOTER ===== -->
   <footer class="footer text-white pt-5 mt-5">
     <div class="container">
       <div class="row">
-        <!-- Logo -->
         <div class=" col-12 col-md-4 mb-4 text-center text-md-start">
           <img src="{{ asset('dossiers/image/Impact-Web-360-Logo1.png') }}" alt="Logo Impact Web" class="img-fluid" style="max-width: 200px;">
         </div>
 
-        <!-- Colonne 1 -->
         <div class="col-6 col-md-4 col-sm-6 mb-4">
           <ul class="list-unstyled footer-links">
             <li><a href="{{ route('home') }}">Accueil</a></li>
@@ -485,23 +477,20 @@
           </ul>
         </div>
 
-        <!-- Colonne 2 -->
         <div class="col-6 col-md-4 col-sm-6 mb-4">
           <ul class="list-unstyled footer-links">
             <li><a href="{{ route('intervenant') }}">Intervenants</a></li>
             <li><a href="{{ route('sponsors.show') }}">Partenaires & Sponsors</a></li>
             <li><a href="#">Ressources Gratuites</a></li>
-            <li><a href="{{ route('step1') }}">Billetterie</a></li>
+            <li><a href="">Billetterie</a></li>
             <li><a href="{{ route('boutique') }}">Boutique</a></li>
             <li><a href="#">Plan d'action + Mentorat</a></li>
           </ul>
         </div>
       </div>
 
-      <!-- Ligne rouge -->
       <hr class="footer-line">
 
-      <!-- Mentions + réseaux -->
       <div class="footer-mentions row align-items-center pt-3 pb-4">
         <div class="col-md-4 text-center yes text-md-start">
           <small>2025 @ Impact Web 360</small>

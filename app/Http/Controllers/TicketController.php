@@ -4,153 +4,148 @@ namespace App\Http\Controllers;
 
 use App\Models\CodePromo;
 use App\Models\Ticket;
+use App\Models\Evenement;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class TicketController extends Controller
 {
-    // Étape 1: Formulaire personnel
-    public function step1()
+    /**
+     * Étape 1: Afficher le formulaire d'informations personnelles.
+     * @param int $evenementId L'ID de l'événement.
+     */
+    public function step1($evenementId)
     {
         $step1 = session('step1');
-        return view('step1', compact('step1'));
+
+        $countries = [
+            'BJ' => 'Bénin',
+            'TG' => 'Togo',
+            'CI' => 'Côte d\'Ivoire',
+            'SN' => 'Sénégal',
+            'CM' => 'Cameroun',
+            'FR' => 'France',
+            'US' => 'États-Unis',
+            'CA' => 'Canada',
+        ];
+
+        $dialCodes = [
+            'BJ' => '+229',
+            'TG' => '+228',
+            'CI' => '+225',
+            'SN' => '+221',
+            'CM' => '+237',
+            'FR' => '+33',
+            'US' => '+1',
+            'CA' => '+1',
+        ];
+        
+        // L'ID est passé à la vue
+        return view('step1', compact('step1', 'evenementId', 'countries', 'dialCodes'));
     }
 
-    public function postStep1(Request $request)
+    /**
+     * Étape 1: Traiter le formulaire et rediriger vers l'étape 2.
+     * @param \Illuminate\Http\Request $request
+     * @param int $evenementId L'ID de l'événement.
+     */
+    public function postStep1(Request $request, $evenementId)
     {
         $data = $request->validate([
-            'prenom' => 'required',
-            'nom' => 'required',
-            'pays' => 'required',
-            'ville' => 'required',
-            'telephone' => 'required',
-            'email' => 'required|email',
+            'prenom' => 'required|string|max:255',
+            'nom' => 'required|string|max:255',
+            'pays' => 'required|string|max:255',
+            'ville' => 'required|string|max:255',
+            'telephone' => 'required|string|max:20',
+            'email' => 'required|email|max:255',
         ]);
-
+        
         session(['step1' => $data]);
-        return redirect()->route('step2');
+        
+        // Redirection vers step2 en conservant l'ID de l'événement
+        return redirect()->route('step2', ['evenementId' => $evenementId]);
     }
 
-    // Étape 2: Catégorie
-    public function step2()
+    /**
+     * Étape 2: Afficher la page de sélection de billet.
+     * @param int $evenementId L'ID de l'événement.
+     */
+    public function step2($evenementId)
     {
+        // On récupère l'objet Evenement pour accéder à ses prix
+        $evenement = Evenement::findOrFail($evenementId);
+        
         $step2 = session('step2');
-        return view('step2', compact('step2'));
+
+        // On passe l'objet Evenement à la vue pour afficher les prix
+        return view('step2', compact('evenement', 'step2'));
     }
 
-    public function postStep2(Request $request)
+    /**
+     * Étape 2: Traiter la sélection de catégorie et le prix.
+     * @param \Illuminate\Http\Request $request
+     * @param int $evenementId L'ID de l'événement.
+     */
+    public function postStep2(Request $request, $evenementId)
     {
         $data = $request->validate([
-            'categorie' => 'required|in:VIP,Etudiant,Participant'
+            'categorie' => 'required|in:Standard,VIP,Premium'
         ]);
 
-        session(['step2' => $data]);
-        return redirect()->route('step3');
-    }
+        $evenement = Evenement::findOrFail($evenementId);
 
-    // Étape 3: Récapitulatif
-    public function step3()
-    {
-        $step1 = session('step1');
-        $step2 = session('step2');
-        $reduction = session('reduction');
-
-        return view('step3', compact('step1', 'step2', 'reduction'));
-    }
-
-    // 🆕 Valider code promo en AJAX
-    public function validerCodePromo(Request $request)
-    {
-        $code = $request->input('code');
-        $categorie = session('step2.categorie');
-
-        if (!$categorie) {
-            return response()->json(['success' => false, 'message' => 'Catégorie non sélectionnée']);
-        }
-
-        $prixCategorie = \App\Models\PrixCategorie::where('categorie', strtolower($categorie))->first();
-
-        if (!$prixCategorie) {
-            return response()->json(['success' => false, 'message' => 'Catégorie inconnue']);
-        }
-
-        $promo = CodePromo::where('code', $code)
-            ->where('actif', true)
-            ->where(function ($query) {
-                $query->whereNull('expiration')
-                      ->orWhere('expiration', '>', now());
-            })
-            ->first();
-
-        if (!$promo) {
-            return response()->json(['success' => false, 'message' => 'Code promo invalide ou expiré.']);
-        }
-
-        $reduction = $promo->reduction;
-        $prixInitial = $prixCategorie->prix;
-        $prixReduit = $prixInitial - ($prixInitial * $reduction / 100);
-
-        // Stocker la réduction
-        session(['reduction' => [
-            'code' => $code,
-            'pourcentage' => $reduction,
-            'prix_final' => $prixReduit
-        ]]);
-
-        return response()->json([
-            'success' => true,
-            'reduction' => $reduction,
-            'prix' => $prixReduit
-        ]);
-    }
-
-    // Enregistrement final
-    public function store(Request $request)
-    {
-        $data = array_merge(
-            session('step1'),
-            session('step2')
-        );
-
-        $prixCategorie = \App\Models\PrixCategorie::where('categorie', strtolower($data['categorie']))->first();
-        $prix = $prixCategorie ? $prixCategorie->prix : 0;
-
-        // Si une réduction a déjà été enregistrée via session
-        $reduction = session('reduction');
-        if ($reduction) {
-            $data['code_promo'] = $reduction['code'];
-            $prix = $reduction['prix_final'];
+        switch ($data['categorie']) {
+            case 'Standard':
+                $prix = $evenement->prix_standard;
+                break;
+            case 'VIP':
+                $prix = $evenement->prix_vip;
+                break;
+            case 'Premium':
+                $prix = $evenement->prix_premium;
+                break;
+            default:
+                $prix = 0;
+                break;
         }
 
         $data['prix'] = $prix;
+        
+        session(['step2' => $data]);
 
-        Ticket::create($data);
-
-        session()->forget(['step1', 'step2', 'reduction']);
-
-        return redirect()->route('tickets.index')->with('success', 'Réservation confirmée!');
+        // Redirection vers l'étape 3
+        return redirect()->route('step3', ['evenementId' => $evenementId]);
     }
 
-    // CRUD standard
-    public function index()
+    /**
+     * Étape 3: Confirmation.
+     * @param int $evenementId L'ID de l'événement.
+     */
+    public function step3($evenementId)
     {
-        $tickets = Ticket::all();
-        return view('Dashboard.Ticket.index', compact('tickets'));
+        $step1 = session('step1');
+        $step2 = session('step2');
+
+        // On récupère l'objet Evenement pour l'envoyer à la vue
+        $evenement = Evenement::findOrFail($evenementId);
+
+        if (!isset($step1) || !isset($step2)) {
+            return redirect()->route('step1', ['evenementId' => $evenementId]);
+        }
+
+        // On passe l'objet Evenement à la vue
+        return view('step3', compact('step1', 'step2', 'evenement'));
     }
 
-    public function edit(Ticket $ticket)
+    /**
+     * Étape 3: Traiter la confirmation et rediriger vers le paiement.
+     */
+    public function postStep3(Request $request)
     {
-        return view('tickets.edit', compact('ticket'));
-    }
+        // Traitez la logique de création du billet et de paiement
+        // ...
 
-    public function update(Request $request, Ticket $ticket)
-    {
-        $ticket->update($request->all());
-        return redirect()->route('tickets.index');
-    }
-
-    public function destroy(Ticket $ticket)
-    {
-        $ticket->delete();
-        return redirect()->route('tickets.index')->with('success', 'Ticket supprimé avec succès!');
+        // Redirigez vers la page de paiement ou une page de succès
+        return redirect()->route('paiement');
     }
 }
