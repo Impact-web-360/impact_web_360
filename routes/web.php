@@ -318,6 +318,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
     Route::resource('admin/codes-promos', App\Http\Controllers\CodePromoController::class)->except(['show', 'edit', 'update']);
+    // Route de suppression d'utilisateur
+    Route::delete('users/{user}', [DashboardController::class, 'destroy'])->name('users.destroy');
 
 
     Route::get('/dashboard/evenements', [EvenementController::class, 'index'])->name('evenements.index');

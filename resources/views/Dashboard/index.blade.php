@@ -216,7 +216,7 @@
 <main id="content" tabindex="-1">
 
   <header>
-    <h1>Bonjour Admin</h1>
+    <h1>Bienvenue Administrateur</h1>
   </header>
 
   <!-- Statistiques : grille 3 colonnes -->
@@ -226,7 +226,7 @@
       <div class="card card-custom p-4 d-flex justify-content-between align-items-center">
         <div>
           <p class="stat-label">Utilisateurs</p>
-          <p class="stat-number">1,254</p>
+          <p class="stat-number">{{ $totalUsers }} ce mois</p>
         </div>
         <i class="fas fa-user card-icon"></i>
       </div>
@@ -234,36 +234,39 @@
       <div class="card card-custom p-4 d-flex justify-content-between align-items-center">
         <div>
           <p class="stat-label">Événements</p>
-          <p class="stat-number">28 à venir</p>
+          <p class="stat-number">{{ $totalEvenements }} à venir</p>
         </div>
         <i class="fas fa-calendar-check card-icon"></i>
       </div>
 
       <div class="card card-custom p-4 d-flex justify-content-between align-items-center">
         <div>
-          <p class="stat-label">Commandes</p>
-          <p class="stat-number">152 ce mois</p>
+          <p class="stat-label">Articles</p>
+          <p class="stat-number">{{ $totalArticles }} ce mois</p>
         </div>
         <i class="fas fa-shopping-cart card-icon"></i>
       </div>
+      
       <div class="card card-custom p-4 d-flex justify-content-between align-items-center">
         <div>
-          <p class="stat-label">Partenaires</p>
-          <p class="stat-number">64 ce mois</p>
+          <p class="stat-label">Sponsors</p>
+          <p class="stat-number">{{ $totalSponsors }} ce mois</p>
         </div>
         <i class="fa fa-handshake card-icon"></i>
       </div>
+
       <div class="card card-custom p-4 d-flex justify-content-between align-items-center">
         <div>
           <p class="stat-label">Intervenants</p>
-          <p class="stat-number">78 ce mois</p>
+          <p class="stat-number">{{ $totalIntervenants }} ce mois</p>
         </div>
         <i class="fas fa-user card-icon"></i>
       </div>
+
       <div class="card card-custom p-4 d-flex justify-content-between align-items-center">
         <div>
-          <p class="stat-label">Contenus</p>
-          <p class="stat-number">1589 ce mois</p>
+          <p class="stat-label">Formations</p>
+          <p class="stat-number">{{ $totalFormations }} ce mois</p>
         </div>
         <i class="fas fa-folder-open card-icon"></i>
       </div>
@@ -276,7 +279,7 @@
   <section id="users" class="mb-5">
     <h2 class="section-title"><i class="fas fa-users"></i> Gestion des Utilisateurs</h2>
     <div class="row g-4">
-      <div class="col-lg-7">
+      <div class="col-lg-12">
         <div class="card card-custom p-3">
           <div class="table-responsive">
             <table class="table table-hover mb-0">
@@ -289,136 +292,39 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Jean Dupont</td>
-                  <td>jean@mail.com</td>
-                  <td>Admin</td>
-                  <td>
-                    <button class="btn btn-outline-primary btn-sm" aria-label="Modifier"><i class="fas fa-edit"></i></button>
-                    <button class="btn btn-outline-danger btn-sm" aria-label="Supprimer"><i class="fas fa-trash"></i></button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Jean Dupont</td>
-                  <td>jean@mail.com</td>
-                  <td>Admin</td>
-                  <td>
-                    <button class="btn btn-outline-primary btn-sm" aria-label="Modifier"><i class="fas fa-edit"></i></button>
-                    <button class="btn btn-outline-danger btn-sm" aria-label="Supprimer"><i class="fas fa-trash"></i></button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Jean Dupont</td>
-                  <td>jean@mail.com</td>
-                  <td>Admin</td>
-                  <td>
-                    <button class="btn btn-outline-primary btn-sm" aria-label="Modifier"><i class="fas fa-edit"></i></button>
-                    <button class="btn btn-outline-danger btn-sm" aria-label="Supprimer"><i class="fas fa-trash"></i></button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Jean Dupont</td>
-                  <td>jean@mail.com</td>
-                  <td>Admin</td>
-                  <td>
-                    <button class="btn btn-outline-primary btn-sm" aria-label="Modifier"><i class="fas fa-edit"></i></button>
-                    <button class="btn btn-outline-danger btn-sm" aria-label="Supprimer"><i class="fas fa-trash"></i></button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Jean Dupont</td>
-                  <td>jean@mail.com</td>
-                  <td>Admin</td>
-                  <td>
-                    <button class="btn btn-outline-primary btn-sm" aria-label="Modifier"><i class="fas fa-edit"></i></button>
-                    <button class="btn btn-outline-danger btn-sm" aria-label="Supprimer"><i class="fas fa-trash"></i></button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Jean Dupont</td>
-                  <td>jean@mail.com</td>
-                  <td>Admin</td>
-                  <td>
-                    <button class="btn btn-outline-primary btn-sm" aria-label="Modifier"><i class="fas fa-edit"></i></button>
-                    <button class="btn btn-outline-danger btn-sm" aria-label="Supprimer"><i class="fas fa-trash"></i></button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Jean Dupont</td>
-                  <td>jean@mail.com</td>
-                  <td>Admin</td>
-                  <td>
-                    <button class="btn btn-outline-primary btn-sm" aria-label="Modifier"><i class="fas fa-edit"></i></button>
-                    <button class="btn btn-outline-danger btn-sm" aria-label="Supprimer"><i class="fas fa-trash"></i></button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Jean Dupont</td>
-                  <td>jean@mail.com</td>
-                  <td>Admin</td>
-                  <td>
-                    <button class="btn btn-outline-primary btn-sm" aria-label="Modifier"><i class="fas fa-edit"></i></button>
-                    <button class="btn btn-outline-danger btn-sm" aria-label="Supprimer"><i class="fas fa-trash"></i></button>
-                  </td>
-                </tr>
+                @foreach ($recentUsers as $user)
+                  <tr>
+                    <td>{{ $user->name }}</td>
+                    <td>{{ $user->email }}</td>
+                    <td>{{ $user->type }}</td>
+                    <td>
+                      <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display:inline-block;">
+                          @csrf
+                          @method('DELETE')
+                          <button type="submit" class="btn btn-outline-danger btn-sm" aria-label="Supprimer" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');">
+                              <i class="fas fa-trash"></i>
+                          </button>
+                      </form>
+
+                    </td>
+                  </tr>
+                @endforeach
               </tbody>
             </table>
           </div>
         </div>
       </div>
 
-      <div class="col-lg-5">
+      <div class="col-lg-12">
         <div class="card card-custom p-4">
           <h5><i class="fas fa-chart-pie"></i> Répartition des rôles</h5>
-          <canvas id="rolesChart" style="min-height: 250px;"></canvas>
+          <canvas id="rolesChart" style="min-height: 200px;"></canvas>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Section Contenus + Paramètres en grille 2 colonnes -->
-  <section class="mb-5">
-    <div class="row g-4">
-      <div class="col-lg-6">
-        <h2 class="section-title"><i class="fas fa-folder-open"></i> Gestion des Contenus</h2>
-        <div class="card card-custom p-4">
-          <p>Ajoutez, modifiez ou supprimez les contenus (articles, produits, événements...)</p>
-          <button class="btn btn-danger"><i class="fas fa-plus"></i> Ajouter</button>
-        </div>
-      </div>
-      <div class="col-lg-6">
-        <h2 class="section-title"><i class="fas fa-cogs"></i> Paramètres</h2>
-        <div class="card card-custom p-4">
-          <p>Modifiez les options générales du site, les paramètres de sécurité, etc.</p>
-          <button class="btn btn-outline-secondary"><i class="fas fa-sliders-h"></i> Configurer</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Messages & Calendrier en grille 2 colonnes -->
-  <section class="mb-5">
-    <div class="row g-4">
-      <div class="col-lg-6">
-        <h2 class="section-title"><i class="fas fa-envelope"></i> Messages & Requêtes</h2>
-        <div class="card card-custom p-4">
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item"><i class="fas fa-comment"></i> Marie : "Je ne trouve pas l'événement X"</li>
-            <li class="list-group-item"><i class="fas fa-comment"></i> Paul : "Ajoutez une catégorie Y"</li>
-          </ul>
-        </div>
-      </div>
-      <div class="col-lg-6">
-        <h2 class="section-title"><i class="fas fa-calendar-alt"></i> Calendrier</h2>
-        <div class="card card-custom p-4">
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item"><i class="fas fa-calendar-day"></i> Atelier IA - 21 Juillet</li>
-            <li class="list-group-item"><i class="fas fa-calendar-day"></i> Hackathon - 05 Août</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
+  
 
   
 </main>
@@ -446,10 +352,10 @@
   new Chart(ctxStats, {
     type: 'bar',
     data: {
-      labels: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin'],
+      labels: @json($labels),
       datasets: [{
-        label: 'Nouveaux Utilisateurs',
-        data: [50, 80, 30, 70, 110, 90],
+        label: 'Nombre d\'utilisateurs',
+        data: @json($data),
         backgroundColor: 'var(--main-color)',
         borderRadius: 5,
         barPercentage: 0.6
@@ -460,6 +366,7 @@
       scales: {
         y: {
           beginAtZero: true,
+          max:200,
           ticks: { stepSize: 20 }
         }
       },
@@ -477,9 +384,9 @@
   new Chart(ctxRoles, {
     type: 'doughnut',
     data: {
-      labels: ['Admin', 'Modérateurs', 'Utilisateurs'],
+      labels: ['Admin', 'Participant', 'Intervenant'],
       datasets: [{
-        data: [5, 15, 80],
+        data: [{{ $adminCount }}, {{ $participantCount }}, {{ $intervenantCount }}],
         backgroundColor: ['#c82333', '#e5534b', '#f8a5a0'],
         hoverOffset: 10
       }]
@@ -493,7 +400,7 @@
         }
       }
     }
-  });
+});
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
