@@ -12,6 +12,7 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="manifest" href="/site.webmanifest">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -974,11 +975,12 @@
 <!-- Bande de Partenaires -->
 <a href="{{ route('sponsors.show') }}">
   <section class="py-4 text-white text-center" style="background-color: #ff4500; " data-aos="fade-right">
-  <marquee behavior="" direction=""> <div class="container d-flex flex-wrap justify-content-center gap-4">
-      @foreach ($sponsors as $sponsor)
-      <div class="me-4 part"><img src="{{ asset('storage/' . $sponsor->logo) }}" alt="" width="50" > &nbsp;&nbsp;&nbsp;&nbsp;♦&nbsp;&nbsp;&nbsp;&nbsp;</div>   
-      @endforeach
-    </div></marquee>
+    <marquee behavior="" direction=""> <div class="container d-flex flex-wrap justify-content-center gap-4">
+        @foreach ($sponsors as $sponsor)
+        <div class="me-5 part"><img src="{{ $sponsor->logo }}" alt="" width="50" class="rounded-4" > &nbsp;&nbsp;&nbsp;&nbsp;♦&nbsp;&nbsp;&nbsp;&nbsp;</div>   
+        @endforeach
+      </div>
+    </marquee>
   </section>  
 </a>
 
@@ -1279,9 +1281,9 @@
     <div class="row g-4">
       <!-- Bloc impact social -->
       <div class="col-md-6">
-        <div class="card border-0 h-100 shadow-lg p-4 rounded-4" 
-             style="background: linear-gradient(135deg, #30328aff, #2d199cff);">
-          <h3 class="mb-3 fw-bold text-white">En termes d'impact social</h3>
+        <div class="card border-0 h-100 shadow-lg p-5 rounded-4" 
+             style="background: #000066cb ;color: #fff">
+          <h3 class="mb-5 fw-bold text-center text-white">En termes d'impact social</h3>
           <ul class="list-unstyled">
             <li class="mb-3"><i class="bi bi-check-circle-fill text-warning me-2"></i> Permettre à <b>500+ participants</b> de repartir avec une idée ou un projet clair à lancer en ligne.</li>
             <li class="mb-3"><i class="bi bi-check-circle-fill text-warning me-2"></i> Encourager au moins <b>100 participants</b> à lancer un business ou une activité génératrice de revenus dans les 6 mois.</li>
@@ -1292,9 +1294,9 @@
 
       <!-- Bloc visibilité -->
       <div class="col-md-6">
-        <div class="card border-0 h-100 shadow-lg p-4 rounded-4" 
-             style="background: linear-gradient(135deg, #e72e16ff, #fc2b07ff);">
-          <h3 class="mb-3 fw-bold text-white">En termes de visibilité et d'engagement</h3>
+        <div class="card border-0 h-100 shadow-lg p-5 rounded-4" 
+             style="background: #ff4400b0; color: #fff">
+          <h3 class="mb-3 fw-bold text-center text-white">En termes de visibilité et d'engagement</h3>
           <ul class="list-unstyled">
             <li class="mb-3"><i class="bi bi-bullseye text-warning me-2"></i> Atteindre <b>+100 000 personnes en ligne</b> via les campagnes digitales.</li>
             <li class="mb-3"><i class="bi bi-broadcast text-warning me-2"></i> Générer une couverture médiatique locale et nationale (TV, presse, radio, web).</li>
