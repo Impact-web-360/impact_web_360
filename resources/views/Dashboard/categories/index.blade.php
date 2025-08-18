@@ -53,7 +53,7 @@
 
 <body>
 
-    <button class="btn btn-danger mb-3 mt-3 ms-3" onclick="history.back()"><i class="fas fa-arrow-left"></i> Retour</button>
+    <a href="{{ route('admin.dashboard') }}"><button class="btn btn-danger mb-3 mt-3 ms-3"><i class="fas fa-arrow-left"></i> Retour</button></a>
     <div class="container container-box">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2>Gestion des Catégories</h2>

@@ -200,7 +200,6 @@
   <a href="{{ route('articles.index')}}" class="nav-link"><i class="fa fa-shopping-basket"></i> Articles</a>
   <a href="{{ route('emploies.index')}}" class="nav-link"><i class="fa fa-briefcase"></i> Emplois</a>
   <a href="{{ route('intervenants.index')}}" class="nav-link"><i class="fa fa-user"></i> Intervenants</a>
-  <a href="{{ route('billet')}}" class="nav-link"><i class="fas fa-ticket-alt"></i> Tickets</a>
   <form action="{{ route('logout') }}" method="POST" id="logout-form">
   @csrf
     <a href="{{ route('logout')}}" class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-arrow-left"></i>Deconnexion</a>
