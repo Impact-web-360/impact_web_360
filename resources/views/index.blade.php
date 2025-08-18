@@ -1235,6 +1235,7 @@
     </div>
   </section>
 
+
   <!-- Section FORUM -->
   <section class="forum-section">
     <div class="container">
@@ -1267,6 +1268,54 @@
       </div>
     </div>
   </section>
+
+  <section class="py-5 text-white section-noir" data-aos="fade-up">
+  <div class="container">
+    <!-- Titre principal -->
+    <h1 class="forum-title text-center mb-5 fw-bold text-uppercase">
+      Résultats Attendus
+    </h1>
+
+    <div class="row g-4">
+      <!-- Bloc impact social -->
+      <div class="col-md-6">
+        <div class="card border-0 h-100 shadow-lg p-4 rounded-4" 
+             style="background: linear-gradient(135deg, #30328aff, #2d199cff);">
+          <h3 class="mb-3 fw-bold text-white">En termes d'impact social</h3>
+          <ul class="list-unstyled">
+            <li class="mb-3"><i class="bi bi-check-circle-fill text-warning me-2"></i> Permettre à <b>500+ participants</b> de repartir avec une idée ou un projet clair à lancer en ligne.</li>
+            <li class="mb-3"><i class="bi bi-check-circle-fill text-warning me-2"></i> Encourager au moins <b>100 participants</b> à lancer un business ou une activité génératrice de revenus dans les 6 mois.</li>
+            <li><i class="bi bi-check-circle-fill text-warning me-2"></i> Offrir <b>200 pass gratuits sponsorisés</b> à des jeunes sans moyens financiers.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Bloc visibilité -->
+      <div class="col-md-6">
+        <div class="card border-0 h-100 shadow-lg p-4 rounded-4" 
+             style="background: linear-gradient(135deg, #e72e16ff, #fc2b07ff);">
+          <h3 class="mb-3 fw-bold text-white">En termes de visibilité et d'engagement</h3>
+          <ul class="list-unstyled">
+            <li class="mb-3"><i class="bi bi-bullseye text-warning me-2"></i> Atteindre <b>+100 000 personnes en ligne</b> via les campagnes digitales.</li>
+            <li class="mb-3"><i class="bi bi-broadcast text-warning me-2"></i> Générer une couverture médiatique locale et nationale (TV, presse, radio, web).</li>
+            <li><i class="bi bi-file-earmark-text-fill text-warning me-2"></i> Produire un <b>rapport final + revue de presse</b> pour les partenaires et institutions.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Texte final -->
+    <div class="text-center mt-5">
+      <p class="fs-5 fst-italic">
+        Notre ambition n'est pas seulement de <span class="text-warning fw-bold">faire salle comble</span>, 
+        mais de déclencher des <span class="fw-bold">déclics, des actions</span>, 
+        et de contribuer à réduire le chômage grâce au digital.
+      </p>
+    </div>
+  </div>
+</section>
+
+
 
 
   <!-- ===== FOOTER ===== -->
