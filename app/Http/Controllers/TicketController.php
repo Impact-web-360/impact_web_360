@@ -18,6 +18,7 @@ class TicketController extends Controller
      */
     public function step1($evenementId)
     {
+        $evenement = Evenement::findOrFail($evenementId);
         $step1 = session('step1');
 
         $countries = [
@@ -43,7 +44,7 @@ class TicketController extends Controller
         ];
         
         // L'ID est passé à la vue
-        return view('step1', compact('step1', 'evenementId', 'countries', 'dialCodes'));
+        return view('step1', compact('step1', 'evenementId', 'countries', 'dialCodes','evenement'));
     }
 
     /**

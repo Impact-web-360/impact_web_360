@@ -353,23 +353,21 @@
     <div class="ticket text-center animate_animated animate_fadeIn">
       <div class="ticket-header p-3">
         <img src="{{ asset('dossiers/image/Impact-Web-360-Logo1.png') }}" alt="Logo" class="ticket-header-img">
-        <h5>Impact Web 360 – Édition 2025</h5>
+        <h5>{{ $evenement->nom }}</h5>
         <div><strong>TK0001</strong></div>
       </div>
       <div class="d-flex justify-content-center align-items-center p-3">
         <div class="ticket-body-left">
           <h5>Date et heure</h5>
-          <h6></h6>
-          <p></p>
+          <h6>{{ \Carbon\Carbon::parse($evenement->date_debut)->format('d F Y') }}</h6>
+          <p>{{ \Carbon\Carbon::parse($evenement->heure)->format('H:i') }}</p>
         </div>
         <div class="align-self-center qr-code">
-          <img
-            src="https://api.qrserver.com/v1/create-qr-code/?data=ImpactWeb360-2025&size=100x100&bgcolor=255-51-0&color=255-255-255"
-            alt="QR Code">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?data=ImpactWeb360-2025&size=100x100&bgcolor=255-51-0&color=255-255-255" alt="QR Code">
         </div>
         <div>
           <h5>Lieu</h5>
-          <h5></h5>
+          <h5>{{ $evenement->lieu }}</h5>
           <p></p>
         </div>
       </div>
