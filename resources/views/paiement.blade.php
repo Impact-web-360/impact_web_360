@@ -456,7 +456,7 @@
           <div class="billet-container mt-5">
             <div class="header-section">
                 <h2>🎫 Billet Électronique</h2>
-                <p class="event-name">{{ $evenement->nom }}</p>
+                <p class="event-name mt-4 mb-2">{{ $evenement->nom }}</p>
             </div>
             
             <div class="details-section">

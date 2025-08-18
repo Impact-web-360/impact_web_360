@@ -231,7 +231,7 @@
     <div class="container">
       <div class="text-center mb-5">
         <h2 class="fw-bold" data-aos="fade-up">Nos Formations en ligne</h2>
-        <p class="text-muted" data-aos="fade-up" data-aos-delay="100">Choisissez une catégorie ou explorez toutes les formations.</p>
+        <p class="text-secondary" data-aos="fade-up" data-aos-delay="100">Choisissez une catégorie ou explorez toutes les formations.</p>
       </div>
 
       <div class="d-flex flex-wrap justify-content-center mb-5" data-aos="fade-up" data-aos-delay="200">

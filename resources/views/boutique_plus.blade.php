@@ -529,7 +529,7 @@
       <div class="d-flex flex-nowrap">
         @foreach ($suggestions as $sugg)
       <a href="{{ route('boutique_plus', $sugg->id) }}" class="text-decoration-none text-white me-3"
-        style="flex: 0 0 auto; width: 75%;">
+        style="flex: 0 0 auto; width: 90%;">
         <div class="product-card bg-transparent p-3" style="border-radius:10px;">
         <img src="{{ $sugg->image }}" class="img-fluid rounded mb-3" alt="{{ $sugg->nom }}"
           style="height: 300px; width: 100%; object-fit: cover;">

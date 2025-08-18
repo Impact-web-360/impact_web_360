@@ -190,7 +190,7 @@
             </button>
             <div class="row">
                 @forelse ($articles as $article)
-                    <div class="col-md-6 col-lg-3 mb-4 d-flex">
+                    <div class="col-md-6 col-lg-3 col-xl-2 mb-4 d-flex">
                         <div class="card card-custom w-100 d-flex flex-column justify-content-between">
                             <div class="image-wrapper">
                                 @if ($article->image)
