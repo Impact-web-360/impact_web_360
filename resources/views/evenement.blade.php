@@ -14,10 +14,6 @@
       font-family: 'Segoe UI', sans-serif;
     }
 
-    .btn-sm {
-      font-size: 1.1rem;
-    }
-
     .navbar-custom {
       background-color: #000066;
       border-radius: 15px;
@@ -209,10 +205,6 @@
       .navbar-toggler-icon {
         background-image: none !important;
       }
-
-      .btn-sm {
-        font-size: 0.85rem;
-      }
     }
 
     @media (max-width: 768px) {
@@ -225,7 +217,6 @@
 
 <body>
 
-  <!-- NAVBAR -->
   <nav class="navbar navbar-expand-lg navbar-dark fixed-top navbar-custom container">
     <a class="navbar-brand" href="index.php"><img src="{{ asset('dossiers/image/Impact-Web-360-Logo1.png') }}"
         alt="Logo Impact Web" /></a>
@@ -256,7 +247,6 @@
   </a>
 
 
-  <!-- SECTION : Tous les événements -->
   <section class="text-white py-5" style="margin-top: 100px;">
     <div class="container ">
       <h2 class="mb-3 fw-bold">Nos Événements</h2>
@@ -265,36 +255,33 @@
         rencontres offrent une expérience unique autour <br> des métiers du digital, de l'entrepreneuriat et de
         l'innovation.</p>
 
-      <!-- Aperçu limité -->
       <div class="row g-4" id="evenements-liste">
         @foreach ($evenements as $evenement)
-            <div class="col-md-6 evenement-item mb-5">
-                <div class="card bg-transparent border-3 text-white">
-                    <img src="{{ $evenement->image }}" class="card-img-top w-100 rounded"
-                        style="max-height: 400px; object-fit: cover;" alt="">
-                    <div class="card-body px-0">
-                        <p class="fs-6">{{ $evenement->date_debut }}</p>
-                        <h5>Thème : "{{ $evenement->theme }}"</h5>
-                        <a href="{{ route('replays_evenement', ['id' => $evenement->id]) }}" class=" text-decoration-none mt-3">Replay disponibles <i class="fa-solid fa-arrow-right ms-1"></i></a>
-                    </div>
-                    <a href="{{ route('step1', ['evenementId' => $evenement->id]) }}" class="btn btn-danger w-50 btn-sm p-2 mt-1">Réserver mon billet <i class="fa-solid fa-arrow-right ms-1"></i></a>
-                </div>
+          <div class="col-md-6 evenement-item">
+            <div class="card bg-transparent border-3 text-white">
+              <img src="{{ $evenement->image }}" class="card-img-top w-100 rounded"
+                style="max-height: 400px; object-fit: cover;" alt="">
+              <div class="card-body px-0">
+                <p class="fs-6">{{ $evenement->date_debut }}</p>
+                <h5>Thème : "{{ $evenement->theme }}"</h5>
+                <a href="{{ route('replays_evenement', ['id' => $evenement->id]) }}" class=" text-decoration-none">Replay disponibles <i
+                  class="fa-solid fa-arrow-right ms-1"></i></a>
+              </div>
+              <a href="{{ route('step1', ['evenementId' => $evenement->id]) }}" class="btn btn-danger btn-lg mt-1">Réserver mon billet <i class="fa-solid fa-arrow-right ms-1"></i></a>
             </div>
+          </div>
         @endforeach
       </div>
+    </div>
 
     @if(count($evenements) > 2)
     <div class="mt-4 text-center">
       <button id="btn-decouvrir" class="btn btn-danger"><i class="fas fa-eye me-2"></i>Découvrir tous les
         événements</button>
+      <button id="btn-masquer" class="btn btn-secondary d-none"><i class="fas fa-eye-slash me-2"></i>Voir moins</button>
     </div>
     @endif
-
-
-    </div>
   </section>
-
-  <!-- SECTION : Événement à venir -->
 
   <section class="text-white py-5">
     <div class="container">
@@ -328,7 +315,6 @@
 
       </div>
 
-      <!-- Contrôles manuels -->
       <button class="carousel-control-prev" type="button" data-bs-target="#eventCarousel" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Précédent</span>
@@ -346,16 +332,13 @@
 
 
 
-  <!-- ===== FOOTER ===== -->
   <footer class="footer text-white pt-5 mt-5">
     <div class="container">
       <div class="row">
-        <!-- Logo -->
         <div class=" col-12 col-md-4 mb-4 text-center text-md-start">
           <img src="{{ asset('dossiers/image/Impact-Web-360-Logo1.png') }}" alt="Logo Impact Web" class="img-fluid" style="max-width: 200px;">
         </div>
 
-        <!-- Colonne 1 -->
         <div class="col-6 col-md-4 col-sm-6 mb-4">
           <ul class="list-unstyled footer-links">
             <li><a href="{{ route('home') }}">Accueil</a></li>
@@ -367,7 +350,6 @@
           </ul>
         </div>
 
-        <!-- Colonne 2 -->
         <div class="col-6 col-md-4 col-sm-6 mb-4">
           <ul class="list-unstyled footer-links">
             <li><a href="{{ route('intervenant') }}">Intervenants</a></li>
@@ -380,10 +362,8 @@
         </div>
       </div>
 
-      <!-- Ligne rouge -->
       <hr class="footer-line">
 
-      <!-- Mentions + réseaux -->
       <div class="footer-mentions row align-items-center pt-3 pb-4">
         <div class="col-md-4 text-center yes text-md-start">
           <small>2025 @ Impact Web 360</small>
@@ -407,38 +387,50 @@
       const evenementItems = document.querySelectorAll('.evenement-item');
       const btnDecouvrir = document.getElementById('btn-decouvrir');
       const btnMasquer = document.getElementById('btn-masquer');
-
-      const afficherNombre = (nombre) => {
-        evenementItems.forEach((item, index) => {
-          if (index < nombre) {
-            item.classList.remove('d-none');
-          } else {
-            item.classList.add('d-none');
-          }
-        });
+      const totalEvents = evenementItems.length;
+      
+      // La fonction qui gère l'affichage des événements
+      const toggleEvents = (showAll) => {
+          evenementItems.forEach((item, index) => {
+              if (showAll || index < 2) {
+                  item.classList.remove('d-none');
+              } else {
+                  item.classList.add('d-none');
+              }
+          });
       };
 
-      // Afficher seulement 2 événements au chargement
-      afficherNombre(2);
+      // Si le nombre total d'événements est supérieur à 2, on affiche le bouton "Découvrir"
+      // et on masque les événements au-delà des deux premiers.
+      if (totalEvents > 2) {
+          if (btnDecouvrir) btnDecouvrir.classList.remove('d-none');
+          toggleEvents(false); // Affiche seulement les 2 premiers
+      } else {
+          // Sinon on masque les deux boutons (pas d'utilité)
+          if (btnDecouvrir) btnDecouvrir.classList.add('d-none');
+          if (btnMasquer) btnMasquer.classList.add('d-none');
+      }
 
-      // Au clic sur "Découvrir"
-      btnDecouvrir.addEventListener('click', () => {
-        afficherNombre(evenementItems.length);
-        btnDecouvrir.classList.add('d-none');
-        btnMasquer.classList.remove('d-none');
-      });
+      // Écouteur pour le bouton "Découvrir"
+      if (btnDecouvrir) {
+          btnDecouvrir.addEventListener('click', () => {
+              toggleEvents(true); // Affiche tous les événements
+              btnDecouvrir.classList.add('d-none');
+              if (btnMasquer) btnMasquer.classList.remove('d-none');
+          });
+      }
 
-      // Au clic sur "Voir moins"
-      btnMasquer.addEventListener('click', () => {
-        afficherNombre(2);
-        btnMasquer.classList.add('d-none');
-        btnDecouvrir.classList.remove('d-none');
-      });
-    });
-  </script>
+      // Écouteur pour le bouton "Voir moins"
+      if (btnMasquer) {
+          btnMasquer.addEventListener('click', () => {
+              toggleEvents(false); // Affiche seulement les 2 premiers
+              btnMasquer.classList.add('d-none');
+              btnDecouvrir.classList.remove('d-none');
+          });
+      }
 
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
+
+      // JavaScript pour le menu hamburger
       const toggler = document.querySelector('.navbar-toggler');
       const hamburger = document.getElementById('hamburgerBtn');
 
