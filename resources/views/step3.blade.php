@@ -358,7 +358,7 @@
                 </div>
 
                 <div class="div-form mt-4">
-                    <form action="#" method="POST">
+                    
                         <div class="row mb-3">
                             <div class="col-md-6 mb-3 mb-md-0">
                                 <label for="nom" class="form-label">Nom</label>
@@ -392,7 +392,6 @@
                         <div class="text-center mt-4">
                             <button id="payBtn" type="submit" class="btn btn-suivant">Confirmer & Payer</button>
                         </div>
-                    </form>
                 </div>
             </div>
         </div>
