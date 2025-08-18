@@ -14,6 +14,10 @@
       font-family: 'Segoe UI', sans-serif;
     }
 
+    .btn-sm {
+      font-size: 1.1rem;
+    }
+
     .navbar-custom {
       background-color: #000066;
       border-radius: 15px;
@@ -205,6 +209,10 @@
       .navbar-toggler-icon {
         background-image: none !important;
       }
+
+      .btn-sm {
+        font-size: 0.85rem;
+      }
     }
 
     @media (max-width: 768px) {
@@ -260,20 +268,20 @@
       <!-- Aperçu limité -->
       <div class="row g-4" id="evenements-liste">
         @foreach ($evenements as $evenement)
-      <div class="col-md-6 evenement-item">
-        <div class="card bg-transparent border-3 text-white">
-        <img src="{{ $evenement->image }}" class="card-img-top w-100 rounded"
-          style="max-height: 400px; object-fit: cover;" alt="">
-        <div class="card-body px-0">
-          <p class="fs-6">{{ $evenement->date_debut }}</p>
-          <h5>Thème : "{{ $evenement->theme }}"</h5>
-          <a href="{{ route('replays_evenement', ['id' => $evenement->id]) }}" class=" text-decoration-none mt-3">Replay disponibles <i class="fa-solid fa-arrow-right ms-1"></i></a>
-        </div>
-        <a href="{{ route('step1', ['evenementId' => $evenement->id]) }}" class="btn btn-danger btn-lg mt-1">Réserver mon billet <i class="fa-solid fa-arrow-right ms-1"></i></a>
+            <div class="col-md-6 evenement-item mb-5">
+                <div class="card bg-transparent border-3 text-white">
+                    <img src="{{ $evenement->image }}" class="card-img-top w-100 rounded"
+                        style="max-height: 400px; object-fit: cover;" alt="">
+                    <div class="card-body px-0">
+                        <p class="fs-6">{{ $evenement->date_debut }}</p>
+                        <h5>Thème : "{{ $evenement->theme }}"</h5>
+                        <a href="{{ route('replays_evenement', ['id' => $evenement->id]) }}" class=" text-decoration-none mt-3">Replay disponibles <i class="fa-solid fa-arrow-right ms-1"></i></a>
+                    </div>
+                    <a href="{{ route('step1', ['evenementId' => $evenement->id]) }}" class="btn btn-danger w-50 btn-sm p-2 mt-1">Réserver mon billet <i class="fa-solid fa-arrow-right ms-1"></i></a>
+                </div>
+            </div>
+        @endforeach
       </div>
-    @endforeach
-      </div>
-    </div>
 
     @if(count($evenements) > 2)
     <div class="mt-4 text-center">

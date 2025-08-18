@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CodePromo;
-use App\Models\Ticket;
+
 use App\Models\Evenement;
 use Illuminate\Http\Request;
+use Mpdf\Mpdf;
+use Barryvdh\DomPDF\Facade\Pdf;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Illuminate\Support\Facades\Session;
 
 class TicketController extends Controller
@@ -147,5 +149,38 @@ class TicketController extends Controller
 
         // Redirigez vers la page de paiement ou une page de succès
         return redirect()->route('paiement');
+    }
+
+    public function paiement($evenementId)
+    {
+        $step1 = session('step1');
+        $step2 = session('step2');
+        $evenement = Evenement::findOrFail($evenementId);
+
+        if (!$step1 || !$step2) {
+            return redirect()->route('step1', ['evenementId' => $evenementId]);
+        }
+
+        // Générer le contenu pour le QR Code
+        $qrData = "Nom: {$step1['nom']}\nPrénom: {$step1['prenom']}\nEmail: {$step1['email']}\nTéléphone: {$step1['telephone']}\nCatégorie: {$step2['categorie']}\nPrix: {$step2['prix']} FCFA\nÉvénement: {$evenement->nom}";
+
+        return view('paiement', compact('step1', 'step2', 'evenement', 'qrData'));
+    }
+
+    public function downloadPdf($evenementId)
+    {
+        $step1 = session('step1');
+        $step2 = session('step2');
+        $evenement = Evenement::findOrFail($evenementId);
+
+        if (!$step1 || !$step2) {
+            return redirect()->route('step1', ['evenementId' => $evenementId]);
+        }
+
+        $qrData = "Nom: {$step1['nom']}\nPrénom: {$step1['prenom']}\nEmail: {$step1['email']}\nTéléphone: {$step1['telephone']}\nCatégorie: {$step2['categorie']}\nPrix: {$step2['prix']} FCFA\nÉvénement: {$evenement->nom}";
+
+        $pdf = Pdf::loadView('billet-pdf', compact('step1', 'step2', 'evenement', 'qrData'));
+
+        return $pdf->download('Billet_'.$step1['prenom'].'_'.$step1['nom'].'.pdf');
     }
 }

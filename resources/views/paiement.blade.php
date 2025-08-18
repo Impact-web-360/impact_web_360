@@ -4,15 +4,138 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Impact Web 360 - Réservation de siège</title>
+  <title>Impact Web 360 - Billetterie</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
   <style>
+
+    :root {
+      --primary-color: #2c3e50;
+      --secondary-color: #ff4500;
+      --background-color: #ecf0f1;
+      --card-background: #ffffff;
+      --text-color-dark: #2d3436;
+      --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.08);
+      --border-radius-large: 15px;
+      }
+
     body {
       background-color: #0e0e12;
       color: white;
       font-family: 'Segoe UI', sans-serif;
+    }
+
+    .billet-container {
+        background-color: var(--card-background);
+        border-radius: var(--border-radius-large);
+        box-shadow: var(--shadow-light);
+        padding: 30px 40px;
+        max-width: 400px;
+        width: 100%;
+        text-align: center;
+        color: #0e0e12;
+        border: 1px solid #e0e6e9;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .billet-container:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+    }
+
+    .header-section {
+        padding-bottom: 20px;
+        border-bottom: 2px dashed #e0e6e9;
+        margin-bottom: 20px;
+    }
+
+    .header-section h2 {
+        font-size: 1.8em;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin: 0 0 5px 0;
+    }
+    
+    .header-section .event-name {
+        font-size: 1.1em;
+        font-weight: 500;
+        color: var(--secondary-color);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin: 0;
+    }
+
+    .details-section {
+        text-align: left;
+        margin-bottom: 25px;
+    }
+
+    .details-section p {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 0;
+        margin: 0;
+        border-bottom: 1px solid #f0f4f7;
+        font-size: 0.95em;
+    }
+
+    .details-section p:last-child {
+        border-bottom: none;
+    }
+
+    .details-section p strong {
+        color: var(--primary-color);
+        font-weight: 500;
+    }
+
+    .qr-code-section {
+        padding-top: 20px;
+    }
+
+    .qr-code-section p {
+        margin-bottom: 15px;
+        font-size: 0.9em;
+        color: #7f8c8d;
+    }
+    
+    .qr-code-section img, .qr-code-section svg {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: auto;
+    }
+
+    .download-btn {
+        display: inline-block;
+        background-color: var(--secondary-color);
+        color: #fff;
+        padding: 12px 25px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 500;
+        margin-top: 30px;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .download-btn:hover {
+        transform: translateY(-2px);
+    }
+
+    @media (max-width: 480px) {
+      .billet-container {
+          padding: 25px;
+          border-radius: 10px;
+      }
+      .header-section h2 {
+          font-size: 1.6em;
+      }
+      .header-section .event-name {
+          font-size: 1em;
+      }
     }
 
     .navbar-custom {
@@ -43,54 +166,6 @@
       border-radius: 8px;
     }
 
-    .form-section {
-      background-color: white;
-      border-radius: 1rem;
-      padding: 2rem;
-      color: black;
-      margin-top: 2rem;
-    }
-
-    .btn-orange {
-      background-color: #ff2d0a;
-      color: white;
-      border-radius: 20px;
-    }
-
-    .ticket {
-      background: #ff3300;
-      color: white;
-      border-radius: 1rem;
-      margin-top: 2rem;
-      flex-wrap: wrap;
-      text-align: center;
-      gap: 1rem;
-    }
-
-    .ticket .d-flex>div {
-      flex: 1 1 30%;
-      min-width: 100px;
-    }
-
-    .ticket-header-img {
-      max-height: 160px;
-      width: auto;
-      margin-top: -65px;
-      margin-bottom: -65px;
-      margin-right: -40px;
-    }
-
-    .ticket-header {
-      background-color: #000066;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap:6px;
-      border-top-left-radius: 1rem;
-      border-top-right-radius: 1rem;
-      padding: 1rem;
-    }
-
     .step-nav {
       background-color: #f8f9fa;
       padding: 1rem;
@@ -101,6 +176,7 @@
       overflow-x: auto;
     }
 
+
     .step-container {
       white-space: nowrap;
       font-weight: 500;
@@ -108,42 +184,10 @@
       display: inline-block;
     }
 
-    .seat-map {
-      background: white;
-      color: black;
-      border-radius: 20px;
-      padding: 2rem;
-      margin-top: 1rem;
-      text-align: center;
-    }
-
-    .seat-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
-      gap: 10px;
-      justify-items: center;
-    }
-
-    .seat {
-      width: 45px;
-      height: 45px;
-      background: #f0f0f0;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 500;
-      cursor: pointer;
-    }
-
-    .seat.reserved {
-      background: #999;
-      cursor: not-allowed;
-    }
-
-    .seat.selected {
-      background: #007bff;
+    .btn-orange {
+      background-color: #ff2d0a;
       color: white;
+      border-radius: 20px;
     }
 
     .btn-suivant {
@@ -159,6 +203,11 @@
 
     .btn-suivant:hover {
       background: #cc2900;
+    }
+
+    .btn-orange:hover {
+      background: linear-gradient(90deg, #e63c00, #cc2900);
+      color: white;
     }
 
     .footer {
@@ -214,7 +263,6 @@
         border-radius: 15px;
         width: 100vw;
       }
-
 
       .product-card {
         margin-top: 30px;
@@ -314,10 +362,6 @@
         line-height: 1.8;
       }
 
-      .legend{
-        font-size: 14px;
-      }
-
       .step-nav span {
         display: inline-block;
         margin: 2px 5px;
@@ -332,31 +376,13 @@
         /* Optionnel : cache la barre de scroll */
       }
 
-      .ticket-header h5{
-        font-size: 15px;
-      }
-
-      .ticket-header-img {
-        max-height: 130px;
-        margin-left: -30px;
-      }
-
-      .ticket-body-left h5{
-        font-size: 14px;
-      }
-
-      .qr-code img{
-        width: 70%;
-      }
     }
   </style>
 </head>
 
 <body>
-
   <nav class="navbar navbar-expand-lg navbar-dark fixed-top navbar-custom container">
-    <a class="navbar-brand" href="index.php"><img src="{{ asset('dossiers/image/Impact-Web-360-Logo1.png') }}"
-        alt="Logo Impact Web" /></a>
+    <a class="navbar-brand" href="index.php"><img src="{{ asset('dossiers/image/Impact-Web-360-Logo1.png') }}"alt="Logo Impact Web" /></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
       <div class="hamburger" id="hamburgerBtn">
         <span></span>
@@ -383,30 +409,7 @@
     <i class="fa fa-arrow-up"></i>
   </a>
 
-  <div class="container" style="margin-top: 150px;">
-    <div class="ticket text-center animate_animated animate_fadeIn">
-      <div class="ticket-header p-3">
-        <img src="{{ asset('dossiers/image/Impact-Web-360-Logo1.png') }}" alt="Logo" class="ticket-header-img">
-        <h5>{{ $evenement->nom }}</h5>
-        <div><strong>TK0001</strong></div>
-      </div>
-      <div class="d-flex justify-content-center align-items-center p-3">
-        <div class="ticket-body-left">
-          <h5>Date et heure</h5>
-          <h6>{{ \Carbon\Carbon::parse($evenement->date_debut)->format('d F Y') }}</h6>
-          <p>{{ \Carbon\Carbon::parse($evenement->heure)->format('H:i') }}</p>
-        </div>
-        <div class="align-self-center qr-code">
-          <img src="https://api.qrserver.com/v1/create-qr-code/?data=ImpactWeb360-2025&size=100x100&bgcolor=255-51-0&color=255-255-255" alt="QR Code">
-        </div>
-        <div>
-          <h5>Lieu</h5>
-          <h5>{{ $evenement->lieu }}</h5>
-          <p></p>
-        </div>
-      </div>
-    </div>
-
+  <div class="container" style="margin-top: 100px; mb-5">
     <div class="row justify-content-center">
       <div class="col-12">
         <div class="step-nav mt-5 text-dark text-center">
@@ -423,8 +426,8 @@
 
             <span>
               <a href="" class="text-decoration-none">
-                <span class="d-none d-md-inline fw-bold text-primary">Réservation de siège</span>
-                <span class="d-inline d-md-none step-icon"><i class="fa-solid fa-couch"></i></span>
+                <span class="d-none d-md-inline text-dark">Réservation de siège</span>
+                <span class="d-inline d-md-none step-icon"><i class="fa-solid fa-couch text-dark"></i></span>
               </a>
             </span>
 
@@ -441,80 +444,43 @@
 
             <span>
               <span>
-                <span class="d-none d-md-inline text-dark">Paiement</span>
-                <span class="d-inline d-md-none step-icon"><i class="bi bi-credit-card"></i></span>
+                <span class="d-none d-md-inline fw-bold text-primary">Paiement</span>
+                <span class="d-inline d-md-none step-icon"><i class="bi bi-credit-card text-primary"></i></span>
               </span>
             </span>
 
           </div>
         </div>
 
-        <form action="{{ route('step2.post', ['evenementId' => $evenement->id]) }}" method="POST" class="mt-4">
-          @csrf
-          <div class="div-form">
-            <div class="seat-map shadow">
-              <h4>Choisissez votre catégorie</h4>
-              <div class=" mt-3" id="grid">
-                <p> -----------------------------------------</p>
-                <p> □□□□□ Scène □□□□□ </p>
-                <p> -----------------------------------------</p>
-                <p> 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨</p>
-                <p> 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 🟨 ← VIP x Premium</p>
-                <p> -----------------------------------------</p>
-                <p> 🟩 🟩 🟩 🟩 🟩 🟩 ← Standard</p>
-                <p> 🟩 🟩 🟩 🟩 🟩 🟩 🟩 🟩 🟩 </p>
-                <p> ----------------------------------------- </p>
-                <p> 🟦 🟦 🟦 🟩 🟩 </p>
-                <p> 🟦 🟦 🟦 🟩 🟩 </p>
-                <p> 🟦 🟦 🟦 🟩 🟩 </p>
-                <p> 🟦 🟦 🟦 🟩 🟩 </p>
-                <p> 🟦 🟦 🟦 🟩 🟩 </p>
-                <p> 🟦 🟦 🟦 🟩 🟩 </p>
-                <p> ----------------------------------------- </p>
-                <center>
-                  <h4>Légende</h4>
-                </center>
-
-              <div class="d-flex justify-content-center flex-wrap gap-4">
-                @if ($evenement->prix_standard)
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="categorie" id="radioStandard" value="Standard" data-prix="{{ $evenement->prix_standard }}" required>
-                    <label class="form-check-label fw-bold" for="radioStandard">
-                      Standard 🟩🟦<br> ({{ intval($evenement->prix_standard) }} FCFA)
-                    </label>
-                  </div>
-                @endif
-                @if ($evenement->prix_vip)
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="categorie" id="radioVIP" value="VIP" data-prix="{{ $evenement->prix_vip }}">
-                    <label class="form-check-label fw-bold" for="radioVIP">
-                      VIP 🟨 <br> ({{ intval($evenement->prix_vip) }} FCFA)
-                    </label>
-                  </div>
-                @endif
-                @if ($evenement->prix_premium)
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="categorie" id="radioPremium" value="Premium" data-prix="{{ $evenement->prix_premium }}">
-                    <label class="form-check-label fw-bold" for="radioPremium">
-                      Premium 🟨<br> ({{ intval($evenement->prix_premium) }} FCFA)
-                    </label>
-                  </div>
-                @endif
-              </div>
-
-              <h5 class="mt-4">Prix total : <span id="prixTotal">0</span> FCFA</h5>
-
+        <div class="d-flex justify-content-center">
+          <div class="billet-container mt-5">
+            <div class="header-section">
+                <h2>🎫 Billet Électronique</h2>
+                <p class="event-name">{{ $evenement->nom }}</p>
             </div>
+            
+            <div class="details-section">
+                <p><strong>Nom & Prénom :</strong> <span>{{ $step1['prenom'] }} {{ $step1['nom'] }}</span></p>
+                <p><strong>Email :</strong> <span>{{ $step1['email'] }}</span></p>
+                <p><strong>Téléphone :</strong> <span>{{ $step1['telephone'] }}</span></p>
+                <p><strong>Catégorie :</strong> <span>{{ $step2['categorie'] }}</span></p>
+                <p><strong>Prix :</strong> <span>{{ intval($step2['prix']) }} FCFA</span></p>
+            </div>
+
+            <div class="qr-code-section">
+                <p>Scannez ce code pour valider votre billet.</p>
+                {!! QrCode::size(150)->generate($qrData) !!}
+            </div>
+
+            <a href="{{ route('billet.pdf', $evenement->id) }}" class="download-btn" target="_blank">
+                Télécharger le billet en PDF
+            </a>
           </div>
-          <div class="text-center">
-            <button type="submit" class="btn btn-suivant">Suivant</button>
-          </div>
-        </form>
+        </div>
+
       </div>
     </div>
   </div>
-</div> 
-
 
   <footer class="footer text-white pt-5 mt-5">
     <div class="container">
@@ -568,43 +534,28 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // Logique pour le menu hamburger
       const toggler = document.querySelector('.navbar-toggler');
       const hamburger = document.getElementById('hamburgerBtn');
+
       toggler.addEventListener('click', () => {
         hamburger.classList.toggle('active');
       });
-
-      // Bouton "Retour en haut"
-      const backToTopBtn = document.getElementById("backToTop");
-      window.onscroll = function() {
-        if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
-          backToTopBtn.style.display = "block";
-        } else {
-          backToTopBtn.style.display = "none";
-        }
-      };
-      backToTopBtn.addEventListener("click", function(e) {
-        e.preventDefault();
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      });
-
-      // LOGIQUE POUR LE CHOIX DE LA CATÉGORIE ET LE PRIX
-      const radios = document.querySelectorAll('input[name="categorie"]');
-      const prixTotalSpan = document.getElementById('prixTotal');
-      const hiddenPrixInput = document.createElement('input');
-      hiddenPrixInput.type = 'hidden';
-      hiddenPrixInput.name = 'prix_selectionne';
-      document.querySelector('form').appendChild(hiddenPrixInput);
-
-      radios.forEach(radio => {
-        radio.addEventListener('change', () => {
-          const prix = radio.dataset.prix;
-          prixTotalSpan.textContent = prix;
-          hiddenPrixInput.value = prix;
-        });
-      });
     });
+
+    const backToTopBtn = document.getElementById("backToTop");
+    window.onscroll = function() {
+      if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+        backToTopBtn.style.display = "block";
+      } else {
+        backToTopBtn.style.display = "none";
+      }
+    };
+
+    backToTopBtn.addEventListener("click", function(e) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+    
   </script>
 </body>
 

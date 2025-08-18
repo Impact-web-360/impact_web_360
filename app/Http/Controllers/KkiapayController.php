@@ -27,4 +27,6 @@ class KkiapayController extends Controller
             return response()->json(['status' => 'failed']);
         }
     }
+
+    
 }

@@ -404,7 +404,7 @@
                     </div>
                 </div>
 
-                <div class="div-form mt-4">
+                <div class="div-form justify-content-center mt-4">
                     <div class="row mb-3">
                         <div class="col-12">
                             <h4 class="text-center mb-4 text-dark fw-bold">Détails de votre réservation</h4>
@@ -443,12 +443,12 @@
                             <div class="info-icon"><i class="fas fa-coins"></i></div>
                             <div class="info-content">
                                 <h6>Montant</h6>
-                                <p class="text-muted fw-bold">{{ $step2['prix'] }} FCFA</p>
+                                <p class="text-muted fw-bold">{{ intval($step2['prix']) }} FCFA</p>
                             </div>
                         </div>
                     </div>
                     <div class="text-center mt-5">
-                        <button type="submit" class="btn btn-payer">Confirmer & Payer</button>
+                        <button id="payBtn" type="submit" class="btn btn-payer">Confirmer & Payer</button>
                     </div>
                 </div>
             </div>
@@ -525,5 +525,32 @@
             });
         });
     </script>
+    <script src="https://cdn.kkiapay.me/k.js"></script>
+    <script>
+        document.getElementById('payBtn').addEventListener('click', function() {
+            openKkiapayWidget({
+                amount: {{ $step2['prix'] }},
+                position: "center",
+                theme: "blue",
+                sandbox: true,
+                key: "c9d2ca003c6a11f0ad78bd6aa09fa344",
+                name: "{{ $step1['nom'] }} {{ $step1['prenom'] }}",
+                phone: "{{ $step1['telephone'] }}",
+                email: "{{ $step1['email'] }}",
+            })
+        })
+
+        addSuccessListener(response => {
+        console.log(response)
+        window.location.href = "/paiement/{{ $evenement->id }}"; 
+        })
+
+        addFailureListener(error => {
+            console.error(error)
+            alert("Le paiement a échoué")
+        })
+    </script>
+
+
 </body>
 </html>

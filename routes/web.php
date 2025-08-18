@@ -143,6 +143,13 @@ Route::post('/step2/{evenementId}', [TicketController::class, 'postStep2'])->nam
 Route::get('/step3/{evenementId}', [TicketController::class, 'step3'])->name('step3');
 Route::post('/step3/{evenementId}', [TicketController::class, 'postStep3'])->name('step3.post');
 
+//Paiement
+Route::get('/paiement/{evenementId}', [TicketController::class, 'paiement'])->name('paiement');
+
+// Route pour télécharger le billet en PDF
+Route::get('/billet/pdf/{evenementId}', [TicketController::class, 'downloadPdf'])->name('billet.pdf');
+
+
 # --- Fin de la section de routes pour les tickets ---
 
 Route::get('/boutique', function () {
