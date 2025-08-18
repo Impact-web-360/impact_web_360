@@ -233,7 +233,7 @@
         <li class="nav-item"><a class="nav-link active" href="{{ route('evenement') }}">Événements</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ route('elearning') }}">E-learning</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ route('intervenant') }}">Intervenants</a></li>
-        <li class="nav-item"><a class="nav-link" href="">Billetterie</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ route('evenement') }}">Billetterie</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ route('boutique') }}">Boutique</a></li>
         <li class="nav-item"><a class="btn btn-light mx-2" href="{{ route('login') }}">Se connecter</a></li>
         <li class="nav-item"><a class="btn btn-inscrire" href="{{ route('register') }}">S'inscrire</a></li>
@@ -257,17 +257,18 @@
 
       <div class="row g-4" id="evenements-liste">
         @foreach ($evenements as $evenement)
-          <div class="col-md-6 evenement-item">
+          <div class="col-md-6 evenement-item mb-5">
             <div class="card bg-transparent border-3 text-white">
               <img src="{{ $evenement->image }}" class="card-img-top w-100 rounded"
                 style="max-height: 400px; object-fit: cover;" alt="">
               <div class="card-body px-0">
                 <p class="fs-6">{{ $evenement->date_debut }}</p>
-                <h5>Thème : "{{ $evenement->theme }}"</h5>
+                <h3>{{ $evenement->nom}}</h3>
+                <h6>Thème : "{{ $evenement->theme }}"</h6>
                 <a href="{{ route('replays_evenement', ['id' => $evenement->id]) }}" class=" text-decoration-none">Replay disponibles <i
                   class="fa-solid fa-arrow-right ms-1"></i></a>
               </div>
-              <a href="{{ route('step1', ['evenementId' => $evenement->id]) }}" class="btn btn-danger btn-lg mt-1">Réserver mon billet <i class="fa-solid fa-arrow-right ms-1"></i></a>
+              <a href="{{ route('step1', ['evenementId' => $evenement->id]) }}" class="btn btn-danger btn-sm p-2 w-50 mt-1">Réserver mon billet <i class="fa-solid fa-arrow-right ms-1"></i></a>
             </div>
           </div>
         @endforeach
@@ -278,7 +279,7 @@
     <div class="mt-4 text-center">
       <button id="btn-decouvrir" class="btn btn-danger"><i class="fas fa-eye me-2"></i>Découvrir tous les
         événements</button>
-      <button id="btn-masquer" class="btn btn-secondary d-none"><i class="fas fa-eye-slash me-2"></i>Voir moins</button>
+      <button id="btn-masquer" class="btn text-light bg-transparent border border-1 d-none"><i class="fas fa-eye-slash me-2"></i>Voir moins</button>
     </div>
     @endif
   </section>
@@ -355,7 +356,7 @@
             <li><a href="{{ route('intervenant') }}">Intervenants</a></li>
             <li><a href="{{ route('sponsors.show') }}">Partenaires & Sponsors</a></li>
             <li><a href="#">Ressources Gratuites</a></li>
-            <li><a href="">Billetterie</a></li>
+            <li><a href="{{ route('evenement') }}">Billetterie</a></li>
             <li><a href="{{ route('boutique') }}">Boutique</a></li>
             <li><a href="#">Plan d'action + Mentorat</a></li>
           </ul>

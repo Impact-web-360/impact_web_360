@@ -480,7 +480,7 @@
             <li><a href="{{ route('intervenant') }}">Intervenants</a></li>
             <li><a href="{{ route('sponsors.show') }}">Partenaires & Sponsors</a></li>
             <li><a href="#">Ressources Gratuites</a></li>
-            <li><a href="">Billetterie</a></li>
+            <li><a href="{{ route('evenement') }}">Billetterie</a></li>
             <li><a href="{{ route('boutique') }}">Boutique</a></li>
             <li><a href="#">Plan d'action + Mentorat</a></li>
           </ul>
