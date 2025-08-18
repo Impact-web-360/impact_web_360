@@ -90,14 +90,30 @@
             font-size: 16px;
             display: inline-block;
         }
-        .btn-orange {
-            background-color: #ff2d0a;
+        .btn-suivant {
+            background: linear-gradient(90deg, #ff4d00, #ff3300);
             color: white;
-            border-radius: 20px;
+            border-radius: 30px;
+            padding: 12px 30px;
+            font-weight: bold;
+            font-size: 16px;
+            border: none;
         }
-        
-        .btn-orange:hover {
+        .btn-suivant:hover {
             background: linear-gradient(90deg, #e63c00, #cc2900);
+        }
+        .btn-retour-categorie {
+            background-color: transparent;
+            border: 2px solid #ff3d00;
+            color: #ff3d00;
+            border-radius: 30px;
+            padding: 12px 30px;
+            font-weight: bold;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        .btn-retour-categorie:hover {
+            background-color: #ff3d00;
             color: white;
         }
         .footer {
@@ -132,70 +148,6 @@
             transform: scale(1.1);
             background-color: #cc3700;
         }
-
-        /* Nouveaux styles pour la section de confirmation */
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-            padding: 1rem;
-        }
-        .info-item {
-            background-color: #f8f9fa;
-            border-radius: 1rem;
-            padding: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-        }
-        .info-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
-        }
-        .info-icon {
-            font-size: 2rem;
-            color: #ff3300;
-        }
-        .info-content h6 {
-            font-weight: 600;
-            margin-bottom: 0.25rem;
-            color: #343a40;
-        }
-        .info-content p {
-            margin: 0;
-            font-size: 1.1rem;
-            color: #6c757d;
-        }
-        .btn-retour {
-            background-color: transparent;
-            border: 2px solid #ff3d00;
-            color: #ff3d00;
-            border-radius: 30px;
-            padding: 12px 30px;
-            font-weight: bold;
-            font-size: 16px;
-            transition: all 0.3s ease;
-        }
-        .btn-retour:hover {
-            background-color: #ff3d00;
-            color: white;
-        }
-        .btn-payer {
-            background: linear-gradient(90deg, #ff4d00, #ff3300);
-            color: white;
-            border-radius: 30px;
-            padding: 12px 30px;
-            font-weight: bold;
-            font-size: 16px;
-            border: none;
-            margin-left: 10px;
-        }
-        .btn-payer:hover {
-            background: linear-gradient(90deg, #e63c00, #cc2900);
-        }
-        /* Fin des nouveaux styles */
 
         @media (max-width: 976px) {
             .navbar-brand img {
@@ -319,7 +271,8 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top navbar-custom container">
-        <a class="navbar-brand" href="index.php"><img src="{{ asset('dossiers/image/Impact-Web-360-Logo1.png') }}" alt="Logo Impact Web" /></a>
+        <a class="navbar-brand" href="index.php"><img src="{{ asset('dossiers/image/Impact-Web-360-Logo1.png') }}"
+                alt="Logo Impact Web" /></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <div class="hamburger" id="hamburgerBtn">
                 <span></span>
@@ -333,7 +286,7 @@
                 <li class="nav-item"><a class="nav-link" href="{{ route('evenement') }}">Événements</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('elearning') }}">E-learning</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('intervenant') }}">Intervenants</a></li>
-                <li class="nav-item"><a class="nav-link active" href="">Billetterie</a></li>
+                <li class="nav-item"><a class="nav-link active" href="{{ route('evenement') }}">Billetterie</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('boutique') }}">Boutique</a></li>
                 <li class="nav-item"><a class="btn btn-light mx-2" href="{{ route('login') }}">Se connecter</a></li>
                 <li class="nav-item"><a class="btn btn-inscrire" href="{{ route('register') }}">S'inscrire</a></li>
@@ -404,52 +357,42 @@
                     </div>
                 </div>
 
-                <div class="div-form justify-content-center mt-4">
-                    <div class="row mb-3">
-                        <div class="col-12">
-                            <h4 class="text-center mb-4 text-dark fw-bold">Détails de votre réservation</h4>
-                        </div>
-                    </div>
-                    <div class="info-grid">
-                        <div class="info-item animate_animated animate_fadeInUp">
-                            <div class="info-icon"><i class="fas fa-user"></i></div>
-                            <div class="info-content">
-                                <h6>Nom et Prénom</h6>
-                                <p class="text-muted fw-bold">{{ $step1['nom'] }} {{ $step1['prenom'] }}</p>
+                <div class="div-form mt-4">
+                    <form action="#" method="POST">
+                        <div class="row mb-3">
+                            <div class="col-md-6 mb-3 mb-md-0">
+                                <label for="nom" class="form-label">Nom</label>
+                                <input type="text" class="form-control" id="nom" name="nom" value="{{ $step1['nom'] }}">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="prenom" class="form-label">Prénom</label>
+                                <input type="text" class="form-control" id="prenom" name="prenom" value="{{ $step1['prenom'] }}">
                             </div>
                         </div>
-                        <div class="info-item animate_animated animatefadeInUp animate_delay-1s">
-                            <div class="info-icon"><i class="fas fa-envelope"></i></div>
-                            <div class="info-content">
-                                <h6>Email</h6>
-                                <p class="text-muted fw-bold">{{ $step1['email'] }}</p>
+                        <div class="row mb-3">
+                            <div class="col-md-6 mb-3 mb-md-0">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" name="email" value="{{ $step1['email'] }}">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="telephone" class="form-label">Téléphone</label>
+                                <input type="tel" class="form-control" id="telephone" name="telephone" value="{{ $step1['telephone'] }}">
                             </div>
                         </div>
-                        <div class="info-item animate_animated animatefadeInUp animate_delay-2s">
-                            <div class="info-icon"><i class="fas fa-phone"></i></div>
-                            <div class="info-content">
-                                <h6>Téléphone</h6>
-                                <p class="text-muted fw-bold">{{ $step1['telephone'] }}</p>
+                        <div class="row mb-3">
+                            <div class="col-md-6 mb-3 mb-md-0">
+                                <label for="categorie" class="form-label">Catégorie de billet</label>
+                                <input type="text" class="form-control" id="categorie" name="categorie" value="{{ $step2['categorie'] }}" readonly>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="montant" class="form-label">Montant</label>
+                                <input type="text" class="form-control" id="montant" name="montant" value="{{ intval($step2['prix']) }} FCFA" readonly>
                             </div>
                         </div>
-                        <div class="info-item animate_animated animatefadeInUp animate_delay-3s">
-                            <div class="info-icon"><i class="fas fa-ticket-alt"></i></div>
-                            <div class="info-content">
-                                <h6>Catégorie de billet</h6>
-                                <p class="text-muted fw-bold">{{ $step2['categorie'] }}</p>
-                            </div>
+                        <div class="text-center mt-4">
+                            <button id="payBtn" type="submit" class="btn btn-suivant">Confirmer & Payer</button>
                         </div>
-                        <div class="info-item animate_animated animatefadeInUp animate_delay-4s">
-                            <div class="info-icon"><i class="fas fa-coins"></i></div>
-                            <div class="info-content">
-                                <h6>Montant</h6>
-                                <p class="text-muted fw-bold">{{ intval($step2['prix']) }} FCFA</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="text-center mt-5">
-                        <button id="payBtn" type="submit" class="btn btn-payer">Confirmer & Payer</button>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
