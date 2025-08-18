@@ -738,34 +738,6 @@
       }
     }
 
-    /* Conteneur principal qui cache le contenu qui dépasse */
-    .sponsors-scroll-container {
-        overflow: hidden;
-        white-space: nowrap;
-    }
-
-    /* Contenu des logos (les sponsors) */
-    .sponsors-scroll-content {
-        display: inline-block;
-        animation: marquee 15s linear infinite;
-    }
-
-    /* Animation de défilement de gauche à droite */
-    @keyframes marquee {
-        from {
-            transform: translateX(100%);
-        }
-        to {
-            transform: translateX(-100%);
-        }
-    }
-
-    /* Maintien des logos sur une seule ligne */
-    .part {
-        display: inline-block;
-        margin-right: 20px; /* Ajustez l'espace entre les logos si nécessaire */
-    }
-
     @media (max-width: 768px) {
 
       /* Ajustements supplémentaires pour petits écrans */
@@ -1001,19 +973,21 @@
 </section>
   <!-- Bande de Partenaires -->
   <a href="{{ route('sponsors.show') }}">
-    <section class="py-4 text-white text-center" style="background-color: #ff4500;" data-aos="fade-right">
-      <div class="sponsors-scroll-container">
-        <div class="sponsors-scroll-content">
+    <section class="py-3 text-white" style="background-color:#ff4500" data-aos="fade-right">
+      <marquee behavior="scroll" direction="left" scrollamount="6">
+        <div class="d-inline-flex flex-nowrap align-items-center gap-4">
           @foreach ($sponsors as $sponsor)
-            <div class="me-5 part">
-              <img src="{{ $sponsor->logo }}" alt="logo sponsor" width="50" class="rounded-4"> 
-              &nbsp;&nbsp;&nbsp;&nbsp;♦&nbsp;&nbsp;&nbsp;&nbsp;
+            <div class="d-flex align-items-center me-4 part mt-2">
+              <img src="{{ $sponsor->logo }}" alt="logo sponsor" width="60" class="rounded-4" style="object-fit:contain; flex-shrink:0;">
+              <span class="mx-2">♦</span>
             </div>
           @endforeach
         </div>
-      </div>
+      </marquee>
     </section>
   </a>
+
+
 
 
 
@@ -1412,96 +1386,83 @@
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
   <script>
-    AOS.init();
-    const eventDate = new Date("2025-11-29T09:00:00").getTime();
+      // Initialisation des bibliothèques
+      AOS.init();
 
-    function updateCountdown() {
-      const now = new Date().getTime();
-      const distance = eventDate - now;
+      // Fonction pour le compte à rebours de l'événement
+      const eventDate = new Date("2025-11-29T09:00:00").getTime();
+      function updateCountdown() {
+          const now = new Date().getTime();
+          const distance = eventDate - now;
 
-      if (distance < 0) {
-        document.querySelector(".countdown-container").innerHTML = "<h4>Événement commencé !</h4>";
-        return;
+          if (distance < 0) {
+              document.querySelector(".countdown-container").innerHTML = "<h4>Événement commencé !</h4>";
+              return;
+          }
+
+          const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+          const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+          const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+          document.getElementById("days").textContent = String(days).padStart(2, '0');
+          document.getElementById("hours").textContent = String(hours).padStart(2, '0');
+          document.getElementById("minutes").textContent = String(minutes).padStart(2, '0');
+          document.getElementById("seconds").textContent = String(seconds).padStart(2, '0');
+      }
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+
+      // Navigation mobile et bouton de retour en haut
+      document.addEventListener('DOMContentLoaded', () => {
+          const toggler = document.querySelector('.navbar-toggler');
+          const hamburger = document.getElementById('hamburgerBtn');
+          const navbarCollapse = document.getElementById('navbarNav');
+
+          toggler.addEventListener('click', () => {
+              hamburger.classList.toggle('active');
+          });
+
+          const backToTopBtn = document.getElementById("backToTop");
+          window.onscroll = function() {
+              if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                  backToTopBtn.style.display = "block";
+              } else {
+                  backToTopBtn.style.display = "none";
+              }
+          };
+          backToTopBtn.addEventListener("click", function(e) {
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: "smooth" });
+          });
+
+          // Initialisation de la galerie Lightbox
+          lightGallery(document.getElementById('lightgallery'), {
+              selector: '.gallery-item',
+              download: false,
+              counter: false
+          });
+      });
+
+      // Code du slider automatique (fonctionnel)
+      const slides = document.querySelectorAll('.hero-slide');
+      let currentSlide = 0;
+      const slideInterval = 3000;
+
+      // Fonction pour changer de diapositive
+      function nextSlide() {
+          slides[currentSlide].classList.remove('active');
+          currentSlide = (currentSlide + 1) % slides.length;
+          slides[currentSlide].classList.add('active');
       }
 
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-      document.getElementById("days").textContent = String(days).padStart(2, '0');
-      document.getElementById("hours").textContent = String(hours).padStart(2, '0');
-      document.getElementById("minutes").textContent = String(minutes).padStart(2, '0');
-      document.getElementById("seconds").textContent = String(seconds).padStart(2, '0');
-    }
-
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
+      // Lancement du slider au chargement de la page
+      window.onload = function() {
+          setInterval(nextSlide, slideInterval);
+      };
   </script>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const toggler = document.querySelector('.navbar-toggler');
-      const hamburger = document.getElementById('hamburgerBtn');
-
-      toggler.addEventListener('click', () => {
-        hamburger.classList.toggle('active');
-      });
-    });
-
-    const backToTopBtn = document.getElementById("backToTop");
-
-    // Afficher le bouton quand on descend de 200px
-    window.onscroll = function() {
-      if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
-        backToTopBtn.style.display = "block";
-      } else {
-        backToTopBtn.style.display = "none";
-      }
-    };
-
-    // Animation douce de retour en haut
-    backToTopBtn.addEventListener("click", function(e) {
-      e.preventDefault();
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
-    });
-</script>
-
-<!-- Script pour le slider -->
-<script>
-
-  // Galerie Lightbox
-      // LightGallery
-    lightGallery(document.getElementById('lightgallery'), {
-      selector: '.gallery-item',
-      download: false,
-      counter: false
-    });
-
-  // Slider automatique
-  document.addEventListener('DOMContentLoaded', function() {
-    const slides = document.querySelectorAll('.hero-slide');
-    let currentSlide = 0;
-    const slideInterval = 5000; // Change d'image toutes les 5 secondes
-    
-    function nextSlide() {
-      slides[currentSlide].classList.remove('active');
-      currentSlide = (currentSlide + 1) % slides.length;
-      slides[currentSlide].classList.add('active');
-    }
-    
-    // Démarrer le slider
-    let slider = setInterval(nextSlide, slideInterval);
-    
-    // Pause au survol
-
-  });
-  
-</script>
 
 </body>
 
