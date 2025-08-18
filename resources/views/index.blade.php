@@ -738,6 +738,33 @@
       }
     }
 
+    /* Conteneur principal qui cache le contenu qui dépasse */
+    .sponsors-scroll-container {
+        overflow: hidden;
+        white-space: nowrap;
+    }
+
+    /* Contenu des logos (les sponsors) */
+    .sponsors-scroll-content {
+        display: inline-block;
+        animation: marquee 15s linear infinite;
+    }
+
+    /* Animation de défilement de gauche à droite */
+    @keyframes marquee {
+        from {
+            transform: translateX(100%);
+        }
+        to {
+            transform: translateX(-100%);
+        }
+    }
+
+    /* Maintien des logos sur une seule ligne */
+    .part {
+        display: inline-block;
+        margin-right: 20px; /* Ajustez l'espace entre les logos si nécessaire */
+    }
 
     @media (max-width: 768px) {
 
@@ -972,17 +999,23 @@
 
 
 </section>
-<!-- Bande de Partenaires -->
-<a href="{{ route('sponsors.show') }}">
-  <section class="py-4 text-white text-center" style="background-color: #ff4500; " data-aos="fade-right">
-    <marquee behavior="" direction=""> <div class="container d-flex flex-wrap justify-content-center gap-4">
-        @foreach ($sponsors as $sponsor)
-        <div class="me-5 part"><img src="{{ $sponsor->logo }}" alt="" width="50" class="rounded-4" > &nbsp;&nbsp;&nbsp;&nbsp;♦&nbsp;&nbsp;&nbsp;&nbsp;</div>   
-        @endforeach
+  <!-- Bande de Partenaires -->
+  <a href="{{ route('sponsors.show') }}">
+    <section class="py-4 text-white text-center" style="background-color: #ff4500;" data-aos="fade-right">
+      <div class="sponsors-scroll-container">
+        <div class="sponsors-scroll-content">
+          @foreach ($sponsors as $sponsor)
+            <div class="me-5 part">
+              <img src="{{ $sponsor->logo }}" alt="logo sponsor" width="50" class="rounded-4"> 
+              &nbsp;&nbsp;&nbsp;&nbsp;♦&nbsp;&nbsp;&nbsp;&nbsp;
+            </div>
+          @endforeach
+        </div>
       </div>
-    </marquee>
-  </section>  
-</a>
+    </section>
+  </a>
+
+
 
 
   <!-- À propos -->
